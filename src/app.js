@@ -71,8 +71,16 @@ function createRoster(str) {
 
           forceList.push({type: which, catalogue: value});
 
-          var rules = document.querySelectorAll("roster>forces>force>rules>rule");
+          var rules = force.querySelectorAll("force>rules>rule");
           console.log("Name: " + which + "  Rules: " + rules);
+          for (rule of rules) {
+            console.log(rule);
+          }
+
+          var selections = force.querySelectorAll("force>selections>selection");
+          for (selection of selections) {
+            console.log(selection);
+          }
       }
     }
 
