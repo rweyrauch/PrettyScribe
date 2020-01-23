@@ -1,5 +1,5 @@
-function handleFileSelect(event) {
-  const input = event.target;
+function handleFileSelect(event: Event) {
+  const input = event.target as HTMLInputElement;
   const files = input.files;
 
   if (files) {
@@ -34,7 +34,7 @@ function handleFileSelect(event) {
 const finput = document.getElementById('roster-file');
 if (finput) finput.addEventListener('change', handleFileSelect, false);
 
-function createRoster(str) {
+function createRoster(str: string) {
 
   var pts = 0;
   var pl = 0;
@@ -45,18 +45,20 @@ function createRoster(str) {
   if (doc) {
 
     var costs = doc.querySelectorAll("roster>costs>cost");
-    for (cost of costs) {
+    for (let cost of costs) {
       if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
-        let which = cost.getAttributeNode("name").nodeValue;
-        let value = cost.getAttributeNode("value").nodeValue;
-        if (which == " PL") {
-           pl = +value;
-        }
-        else if (which === "pts") {
-           pts = +value;
-        }
-        else if (which === "CP") {
-          cp = +value;
+        let which = cost.getAttributeNode("name")?.nodeValue;
+        let value = cost.getAttributeNode("value")?.nodeValue;
+        if (value) {
+          if (which == " PL") {
+            pl = +value;
+          }
+          else if (which === "pts") {
+            pts = +value;
+          }
+          else if (which === "CP") {
+            cp = +value;
+          }
         }
       }
     }
@@ -64,21 +66,21 @@ function createRoster(str) {
     var forceList = [];
 
     var forces = doc.querySelectorAll("roster>forces>force");
-    for (force of forces) {
+    for (let force of forces) {
          if (force.hasAttribute("name") && force.hasAttribute("catalogueName")) {
-          let which = force.getAttributeNode("name").nodeValue;
-          let value = force.getAttributeNode("catalogueName").nodeValue;
+          let which = force.getAttributeNode("name")?.nodeValue;
+          let value = force.getAttributeNode("catalogueName")?.nodeValue;
 
           forceList.push({type: which, catalogue: value});
 
           var rules = force.querySelectorAll("force>rules>rule");
           console.log("Name: " + which + "  Rules: " + rules);
-          for (rule of rules) {
+          for (let rule of rules) {
             console.log(rule);
           }
 
           var selections = force.querySelectorAll("force>selections>selection");
-          for (selection of selections) {
+          for (let selection of selections) {
             console.log(selection);
           }
       }
