@@ -1,3 +1,7 @@
+import { Roster } from "./roster.js";
+
+var roster: Roster | null = null;
+
 function handleFileSelect(event: Event) {
   const input = event.target as HTMLInputElement;
   const files = input.files;
@@ -20,7 +24,10 @@ function handleFileSelect(event: Event) {
             const xmldatastart = re.result.toString().indexOf(',') + 1;
             console.log("XML Start: " + xmldatastart);
             const xmldata = window.atob(re.result.toString().slice(xmldatastart));
-            createRoster(xmldata);
+            roster = Roster.CreateRoster(xmldata);
+            if (roster) {
+              console.log("Points: " + roster._points + "  Power Level: " + roster._powerLevel + "  CP: " + roster._commandPoints);
+            }
           }
         }
       }
@@ -33,62 +40,3 @@ function handleFileSelect(event: Event) {
 
 const finput = document.getElementById('roster-file');
 if (finput) finput.addEventListener('change', handleFileSelect, false);
-
-function createRoster(str: string) {
-
-  var pts = 0;
-  var pl = 0;
-  var cp = 0;
-
-  var parser = new DOMParser();
-  var doc = parser.parseFromString(str, "text/xml");
-  if (doc) {
-
-    var costs = doc.querySelectorAll("roster>costs>cost");
-    for (let cost of costs) {
-      if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
-        let which = cost.getAttributeNode("name")?.nodeValue;
-        let value = cost.getAttributeNode("value")?.nodeValue;
-        if (value) {
-          if (which == " PL") {
-            pl = +value;
-          }
-          else if (which === "pts") {
-            pts = +value;
-          }
-          else if (which === "CP") {
-            cp = +value;
-          }
-        }
-      }
-    }
-
-    var forceList = [];
-
-    var forces = doc.querySelectorAll("roster>forces>force");
-    for (let force of forces) {
-         if (force.hasAttribute("name") && force.hasAttribute("catalogueName")) {
-          let which = force.getAttributeNode("name")?.nodeValue;
-          let value = force.getAttributeNode("catalogueName")?.nodeValue;
-
-          forceList.push({type: which, catalogue: value});
-
-          var rules = force.querySelectorAll("force>rules>rule");
-          console.log("Name: " + which + "  Rules: " + rules);
-          for (let rule of rules) {
-            console.log(rule);
-          }
-
-          var selections = force.querySelectorAll("force>selections>selection");
-          for (let selection of selections) {
-            console.log(selection);
-          }
-      }
-    }
-
-    console.log(forceList);
-  }
-
-  console.log("Points: " + pts + "  Power Level: " + pl + "  CP: " + cp);
-
-}
