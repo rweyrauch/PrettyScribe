@@ -1,5 +1,5 @@
 import { Force } from "./force.js";
-import { Unit, WoundTracker } from "./unit.js";
+import { Unit, WoundTracker, UnitRole } from "./unit.js";
 import { Weapon } from "./weapon.js";
 
 export class Roster {
@@ -12,18 +12,6 @@ export class Roster {
     constructor() {
 
     }
-
-    private static UnitRole: string[] = [
-        'HQ',
-        'Troops',
-        'Elites',
-        'Fast Attack',
-        'Heavy Support',
-        'Flyer',
-        'Dedicated Transport',
-        'Fortification',
-        'Lord of War'
-    ]
 
     static CreateRoster(xml: string): Roster | null {
         var parser = new DOMParser();
@@ -106,10 +94,25 @@ export class Roster {
         for (let selection of selections) {
             //console.log(selection);
             var unit = Roster.CreateUnit(selection);
-            if (unit && unit._role.length > 0) {
+            if (unit && unit._role != UnitRole['None']) {
                 force._units.push(unit);
             }
         }
+    }
+
+    private static LookupRole(roleText: string): UnitRole {
+        switch (roleText) {
+            case 'HQ': return UnitRole['HQ'];
+            case 'Troops': return UnitRole['Troops'];
+            case 'Elites': return UnitRole['Elites'];
+            case 'Fast Attack': return UnitRole['Fast Attack'];
+            case 'Heavy Support': return UnitRole['Heavy Support'];
+            case 'Flyer': return UnitRole['Flyer'];
+            case 'Dedicated Transport': return UnitRole['Dedicated Transport'];
+            case 'Fortification': return UnitRole['Fortification'];
+            case 'Lord of War': return UnitRole['Lord of War'];
+        }
+        return UnitRole['None'];
     }
 
     private static CreateUnit(root: Element): Unit | null {
@@ -127,13 +130,15 @@ export class Roster {
                     unit._faction = catName.slice(factIndex);
                 }
                 else {
-                    var unitRole = this.UnitRole.find(element => element === catName?.trim());
-                    if (unitRole) {
+                    const roleText = catName.trim();
+                    var unitRole = Roster.LookupRole(roleText);
+                    if (unitRole != UnitRole['None']) {
                         unit._role = unitRole;
                     }
                     else {
                         // Keyword
                         unit._keywords.push(catName);
+                        unit._role = UnitRole['None'];
                     }
                 }
             }
@@ -225,6 +230,24 @@ export class Roster {
                 }
             }
         }
+
+        // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
+        var costs = root.querySelectorAll(":scope > costs > cost");
+        for (let cost of costs) {
+            if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
+                let which = cost.getAttributeNode("name")?.nodeValue;
+                let value = cost.getAttributeNode("value")?.nodeValue;
+                if (value) {
+                    if (which == " PL") {
+                        unit._powerLevel = +value;
+                    }
+                    else if (which === "pts") {
+                        unit._points = +value;
+                    }
+                 }
+            }
+        }
+
         return unit;
     }
 };

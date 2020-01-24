@@ -1,4 +1,5 @@
 import { Roster } from "./roster.js";
+import { Renderer } from "./renderer.js";
 
 var roster: Roster | null = null;
 
@@ -46,7 +47,7 @@ function handleFileSelect(event: Event) {
                     let uname = document.createElement('td');
                     uname.innerHTML = unit._name;
                     let role = document.createElement('td');
-                    role.innerHTML = unit._role;
+                    role.innerHTML = unit._role.toString();
                     let models = document.createElement('td');
                     models.innerHTML = 'TBD';
                     let pts = document.createElement('td');
@@ -59,6 +60,20 @@ function handleFileSelect(event: Event) {
                     tr.appendChild(pts);
                     tr.appendChild(pwr);
                     body.appendChild(tr);    
+                  }
+                }
+
+                const renderer: Renderer = new Renderer();
+                const forceUnits = document.getElementById('force-units');
+                if (forceUnits) {
+                  //console.log(forceUnits);
+                  for (let unit of roster._forces[0]._units) {
+                    let canvas = document.createElement('canvas') as HTMLCanvasElement;
+                    canvas.width = 144 * 5.5;
+                    canvas.height = 144 * 8.5;
+                    
+                    renderer.render(unit, canvas, 0, 0);
+                    forceUnits.appendChild(canvas);
                   }
                 }
               }

@@ -2,43 +2,61 @@
 <html lang="en">
 
 <head>
-  <title>PrettyScribe</title>
+      <title>PrettyScribe</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <script src="https://kit.fontawesome.com/324895d590.js" crossorigin="anonymous"></script>
+      <script src="https://kit.fontawesome.com/324895d590.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <label for="roster-file">File</label>
-  <input type="file" files="roster-file" id="roster-file" name="roster-file">
-  <list id="list">
-  </list>
+      <div style="display:none;">
+            <img id="octagon" src="./assets/octagon.png">
+            <img id="role_dt" src="./assets/icon_DT.png">
+            <img id="role_el" src="./assets/icon_EL.png">
+            <img id="role_fa" src="./assets/icon_FA.png">
+            <img id="role_fl" src="./assets/icon_FL.png">
+            <img id="role_ft" src="./assets/icon_FT.png">
+            <img id="role_hq" src="./assets/icon_HQ.png">
+            <img id="role_hs" src="./assets/icon_HS.png">
+            <img id="role_lw" src="./assets/icon_LW.png">
+            <img id="role_tr" src="./assets/icon_TR.png">
+      </div>
 
-  <div id="roster-title"></div>
-  <div id="force-title"></div>
-  <table class="table table-striped" id="force-list">
-      <thead>
-            <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Models</th>
-                  <th scope="col">Points</th>
-                  <th scope="col">Power</th>
-            </tr>
-      </thead>
-  </table>
+      <label for="roster-file">File</label>
+      <input type="file" files="roster-file" id="roster-file" name="roster-file">
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+      <list id="list">
+      </list>
 
-  <script type="module" src="./dist/app.js"></script>
+      <div id="roster-title"></div>
+      <div id="force-title"></div>
+      <table class="table table-sm table-striped" id="force-list">
+            <thead>
+                  <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Models</th>
+                        <th scope="col">Points</th>
+                        <th scope="col">Power</th>
+                  </tr>
+            </thead>
+      </table>
+
+      <div id="force-units">
+
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+      <script type="module" src="./dist/app.js"></script>
 
 </body>
 

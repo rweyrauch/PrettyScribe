@@ -5,10 +5,25 @@ export class WoundTracker {
     _table: Map<string, string> = new Map();
 };
 
+
+export enum UnitRole {
+    'None',
+    'HQ',
+    'Troops',
+    'Elites',
+    'Fast Attack',
+    'Heavy Support',
+    'Flyer',
+    'Dedicated Transport',
+    'Fortification',
+    'Lord of War'
+};
+
 export class Unit {
 
+
     _name: string = "";
-    _role: string = "";
+    _role: UnitRole = UnitRole['Troops'];
     _faction: string = "";
     _keywords: string[] = [];
     
