@@ -1,5 +1,10 @@
 import { Weapon } from "./weapon.js";
 
+export class WoundTracker {
+    _name: string = "";
+    _table: Map<string, string> = new Map();
+};
+
 export class Unit {
 
     _name: string = "";
@@ -24,4 +29,5 @@ export class Unit {
     _points: number = 0;
     _powerLevel: number = 0;
     
+    _woundTracker: WoundTracker[] = [];
 }

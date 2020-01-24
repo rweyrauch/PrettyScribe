@@ -1,5 +1,5 @@
 import { Force } from "./force.js";
-import { Unit } from "./unit.js";
+import { Unit, WoundTracker } from "./unit.js";
 import { Weapon } from "./weapon.js";
 
 export class Roster {
@@ -77,6 +77,9 @@ export class Roster {
                 if (which) {
                     f._name = which;
                 }
+                if (value) {
+                    f._catalog = value;
+                }
 
                 var rules = root.querySelectorAll("force>rules>rule");
                 //console.log("Name: " + which + "  Rules: " + rules);
@@ -103,8 +106,7 @@ export class Roster {
         for (let selection of selections) {
             //console.log(selection);
             var unit = Roster.CreateUnit(selection);
-            if (unit) {
-                console.log(unit);
+            if (unit && unit._role.length > 0) {
                 force._units.push(unit);
             }
         }
@@ -118,17 +120,15 @@ export class Roster {
         }
         var categories = root.querySelectorAll("selection>categories>category");
         for (let cat of categories) {
-            //console.log(cat);
             let catName = cat.getAttributeNode("name")?.nodeValue;
             if (catName) {
-                //console.log("Category Name: " + catName);
-                if (catName.lastIndexOf("Faction: ") >= 0) {
-                    unit._faction = catName;
+                const factIndex = catName.lastIndexOf("Faction: ");
+                if (factIndex >= 0) {
+                    unit._faction = catName.slice(factIndex);
                 }
                 else {
                     var unitRole = this.UnitRole.find(element => element === catName?.trim());
                     if (unitRole) {
-                        //console.log("Found unit role: " + unitRole);
                         unit._role = unitRole;
                     }
                     else {
@@ -143,71 +143,86 @@ export class Roster {
             // What kind of prop is this
             let propName = prop.getAttributeNode("name")?.nodeValue;
             let propType = prop.getAttributeNode("typeName")?.nodeValue;
-            if (propType && (propType === "Unit")) {
-                //console.log("Found unit.");
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        //console.log("Char: " + charName);
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'M': unit._move = char.textContent; break;
-                                case 'WS': unit._ws = char.textContent; break;
-                                case 'BS': unit._bs = char.textContent; break;
-                                case 'S': unit._str = +char.textContent; break;
-                                case 'T': unit._toughness = +char.textContent; break;
-                                case 'W': unit._wounds = +char.textContent; break;
-                                case 'A': unit._attacks = +char.textContent; break;
-                                case 'Ld': unit._leadership = +char.textContent; break;
-                                case 'Save': unit._save = char.textContent; break;
-                            }
-
-                        }
-                    }
-                }
-            }
-            else if (propType && propType == "Abilities") {
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName && char.textContent && propName) {
-                        if (charName === "Description") {
-                            unit._abilities.set(propName, char.textContent);
-                        }
-                    }
-                }               
-            }
-            else if (propType && propType == "Weapon") {
-                console.log("Weapon: " + prop);
-                let weapon: Weapon = new Weapon();
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        //console.log("Char: " + charName);
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'Range': weapon._range = char.textContent; break;
-                                case 'Type': weapon._type = char.textContent; break;
-                                case 'S': weapon._str = char.textContent; break;
-                                case 'AP': weapon._ap = +char.textContent; break;
-                                case 'D': weapon._damage = char.textContent; break;
-                                case 'Abilities': break;
+            if (propName && propType) {
+                if (propType === "Unit") {
+                    let chars = prop.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName) {
+                            if (char.textContent) {
+                                switch (charName) {
+                                    case 'M': unit._move = char.textContent; break;
+                                    case 'WS': unit._ws = char.textContent; break;
+                                    case 'BS': unit._bs = char.textContent; break;
+                                    case 'S': unit._str = +char.textContent; break;
+                                    case 'T': unit._toughness = +char.textContent; break;
+                                    case 'W': unit._wounds = +char.textContent; break;
+                                    case 'A': unit._attacks = +char.textContent; break;
+                                    case 'Ld': unit._leadership = +char.textContent; break;
+                                    case 'Save': unit._save = char.textContent; break;
+                                }
                             }
                         }
                     }
                 }
-                unit._weapons.push(weapon);
-            }
-            else if (propType && propType == "Wound Track") {
-                console.log("Wound Tracker: " + prop);
-            }
-            else if (propType && propType == "Transport") {
-                console.log("Transport: " + prop);
-            }
-            else {
-                console.log(prop);
+                else if (propType == "Abilities") {
+                    let chars = prop.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName && char.textContent && propName) {
+                            if (charName === "Description") {
+                                unit._abilities.set(propName, char.textContent);
+                            }
+                        }
+                    }
+                }
+                else if (propType == "Weapon") {
+                    let weapon: Weapon = new Weapon();
+                    weapon._name = propName;
+                    let chars = prop.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName) {
+                            if (char.textContent) {
+                                switch (charName) {
+                                    case 'Range': weapon._range = char.textContent; break;
+                                    case 'Type': weapon._type = char.textContent; break;
+                                    case 'S': weapon._str = char.textContent; break;
+                                    case 'AP': weapon._ap = +char.textContent; break;
+                                    case 'D': weapon._damage = char.textContent; break;
+                                    case 'Abilities': break;
+                                }
+                            }
+                        }
+                    }
+                    unit._weapons.push(weapon);
+                }
+                else if (propType == "Wound Track") {
+                    let tracker = new WoundTracker();
+                    tracker._name = propName;
+                    let chars = prop.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName && char.textContent && propName) {
+                            tracker._table.set(charName, char.textContent);
+                        }
+                    }
+                    unit._woundTracker.push(tracker);
+                }
+                else if (propType == "Transport") {
+                    let chars = prop.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName && char.textContent && propName) {
+                            if (charName === "Capacity") {
+                                unit._abilities.set(propName, char.textContent);
+                            }
+                        }
+                    }
+                }
+                else {
+                    console.log(prop);
+                }
             }
         }
         return unit;

@@ -27,6 +27,41 @@ function handleFileSelect(event: Event) {
             roster = Roster.CreateRoster(xmldata);
             if (roster) {
               console.log("Points: " + roster._points + "  Power Level: " + roster._powerLevel + "  CP: " + roster._commandPoints);
+
+              if (roster._forces.length > 0) {
+                const rosterTitle = document.getElementById('roster-title');
+                if (rosterTitle) {
+                  rosterTitle.innerHTML = '<h3>Army Roster (' + roster._points + ' pts, ' + roster._powerLevel + ')</h3>';
+                }
+                const forceTitle = document.getElementById('force-title');
+                if (forceTitle) {
+                  forceTitle.innerHTML = '<p>' + roster._forces[0]._catalog + ' ' + roster._forces[0]._name + '</p>';
+                }
+                const forceList = document.getElementById('force-list');
+                if (forceList) {
+                  let body = document.createElement('tbody');
+                  forceList.appendChild(body);
+                  for (let unit of roster._forces[0]._units) {
+                    let tr = document.createElement('tr');
+                    let uname = document.createElement('td');
+                    uname.innerHTML = unit._name;
+                    let role = document.createElement('td');
+                    role.innerHTML = unit._role;
+                    let models = document.createElement('td');
+                    models.innerHTML = 'TBD';
+                    let pts = document.createElement('td');
+                    pts.innerHTML = unit._points.toString();
+                    let pwr = document.createElement('td');
+                    pwr.innerHTML = unit._powerLevel.toString();
+                    tr.appendChild(uname);
+                    tr.appendChild(role);
+                    tr.appendChild(models);
+                    tr.appendChild(pts);
+                    tr.appendChild(pwr);
+                    body.appendChild(tr);    
+                  }
+                }
+              }
             }
           }
         }
