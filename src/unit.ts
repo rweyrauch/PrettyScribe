@@ -44,10 +44,11 @@ export class Unit {
 
     _name: string = "";
     _role: UnitRole = UnitRole['Troops'];
-    _faction: string = "";
+    _factions: string[] = [];
     _keywords: string[] = [];
     
     _abilities: Map<string, string> = new Map();
+    _rules: Map<string, string> = new Map();
 
     _models: Model[] = [];
 
@@ -59,5 +60,16 @@ export class Unit {
     parseModel(root: Element): Model|null {
 
         return null;
+    }
+
+    computePoints(): void {
+        this._points = 0;
+
+        for (let model of this._models) {
+            this._points += model._points;
+            for (let weapon of model._weapons) {
+                this._points += weapon._points;
+            }
+        }
     }
 }

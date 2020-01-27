@@ -127,7 +127,7 @@ export class Roster {
             if (catName) {
                 const factIndex = catName.lastIndexOf("Faction: ");
                 if (factIndex >= 0) {
-                    unit._faction = catName.slice(factIndex);
+                    unit._factions.push(catName.slice(factIndex));
                 }
                 else {
                     const roleText = catName.trim();
@@ -171,9 +171,8 @@ export class Roster {
                             }
                         }
                     }
-
                     // parse model cost
-                    var costs = root.querySelectorAll(":scope costs>cost");
+                    var costs = root.querySelectorAll("selection>costs>cost");
                     for (let cost of costs) {
                         if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
                             let which = cost.getAttributeNode("name")?.nodeValue;
@@ -188,6 +187,7 @@ export class Roster {
                              }
                         }
                     }
+                 
                     unit._models.push(model);
                 }
                 else if (propType == "Abilities") {
@@ -220,8 +220,9 @@ export class Roster {
                             }
                         }
                     }
+/*                    
                     // parse weapon cost
-                    var costs = root.querySelectorAll(":scope costs>cost");
+                    var costs = root.querySelectorAll("costs>cost");
                     for (let cost of costs) {
                         if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
                             let which = cost.getAttributeNode("name")?.nodeValue;
@@ -233,7 +234,7 @@ export class Roster {
                             }
                         }
                     }
-                   
+*/                   
                     unit._models[unit._models.length-1]._weapons.push(weapon);
                 }
                 else if (propType == "Wound Track") {
@@ -282,6 +283,20 @@ export class Roster {
             }
         }
 
+        var rules = root.querySelectorAll(":scope rules > rule");
+        for (let rule of rules) {
+            if (rule.hasAttribute("name")) {
+                let ruleName = rule.getAttributeNode("name")?.nodeValue;
+                var desc = rule.querySelector(":scope description");
+                if (ruleName && desc && desc.textContent) {
+                    unit._rules.set(ruleName, desc.textContent);
+                }
+            }
+        }
+
+        // Compute unit points
+        unit.computePoints();
+     
         return unit;
     }
 };

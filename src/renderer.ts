@@ -254,6 +254,19 @@ export class Renderer {
         this._currentY += 4;
     }
 
+    private renderRules(ctx: CanvasRenderingContext2D, unit: Unit): void {
+        ctx.font = '16px sans-serif';
+        this.renderText(ctx, "RULES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+
+        ctx.font ='12px serif';
+        for (let rule of unit._rules) {
+            const content = rule[0].toUpperCase();
+            const desc = rule[1];
+            this._currentY = this.renderParagraph(ctx, content+": "+desc, this._currentX + 190, this._currentY, 500);
+        }
+        this._currentY += 4;
+    }
+ 
     private renderKeywords(ctx: CanvasRenderingContext2D, unit: Unit): void {
         ctx.font = '16px sans-serif';
         this.renderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
@@ -263,6 +276,32 @@ export class Renderer {
         this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
         
         this._currentY += 4;
+    }
+
+    private renderFactions(ctx: CanvasRenderingContext2D, unit: Unit): void {
+        ctx.font = '16px sans-serif';
+        this.renderText(ctx, "FACTIONS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+
+        ctx.font ='12px serif';
+        const kw = unit._factions.join(", ").toLocaleUpperCase();
+        this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
+        
+        this._currentY += 4;
+    }
+
+    private renderWoundTracker(ctx: CanvasRenderingContext2D, unit: Unit, columnWidths: number[]|null): void {
+        const height = 22;
+
+        let w = 50;
+        let x = this._currentX;
+        let ci = 0;
+
+        for (let tracker of unit._woundTracker) {
+            ctx.fillRect(x, this._currentY, this._maxX, height);
+    
+            ctx.fillStyle = 'black'
+            ctx.font = '12px sans-serif';    
+        }
     }
 
     render(unit: Unit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
@@ -310,11 +349,30 @@ export class Renderer {
             this.renderAbilities(ctx, unit);
         }
 
+        if (unit._rules.size > 0) {
+            this.renderLine(ctx);
+            this.renderRules(ctx, unit);
+        }
+
+        if (unit._factions.length > 0) {
+            this.renderLine(ctx);
+            this.renderFactions(ctx, unit);
+        }
+
         if (unit._keywords.length > 0) {
             this.renderLine(ctx);
             this.renderKeywords(ctx, unit);
         }
-/*
+        /*
+        if (unit._woundTracker.length > 0) {
+            this.renderLine(ctx);
+            const trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
+            const trackerLabelWidth = [200, 200, 100, 100, 100];
+            this.renderTableHeader(ctx, trackerLabels, trackerLabelWidth);    
+            this.renderWoundTracker(ctx, unit, trackerLabelWidth);
+        }
+        */
+        /*
         # wizard statlines:
         if(count($unit['powers']) > 0) {
             $needs_smite = true;
