@@ -105,9 +105,9 @@ export class Renderer {
 
     private renderAbilities(ctx: CanvasRenderingContext2D, unit: Unit): void {
         ctx.font = '16px sans-serif';
-        this.renderText(ctx, "ABILITIES", this._currentX + 80, this._currentY + 20, 100, 16, Justification.Right);
+        this.renderText(ctx, "ABILITIES", this._currentX + 20, this._currentY + 20, 100, 16, Justification.Left);
 
-        ctx.font ='12px sans-serif';
+        ctx.font ='12px serif';
         for (let ab of unit._abilities) {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
@@ -118,9 +118,9 @@ export class Renderer {
 
     private renderKeywords(ctx: CanvasRenderingContext2D, unit: Unit): void {
         ctx.font = '16px sans-serif';
-        this.renderText(ctx, "KEYWORDS", this._currentX + 80, this._currentY + 20, 100, 16, Justification.Right);
+        this.renderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY + 20, 100, 16, Justification.Left);
 
-        ctx.font ='12px sans-serif';
+        ctx.font ='12px serif';
         const kw = unit._keywords.join(", ").toLocaleUpperCase();
         this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY + 20, 500);
         
