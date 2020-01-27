@@ -19,30 +19,45 @@ export enum UnitRole {
     'Lord of War'
 };
 
-export class Unit {
+export class Model {
 
+    _name: string = "";
+
+    // Characteristics
+    _move: string = "0\"";
+    _ws: string = "";
+    _bs: string = "";
+    _str: number = 4;
+    _toughness: number = 4;
+    _wounds: number = 1;
+    _attacks: string|number = 1;
+    _leadership: number = 7;
+    _save: string = "";
+
+    _weapons: Weapon[] = [];
+
+    _points: number = 0;
+    _powerLevel: number = 0;
+};
+
+export class Unit {
 
     _name: string = "";
     _role: UnitRole = UnitRole['Troops'];
     _faction: string = "";
     _keywords: string[] = [];
     
-    // Characteristics
-    _move: string|null = "0\"";
-    _ws: string|null = "";
-    _bs: string|null = "";
-    _str: number = 4;
-    _toughness: number = 4;
-    _wounds: number = 1;
-    _attacks: string|number|null = 1;
-    _leadership: number = 7;
-    _save: string|null = "";
-
     _abilities: Map<string, string> = new Map();
-    _weapons: Weapon[] = [];
+
+    _models: Model[] = [];
 
     _points: number = 0;
     _powerLevel: number = 0;
     
     _woundTracker: WoundTracker[] = [];
+
+    parseModel(root: Element): Model|null {
+
+        return null;
+    }
 }

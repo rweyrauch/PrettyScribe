@@ -1,4 +1,5 @@
-import { Unit, UnitRole } from "./unit.js";
+import { Unit, UnitRole, Model } from "./unit.js";
+import { Weapon } from "./weapon.js";
 
 export enum Justification {
     Left,
@@ -35,6 +36,15 @@ export class Renderer {
         this._roles.set(UnitRole['Lord of War'], document.getElementById('role_lw') as HTMLImageElement);
     }
     
+    private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
+        ctx.strokeStyle = 'black';
+        ctx.strokeRect(x, y, w, h);
+    }
+
+    private renderWatermark(ctx: CanvasRenderingContext2D) {
+
+    }
+
     private renderText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, h: number, how: Justification): void {
         if (ctx && text.length) {
             ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
@@ -97,34 +107,162 @@ export class Renderer {
         this._currentY += 2;
     }
 
-    private renderWeapons(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        for (let weapon of unit._weapons) {
+    private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[]|null) {
+        let x      = this._currentX;
+        const height = 22;
+        const width = this._maxX;
+        ctx.fillStyle = '#AAAAAA';
+        ctx.fillRect(this._currentX, this._currentY, width, height);
 
+        ctx.fillStyle = 'black';
+        ctx.font = '14px sans-serif';
+        var w = 50;
+        if (labels) {
+            ctx.font = '12px sans-serif';
+            for (let i = 0; i < labels.length; i++) {
+                if (columnWidths) w = columnWidths[i];
+                this.renderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
+                x += w;
+            }
         }
+
+        this._currentY += height;
+    }
+
+    private renderWeapons(ctx: CanvasRenderingContext2D, weapons: Weapon[], columnWidths: number[]|null): void {
+        ctx.font = '12px sans-serif';
+
+        const height = 22;
+
+        let i = 0; 
+        let w = 50;
+        for (let weapon of weapons) {
+
+            let ci = 0;
+            let x = this._currentX;
+
+            if (i % 2) ctx.fillStyle = '#eeeeee';
+            else ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x, this._currentY, this._maxX, height);
+            i++;
+
+            ctx.fillStyle = 'black'
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, weapon._name.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, weapon._range.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, weapon._type.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, weapon._str.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, weapon._ap.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, weapon._damage.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            for (let ab of weapon._abilities) {
+                this.renderText(ctx, ab[0] + ' ' + ab[1], x, this._currentY, w, height, Justification.Center);
+            }
+            x += w;
+
+            this._currentY += height;
+        }
+    }
+
+    private renderModel(ctx: CanvasRenderingContext2D, model: Model, columnWidths: number[]|null, bg: number): void {
+ 
+        const height = 22;
+
+        let w = 50;
+        let x = this._currentX;
+        let ci = 0;
+
+        if (bg % 2) ctx.fillStyle = '#eeeeee';
+        else ctx.fillStyle = '#ffffff';
+        ctx.fillRect(x, this._currentY, this._maxX, height);
+
+        ctx.fillStyle = 'black'
+        ctx.font = '12px sans-serif';
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._name.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._move.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._ws.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._bs.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._str.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._toughness.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._wounds.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._attacks.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._leadership.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        if (columnWidths) w = columnWidths[ci++];
+        this.renderText(ctx, model._save.toString(), x, this._currentY, w, height, Justification.Center);
+        x += w;
+
+        this._currentY += height;
+    
+
     }
 
     private renderAbilities(ctx: CanvasRenderingContext2D, unit: Unit): void {
         ctx.font = '16px sans-serif';
-        this.renderText(ctx, "ABILITIES", this._currentX + 20, this._currentY + 20, 100, 16, Justification.Left);
+        this.renderText(ctx, "ABILITIES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font ='12px serif';
         for (let ab of unit._abilities) {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
-            this._currentY = this.renderParagraph(ctx, content+": "+desc, this._currentX + 190, this._currentY + 20, 500);
+            this._currentY = this.renderParagraph(ctx, content+": "+desc, this._currentX + 190, this._currentY, 500);
         }
-        this._currentY += 2;
+        this._currentY += 4;
     }
 
     private renderKeywords(ctx: CanvasRenderingContext2D, unit: Unit): void {
         ctx.font = '16px sans-serif';
-        this.renderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY + 20, 100, 16, Justification.Left);
+        this.renderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font ='12px serif';
         const kw = unit._keywords.join(", ").toLocaleUpperCase();
-        this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY + 20, 500);
+        this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
         
-        this._currentY += 2;
+        this._currentY += 4;
     }
 
     render(unit: Unit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
@@ -147,10 +285,25 @@ export class Renderer {
 
         ctx.fillStyle = '#000000';
 
-        if (unit._weapons.length > 0) {
-            this.renderLine(ctx);
-            this.renderWeapons(ctx, unit);
+        let weapons: Weapon[] = [];
+
+        const unitLabels = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
+        const unitLabelWidths = [200, 50, 50, 50, 50, 50, 50, 50, 50, 50];
+        this.renderTableHeader(ctx, unitLabels, unitLabelWidths);
+        let i = 0;
+        for (var model of unit._models) {
+            this.renderModel(ctx, model, unitLabelWidths, i%2);
+            i++;
+            for (let weapon of model._weapons) {
+                weapons.push(weapon);
+            }
         }
+
+
+        const weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
+        const weaponLabelWidth = [200, 50, 100, 50, 50, 50, 200];
+        this.renderTableHeader(ctx, weaponLabels, weaponLabelWidth);
+        this.renderWeapons(ctx, weapons, weaponLabelWidth);
 
         if (unit._abilities.size > 0) {
             this.renderLine(ctx);
@@ -162,16 +315,6 @@ export class Renderer {
             this.renderKeywords(ctx, unit);
         }
 /*
-        # model statlines:
-        if(count($unit['model_stat'])) {
-            this.renderTable($unit['model_stat']);
-        }
-        # weapon statlines:
-        if(count($unit['weapon_stat'])) {
-            this.renderLine();
-            this.renderTable($unit['weapon_stat']);
-        }
-
         # wizard statlines:
         if(count($unit['powers']) > 0) {
             $needs_smite = true;
@@ -188,28 +331,6 @@ export class Renderer {
             }
             this.renderLine();
             this.renderTable($unit['powers']);
-        }
-
-        # abilities:
-        if(count($unit['abilities']) > 0) {
-            this.renderLine();
-            this.renderAbilities('Abilities', $unit['abilities']);
-        }
-
-        # keywords and keyword-adjacents:
-        $unit['points'] = array($unit['points']);
-        $lists = array(
-            'Rules'    => 'rules',
-            'Factions' => 'factions',
-            'Keywords' => 'keywords',
-            'Contents' => 'roster'
-        );
-        foreach($lists as $label => $data) {
-            if(count($unit[$data]) > 0) {
-                $allCaps = $label == 'Roster' ? false : true;
-                this.renderLine();
-                this.renderKeywords($label, $unit[$data], $allCaps);
-            }
         }
 
         # wound tracker:
@@ -233,9 +354,11 @@ export class Renderer {
             this.renderTable($unit['explode_table']);
         }
 
-        this.renderBorder();
-        this.renderWatermark();
 */
+        const totalHeight = this._currentY - (yOffset + this._margin);
+        const totalWidth = this._maxX - this._currentX - 1;
+        this.renderBorder(ctx, this._currentX, yOffset + this._margin, totalWidth, totalHeight);
+        this.renderWatermark(ctx);
 
         return [this._currentX, this._currentY];
     }
@@ -302,7 +425,8 @@ export class Renderer {
         ctx.fillStyle = 'white';
         ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
         this.renderText(ctx, unitName, title_x, yStart, maxWidth, titleHeight, Justification.Center);
-        this._currentY += 100;
+
+        this._currentY += titleHeight;
     }
 
 };

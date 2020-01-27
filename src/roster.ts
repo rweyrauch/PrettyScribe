@@ -1,5 +1,5 @@
 import { Force } from "./force.js";
-import { Unit, WoundTracker, UnitRole } from "./unit.js";
+import { Unit, WoundTracker, UnitRole, Model } from "./unit.js";
 import { Weapon } from "./weapon.js";
 
 export class Roster {
@@ -150,25 +150,45 @@ export class Roster {
             let propType = prop.getAttributeNode("typeName")?.nodeValue;
             if (propName && propType) {
                 if (propType === "Unit") {
+                    var model: Model = new Model();
+                    model._name = propName;
                     let chars = prop.querySelectorAll("characteristics>characteristic");
                     for (let char of chars) {
                         let charName = char.getAttributeNode("name")?.nodeValue;
                         if (charName) {
                             if (char.textContent) {
                                 switch (charName) {
-                                    case 'M': unit._move = char.textContent; break;
-                                    case 'WS': unit._ws = char.textContent; break;
-                                    case 'BS': unit._bs = char.textContent; break;
-                                    case 'S': unit._str = +char.textContent; break;
-                                    case 'T': unit._toughness = +char.textContent; break;
-                                    case 'W': unit._wounds = +char.textContent; break;
-                                    case 'A': unit._attacks = +char.textContent; break;
-                                    case 'Ld': unit._leadership = +char.textContent; break;
-                                    case 'Save': unit._save = char.textContent; break;
+                                    case 'M': model._move = char.textContent; break;
+                                    case 'WS': model._ws = char.textContent; break;
+                                    case 'BS': model._bs = char.textContent; break;
+                                    case 'S': model._str = +char.textContent; break;
+                                    case 'T': model._toughness = +char.textContent; break;
+                                    case 'W': model._wounds = +char.textContent; break;
+                                    case 'A': model._attacks = +char.textContent; break;
+                                    case 'Ld': model._leadership = +char.textContent; break;
+                                    case 'Save': model._save = char.textContent; break;
                                 }
                             }
                         }
                     }
+
+                    // parse model cost
+                    var costs = root.querySelectorAll(":scope costs>cost");
+                    for (let cost of costs) {
+                        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
+                            let which = cost.getAttributeNode("name")?.nodeValue;
+                            let value = cost.getAttributeNode("value")?.nodeValue;
+                            if (value) {
+                                if (which == " PL") {
+                                    model._powerLevel = +value;
+                                }
+                                else if (which === "pts") {
+                                    model._points = +value;
+                                }
+                             }
+                        }
+                    }
+                    unit._models.push(model);
                 }
                 else if (propType == "Abilities") {
                     let chars = prop.querySelectorAll("characteristics>characteristic");
@@ -200,7 +220,21 @@ export class Roster {
                             }
                         }
                     }
-                    unit._weapons.push(weapon);
+                    // parse weapon cost
+                    var costs = root.querySelectorAll(":scope costs>cost");
+                    for (let cost of costs) {
+                        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
+                            let which = cost.getAttributeNode("name")?.nodeValue;
+                            let value = cost.getAttributeNode("value")?.nodeValue;
+                            if (value) {
+                                 if (which === "pts") {
+                                    weapon._points = +value;
+                                }
+                            }
+                        }
+                    }
+                   
+                    unit._models[unit._models.length-1]._weapons.push(weapon);
                 }
                 else if (propType == "Wound Track") {
                     let tracker = new WoundTracker();
