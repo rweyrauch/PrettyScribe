@@ -89,8 +89,8 @@ function handleFileSelect(event: Event) {
 
                     for (let unit of force._units) {
                       let canvas = document.createElement('canvas') as HTMLCanvasElement;
-                      canvas.width = renderer._res * 5.5;
-                      canvas.height = renderer._res * 8.5;
+                      canvas.width = Renderer._res * 5.5;
+                      canvas.height = Renderer._res * 8.5;
                       
                       const dims = renderer.render(unit, canvas, 0, 0);
                       console.log("Dims: " + dims);

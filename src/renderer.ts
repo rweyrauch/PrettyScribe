@@ -9,8 +9,10 @@ export enum Justification {
 
 export class Renderer {
 
-    readonly _res: number = 144;
-    readonly _margin: number = 50;
+    public static readonly _res: number = 144;
+    public static readonly _margin: number = 50;
+    
+    private static readonly _bevelSize = 15;
 
     private _currentX: number = 0;
     private _currentY: number = 0;
@@ -20,6 +22,11 @@ export class Renderer {
     private _octagon: HTMLImageElement|null = null;
 
     private _roles: Map<UnitRole, HTMLImageElement|null> = new Map();
+
+    private static readonly _blackColor = '#1d272a';
+    private static readonly _grey1 = '#b3bbb5';
+    private static readonly _greyLight = '#dde1df';
+    private static readonly _fillColor = '#f6f6f6';
 
     constructor() {
 
@@ -37,8 +44,19 @@ export class Renderer {
     }
     
     private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-        ctx.strokeStyle = 'black';
-        ctx.strokeRect(x, y, w, h);
+        ctx.strokeStyle =  Renderer._blackColor;
+
+        ctx.beginPath();
+            ctx.moveTo(x, y + Renderer._bevelSize);
+            ctx.lineTo(x, y + h - Renderer._bevelSize);
+            ctx.lineTo(x + Renderer._bevelSize, y + h);
+            ctx.lineTo(x + w - Renderer._bevelSize, y + h);
+            ctx.lineTo(x + w, y + h - Renderer._bevelSize);
+            ctx.lineTo(x + w, y + Renderer._bevelSize);
+            ctx.lineTo(x + w - Renderer._bevelSize, y);
+            ctx.lineTo(x + Renderer._bevelSize, y);
+        ctx.closePath();
+        ctx.stroke();
     }
 
     private renderWatermark(ctx: CanvasRenderingContext2D) {
@@ -99,7 +117,7 @@ export class Renderer {
 
     private renderLine(ctx: CanvasRenderingContext2D): void {
         ctx.lineWidth = 2;
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = Renderer._blackColor;
         ctx.beginPath();
             ctx.moveTo(this._currentX, this._currentY);
             ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
@@ -111,10 +129,10 @@ export class Renderer {
         let x      = this._currentX;
         const height = 22;
         const width = this._maxWidth;
-        ctx.fillStyle = '#AAAAAA';
+        ctx.fillStyle = Renderer._grey1;
         ctx.fillRect(this._currentX, this._currentY, width, height);
 
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = Renderer._blackColor;
         ctx.font = '14px sans-serif';
         var w = 50;
         if (labels) {
@@ -141,12 +159,12 @@ export class Renderer {
             let ci = 0;
             let x = this._currentX;
 
-            if (i % 2) ctx.fillStyle = '#eeeeee';
+            if (i % 2) ctx.fillStyle = Renderer._greyLight;
             else ctx.fillStyle = '#ffffff';
             ctx.fillRect(x, this._currentY, this._maxWidth, height);
             i++;
 
-            ctx.fillStyle = 'black'
+            ctx.fillStyle = Renderer._blackColor;
             if (columnWidths) w = columnWidths[ci++];
             this.renderText(ctx, weapon._name.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
@@ -189,11 +207,11 @@ export class Renderer {
         let x = this._currentX;
         let ci = 0;
 
-        if (bg % 2) ctx.fillStyle = '#eeeeee';
+        if (bg % 2) ctx.fillStyle = Renderer._greyLight;
         else ctx.fillStyle = '#ffffff';
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
-        ctx.fillStyle = 'black'
+        ctx.fillStyle = Renderer._blackColor;
         ctx.font = '12px sans-serif';
 
         if (columnWidths) w = columnWidths[ci++];
@@ -300,10 +318,10 @@ export class Renderer {
             let x = this._currentX;
             let ci = 0;
 
-            ctx.fillStyle = '#EEEEEE';
+            ctx.fillStyle = Renderer._greyLight;
             ctx.fillRect(x, this._currentY, this._maxWidth, height);
     
-            ctx.fillStyle = 'black'
+            ctx.fillStyle = Renderer._blackColor;
             ctx.font = '12px sans-serif';  
             if (columnWidths) w = columnWidths[ci++];
 
@@ -335,17 +353,17 @@ export class Renderer {
             return [0, 0];
         }
 
-        this._currentX = xOffset + this._margin;
-        this._currentY = yOffset + this._margin;
+        this._currentX = xOffset + Renderer._margin;
+        this._currentY = yOffset + Renderer._margin;
         this._maxWidth = canvas.width - this._currentX;
         this._maxHeight = Math.max(0, canvas.height - this._currentY);
     
-        ctx.fillStyle = '#EEEEEE';
+        ctx.fillStyle = Renderer._fillColor;
         ctx.fillRect(this._currentX, this._currentY, this._maxWidth, this._maxHeight);
 
         this.renderHeader(unit, ctx);
 
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = Renderer._blackColor;
 
         let weapons: Weapon[] = [];
         const unitLabelWidths: number[] = [];
@@ -362,12 +380,22 @@ export class Renderer {
             }
         }
 
+        // Unique list of weapons
+        const uniqueWeapons: Weapon[] = [];
+        const scratchMap: Map<string, Weapon> = new Map();
+        for (const w of weapons) {
+            if (!scratchMap.has(w._name)) {
+                scratchMap.set(w._name, w);
+                uniqueWeapons.push(w);
+            }
+        }
+
         const weaponLabelWidths: number[] = [];
         this._weaponLabelWidthNormalized.forEach(element => {
             weaponLabelWidths.push(element*this._maxWidth);
         });
         this.renderTableHeader(ctx, Renderer._weaponLabels, weaponLabelWidths);
-        this.renderWeapons(ctx, weapons, weaponLabelWidths);
+        this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
 
         if (unit._abilities.size > 0) {
             this.renderLine(ctx);
@@ -445,10 +473,10 @@ export class Renderer {
         }
 
 */
-        const totalHeight = this._currentY - (yOffset + this._margin);
+        const totalHeight = this._currentY - (yOffset + Renderer._margin);
         const totalWidth = this._maxWidth;
 
-        this.renderBorder(ctx, this._currentX, yOffset + this._margin, totalWidth, totalHeight);
+        this.renderBorder(ctx, this._currentX, yOffset + Renderer._margin, totalWidth, totalHeight);
         this.renderWatermark(ctx);
 
         return [this._currentX, this._currentY];
@@ -457,22 +485,21 @@ export class Renderer {
     private renderHeader(unit: Unit, ctx: CanvasRenderingContext2D): void {
 
         ctx.globalAlpha = 1;
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = Renderer._blackColor;
     
         const xStart = this._currentX;
         const xEnd =  this._currentX + this._maxWidth;
         const yStart = this._currentY;
         const titleHeight = 36;
         const yEnd = yStart + titleHeight;
-        const bevelSize = 15;
-
+ 
         ctx.beginPath();
-            ctx.moveTo(xStart, yStart + bevelSize);
+            ctx.moveTo(xStart, yStart + Renderer._bevelSize);
             ctx.lineTo(xStart, yEnd);
             ctx.lineTo(xEnd, yEnd);
-            ctx.lineTo(xEnd, yStart + bevelSize);
-            ctx.lineTo(xEnd - bevelSize, yStart);
-            ctx.lineTo(xStart + bevelSize, yStart);
+            ctx.lineTo(xEnd, yStart + Renderer._bevelSize);
+            ctx.lineTo(xEnd - Renderer._bevelSize, yStart);
+            ctx.lineTo(xStart + Renderer._bevelSize, yStart);
             ctx.closePath();
         ctx.fill();
 
