@@ -14,8 +14,8 @@ export class Renderer {
 
     private _currentX: number = 0;
     private _currentY: number = 0;
-    private _maxX: number = 0;
-    private _maxY: number = 0;
+    private _maxWidth: number = 0;
+    private _maxHeight: number = 0;
 
     private _octagon: HTMLImageElement|null = null;
 
@@ -102,7 +102,7 @@ export class Renderer {
         ctx.strokeStyle = '#000000';
         ctx.beginPath();
             ctx.moveTo(this._currentX, this._currentY);
-            ctx.lineTo(this._maxX, this._currentY);
+            ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
         ctx.stroke();
         this._currentY += 2;
     }
@@ -110,7 +110,7 @@ export class Renderer {
     private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[]|null) {
         let x      = this._currentX;
         const height = 22;
-        const width = this._maxX;
+        const width = this._maxWidth;
         ctx.fillStyle = '#AAAAAA';
         ctx.fillRect(this._currentX, this._currentY, width, height);
 
@@ -143,7 +143,7 @@ export class Renderer {
 
             if (i % 2) ctx.fillStyle = '#eeeeee';
             else ctx.fillStyle = '#ffffff';
-            ctx.fillRect(x, this._currentY, this._maxX, height);
+            ctx.fillRect(x, this._currentY, this._maxWidth, height);
             i++;
 
             ctx.fillStyle = 'black'
@@ -191,7 +191,7 @@ export class Renderer {
 
         if (bg % 2) ctx.fillStyle = '#eeeeee';
         else ctx.fillStyle = '#ffffff';
-        ctx.fillRect(x, this._currentY, this._maxX, height);
+        ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
         ctx.fillStyle = 'black'
         ctx.font = '12px sans-serif';
@@ -249,6 +249,7 @@ export class Renderer {
         for (let ab of unit._abilities) {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
+            this._currentY += 2;
             this._currentY = this.renderParagraph(ctx, content+": "+desc, this._currentX + 190, this._currentY, 500);
         }
         this._currentY += 4;
@@ -262,6 +263,7 @@ export class Renderer {
         for (let rule of unit._rules) {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
+            this._currentY += 2;
             this._currentY = this.renderParagraph(ctx, content+": "+desc, this._currentX + 190, this._currentY, 500);
         }
         this._currentY += 4;
@@ -297,12 +299,17 @@ export class Renderer {
         let ci = 0;
 
         for (let tracker of unit._woundTracker) {
-            ctx.fillRect(x, this._currentY, this._maxX, height);
+            ctx.fillRect(x, this._currentY, this._maxWidth, height);
     
             ctx.fillStyle = 'black'
             ctx.font = '12px sans-serif';    
         }
     }
+
+    private static _unitLabels         = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
+    private _unitLabelWidthsNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077];
+    private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
+    private _weaponLabelWidthNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.231];
 
     render(unit: Unit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
 
@@ -311,24 +318,24 @@ export class Renderer {
             return [0, 0];
         }
 
-        this._maxX = canvas.width;
-        this._maxY = canvas.clientHeight;
-
         this._currentX = xOffset + this._margin;
         this._currentY = yOffset + this._margin;
+        this._maxWidth = canvas.width - this._currentX;
+        this._maxHeight = canvas.clientHeight - this._currentY;
     
         ctx.fillStyle = '#EEEEEE';
-        ctx.fillRect(this._currentX, this._currentY, this._maxX, this._maxY);
+        ctx.fillRect(this._currentX, this._currentY, this._maxWidth, this._maxHeight);
 
         this.renderHeader(unit, ctx);
 
         ctx.fillStyle = '#000000';
 
         let weapons: Weapon[] = [];
-
-        const unitLabels = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
-        const unitLabelWidths = [200, 50, 50, 50, 50, 50, 50, 50, 50, 50];
-        this.renderTableHeader(ctx, unitLabels, unitLabelWidths);
+        const unitLabelWidths: number[] = [];
+        this._unitLabelWidthsNormalized.forEach(element => {
+            unitLabelWidths.push(element*this._maxWidth);
+        });
+        this.renderTableHeader(ctx, Renderer._unitLabels, unitLabelWidths);
         let i = 0;
         for (var model of unit._models) {
             this.renderModel(ctx, model, unitLabelWidths, i%2);
@@ -338,29 +345,34 @@ export class Renderer {
             }
         }
 
-
-        const weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
-        const weaponLabelWidth = [200, 50, 100, 50, 50, 50, 200];
-        this.renderTableHeader(ctx, weaponLabels, weaponLabelWidth);
-        this.renderWeapons(ctx, weapons, weaponLabelWidth);
+        const weaponLabelWidths: number[] = [];
+        this._weaponLabelWidthNormalized.forEach(element => {
+            weaponLabelWidths.push(element*this._maxWidth);
+        });
+        this.renderTableHeader(ctx, Renderer._weaponLabels, weaponLabelWidths);
+        this.renderWeapons(ctx, weapons, weaponLabelWidths);
 
         if (unit._abilities.size > 0) {
             this.renderLine(ctx);
+            this._currentY += 2;
             this.renderAbilities(ctx, unit);
         }
 
         if (unit._rules.size > 0) {
             this.renderLine(ctx);
+            this._currentY += 2;
             this.renderRules(ctx, unit);
         }
 
         if (unit._factions.length > 0) {
             this.renderLine(ctx);
+            this._currentY += 2;
             this.renderFactions(ctx, unit);
         }
 
         if (unit._keywords.length > 0) {
             this.renderLine(ctx);
+            this._currentY += 2;
             this.renderKeywords(ctx, unit);
         }
         /*
@@ -370,6 +382,7 @@ export class Renderer {
             const trackerLabelWidth = [200, 200, 100, 100, 100];
             this.renderTableHeader(ctx, trackerLabels, trackerLabelWidth);    
             this.renderWoundTracker(ctx, unit, trackerLabelWidth);
+            this._currentY += 2;
         }
         */
         /*
@@ -414,7 +427,8 @@ export class Renderer {
 
 */
         const totalHeight = this._currentY - (yOffset + this._margin);
-        const totalWidth = this._maxX - this._currentX - 1;
+        const totalWidth = this._maxWidth;
+
         this.renderBorder(ctx, this._currentX, yOffset + this._margin, totalWidth, totalHeight);
         this.renderWatermark(ctx);
 
@@ -427,7 +441,7 @@ export class Renderer {
         ctx.fillStyle = '#000000';
     
         const xStart = this._currentX;
-        const xEnd = this._maxX;
+        const xEnd =  this._currentX + this._maxWidth;
         const yStart = this._currentY;
         const titleHeight = 36;
         const yEnd = yStart + titleHeight;
@@ -473,7 +487,7 @@ export class Renderer {
         ctx.font = title_size + 'px ' + 'bold serif';
         const unitName = unit._name.toLocaleUpperCase();
         let check = ctx.measureText(unitName);
-        const maxWidth = this._maxX - this._currentX - title_x;
+        const maxWidth = this._maxWidth - this._currentX - title_x;
         while (iters < 6 && check.width > maxWidth) {
             iters += 1;
             title_size -= 2;
