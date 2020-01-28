@@ -9,8 +9,8 @@ export enum Justification {
 
 export class Renderer {
 
-    readonly _res: number = 144;
-    readonly _margin: number = 70;
+     readonly _res: number = 144;
+    readonly _margin: number = 50;
 
     private _currentX: number = 0;
     private _currentY: number = 0;
@@ -242,7 +242,7 @@ export class Renderer {
     }
 
     private renderAbilities(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        ctx.font = '16px sans-serif';
+        ctx.font = '14px sans-serif';
         this.renderText(ctx, "ABILITIES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font ='12px serif';
@@ -256,7 +256,7 @@ export class Renderer {
     }
 
     private renderRules(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        ctx.font = '16px sans-serif';
+        ctx.font = '14px sans-serif';
         this.renderText(ctx, "RULES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font ='12px serif';
@@ -270,7 +270,7 @@ export class Renderer {
     }
  
     private renderKeywords(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        ctx.font = '16px sans-serif';
+        ctx.font = '14px sans-serif';
         this.renderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font ='12px serif';
@@ -281,7 +281,7 @@ export class Renderer {
     }
 
     private renderFactions(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        ctx.font = '16px sans-serif';
+        ctx.font = '14px sans-serif';
         this.renderText(ctx, "FACTIONS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font ='12px serif';
@@ -321,7 +321,7 @@ export class Renderer {
         this._currentX = xOffset + this._margin;
         this._currentY = yOffset + this._margin;
         this._maxWidth = canvas.width - this._currentX;
-        this._maxHeight = canvas.clientHeight - this._currentY;
+        this._maxHeight = Math.max(0, canvas.height - this._currentY);
     
         ctx.fillStyle = '#EEEEEE';
         ctx.fillRect(this._currentX, this._currentY, this._maxWidth, this._maxHeight);
