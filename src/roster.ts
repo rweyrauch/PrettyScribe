@@ -164,7 +164,7 @@ export class Roster {
                                     case 'S': model._str = +char.textContent; break;
                                     case 'T': model._toughness = +char.textContent; break;
                                     case 'W': model._wounds = +char.textContent; break;
-                                    case 'A': model._attacks = +char.textContent; break;
+                                    case 'A': model._attacks = char.textContent; break;
                                     case 'Ld': model._leadership = +char.textContent; break;
                                     case 'Save': model._save = char.textContent; break;
                                 }

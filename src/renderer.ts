@@ -9,7 +9,7 @@ export enum Justification {
 
 export class Renderer {
 
-     readonly _res: number = 144;
+    readonly _res: number = 144;
     readonly _margin: number = 50;
 
     private _currentX: number = 0;
@@ -295,14 +295,28 @@ export class Renderer {
         const height = 22;
 
         let w = 50;
-        let x = this._currentX;
-        let ci = 0;
-
+ 
         for (let tracker of unit._woundTracker) {
+            let x = this._currentX;
+            let ci = 0;
+
+            ctx.fillStyle = '#EEEEEE';
             ctx.fillRect(x, this._currentY, this._maxWidth, height);
     
             ctx.fillStyle = 'black'
-            ctx.font = '12px sans-serif';    
+            ctx.font = '12px sans-serif';  
+            if (columnWidths) w = columnWidths[ci++];
+
+            this.renderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            for (let attr of tracker._table) {
+                if (columnWidths) w = columnWidths[ci++];
+                this.renderText(ctx, attr[1], x, this._currentY, w, height, Justification.Center);
+                x += w;
+            }
+
+            this._currentY += height;  
         }
     }
 
@@ -310,6 +324,9 @@ export class Renderer {
     private _unitLabelWidthsNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077];
     private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
     private _weaponLabelWidthNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.231];
+
+    private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
+    private _trackerLabelWidth = [0.3, 0.2, 0.15, 0.15, 0.15];
 
     render(unit: Unit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
 
@@ -375,16 +392,18 @@ export class Renderer {
             this._currentY += 2;
             this.renderKeywords(ctx, unit);
         }
-        /*
+        
         if (unit._woundTracker.length > 0) {
             this.renderLine(ctx);
-            const trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
-            const trackerLabelWidth = [200, 200, 100, 100, 100];
-            this.renderTableHeader(ctx, trackerLabels, trackerLabelWidth);    
-            this.renderWoundTracker(ctx, unit, trackerLabelWidth);
+            const trackerLabelWidths: number[] = [];
+            this._trackerLabelWidth.forEach(element => {
+                trackerLabelWidths.push(element*this._maxWidth);
+            });
+            this.renderTableHeader(ctx, Renderer._trackerLabels, trackerLabelWidths);    
+            this.renderWoundTracker(ctx, unit, trackerLabelWidths);
             this._currentY += 2;
         }
-        */
+        
         /*
         # wizard statlines:
         if(count($unit['powers']) > 0) {

@@ -30,7 +30,7 @@ export class Model {
     _str: number = 4;
     _toughness: number = 4;
     _wounds: number = 1;
-    _attacks: string|number = 1;
+    _attacks: string = "";
     _leadership: number = 7;
     _save: string = "";
 
