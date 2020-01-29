@@ -1,5 +1,5 @@
 import { Force } from "./force.js";
-import { Unit, WoundTracker, UnitRole, Model, PsychicPower } from "./unit.js";
+import { Unit, WoundTracker, UnitRole, Model, PsychicPower, Explosion } from "./unit.js";
 import { Weapon } from "./weapon.js";
 
 export class Roster {
@@ -276,6 +276,24 @@ export class Roster {
                         }
                     }
                     unit._models[unit._models.length-1]._psychicPowers.push(power);
+                }
+                else if (propType == "Explosion") {
+                    let explosion: Explosion = new Explosion();
+                    explosion._name = propName;
+                    let chars = prop.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName) {
+                            if (char.textContent) {
+                                switch (charName) {
+                                    case 'Dice Roll': explosion._diceRoll = char.textContent; break;
+                                    case 'Distance': explosion._distance = char.textContent; break;
+                                    case 'Mortal Wounds': explosion._mortalWounds = char.textContent; break;
+                                }
+                            }
+                        }
+                    }
+                    unit._models[unit._models.length-1]._explosions.push(explosion);
                 }
                 else {
                     console.log(propType);

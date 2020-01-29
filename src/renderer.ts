@@ -1,4 +1,4 @@
-import { Unit, UnitRole, Model, PsychicPower } from "./unit.js";
+import { Unit, UnitRole, Model, PsychicPower, Explosion } from "./unit.js";
 import { Weapon } from "./weapon.js";
 
 export enum Justification {
@@ -184,6 +184,45 @@ export class Renderer {
         }
     }
 
+    private renderExplosion(ctx: CanvasRenderingContext2D, explosions: Explosion[], columnWidths: number[]|null): void {
+        ctx.font = '12px sans-serif';
+
+        const height = 22;
+
+        let i = 0; 
+        let w = 50;
+
+        for (const expl of explosions) {
+            let ci = 0;
+            let x = this._currentX;
+
+            if (i % 2) ctx.fillStyle = Renderer._greyLight;
+            else ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x, this._currentY, this._maxWidth, height);
+            i++;
+
+            ctx.fillStyle = Renderer._blackColor;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, expl._name, x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, expl._diceRoll, x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, expl._distance, x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, expl._mortalWounds, x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            this._currentY += height;
+        }
+    }
+
     private renderWeapons(ctx: CanvasRenderingContext2D, weapons: Weapon[], columnWidths: number[]|null): void {
         ctx.font = '12px sans-serif';
 
@@ -228,12 +267,8 @@ export class Renderer {
 
             if (columnWidths) w = columnWidths[ci++];
             this._currentY += 2;
-            //for (let ab of weapon._abilities) {
             this._currentY = this.renderParagraph(ctx, weapon._abilities, x, this._currentY, w);
-            //}
             x += w;
-
-            //this._currentY += height;
         }
     }
 
@@ -293,8 +328,6 @@ export class Renderer {
         x += w;
 
         this._currentY += height;
-    
-
     }
 
     private renderAbilities(ctx: CanvasRenderingContext2D, unit: Unit): void {
@@ -384,6 +417,9 @@ export class Renderer {
     private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
     private _spellLabelWidthNormalized = [0.3, 0.1, 0.1, 0.5];
 
+    private static _explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];
+    private _explosionLabelWidthNormalized = [0.3, 0.15, 0.15, 0.15];
+
     private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
     private _trackerLabelWidth = [0.3, 0.2, 0.15, 0.15, 0.15];
 
@@ -408,6 +444,7 @@ export class Renderer {
 
         let weapons: Weapon[] = [];
         let spells: PsychicPower[] = [];
+        let explosions: Explosion[] = [];
         const unitLabelWidths: number[] = [];
         this._unitLabelWidthsNormalized.forEach(element => {
             unitLabelWidths.push(element*this._maxWidth);
@@ -423,6 +460,9 @@ export class Renderer {
             for (let spell of model._psychicPowers) {
                 spells.push(spell);
             }
+            for (let expl of model._explosions) {
+                explosions.push(expl);
+            }
         }
 
         // Unique list of weapons
@@ -435,19 +475,23 @@ export class Renderer {
             }
         }
 
-        const weaponLabelWidths: number[] = [];
-        this._weaponLabelWidthNormalized.forEach(element => {
-            weaponLabelWidths.push(element*this._maxWidth);
-        });
-        this.renderTableHeader(ctx, Renderer._weaponLabels, weaponLabelWidths);
-        this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
+        if (uniqueWeapons.length > 0) {
+            const weaponLabelWidths: number[] = [];
+            this._weaponLabelWidthNormalized.forEach(element => {
+                weaponLabelWidths.push(element*this._maxWidth);
+            });
+            this.renderTableHeader(ctx, Renderer._weaponLabels, weaponLabelWidths);
+            this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
+        }
 
-        const spellLabelWidths: number[] = [];
-        this._spellLabelWidthNormalized.forEach(element => {
-            spellLabelWidths.push(element*this._maxWidth);
-        });
-        this.renderTableHeader(ctx, Renderer._spellLabels, spellLabelWidths);
-        this.renderSpells(ctx, spells, spellLabelWidths);
+        if (spells.length > 0) {
+            const spellLabelWidths: number[] = [];
+            this._spellLabelWidthNormalized.forEach(element => {
+                spellLabelWidths.push(element*this._maxWidth);
+            });
+            this.renderTableHeader(ctx, Renderer._spellLabels, spellLabelWidths);
+            this.renderSpells(ctx, spells, spellLabelWidths);
+        }
 
         if (unit._abilities.size > 0) {
             this.renderLine(ctx);
@@ -481,9 +525,18 @@ export class Renderer {
             });
             this.renderTableHeader(ctx, Renderer._trackerLabels, trackerLabelWidths);    
             this.renderWoundTracker(ctx, unit, trackerLabelWidths);
-            this._currentY += 2;
         }
         
+        if (explosions.length > 0) {
+            this.renderLine(ctx);            
+            const explLabelWidths: number[] = [];
+            this._explosionLabelWidthNormalized.forEach(element => {
+                explLabelWidths.push(element*this._maxWidth);
+            });
+            this.renderTableHeader(ctx, Renderer._explosionLabels, explLabelWidths);
+            this.renderExplosion(ctx, explosions, explLabelWidths);
+        }
+
         /*
         # wizard statlines:
         if(count($unit['powers']) > 0) {
@@ -513,12 +566,6 @@ export class Renderer {
             this._currentY += 5;
             this.renderWoundBoxes($unit);
         }
-
-        if(count($unit['explode_table']) > 0) {
-            this.renderLine();
-            this.renderTable($unit['explode_table']);
-        }
-
 */
         const totalHeight = this._currentY - (yOffset + Renderer._margin);
         const totalWidth = this._maxWidth;

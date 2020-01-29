@@ -6,7 +6,7 @@ export class Weapon {
     _range: string | number = "Melee";
     _type: string = "Melee";
     _str: WeaponStrength = "user";
-    _ap: string = "-";
+    _ap: string = "";
     _damage: string = "";
     
     _abilities: string = "";

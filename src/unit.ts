@@ -5,6 +5,13 @@ export class WoundTracker {
     _table: Map<string, string> = new Map();
 };
 
+export class Explosion {
+    _name: string = "";
+    _diceRoll: string = "";
+    _distance: string = "";
+    _mortalWounds: string = "";
+}
+
 export class PsychicPower {
     _name: string = "";
     _manifest: number = 0;
@@ -42,6 +49,7 @@ export class Model {
 
     _weapons: Weapon[] = [];
     _psychicPowers: PsychicPower[] = [];
+    _explosions: Explosion[] = [];
 
     _points: number = 0;
     _powerLevel: number = 0;
