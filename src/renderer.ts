@@ -1,4 +1,4 @@
-import { Unit, UnitRole, Model } from "./unit.js";
+import { Unit, UnitRole, Model, PsychicPower } from "./unit.js";
 import { Weapon } from "./weapon.js";
 
 export enum Justification {
@@ -126,7 +126,7 @@ export class Renderer {
     }
 
     private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[]|null) {
-        let x      = this._currentX;
+        let x = this._currentX;
         const height = 22;
         const width = this._maxWidth;
         ctx.fillStyle = Renderer._grey1;
@@ -147,6 +147,43 @@ export class Renderer {
         this._currentY += height;
     }
 
+    private renderSpells(ctx: CanvasRenderingContext2D, spells: PsychicPower[], columnWidths: number[]|null): void {
+        ctx.font = '12px sans-serif';
+
+        const height = 22;
+
+        let i = 0; 
+        let w = 50;
+
+        for (const spell of spells) {
+            let ci = 0;
+            let x = this._currentX;
+
+            if (i % 2) ctx.fillStyle = Renderer._greyLight;
+            else ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x, this._currentY, this._maxWidth, height);
+            i++;
+
+            ctx.fillStyle = Renderer._blackColor;
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, spell._name.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, spell._manifest.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this.renderText(ctx, spell._range.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            this._currentY += 2;
+            this._currentY = this.renderParagraph(ctx, spell._details, x, this._currentY, w);
+            x += w;
+        }
+    }
+
     private renderWeapons(ctx: CanvasRenderingContext2D, weapons: Weapon[], columnWidths: number[]|null): void {
         ctx.font = '12px sans-serif';
 
@@ -154,7 +191,7 @@ export class Renderer {
 
         let i = 0; 
         let w = 50;
-        for (let weapon of weapons) {
+        for (const weapon of weapons) {
 
             let ci = 0;
             let x = this._currentX;
@@ -190,12 +227,13 @@ export class Renderer {
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
-            for (let ab of weapon._abilities) {
-                this.renderText(ctx, ab[0] + ' ' + ab[1], x, this._currentY, w, height, Justification.Center);
-            }
+            this._currentY += 2;
+            //for (let ab of weapon._abilities) {
+            this._currentY = this.renderParagraph(ctx, weapon._abilities, x, this._currentY, w);
+            //}
             x += w;
 
-            this._currentY += height;
+            //this._currentY += height;
         }
     }
 
@@ -341,7 +379,10 @@ export class Renderer {
     private static _unitLabels         = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
     private _unitLabelWidthsNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077];
     private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
-    private _weaponLabelWidthNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.231];
+    private _weaponLabelWidthNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.3];
+
+    private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
+    private _spellLabelWidthNormalized = [0.3, 0.1, 0.1, 0.5];
 
     private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
     private _trackerLabelWidth = [0.3, 0.2, 0.15, 0.15, 0.15];
@@ -366,6 +407,7 @@ export class Renderer {
         ctx.fillStyle = Renderer._blackColor;
 
         let weapons: Weapon[] = [];
+        let spells: PsychicPower[] = [];
         const unitLabelWidths: number[] = [];
         this._unitLabelWidthsNormalized.forEach(element => {
             unitLabelWidths.push(element*this._maxWidth);
@@ -377,6 +419,9 @@ export class Renderer {
             i++;
             for (let weapon of model._weapons) {
                 weapons.push(weapon);
+            }
+            for (let spell of model._psychicPowers) {
+                spells.push(spell);
             }
         }
 
@@ -396,6 +441,13 @@ export class Renderer {
         });
         this.renderTableHeader(ctx, Renderer._weaponLabels, weaponLabelWidths);
         this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
+
+        const spellLabelWidths: number[] = [];
+        this._spellLabelWidthNormalized.forEach(element => {
+            spellLabelWidths.push(element*this._maxWidth);
+        });
+        this.renderTableHeader(ctx, Renderer._spellLabels, spellLabelWidths);
+        this.renderSpells(ctx, spells, spellLabelWidths);
 
         if (unit._abilities.size > 0) {
             this.renderLine(ctx);
@@ -460,11 +512,6 @@ export class Renderer {
             this.renderLine();
             this._currentY += 5;
             this.renderWoundBoxes($unit);
-        }
-
-        if(count($unit['wound_track']) > 0) {
-            this.renderLine();
-            this.renderTable($unit['wound_track']);
         }
 
         if(count($unit['explode_table']) > 0) {

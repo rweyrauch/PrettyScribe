@@ -6,10 +6,10 @@ export class Weapon {
     _range: string | number = "Melee";
     _type: string = "Melee";
     _str: WeaponStrength = "user";
-    _ap: number = 0;
+    _ap: string = "-";
     _damage: string = "";
     
-    _abilities: Map<string, string> = new Map();
+    _abilities: string = "";
 
     _points: number = 0;
 }

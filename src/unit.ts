@@ -5,6 +5,12 @@ export class WoundTracker {
     _table: Map<string, string> = new Map();
 };
 
+export class PsychicPower {
+    _name: string = "";
+    _manifest: number = 0;
+    _range: string = "";
+    _details: string = "";
+}
 
 export enum UnitRole {
     'None',
@@ -35,6 +41,7 @@ export class Model {
     _save: string = "";
 
     _weapons: Weapon[] = [];
+    _psychicPowers: PsychicPower[] = [];
 
     _points: number = 0;
     _powerLevel: number = 0;
@@ -43,7 +50,7 @@ export class Model {
 export class Unit {
 
     _name: string = "";
-    _role: UnitRole = UnitRole['Troops'];
+    _role: UnitRole = UnitRole['None'];
     _factions: string[] = [];
     _keywords: string[] = [];
     

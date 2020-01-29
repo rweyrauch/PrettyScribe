@@ -1,5 +1,5 @@
 import { Force } from "./force.js";
-import { Unit, WoundTracker, UnitRole, Model } from "./unit.js";
+import { Unit, WoundTracker, UnitRole, Model, PsychicPower } from "./unit.js";
 import { Weapon } from "./weapon.js";
 
 export class Roster {
@@ -136,9 +136,8 @@ export class Roster {
                         unit._role = unitRole;
                     }
                     else {
-                        // Keyword
+                         // Keyword
                         unit._keywords.push(catName);
-                        unit._role = UnitRole['None'];
                     }
                 }
             }
@@ -213,9 +212,9 @@ export class Roster {
                                     case 'Range': weapon._range = char.textContent; break;
                                     case 'Type': weapon._type = char.textContent; break;
                                     case 'S': weapon._str = char.textContent; break;
-                                    case 'AP': weapon._ap = +char.textContent; break;
+                                    case 'AP': weapon._ap = char.textContent; break;
                                     case 'D': weapon._damage = char.textContent; break;
-                                    case 'Abilities': break;
+                                    case 'Abilities': weapon._abilities = char.textContent; break;
                                 }
                             }
                         }
@@ -260,8 +259,26 @@ export class Roster {
                         }
                     }
                 }
+                else if (propType == "Psychic Power") {
+                    let power: PsychicPower = new PsychicPower();
+                    power._name = propName;
+                    let chars = prop.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName) {
+                            if (char.textContent) {
+                                switch (charName) {
+                                    case 'Range': power._range = char.textContent; break;
+                                    case 'Warp Charge': power._manifest = +char.textContent; break;
+                                    case 'Details': power._details = char.textContent; break;
+                                }
+                            }
+                        }
+                    }
+                    unit._models[unit._models.length-1]._psychicPowers.push(power);
+                }
                 else {
-                    console.log(prop);
+                    console.log(propType);
                 }
             }
         }
