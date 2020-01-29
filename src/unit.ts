@@ -59,8 +59,8 @@ export class Unit {
 
     _name: string = "";
     _role: UnitRole = UnitRole['None'];
-    _factions: string[] = [];
-    _keywords: string[] = [];
+    _factions: Set<string> = new Set();
+    _keywords: Set<string> = new Set();
     
     _abilities: Map<string, string> = new Map();
     _rules: Map<string, string> = new Map();

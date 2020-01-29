@@ -10,7 +10,7 @@ export enum Justification {
 export class Renderer {
 
     public static readonly _res: number = 144;
-    public static readonly _margin: number = 50;
+    public static readonly _margin: number = 0;
 
     private static readonly _bevelSize = 15;
 
@@ -386,7 +386,8 @@ export class Renderer {
         this.renderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font = '12px serif';
-        const kw = unit._keywords.join(", ").toLocaleUpperCase();
+        const kwlist = [...unit._keywords]; 
+        const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
 
         this._currentY += 4;
@@ -397,7 +398,8 @@ export class Renderer {
         this.renderText(ctx, "FACTIONS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font = '12px serif';
-        const kw = unit._factions.join(", ").toLocaleUpperCase();
+        const kwlist = [...unit._factions]; 
+        const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
 
         this._currentY += 4;
@@ -525,13 +527,13 @@ export class Renderer {
             this.renderRules(ctx, unit);
         }
 
-        if (unit._factions.length > 0) {
+        if (unit._factions.size > 0) {
             this.renderLine(ctx);
             this._currentY += 2;
             this.renderFactions(ctx, unit);
         }
 
-        if (unit._keywords.length > 0) {
+        if (unit._keywords.size > 0) {
             this.renderLine(ctx);
             this._currentY += 2;
             this.renderKeywords(ctx, unit);
@@ -593,7 +595,7 @@ export class Renderer {
         this.renderBorder(ctx, this._currentX, yOffset + Renderer._margin, totalWidth, totalHeight);
         this.renderWatermark(ctx);
 
-        return [this._currentX, this._currentY];
+        return [this._maxWidth, this._currentY];
     }
 
     private renderHeader(unit: Unit, ctx: CanvasRenderingContext2D): void {

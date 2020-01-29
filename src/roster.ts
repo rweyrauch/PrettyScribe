@@ -125,9 +125,11 @@ export class Roster {
         for (let cat of categories) {
             let catName = cat.getAttributeNode("name")?.nodeValue;
             if (catName) {
-                const factIndex = catName.lastIndexOf("Faction: ");
+                const factPattern = "Faction: ";
+                const factIndex = catName.lastIndexOf(factPattern);
                 if (factIndex >= 0) {
-                    unit._factions.push(catName.slice(factIndex));
+                    const factKeyword = catName.slice(factIndex+factPattern.length);
+                    unit._factions.add(factKeyword);
                 }
                 else {
                     const roleText = catName.trim();
@@ -136,12 +138,13 @@ export class Roster {
                         unit._role = unitRole;
                     }
                     else {
-                         // Keyword
-                        unit._keywords.push(catName);
+                        // Keyword
+                        unit._keywords.add(catName);
                     }
                 }
             }
         }
+
         var props = root.querySelectorAll("selection>profiles>profile");
         for (let prop of props) {
             // What kind of prop is this

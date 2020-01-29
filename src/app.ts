@@ -94,7 +94,14 @@ function handleFileSelect(event: Event) {
                       
                       const dims = renderer.render(unit, canvas, 0, 0);
                       console.log("Dims: " + dims);
-                      forceUnits?.appendChild(canvas);
+
+                      const border = 25;
+                      let finalCanvas = document.createElement('canvas') as HTMLCanvasElement;
+                      finalCanvas.width = dims[0] + border * 2;
+                      finalCanvas.height = dims[1] + border * 2;
+                      let finalCtx = finalCanvas.getContext('2d');
+                      finalCtx?.drawImage(canvas, border, border);
+                      forceUnits?.appendChild(finalCanvas);
                     }
                 }
               }
