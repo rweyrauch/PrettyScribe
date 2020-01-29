@@ -11,7 +11,7 @@ export class Renderer {
 
     public static readonly _res: number = 144;
     public static readonly _margin: number = 50;
-    
+
     private static readonly _bevelSize = 15;
 
     private _currentX: number = 0;
@@ -19,9 +19,9 @@ export class Renderer {
     private _maxWidth: number = 0;
     private _maxHeight: number = 0;
 
-    private _octagon: HTMLImageElement|null = null;
+    private _octagon: HTMLImageElement | null = null;
 
-    private _roles: Map<UnitRole, HTMLImageElement|null> = new Map();
+    private _roles: Map<UnitRole, HTMLImageElement | null> = new Map();
 
     private static readonly _blackColor = '#1d272a';
     private static readonly _grey1 = '#b3bbb5';
@@ -42,21 +42,22 @@ export class Renderer {
         this._roles.set(UnitRole['Fortification'], document.getElementById('role_ft') as HTMLImageElement);
         this._roles.set(UnitRole['Lord of War'], document.getElementById('role_lw') as HTMLImageElement);
     }
-    
+
     private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-        ctx.strokeStyle =  Renderer._blackColor;
+        ctx.strokeStyle = Renderer._blackColor;
 
         ctx.beginPath();
-            ctx.moveTo(x, y + Renderer._bevelSize);
-            ctx.lineTo(x, y + h - Renderer._bevelSize);
-            ctx.lineTo(x + Renderer._bevelSize, y + h);
-            ctx.lineTo(x + w - Renderer._bevelSize, y + h);
-            ctx.lineTo(x + w, y + h - Renderer._bevelSize);
-            ctx.lineTo(x + w, y + Renderer._bevelSize);
-            ctx.lineTo(x + w - Renderer._bevelSize, y);
-            ctx.lineTo(x + Renderer._bevelSize, y);
+        ctx.moveTo(x, y + Renderer._bevelSize);
+        ctx.lineTo(x, y + h - Renderer._bevelSize);
+        ctx.lineTo(x + Renderer._bevelSize, y + h);
+        ctx.lineTo(x + w - Renderer._bevelSize, y + h);
+        ctx.lineTo(x + w, y + h - Renderer._bevelSize);
+        ctx.lineTo(x + w, y + Renderer._bevelSize);
+        ctx.lineTo(x + w - Renderer._bevelSize, y);
+        ctx.lineTo(x + Renderer._bevelSize, y);
         ctx.closePath();
         ctx.stroke();
+
     }
 
     private renderWatermark(ctx: CanvasRenderingContext2D) {
@@ -71,13 +72,13 @@ export class Renderer {
             const th = measure.actualBoundingBoxDescent - measure.actualBoundingBoxAscent;
 
             if (how == Justification.Center) {
-                ctx.fillText(text, x + (w-tw)/2, y + (h-th)/2);
+                ctx.fillText(text, x + (w - tw) / 2, y + (h - th) / 2);
             }
             else if (how == Justification.Left) {
-                ctx.fillText(text, x, y + (h-th)/2);                
+                ctx.fillText(text, x, y + (h - th) / 2);
             }
             else if (how == Justification.Right) {
-                ctx.fillText(text, x + w - tw, y + (h-th)/2);                
+                ctx.fillText(text, x + w - tw, y + (h - th) / 2);
             }
         }
     }
@@ -93,7 +94,7 @@ export class Renderer {
             const heightMeasure = ctx.measureText(text);
             const th = (heightMeasure.actualBoundingBoxDescent - heightMeasure.actualBoundingBoxAscent) * 1.2;
 
-            text.split(" ").forEach(function(word) {
+            text.split(" ").forEach(function (word) {
                 const measure: TextMetrics = ctx.measureText(word);
                 if ((length + measure.width) > w) {
                     lines.push(currentLine.join(" "));
@@ -119,13 +120,13 @@ export class Renderer {
         ctx.lineWidth = 2;
         ctx.strokeStyle = Renderer._blackColor;
         ctx.beginPath();
-            ctx.moveTo(this._currentX, this._currentY);
-            ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
+        ctx.moveTo(this._currentX, this._currentY);
+        ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
         ctx.stroke();
         this._currentY += 2;
     }
 
-    private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[]|null) {
+    private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[] | null) {
         let x = this._currentX;
         const height = 22;
         const width = this._maxWidth;
@@ -147,22 +148,22 @@ export class Renderer {
         this._currentY += height;
     }
 
-    private renderSpells(ctx: CanvasRenderingContext2D, spells: PsychicPower[], columnWidths: number[]|null): void {
+    private renderSpells(ctx: CanvasRenderingContext2D, spells: PsychicPower[], columnWidths: number[] | null): void {
         ctx.font = '12px sans-serif';
 
         const height = 22;
 
-        let i = 0; 
+        let i = 0;
         let w = 50;
+
+        ctx.save();
 
         for (const spell of spells) {
             let ci = 0;
             let x = this._currentX;
 
-            if (i % 2) ctx.fillStyle = Renderer._greyLight;
-            else ctx.fillStyle = '#ffffff';
-            ctx.fillRect(x, this._currentY, this._maxWidth, height);
-            i++;
+            let xStart = this._currentX;
+            let yStart = this._currentY;
 
             ctx.fillStyle = Renderer._blackColor;
             if (columnWidths) w = columnWidths[ci++];
@@ -181,15 +182,26 @@ export class Renderer {
             this._currentY += 2;
             this._currentY = this.renderParagraph(ctx, spell._details, x, this._currentY, w);
             x += w;
+
+            ctx.save();
+            if (i % 2) ctx.fillStyle = Renderer._greyLight;
+            else ctx.fillStyle = '#ffffff';
+            ctx.globalCompositeOperation = "destination-over";
+            const actualHeight = this._currentY - yStart;
+            ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
+            i++;
+
+            ctx.restore();
         }
+        ctx.restore();
     }
 
-    private renderExplosion(ctx: CanvasRenderingContext2D, explosions: Explosion[], columnWidths: number[]|null): void {
+    private renderExplosion(ctx: CanvasRenderingContext2D, explosions: Explosion[], columnWidths: number[] | null): void {
         ctx.font = '12px sans-serif';
 
         const height = 22;
 
-        let i = 0; 
+        let i = 0;
         let w = 50;
 
         for (const expl of explosions) {
@@ -223,22 +235,22 @@ export class Renderer {
         }
     }
 
-    private renderWeapons(ctx: CanvasRenderingContext2D, weapons: Weapon[], columnWidths: number[]|null): void {
+    private renderWeapons(ctx: CanvasRenderingContext2D, weapons: Weapon[], columnWidths: number[] | null): void {
         ctx.font = '12px sans-serif';
 
         const height = 22;
 
-        let i = 0; 
+        ctx.save();
+
+        let i = 0;
         let w = 50;
         for (const weapon of weapons) {
 
             let ci = 0;
             let x = this._currentX;
 
-            if (i % 2) ctx.fillStyle = Renderer._greyLight;
-            else ctx.fillStyle = '#ffffff';
-            ctx.fillRect(x, this._currentY, this._maxWidth, height);
-            i++;
+            let xStart = this._currentX;
+            let yStart = this._currentY;
 
             ctx.fillStyle = Renderer._blackColor;
             if (columnWidths) w = columnWidths[ci++];
@@ -269,11 +281,22 @@ export class Renderer {
             this._currentY += 2;
             this._currentY = this.renderParagraph(ctx, weapon._abilities, x, this._currentY, w);
             x += w;
+
+            ctx.save();
+            ctx.globalCompositeOperation = "destination-over";
+            const actualHeight = this._currentY - yStart;
+            if (i % 2) ctx.fillStyle = Renderer._greyLight;
+            else ctx.fillStyle =  '#ffffff';
+            ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
+            i++;
+
+            ctx.restore();
         }
+        ctx.restore();
     }
 
-    private renderModel(ctx: CanvasRenderingContext2D, model: Model, columnWidths: number[]|null, bg: number): void {
- 
+    private renderModel(ctx: CanvasRenderingContext2D, model: Model, columnWidths: number[] | null, bg: number): void {
+
         const height = 22;
 
         let w = 50;
@@ -334,12 +357,12 @@ export class Renderer {
         ctx.font = '14px sans-serif';
         this.renderText(ctx, "ABILITIES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font ='12px serif';
+        ctx.font = '12px serif';
         for (let ab of unit._abilities) {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
             this._currentY += 2;
-            this._currentY = this.renderParagraph(ctx, content+": "+desc, this._currentX + 190, this._currentY, 500);
+            this._currentY = this.renderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
         }
         this._currentY += 4;
     }
@@ -348,24 +371,24 @@ export class Renderer {
         ctx.font = '14px sans-serif';
         this.renderText(ctx, "RULES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font ='12px serif';
+        ctx.font = '12px serif';
         for (let rule of unit._rules) {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
             this._currentY += 2;
-            this._currentY = this.renderParagraph(ctx, content+": "+desc, this._currentX + 190, this._currentY, 500);
+            this._currentY = this.renderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
         }
         this._currentY += 4;
     }
- 
+
     private renderKeywords(ctx: CanvasRenderingContext2D, unit: Unit): void {
         ctx.font = '14px sans-serif';
         this.renderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font ='12px serif';
+        ctx.font = '12px serif';
         const kw = unit._keywords.join(", ").toLocaleUpperCase();
         this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
-        
+
         this._currentY += 4;
     }
 
@@ -373,27 +396,27 @@ export class Renderer {
         ctx.font = '14px sans-serif';
         this.renderText(ctx, "FACTIONS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font ='12px serif';
+        ctx.font = '12px serif';
         const kw = unit._factions.join(", ").toLocaleUpperCase();
         this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
-        
+
         this._currentY += 4;
     }
 
-    private renderWoundTracker(ctx: CanvasRenderingContext2D, unit: Unit, columnWidths: number[]|null): void {
+    private renderWoundTracker(ctx: CanvasRenderingContext2D, unit: Unit, columnWidths: number[] | null): void {
         const height = 22;
 
         let w = 50;
- 
+
         for (let tracker of unit._woundTracker) {
             let x = this._currentX;
             let ci = 0;
 
             ctx.fillStyle = Renderer._greyLight;
             ctx.fillRect(x, this._currentY, this._maxWidth, height);
-    
+
             ctx.fillStyle = Renderer._blackColor;
-            ctx.font = '12px sans-serif';  
+            ctx.font = '12px sans-serif';
             if (columnWidths) w = columnWidths[ci++];
 
             this.renderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
@@ -405,11 +428,11 @@ export class Renderer {
                 x += w;
             }
 
-            this._currentY += height;  
+            this._currentY += height;
         }
     }
 
-    private static _unitLabels         = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
+    private static _unitLabels = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
     private _unitLabelWidthsNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077];
     private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
     private _weaponLabelWidthNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.3];
@@ -434,9 +457,6 @@ export class Renderer {
         this._currentY = yOffset + Renderer._margin;
         this._maxWidth = canvas.width - this._currentX;
         this._maxHeight = Math.max(0, canvas.height - this._currentY);
-    
-        ctx.fillStyle = Renderer._fillColor;
-        ctx.fillRect(this._currentX, this._currentY, this._maxWidth, this._maxHeight);
 
         this.renderHeader(unit, ctx);
 
@@ -447,12 +467,12 @@ export class Renderer {
         let explosions: Explosion[] = [];
         const unitLabelWidths: number[] = [];
         this._unitLabelWidthsNormalized.forEach(element => {
-            unitLabelWidths.push(element*this._maxWidth);
+            unitLabelWidths.push(element * this._maxWidth);
         });
         this.renderTableHeader(ctx, Renderer._unitLabels, unitLabelWidths);
         let i = 0;
         for (var model of unit._models) {
-            this.renderModel(ctx, model, unitLabelWidths, i%2);
+            this.renderModel(ctx, model, unitLabelWidths, i % 2);
             i++;
             for (let weapon of model._weapons) {
                 weapons.push(weapon);
@@ -478,7 +498,7 @@ export class Renderer {
         if (uniqueWeapons.length > 0) {
             const weaponLabelWidths: number[] = [];
             this._weaponLabelWidthNormalized.forEach(element => {
-                weaponLabelWidths.push(element*this._maxWidth);
+                weaponLabelWidths.push(element * this._maxWidth);
             });
             this.renderTableHeader(ctx, Renderer._weaponLabels, weaponLabelWidths);
             this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
@@ -487,7 +507,7 @@ export class Renderer {
         if (spells.length > 0) {
             const spellLabelWidths: number[] = [];
             this._spellLabelWidthNormalized.forEach(element => {
-                spellLabelWidths.push(element*this._maxWidth);
+                spellLabelWidths.push(element * this._maxWidth);
             });
             this.renderTableHeader(ctx, Renderer._spellLabels, spellLabelWidths);
             this.renderSpells(ctx, spells, spellLabelWidths);
@@ -516,22 +536,22 @@ export class Renderer {
             this._currentY += 2;
             this.renderKeywords(ctx, unit);
         }
-        
+
         if (unit._woundTracker.length > 0) {
             this.renderLine(ctx);
             const trackerLabelWidths: number[] = [];
             this._trackerLabelWidth.forEach(element => {
-                trackerLabelWidths.push(element*this._maxWidth);
+                trackerLabelWidths.push(element * this._maxWidth);
             });
-            this.renderTableHeader(ctx, Renderer._trackerLabels, trackerLabelWidths);    
+            this.renderTableHeader(ctx, Renderer._trackerLabels, trackerLabelWidths);
             this.renderWoundTracker(ctx, unit, trackerLabelWidths);
         }
-        
+
         if (explosions.length > 0) {
-            this.renderLine(ctx);            
+            this.renderLine(ctx);
             const explLabelWidths: number[] = [];
             this._explosionLabelWidthNormalized.forEach(element => {
-                explLabelWidths.push(element*this._maxWidth);
+                explLabelWidths.push(element * this._maxWidth);
             });
             this.renderTableHeader(ctx, Renderer._explosionLabels, explLabelWidths);
             this.renderExplosion(ctx, explosions, explLabelWidths);
@@ -580,44 +600,44 @@ export class Renderer {
 
         ctx.globalAlpha = 1;
         ctx.fillStyle = Renderer._blackColor;
-    
+
         const xStart = this._currentX;
-        const xEnd =  this._currentX + this._maxWidth;
+        const xEnd = this._currentX + this._maxWidth;
         const yStart = this._currentY;
         const titleHeight = 36;
         const yEnd = yStart + titleHeight;
- 
+
         ctx.beginPath();
-            ctx.moveTo(xStart, yStart + Renderer._bevelSize);
-            ctx.lineTo(xStart, yEnd);
-            ctx.lineTo(xEnd, yEnd);
-            ctx.lineTo(xEnd, yStart + Renderer._bevelSize);
-            ctx.lineTo(xEnd - Renderer._bevelSize, yStart);
-            ctx.lineTo(xStart + Renderer._bevelSize, yStart);
-            ctx.closePath();
+        ctx.moveTo(xStart, yStart + Renderer._bevelSize);
+        ctx.lineTo(xStart, yEnd);
+        ctx.lineTo(xEnd, yEnd);
+        ctx.lineTo(xEnd, yStart + Renderer._bevelSize);
+        ctx.lineTo(xEnd - Renderer._bevelSize, yStart);
+        ctx.lineTo(xStart + Renderer._bevelSize, yStart);
+        ctx.closePath();
         ctx.fill();
 
         if (this._octagon) {
             let imgX = xStart + 6;
 
             // Unit battlefield role icon
-            ctx.drawImage(this._octagon, imgX, yStart+2, 32, 32);
+            ctx.drawImage(this._octagon, imgX, yStart + 2, 32, 32);
             const roleImg = this._roles.get(unit._role);
             if (roleImg) {
-                ctx.drawImage(roleImg, imgX + 4, yStart+2 + 4, 24, 24);
+                ctx.drawImage(roleImg, imgX + 4, yStart + 2 + 4, 24, 24);
             }
 
             ctx.fillStyle = 'white';
             ctx.font = "18px serif";
             // Power level icon
             imgX += 34;
-            ctx.drawImage(this._octagon, imgX, yStart+2, 32, 32);
-            this.renderText(ctx, unit._powerLevel.toString(), imgX, yStart+2, 32, 32, Justification.Center);
+            ctx.drawImage(this._octagon, imgX, yStart + 2, 32, 32);
+            this.renderText(ctx, unit._powerLevel.toString(), imgX, yStart + 2, 32, 32, Justification.Center);
 
             // Points icon
             imgX += 34;
-            ctx.drawImage(this._octagon, imgX, yStart+2, 32, 32);
-            this.renderText(ctx, unit._points.toString(), imgX, yStart+2, 32, 32, Justification.Center);
+            ctx.drawImage(this._octagon, imgX, yStart + 2, 32, 32);
+            this.renderText(ctx, unit._points.toString(), imgX, yStart + 2, 32, 32, Justification.Center);
         }
 
         // unit name
