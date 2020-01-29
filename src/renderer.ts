@@ -123,7 +123,7 @@ export class Renderer {
         ctx.moveTo(this._currentX, this._currentY);
         ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
         ctx.stroke();
-        this._currentY += 2;
+        this._currentY += 1;
     }
 
     private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[] | null) {
@@ -502,6 +502,7 @@ export class Renderer {
             this._weaponLabelWidthNormalized.forEach(element => {
                 weaponLabelWidths.push(element * this._maxWidth);
             });
+            this.renderLine(ctx);
             this.renderTableHeader(ctx, Renderer._weaponLabels, weaponLabelWidths);
             this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
         }
@@ -511,6 +512,7 @@ export class Renderer {
             this._spellLabelWidthNormalized.forEach(element => {
                 spellLabelWidths.push(element * this._maxWidth);
             });
+            this.renderLine(ctx);
             this.renderTableHeader(ctx, Renderer._spellLabels, spellLabelWidths);
             this.renderSpells(ctx, spells, spellLabelWidths);
         }
@@ -559,25 +561,7 @@ export class Renderer {
             this.renderExplosion(ctx, explosions, explLabelWidths);
         }
 
-        /*
-        # wizard statlines:
-        if(count($unit['powers']) > 0) {
-            $needs_smite = true;
-            foreach($unit['powers'] as $power) {
-                if($power['Psychic Power'] == 'Smite') { $needs_smite = false; }
-            }
-            if($needs_smite) {
-                array_unshift($unit['powers'], array(
-                    'Psychic Power' => 'Smite',
-                    'Warp Charge'   => 5,
-                    'Range'         => '18"',
-                    'Details'       => 'If manifested, the closest visible enemy unit within 18" of the psyker suffers D3 mortal wounds. If the result of the Psychic test was more than 10, the target suffers D6 mortal wounds instead.'
-                ));
-            }
-            this.renderLine();
-            this.renderTable($unit['powers']);
-        }
-
+/*
         # wound tracker:
         $hasTracks = false;
         foreach($unit['model_stat'] as $type) {

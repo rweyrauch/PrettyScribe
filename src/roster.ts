@@ -20,13 +20,10 @@ export class Roster {
         var roster: Roster | null = null;
 
         if (doc) {
-
             roster = new Roster();
 
             Roster.ParseRosterPoints(doc, roster);
             Roster.ParseForces(doc, roster);
-
-            console.log(roster);
         }
         return roster;
     }

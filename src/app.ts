@@ -3,31 +3,49 @@ import { Renderer } from "./renderer.js";
 
 var roster: Roster | null = null;
 
+function removeAllChildren(parent: Element|null): void {
+  if (parent) {
+    var first = parent.firstElementChild; 
+    while (first) { 
+        first.remove(); 
+        first = parent.firstElementChild; 
+    } 
+  }
+}
+
+function cleanup(): void {
+  const rosterTitle = document.getElementById('roster-title');
+  removeAllChildren(rosterTitle);
+
+  const rosterList = document.getElementById('roster-lists');
+  removeAllChildren(rosterList);
+ 
+  const forceUnits = document.getElementById('force-units');
+  removeAllChildren(rosterTitle);
+}
+
 function handleFileSelect(event: Event) {
   const input = event.target as HTMLInputElement;
   const files = input.files;
+
+  cleanup();
 
   if (files) {
     // files is a FileList of File objects. List some properties.
     var output = [];
     for (let f of files) {
-      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-        f.size, ' bytes, last modified: ',
-        f.lastModified ? f.lastModified.toString() : 'n/a',
-        '</li>');
       const reader = new FileReader();
       reader.onload = function (e) {
         const re = e.target;
         if (re && re.result) {
-          //console.log(re.result);
           if (re.result) {
             // Skip encoding tag
             const xmldatastart = re.result.toString().indexOf(',') + 1;
-            console.log("XML Start: " + xmldatastart);
+            //console.log("XML Start: " + xmldatastart);
             const xmldata = window.atob(re.result.toString().slice(xmldatastart));
             roster = Roster.CreateRoster(xmldata);
             if (roster) {
-              console.log("Points: " + roster._points + "  Power Level: " + roster._powerLevel + "  CP: " + roster._commandPoints);
+              //console.log("Points: " + roster._points + "  Power Level: " + roster._powerLevel + "  CP: " + roster._commandPoints);
 
               if (roster._forces.length > 0) {
                 const rosterTitle = document.getElementById('roster-title');
@@ -93,7 +111,6 @@ function handleFileSelect(event: Event) {
                       canvas.height = Renderer._res * 8.5;
                       
                       const dims = renderer.render(unit, canvas, 0, 0);
-                      console.log("Dims: " + dims);
 
                       const border = 25;
                       let finalCanvas = document.createElement('canvas') as HTMLCanvasElement;
@@ -111,8 +128,6 @@ function handleFileSelect(event: Event) {
       }
       reader.readAsDataURL(f);
     }
-    const list = document.getElementById('list');
-    if (list) list.innerHTML = '<ul>' + output.join('') + '</ul>';
   }
 }
 

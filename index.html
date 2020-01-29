@@ -4,13 +4,14 @@
 <head>
       <title>PrettyScribe</title>
 
-      <link href="https://fonts.googleapis.com/css?family=Fjalla+One|PT+Serif|Source+Sans+Pro&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Fjalla+One|PT+Serif|Source+Sans+Pro&display=swap"
+            rel="stylesheet">
 
       <!-- Bootstrap CSS -->
       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
       <link rel="stylesheet" href="./css/prettyscribe.css">
-      
+
       <script src="https://kit.fontawesome.com/324895d590.js" crossorigin="anonymous"></script>
 </head>
 
@@ -28,18 +29,33 @@
             <img id="role_tr" src="./assets/icon_TR.png">
       </div>
 
-      <label for="roster-file">File</label>
-      <input type="file" files="roster-file" id="roster-file" name="roster-file">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <span class="navbar-brand">PrettyScribe</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                        <a class="nav-item active nav-link" href="#">Home</a>
+                        <a class="nav-item nav-link" href="#">Warhammer 40K</a>
+                        <a class="nav-item nav-link" href="#">KillTeam</a>
+                        <a class="nav-item nav-link" href="#">Age of Sigmar</a>
+                  </ul>
+            </div>
+      </nav>
 
-      <list id="list">
-      </list>
-
-      <div id="roster-title"></div>
-
-      <div id="roster-lists"></div>
+      <div class="container-fluid">
+            <label for="roster-file">File</label>
+            <input type="file" files="roster-file" id="roster-file" name="roster-file">
       
-      <div id="force-units"></div>
-
+            <div id="roster-title"></div>
+      
+            <div id="roster-lists"></div>
+      
+            <div id="force-units"></div>      
+      </div>
+ 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
