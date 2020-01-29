@@ -236,7 +236,7 @@ export class Roster {
 */                   
                     unit._models[unit._models.length-1]._weapons.push(weapon);
                 }
-                else if (propType == "Wound Track") {
+                else if (propType.includes("Wound Track")) {
                     let tracker = new WoundTracker();
                     tracker._name = propName;
                     let chars = prop.querySelectorAll("characteristics>characteristic");
