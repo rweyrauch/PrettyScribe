@@ -71,20 +71,4 @@ export class Unit {
     _powerLevel: number = 0;
     
     _woundTracker: WoundTracker[] = [];
-
-    parseModel(root: Element): Model|null {
-
-        return null;
-    }
-
-    computePoints(): void {
-        this._points = 0;
-
-        for (let model of this._models) {
-            this._points += model._points;
-            for (let weapon of model._weapons) {
-                this._points += weapon._points;
-            }
-        }
-    }
 }

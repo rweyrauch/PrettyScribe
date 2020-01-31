@@ -6,7 +6,7 @@ export class Roster {
     _powerLevel: number = 0;
     _commandPoints: number = 0;
     _points: number = 0;
-
+    _name: string = "";
     _forces: Force[] = [];
 
     constructor() {
@@ -16,16 +16,39 @@ export class Roster {
     static CreateRoster(xml: string): Roster | null {
         var parser = new DOMParser();
         var doc = parser.parseFromString(xml, "text/xml");
-
-        var roster: Roster | null = null;
-
         if (doc) {
-            roster = new Roster();
+            // Determine roster type (game system).
+            var info = doc.querySelector("roster");
+            if (info) {
+                const gameType = info.getAttributeNode("gameSystemName")?.nodeValue;
+                if (!gameType) return null;
 
-            Roster.ParseRosterPoints(doc, roster);
-            Roster.ParseForces(doc, roster);
+                if (gameType == "Warhammer 40,000 8th Edition") {
+                    var roster: Roster | null = null;
+
+                    roster = new Roster();
+
+                    const name = info.getAttributeNode("name")?.nodeValue;
+                    if (name) {
+                        roster._name = name;
+                    }
+                    else {
+                        roster._name = "Army Roster";
+                    }
+                    
+                    Roster.ParseRosterPoints(doc, roster);
+                    Roster.ParseForces(doc, roster);
+                    return roster;
+                }
+                else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
+                    alert("Kill Team not supported yet.");
+                }
+                else if (gameType == "Age of Sigmar") {
+                    alert("Age of Sigmar not supported yet.");
+                }
+            }
         }
-        return roster;
+        return null;   
     }
 
     private static ParseRosterPoints(doc: XMLDocument, roster: Roster): void {
@@ -67,14 +90,12 @@ export class Roster {
                 }
 
                 var rules = root.querySelectorAll("force>rules>rule");
-                //console.log("Name: " + which + "  Rules: " + rules);
                 for (let rule of rules) {
                     if (rule.hasAttribute("name")) {
                         let ruleName = rule.getAttributeNode("name")?.nodeValue;
                         var desc = rule.querySelector("rule>description");
                         if (ruleName && desc) {
                             f._rules.set(ruleName, desc.textContent);
-                            //console.log(rule);
                         }
                     }
                 }
@@ -89,7 +110,6 @@ export class Roster {
     private static ParseUnits(root: Element, force: Force): void {
         var selections = root.querySelectorAll("force>selections>selection");
         for (let selection of selections) {
-            //console.log(selection);
             var unit = Roster.CreateUnit(selection);
             if (unit && unit._role != UnitRole['None']) {
                 force._units.push(unit);
@@ -276,7 +296,6 @@ export class Roster {
         var costs = root.querySelectorAll(":scope costs>cost");
         for (let cost of costs) {
             if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
-                console.log(cost);
                 let which = cost.getAttributeNode("name")?.nodeValue;
                 let value = cost.getAttributeNode("value")?.nodeValue;
                 if (value) {
