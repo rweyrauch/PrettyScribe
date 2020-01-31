@@ -219,22 +219,29 @@ export class Roster {
                             }
                         }
                     }
-/*                    
+                    
                     // parse weapon cost
-                    var costs = root.querySelectorAll("costs>cost");
+                    var costs = root.querySelectorAll(":scope selections>selection>costs>cost");
+                    //if (costs) console.log("Found weapons costs. " + costs.length);
                     for (let cost of costs) {
+                        //console.log(cost);
                         if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
                             let which = cost.getAttributeNode("name")?.nodeValue;
                             let value = cost.getAttributeNode("value")?.nodeValue;
                             if (value) {
-                                 if (which === "pts") {
-                                    weapon._points = +value;
+                                if (which === "pts") {
+                                    if (weapon) {
+                                        // console.log("Weapon: " + weapon._name + "  Points: " + value);
+                                        weapon._points = +value;
+                                    }
                                 }
                             }
                         }
                     }
-*/                   
-                    unit._models[unit._models.length-1]._weapons.push(weapon);
+                   
+                    if (unit._models.length) {
+                        unit._models[unit._models.length-1]._weapons.push(weapon);
+                    }
                 }
                 else if (propType.includes("Wound Track")) {
                     let tracker = new WoundTracker();
@@ -302,9 +309,10 @@ export class Roster {
         }
 
         // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
-        var costs = root.querySelectorAll(":scope > costs > cost");
+        var costs = root.querySelectorAll("costs > cost");
         for (let cost of costs) {
             if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
+                console.log(cost);
                 let which = cost.getAttributeNode("name")?.nodeValue;
                 let value = cost.getAttributeNode("value")?.nodeValue;
                 if (value) {
@@ -318,11 +326,11 @@ export class Roster {
             }
         }
 
-        var rules = root.querySelectorAll(":scope rules > rule");
+        var rules = root.querySelectorAll("rules > rule");
         for (let rule of rules) {
             if (rule.hasAttribute("name")) {
                 let ruleName = rule.getAttributeNode("name")?.nodeValue;
-                var desc = rule.querySelector(":scope description");
+                var desc = rule.querySelector("description");
                 if (ruleName && desc && desc.textContent) {
                     unit._rules.set(ruleName, desc.textContent);
                 }
