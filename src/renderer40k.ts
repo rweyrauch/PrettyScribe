@@ -1,4 +1,4 @@
-import { Unit, UnitRole, Model, PsychicPower, Explosion, Weapon } from "./roster40k.js";
+import { Unit, UnitRole, Model, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k.js";
 
 export enum Justification {
     Left,
@@ -42,6 +42,79 @@ export class Renderer40k {
         this._roles.set(UnitRole['Lord of War'], document.getElementById('role_lw') as HTMLImageElement);
     }
 
+    render(roster: Roster40k, title: HTMLElement|null, list: HTMLElement|null, forces: HTMLElement|null): void {
+
+        if (title) {
+            title.innerHTML = '<h3>' + roster._name + ' (' + roster._points + ' pts, ' + roster._powerLevel + ' PL, ' + roster._commandPoints + ' CP)</h3>';
+        }
+
+        for (let force of roster._forces) {
+            const forceTitle = document.createElement('div');
+            if (forceTitle) {
+              forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + '</p>';
+            }
+            if (list)
+                list.appendChild(forceTitle);
+
+            const table = document.createElement('table');
+            table.classList.add('table');
+            table.classList.add('table-sm');
+            table.classList.add('table-striped');
+            const thead = document.createElement('thead');
+            table.appendChild(thead);
+            thead.classList.add('thead-light');
+            const tr = document.createElement('tr');
+            thead.appendChild(tr);
+            const headerLabels = ["NAME", "ROLE", "MODELS", "POINTS", "POWER"];
+            headerLabels.forEach(element => {
+              const th = document.createElement('th');
+              th.scope = "col";
+              th.innerHTML = element;
+              tr.appendChild(th);
+            });
+            forceTitle.appendChild(table);
+
+            let body = document.createElement('tbody');
+            table.appendChild(body);
+            for (let unit of force._units) {
+              let tr = document.createElement('tr');
+              let uname = document.createElement('td');
+              uname.innerHTML = unit._name;
+              let role = document.createElement('td');
+              role.innerHTML = unit._role.toString();
+              let models = document.createElement('td');
+              models.innerHTML = 'TBD';
+              let pts = document.createElement('td');
+              pts.innerHTML = unit._points.toString();
+              let pwr = document.createElement('td');
+              pwr.innerHTML = unit._powerLevel.toString();
+              tr.appendChild(uname);
+              tr.appendChild(role);
+              tr.appendChild(models);
+              tr.appendChild(pts);
+              tr.appendChild(pwr);
+              body.appendChild(tr);    
+            }
+
+            for (let unit of force._units) {
+              let canvas = document.createElement('canvas') as HTMLCanvasElement;
+              canvas.width = Renderer40k._res * 5.5;
+              canvas.height = Renderer40k._res * 8.5;
+              
+              const dims = this.renderUnit(unit, canvas, 0, 0);
+
+              const border = 25;
+              let finalCanvas = document.createElement('canvas') as HTMLCanvasElement;
+              finalCanvas.width = dims[0] + border * 2;
+              finalCanvas.height = dims[1] + border * 2;
+              let finalCtx = finalCanvas.getContext('2d');
+              finalCtx?.drawImage(canvas, border, border);
+              if (forces) 
+                forces.appendChild(finalCanvas);
+            }
+        }
+    }
+ 
     private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
         ctx.strokeStyle = Renderer40k._blackColor;
 
@@ -447,7 +520,7 @@ export class Renderer40k {
     private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
     private _trackerLabelWidth = [0.3, 0.2, 0.15, 0.15, 0.15];
 
-    render(unit: Unit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
+    protected renderUnit(unit: Unit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
 
         let ctx = canvas.getContext('2d');
         if (!ctx) {

@@ -3,13 +3,13 @@ import { Renderer40k } from "./renderer40k.js";
 
 var roster: Roster40k | null = null;
 
-function removeAllChildren(parent: Element|null): void {
+function removeAllChildren(parent: Element | null): void {
   if (parent) {
-    var first = parent.firstElementChild; 
-    while (first) { 
-        first.remove(); 
-        first = parent.firstElementChild; 
-    } 
+    var first = parent.firstElementChild;
+    while (first) {
+      first.remove();
+      first = parent.firstElementChild;
+    }
   }
 }
 
@@ -19,7 +19,7 @@ function cleanup(): void {
 
   const rosterList = document.getElementById('roster-lists');
   removeAllChildren(rosterList);
- 
+
   const forceUnits = document.getElementById('force-units');
   removeAllChildren(forceUnits);
 }
@@ -43,83 +43,34 @@ function handleFileSelect(event: Event) {
             const xmldatastart = re.result.toString().indexOf(',') + 1;
             //console.log("XML Start: " + xmldatastart);
             const xmldata = window.atob(re.result.toString().slice(xmldatastart));
-            roster = Roster40k.CreateRoster(xmldata);
-            if (roster) {
-              //console.log("Points: " + roster._points + "  Power Level: " + roster._powerLevel + "  CP: " + roster._commandPoints);
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(xmldata, "text/xml");
 
-              if (roster._forces.length > 0) {
-                const rosterTitle = document.getElementById('roster-title');
-                if (rosterTitle) {
-                  rosterTitle.innerHTML = '<h3>' + roster._name + ' (' + roster._points + ' pts, ' + roster._powerLevel + ' PL, ' + roster._commandPoints + ' CP)</h3>';
+            if (doc) {
+              // Determine roster type (game system).
+              var info = doc.querySelector("roster");
+              if (info) {
+                const gameType = info.getAttributeNode("gameSystemName")?.nodeValue;
+                if (!gameType) return;
+
+                if (gameType == "Warhammer 40,000 8th Edition") {
+                  var roster = Roster40k.CreateRoster(doc);
+                  if (roster) {
+                    if (roster._forces.length > 0) {
+                      const rosterTitle = document.getElementById('roster-title');
+                      const rosterList = document.getElementById('roster-lists');
+                      const forceUnits = document.getElementById('force-units');
+
+                      const renderer: Renderer40k = new Renderer40k();
+                      renderer.render(roster, rosterTitle, rosterList, forceUnits);
+                    }
+                  }
                 }
-
-                const renderer: Renderer40k = new Renderer40k();
-
-                const rosterList = document.getElementById('roster-lists');
-                const forceUnits = document.getElementById('force-units');
-                 
-                for (let force of roster._forces) {
-                    const forceTitle = document.createElement('div');
-                    if (forceTitle) {
-                      forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + '</p>';
-                    }
-                    rosterList?.appendChild(forceTitle);
-
-                    const table = document.createElement('table');
-                    table.classList.add('table');
-                    table.classList.add('table-sm');
-                    table.classList.add('table-striped');
-                    const thead = document.createElement('thead');
-                    table.appendChild(thead);
-                    thead.classList.add('thead-light');
-                    const tr = document.createElement('tr');
-                    thead.appendChild(tr);
-                    const headerLabels = ["NAME", "ROLE", "MODELS", "POINTS", "POWER"];
-                    headerLabels.forEach(element => {
-                      const th = document.createElement('th');
-                      th.scope = "col";
-                      th.innerHTML = element;
-                      tr.appendChild(th);
-                    });
-                    forceTitle.appendChild(table);
-
-                    let body = document.createElement('tbody');
-                    table.appendChild(body);
-                    for (let unit of force._units) {
-                      let tr = document.createElement('tr');
-                      let uname = document.createElement('td');
-                      uname.innerHTML = unit._name;
-                      let role = document.createElement('td');
-                      role.innerHTML = unit._role.toString();
-                      let models = document.createElement('td');
-                      models.innerHTML = 'TBD';
-                      let pts = document.createElement('td');
-                      pts.innerHTML = unit._points.toString();
-                      let pwr = document.createElement('td');
-                      pwr.innerHTML = unit._powerLevel.toString();
-                      tr.appendChild(uname);
-                      tr.appendChild(role);
-                      tr.appendChild(models);
-                      tr.appendChild(pts);
-                      tr.appendChild(pwr);
-                      body.appendChild(tr);    
-                    }
-
-                    for (let unit of force._units) {
-                      let canvas = document.createElement('canvas') as HTMLCanvasElement;
-                      canvas.width = Renderer40k._res * 5.5;
-                      canvas.height = Renderer40k._res * 8.5;
-                      
-                      const dims = renderer.render(unit, canvas, 0, 0);
-
-                      const border = 25;
-                      let finalCanvas = document.createElement('canvas') as HTMLCanvasElement;
-                      finalCanvas.width = dims[0] + border * 2;
-                      finalCanvas.height = dims[1] + border * 2;
-                      let finalCtx = finalCanvas.getContext('2d');
-                      finalCtx?.drawImage(canvas, border, border);
-                      forceUnits?.appendChild(finalCanvas);
-                    }
+                else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
+                  alert("Kill Team not supported yet.");
+                }
+                else if (gameType == "Age of Sigmar") {
+                  alert("Age of Sigmar not supported yet.");
                 }
               }
             }

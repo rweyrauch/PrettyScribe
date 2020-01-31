@@ -107,39 +107,25 @@ export class Roster40k {
 
     }
 
-    static CreateRoster(xml: string): Roster40k | null {
-        var parser = new DOMParser();
-        var doc = parser.parseFromString(xml, "text/xml");
+    static CreateRoster(doc: Document): Roster40k | null {
         if (doc) {
             // Determine roster type (game system).
             var info = doc.querySelector("roster");
             if (info) {
-                const gameType = info.getAttributeNode("gameSystemName")?.nodeValue;
-                if (!gameType) return null;
+                const roster = new Roster40k();
 
-                if (gameType == "Warhammer 40,000 8th Edition") {
-                    var roster: Roster40k | null = null;
-
-                    roster = new Roster40k();
-
-                    const name = info.getAttributeNode("name")?.nodeValue;
-                    if (name) {
-                        roster._name = name;
-                    }
-                    else {
-                        roster._name = "Army Roster";
-                    }
-
-                    Roster40k.ParseRosterPoints(doc, roster);
-                    Roster40k.ParseForces(doc, roster);
-                    return roster;
+                const name = info.getAttributeNode("name")?.nodeValue;
+                if (name) {
+                    roster._name = name;
                 }
-                else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
-                    alert("Kill Team not supported yet.");
+                else {
+                    roster._name = "40k Army Roster";
                 }
-                else if (gameType == "Age of Sigmar") {
-                    alert("Age of Sigmar not supported yet.");
-                }
+
+                Roster40k.ParseRosterPoints(doc, roster);
+                Roster40k.ParseForces(doc, roster);
+                
+                return roster;
             }
         }
         return null;
