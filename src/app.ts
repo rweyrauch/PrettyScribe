@@ -50,7 +50,7 @@ function handleFileSelect(event: Event) {
               if (roster._forces.length > 0) {
                 const rosterTitle = document.getElementById('roster-title');
                 if (rosterTitle) {
-                  rosterTitle.innerHTML = '<h3>' + roster._name + ' (' + roster._points + ' pts, ' + roster._powerLevel + ')</h3>';
+                  rosterTitle.innerHTML = '<h3>' + roster._name + ' (' + roster._points + ' pts, ' + roster._powerLevel + ' PL, ' + roster._commandPoints + ' CP)</h3>';
                 }
 
                 const renderer: Renderer = new Renderer();

@@ -1,5 +1,4 @@
-import { Unit, UnitRole, Model, PsychicPower, Explosion } from "./unit.js";
-import { Weapon } from "./weapon.js";
+import { Unit, UnitRole, Model, PsychicPower, Explosion, Weapon } from "./roster.js";
 
 export enum Justification {
     Left,

@@ -1,6 +1,100 @@
-import { Force } from "./force.js";
-import { Unit, WoundTracker, UnitRole, Model, PsychicPower, Explosion } from "./unit.js";
-import { Weapon } from "./weapon.js";
+type WeaponStrength = number| string;
+
+export class Weapon {
+    _name: string = "";
+    _range: string | number = "Melee";
+    _type: string = "Melee";
+    _str: WeaponStrength = "user";
+    _ap: string = "";
+    _damage: string = "";
+    
+    _abilities: string = "";
+
+}
+
+export class WoundTracker {
+    _name: string = "";
+    _table: Map<string, string> = new Map();
+};
+
+export class Explosion {
+    _name: string = "";
+    _diceRoll: string = "";
+    _distance: string = "";
+    _mortalWounds: string = "";
+}
+
+export class PsychicPower {
+    _name: string = "";
+    _manifest: number = 0;
+    _range: string = "";
+    _details: string = "";
+}
+
+export enum UnitRole {
+    'None',
+    'HQ',
+    'Troops',
+    'Elites',
+    'Fast Attack',
+    'Heavy Support',
+    'Flyer',
+    'Dedicated Transport',
+    'Fortification',
+    'Lord of War'
+};
+
+export class Model {
+
+    _name: string = "";
+    _count: number = 0;
+
+    // Characteristics
+    _move: string = "0\"";
+    _ws: string = "";
+    _bs: string = "";
+    _str: number = 4;
+    _toughness: number = 4;
+    _wounds: number = 1;
+    _attacks: string = "";
+    _leadership: number = 7;
+    _save: string = "";
+
+    _weapons: Weapon[] = [];
+    _psychicPowers: PsychicPower[] = [];
+    _explosions: Explosion[] = [];
+};
+
+export class Unit {
+
+    _name: string = "";
+    _role: UnitRole = UnitRole['None'];
+    _factions: Set<string> = new Set();
+    _keywords: Set<string> = new Set();
+    
+    _abilities: Map<string, string> = new Map();
+    _rules: Map<string, string> = new Map();
+
+    _models: Model[] = [];
+
+    _points: number = 0;
+    _powerLevel: number = 0;
+    _commandPoints: number = 0;
+    
+    _woundTracker: WoundTracker[] = [];
+}
+
+export class Force {
+    _catalog: string = "";
+    _name: string = "Unknown";
+    _faction: string = "Unknown";
+    _rules: Map<string, string|null> = new Map();
+    _units: Unit[] = [];
+
+    constructor() {
+
+    }
+};
 
 export class Roster {
     _powerLevel: number = 0;
@@ -35,7 +129,7 @@ export class Roster {
                     else {
                         roster._name = "Army Roster";
                     }
-                    
+
                     Roster.ParseRosterPoints(doc, roster);
                     Roster.ParseForces(doc, roster);
                     return roster;
@@ -48,7 +142,7 @@ export class Roster {
                 }
             }
         }
-        return null;   
+        return null;
     }
 
     private static ParseRosterPoints(doc: XMLDocument, roster: Roster): void {
@@ -145,7 +239,7 @@ export class Roster {
                 const factPattern = "Faction: ";
                 const factIndex = catName.lastIndexOf(factPattern);
                 if (factIndex >= 0) {
-                    const factKeyword = catName.slice(factIndex+factPattern.length);
+                    const factKeyword = catName.slice(factIndex + factPattern.length);
                     unit._factions.add(factKeyword);
                 }
                 else {
@@ -222,9 +316,9 @@ export class Roster {
                             }
                         }
                     }
-                   
+
                     if (unit._models.length) {
-                        unit._models[unit._models.length-1]._weapons.push(weapon);
+                        unit._models[unit._models.length - 1]._weapons.push(weapon);
                     }
                 }
                 else if (propType.includes("Wound Track")) {
@@ -266,7 +360,7 @@ export class Roster {
                             }
                         }
                     }
-                    unit._models[unit._models.length-1]._psychicPowers.push(power);
+                    unit._models[unit._models.length - 1]._psychicPowers.push(power);
                 }
                 else if (propType == "Explosion") {
                     let explosion: Explosion = new Explosion();
@@ -284,7 +378,7 @@ export class Roster {
                             }
                         }
                     }
-                    unit._models[unit._models.length-1]._explosions.push(explosion);
+                    unit._models[unit._models.length - 1]._explosions.push(explosion);
                 }
                 else {
                     console.log(propType);
@@ -305,7 +399,10 @@ export class Roster {
                     else if (which == "pts") {
                         unit._points += +value;
                     }
-                 }
+                    else if (which == "CP") {
+                        unit._commandPoints += +value;
+                    }
+                }
             }
         }
 
