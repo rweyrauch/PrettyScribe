@@ -118,7 +118,7 @@ export class Roster {
         if (unitName) {
             unit._name = unitName;
         }
-        var categories = root.querySelectorAll("selection>categories>category");
+        var categories = root.querySelectorAll(":scope categories>category");
         for (let cat of categories) {
             let catName = cat.getAttributeNode("name")?.nodeValue;
             if (catName) {
@@ -142,7 +142,7 @@ export class Roster {
             }
         }
 
-        var props = root.querySelectorAll("selection>profiles>profile");
+        var props = root.querySelectorAll(":scope profiles>profile");
         for (let prop of props) {
             // What kind of prop is this
             let propName = prop.getAttributeNode("name")?.nodeValue;
@@ -170,23 +170,6 @@ export class Roster {
                             }
                         }
                     }
-                    // parse model cost
-                    var costs = root.querySelectorAll("selection>costs>cost");
-                    for (let cost of costs) {
-                        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
-                            let which = cost.getAttributeNode("name")?.nodeValue;
-                            let value = cost.getAttributeNode("value")?.nodeValue;
-                            if (value) {
-                                if (which == " PL") {
-                                    model._powerLevel = +value;
-                                }
-                                else if (which === "pts") {
-                                    model._points = +value;
-                                }
-                             }
-                        }
-                    }
-                 
                     unit._models.push(model);
                 }
                 else if (propType == "Abilities") {
@@ -215,25 +198,6 @@ export class Roster {
                                     case 'AP': weapon._ap = char.textContent; break;
                                     case 'D': weapon._damage = char.textContent; break;
                                     case 'Abilities': weapon._abilities = char.textContent; break;
-                                }
-                            }
-                        }
-                    }
-                    
-                    // parse weapon cost
-                    var costs = root.querySelectorAll(":scope selections>selection>costs>cost");
-                    //if (costs) console.log("Found weapons costs. " + costs.length);
-                    for (let cost of costs) {
-                        //console.log(cost);
-                        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
-                            let which = cost.getAttributeNode("name")?.nodeValue;
-                            let value = cost.getAttributeNode("value")?.nodeValue;
-                            if (value) {
-                                if (which === "pts") {
-                                    if (weapon) {
-                                        // console.log("Weapon: " + weapon._name + "  Points: " + value);
-                                        weapon._points = +value;
-                                    }
                                 }
                             }
                         }
@@ -309,7 +273,7 @@ export class Roster {
         }
 
         // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
-        var costs = root.querySelectorAll("costs > cost");
+        var costs = root.querySelectorAll(":scope costs>cost");
         for (let cost of costs) {
             if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
                 console.log(cost);
@@ -317,16 +281,16 @@ export class Roster {
                 let value = cost.getAttributeNode("value")?.nodeValue;
                 if (value) {
                     if (which == " PL") {
-                        unit._powerLevel = +value;
+                        unit._powerLevel += +value;
                     }
-                    else if (which === "pts") {
-                        unit._points = +value;
+                    else if (which == "pts") {
+                        unit._points += +value;
                     }
                  }
             }
         }
 
-        var rules = root.querySelectorAll("rules > rule");
+        var rules = root.querySelectorAll(":scope rules > rule");
         for (let rule of rules) {
             if (rule.hasAttribute("name")) {
                 let ruleName = rule.getAttributeNode("name")?.nodeValue;
@@ -337,9 +301,6 @@ export class Roster {
             }
         }
 
-        // Compute unit points
-        unit.computePoints();
-     
         return unit;
     }
 };

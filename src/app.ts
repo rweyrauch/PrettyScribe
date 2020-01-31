@@ -21,7 +21,7 @@ function cleanup(): void {
   removeAllChildren(rosterList);
  
   const forceUnits = document.getElementById('force-units');
-  removeAllChildren(rosterTitle);
+  removeAllChildren(forceUnits);
 }
 
 function handleFileSelect(event: Event) {
