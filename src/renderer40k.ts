@@ -1,4 +1,4 @@
-import { Unit, UnitRole, Model, PsychicPower, Explosion, Weapon } from "./roster.js";
+import { Unit, UnitRole, Model, PsychicPower, Explosion, Weapon } from "./roster40k.js";
 
 export enum Justification {
     Left,
@@ -6,7 +6,7 @@ export enum Justification {
     Center
 };
 
-export class Renderer {
+export class Renderer40k {
 
     public static readonly _res: number = 144;
     public static readonly _margin: number = 0;
@@ -43,17 +43,17 @@ export class Renderer {
     }
 
     private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-        ctx.strokeStyle = Renderer._blackColor;
+        ctx.strokeStyle = Renderer40k._blackColor;
 
         ctx.beginPath();
-        ctx.moveTo(x, y + Renderer._bevelSize);
-        ctx.lineTo(x, y + h - Renderer._bevelSize);
-        ctx.lineTo(x + Renderer._bevelSize, y + h);
-        ctx.lineTo(x + w - Renderer._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - Renderer._bevelSize);
-        ctx.lineTo(x + w, y + Renderer._bevelSize);
-        ctx.lineTo(x + w - Renderer._bevelSize, y);
-        ctx.lineTo(x + Renderer._bevelSize, y);
+        ctx.moveTo(x, y + Renderer40k._bevelSize);
+        ctx.lineTo(x, y + h - Renderer40k._bevelSize);
+        ctx.lineTo(x + Renderer40k._bevelSize, y + h);
+        ctx.lineTo(x + w - Renderer40k._bevelSize, y + h);
+        ctx.lineTo(x + w, y + h - Renderer40k._bevelSize);
+        ctx.lineTo(x + w, y + Renderer40k._bevelSize);
+        ctx.lineTo(x + w - Renderer40k._bevelSize, y);
+        ctx.lineTo(x + Renderer40k._bevelSize, y);
         ctx.closePath();
         ctx.stroke();
 
@@ -117,7 +117,7 @@ export class Renderer {
 
     private renderLine(ctx: CanvasRenderingContext2D): void {
         ctx.lineWidth = 2;
-        ctx.strokeStyle = Renderer._blackColor;
+        ctx.strokeStyle = Renderer40k._blackColor;
         ctx.beginPath();
         ctx.moveTo(this._currentX, this._currentY);
         ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
@@ -129,10 +129,10 @@ export class Renderer {
         let x = this._currentX;
         const height = 22;
         const width = this._maxWidth;
-        ctx.fillStyle = Renderer._grey1;
+        ctx.fillStyle = Renderer40k._grey1;
         ctx.fillRect(this._currentX, this._currentY, width, height);
 
-        ctx.fillStyle = Renderer._blackColor;
+        ctx.fillStyle = Renderer40k._blackColor;
         ctx.font = '14px sans-serif';
         var w = 50;
         if (labels) {
@@ -164,7 +164,7 @@ export class Renderer {
             let xStart = this._currentX;
             let yStart = this._currentY;
 
-            ctx.fillStyle = Renderer._blackColor;
+            ctx.fillStyle = Renderer40k._blackColor;
             if (columnWidths) w = columnWidths[ci++];
             this.renderText(ctx, spell._name.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
@@ -183,7 +183,7 @@ export class Renderer {
             x += w;
 
             ctx.save();
-            if (i % 2) ctx.fillStyle = Renderer._greyLight;
+            if (i % 2) ctx.fillStyle = Renderer40k._greyLight;
             else ctx.fillStyle = '#ffffff';
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
@@ -207,12 +207,12 @@ export class Renderer {
             let ci = 0;
             let x = this._currentX;
 
-            if (i % 2) ctx.fillStyle = Renderer._greyLight;
+            if (i % 2) ctx.fillStyle = Renderer40k._greyLight;
             else ctx.fillStyle = '#ffffff';
             ctx.fillRect(x, this._currentY, this._maxWidth, height);
             i++;
 
-            ctx.fillStyle = Renderer._blackColor;
+            ctx.fillStyle = Renderer40k._blackColor;
 
             if (columnWidths) w = columnWidths[ci++];
             this.renderText(ctx, expl._name, x, this._currentY, w, height, Justification.Center);
@@ -251,7 +251,7 @@ export class Renderer {
             let xStart = this._currentX;
             let yStart = this._currentY;
 
-            ctx.fillStyle = Renderer._blackColor;
+            ctx.fillStyle = Renderer40k._blackColor;
             if (columnWidths) w = columnWidths[ci++];
             this.renderText(ctx, weapon._name.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
@@ -284,7 +284,7 @@ export class Renderer {
             ctx.save();
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
-            if (i % 2) ctx.fillStyle = Renderer._greyLight;
+            if (i % 2) ctx.fillStyle = Renderer40k._greyLight;
             else ctx.fillStyle =  '#ffffff';
             ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
             i++;
@@ -302,11 +302,11 @@ export class Renderer {
         let x = this._currentX;
         let ci = 0;
 
-        if (bg % 2) ctx.fillStyle = Renderer._greyLight;
+        if (bg % 2) ctx.fillStyle = Renderer40k._greyLight;
         else ctx.fillStyle = '#ffffff';
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
-        ctx.fillStyle = Renderer._blackColor;
+        ctx.fillStyle = Renderer40k._blackColor;
         ctx.font = '12px sans-serif';
 
         if (columnWidths) w = columnWidths[ci++];
@@ -413,10 +413,10 @@ export class Renderer {
             let x = this._currentX;
             let ci = 0;
 
-            ctx.fillStyle = Renderer._greyLight;
+            ctx.fillStyle = Renderer40k._greyLight;
             ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
-            ctx.fillStyle = Renderer._blackColor;
+            ctx.fillStyle = Renderer40k._blackColor;
             ctx.font = '12px sans-serif';
             if (columnWidths) w = columnWidths[ci++];
 
@@ -454,14 +454,14 @@ export class Renderer {
             return [0, 0];
         }
 
-        this._currentX = xOffset + Renderer._margin;
-        this._currentY = yOffset + Renderer._margin;
+        this._currentX = xOffset + Renderer40k._margin;
+        this._currentY = yOffset + Renderer40k._margin;
         this._maxWidth = canvas.width - this._currentX;
         this._maxHeight = Math.max(0, canvas.height - this._currentY);
 
         this.renderHeader(unit, ctx);
 
-        ctx.fillStyle = Renderer._blackColor;
+        ctx.fillStyle = Renderer40k._blackColor;
 
         let weapons: Weapon[] = [];
         let spells: PsychicPower[] = [];
@@ -470,7 +470,7 @@ export class Renderer {
         this._unitLabelWidthsNormalized.forEach(element => {
             unitLabelWidths.push(element * this._maxWidth);
         });
-        this.renderTableHeader(ctx, Renderer._unitLabels, unitLabelWidths);
+        this.renderTableHeader(ctx, Renderer40k._unitLabels, unitLabelWidths);
         let i = 0;
         for (var model of unit._models) {
             this.renderModel(ctx, model, unitLabelWidths, i % 2);
@@ -502,7 +502,7 @@ export class Renderer {
                 weaponLabelWidths.push(element * this._maxWidth);
             });
             this.renderLine(ctx);
-            this.renderTableHeader(ctx, Renderer._weaponLabels, weaponLabelWidths);
+            this.renderTableHeader(ctx, Renderer40k._weaponLabels, weaponLabelWidths);
             this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
         }
 
@@ -512,7 +512,7 @@ export class Renderer {
                 spellLabelWidths.push(element * this._maxWidth);
             });
             this.renderLine(ctx);
-            this.renderTableHeader(ctx, Renderer._spellLabels, spellLabelWidths);
+            this.renderTableHeader(ctx, Renderer40k._spellLabels, spellLabelWidths);
             this.renderSpells(ctx, spells, spellLabelWidths);
         }
 
@@ -546,7 +546,7 @@ export class Renderer {
             this._trackerLabelWidth.forEach(element => {
                 trackerLabelWidths.push(element * this._maxWidth);
             });
-            this.renderTableHeader(ctx, Renderer._trackerLabels, trackerLabelWidths);
+            this.renderTableHeader(ctx, Renderer40k._trackerLabels, trackerLabelWidths);
             this.renderWoundTracker(ctx, unit, trackerLabelWidths);
         }
 
@@ -556,7 +556,7 @@ export class Renderer {
             this._explosionLabelWidthNormalized.forEach(element => {
                 explLabelWidths.push(element * this._maxWidth);
             });
-            this.renderTableHeader(ctx, Renderer._explosionLabels, explLabelWidths);
+            this.renderTableHeader(ctx, Renderer40k._explosionLabels, explLabelWidths);
             this.renderExplosion(ctx, explosions, explLabelWidths);
         }
 
@@ -572,10 +572,10 @@ export class Renderer {
             this.renderWoundBoxes($unit);
         }
 */
-        const totalHeight = this._currentY - (yOffset + Renderer._margin);
+        const totalHeight = this._currentY - (yOffset + Renderer40k._margin);
         const totalWidth = this._maxWidth;
 
-        this.renderBorder(ctx, this._currentX, yOffset + Renderer._margin, totalWidth, totalHeight);
+        this.renderBorder(ctx, this._currentX, yOffset + Renderer40k._margin, totalWidth, totalHeight);
         this.renderWatermark(ctx);
 
         return [this._maxWidth, this._currentY];
@@ -584,7 +584,7 @@ export class Renderer {
     private renderHeader(unit: Unit, ctx: CanvasRenderingContext2D): void {
 
         ctx.globalAlpha = 1;
-        ctx.fillStyle = Renderer._blackColor;
+        ctx.fillStyle = Renderer40k._blackColor;
 
         const xStart = this._currentX;
         const xEnd = this._currentX + this._maxWidth;
@@ -593,12 +593,12 @@ export class Renderer {
         const yEnd = yStart + titleHeight;
 
         ctx.beginPath();
-        ctx.moveTo(xStart, yStart + Renderer._bevelSize);
+        ctx.moveTo(xStart, yStart + Renderer40k._bevelSize);
         ctx.lineTo(xStart, yEnd);
         ctx.lineTo(xEnd, yEnd);
-        ctx.lineTo(xEnd, yStart + Renderer._bevelSize);
-        ctx.lineTo(xEnd - Renderer._bevelSize, yStart);
-        ctx.lineTo(xStart + Renderer._bevelSize, yStart);
+        ctx.lineTo(xEnd, yStart + Renderer40k._bevelSize);
+        ctx.lineTo(xEnd - Renderer40k._bevelSize, yStart);
+        ctx.lineTo(xStart + Renderer40k._bevelSize, yStart);
         ctx.closePath();
         ctx.fill();
 

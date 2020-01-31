@@ -1,7 +1,7 @@
-import { Roster } from "./roster.js";
-import { Renderer } from "./renderer.js";
+import { Roster40k } from "./roster40k.js";
+import { Renderer40k } from "./renderer40k.js";
 
-var roster: Roster | null = null;
+var roster: Roster40k | null = null;
 
 function removeAllChildren(parent: Element|null): void {
   if (parent) {
@@ -43,7 +43,7 @@ function handleFileSelect(event: Event) {
             const xmldatastart = re.result.toString().indexOf(',') + 1;
             //console.log("XML Start: " + xmldatastart);
             const xmldata = window.atob(re.result.toString().slice(xmldatastart));
-            roster = Roster.CreateRoster(xmldata);
+            roster = Roster40k.CreateRoster(xmldata);
             if (roster) {
               //console.log("Points: " + roster._points + "  Power Level: " + roster._powerLevel + "  CP: " + roster._commandPoints);
 
@@ -53,7 +53,7 @@ function handleFileSelect(event: Event) {
                   rosterTitle.innerHTML = '<h3>' + roster._name + ' (' + roster._points + ' pts, ' + roster._powerLevel + ' PL, ' + roster._commandPoints + ' CP)</h3>';
                 }
 
-                const renderer: Renderer = new Renderer();
+                const renderer: Renderer40k = new Renderer40k();
 
                 const rosterList = document.getElementById('roster-lists');
                 const forceUnits = document.getElementById('force-units');
@@ -107,8 +107,8 @@ function handleFileSelect(event: Event) {
 
                     for (let unit of force._units) {
                       let canvas = document.createElement('canvas') as HTMLCanvasElement;
-                      canvas.width = Renderer._res * 5.5;
-                      canvas.height = Renderer._res * 8.5;
+                      canvas.width = Renderer40k._res * 5.5;
+                      canvas.height = Renderer40k._res * 8.5;
                       
                       const dims = renderer.render(unit, canvas, 0, 0);
 

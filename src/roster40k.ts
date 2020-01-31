@@ -96,7 +96,7 @@ export class Force {
     }
 };
 
-export class Roster {
+export class Roster40k {
     _powerLevel: number = 0;
     _commandPoints: number = 0;
     _points: number = 0;
@@ -107,7 +107,7 @@ export class Roster {
 
     }
 
-    static CreateRoster(xml: string): Roster | null {
+    static CreateRoster(xml: string): Roster40k | null {
         var parser = new DOMParser();
         var doc = parser.parseFromString(xml, "text/xml");
         if (doc) {
@@ -118,9 +118,9 @@ export class Roster {
                 if (!gameType) return null;
 
                 if (gameType == "Warhammer 40,000 8th Edition") {
-                    var roster: Roster | null = null;
+                    var roster: Roster40k | null = null;
 
-                    roster = new Roster();
+                    roster = new Roster40k();
 
                     const name = info.getAttributeNode("name")?.nodeValue;
                     if (name) {
@@ -130,8 +130,8 @@ export class Roster {
                         roster._name = "Army Roster";
                     }
 
-                    Roster.ParseRosterPoints(doc, roster);
-                    Roster.ParseForces(doc, roster);
+                    Roster40k.ParseRosterPoints(doc, roster);
+                    Roster40k.ParseForces(doc, roster);
                     return roster;
                 }
                 else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
@@ -145,7 +145,7 @@ export class Roster {
         return null;
     }
 
-    private static ParseRosterPoints(doc: XMLDocument, roster: Roster): void {
+    private static ParseRosterPoints(doc: XMLDocument, roster: Roster40k): void {
         var costs = doc.querySelectorAll("roster>costs>cost");
         for (let cost of costs) {
             if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
@@ -166,7 +166,7 @@ export class Roster {
         }
     }
 
-    private static ParseForces(doc: XMLDocument, roster: Roster): void {
+    private static ParseForces(doc: XMLDocument, roster: Roster40k): void {
         var forcesRoot = doc.querySelectorAll("roster>forces>force");
         for (let root of forcesRoot) {
             if (root.hasAttribute("name") && root.hasAttribute("catalogueName")) {
@@ -194,7 +194,7 @@ export class Roster {
                     }
                 }
 
-                Roster.ParseUnits(root, f);
+                Roster40k.ParseUnits(root, f);
 
                 roster._forces.push(f);
             }
@@ -204,7 +204,7 @@ export class Roster {
     private static ParseUnits(root: Element, force: Force): void {
         var selections = root.querySelectorAll("force>selections>selection");
         for (let selection of selections) {
-            var unit = Roster.CreateUnit(selection);
+            var unit = Roster40k.CreateUnit(selection);
             if (unit && unit._role != UnitRole['None']) {
                 force._units.push(unit);
             }
@@ -244,7 +244,7 @@ export class Roster {
                 }
                 else {
                     const roleText = catName.trim();
-                    var unitRole = Roster.LookupRole(roleText);
+                    var unitRole = Roster40k.LookupRole(roleText);
                     if (unitRole != UnitRole['None']) {
                         unit._role = unitRole;
                     }
