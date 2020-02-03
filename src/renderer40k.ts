@@ -490,7 +490,7 @@ export class Renderer40k {
         this._currentY += 4;
     }
 
-    private renderWoundTracker(ctx: CanvasRenderingContext2D, unit: Unit, columnWidths: number[] | null): void {
+    private renderWoundTable(ctx: CanvasRenderingContext2D, unit: Unit, columnWidths: number[] | null): void {
         const height = 22;
 
         let w = 50;
@@ -543,6 +543,40 @@ export class Renderer40k {
 
         this._currentY += 4;
   
+    }
+
+    private renderWoundBoxes(ctx: CanvasRenderingContext2D, unit: Unit) {
+
+        const woundBoxSize = 30;
+        const boxMargin = 10;
+        const boxStartX = 340;
+        const unitNameWidth = 80;
+
+        ctx.save();
+
+        for (let model of unit._models) {
+            if (model._wounds > 1) {
+
+                let currentY = this._currentY;
+
+                ctx.font = '14px sans-serif';
+ 
+                this._currentY = this.renderParagraph(ctx, model._name, this._currentX + unitNameWidth, this._currentY, boxStartX-unitNameWidth-boxMargin);
+                let x = this._currentX + boxStartX;
+                ctx.strokeStyle = Renderer40k._blackColor;
+                for (let w = 0; w < model._wounds; w++) {
+                    if (w % 10 == 0 && w != 0) {
+                        currentY += woundBoxSize + boxMargin;
+                        x = this._currentX + boxStartX;
+                    }
+                    ctx.strokeRect(x, currentY, woundBoxSize, woundBoxSize);
+                    x += woundBoxSize + boxMargin;
+                }
+                currentY += woundBoxSize + boxMargin;
+                this._currentY = currentY;
+            }
+        }
+        ctx.restore();
     }
 
     private static _unitLabels = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
@@ -665,7 +699,7 @@ export class Renderer40k {
                 trackerLabelWidths.push(element * this._maxWidth);
             });
             this.renderTableHeader(ctx, Renderer40k._trackerLabels, trackerLabelWidths);
-            this.renderWoundTracker(ctx, unit, trackerLabelWidths);
+            this.renderWoundTable(ctx, unit, trackerLabelWidths);
         }
 
         if (explosions.length > 0) {
@@ -678,18 +712,17 @@ export class Renderer40k {
             this.renderExplosion(ctx, explosions, explLabelWidths);
         }
 
-/*
-        # wound tracker:
-        $hasTracks = false;
-        foreach($unit['model_stat'] as $type) {
-            if($type['W'] > 1) { $hasTracks = true; }
+        // wound tracker boxes
+        let hasTracks = false;
+        for (let model of unit._models) {
+            if (model._wounds > 1) { hasTracks = true; }
         }
-        if($hasTracks) {
-            this.renderLine();
+        if (hasTracks) {
+            this.renderLine(ctx);
             this._currentY += 5;
-            this.renderWoundBoxes($unit);
+            this.renderWoundBoxes(ctx, unit);
         }
-*/
+
         const totalHeight = this._currentY - (yOffset + Renderer40k._margin);
         const totalWidth = this._maxWidth;
 
