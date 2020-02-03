@@ -1,4 +1,4 @@
-import { Roster40k } from "./roster40k.js";
+import { Roster40k, Create40kRoster } from "./roster40k.js";
 import { Renderer40k } from "./renderer40k.js";
 
 var roster: Roster40k | null = null;
@@ -58,7 +58,7 @@ function handleFileSelect(event: Event) {
                 const forceUnits = document.getElementById('force-units');
 
                 if (gameType == "Warhammer 40,000 8th Edition") {
-                  var roster = Roster40k.CreateRoster(doc);
+                  var roster = Create40kRoster(doc);
                   if (roster) {
                     if (roster._forces.length > 0) {
                       const renderer: Renderer40k = new Renderer40k();

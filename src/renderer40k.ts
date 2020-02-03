@@ -1,4 +1,4 @@
-import { Unit, UnitRole, Model, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k.js";
+import { Unit, UnitRole, UnitRoleToString, Model, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k.js";
 
 export enum Justification {
     Left,
@@ -31,15 +31,15 @@ export class Renderer40k {
 
         this._octagon = document.getElementById('octagon') as HTMLImageElement;
 
-        this._roles.set(UnitRole['HQ'], document.getElementById('role_hq') as HTMLImageElement);
-        this._roles.set(UnitRole['Troops'], document.getElementById('role_tr') as HTMLImageElement);
-        this._roles.set(UnitRole['Elites'], document.getElementById('role_el') as HTMLImageElement);
-        this._roles.set(UnitRole['Fast Attack'], document.getElementById('role_fa') as HTMLImageElement);
-        this._roles.set(UnitRole['Heavy Support'], document.getElementById('role_hs') as HTMLImageElement);
-        this._roles.set(UnitRole['Flyer'], document.getElementById('role_fl') as HTMLImageElement);
-        this._roles.set(UnitRole['Dedicated Transport'], document.getElementById('role_dt') as HTMLImageElement);
-        this._roles.set(UnitRole['Fortification'], document.getElementById('role_ft') as HTMLImageElement);
-        this._roles.set(UnitRole['Lord of War'], document.getElementById('role_lw') as HTMLImageElement);
+        this._roles.set(UnitRole.HQ, document.getElementById('role_hq') as HTMLImageElement);
+        this._roles.set(UnitRole.TR, document.getElementById('role_tr') as HTMLImageElement);
+        this._roles.set(UnitRole.EL, document.getElementById('role_el') as HTMLImageElement);
+        this._roles.set(UnitRole.FA, document.getElementById('role_fa') as HTMLImageElement);
+        this._roles.set(UnitRole.HS, document.getElementById('role_hs') as HTMLImageElement);
+        this._roles.set(UnitRole.FL, document.getElementById('role_fl') as HTMLImageElement);
+        this._roles.set(UnitRole.DT, document.getElementById('role_dt') as HTMLImageElement);
+        this._roles.set(UnitRole.FT, document.getElementById('role_ft') as HTMLImageElement);
+        this._roles.set(UnitRole.LW, document.getElementById('role_lw') as HTMLImageElement);
     }
 
     render(roster: Roster40k, title: HTMLElement|null, list: HTMLElement|null, forces: HTMLElement|null): void {
@@ -81,9 +81,22 @@ export class Renderer40k {
               let uname = document.createElement('td');
               uname.innerHTML = unit._name;
               let role = document.createElement('td');
-              role.innerHTML = unit._role.toString();
+              role.innerHTML = UnitRoleToString[unit._role];
               let models = document.createElement('td');
-              models.innerHTML = 'TBD';
+              models.innerHTML = "";
+              let mi = 0;
+              for (const model of unit._models) {
+                  if (model._count > 1) {
+                    models.innerHTML += model._count + " " + model._name;
+                  }
+                  else {
+                      models.innerHTML += model._name;
+                  }
+                  mi++;
+                  if (mi != unit._models.length) {
+                      models.innerHTML += ",  "
+                  }
+              }
               let pts = document.createElement('td');
               pts.innerHTML = unit._points.toString();
               let pwr = document.createElement('td');
@@ -506,6 +519,32 @@ export class Renderer40k {
         }
     }
 
+    private renderModelList(ctx: CanvasRenderingContext2D, unit: Unit) {
+        ctx.font = '14px sans-serif';
+        this.renderText(ctx, "MODELS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+
+        ctx.font = '12px serif';
+        let modelList = "";
+        let mi = 0;
+        for (const model of unit._models) {
+            if (model._count > 1) {
+              modelList += model._count + " " + model._name;
+            }
+            else {
+                modelList += model._name;
+            }
+            mi++;
+            if (mi != unit._models.length) {
+                modelList += ",  "
+            }
+        }
+
+        this._currentY = this.renderParagraph(ctx, modelList, this._currentX + 190, this._currentY, 500);
+
+        this._currentY += 4;
+  
+    }
+
     private static _unitLabels = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
     private _unitLabelWidthsNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077];
     private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
@@ -611,6 +650,12 @@ export class Renderer40k {
             this.renderLine(ctx);
             this._currentY += 2;
             this.renderKeywords(ctx, unit);
+        }
+
+        if (unit._models.length > 0) {
+            this.renderLine(ctx);
+            this._currentY += 2;
+            this.renderModelList(ctx, unit);
         }
 
         if (unit._woundTracker.length > 0) {
