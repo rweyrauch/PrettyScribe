@@ -53,14 +53,14 @@ function handleFileSelect(event: Event) {
                 const gameType = info.getAttributeNode("gameSystemName")?.nodeValue;
                 if (!gameType) return;
 
+                const rosterTitle = document.getElementById('roster-title');
+                const rosterList = document.getElementById('roster-lists');
+                const forceUnits = document.getElementById('force-units');
+
                 if (gameType == "Warhammer 40,000 8th Edition") {
                   var roster = Roster40k.CreateRoster(doc);
                   if (roster) {
                     if (roster._forces.length > 0) {
-                      const rosterTitle = document.getElementById('roster-title');
-                      const rosterList = document.getElementById('roster-lists');
-                      const forceUnits = document.getElementById('force-units');
-
                       const renderer: Renderer40k = new Renderer40k();
                       renderer.render(roster, rosterTitle, rosterList, forceUnits);
                     }
