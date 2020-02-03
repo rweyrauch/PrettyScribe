@@ -143,7 +143,23 @@ export class Renderer40k {
         ctx.closePath();
         ctx.stroke();
 
-    }
+        ctx.save();
+        ctx.fillStyle = Renderer40k._fillColor;
+        ctx.globalCompositeOperation = "destination-over";
+        ctx.beginPath();
+        ctx.moveTo(x, y + Renderer40k._bevelSize);
+        ctx.lineTo(x, y + h - Renderer40k._bevelSize);
+        ctx.lineTo(x + Renderer40k._bevelSize, y + h);
+        ctx.lineTo(x + w - Renderer40k._bevelSize, y + h);
+        ctx.lineTo(x + w, y + h - Renderer40k._bevelSize);
+        ctx.lineTo(x + w, y + Renderer40k._bevelSize);
+        ctx.lineTo(x + w - Renderer40k._bevelSize, y);
+        ctx.lineTo(x + Renderer40k._bevelSize, y);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.restore();
+}
 
     private renderWatermark(ctx: CanvasRenderingContext2D) {
 
@@ -564,11 +580,13 @@ export class Renderer40k {
                 this._currentY = this.renderParagraph(ctx, model._name, this._currentX + unitNameWidth, this._currentY, boxStartX-unitNameWidth-boxMargin);
                 let x = this._currentX + boxStartX;
                 ctx.strokeStyle = Renderer40k._blackColor;
+                ctx.fillStyle = '#ffffff';
                 for (let w = 0; w < model._wounds; w++) {
                     if (w % 10 == 0 && w != 0) {
                         currentY += woundBoxSize + boxMargin;
                         x = this._currentX + boxStartX;
                     }
+                    ctx.fillRect(x, currentY, woundBoxSize, woundBoxSize);
                     ctx.strokeRect(x, currentY, woundBoxSize, woundBoxSize);
                     x += woundBoxSize + boxMargin;
                 }
