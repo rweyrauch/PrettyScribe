@@ -65,11 +65,12 @@ export class Renderer40k {
             thead.classList.add('thead-light');
             const tr = document.createElement('tr');
             thead.appendChild(tr);
-            const headerLabels = ["NAME", "ROLE", "MODELS", "POINTS", "POWER"];
-            headerLabels.forEach(element => {
-              const th = document.createElement('th');
+            const headerInfo = [{ name: "NAME", w: '25%'}, {name:"ROLE", w:'20%'}, {name:"MODELS", w:'25%'}, {name:"POINTS", w:'15%'}, {name:"POWER", w:'15%'}];
+            headerInfo.forEach(element => {
+              let th = document.createElement('th');
               th.scope = "col";
-              th.innerHTML = element;
+              th.innerHTML = element.name;
+              th.style.width = element.w;
               tr.appendChild(th);
             });
             forceTitle.appendChild(table);
