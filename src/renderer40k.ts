@@ -720,9 +720,10 @@ export class Renderer40k {
         ctx.closePath();
         ctx.fill();
 
-        if (this._octagon) {
-            let imgX = xStart + 6;
+        let imgX = xStart + 6;
 
+        if (this._octagon) {
+ 
             // Unit battlefield role icon
             ctx.drawImage(this._octagon, imgX, yStart + 2, 32, 32);
             const roleImg = this._roles.get(unit._role);
@@ -746,11 +747,11 @@ export class Renderer40k {
         // unit name
         let iters: number = 0;
         let title_size = 28;
-        const title_x = this._currentX + 120;
+        const title_x = imgX + 6;
         ctx.font = title_size + 'px ' + 'bold serif';
         const unitName = unit._name.toLocaleUpperCase();
         let check = ctx.measureText(unitName);
-        const maxWidth = this._maxWidth - this._currentX - title_x;
+        const maxWidth = this._maxWidth - title_x;
         while (iters < 6 && check.width > maxWidth) {
             iters += 1;
             title_size -= 2;
