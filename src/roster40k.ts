@@ -2,7 +2,7 @@ type WeaponStrength = number | string;
 
 export class Weapon {
     _name: string = "";
-    _range: string | number = "Melee";
+    _range: string = "Melee";
     _type: string = "Melee";
     _str: WeaponStrength = "user";
     _ap: string = "";
@@ -33,6 +33,8 @@ export class PsychicPower {
 
 export enum UnitRole {
     NONE,
+
+    // 40k
     HQ,
     TR,
     EL,
@@ -41,11 +43,19 @@ export enum UnitRole {
     FL,
     DT,
     FT,
-    LW
+    LW,
+
+    // Kill Team
+    COMMANDER,
+    LEADER,
+    SPECIALIST,
+    NON_SPECIALIST,
 };
 
 export const UnitRoleToString: string[] = [
     'None',
+
+    // 40k
     'HQ',
     'Troops',
     'Elites',
@@ -54,7 +64,13 @@ export const UnitRoleToString: string[] = [
     'Flyer',
     'Dedicated Transport',
     'Fortification',
-    'Lord of War'
+    'Lord of War',
+
+    // Kill Team
+    'Commander',
+    'Leader',
+    'Specialist',
+    'Non-specialist'
 ];
 
 export class Model {
@@ -121,7 +137,7 @@ export class Roster40k {
     }
 };
 
-export function Create40kRoster(doc: Document): Roster40k | null {
+export function Create40kRoster(doc: Document, is40k: boolean = true): Roster40k | null {
     if (doc) {
         // Determine roster type (game system).
         var info = doc.querySelector("roster");
@@ -137,7 +153,7 @@ export function Create40kRoster(doc: Document): Roster40k | null {
             }
 
             ParseRosterPoints(doc, roster);
-            ParseForces(doc, roster);
+            ParseForces(doc, roster, is40k);
 
             return roster;
         }
@@ -166,7 +182,7 @@ function ParseRosterPoints(doc: XMLDocument, roster: Roster40k): void {
     }
 }
 
-function ParseForces(doc: XMLDocument, roster: Roster40k): void {
+function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void {
     var forcesRoot = doc.querySelectorAll("roster>forces>force");
     for (let root of forcesRoot) {
         if (root.hasAttribute("name") && root.hasAttribute("catalogueName")) {
@@ -194,18 +210,19 @@ function ParseForces(doc: XMLDocument, roster: Roster40k): void {
                 }
             }
 
-            ParseUnits(root, f);
+            ParseUnits(root, f, is40k);
 
             roster._forces.push(f);
         }
     }
 }
 
-function ParseUnits(root: Element, force: Force): void {
+function ParseUnits(root: Element, force: Force, is40k: boolean): void {
     var selections = root.querySelectorAll("force>selections>selection");
     for (let selection of selections) {
-        var unit = CreateUnit(selection);
-        if (unit && unit._role != UnitRole.NONE) {
+        var unit = CreateUnit(selection, is40k);
+        if (unit && unit._role != UnitRole.NONE)
+        {
             force._units.push(unit);
         }
     }
@@ -233,7 +250,18 @@ function LookupRole(roleText: string): UnitRole {
     return UnitRole.NONE;
 }
 
-function CreateUnit(root: Element): Unit | null {
+function LookupRoleKillTeam(roleText: string): UnitRole {
+    switch (roleText) {
+        case 'Commander': return UnitRole.COMMANDER;
+        case 'Leader': return UnitRole.LEADER;
+        case 'Specialist': return UnitRole.SPECIALIST;
+        case 'Non-specialist': return UnitRole.NON_SPECIALIST;
+    }
+    return UnitRole.NONE;
+}
+
+
+function CreateUnit(root: Element, is40k: boolean): Unit | null {
     var unit: Unit = new Unit();
     var unitName = root.getAttributeNode("name")?.nodeValue;
     if (unitName) {
@@ -257,8 +285,19 @@ function CreateUnit(root: Element): Unit | null {
                     unit._role = unitRole;
                 }
                 else {
-                    // Keyword
-                    unit._keywords.add(catName);
+                    if (!is40k) {
+                        unitRole = LookupRoleKillTeam(roleText);
+                        if (unitRole != UnitRole.NONE) {
+                            unit._role = unitRole;
+                        }
+                        else {
+                            // Keyword
+                            unit._keywords.add(catName);
+                        }
+                    } else {
+                        // Keyword
+                        unit._keywords.add(catName);
+                    }
                 }
             }
         }
@@ -270,7 +309,7 @@ function CreateUnit(root: Element): Unit | null {
         let propName = prop.getAttributeNode("name")?.nodeValue;
         let propType = prop.getAttributeNode("typeName")?.nodeValue;
         if (propName && propType) {
-            if (propType === "Unit") {
+            if ((propType === "Unit") || (propType === "Model")) {
                 var model: Model = new Model();
                 model._name = propName;
                 let chars = prop.querySelectorAll("characteristics>characteristic");
@@ -303,18 +342,18 @@ function CreateUnit(root: Element): Unit | null {
                 }
                 unit._models.push(model);
             }
-            else if (propType == "Abilities") {
+            else if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability")) {
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
                     if (charName && char.textContent && propName) {
-                        if (charName === "Description") {
+                        if ((charName === "Description") || (charName === "Ability")) {
                             unit._abilities.set(propName, char.textContent);
                         }
                     }
                 }
             }
-            else if (propType == "Weapon") {
+            else if (propType === "Weapon") {
                 let weapon: Weapon = new Weapon();
                 weapon._name = propName;
                 let chars = prop.querySelectorAll("characteristics>characteristic");
@@ -398,7 +437,7 @@ function CreateUnit(root: Element): Unit | null {
                 unit._models[unit._models.length - 1]._explosions.push(explosion);
             }
             else {
-                console.log(propType);
+                console.log("Unknown profile type: " + propType);
             }
         }
     }

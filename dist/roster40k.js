@@ -35,6 +35,7 @@ export class PsychicPower {
 export var UnitRole;
 (function (UnitRole) {
     UnitRole[UnitRole["NONE"] = 0] = "NONE";
+    // 40k
     UnitRole[UnitRole["HQ"] = 1] = "HQ";
     UnitRole[UnitRole["TR"] = 2] = "TR";
     UnitRole[UnitRole["EL"] = 3] = "EL";
@@ -44,10 +45,16 @@ export var UnitRole;
     UnitRole[UnitRole["DT"] = 7] = "DT";
     UnitRole[UnitRole["FT"] = 8] = "FT";
     UnitRole[UnitRole["LW"] = 9] = "LW";
+    // Kill Team
+    UnitRole[UnitRole["COMMANDER"] = 10] = "COMMANDER";
+    UnitRole[UnitRole["LEADER"] = 11] = "LEADER";
+    UnitRole[UnitRole["SPECIALIST"] = 12] = "SPECIALIST";
+    UnitRole[UnitRole["NON_SPECIALIST"] = 13] = "NON_SPECIALIST";
 })(UnitRole || (UnitRole = {}));
 ;
 export const UnitRoleToString = [
     'None',
+    // 40k
     'HQ',
     'Troops',
     'Elites',
@@ -56,7 +63,12 @@ export const UnitRoleToString = [
     'Flyer',
     'Dedicated Transport',
     'Fortification',
-    'Lord of War'
+    'Lord of War',
+    // Kill Team
+    'Commander',
+    'Leader',
+    'Specialist',
+    'Non-specialist'
 ];
 export class Model {
     constructor() {
@@ -113,7 +125,7 @@ export class Roster40k {
     }
 }
 ;
-export function Create40kRoster(doc) {
+export function Create40kRoster(doc, is40k = true) {
     var _a;
     if (doc) {
         // Determine roster type (game system).
@@ -128,7 +140,7 @@ export function Create40kRoster(doc) {
                 roster._name = "40k Army Roster";
             }
             ParseRosterPoints(doc, roster);
-            ParseForces(doc, roster);
+            ParseForces(doc, roster, is40k);
             return roster;
         }
     }
@@ -155,7 +167,7 @@ function ParseRosterPoints(doc, roster) {
         }
     }
 }
-function ParseForces(doc, roster) {
+function ParseForces(doc, roster, is40k) {
     var _a, _b, _c;
     var forcesRoot = doc.querySelectorAll("roster>forces>force");
     for (let root of forcesRoot) {
@@ -179,15 +191,15 @@ function ParseForces(doc, roster) {
                     }
                 }
             }
-            ParseUnits(root, f);
+            ParseUnits(root, f, is40k);
             roster._forces.push(f);
         }
     }
 }
-function ParseUnits(root, force) {
+function ParseUnits(root, force, is40k) {
     var selections = root.querySelectorAll("force>selections>selection");
     for (let selection of selections) {
-        var unit = CreateUnit(selection);
+        var unit = CreateUnit(selection, is40k);
         if (unit && unit._role != UnitRole.NONE) {
             force._units.push(unit);
         }
@@ -215,7 +227,16 @@ function LookupRole(roleText) {
     }
     return UnitRole.NONE;
 }
-function CreateUnit(root) {
+function LookupRoleKillTeam(roleText) {
+    switch (roleText) {
+        case 'Commander': return UnitRole.COMMANDER;
+        case 'Leader': return UnitRole.LEADER;
+        case 'Specialist': return UnitRole.SPECIALIST;
+        case 'Non-specialist': return UnitRole.NON_SPECIALIST;
+    }
+    return UnitRole.NONE;
+}
+function CreateUnit(root, is40k) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
     var unit = new Unit();
     var unitName = (_a = root.getAttributeNode("name")) === null || _a === void 0 ? void 0 : _a.nodeValue;
@@ -239,8 +260,20 @@ function CreateUnit(root) {
                     unit._role = unitRole;
                 }
                 else {
-                    // Keyword
-                    unit._keywords.add(catName);
+                    if (!is40k) {
+                        unitRole = LookupRoleKillTeam(roleText);
+                        if (unitRole != UnitRole.NONE) {
+                            unit._role = unitRole;
+                        }
+                        else {
+                            // Keyword
+                            unit._keywords.add(catName);
+                        }
+                    }
+                    else {
+                        // Keyword
+                        unit._keywords.add(catName);
+                    }
                 }
             }
         }
@@ -251,7 +284,7 @@ function CreateUnit(root) {
         let propName = (_c = prop.getAttributeNode("name")) === null || _c === void 0 ? void 0 : _c.nodeValue;
         let propType = (_d = prop.getAttributeNode("typeName")) === null || _d === void 0 ? void 0 : _d.nodeValue;
         if (propName && propType) {
-            if (propType === "Unit") {
+            if ((propType === "Unit") || (propType === "Model")) {
                 var model = new Model();
                 model._name = propName;
                 let chars = prop.querySelectorAll("characteristics>characteristic");
@@ -301,18 +334,18 @@ function CreateUnit(root) {
                 }
                 unit._models.push(model);
             }
-            else if (propType == "Abilities") {
+            else if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability")) {
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = (_g = char.getAttributeNode("name")) === null || _g === void 0 ? void 0 : _g.nodeValue;
                     if (charName && char.textContent && propName) {
-                        if (charName === "Description") {
+                        if ((charName === "Description") || (charName === "Ability")) {
                             unit._abilities.set(propName, char.textContent);
                         }
                     }
                 }
             }
-            else if (propType == "Weapon") {
+            else if (propType === "Weapon") {
                 let weapon = new Weapon();
                 weapon._name = propName;
                 let chars = prop.querySelectorAll("characteristics>characteristic");
@@ -419,7 +452,7 @@ function CreateUnit(root) {
                 unit._models[unit._models.length - 1]._explosions.push(explosion);
             }
             else {
-                console.log(propType);
+                console.log("Unknown profile type: " + propType);
             }
         }
     }

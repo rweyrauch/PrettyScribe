@@ -67,7 +67,14 @@ function handleFileSelect(event: Event) {
                   }
                 }
                 else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
-                  alert("Kill Team not supported yet.");
+                  //alert("Kill Team not supported yet.");
+                  var roster = Create40kRoster(doc, false);
+                  if (roster) {
+                    if (roster._forces.length > 0) {
+                      const renderer: Renderer40k = new Renderer40k();
+                      renderer.render(roster, rosterTitle, rosterList, forceUnits);
+                    }
+                  }
                 }
                 else if (gameType == "Age of Sigmar") {
                   alert("Age of Sigmar not supported yet.");
