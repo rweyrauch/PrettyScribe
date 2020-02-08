@@ -1,6 +1,7 @@
 import { Roster40k, Create40kRoster } from "./roster40k.js";
 import { Renderer40k } from "./renderer40k.js";
 import { CreateAoSRoster } from "./rosterAoS.js";
+import { RendererAoS } from "./rendererAoS.js";
 
 function removeAllChildren(parent: Element | null): void {
   if (parent) {
@@ -60,8 +61,8 @@ function handleFileSelect(event: Event) {
                   let roster = Create40kRoster(doc);
                   if (roster) {
                     if (roster._forces.length > 0) {
-                      const renderer: Renderer40k = new Renderer40k();
-                      renderer.render(roster, rosterTitle, rosterList, forceUnits);
+                      const renderer: Renderer40k = new Renderer40k(roster);
+                      renderer.render(rosterTitle, rosterList, forceUnits);
                     }
                   }
                 }
@@ -70,15 +71,16 @@ function handleFileSelect(event: Event) {
                   let roster = Create40kRoster(doc, false);
                   if (roster) {
                     if (roster._forces.length > 0) {
-                      const renderer: Renderer40k = new Renderer40k();
-                      renderer.render(roster, rosterTitle, rosterList, forceUnits);
+                      const renderer: Renderer40k = new Renderer40k(roster);
+                      renderer.render(rosterTitle, rosterList, forceUnits);
                     }
                   }
                 }
                 else if (gameType == "Age of Sigmar") {
                   let roster = CreateAoSRoster(doc);
                   if (roster) {
-                    alert("Age of Sigmar display is not supported yet.");
+                    const renderer: RendererAoS = new RendererAoS(roster);
+                    renderer.render(rosterTitle, rosterList, forceUnits);
                   }
                 }
               }
