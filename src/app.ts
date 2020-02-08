@@ -1,11 +1,10 @@
 import { Roster40k, Create40kRoster } from "./roster40k.js";
 import { Renderer40k } from "./renderer40k.js";
-
-var roster: Roster40k | null = null;
+import { CreateAoSRoster } from "./rosterAoS.js";
 
 function removeAllChildren(parent: Element | null): void {
   if (parent) {
-    var first = parent.firstElementChild;
+    let first = parent.firstElementChild;
     while (first) {
       first.remove();
       first = parent.firstElementChild;
@@ -32,7 +31,7 @@ function handleFileSelect(event: Event) {
 
   if (files) {
     // files is a FileList of File objects. List some properties.
-    var output = [];
+    let output = [];
     for (let f of files) {
       const reader = new FileReader();
       reader.onload = function (e) {
@@ -43,12 +42,12 @@ function handleFileSelect(event: Event) {
             const xmldatastart = re.result.toString().indexOf(',') + 1;
             //console.log("XML Start: " + xmldatastart);
             const xmldata = window.atob(re.result.toString().slice(xmldatastart));
-            var parser = new DOMParser();
-            var doc = parser.parseFromString(xmldata, "text/xml");
+            let parser = new DOMParser();
+            let doc = parser.parseFromString(xmldata, "text/xml");
 
             if (doc) {
               // Determine roster type (game system).
-              var info = doc.querySelector("roster");
+              let info = doc.querySelector("roster");
               if (info) {
                 const gameType = info.getAttributeNode("gameSystemName")?.nodeValue;
                 if (!gameType) return;
@@ -58,7 +57,7 @@ function handleFileSelect(event: Event) {
                 const forceUnits = document.getElementById('force-units');
 
                 if (gameType == "Warhammer 40,000 8th Edition") {
-                  var roster = Create40kRoster(doc);
+                  let roster = Create40kRoster(doc);
                   if (roster) {
                     if (roster._forces.length > 0) {
                       const renderer: Renderer40k = new Renderer40k();
@@ -68,7 +67,7 @@ function handleFileSelect(event: Event) {
                 }
                 else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
                   //alert("Kill Team not supported yet.");
-                  var roster = Create40kRoster(doc, false);
+                  let roster = Create40kRoster(doc, false);
                   if (roster) {
                     if (roster._forces.length > 0) {
                       const renderer: Renderer40k = new Renderer40k();
@@ -77,7 +76,10 @@ function handleFileSelect(event: Event) {
                   }
                 }
                 else if (gameType == "Age of Sigmar") {
-                  alert("Age of Sigmar not supported yet.");
+                  let roster = CreateAoSRoster(doc);
+                  if (roster) {
+                    alert("Age of Sigmar display is not supported yet.");
+                  }
                 }
               }
             }

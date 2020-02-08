@@ -1,0 +1,1203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<roster id="b0b9-93d2-e61a-b997" name="Stormcast Eternal Sample" battleScribeVersion="2.03" gameSystemId="e51d-b1a3-75fc-dc33" gameSystemName="Age of Sigmar" gameSystemRevision="55" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+  <costs>
+    <cost name="pts" typeId="points" value="2000.0"/>
+  </costs>
+  <forces>
+    <force id="3dda-135d-e15b-d4f7" name="**Pitched Battle** 2,000" entryId="36b7-ee1e-0855-f23f" catalogueId="ed04-877b-c5d3-ce41" catalogueRevision="46" catalogueName="Order - Stormcast Eternals">
+      <rules>
+        <rule id="a954-6cfc-59ca-674e" name="Inspiring Presence" publicationId="e51d-b1a3-pubEQ" page="3" hidden="false">
+          <description>You can use this command ability at the start of the battleshock phase. If you do so, pick a friendly unit that is within 6&quot; of friendly HERO, or 12&quot; of a friendly HERO that is a general. That unit does not have to take battleshock tests in that phase.</description>
+        </rule>
+        <rule id="3f48-3925-7123-3392" name="At the Double" publicationId="e51d-b1a3-pubEQ" page="3" hidden="false">
+          <description>You can use this command ability after you make a run roll for a friendly unit that is within 6&quot; of a friendly HERO, or 12&quot; of a friendly HERO that is a general. If you do so, the run roll is treated as being a 6.</description>
+        </rule>
+        <rule id="c157-62a0-2514-c4f4" name="Forward to Victory" publicationId="e51d-b1a3-pubEQ" page="3" hidden="false">
+          <description>You can use this command ability after you make a charge roll for a friendly unit that is within 6&quot; of a friendly HERO, or 12&quot; of a friendly HERO that is a general. If you do so, re-roll the charge roll.</description>
+        </rule>
+      </rules>
+      <selections>
+        <selection id="2c11-26cc-1147-ce92" name="Allegiance" entryId="7332-f387-438b-852c::c6a3-2acf-1e46-3896" publicationId="ed04-877b-pubN71576" number="1" type="unit">
+          <selections>
+            <selection id="426d-c219-7bb4-8d37" name="Allegiance: Stormcast Eternals" entryId="7332-f387-438b-852c::81f4-ef16-b80c-6926" entryGroupId="7332-f387-438b-852c::c054-2350-5f5d-85b4" publicationId="ed04-877b-pubN65537" page="116" number="1" type="upgrade">
+              <profiles>
+                <profile id="7332-f387-438b-852c::1de2-9aa8-2e5c-12d5" name="Scions of the Storm" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                  <characteristics>
+                    <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">Instead of setting up a STORMCAST ETERNAL unit on the battlefield, you can place it to one side and say that it is set up in the Celestial Realm as a reserve unit. You can set up one reserve unit in the Celestial Realm for each unit you have set up on the battlefield. At the end of your movement phase, you can set up one or more of the reserve units in the Celestial Realm on the battlefield, more than 9&quot; from any enemy units. Any reserve units in the Celestial Realm that are not set up on the battlefield before the start of the fourth battle round are slain.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="7332-f387-438b-852c::4681-2ff9-bf65-8bf0" name="Shock and Awe" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                  <characteristics>
+                    <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">Subtract 1 from hit rolls for attacks that target friendly STORMCAST ETERNAL units that were set up on the battlefield during the same turn.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="7332-f387-438b-852c::b030-9956-546a-8c13" name="Stormhosts" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                  <characteristics>
+                    <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">If your army is a Stormcast Eternals army, you can give it a Stormhost keyword. All STORMCAST ETERNAL units in your army gain that keyword. If a model already has a Stormhost keyword, it cannot gain another one, but this does not prevent other units in your army from having a different Stormhost keyword. You can either choose one of the Stormhosts in the list, or choose another Stormhost you&apos;ve read about or created yourself. If you choose from the list below, all units with that keyword benefit from the extra abilities listed for that Stormhost. If you choose a different Stormhost, simply pick the Stormhost that most closely matches the nature of your own Stormhost.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="c793-3bd8-a347-18a5" name="Hallowed Knights" entryId="7332-f387-438b-852c::40d8-88f2-4d3f-3d9d" entryGroupId="7332-f387-438b-852c::5290-420b-8ecc-556a" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="7332-f387-438b-852c::2bf5-68c5-17c4-4e84" name="Only the Faithful" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                      <characteristics>
+                        <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">If a friendly HALLOWED KNIGHTS unit is affected by a spell or endless spell, roll a dice. On a 6+ ignore the effects of that spell on that unit.</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="7332-f387-438b-852c::9386-4a0d-d24b-32d8" name="Holy Crusaders" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+                      <characteristics>
+                        <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this command ability at the start of your hero phase. If you do so, pick a friendly HALLOWED KNIGHTS unit wholly within 9&quot; of a friendly HALLOWED KNIGHTS HERO, or wholly within 18&quot; of a friendly HALLOWED KNIGHTS HERO that is a general. Add 1 to run rolls and charge rolls for that unit until your next hero phase. In addition, until your next hero phase, that unit can run and still charge later in the same turn.</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="71c4-1766-fe41-ccb4" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="10dd-9821-653b-0736" name="Game Type" entryId="e12e-ffc5-6892-4795::a741-5681-7572-fa32" number="1" type="upgrade">
+          <selections>
+            <selection id="44e0-8cfa-72f5-ee41" name="2000 Points - Battlehost" entryId="e12e-ffc5-6892-4795::39f6-88b3-177e-2535::cea8-e4b2-c44f-c7b4" entryGroupId="e12e-ffc5-6892-4795::39f6-88b3-177e-2535::5927-9c5a-8b20-8f37" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="e276-80ca-9ef7-97c2" name="Battlehost" entryId="6330-7561-7a32-0851" primary="false"/>
+              </categories>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="8f38-e2cf-15a9-d3b9" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="f892-515f-b16b-785c" name="Lord-Relictor" entryId="5048-b161-6f3d-8c30::ce64-88a6-ce56-0940" publicationId="ed04-877b-pubN71576" page="171" number="1" type="unit">
+          <profiles>
+            <profile id="5048-b161-6f3d-8c30::6c27-df50-5164-0c3d" name="Lord-Relictor" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">4&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">5</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">9</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">3+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="5048-b161-6f3d-8c30::66f5-daa0-cc6f-3fc1" name="Lightning Storm" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">In your hero phase, you can pick 1 enemy unit that is within 12&quot; of this model and roll a dice. On a 3+, that unit suffers D3 mortal wounds. In addition, subtract 1 from hit rolls for attacks made by that unit until your next hero phase. A Lord-Relictor cannot use the Lightning Storm and Healing Storm abilities in the same turn.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="5048-b161-6f3d-8c30::9995-0906-114d-2cbd" name="Healing Storm" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">In your hero phase, you can pick a friendly STORMCAST ETERNAL model within 12&quot; of this model and roll a dice. On a 3+ you can heal up to D3 wounds that have been allocated to that model. A Lord-Relictor cannot use the Lightning Storm and Healing Storm abilities in the same turn.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="a454-0ce3-d0ad-ad7b" name="Relic Hammer" entryId="5048-b161-6f3d-8c30::478a-ebae-4b74-e2bd" number="1" type="upgrade">
+              <profiles>
+                <profile id="5048-b161-6f3d-8c30::8123-0229-ec95-ed53" name="Relic Hammer" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="43d8-a7b4-7cfb-d37d" name="0. Parchment of Purity" entryId="5048-b161-6f3d-8c30::cb94-a32f-af1a-dc9c::ad60-7bcb-946b-c4ee::8bb6-22c5-04a8-9c85" entryGroupId="5048-b161-6f3d-8c30::cb94-a32f-af1a-dc9c::ad60-7bcb-946b-c4ee::5b11-8348-7d88-db3b" number="1" type="upgrade">
+              <profiles>
+                <profile id="5048-b161-6f3d-8c30::cb94-a32f-af1a-dc9c::ad60-7bcb-946b-c4ee::7078-9239-2534-8ab0" name="Parchment of Purity" hidden="false" typeId="0ac4-aacb-2481-8e72" typeName="Artefact">
+                  <characteristics>
+                    <characteristic name="Artefact Details" typeId="0918-c47a-d84e-c0cf">In your hero phase, heal 1 wound allocated to the bearer.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="f1ac-08d5-aeef-d6c7" name="Artefact" entryId="3564-4c26-10b4-d953" primary="false"/>
+              </categories>
+            </selection>
+            <selection id="99b0-9237-9ddd-78c5" name="6. Translocation" entryId="5048-b161-6f3d-8c30::d059-3c6e-ac41-62d3::0f4e-3046-d7a4-2269" entryGroupId="5048-b161-6f3d-8c30::d059-3c6e-ac41-62d3::3963-714a-777a-2f98" number="1" type="upgrade">
+              <profiles>
+                <profile id="5048-b161-6f3d-8c30::d059-3c6e-ac41-62d3::49d9-2185-4c01-9cc0" name="Translocation" hidden="false" typeId="eed7-4131-0a52-0668" typeName="Prayer">
+                  <characteristics>
+                    <characteristic name="Description" typeId="0746-6cfb-5e15-53cb">In your hero phase, pick a friendly STORMCAST ETERNAL unit wholly within 9&quot; of this PRIEST and roll a dice. On a 3+ the prayer is successful. If the prayer is successful, remove that unit from the battlefield and then set it up again anywhere on the battlefield more than 9&quot; from any enemy units. It may not move in the subsequent movement phase.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="100.0"/>
+          </costs>
+          <categories>
+            <category id="9f31-89b9-eba9-525a" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="28b2-7c02-984e-a3e4" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="ad86-ea1e-6432-36ed" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="bd22-f1ee-6a30-6626" name="LORD-RELICTOR" entryId="9f51-d140-8ff0-88a7" primary="false"/>
+            <category id="e0f1-f967-13c8-359f" name="PRIEST" entryId="e8a5-e4c1-3d11-e7dd" primary="false"/>
+            <category id="213b-69bd-1833-1bba" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="0e60-a6b5-8c4c-8b60" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="552a-c8e7-358c-41d2" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="28b2-0038-7b1c-6e53" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="0823-ca79-8a2e-d916" name="Celestar Ballista" entryId="860b-7244-e6f9-95dd::70bf-9177-9d10-bc5f" publicationId="ed04-877b-pubN71576" page="186" number="1" type="unit">
+          <profiles>
+            <profile id="860b-7244-e6f9-95dd::da1c-5c83-454a-8e2a" name="Celestar Ballista" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">3&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">7</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">7</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="860b-7244-e6f9-95dd::5052-5268-8380-6e9e" name="Celestar Ballista" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">The Ballista and its crew are treated as a single model. The crew must remain within 1&quot; of the Ballista.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="860b-7244-e6f9-95dd::6f7b-874a-41df-1c53" name="Bastions of Death" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">When this unit is targeted by an enemy missile weapon, add 2 to its save rolls if it is in cover instead of 1.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="860b-7244-e6f9-95dd::c7cc-81a6-6ad1-be91" name="Chained Lightning" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the hit roll for an attack made with a Celestar Stormbolt scores a hit, that attack inflicts D6 hits on the target instead of 1. Make a wound and save roll for each hit.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="860b-7244-e6f9-95dd::fe2f-47c3-cf38-27a7" name="Versatile Weapon" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Before attacking with Celestar Stormbolts, choose either the Single Shot or Rapid Fire missile weapon characteristics for that shooting attack.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="dbce-4326-e793-2f09" name="Celestar Stormbolts" entryId="860b-7244-e6f9-95dd::6ba0-c6d6-ff1b-4855" number="1" type="upgrade">
+              <profiles>
+                <profile id="860b-7244-e6f9-95dd::2521-df86-9a95-d14f" name="Celestar Stormbolts: Single Shot" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">36&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-2</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="860b-7244-e6f9-95dd::f152-b8bc-7efd-7b92" name="Celestar Stormbolts: Rapid Fire" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">18&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-2</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="8ed9-4df4-2958-2af2" name="Sigmarite Blades" entryId="860b-7244-e6f9-95dd::bea4-0f28-8cd9-5c65" number="1" type="upgrade">
+              <profiles>
+                <profile id="860b-7244-e6f9-95dd::7de1-958f-3c20-cca0" name="Sigmarite Blades" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="110.0"/>
+          </costs>
+          <categories>
+            <category id="3de0-11f0-80b1-7727" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="1098-eae7-8519-9e2a" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="90f5-b591-0510-a5c6" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="cc55-bc71-3fcc-f5f7" name="CELESTAR BALLISTA" entryId="2bb9-a62f-3e50-200a" primary="false"/>
+            <category id="51f1-bee5-1051-95cd" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="e287-57b8-030c-a1b8" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="dd50-f56b-acc5-1718" name="WAR MACHINE" entryId="880e-1e33-b965-71ec" primary="false"/>
+            <category id="0772-6b4d-7d0d-cb4d" name="ORDINATOS" entryId="b61f-e578-f720-2cd7" primary="false"/>
+            <category id="f5db-c31b-24df-f513" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="false"/>
+            <category id="0872-18cd-a8b0-aba9" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="fb02-62d4-208a-e584" name="Lord-Ordinator" entryId="c40a-f331-f505-15bc::c924-f509-4a7f-1735" publicationId="ed04-877b-pubN71576" page="170" number="1" type="unit">
+          <profiles>
+            <profile id="c40a-f331-f505-15bc::4976-c39c-347c-9a0c" name="Arcane Engineer" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to hit rolls for attacks made by ORDER WAR MACHINES while they are wholly within 9&quot; of one or more friendly LORD-ORDINATORS.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="c40a-f331-f505-15bc::19a9-7caa-ddad-87fb" name="Lord-Ordinator" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">5</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">9</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="c40a-f331-f505-15bc::f71a-9c9c-d076-48aa" name="Solemn Duty" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+              <characteristics>
+                <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this command ability at the start of the battleshock phase. If you do so, pick a friendly model with this command ability. Until the end of that phase, you do not have to take battleshock tests for friendly STORMCAST ETERNAL units that are wholly within 18&quot; of that model.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <costs>
+            <cost name="pts" typeId="points" value="140.0"/>
+          </costs>
+          <categories>
+            <category id="8921-87e5-eddf-5530" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="e59d-9b1d-047c-ee56" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="e819-075b-3a10-f5af" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="55ab-78cc-aeac-3ea6" name="LORD-ORDINATOR" entryId="683a-4213-e600-479d" primary="false"/>
+            <category id="015b-c854-5d36-ffbf" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="84ad-6f2b-5915-a732" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="c25e-91cd-2013-c534" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="ba3b-89ea-ddf5-257b" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="25ad-ab5b-1a24-cf36" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="56b1-2177-869c-fbbf" name="Astreia Solbright" entryId="3209-2c3a-ad64-504b::0bd3-8d56-f1d3-23ea" publicationId="ed04-877b-pubN71576" page="158" number="1" type="unit">
+          <profiles>
+            <profile id="3209-2c3a-ad64-504b::ce8e-e73a-cb74-3afa" name="Astreia Solbright" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">12&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">7</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">9</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">3+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::7d15-22d1-06fb-9038" name="Astreia Solbright" hidden="false" typeId="f55d-ee3a-1597-110f" typeName="Magic">
+              <characteristics>
+                <characteristic name="Cast/Unbind" typeId="8294-f605-2c0f-8f92">1/1</characteristic>
+                <characteristic name="Spells Known" typeId="dc9c-47d3-6931-859c">Arcane Bolt, Mystic Shield and Lightning Pulse</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::fc4b-35b4-7010-e894" name="Lightning Pulse" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+              <characteristics>
+                <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, roll a dice for each enemy unti within 12&quot; of the caster that is visible to them. On a 5+, that unit suffers 1 mortal wound.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::aeac-046a-770b-b0ab" name="Soul Energy of the First Host" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+              <characteristics>
+                <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this ability in your hero phase, your shooting phase, or the combat phase.  Hero Phase: If you use this command ability in your hero phase, pick a friendly unit of HAMMERS OF SIGMAR EVOCATORS wholly within 12&quot; of a friendly model with this command ability. That unit can automatically cast Empower in that hero phase (no casting roll is required, and the spell cannot be unbound).  Shooting Phase: If you use this command ability in your shooting phase, pick a friendly unit of HAMMERS OF SIGMAR CASTIGATORS wholly within 12&quot; of a friendly model with this command ability. You can use Aetheric Channelling to increase the accuracy and power of the unit&apos;s Thunderhead Greatbows in that shooting phase instead of choosing only one of those options.  Combat Phase: If you use this command ability in the combat phase, pick a friendly unit of HAMMERS OF SIGMAR SEQUITORS wholly within 12&quot; of a friendly model with this command ability. You can use Aetheric Channelling to increase the power of the unit&apos;s weapons and shields in that combat phase instead of choosing only one of those options.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::94be-2718-3580-3a94" name="Mount" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Astreia’s Dracoline, Kazra, attacks with its Monstrous Claws.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::8681-ea39-4f15-8510::fee6-8b75-5211-5a36" name="Spirit Flask" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Once per battle, at the start of the combat phase, you can say that this model will shatter 1, 2 or 3 spirit flasks. If you do so, each unit within 3&quot; of this model suffers 1 mortal wound for each spirit flask that was shattered. Units with 10 or more models suffer D3 mortal wounds for each spirit flask that was shattered instead. Allocate the mortal wounds to this model last of all, after allocating them to any other units that are affected.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::c665-8abb-728b-bee9::e808-e0d1-915a-4a45" name="Supernatural Roar" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Subtract 1 from the Bravery characteristic of enemy units when they are within 3&quot; of one or more friendly DRACOLINES.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::e93e-ff9a-ed43-dfa5::3089-5a4d-d943-48b3" name="Prime Electrids" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If this model successfully casts Arcane Bolt and it is not unbound, then the spell inflicts D3 mortal wounds instead of 1, or D6 mortal wounds instead of D3 if the casting roll was 10+.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::48c3-5ae2-b841-9a35::cbbc-6fb6-0da7-72a5" name="Cycle of the Storm" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Once per turn, when a friendly STORMCAST ETERNAL model is slain within 18&quot; of this model, instead of removing the slain model, you can heal 1 wound allocated to it. This model cannot use this ability on itself.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::6ad8-3ccd-49a0-4cb9::ae02-a84f-a903-1ff8" name="Arcane Bolt" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+              <characteristics>
+                <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick an enemy unit within 18&quot; of the caster that is visible to them. That unit suffers 1 mortal wound. If the casting roll was 10 or more, the unit suffers D3 mortal wounds instead.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::aec4-4bd2-48d8-3edf::b41f-f1ce-7aa5-4f81" name="Mystic Shield" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+              <characteristics>
+                <characteristic name="Casting Value" typeId="2508-b604-1258-a920">6</characteristic>
+                <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick a friendly unit within 18&quot; of the caster that is visible to them. Re-roll save rolls of 1 for that unit until your next hero phase.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="3209-2c3a-ad64-504b::9f79-0107-09de-78af::08a2-ad1d-4f24-076e" name="Thunderous Pounce" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll charge rolls for this model. In addition, the Damage characteristic for this model&apos;s Monstrous Claws is D3 instead of 1 if this model made a charge move in the same turn.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="ced1-f128-0c77-2c24" name="Monstrous Claws" entryId="3209-2c3a-ad64-504b::bb2c-edd3-ede8-e7f2" number="1" type="upgrade">
+              <profiles>
+                <profile id="3209-2c3a-ad64-504b::34e3-c907-fe39-3c10::0bfc-288a-37d1-e76c" name="Monstrous Claws" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="387b-51eb-1b70-a17d" name="Aetherstave" entryId="3209-2c3a-ad64-504b::afc3-08eb-77a0-74a4" number="1" type="upgrade">
+              <profiles>
+                <profile id="3209-2c3a-ad64-504b::8757-f5a0-39fb-5439::d0a7-b134-ba43-5e80" name="Aetherstave" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e7a1-ed1a-b8de-e246" name="General" entryId="3209-2c3a-ad64-504b::f39b-6342-66a4-3698" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="10a8-a5ab-acd7-c2da" name="General" entryId="b745-17c4-8fbf-8b04" primary="false"/>
+              </categories>
+            </selection>
+            <selection id="dbbd-9203-a2bb-285b" name="0. Martyr&apos;s Strength" entryId="3209-2c3a-ad64-504b::ea74-61ed-1c6d-649b::e6fa-0519-eaa3-4c2a::eed5-2ef8-6545-87e8" entryGroupId="3209-2c3a-ad64-504b::ea74-61ed-1c6d-649b::e6fa-0519-eaa3-4c2a::4544-43f1-eee9-ae4e" number="1" type="upgrade">
+              <profiles>
+                <profile id="3209-2c3a-ad64-504b::ea74-61ed-1c6d-649b::e6fa-0519-eaa3-4c2a::ee6a-fffb-5c82-6231" name="Martyr&apos;s Strength" hidden="false" typeId="c749-bae4-71a8-0c36" typeName="Command Trait">
+                  <characteristics>
+                    <characteristic name="Command Trait Details" typeId="ee96-6f3a-e5ca-2350">Roll a dice if this general is slain in the combat phase. On a 2+ this general can make a pile-in move and then attack with all of the melee weapons it is armed with, before it is removed from play.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="220.0"/>
+          </costs>
+          <categories>
+            <category id="b807-ca39-9cd4-74c7" name="ASTREIA SOLBRIGHT" entryId="2935-4acc-ca83-4f70" primary="false"/>
+            <category id="9c0f-2af1-2afa-18c2" name="DRACOLINE" entryId="c83b-e760-c03a-7031" primary="false"/>
+            <category id="0e12-57b9-ad19-9c95" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="6efc-64c4-36c6-2cdc" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="55ee-74cd-61f4-4044" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="72f8-859b-5c10-25c0" name="HAMMERS OF SIGMAR" entryId="cf54-4907-2f8d-08bb" primary="false"/>
+            <category id="42b8-5719-91b6-06c7" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="e097-7ad1-f2a0-377a" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="b7d6-941f-90d5-b277" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="734b-8ed8-c611-85b1" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="a481-096e-d711-aa6e" name="LORD-ARCANUM" entryId="e278-4f31-d3f9-2c34" primary="false"/>
+            <category id="fd3e-8c00-28a6-8191" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="36bc-06c2-d38c-c7f4" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="6d8d-b59b-c5eb-9af2" name="Sequitors" entryId="87b6-f5af-5630-028d::29da-7c0d-155b-f63a" publicationId="ed04-877b-pubN71576" page="187" number="1" type="unit">
+          <profiles>
+            <profile id="87b6-f5af-5630-028d::9ba3-1ba0-5f31-b26e" name="Sequitor" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">7</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="87b6-f5af-5630-028d::1c18-5188-2199-3329" name="Sequitor-Prime" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">The leader of this unit is a Sequitor-Prime. A Sequitor-Prime can replace the unit’s weapon option with a Stormsmite Greatmace, in addition to any other models in the unit that can do so. Add 1 to the Attacks characteristic of a Sequitor-Prime’s melee weapon. If a Sequitor-Prime is armed with a Stormsmite Maul and Soulshield or Tempest Blade and Soulshield, they may also carry a Redemption Cache.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="87b6-f5af-5630-028d::3e69-fa0a-5a7c-ff81" name="Sequitor Aetheric Channelling" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">At the start of the combat phase, you must say if this unit will channel aetheric power into its weapons or its shields. If you choose its weapons, you can re-roll failed hit rolls for attacks made by this unit in that combat phase. If you choose its shields, you can re-roll failed save rolls for attacks that target this unit in that combat phase (instead of only re-rolling save rolls of 1).</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="87b6-f5af-5630-028d::0df6-338b-0c60-72e9" name="Soulshields" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll save rolls of 1 for attacks that target this unit if any models from this unit are carrying a Soulshield.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="87b6-f5af-5630-028d::a92e-6fa5-6ca4-2a41" name="Greatmace Blast" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the unmodified hit roll for an attack made with a Stormsmite Greatmace that targets a DAEMON or NIGHTHAUNT unit is 6, that attack inflicts D3 hits on the target instead of 1. Make a wound and save roll for each hit.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="3ca0-3fab-a609-17c0" name="5 Sequitors" entryId="87b6-f5af-5630-028d::30a3-00db-1cd7-001f" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="130.0"/>
+              </costs>
+            </selection>
+            <selection id="88b2-9b06-c497-b17d" name="Stormsmite Greatmace (Sequitor-Prime)" entryId="87b6-f5af-5630-028d::3172-6264-e86e-248b" number="1" type="upgrade">
+              <profiles>
+                <profile id="87b6-f5af-5630-028d::7b65-c24f-872d-30f1" name="Stormsmite Greatmace" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">2</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="6b73-dde4-1305-6dd0" name="Stormsmite Greatmace" entryId="87b6-f5af-5630-028d::8141-b133-8132-69f2" number="2" type="upgrade">
+              <profiles>
+                <profile id="87b6-f5af-5630-028d::75c6-5428-2cc9-23ba" name="Stormsmite Greatmace" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">2</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="6ea4-a332-67b1-f293" name="Tempest Blade and Soulshield" entryId="87b6-f5af-5630-028d::ded6-1b30-fdaa-7eb1" entryGroupId="87b6-f5af-5630-028d::41a3-6543-745b-dd08" number="1" type="upgrade">
+              <profiles>
+                <profile id="87b6-f5af-5630-028d::a93a-c381-0713-e158" name="Tempest Blade and Soulshield" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="77df-cacf-ad41-f216" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="1445-07ff-8ad1-33e2" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="38de-4c3e-91aa-162e" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="ac84-7c01-3808-0112" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="5bb7-e38d-2472-056b" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="62a4-ec8c-50e0-fa3a" name="SEQUITORS" entryId="b739-26fe-8dcc-2388" primary="false"/>
+            <category id="a01a-7e98-bc2e-914a" name="REDEEMER" entryId="c945-c89f-4053-6479" primary="false"/>
+            <category id="4352-5af0-f9eb-cabe" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="f5c5-ced1-27dd-6e33" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="6879-8a99-c959-995e" name="Judicators" entryId="18ae-599f-8351-6eb0::993b-d238-93ba-a4f2" publicationId="ed04-877b-pubN71576" page="182" number="1" type="unit">
+          <profiles>
+            <profile id="18ae-599f-8351-6eb0::cda6-0679-0941-4468" name="Judicators" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">7</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="18ae-599f-8351-6eb0::818c-4d3b-7936-64cd" name="Judicator-Prime" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">The leader of this unit is a Judicator-Prime. Add 1 to hit rolls for attacks made by a Judicator-Prime.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="18ae-599f-8351-6eb0::b5c6-42e9-e2d0-c5c8" name="Eternal Judgement" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Re-roll hit rolls of 1 for attacks made with this unit’s missile weapons that target a CHAOS unit.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="dd2c-9f61-72f2-cb40" name="5 Judicators" entryId="18ae-599f-8351-6eb0::ada5-76ec-c639-4daa" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="160.0"/>
+              </costs>
+            </selection>
+            <selection id="5830-8eb6-2979-c82f" name="Storm Gladius" entryId="18ae-599f-8351-6eb0::27c3-6f16-6831-440a" number="1" type="upgrade">
+              <profiles>
+                <profile id="18ae-599f-8351-6eb0::da60-50d2-f4d1-d0fe" name="Storm Gladius" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="65d0-8546-3b23-a79d" name="Skybolt Bow" entryId="18ae-599f-8351-6eb0::13f1-b660-6ee4-9ea3" entryGroupId="18ae-599f-8351-6eb0::eaf8-6850-617d-b9ba" number="1" type="upgrade">
+              <profiles>
+                <profile id="18ae-599f-8351-6eb0::f873-2341-e174-4865" name="Skybolt Bow" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">24&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="5046-db92-3668-4ef4" name="Shockbolt Bow" entryId="18ae-599f-8351-6eb0::7101-e9f9-96f6-93af" entryGroupId="18ae-599f-8351-6eb0::ecb3-41a0-b755-d900" number="1" type="upgrade">
+              <profiles>
+                <profile id="18ae-599f-8351-6eb0::1914-19db-9b74-8ddf" name="Shockbolt Bow" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">24&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="18ae-599f-8351-6eb0::b20d-c0d3-5230-2f6c" name="Chained Lightning" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the hit roll for an attack made with a Shockbolt Bow scores a hit, that attack inflicts D6 hits on the target instead of 1. Make a wound and save roll for each hit.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="35c1-cc1a-2f71-436a" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="ae96-f057-da97-58c6" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="1bf6-ce2f-a4fe-fd1b" name="JUDICATORS" entryId="47cd-ba11-d528-de85" primary="false"/>
+            <category id="d7fd-2fc0-76f4-411b" name="JUSTICAR" entryId="e897-5e9b-1972-88b0" primary="false"/>
+            <category id="2289-38ee-a425-04b4" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="8d05-ba93-c8c6-42f6" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="944b-8965-0149-8d02" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="2aa2-d993-ae05-572e" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="adc5-b904-2dfb-8e1d" name="Sequitors" entryId="87b6-f5af-5630-028d::29da-7c0d-155b-f63a" publicationId="ed04-877b-pubN71576" page="187" number="1" type="unit">
+          <profiles>
+            <profile id="87b6-f5af-5630-028d::9ba3-1ba0-5f31-b26e" name="Sequitor" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">7</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="87b6-f5af-5630-028d::1c18-5188-2199-3329" name="Sequitor-Prime" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">The leader of this unit is a Sequitor-Prime. A Sequitor-Prime can replace the unit’s weapon option with a Stormsmite Greatmace, in addition to any other models in the unit that can do so. Add 1 to the Attacks characteristic of a Sequitor-Prime’s melee weapon. If a Sequitor-Prime is armed with a Stormsmite Maul and Soulshield or Tempest Blade and Soulshield, they may also carry a Redemption Cache.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="87b6-f5af-5630-028d::3e69-fa0a-5a7c-ff81" name="Sequitor Aetheric Channelling" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">At the start of the combat phase, you must say if this unit will channel aetheric power into its weapons or its shields. If you choose its weapons, you can re-roll failed hit rolls for attacks made by this unit in that combat phase. If you choose its shields, you can re-roll failed save rolls for attacks that target this unit in that combat phase (instead of only re-rolling save rolls of 1).</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="87b6-f5af-5630-028d::0df6-338b-0c60-72e9" name="Soulshields" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll save rolls of 1 for attacks that target this unit if any models from this unit are carrying a Soulshield.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="87b6-f5af-5630-028d::a92e-6fa5-6ca4-2a41" name="Greatmace Blast" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the unmodified hit roll for an attack made with a Stormsmite Greatmace that targets a DAEMON or NIGHTHAUNT unit is 6, that attack inflicts D3 hits on the target instead of 1. Make a wound and save roll for each hit.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="dc46-3a1e-3d14-dc7f" name="5 Sequitors" entryId="87b6-f5af-5630-028d::30a3-00db-1cd7-001f" number="2" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="260.0"/>
+              </costs>
+            </selection>
+            <selection id="3983-ecba-1b20-ffd4" name="Stormsmite Greatmace" entryId="87b6-f5af-5630-028d::8141-b133-8132-69f2" number="4" type="upgrade">
+              <profiles>
+                <profile id="87b6-f5af-5630-028d::75c6-5428-2cc9-23ba" name="Stormsmite Greatmace" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">2</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="4e16-eb7b-2a39-5979" name="Stormsmite Greatmace (Sequitor-Prime)" entryId="87b6-f5af-5630-028d::3172-6264-e86e-248b" number="1" type="upgrade">
+              <profiles>
+                <profile id="87b6-f5af-5630-028d::7b65-c24f-872d-30f1" name="Stormsmite Greatmace" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">2</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="0fc9-bfbd-a4cb-5dd9" name="Stormsmite Maul and Soulshield" entryId="87b6-f5af-5630-028d::1ecd-b8f1-3b9c-925b" entryGroupId="87b6-f5af-5630-028d::41a3-6543-745b-dd08" number="1" type="upgrade">
+              <profiles>
+                <profile id="87b6-f5af-5630-028d::260f-205e-1f45-de0e" name="Stormsmite Maul" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="e281-00c5-9358-dc63" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="2ffc-4f3e-ea17-37bb" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="36ac-1d67-79d4-cd47" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="3cdc-983d-60cd-e522" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="cf0d-1c35-e292-41e9" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="1087-169a-c0c1-9941" name="SEQUITORS" entryId="b739-26fe-8dcc-2388" primary="false"/>
+            <category id="9b59-f01e-ef08-dcdf" name="REDEEMER" entryId="c945-c89f-4053-6479" primary="false"/>
+            <category id="a390-a3f9-36eb-b8b3" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="0b46-8449-cf1a-2949" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="6ae0-aafe-c013-f2d1" name="Endless Spell: Aethervoid Pendulum" entryId="28b7-9a3f-0f7b-c498::98c8-838b-2c8a-a9f7" number="1" type="upgrade">
+          <profiles>
+            <profile id="28b7-9a3f-0f7b-c498::b2ad-28b6-8c19-2bd7" name="Summon Aethervoid Pendulum" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+              <characteristics>
+                <characteristic name="Casting Value" typeId="2508-b604-1258-a920">6</characteristic>
+                <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, set up an Aethervoid Pendulum model wholly within 6&quot; of the caster so that it points lengthways in the direction you wish it to move.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="28b7-9a3f-0f7b-c498::21f3-0955-0b5b-632a" name="Predatory" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">An Aethervoid Pendulum is a predatory endless spell. It can move up to 8&quot; and can fly. </characteristic>
+              </characteristics>
+            </profile>
+            <profile id="28b7-9a3f-0f7b-c498::a0f5-049e-5f6b-92f7" name="Slicing Into Reality" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">When this model is set up, the player who set it up can immediately make a move with it.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="28b7-9a3f-0f7b-c498::75ab-d1f9-8312-4930" name="Scything Blade" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">After this model has moved, each unit that has any models it passed across, and each other unit that is within 1&quot; of it at the end of its move, suffers D6 mortal wounds. </characteristic>
+              </characteristics>
+            </profile>
+            <profile id="28b7-9a3f-0f7b-c498::2577-0a57-fc04-cbb1" name="Unstoppable Mechanism" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Whenever you set up an Aethervoid Pendulum, you must place it lengthways in the direction you wish it to move. Whenever it moves, move it in a straight line in that direction.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="28b7-9a3f-0f7b-c498::bcfe-fca6-6bb7-9d98::8e0c-cbe4-27be-8a30" name="Fly" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can fly.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <costs>
+            <cost name="pts" typeId="points" value="50.0"/>
+          </costs>
+          <categories>
+            <category id="b0ef-8364-1bcc-6f44" name="ENDLESS SPELL" entryId="31f4-2067-3ade-e6f8" primary="false"/>
+            <category id="005b-6354-8d1d-e99e" name="AETHERVOID PENDULUM" entryId="5647-b7a8-9716-1d17" primary="false"/>
+            <category id="4e1d-479f-e33d-3470" name="Malign Sorcery" entryId="eecb-ed66-d474-9ddd" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="9013-d736-809f-6e34" name="Lord-Celestant on Stardrake" entryId="e7aa-2962-d6ab-8be7::19ca-60d5-c3b7-9444" publicationId="ed04-877b-pubN71576" page="168" number="1" type="unit">
+          <profiles>
+            <profile id="e7aa-2962-d6ab-8be7::75de-5961-3220-82cf" name="Lord-Celestant on Stardrake" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">*</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">16</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">9</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">3+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::c0bc-ee6d-8525-8781" name="WoundTable0" hidden="false" typeId="90d1-a434-348d-a861" typeName="Damage Table">
+              <characteristics>
+                <characteristic name="Variable 1" typeId="420a-645a-ab28-93a0">Wounds Suffered</characteristic>
+                <characteristic name="Variable 2" typeId="4cdd-1e03-530f-0ff7">Move</characteristic>
+                <characteristic name="Variable 3" typeId="b1ea-56be-ba52-16e9">Great Claws</characteristic>
+                <characteristic name="Variable 4" typeId="ad26-bf56-95c4-80f1">Cavernous Jaw Bites</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::abea-165f-9646-b338" name="WoundTable1" hidden="false" typeId="90d1-a434-348d-a861" typeName="Damage Table">
+              <characteristics>
+                <characteristic name="Variable 1" typeId="420a-645a-ab28-93a0">0-4</characteristic>
+                <characteristic name="Variable 2" typeId="4cdd-1e03-530f-0ff7">12&quot;</characteristic>
+                <characteristic name="Variable 3" typeId="b1ea-56be-ba52-16e9">3+</characteristic>
+                <characteristic name="Variable 4" typeId="ad26-bf56-95c4-80f1">3</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::a2c0-75b2-2ab0-15f7" name="WoundTable2" hidden="false" typeId="90d1-a434-348d-a861" typeName="Damage Table">
+              <characteristics>
+                <characteristic name="Variable 1" typeId="420a-645a-ab28-93a0">5-8</characteristic>
+                <characteristic name="Variable 2" typeId="4cdd-1e03-530f-0ff7">11&quot;</characteristic>
+                <characteristic name="Variable 3" typeId="b1ea-56be-ba52-16e9">3+</characteristic>
+                <characteristic name="Variable 4" typeId="ad26-bf56-95c4-80f1">2</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::88f9-9fb1-9f23-a899" name="WoundTable3" hidden="false" typeId="90d1-a434-348d-a861" typeName="Damage Table">
+              <characteristics>
+                <characteristic name="Variable 1" typeId="420a-645a-ab28-93a0">9-12</characteristic>
+                <characteristic name="Variable 2" typeId="4cdd-1e03-530f-0ff7">10&quot;</characteristic>
+                <characteristic name="Variable 3" typeId="b1ea-56be-ba52-16e9">4+</characteristic>
+                <characteristic name="Variable 4" typeId="ad26-bf56-95c4-80f1">2</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::ad72-5996-5086-4dbd" name="WoundTable4" hidden="false" typeId="90d1-a434-348d-a861" typeName="Damage Table">
+              <characteristics>
+                <characteristic name="Variable 1" typeId="420a-645a-ab28-93a0">13-16+</characteristic>
+                <characteristic name="Variable 2" typeId="4cdd-1e03-530f-0ff7">8&quot;</characteristic>
+                <characteristic name="Variable 3" typeId="b1ea-56be-ba52-16e9">4+</characteristic>
+                <characteristic name="Variable 4" typeId="ad26-bf56-95c4-80f1">1</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::e2df-e3a7-e7b0-e86c" name="Lord of the Celestial Host" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+              <characteristics>
+                <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this command ability at the start of the combat phase if a friendly model with this command ability is on the battlefield. If you do so, you can re-roll failed wound rolls for attacks made by friendly STARDRAKE and DRACOTH mounts until the end of that phase.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::fc9e-b9fc-b361-a39b" name="Inescapable Vengeance" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add D3 to the Attacks characteristic of this model’s Celestine Hammer or Stormbound Blade if this model made a charge move in the same turn.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::94e6-d1b6-8dad-0336" name="Mount" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This model’s Stardrake attacks with its Great Claws.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::e718-0e71-7774-7909::8e0c-cbe4-27be-8a30" name="Fly" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can fly.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::6d47-e470-e24e-c489::1d24-4c78-1fe5-9f5a" name="Sigmarite Thundershield" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll save rolls of 1 for attacks that target this model. If the re-rolled save is successful, each enemy unit within 3&quot; of this model suffers 1 mortal wound.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::ba4c-3380-b010-7a6a::9c20-eaa4-13de-b0c4" name="Arcane Lineage" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to casting rolls for friendly WIZARDS while they are within 18&quot; of this model. In addition, subtract 1 from casting rolls for enemy WIZARDS while they are within 18&quot; of this model.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::5b29-4565-032b-ad6c::1008-c5fc-5343-87f7" name="Cavernous Jaws" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">After this model makes a pile-in move, this model’s Stardrake can bite one or more enemy models with its cavernous jaws. The number of bites it can make is shown on the damage table above. For each bite, pick one enemy model within 3&quot; of this model and roll a dice. If the roll is greater than that model’s Wounds characteristic, it is slain.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::9657-d539-eb4d-f840::eba0-3214-b264-1ba5" name="Lord of the Heavens" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">At the start of your shooting phase, if this model is on the battlefield, it can either breathe a Roiling Thunderhead or call down a Rain of Stars.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::8477-678b-f10e-b548::fb39-e56c-ba04-8a8b" name="Rain of Stars" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Pick up to D6 enemy units on the battlefield. Roll a dice for each unit you pick. On a 4+ that unit suffers D3 mortal wounds.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::fd4f-c210-d9b6-a901::0371-9fcd-c5de-730e" name="Roiling Thunderhead" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Pick 1 enemy unit within 18&quot; of this model that is visible to it. Roll a dice for each model in that unit that is within 18&quot; of this model. For each 6+ that unit suffers 1 mortal wound.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e7aa-2962-d6ab-8be7::6d3a-7ce8-cf43-f277::364e-357c-4ed6-6f57" name="Sweeping Tail" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Each time this model attacks, roll a dice for each enemy unit within 3&quot; of this model after all of this model’s attacks have been resolved. If the roll is less than the number of models in that enemy unit, that enemy unit suffers D3 mortal wounds.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="d6d5-fbe6-1c35-215f" name="Great Claws" entryId="e7aa-2962-d6ab-8be7::f769-ceda-5a45-9d66" number="1" type="upgrade">
+              <profiles>
+                <profile id="e7aa-2962-d6ab-8be7::3a06-abc7-ee37-8483::e640-2d33-1746-9563" name="Great Claws" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">*</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="0b20-d3e3-902b-3f08" name="Stormbound Blade" entryId="e7aa-2962-d6ab-8be7::2ebd-88bf-454a-b695" entryGroupId="e7aa-2962-d6ab-8be7::4280-98af-8aed-4d99" number="1" type="upgrade">
+              <profiles>
+                <profile id="e7aa-2962-d6ab-8be7::77cd-3209-9ffa-81ed" name="Stormbound Blade" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">2</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="e7aa-2962-d6ab-8be7::7782-1bab-8b6c-377c" name="Stormbound Blade" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the unmodified hit roll for an attack made with a Stormbound Blade is 6, that attack inflicts 3 hits on the target instead of 1. Make a wound and save roll for each hit.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="500.0"/>
+          </costs>
+          <categories>
+            <category id="7785-a22c-5f9b-813e" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="c4f4-2d18-25b5-1ed4" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="ff7a-64d9-4b33-c914" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="054f-e34f-51af-96d2" name="LORD-CELESTANT" entryId="78f1-562f-011e-181e" primary="false"/>
+            <category id="94c8-ba1d-1744-1fd0" name="MONSTER" entryId="1959-9f6a-3056-913a" primary="false"/>
+            <category id="c0f3-43d2-43bb-d90e" name="STARDRAKE" entryId="9334-c292-162a-2242" primary="false"/>
+            <category id="c394-6b43-4ef0-0779" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="382c-55de-2064-e034" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="daf4-ca15-ffb3-c8f2" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+            <category id="951c-c8b2-0b5b-56eb" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="94b4-c25d-31fc-9cad" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+            <category id="5723-b105-1f9d-97e9" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="19a2-612a-6d45-0cfb" name="Evocators" entryId="f3ba-f7a5-03b5-3662::6427-4f9f-abde-dc0b" publicationId="ed04-877b-pubN71576" page="189" number="1" type="unit">
+          <profiles>
+            <profile id="f3ba-f7a5-03b5-3662::1522-405a-0a21-b36e" name="Evocators" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">3</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">8</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f3ba-f7a5-03b5-3662::a9b2-3e78-e510-8f80" name="Evocator-Prime" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">The leader of this unit is an Evocator-Prime. Add 1 to the Attacks characteristic of an Evocator-Prime’s melee weapons.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f3ba-f7a5-03b5-3662::64f9-5fd6-637c-4a16" name="Evocators" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">A unit of Evocators is a WIZARD while it has 2 or more models. It cannot attempt to cast any spells other than Empower, but any number of units of EVOCATORS can attempt to cast Empower in the same hero phase.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f3ba-f7a5-03b5-3662::adb1-b166-4b7b-dc1c" name="Empower" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+              <characteristics>
+                <characteristic name="Casting Value" typeId="2508-b604-1258-a920">6</characteristic>
+                <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick a friendly REDEEMER or SACROSANCT unit wholly within 12&quot; of the caster. Until your next hero phase, you can re-roll failed wound rolls for attacks made by that unit.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f3ba-f7a5-03b5-3662::4eb4-0ce3-77e1-43e4" name="Evocators" hidden="false" typeId="f55d-ee3a-1597-110f" typeName="Magic">
+              <characteristics>
+                <characteristic name="Cast/Unbind" typeId="8294-f605-2c0f-8f92">1/1</characteristic>
+                <characteristic name="Spells Known" typeId="dc9c-47d3-6931-859c">Empower</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f3ba-f7a5-03b5-3662::99a0-5120-d50a-41bf::93f4-0309-953d-7125" name="Celestial Lightning Arc" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll save rolls of 1 for attacks made with missile weapons that target this unit. In addition, after this unit has been picked to fight for the first time in a phase, after all of its attacks have been resolved, you can pick 1 enemy unit within 3&quot; of this unit. If you do so, roll 2 dice for each model in this unit. For each 4+ that enemy unit suffers 1 mortal wound.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="9339-c7d7-1520-2889" name="5 Evocators" entryId="f3ba-f7a5-03b5-3662::b829-f602-1b78-a29f" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="220.0"/>
+              </costs>
+            </selection>
+            <selection id="3f40-73fc-3902-1a9f" name="2. Celestial Blades" entryId="f3ba-f7a5-03b5-3662::2378-7fdc-dd00-d958::d8d6-ee35-e0ef-e7fc" entryGroupId="f3ba-f7a5-03b5-3662::2378-7fdc-dd00-d958::f6de-bd31-36da-ac46" number="1" type="upgrade">
+              <profiles>
+                <profile id="f3ba-f7a5-03b5-3662::2378-7fdc-dd00-d958::f74b-cbae-7519-4b10" name="Celestial Blades" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick a friendly STORMCAST ETERNAL unit wholly within 18&quot; of the caster that is visible to them. Add 1 to wound rolls for attacks made with that unit’s melee weapons until your next hero phase.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="354c-6b21-ab35-4bda" name="Grandstave" entryId="f3ba-f7a5-03b5-3662::90e2-9b2c-164e-9737" entryGroupId="f3ba-f7a5-03b5-3662::3339-05b8-650c-d241" number="1" type="upgrade">
+              <profiles>
+                <profile id="f3ba-f7a5-03b5-3662::fe60-ddd1-51cf-3c75::6792-e754-f9cf-ee1f" name="Grandstave" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">2</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="c3e3-d6a5-4277-496b" name="Tempest Blade and Stormstave" entryId="f3ba-f7a5-03b5-3662::2578-5336-0a23-7836" entryGroupId="f3ba-f7a5-03b5-3662::3339-05b8-650c-d241" number="2" type="upgrade">
+              <profiles>
+                <profile id="f3ba-f7a5-03b5-3662::8cd8-b469-f441-1bea::1a38-c085-44a0-312f" name="Tempest Blade and Stormstave" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="5927-7282-3f25-7d79" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="c309-cdbb-c625-2cb7" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="1b77-0178-50c8-00c2" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="4b9a-02bd-5339-5feb" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="0b66-435a-2f74-fcad" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="eaa4-07ec-1091-78ef" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="6170-c169-6942-99d0" name="EVOCATORS" entryId="026b-506d-9fad-e6e0" primary="false"/>
+            <category id="ae82-4182-a0d5-20c7" name="CORPUSCANT" entryId="78eb-70ff-9106-e064" primary="false"/>
+            <category id="5ac7-e54e-c2cf-ab7a" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="54b6-565f-f73a-4054" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="f57c-8103-bda3-9f0a" name="Vanguard-Hunters" entryId="39fb-ca45-181d-24bb::a304-f6e3-9750-fae8" publicationId="ed04-877b-pubN71576" page="185" number="1" type="unit">
+          <profiles>
+            <profile id="39fb-ca45-181d-24bb::04b0-5405-0a0d-a513" name="Vanguard-Hunter" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">6&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">7</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="39fb-ca45-181d-24bb::b81c-c691-4d14-fb81" name="Hunter-Prime" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">The leader of this unit is a Hunter-Prime. Add 1 to the Attacks characteristic of a Hunter-Prime’s weapons.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="39fb-ca45-181d-24bb::392b-1f29-6d23-bff8" name="Tireless Hunters" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can run and still shoot later in the same turn.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="4d30-4693-f5b9-015f" name="5 Vanguard-Hunters" entryId="39fb-ca45-181d-24bb::759a-9d32-d9be-01ff" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="110.0"/>
+              </costs>
+            </selection>
+            <selection id="e69a-193a-588f-44f0" name="Boltstorm Pistol" entryId="39fb-ca45-181d-24bb::301d-373f-cbe7-52ea" number="1" type="upgrade">
+              <profiles>
+                <profile id="39fb-ca45-181d-24bb::9816-a339-b7c1-97ed::ce4d-1992-0dfb-05c6" name="Boltstorm Pistol" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">9&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="a202-399d-0509-27b0" name="Shock Handaxe" entryId="39fb-ca45-181d-24bb::cd3b-2bbe-e4d0-7647" entryGroupId="39fb-ca45-181d-24bb::3c64-1f5e-2f04-48e4" number="1" type="upgrade">
+              <profiles>
+                <profile id="39fb-ca45-181d-24bb::344f-6ee5-cc77-6ec0" name="Shock Handaxe" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="1294-5ad1-d79d-ced0" name="ANGELOS" entryId="c8c1-13d2-d41c-3b40" primary="false"/>
+            <category id="a639-6027-f43a-61fe" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="466a-366e-c8d8-de2a" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="6e6e-8010-16b7-41df" name="VANGUARD-HUNTERS" entryId="b206-08e3-4402-220b" primary="false"/>
+            <category id="3bf2-1266-dc05-bb7f" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="51fe-3add-96ee-c0bd" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="ee26-1f4b-f523-51bc" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="7ef3-3d5f-af22-df80" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+          </categories>
+        </selection>
+      </selections>
+      <publications>
+        <publication id="e51d-b1a3-pubEC" name="The General&apos;s Handbook"/>
+        <publication id="e51d-b1a3-pubEHOGM" name="Malign Sorcery"/>
+        <publication id="ed04-877b-pubN110200" name="Blightwar"/>
+        <publication id="ed04-877b-pubN65537" name="Order Battletome: Stormcast Eternals (2nd Edition)"/>
+        <publication id="e51d-b1a3-pubE5LCI" name="General&apos;s Handbook 2018"/>
+        <publication id="ed04-877b-pubN126219" name="White Dwarf: Feb 2019"/>
+        <publication id="ed04-877b-pubN71576" name="Battletome: Stormcast Eternals (2nd Edition)"/>
+        <publication id="ed04-877b-pubN71830" name="Battletome: Stormcast Eternals, Errata July 2018"/>
+        <publication id="ed04-877b-pubN101748" name="Order Official FAQs and errata, Version 1.4"/>
+        <publication id="e51d-b1a3-pubEQOCI" name="General&apos;s Handbook 2017"/>
+        <publication id="ed04-877b-pubN100815" name="Order Battletome Stormcast Eternals"/>
+        <publication id="ed04-877b-pubN117503" name="Warhammer World Exclusive"/>
+        <publication id="e51d-b1a3-pubEFCFK" name="Malign Sorcery; Errata, July 2018"/>
+        <publication id="e51d-b1a3-pubEKHGM" name="Malign Sorcery"/>
+        <publication id="e51d-b1a3-pubETJDK" name="Malign Sorcery; Official Errata, December 2018"/>
+        <publication id="e51d-b1a3-pubEQ" name="Core Rules"/>
+      </publications>
+      <categories>
+        <category id="325d-d32a-8c1e-b211" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="b805-938c-8bc5-40fe" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+        <category id="1c23-3319-de31-97d2" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+        <category id="2e46-f13a-dd56-1ae3" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="false"/>
+        <category id="5019-43a8-f22d-fd3e" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="false"/>
+        <category id="92bb-a15e-22f9-73d0" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+        <category id="e772-1d79-69fb-5942" name="Battalion" entryId="be17-6bbd-b857-3f43" primary="false"/>
+        <category id="b2fd-0a55-8772-9c32" name="General" entryId="b745-17c4-8fbf-8b04" primary="false"/>
+        <category id="3be3-bf5b-28a4-a545" name="Artefact" entryId="3564-4c26-10b4-d953" primary="false"/>
+        <category id="3542-d2c7-c873-1697" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="false"/>
+        <category id="519d-7ff5-76f6-4716" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="false"/>
+        <category id="5790-d964-facb-ac5a" name="Realm of Origin" entryId="5c6d-5384-bcb1-b474" primary="false"/>
+        <category id="ae16-cece-62d0-d910" name="Malign Sorcery" entryId="eecb-ed66-d474-9ddd" primary="false"/>
+        <category id="0ac6-f327-e7d1-b6d2" name="Command Points" entryId="8be8-3ccd-be93-b55e" primary="false"/>
+        <category id="aadb-76bc-d5a9-6d5b" name="Realm of Battle" entryId="5e28-c4f1-4a92-b75c" primary="false"/>
+        <category id="dc04-968f-68ac-cf98" name="Scenery" entryId="bc8a-9257-1601-6d62" primary="false"/>
+      </categories>
+    </force>
+  </forces>
+</roster>

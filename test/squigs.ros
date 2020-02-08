@@ -69,7 +69,7 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="bd0f-5b28-bcaf-cafb" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="true"/>
+            <category id="e6d3-5ef9-dbb8-4f3d" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="true"/>
           </categories>
         </selection>
         <selection id="e92d-e66e-cb2c-e2fd" name="Game Type" entryId="e12e-ffc5-6892-4795::a741-5681-7572-fa32" number="1" type="upgrade">
@@ -79,7 +79,7 @@
                 <cost name="pts" typeId="points" value="0.0"/>
               </costs>
               <categories>
-                <category id="01fd-6031-9a74-6d0e" name="Battlehost" entryId="6330-7561-7a32-0851" primary="false"/>
+                <category id="98a0-1bb4-6f4e-c807" name="Battlehost" entryId="6330-7561-7a32-0851" primary="false"/>
               </categories>
             </selection>
           </selections>
@@ -87,7 +87,7 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="f7b4-c6e5-907d-43f0" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="true"/>
+            <category id="d27b-6190-eb20-da2d" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="true"/>
           </categories>
         </selection>
         <selection id="60f5-168c-48bb-0ca9" name="Sneaky Shufflers" entryId="b067-d8cd-64cb-2ce1::7f2d-e883-6fb0-ef8b" number="1" type="unit">
@@ -112,17 +112,53 @@
                 <cost name="pts" typeId="points" value="70.0"/>
               </costs>
             </selection>
+            <selection id="f911-2d48-e0c1-45c9" name="Gnashers" entryId="b067-d8cd-64cb-2ce1::f5e9-5fa6-a992-e605" number="1" type="upgrade">
+              <profiles>
+                <profile id="b067-d8cd-64cb-2ce1::23e6-5e2c-7bcc-fe9f" name="Gnashers" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="2ef9-3a2a-6361-fdee" name="Loonfungus Sickle" entryId="b067-d8cd-64cb-2ce1::74c9-603c-b3cf-eb11" number="1" type="upgrade">
+              <profiles>
+                <profile id="b067-d8cd-64cb-2ce1::33ad-bc9a-2e1e-cf8e" name="Loonfungus Sickle" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
           </selections>
           <costs>
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="6943-d689-56e2-3b66" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="587d-8d8f-bb0d-fbba" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
-            <category id="a666-70af-29be-dcf9" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="7327-80f7-0859-2f4c" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="abf6-2a4d-81fe-b2b6" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
-            <category id="c6a7-42da-a953-314f" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="3806-e238-5c8c-e96e" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="2e2f-14c9-2e3a-ffd0" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="244f-c553-cf8d-8094" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="4b4f-59fe-2da8-55f2" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="61e2-e709-39a7-bf5e" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="412f-bc9e-33ac-8a45" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
           </categories>
         </selection>
         <selection id="cdf4-ac5d-5dc9-60e6" name="Loonboss on Mangler Squigs" entryId="f5ba-3dd8-de2e-78fa::6a0d-90f0-a499-dfbb" publicationId="3323-8984-c803-feb5" number="1" type="model">
@@ -233,26 +269,98 @@
                 <cost name="pts" typeId="points" value="0.0"/>
               </costs>
             </selection>
+            <selection id="46bd-d74b-6d24-733b" name="Balls and Chains" entryId="f5ba-3dd8-de2e-78fa::a8da-f2d9-d9b2-9756" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::0f16-5592-151f-ceb3" name="Balls and Chains" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">*</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-2</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="7c1d-1870-f868-88fd" name="Grots&apos; Bashin&apos; Stikks" entryId="f5ba-3dd8-de2e-78fa::a3bc-a01d-744c-3916" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::bf21-d882-60fa-3513" name="Grots&apos; Bashin&apos; Stikks" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="df41-4602-57f4-28c7" name="Huge Fang-filled Gobs" entryId="f5ba-3dd8-de2e-78fa::f1b7-3f66-cc0b-0b39" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::ed67-ad9f-aaf3-d054" name="Huge Fang-filled Gobs" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">*</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D6</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="f4e5-4f9f-a47d-d1f9" name="Moon-cutta" entryId="f5ba-3dd8-de2e-78fa::daf2-f873-d681-6692" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::2fdb-43c1-55b8-7553" name="Moon-cutta" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">5</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707"/>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
           </selections>
           <costs>
             <cost name="pts" typeId="points" value="280.0"/>
           </costs>
           <categories>
-            <category id="7b6d-bc50-ce08-9543" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
-            <category id="446a-eb73-c051-8926" name="SQUIG-BOSS" entryId="647a-69d4-fe9c-2491" primary="false"/>
-            <category id="1de3-a295-3cef-21a5" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="ed13-beff-b828-df26" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="21fc-817a-51cb-798a" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="1952-c609-9a09-57cc" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="aa3f-4038-7b26-8cf7" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
-            <category id="4f05-7eaf-b07d-7443" name="MONSTER" entryId="1959-9f6a-3056-913a" primary="false"/>
-            <category id="d364-fc14-9cfd-1349" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
-            <category id="36a8-ab3a-93b4-cb45" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="fd1c-9ad6-1103-65b8" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="fc67-c880-6466-7dbd" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="6b62-6d1f-9e34-c1d0" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
-            <category id="c748-c4c7-8bf8-a2aa" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
-            <category id="c963-038e-4dd9-1693" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+            <category id="7e59-3223-f2d3-1976" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="2896-e8f4-266e-baab" name="SQUIG-BOSS" entryId="647a-69d4-fe9c-2491" primary="false"/>
+            <category id="557f-f513-a31d-6191" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="9e05-48ae-129f-1008" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="0e0d-0a5e-d26f-71ab" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="c3e1-bcbf-591b-0606" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="82f9-1c48-2766-7e8b" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="83f9-94bc-86ca-2491" name="MONSTER" entryId="1959-9f6a-3056-913a" primary="false"/>
+            <category id="8a05-1de3-3510-75d4" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="b81e-1662-92aa-03f3" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="483c-6efc-11c2-b310" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="65bc-b769-fc61-f59f" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="4d8e-a37b-535c-ad78" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="04a5-a2d6-8bbc-1517" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="80d0-9235-7798-fd71" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
           </categories>
         </selection>
         <selection id="4eb5-d594-067e-4afa" name="Zarbag" entryId="2fa8-e4d0-5fd3-fd08::db84-4cbf-0008-9a63" number="1" type="model">
@@ -317,26 +425,57 @@
                 <cost name="pts" typeId="points" value="0.0"/>
               </costs>
             </selection>
+            <selection id="108c-0ed2-62ab-8db3" name="Cursed Sickle" entryId="2fa8-e4d0-5fd3-fd08::c310-6e22-7215-0237" number="1" type="upgrade">
+              <profiles>
+                <profile id="2fa8-e4d0-5fd3-fd08::ea86-1f44-2659-1855" name="Cursed Sickle" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="b6dd-5516-2337-2a8c" name="Face of Da Bad Moon" entryId="2fa8-e4d0-5fd3-fd08::87dd-f0b2-7b2a-19e7" number="1" type="upgrade">
+              <profiles>
+                <profile id="2fa8-e4d0-5fd3-fd08::d46e-cf66-116c-4903" name="Face of Da Bad Moon" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick 1 enemy unit within 3&quot; of the caster that is visible to them. That unit must make a normal move and must retreat. If it is impossible for the unit to make the move for any reason, it suffers D6 mortal wounds, instead.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
           </selections>
           <costs>
             <cost name="pts" typeId="points" value="160.0"/>
           </costs>
           <categories>
-            <category id="f852-264b-d1ad-061a" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="5275-13be-d194-633a" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
-            <category id="929f-ee7d-f60b-7f54" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="c8c7-0c9f-630c-dab4" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
-            <category id="84bf-2da9-4ebd-d27b" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
-            <category id="ecaa-c3aa-a356-7375" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="8ada-68a6-0ea4-8a41" name="MADCAP SHAMAN" entryId="3c1c-ad7a-13e9-7e3b" primary="false"/>
-            <category id="daaa-76ed-0539-4725" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="0875-a89a-fed7-7681" name="MOONCLAN WIZARD" entryId="930d-b87d-0db6-2b35" primary="false"/>
-            <category id="91da-3a06-bada-2a3e" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="87cd-4b24-6ec0-84c1" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
-            <category id="e6f8-c666-f47d-2fb5" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="8425-6f4c-0aa5-7802" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
-            <category id="5461-9198-7b5a-612e" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="c386-2a27-193a-9d64" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="dd89-426e-3ff1-d56d" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="fdae-2247-3161-3df7" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="e8bf-4bfc-53a3-5951" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="e66f-4973-8e2f-db6d" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="3a59-4189-18dd-04bd" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="d384-d121-68e4-d695" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="f4b8-6ac2-d697-c090" name="MADCAP SHAMAN" entryId="3c1c-ad7a-13e9-7e3b" primary="false"/>
+            <category id="fb5a-c2ed-29cd-dfa1" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="ef0c-0d1c-bf7f-59c1" name="MOONCLAN WIZARD" entryId="930d-b87d-0db6-2b35" primary="false"/>
+            <category id="64d7-d0f2-6590-f299" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="b970-0f7f-9003-3efc" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="7774-a93c-8744-cb95" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="6c9f-4582-5fee-a0c5" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="03f8-e6fd-540d-1e7e" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="bf6c-5581-ba03-a177" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
           </categories>
         </selection>
         <selection id="7849-d4d9-62ac-70fb" name="Zarbag&apos;s Gitz" entryId="403d-f219-0811-551b::2653-d92c-7afc-5bf6" number="1" type="unit">
@@ -375,16 +514,90 @@
               </characteristics>
             </profile>
           </profiles>
+          <selections>
+            <selection id="3cae-782b-fddd-536f" name="Massive Gob Full of Teeth" entryId="403d-f219-0811-551b::da64-8419-eecb-5169" number="1" type="upgrade">
+              <profiles>
+                <profile id="403d-f219-0811-551b::ed0f-bb8f-bda1-4ef5" name="Massive Gob Full of Teeth" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="4d13-a8f8-452f-3dec" name="Moonclan Bow" entryId="403d-f219-0811-551b::ccba-e699-773c-6f61" number="1" type="upgrade">
+              <profiles>
+                <profile id="403d-f219-0811-551b::1f8f-93f3-31cc-38ee" name="Moonclan Bow" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">16&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">5+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="5391-8d15-0763-002a" name="Slitta" entryId="403d-f219-0811-551b::3322-a12f-25af-b496" number="1" type="upgrade">
+              <profiles>
+                <profile id="403d-f219-0811-551b::401e-3ca7-ca2f-dc17" name="Slitta" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">5+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e063-eebf-551d-1331" name="Squig Prodder" entryId="403d-f219-0811-551b::83a1-4f46-fcbe-449d" number="1" type="upgrade">
+              <profiles>
+                <profile id="403d-f219-0811-551b::8b3e-a92d-8357-3401" name="Squig Prodder" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
           <costs>
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="69f1-fe4c-58c8-d065" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="cbbd-8406-5a1a-fb74" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
-            <category id="1b41-7768-4724-4ac2" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="eda1-9d8f-6038-a234" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="cdec-4667-1f48-644f" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
-            <category id="f8ef-4238-ccab-b22c" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="7121-3f86-c0d3-7b54" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="3066-8c18-1a6c-d3c0" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="0fe0-9c18-4502-2d36" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="ae75-f6ce-8afa-bf6e" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="bae5-0d0c-8f76-2f9c" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="0f42-cef7-326e-85ad" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
           </categories>
         </selection>
         <selection id="9452-eb0f-b202-cc84" name="Boingrot Bounders" entryId="b583-cda5-78cc-82b3::ff2e-4400-dbde-d4c4" number="1" type="unit">
@@ -424,17 +637,53 @@
                 <cost name="pts" typeId="points" value="200.0"/>
               </costs>
             </selection>
+            <selection id="89d7-30fd-acab-43be" name="Fang-filled Gob" entryId="b583-cda5-78cc-82b3::cc25-1590-0117-24d3" number="1" type="upgrade">
+              <profiles>
+                <profile id="b583-cda5-78cc-82b3::b8d9-1464-6ccb-c48f" name="Fang-filled Gob" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="bd1c-a014-5e6c-c66c" name="Pokin&apos; Lance" entryId="b583-cda5-78cc-82b3::6afe-2a78-a219-8135" number="1" type="upgrade">
+              <profiles>
+                <profile id="b583-cda5-78cc-82b3::e683-9706-d1aa-781e" name="Pokin&apos; Lance" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
           </selections>
           <costs>
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="d4c0-00be-5270-436d" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="ea42-9be6-3f6b-6928" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="f80c-7a16-c5e5-931d" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="cbeb-b1b1-2cd9-0352" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
-            <category id="c675-4389-12c9-45aa" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
-            <category id="91ca-da11-0828-87e4" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="cd98-e5e1-44ea-8a88" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="ceb4-951b-5259-0704" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="2ed1-dd3c-3998-03a3" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="06e5-3c67-5d52-1ebe" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="a3dd-bee1-69e1-177d" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="4c50-6cf8-857f-a087" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
           </categories>
         </selection>
         <selection id="ed42-e58f-f6b1-4ccd" name="Fungoid Cave-Shaman" entryId="04ca-f4e4-7e08-496a::6d41-0a01-8e38-6094" number="1" type="model">
@@ -509,21 +758,70 @@
                 <cost name="pts" typeId="points" value="0.0"/>
               </costs>
             </selection>
+            <selection id="795b-bf5c-e8ff-37db" name="Moon-sickle" entryId="04ca-f4e4-7e08-496a::e97d-9934-c8c9-a580" number="1" type="upgrade">
+              <profiles>
+                <profile id="04ca-f4e4-7e08-496a::6050-c026-e8c8-f789" name="Moon-sickle" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="63d0-35e8-8573-18da" name="Spore Maws" entryId="04ca-f4e4-7e08-496a::4787-fd15-b6d9-50f6" number="1" type="upgrade">
+              <profiles>
+                <profile id="04ca-f4e4-7e08-496a::4c23-1aac-1d33-cc2a" name="Spore Maws" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">7</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, each enemy unit within D6&quot; of the caster suffers D3 mortal wounds.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e02e-f291-c202-a200" name="Spore Squig&apos;s Vicious Teeth" entryId="04ca-f4e4-7e08-496a::13ef-9bd6-75ad-1476" number="1" type="upgrade">
+              <profiles>
+                <profile id="04ca-f4e4-7e08-496a::08e8-a816-a9aa-131e" name="Spore Squig&apos;s Vicious Teeth" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
           </selections>
           <costs>
             <cost name="pts" typeId="points" value="90.0"/>
           </costs>
           <categories>
-            <category id="acec-e245-41d7-5dff" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
-            <category id="ef4d-4ef7-5c0f-a8a0" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
-            <category id="3fce-1229-9806-ca13" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="0644-a091-7c4b-b3b8" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="b237-9b4d-ee46-751e" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
-            <category id="543d-d9c0-73d7-37ea" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="3406-7b98-5bdc-1c80" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="737b-c776-b4f7-62e8" name="MOONCLAN WIZARD" entryId="930d-b87d-0db6-2b35" primary="false"/>
-            <category id="d23d-67ae-b009-1ea0" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="1bcb-fa95-d95e-525e" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="e0a7-192e-d02a-9b70" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="1e15-3302-61b7-c65f" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="d210-52a8-1844-3dde" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="e69b-682a-0dc1-a641" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="6fce-bf98-1b14-57c3" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="1cf2-c38c-7870-180e" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="fb64-a2d6-ff3e-27d1" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="f3b2-c444-6897-2d9d" name="MOONCLAN WIZARD" entryId="930d-b87d-0db6-2b35" primary="false"/>
+            <category id="f1ff-8033-d61b-9c9a" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="2641-9981-2028-000a" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
           </categories>
         </selection>
         <selection id="c2ec-4b4a-cc50-3c64" name="Boingrot Bounders" entryId="b583-cda5-78cc-82b3::ff2e-4400-dbde-d4c4" number="1" type="unit">
@@ -563,17 +861,53 @@
                 <cost name="pts" typeId="points" value="200.0"/>
               </costs>
             </selection>
+            <selection id="9936-9b7d-2b0a-167f" name="Fang-filled Gob" entryId="b583-cda5-78cc-82b3::cc25-1590-0117-24d3" number="1" type="upgrade">
+              <profiles>
+                <profile id="b583-cda5-78cc-82b3::b8d9-1464-6ccb-c48f" name="Fang-filled Gob" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="5363-214d-1845-9b39" name="Pokin&apos; Lance" entryId="b583-cda5-78cc-82b3::6afe-2a78-a219-8135" number="1" type="upgrade">
+              <profiles>
+                <profile id="b583-cda5-78cc-82b3::e683-9706-d1aa-781e" name="Pokin&apos; Lance" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
           </selections>
           <costs>
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="8091-f0ff-5503-6f21" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="4ecf-c9f0-7226-882c" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="2678-f0b2-bb70-1828" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="c275-d095-8051-7294" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
-            <category id="e4fa-31ab-5ae8-34a7" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
-            <category id="6bb7-2283-b00f-8188" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="1f54-ca23-8e39-487a" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="e1b4-c266-6aec-1e9c" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="2fc3-bf9b-1f1f-f73f" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="7abf-5f52-54a4-5cd6" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="d85e-424c-e42d-a2c1" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="9e6c-153d-b892-169f" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
           </categories>
         </selection>
         <selection id="7542-b527-a7c6-df49" name="Stabbas" entryId="4e28-9e45-8827-ceed::f468-427a-bd3b-4e91" number="1" type="unit">
@@ -703,12 +1037,12 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="4e06-b5fa-a928-1bdb" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="82e4-b85f-da0b-9257" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="f135-5e64-2700-8a6a" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
-            <category id="79fb-60e5-9f5f-9353" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="7513-2ce0-c730-f1e7" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
-            <category id="24e5-dd19-2e16-213e" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="false"/>
+            <category id="2ba4-8899-36bd-30f5" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="ef73-f35d-5aa6-4285" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="f9fa-d204-79dd-7b1e" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="8e8c-022e-40da-d387" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="2d36-afea-f45c-9b30" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+            <category id="e003-0293-9178-fcee" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="false"/>
           </categories>
         </selection>
         <selection id="cffd-c1c8-f239-b7c4" name="Squig Herd" entryId="8d20-a798-f03a-d4a6::d7f2-6558-9c0f-89bc" number="1" type="unit">
@@ -784,12 +1118,12 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="c29e-aa77-5d41-8892" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="523e-d0cf-d2e4-3798" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="ad87-64a6-5906-04fc" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="0e36-b658-6088-2648" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
-            <category id="3880-966e-0845-518c" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-            <category id="7eec-2570-8919-44df" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+            <category id="fd63-6ab8-5150-e428" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="c8d0-af74-8e9a-2267" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="a612-ddd6-fb1c-2da2" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="3884-66c5-69e2-c04f" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="2e1c-3310-0f9a-9b10" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="9d1b-fdf4-991a-f479" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
           </categories>
         </selection>
         <selection id="07ff-9e4d-413d-d1ea" name="Squig Herd" entryId="8d20-a798-f03a-d4a6::d7f2-6558-9c0f-89bc" number="1" type="unit">
@@ -865,12 +1199,12 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="5043-3429-18b9-0bec" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="31b2-9691-0f13-b9a8" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="cf92-ebc4-b951-d973" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="eaa1-2882-fc5e-fece" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
-            <category id="0688-0d9d-ce48-154a" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-            <category id="5e7e-5da9-d5f3-8d92" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+            <category id="90ee-aa7b-7f06-5d68" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="7782-bae1-6b80-80a0" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="bf54-e81a-58ba-c79f" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="066c-f2cd-93fe-c389" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="afb8-c695-4a30-7a4f" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="133e-5d56-da0e-c17c" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
           </categories>
         </selection>
         <selection id="0124-2ce2-cd2f-3394" name="Loonboss on Giant Cave Squig" entryId="90c2-6206-9d63-9e26::8616-ec44-afd5-57d3" number="1" type="model">
@@ -959,20 +1293,20 @@
             <cost name="pts" typeId="points" value="110.0"/>
           </costs>
           <categories>
-            <category id="90f3-0b1d-c8fc-7a5f" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
-            <category id="41c9-b3e2-e936-eeab" name="SQUIG-BOSS" entryId="647a-69d4-fe9c-2491" primary="false"/>
-            <category id="d9d0-d5cd-d16d-93d5" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="d324-f48c-1027-ca96" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="cf51-eeff-d3da-a92a" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="1da9-6692-2fd2-3bf8" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
-            <category id="a8c7-e897-a152-c8e8" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="3949-6ed2-6a23-b053" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
-            <category id="0c91-5ae4-d661-5d73" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
-            <category id="500b-bed5-6ffa-8be3" name="SQUIG-BOSS" entryId="647a-69d4-fe9c-2491" primary="false"/>
-            <category id="bf7e-2db1-a867-bc0a" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
-            <category id="7e1e-7027-618b-cda0" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="0a55-f4de-8f42-6a15" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="9a27-30be-9471-c0d5" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="0f62-301f-cf30-0f00" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="365e-1c0b-4f66-b004" name="SQUIG-BOSS" entryId="647a-69d4-fe9c-2491" primary="false"/>
+            <category id="2365-878b-d16d-8061" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="89aa-2d43-6ae6-564e" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="eca5-f8cb-1f00-a9ca" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="08ee-060d-f4cd-7018" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="2ff2-f941-7e91-6618" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="e317-6291-08ab-e1dd" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="048d-c0f1-28e5-d9e9" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="f198-7a6b-8ce2-cfcd" name="SQUIG-BOSS" entryId="647a-69d4-fe9c-2491" primary="false"/>
+            <category id="c3b4-f8a0-01a8-3a6f" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="07a6-2dd4-f59a-8278" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="33f5-745e-8390-8f4f" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="8f4f-cf96-2796-c535" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
           </categories>
         </selection>
         <selection id="a6c5-33f4-f40e-d8e6" name="Skragrott, the Loonking" entryId="769c-213a-a559-9692::a2bb-637e-6b79-4ea3" number="1" type="model">
@@ -1088,25 +1422,38 @@
                 <cost name="pts" typeId="points" value="0.0"/>
               </costs>
             </selection>
+            <selection id="2685-560f-6c8c-5f72" name="5. Squig Lure" entryId="769c-213a-a559-9692::0d9d-7f20-1757-0393::9e26-d6e3-4964-6ba6" entryGroupId="769c-213a-a559-9692::0d9d-7f20-1757-0393::9e4b-9a06-84c4-c5d9" number="1" type="upgrade">
+              <profiles>
+                <profile id="769c-213a-a559-9692::0d9d-7f20-1757-0393::39b2-e4ab-67f6-afc2" name="Squig Lure" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick up to D3 friendly SQUIG units wholly within 18&quot; of the caster and visible to them. Those units can run and still charge later in the same turn.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
           </selections>
           <costs>
             <cost name="pts" typeId="points" value="220.0"/>
           </costs>
           <categories>
-            <category id="2d5a-0b2b-fe51-6935" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
-            <category id="9235-f349-680e-61c1" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="8d0d-0827-0500-b6d6" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
-            <category id="5139-6c58-0a0c-7b26" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="be7e-2843-bc66-5020" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
-            <category id="100d-03a4-ae16-aad7" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="3cf0-408f-dc99-7790" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="8c43-c6fb-4531-6b8e" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
-            <category id="5da3-e1aa-b1c6-ad92" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="de58-5a93-3243-faa0" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="09fa-5fcf-ee41-c9e5" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
-            <category id="900c-d8be-d2a0-7066" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="e36b-9028-83fd-e7b0" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
-            <category id="22e9-1149-f2c5-aa6a" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="9370-951d-f64d-8352" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="f694-e71d-d53d-13b3" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="b441-d73b-2ed2-54cf" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="c2f2-a52b-bec2-7d37" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="b6be-2738-cce9-5c22" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="be1c-ccfc-d44b-9d7b" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="0d41-d0e8-a32d-6b8c" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="92c9-82e6-5776-6c2d" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="5dab-40ed-b8ce-8152" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="5cd1-c8b4-bfa6-ed7f" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="84d7-5b43-1ec0-e1fe" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="2407-6f56-52ec-ff53" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="78a5-dd1a-a43a-b612" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="f580-eca4-1b80-97e6" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
           </categories>
         </selection>
         <selection id="0b2e-314c-d9b9-d7ea" name="Squig Hoppers" entryId="19c7-4f2e-b279-e1d4::73c2-8a55-9faa-bb56" number="1" type="unit">
@@ -1182,13 +1529,13 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="6e4a-9f0c-708d-b6a3" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
-            <category id="9823-02a7-8943-f65c" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
-            <category id="1b60-d85a-5d81-475d" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
-            <category id="76a2-246c-f7ae-3291" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
-            <category id="0d08-b568-ed1a-579a" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-            <category id="ecf9-cc9e-e94a-d08a" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-            <category id="b082-65e6-5c11-8ff9" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+            <category id="5347-d342-201c-cc0d" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="6ba5-72d5-6b41-3111" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="fe95-a1ed-8ba3-dc62" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="b3ed-e8e9-c38c-3daf" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="b51c-3ec1-bef8-59fe" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="259f-d1bd-de95-fd57" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="5605-ba3b-1ddd-2c91" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
           </categories>
         </selection>
       </selections>
@@ -1204,22 +1551,22 @@
         <publication id="e51d-b1a3-pubEQ" name="Core Rules"/>
       </publications>
       <categories>
-        <category id="789e-2900-9f7a-f08e" name="Uncategorised" entryId="(No Category)" primary="false"/>
-        <category id="ad60-45a4-913a-aa1c" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
-        <category id="1b0a-ff1c-fa3d-a8b0" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
-        <category id="cf4c-2cee-39b1-0e8b" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="false"/>
-        <category id="9f06-b3ae-7f4e-10cd" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="false"/>
-        <category id="e98d-3d5a-1cee-b962" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-        <category id="97f0-77c2-dd0e-f204" name="Battalion" entryId="be17-6bbd-b857-3f43" primary="false"/>
-        <category id="6620-7fbb-a81a-5b23" name="General" entryId="b745-17c4-8fbf-8b04" primary="false"/>
-        <category id="7c3a-0eb1-23dd-48fe" name="Artefact" entryId="3564-4c26-10b4-d953" primary="false"/>
-        <category id="8c60-e952-cece-b3b3" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="false"/>
-        <category id="7031-b3d8-98d6-20cb" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="false"/>
-        <category id="f780-5944-6e4c-3df5" name="Realm of Origin" entryId="5c6d-5384-bcb1-b474" primary="false"/>
-        <category id="cbf4-6897-2d56-81c9" name="Malign Sorcery" entryId="eecb-ed66-d474-9ddd" primary="false"/>
-        <category id="f963-5c74-42ed-2848" name="Command Points" entryId="8be8-3ccd-be93-b55e" primary="false"/>
-        <category id="84c3-8065-b868-024c" name="Realm of Battle" entryId="5e28-c4f1-4a92-b75c" primary="false"/>
-        <category id="2aa1-c9bf-e69e-10b8" name="Scenery" entryId="bc8a-9257-1601-6d62" primary="false"/>
+        <category id="061b-35c1-ee6c-2177" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="43ef-b488-b3bf-a879" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+        <category id="816e-91ed-3bca-272b" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+        <category id="46d9-939b-9fce-5930" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="false"/>
+        <category id="0640-6f7f-941d-913c" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="false"/>
+        <category id="0f29-1b6a-229c-f1c1" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+        <category id="1079-733c-d99f-b073" name="Battalion" entryId="be17-6bbd-b857-3f43" primary="false"/>
+        <category id="ecd4-91d3-af04-b49d" name="General" entryId="b745-17c4-8fbf-8b04" primary="false"/>
+        <category id="20d2-0591-70a4-0c69" name="Artefact" entryId="3564-4c26-10b4-d953" primary="false"/>
+        <category id="a2fa-cf14-0757-1f68" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="false"/>
+        <category id="cfd8-b6c7-9f72-3ea2" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="false"/>
+        <category id="7906-900a-2ade-2114" name="Realm of Origin" entryId="5c6d-5384-bcb1-b474" primary="false"/>
+        <category id="a87b-fd4c-bc1c-f867" name="Malign Sorcery" entryId="eecb-ed66-d474-9ddd" primary="false"/>
+        <category id="bad7-f3ae-28bc-61a5" name="Command Points" entryId="8be8-3ccd-be93-b55e" primary="false"/>
+        <category id="7f32-c52b-d39e-6a85" name="Realm of Battle" entryId="5e28-c4f1-4a92-b75c" primary="false"/>
+        <category id="7a00-c178-b581-ea59" name="Scenery" entryId="bc8a-9257-1601-6d62" primary="false"/>
       </categories>
     </force>
   </forces>
