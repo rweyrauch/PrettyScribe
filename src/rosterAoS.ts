@@ -73,7 +73,6 @@ export class AoSUnit {
     _commandTraits: Map<string, string> = new Map();
     _magic: Map<string, string> = new Map();
     _artefacts: Map<string, string> = new Map();
-    _unitLeader: string = "";
 
     _count: number = 0;
 
@@ -209,7 +208,7 @@ function ParseSelections(root: Element, force: AoSForce): void {
         }
         else {
             let unit = ParseUnit(selection);
-            if (unit) {
+            if (unit && (unit._role != AoSUnitRole.NONE)) {
                 force._units.push(unit);
             }
         }
@@ -270,7 +269,7 @@ function ParseUnit(root: Element): AoSUnit {
             else if (profType == "Unit Leader") {
                 let char = prof.querySelector("characteristics>characteristic");
                 if (char && char.textContent) {
-                    unit._unitLeader = char.textContent;
+                    unit._abilities.set(profType, char.textContent);
                 }
             }
             else if (profType == "Spell") {

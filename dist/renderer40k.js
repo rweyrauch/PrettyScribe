@@ -1,13 +1,8 @@
 import { UnitRole, UnitRoleToString } from "./roster40k.js";
-export var Justification;
-(function (Justification) {
-    Justification[Justification["Left"] = 0] = "Left";
-    Justification[Justification["Right"] = 1] = "Right";
-    Justification[Justification["Center"] = 2] = "Center";
-})(Justification || (Justification = {}));
-;
+import { Justification, RenderText, RenderParagraph } from "./renderer.js";
 export class Renderer40k {
-    constructor() {
+    constructor(roster) {
+        this._roster = null;
         this._currentX = 0;
         this._currentY = 0;
         this._maxWidth = 0;
@@ -19,6 +14,7 @@ export class Renderer40k {
         this._spellLabelWidthNormalized = [0.3, 0.1, 0.1, 0.5];
         this._explosionLabelWidthNormalized = [0.3, 0.15, 0.15, 0.15];
         this._trackerLabelWidth = [0.3, 0.2, 0.15, 0.15, 0.15];
+        this._roster = roster;
         this._octagon = document.getElementById('octagon');
         this._roles.set(UnitRole.HQ, document.getElementById('role_hq'));
         this._roles.set(UnitRole.TR, document.getElementById('role_tr'));
@@ -30,12 +26,14 @@ export class Renderer40k {
         this._roles.set(UnitRole.FT, document.getElementById('role_ft'));
         this._roles.set(UnitRole.LW, document.getElementById('role_lw'));
     }
-    render(roster, title, list, forces) {
+    render(title, list, forces) {
         var _a;
+        if (this._roster == null)
+            return;
         if (title) {
-            title.innerHTML = '<h3>' + roster._name + ' (' + roster._points + ' pts, ' + roster._powerLevel + ' PL, ' + roster._commandPoints + ' CP)</h3>';
+            title.innerHTML = '<h3>' + this._roster._name + ' (' + this._roster._points + ' pts, ' + this._roster._powerLevel + ' PL, ' + this._roster._commandPoints + ' CP)</h3>';
         }
-        for (let force of roster._forces) {
+        for (let force of this._roster._forces) {
             const forceTitle = document.createElement('div');
             if (forceTitle) {
                 forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + '</p>';
@@ -141,53 +139,6 @@ export class Renderer40k {
     }
     renderWatermark(ctx) {
     }
-    renderText(ctx, text, x, y, w, h, how) {
-        if (ctx && text.length) {
-            ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
-            let measure = ctx.measureText(text);
-            const tw = measure.width;
-            const th = measure.actualBoundingBoxDescent - measure.actualBoundingBoxAscent;
-            if (how == Justification.Center) {
-                ctx.fillText(text, x + (w - tw) / 2, y + (h - th) / 2);
-            }
-            else if (how == Justification.Left) {
-                ctx.fillText(text, x, y + (h - th) / 2);
-            }
-            else if (how == Justification.Right) {
-                ctx.fillText(text, x + w - tw, y + (h - th) / 2);
-            }
-        }
-    }
-    renderParagraph(ctx, text, x, y, w) {
-        let curY = y;
-        if (ctx && text.length) {
-            let lines = [];
-            let currentLine = [];
-            ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
-            let length = 0;
-            const spaceWidth = ctx.measureText(" ").width;
-            const heightMeasure = ctx.measureText(text);
-            const th = (heightMeasure.actualBoundingBoxDescent - heightMeasure.actualBoundingBoxAscent) * 1.2;
-            text.split(" ").forEach(function (word) {
-                const measure = ctx.measureText(word);
-                if ((length + measure.width) > w) {
-                    lines.push(currentLine.join(" "));
-                    currentLine.length = 0;
-                    length = 0;
-                }
-                length += measure.width + spaceWidth;
-                currentLine.push(word);
-            });
-            if (currentLine.length > 0) {
-                lines.push(currentLine.join(" "));
-            }
-            for (let l of lines) {
-                ctx.fillText(l, x, curY);
-                curY += th;
-            }
-        }
-        return curY;
-    }
     renderLine(ctx) {
         ctx.lineWidth = 2;
         ctx.strokeStyle = Renderer40k._blackColor;
@@ -211,7 +162,7 @@ export class Renderer40k {
             for (let i = 0; i < labels.length; i++) {
                 if (columnWidths)
                     w = columnWidths[i];
-                this.renderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
+                RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
                 x += w;
             }
         }
@@ -231,20 +182,20 @@ export class Renderer40k {
             ctx.fillStyle = Renderer40k._blackColor;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, spell._name.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, spell._name.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, spell._manifest.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, spell._manifest.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, spell._range.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, spell._range.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
             this._currentY += 2;
-            this._currentY = this.renderParagraph(ctx, spell._details, x, this._currentY, w);
+            this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w);
             x += w;
             ctx.save();
             if (i % 2)
@@ -276,19 +227,19 @@ export class Renderer40k {
             ctx.fillStyle = Renderer40k._blackColor;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, expl._name, x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, expl._name, x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, expl._diceRoll, x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, expl._diceRoll, x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, expl._distance, x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, expl._distance, x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, expl._mortalWounds, x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, expl._mortalWounds, x, this._currentY, w, height, Justification.Center);
             x += w;
             this._currentY += height;
         }
@@ -307,32 +258,32 @@ export class Renderer40k {
             ctx.fillStyle = Renderer40k._blackColor;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, weapon._name.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, weapon._name.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, weapon._range.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, weapon._range.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, weapon._type.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, weapon._type.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, weapon._str.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, weapon._str.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, weapon._ap.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, weapon._ap.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, weapon._damage.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, weapon._damage.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
             this._currentY += 2;
-            this._currentY = this.renderParagraph(ctx, weapon._abilities, x, this._currentY, w);
+            this._currentY = RenderParagraph(ctx, weapon._abilities, x, this._currentY, w);
             x += w;
             ctx.save();
             ctx.globalCompositeOperation = "destination-over";
@@ -361,86 +312,86 @@ export class Renderer40k {
         ctx.font = '12px sans-serif';
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._name.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._name.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._move.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._move.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._ws.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._ws.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._bs.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._bs.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._str.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._str.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._toughness.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._toughness.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._wounds.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._wounds.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._attacks.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._attacks.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._leadership.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._leadership.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         if (columnWidths)
             w = columnWidths[ci++];
-        this.renderText(ctx, model._save.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._save.toString(), x, this._currentY, w, height, Justification.Center);
         x += w;
         this._currentY += height;
     }
     renderAbilities(ctx, unit) {
         ctx.font = '14px sans-serif';
-        this.renderText(ctx, "ABILITIES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        RenderText(ctx, "ABILITIES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
         ctx.font = '12px serif';
         for (let ab of unit._abilities) {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
             this._currentY += 2;
-            this._currentY = this.renderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
         }
         this._currentY += 4;
     }
     renderRules(ctx, unit) {
         ctx.font = '14px sans-serif';
-        this.renderText(ctx, "RULES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        RenderText(ctx, "RULES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
         ctx.font = '12px serif';
         for (let rule of unit._rules) {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
             this._currentY += 2;
-            this._currentY = this.renderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
         }
         this._currentY += 4;
     }
     renderKeywords(ctx, unit) {
         ctx.font = '14px sans-serif';
-        this.renderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
         ctx.font = '12px serif';
         const kwlist = [...unit._keywords];
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
         this._currentY += 4;
     }
     renderFactions(ctx, unit) {
         ctx.font = '14px sans-serif';
-        this.renderText(ctx, "FACTIONS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        RenderText(ctx, "FACTIONS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
         ctx.font = '12px serif';
         const kwlist = [...unit._factions];
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = this.renderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
         this._currentY += 4;
     }
     renderWoundTable(ctx, unit, columnWidths) {
@@ -455,12 +406,12 @@ export class Renderer40k {
             ctx.font = '12px sans-serif';
             if (columnWidths)
                 w = columnWidths[ci++];
-            this.renderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
             x += w;
             for (let attr of tracker._table) {
                 if (columnWidths)
                     w = columnWidths[ci++];
-                this.renderText(ctx, attr[1], x, this._currentY, w, height, Justification.Center);
+                RenderText(ctx, attr[1], x, this._currentY, w, height, Justification.Center);
                 x += w;
             }
             this._currentY += height;
@@ -468,7 +419,7 @@ export class Renderer40k {
     }
     renderModelList(ctx, unit) {
         ctx.font = '14px sans-serif';
-        this.renderText(ctx, "MODELS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        RenderText(ctx, "MODELS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
         ctx.font = '12px serif';
         let modelList = "";
         let mi = 0;
@@ -484,7 +435,7 @@ export class Renderer40k {
                 modelList += ",  ";
             }
         }
-        this._currentY = this.renderParagraph(ctx, modelList, this._currentX + 190, this._currentY, 500);
+        this._currentY = RenderParagraph(ctx, modelList, this._currentX + 190, this._currentY, 500);
         this._currentY += 4;
     }
     renderWoundBoxes(ctx, unit) {
@@ -497,7 +448,7 @@ export class Renderer40k {
             if (model._wounds > 1) {
                 let currentY = this._currentY;
                 ctx.font = '14px sans-serif';
-                this._currentY = this.renderParagraph(ctx, model._name, this._currentX + unitNameWidth, this._currentY, boxStartX - unitNameWidth - boxMargin);
+                this._currentY = RenderParagraph(ctx, model._name, this._currentX + unitNameWidth, this._currentY, boxStartX - unitNameWidth - boxMargin);
                 let x = this._currentX + boxStartX;
                 ctx.strokeStyle = Renderer40k._blackColor;
                 ctx.fillStyle = '#ffffff';
@@ -667,11 +618,11 @@ export class Renderer40k {
             // Power level icon
             imgX += 34;
             ctx.drawImage(this._octagon, imgX, yStart + 2, 32, 32);
-            this.renderText(ctx, unit._powerLevel.toString(), imgX, yStart + 2, 32, 32, Justification.Center);
+            RenderText(ctx, unit._powerLevel.toString(), imgX, yStart + 2, 32, 32, Justification.Center);
             // Points icon
             imgX += 34;
             ctx.drawImage(this._octagon, imgX, yStart + 2, 32, 32);
-            this.renderText(ctx, unit._points.toString(), imgX, yStart + 2, 32, 32, Justification.Center);
+            RenderText(ctx, unit._points.toString(), imgX, yStart + 2, 32, 32, Justification.Center);
         }
         // unit name
         let iters = 0;
@@ -689,7 +640,7 @@ export class Renderer40k {
         }
         ctx.fillStyle = 'white';
         ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
-        this.renderText(ctx, unitName, title_x, yStart, maxWidth, titleHeight, Justification.Center);
+        RenderText(ctx, unitName, title_x, yStart, maxWidth, titleHeight, Justification.Center);
         this._currentY += titleHeight;
     }
 }

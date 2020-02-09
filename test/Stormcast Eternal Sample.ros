@@ -158,15 +158,15 @@
             <cost name="pts" typeId="points" value="100.0"/>
           </costs>
           <categories>
-            <category id="9f31-89b9-eba9-525a" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="28b2-7c02-984e-a3e4" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="ad86-ea1e-6432-36ed" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="bd22-f1ee-6a30-6626" name="LORD-RELICTOR" entryId="9f51-d140-8ff0-88a7" primary="false"/>
-            <category id="e0f1-f967-13c8-359f" name="PRIEST" entryId="e8a5-e4c1-3d11-e7dd" primary="false"/>
-            <category id="213b-69bd-1833-1bba" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="0e60-a6b5-8c4c-8b60" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="552a-c8e7-358c-41d2" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
-            <category id="28b2-0038-7b1c-6e53" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="7866-4882-18ae-1553" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="41a1-2a60-51c8-e522" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="3bb9-1214-2e24-bd42" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="118d-c2c8-60e5-ee6e" name="LORD-RELICTOR" entryId="9f51-d140-8ff0-88a7" primary="false"/>
+            <category id="bb25-95ec-8de5-241e" name="PRIEST" entryId="e8a5-e4c1-3d11-e7dd" primary="false"/>
+            <category id="1702-6461-3989-52d1" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="0911-36df-7e98-5c56" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="7300-339f-0da5-dec6" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="0380-a608-f258-45e3" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
           </categories>
         </selection>
         <selection id="0823-ca79-8a2e-d916" name="Celestar Ballista" entryId="860b-7244-e6f9-95dd::70bf-9177-9d10-bc5f" publicationId="ed04-877b-pubN71576" page="186" number="1" type="unit">
@@ -253,16 +253,16 @@
             <cost name="pts" typeId="points" value="110.0"/>
           </costs>
           <categories>
-            <category id="3de0-11f0-80b1-7727" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="1098-eae7-8519-9e2a" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="90f5-b591-0510-a5c6" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="cc55-bc71-3fcc-f5f7" name="CELESTAR BALLISTA" entryId="2bb9-a62f-3e50-200a" primary="false"/>
-            <category id="51f1-bee5-1051-95cd" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
-            <category id="e287-57b8-030c-a1b8" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="dd50-f56b-acc5-1718" name="WAR MACHINE" entryId="880e-1e33-b965-71ec" primary="false"/>
-            <category id="0772-6b4d-7d0d-cb4d" name="ORDINATOS" entryId="b61f-e578-f720-2cd7" primary="false"/>
-            <category id="f5db-c31b-24df-f513" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="false"/>
-            <category id="0872-18cd-a8b0-aba9" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="true"/>
+            <category id="fb2d-dee2-c0a7-6a14" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="12dd-07fd-4d6a-fd1d" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="2033-9022-c478-c0a9" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="a67d-3331-8161-1e8d" name="CELESTAR BALLISTA" entryId="2bb9-a62f-3e50-200a" primary="false"/>
+            <category id="73d1-b169-60ad-a3dd" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="c0e3-5788-8cde-17f3" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="0dab-8aaf-f663-43e0" name="WAR MACHINE" entryId="880e-1e33-b965-71ec" primary="false"/>
+            <category id="71d4-965a-7687-e7c2" name="ORDINATOS" entryId="b61f-e578-f720-2cd7" primary="false"/>
+            <category id="1e32-2b10-fd59-0e4f" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="false"/>
+            <category id="f0d5-f18b-67e7-bdb3" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="true"/>
           </categories>
         </selection>
         <selection id="fb02-62d4-208a-e584" name="Lord-Ordinator" entryId="c40a-f331-f505-15bc::c924-f509-4a7f-1735" publicationId="ed04-877b-pubN71576" page="170" number="1" type="unit">
@@ -286,19 +286,44 @@
               </characteristics>
             </profile>
           </profiles>
+          <selections>
+            <selection id="fd61-1e4c-a8e9-5ae8" name="Astral Hammers" entryId="c40a-f331-f505-15bc::3c1c-3066-5e71-3d0f" entryGroupId="c40a-f331-f505-15bc::12c3-fbf7-be1e-f913" number="1" type="upgrade">
+              <profiles>
+                <profile id="c40a-f331-f505-15bc::db99-6b7f-f4f8-8bdb" name="Astral Hammers" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">6</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="c40a-f331-f505-15bc::6e32-099b-b29f-2862" name="Meteoric Slam" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the unmodified hit roll for two or more attacks made against the same enemy unit in the same phase with this model’s Astral Hammers is 6, that enemy unit suffers D3 mortal wounds after all of this model’s attacks have been resolved.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
           <costs>
             <cost name="pts" typeId="points" value="140.0"/>
           </costs>
           <categories>
-            <category id="8921-87e5-eddf-5530" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="e59d-9b1d-047c-ee56" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="e819-075b-3a10-f5af" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="55ab-78cc-aeac-3ea6" name="LORD-ORDINATOR" entryId="683a-4213-e600-479d" primary="false"/>
-            <category id="015b-c854-5d36-ffbf" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="84ad-6f2b-5915-a732" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="c25e-91cd-2013-c534" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
-            <category id="ba3b-89ea-ddf5-257b" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
-            <category id="25ad-ab5b-1a24-cf36" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="d735-a28f-a936-9425" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="26a4-7f69-a338-e857" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="71e6-4cb4-600d-9688" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="d8af-005f-ad60-5caa" name="LORD-ORDINATOR" entryId="683a-4213-e600-479d" primary="false"/>
+            <category id="826d-cfcc-6d93-ff21" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="55b8-cad6-2ba6-ee17" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="f95b-7fa4-a89d-a60a" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="7714-80b7-a2d4-fe72" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="2b84-05ef-12ca-4c79" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
           </categories>
         </selection>
         <selection id="56b1-2177-869c-fbbf" name="Astreia Solbright" entryId="3209-2c3a-ad64-504b::0bd3-8d56-f1d3-23ea" publicationId="ed04-877b-pubN71576" page="158" number="1" type="unit">
@@ -433,19 +458,19 @@
             <cost name="pts" typeId="points" value="220.0"/>
           </costs>
           <categories>
-            <category id="b807-ca39-9cd4-74c7" name="ASTREIA SOLBRIGHT" entryId="2935-4acc-ca83-4f70" primary="false"/>
-            <category id="9c0f-2af1-2afa-18c2" name="DRACOLINE" entryId="c83b-e760-c03a-7031" primary="false"/>
-            <category id="0e12-57b9-ad19-9c95" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="6efc-64c4-36c6-2cdc" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="55ee-74cd-61f4-4044" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="72f8-859b-5c10-25c0" name="HAMMERS OF SIGMAR" entryId="cf54-4907-2f8d-08bb" primary="false"/>
-            <category id="42b8-5719-91b6-06c7" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="e097-7ad1-f2a0-377a" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
-            <category id="b7d6-941f-90d5-b277" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="734b-8ed8-c611-85b1" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
-            <category id="a481-096e-d711-aa6e" name="LORD-ARCANUM" entryId="e278-4f31-d3f9-2c34" primary="false"/>
-            <category id="fd3e-8c00-28a6-8191" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
-            <category id="36bc-06c2-d38c-c7f4" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="0641-296e-7bd3-06dd" name="ASTREIA SOLBRIGHT" entryId="2935-4acc-ca83-4f70" primary="false"/>
+            <category id="f925-8dbf-d483-20b1" name="DRACOLINE" entryId="c83b-e760-c03a-7031" primary="false"/>
+            <category id="1ab3-1a67-6ffd-db90" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="b551-32be-59a3-74ee" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="d021-8f57-c5b0-f603" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="bf0c-2009-bd7c-103e" name="HAMMERS OF SIGMAR" entryId="cf54-4907-2f8d-08bb" primary="false"/>
+            <category id="c9af-f2dc-93d5-61ef" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="d59b-9de8-270a-a595" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="52b3-9f3c-996f-2324" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="11dc-48b2-3082-8a7a" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="9208-4e49-145e-0b2c" name="LORD-ARCANUM" entryId="e278-4f31-d3f9-2c34" primary="false"/>
+            <category id="16b5-cea7-f79c-bc22" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="3116-86ba-68f2-ff34" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
           </categories>
         </selection>
         <selection id="6d8d-b59b-c5eb-9af2" name="Sequitors" entryId="87b6-f5af-5630-028d::29da-7c0d-155b-f63a" publicationId="ed04-877b-pubN71576" page="187" number="1" type="unit">
@@ -544,15 +569,15 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="77df-cacf-ad41-f216" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="1445-07ff-8ad1-33e2" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="38de-4c3e-91aa-162e" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="ac84-7c01-3808-0112" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
-            <category id="5bb7-e38d-2472-056b" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="62a4-ec8c-50e0-fa3a" name="SEQUITORS" entryId="b739-26fe-8dcc-2388" primary="false"/>
-            <category id="a01a-7e98-bc2e-914a" name="REDEEMER" entryId="c945-c89f-4053-6479" primary="false"/>
-            <category id="4352-5af0-f9eb-cabe" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-            <category id="f5c5-ced1-27dd-6e33" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+            <category id="7afd-dd8f-fe30-9ee4" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="0c0f-1485-59fb-9fba" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="a752-5c55-951b-a941" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="fd03-00f7-075e-1cec" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="62d0-a80c-2581-58fe" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="97d4-8ea4-e77a-c3d1" name="SEQUITORS" entryId="b739-26fe-8dcc-2388" primary="false"/>
+            <category id="11a1-4ef5-4ec7-660b" name="REDEEMER" entryId="c945-c89f-4053-6479" primary="false"/>
+            <category id="b91e-746f-75d2-7986" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="38c9-af8d-7a01-2428" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
           </categories>
         </selection>
         <selection id="6879-8a99-c959-995e" name="Judicators" entryId="18ae-599f-8351-6eb0::993b-d238-93ba-a4f2" publicationId="ed04-877b-pubN71576" page="182" number="1" type="unit">
@@ -646,14 +671,14 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="35c1-cc1a-2f71-436a" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="ae96-f057-da97-58c6" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="1bf6-ce2f-a4fe-fd1b" name="JUDICATORS" entryId="47cd-ba11-d528-de85" primary="false"/>
-            <category id="d7fd-2fc0-76f4-411b" name="JUSTICAR" entryId="e897-5e9b-1972-88b0" primary="false"/>
-            <category id="2289-38ee-a425-04b4" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="8d05-ba93-c8c6-42f6" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="944b-8965-0149-8d02" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-            <category id="2aa2-d993-ae05-572e" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+            <category id="1ea3-f238-5fc2-eb3d" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="32b1-f4ae-3595-698e" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="dbd4-60f8-8e48-b2cf" name="JUDICATORS" entryId="47cd-ba11-d528-de85" primary="false"/>
+            <category id="2054-2348-6654-1e0e" name="JUSTICAR" entryId="e897-5e9b-1972-88b0" primary="false"/>
+            <category id="617d-8f55-8a19-10f7" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="0b11-5143-1d51-cb62" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="fbb5-92fa-5d8d-2794" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="db7d-a88e-ac2a-24ac" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
           </categories>
         </selection>
         <selection id="adc5-b904-2dfb-8e1d" name="Sequitors" entryId="87b6-f5af-5630-028d::29da-7c0d-155b-f63a" publicationId="ed04-877b-pubN71576" page="187" number="1" type="unit">
@@ -752,15 +777,15 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="e281-00c5-9358-dc63" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="2ffc-4f3e-ea17-37bb" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="36ac-1d67-79d4-cd47" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="3cdc-983d-60cd-e522" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
-            <category id="cf0d-1c35-e292-41e9" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="1087-169a-c0c1-9941" name="SEQUITORS" entryId="b739-26fe-8dcc-2388" primary="false"/>
-            <category id="9b59-f01e-ef08-dcdf" name="REDEEMER" entryId="c945-c89f-4053-6479" primary="false"/>
-            <category id="a390-a3f9-36eb-b8b3" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-            <category id="0b46-8449-cf1a-2949" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+            <category id="1d95-b63d-461b-cf96" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="41bf-8c70-639f-8059" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="8e57-d0d7-3d6e-3f56" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="ec57-128d-4294-ace7" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="8fdb-a9c3-a051-b795" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="724d-044b-bde7-5e43" name="SEQUITORS" entryId="b739-26fe-8dcc-2388" primary="false"/>
+            <category id="62bd-f787-fff9-565c" name="REDEEMER" entryId="c945-c89f-4053-6479" primary="false"/>
+            <category id="262e-c87f-b3bb-aeba" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="2079-3369-7867-006d" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
           </categories>
         </selection>
         <selection id="6ae0-aafe-c013-f2d1" name="Endless Spell: Aethervoid Pendulum" entryId="28b7-9a3f-0f7b-c498::98c8-838b-2c8a-a9f7" number="1" type="upgrade">
@@ -959,18 +984,18 @@
             <cost name="pts" typeId="points" value="500.0"/>
           </costs>
           <categories>
-            <category id="7785-a22c-5f9b-813e" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="c4f4-2d18-25b5-1ed4" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
-            <category id="ff7a-64d9-4b33-c914" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="054f-e34f-51af-96d2" name="LORD-CELESTANT" entryId="78f1-562f-011e-181e" primary="false"/>
-            <category id="94c8-ba1d-1744-1fd0" name="MONSTER" entryId="1959-9f6a-3056-913a" primary="false"/>
-            <category id="c0f3-43d2-43bb-d90e" name="STARDRAKE" entryId="9334-c292-162a-2242" primary="false"/>
-            <category id="c394-6b43-4ef0-0779" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="382c-55de-2064-e034" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="daf4-ca15-ffb3-c8f2" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
-            <category id="951c-c8b2-0b5b-56eb" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
-            <category id="94b4-c25d-31fc-9cad" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
-            <category id="5723-b105-1f9d-97e9" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="9f58-e88a-8f18-d3bf" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="c03d-bb71-bced-0b15" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="2777-5f54-9b00-33f1" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="3f6a-ae27-6a0e-f17e" name="LORD-CELESTANT" entryId="78f1-562f-011e-181e" primary="false"/>
+            <category id="6238-83cb-865f-8129" name="MONSTER" entryId="1959-9f6a-3056-913a" primary="false"/>
+            <category id="52f1-826b-1248-e9d0" name="STARDRAKE" entryId="9334-c292-162a-2242" primary="false"/>
+            <category id="758a-2bd0-2479-5682" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="baff-9ceb-e97b-9fd2" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="b0fd-97c5-87b3-1f97" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+            <category id="4ea7-0bf8-e8fd-b3c6" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="3316-d215-aedc-bb73" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+            <category id="197c-21d4-c490-ddb5" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
           </categories>
         </selection>
         <selection id="19a2-612a-6d45-0cfb" name="Evocators" entryId="f3ba-f7a5-03b5-3662::6427-4f9f-abde-dc0b" publicationId="ed04-877b-pubN71576" page="189" number="1" type="unit">
@@ -1071,16 +1096,16 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="5927-7282-3f25-7d79" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="c309-cdbb-c625-2cb7" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="1b77-0178-50c8-00c2" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="4b9a-02bd-5339-5feb" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
-            <category id="0b66-435a-2f74-fcad" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="eaa4-07ec-1091-78ef" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
-            <category id="6170-c169-6942-99d0" name="EVOCATORS" entryId="026b-506d-9fad-e6e0" primary="false"/>
-            <category id="ae82-4182-a0d5-20c7" name="CORPUSCANT" entryId="78eb-70ff-9106-e064" primary="false"/>
-            <category id="5ac7-e54e-c2cf-ab7a" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-            <category id="54b6-565f-f73a-4054" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="53a5-7172-1f54-62ea" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="7156-dcb4-0ecb-be78" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="aa68-17a8-f0c1-d755" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="bea7-eb11-79a4-7917" name="SACROSANCT" entryId="c697-a15a-76d4-5329" primary="false"/>
+            <category id="61a4-9a2e-011e-c3f1" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="ce19-a1f9-3637-2862" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="2467-7ceb-4256-8953" name="EVOCATORS" entryId="026b-506d-9fad-e6e0" primary="false"/>
+            <category id="e66a-6a86-14f0-25ce" name="CORPUSCANT" entryId="78eb-70ff-9106-e064" primary="false"/>
+            <category id="60a3-4ac8-54cd-5fab" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="89ac-02b1-2db1-e004" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
           </categories>
         </selection>
         <selection id="f57c-8103-bda3-9f0a" name="Vanguard-Hunters" entryId="39fb-ca45-181d-24bb::a304-f6e3-9750-fae8" publicationId="ed04-877b-pubN71576" page="185" number="1" type="unit">
@@ -1151,14 +1176,14 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="1294-5ad1-d79d-ced0" name="ANGELOS" entryId="c8c1-13d2-d41c-3b40" primary="false"/>
-            <category id="a639-6027-f43a-61fe" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
-            <category id="466a-366e-c8d8-de2a" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
-            <category id="6e6e-8010-16b7-41df" name="VANGUARD-HUNTERS" entryId="b206-08e3-4402-220b" primary="false"/>
-            <category id="3bf2-1266-dc05-bb7f" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
-            <category id="51fe-3add-96ee-c0bd" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
-            <category id="ee26-1f4b-f523-51bc" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
-            <category id="7ef3-3d5f-af22-df80" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="c55d-6306-ec6b-d9db" name="ANGELOS" entryId="c8c1-13d2-d41c-3b40" primary="false"/>
+            <category id="bd6f-6d15-85a6-b0a6" name="CELESTIAL" entryId="7c69-4225-cf08-7991" primary="false"/>
+            <category id="dd8e-0583-d01f-588c" name="HUMAN" entryId="2308-7db2-829e-94b3" primary="false"/>
+            <category id="f16e-9266-5ed4-ba3a" name="VANGUARD-HUNTERS" entryId="b206-08e3-4402-220b" primary="false"/>
+            <category id="6883-c347-9de9-e9cd" name="ORDER" entryId="b970-b3bf-e1a4-a6fc" primary="false"/>
+            <category id="20c7-66a9-9b9f-5844" name="STORMCAST ETERNALS" entryId="b396-0600-80d6-cee9" primary="false"/>
+            <category id="98d8-fc18-dfdb-66e3" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="95e4-db7a-e6ce-14ed" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
           </categories>
         </selection>
       </selections>
