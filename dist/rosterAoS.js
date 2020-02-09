@@ -13,6 +13,7 @@ export class AoSWeapon {
 export class AoSWoundTracker {
     constructor() {
         this._name = "";
+        this._woundTrackerLabels = [];
         this._table = new Map();
     }
 }
@@ -83,7 +84,7 @@ export class AoSUnit {
         this._spells = [];
         this._prayers = [];
         this._points = 0;
-        this._woundTracker = [];
+        this._woundTracker = null;
     }
 }
 export class AoSForce {

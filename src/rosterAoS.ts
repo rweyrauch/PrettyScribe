@@ -12,6 +12,7 @@ export class AoSWeapon {
 
 export class AoSWoundTracker {
     _name: string = "";
+    _woundTrackerLabels: string[] = [];
     _table: Map<string, string> = new Map();
 };
 
@@ -88,7 +89,7 @@ export class AoSUnit {
 
     _points: number = 0;
 
-    _woundTracker: AoSWoundTracker[] = [];
+    _woundTracker: AoSWoundTracker|null = null;
 }
 
 export class AoSForce {

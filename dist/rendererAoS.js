@@ -11,6 +11,7 @@ export class RendererAoS {
         this._weaponLabelWidthNormalized = [0.4, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
         this._spellLabelWidthNormalized = [0.3, 0.2, 0.5];
         this._prayerLabelWidthNormalized = [0.4, 0.6];
+        this._trackerLabelWidth = [0.3, 0.2, 0.15, 0.15, 0.15];
         this._roster = roster;
     }
     render(title, list, forces) {
@@ -175,11 +176,23 @@ export class RendererAoS {
             this._currentY += 2;
             this.renderMap(ctx, "MAGIC", unit._magic);
         }
+        if (unit._woundTracker) {
+            this.renderLine(ctx);
+            const trackerLabelWidths = [];
+            this._trackerLabelWidth.forEach(element => {
+                trackerLabelWidths.push(element * this._maxWidth);
+            });
+            this.renderTableHeader(ctx, unit._woundTracker._woundTrackerLabels, trackerLabelWidths);
+            this.renderWoundTable(ctx, unit, trackerLabelWidths);
+        }
         if (unit._keywords.size > 0) {
             this.renderLine(ctx);
             this._currentY += 2;
             this.renderKeywords(ctx, unit);
         }
+        const totalHeight = this._currentY - (yOffset + RendererAoS._margin);
+        const totalWidth = this._maxWidth;
+        this.renderBorder(ctx, this._currentX, yOffset + RendererAoS._margin, totalWidth, totalHeight);
         return [this._maxWidth, this._currentY];
     }
     renderHeader(unit, ctx) {
@@ -191,10 +204,12 @@ export class RendererAoS {
         const titleHeight = 36;
         const yEnd = yStart + titleHeight;
         ctx.beginPath();
-        ctx.moveTo(xStart, yStart);
+        ctx.moveTo(xStart, yStart + RendererAoS._bevelSize);
         ctx.lineTo(xStart, yEnd);
         ctx.lineTo(xEnd, yEnd);
-        ctx.lineTo(xEnd, yStart);
+        ctx.lineTo(xEnd, yStart + RendererAoS._bevelSize);
+        ctx.lineTo(xEnd - RendererAoS._bevelSize, yStart);
+        ctx.lineTo(xStart + RendererAoS._bevelSize, yStart);
         ctx.closePath();
         ctx.fill();
         let imgX = xStart + 6;
@@ -427,9 +442,63 @@ export class RendererAoS {
         x += w;
         this._currentY += height;
     }
+    renderWoundTable(ctx, unit, columnWidths) {
+        const height = 22;
+        if (unit._woundTracker == null) {
+            return;
+        }
+        let w = 50;
+        let x = this._currentX;
+        let ci = 0;
+        ctx.fillStyle = RendererAoS._greyLight;
+        ctx.fillRect(x, this._currentY, this._maxWidth, height);
+        ctx.fillStyle = RendererAoS._blackColor;
+        ctx.font = '12px sans-serif';
+        if (columnWidths)
+            w = columnWidths[ci++];
+        RenderText(ctx, unit._woundTracker._name, x, this._currentY, w, height, Justification.Center);
+        x += w;
+        for (let attr of unit._woundTracker._table) {
+            if (columnWidths)
+                w = columnWidths[ci++];
+            RenderText(ctx, attr[1], x, this._currentY, w, height, Justification.Center);
+            x += w;
+        }
+        this._currentY += height;
+    }
+    renderBorder(ctx, x, y, w, h) {
+        ctx.strokeStyle = RendererAoS._blackColor;
+        ctx.beginPath();
+        ctx.moveTo(x, y + RendererAoS._bevelSize);
+        ctx.lineTo(x, y + h - RendererAoS._bevelSize);
+        ctx.lineTo(x + RendererAoS._bevelSize, y + h);
+        ctx.lineTo(x + w - RendererAoS._bevelSize, y + h);
+        ctx.lineTo(x + w, y + h - RendererAoS._bevelSize);
+        ctx.lineTo(x + w, y + RendererAoS._bevelSize);
+        ctx.lineTo(x + w - RendererAoS._bevelSize, y);
+        ctx.lineTo(x + RendererAoS._bevelSize, y);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.save();
+        ctx.fillStyle = RendererAoS._fillColor;
+        ctx.globalCompositeOperation = "destination-over";
+        ctx.beginPath();
+        ctx.moveTo(x, y + RendererAoS._bevelSize);
+        ctx.lineTo(x, y + h - RendererAoS._bevelSize);
+        ctx.lineTo(x + RendererAoS._bevelSize, y + h);
+        ctx.lineTo(x + w - RendererAoS._bevelSize, y + h);
+        ctx.lineTo(x + w, y + h - RendererAoS._bevelSize);
+        ctx.lineTo(x + w, y + RendererAoS._bevelSize);
+        ctx.lineTo(x + w - RendererAoS._bevelSize, y);
+        ctx.lineTo(x + RendererAoS._bevelSize, y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
 }
 RendererAoS._res = 144;
 RendererAoS._margin = 0;
+RendererAoS._bevelSize = 15;
 RendererAoS._blackColor = '#1d272a';
 RendererAoS._grey1 = '#b3bbb5';
 RendererAoS._greyLight = '#dde1df';
