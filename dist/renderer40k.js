@@ -448,7 +448,8 @@ export class Renderer40k {
             if (model._wounds > 1) {
                 let currentY = this._currentY;
                 ctx.font = '14px sans-serif';
-                this._currentY = RenderParagraph(ctx, model._name, this._currentX + unitNameWidth, this._currentY, boxStartX - unitNameWidth - boxMargin);
+                ctx.fillStyle = Renderer40k._blackColor;
+                this._currentY = RenderParagraph(ctx, model._name, this._currentX + unitNameWidth, this._currentY + (woundBoxSize - 14) / 2, boxStartX - unitNameWidth - boxMargin);
                 let x = this._currentX + boxStartX;
                 ctx.strokeStyle = Renderer40k._blackColor;
                 ctx.fillStyle = '#ffffff';

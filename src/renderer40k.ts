@@ -1,5 +1,6 @@
 import { Unit, UnitRole, UnitRoleToString, Model, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k.js";
 import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer.js";
+import { RendererAoS } from "./rendererAoS.js";
 
 export class Renderer40k implements Renderer {
 
@@ -525,8 +526,10 @@ export class Renderer40k implements Renderer {
                 let currentY = this._currentY;
 
                 ctx.font = '14px sans-serif';
- 
-                this._currentY = RenderParagraph(ctx, model._name, this._currentX + unitNameWidth, this._currentY, boxStartX-unitNameWidth-boxMargin);
+                ctx.fillStyle = Renderer40k._blackColor;
+
+                this._currentY = RenderParagraph(ctx, model._name, this._currentX + unitNameWidth, this._currentY + (woundBoxSize-14)/2, boxStartX-unitNameWidth-boxMargin);
+
                 let x = this._currentX + boxStartX;
                 ctx.strokeStyle = Renderer40k._blackColor;
                 ctx.fillStyle = '#ffffff';
