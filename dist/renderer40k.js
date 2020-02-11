@@ -406,7 +406,7 @@ export class Renderer40k {
             ctx.font = '12px sans-serif';
             if (columnWidths)
                 w = columnWidths[ci++];
-            RenderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
+            //RenderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
             x += w;
             for (let attr of tracker._table) {
                 if (columnWidths)

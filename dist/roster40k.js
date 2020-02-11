@@ -386,8 +386,13 @@ function CreateUnit(root, is40k) {
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = (_j = char.getAttributeNode("name")) === null || _j === void 0 ? void 0 : _j.nodeValue;
-                    if (charName && char.textContent && propName) {
-                        tracker._table.set(charName, char.textContent);
+                    if (charName && propName) {
+                        if (char.textContent) {
+                            tracker._table.set(charName, char.textContent);
+                        }
+                        else {
+                            tracker._table.set(charName, "-");
+                        }
                     }
                 }
                 unit._woundTracker.push(tracker);

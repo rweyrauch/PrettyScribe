@@ -1,6 +1,5 @@
 import { Unit, UnitRole, UnitRoleToString, Model, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k.js";
 import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer.js";
-import { RendererAoS } from "./rendererAoS.js";
 
 export class Renderer40k implements Renderer {
 
@@ -472,7 +471,7 @@ export class Renderer40k implements Renderer {
             ctx.font = '12px sans-serif';
             if (columnWidths) w = columnWidths[ci++];
 
-            RenderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
+            //RenderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
             x += w;
 
             for (let attr of tracker._table) {
