@@ -194,7 +194,7 @@ export class Renderer40k {
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this._currentY += 2;
+            //this._currentY += 2;
             this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w);
             x += w;
             ctx.save();
@@ -282,8 +282,14 @@ export class Renderer40k {
             x += w;
             if (columnWidths)
                 w = columnWidths[ci++];
-            this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, weapon._abilities, x, this._currentY, w);
+            if (weapon._abilities) {
+                this._currentY += 4;
+                this._currentY = RenderParagraph(ctx, weapon._abilities, x, this._currentY, w);
+                this._currentY += 2;
+            }
+            else {
+                this._currentY += height;
+            }
             x += w;
             ctx.save();
             ctx.globalCompositeOperation = "destination-over";
@@ -299,7 +305,7 @@ export class Renderer40k {
         ctx.restore();
     }
     renderModel(ctx, model, columnWidths, bg) {
-        const height = 22;
+        const height = 24;
         let w = 50;
         let x = this._currentX;
         let ci = 0;
@@ -360,9 +366,9 @@ export class Renderer40k {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 600);
+            this._currentY += 2;
         }
-        this._currentY += 4;
     }
     renderRules(ctx, unit) {
         ctx.font = '14px sans-serif';
@@ -372,9 +378,9 @@ export class Renderer40k {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 600);
+            this._currentY += 4;
         }
-        this._currentY += 4;
     }
     renderKeywords(ctx, unit) {
         ctx.font = '14px sans-serif';
@@ -382,8 +388,9 @@ export class Renderer40k {
         ctx.font = '12px serif';
         const kwlist = [...unit._keywords];
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
-        this._currentY += 4;
+        this._currentY += 2;
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 600);
+        this._currentY += 2;
     }
     renderFactions(ctx, unit) {
         ctx.font = '14px sans-serif';
@@ -391,8 +398,9 @@ export class Renderer40k {
         ctx.font = '12px serif';
         const kwlist = [...unit._factions];
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
-        this._currentY += 4;
+        this._currentY += 2;
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 600);
+        this._currentY += 2;
     }
     renderWoundTable(ctx, unit, columnWidths) {
         const height = 22;
@@ -435,8 +443,9 @@ export class Renderer40k {
                 modelList += ",  ";
             }
         }
-        this._currentY = RenderParagraph(ctx, modelList, this._currentX + 190, this._currentY, 500);
-        this._currentY += 4;
+        this._currentY += 2;
+        this._currentY = RenderParagraph(ctx, modelList, this._currentX + 190, this._currentY, 600);
+        this._currentY += 2;
     }
     renderWoundBoxes(ctx, unit) {
         const woundBoxSize = 30;
@@ -652,7 +661,7 @@ Renderer40k._blackColor = '#1d272a';
 Renderer40k._grey1 = '#b3bbb5';
 Renderer40k._greyLight = '#dde1df';
 Renderer40k._fillColor = '#f6f6f6';
-Renderer40k._unitLabels = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
+Renderer40k._unitLabels = ["MODEL", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
 Renderer40k._weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
 Renderer40k._spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
 Renderer40k._explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];

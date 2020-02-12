@@ -229,7 +229,7 @@ export class Renderer40k implements Renderer {
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
-            this._currentY += 2;
+            //this._currentY += 2;
             this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w);
             x += w;
 
@@ -328,8 +328,14 @@ export class Renderer40k implements Renderer {
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
-            this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, weapon._abilities, x, this._currentY, w);
+            if (weapon._abilities) {
+                this._currentY += 4;
+                this._currentY = RenderParagraph(ctx, weapon._abilities, x, this._currentY, w);
+                this._currentY += 2;
+            }
+            else {
+                this._currentY += height;
+            }
             x += w;
 
             ctx.save();
@@ -347,7 +353,7 @@ export class Renderer40k implements Renderer {
 
     private renderModel(ctx: CanvasRenderingContext2D, model: Model, columnWidths: number[] | null, bg: number): void {
 
-        const height = 22;
+        const height = 24;
 
         let w = 50;
         let x = this._currentX;
@@ -412,9 +418,9 @@ export class Renderer40k implements Renderer {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 600);
+            this._currentY += 2;
         }
-        this._currentY += 4;
     }
 
     private renderRules(ctx: CanvasRenderingContext2D, unit: Unit): void {
@@ -426,9 +432,9 @@ export class Renderer40k implements Renderer {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 600);
+            this._currentY += 4;
         }
-        this._currentY += 4;
     }
 
     private renderKeywords(ctx: CanvasRenderingContext2D, unit: Unit): void {
@@ -438,9 +444,9 @@ export class Renderer40k implements Renderer {
         ctx.font = '12px serif';
         const kwlist = [...unit._keywords]; 
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
-
-        this._currentY += 4;
+        this._currentY += 2;
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 600);
+        this._currentY += 2;
     }
 
     private renderFactions(ctx: CanvasRenderingContext2D, unit: Unit): void {
@@ -450,9 +456,9 @@ export class Renderer40k implements Renderer {
         ctx.font = '12px serif';
         const kwlist = [...unit._factions]; 
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
-
-        this._currentY += 4;
+        this._currentY += 2;
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 600);
+        this._currentY += 2;
     }
 
     private renderWoundTable(ctx: CanvasRenderingContext2D, unit: Unit, columnWidths: number[] | null): void {
@@ -504,10 +510,9 @@ export class Renderer40k implements Renderer {
             }
         }
 
-        this._currentY = RenderParagraph(ctx, modelList, this._currentX + 190, this._currentY, 500);
-
-        this._currentY += 4;
-  
+        this._currentY += 2;
+        this._currentY = RenderParagraph(ctx, modelList, this._currentX + 190, this._currentY, 600);
+        this._currentY += 2;
     }
 
     private renderWoundBoxes(ctx: CanvasRenderingContext2D, unit: Unit) {
@@ -548,7 +553,7 @@ export class Renderer40k implements Renderer {
         ctx.restore();
     }
 
-    private static _unitLabels = ["UNIT", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
+    private static _unitLabels = ["MODEL", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
     private _unitLabelWidthsNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077];
     private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
     private _weaponLabelWidthNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.3];

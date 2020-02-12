@@ -9,7 +9,6 @@ export class Weapon {
     _damage: string = "";
 
     _abilities: string = "";
-
 }
 
 export class WoundTracker {
