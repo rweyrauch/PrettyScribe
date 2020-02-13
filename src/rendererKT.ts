@@ -1,5 +1,5 @@
-import { Unit, UnitRole, UnitRoleToString, Model, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k.js";
-import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer.js";
+import { Unit, UnitRole, UnitRoleToString, Model, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k";
+import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer";
 
 export class RendererKT implements Renderer {
 

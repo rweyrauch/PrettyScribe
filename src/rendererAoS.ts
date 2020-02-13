@@ -1,5 +1,5 @@
-import { AoSUnit, AoSUnitRole, AoSUnitRoleToString, AoSWeapon, RosterAoS, AoSSpell, AoSPrayer } from "./rosterAoS.js";
-import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer.js";
+import { AoSUnit, AoSUnitRole, AoSUnitRoleToString, AoSWeapon, RosterAoS, AoSSpell, AoSPrayer } from "./rosterAoS";
+import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer";
 
 export class RendererAoS implements Renderer {
 

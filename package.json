@@ -2,14 +2,25 @@
   "name": "prettyscribe",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
-  "dependencies": {},
+  "main": "dist/app.js",
+  "dependencies": {
+    "jszip": "^3.2.2"
+  },
   "devDependencies": {
-    "lite-server": "^2.5.4"
+    "@types/jszip": "^3.1.7",
+    "clean-webpack-plugin": "^3.0.0",
+    "lite-server": "^2.5.4",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "lite-server"
+    "start": "webpack-dev-server",
+    "buildprod": "webpack --config webpack.config.prod.js",
+    "build": "webpack"
   },
   "author": "Rick Weyrauch",
   "license": "ISC"

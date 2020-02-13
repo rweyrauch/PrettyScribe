@@ -1,7 +1,7 @@
-import { Roster40k, Create40kRoster } from "./roster40k.js";
-import { Renderer40k } from "./renderer40k.js";
-import { CreateAoSRoster } from "./rosterAoS.js";
-import { RendererAoS } from "./rendererAoS.js";
+import { Roster40k, Create40kRoster } from "./roster40k";
+import { Renderer40k } from "./renderer40k";
+import { CreateAoSRoster } from "./rosterAoS";
+import { RendererAoS } from "./rendererAoS";
 
 function removeAllChildren(parent: Element | null): void {
   if (parent) {
@@ -42,15 +42,17 @@ function handleFileSelect(event: Event) {
     // files is a FileList of File objects. List some properties.
     let output = [];
     for (let f of files) {
+
+      const fileExt = getFileExtension(f.name);
+      if (fileExt == "rosz") {
+        console.log("Got zipped file.");
+      }
+
       const reader = new FileReader();
       reader.onload = function (e) {
         const re = e.target;
         if (re && re.result) {
           let sourceData = re.result;
-          const fileExt = getFileExtension(f.name);
-          if (fileExt == "rosz") {
-            console.log("Got zipped file.");
-          }
           // Skip encoding tag
           const xmldatastart = sourceData.toString().indexOf(',') + 1;
           //console.log("XML Start: " + xmldatastart);
