@@ -100,7 +100,7 @@ function handleFileSelect(event: Event) {
           })
         });
       }
-      else {
+      else if (fileExt == "ros") {
         const reader = new FileReader();
         reader.onload = function (e) {
           const re = e.target;
@@ -113,6 +113,9 @@ function handleFileSelect(event: Event) {
           }
         }
         reader.readAsDataURL(f);
+      }
+      else {
+        alert("PrettyScribe only supports .ros and .rosz files.");
       }
     }
   }
