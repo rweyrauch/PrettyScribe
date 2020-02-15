@@ -22,7 +22,12 @@ export class RendererKT implements Renderer {
     public static readonly _res: number = 144;
     public static readonly _margin: number = 0;
 
-    private static readonly _ktColor = '#B23A07';
+    private static readonly _bevelSize = 15;
+
+    private static readonly _ktColor = '#e65010';
+    private static readonly _ktDarkGrey = '#1e1e1e';
+    private static readonly _ktLightGrey = '#dadada';
+    private static readonly _ktBackground = '#f3f2f1';
 
     private _roster: Roster40k|null = null;
 

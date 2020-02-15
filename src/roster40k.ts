@@ -357,7 +357,8 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                 }
                 unit._models.push(model);
             }
-            else if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability")) {
+            else if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability") || 
+            (propType === "Household Tradition") || (propType === "Warlord Trait") || (propType === "Astra Militarum Orders")) {
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
@@ -438,7 +439,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                 }
                 unit._models[unit._models.length - 1]._psychicPowers.push(power);
             }
-            else if (propType == "Explosion") {
+            else if (propType.includes("Explosion")) {
                 let explosion: Explosion = new Explosion();
                 explosion._name = propName;
                 let chars = prop.querySelectorAll("characteristics>characteristic");

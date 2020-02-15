@@ -139,8 +139,12 @@ export class Renderer40k implements Renderer {
               finalCanvas.height = dims[1] + border * 2;
               let finalCtx = finalCanvas.getContext('2d');
               finalCtx?.drawImage(canvas, border, border);
-              if (forces) 
-                forces.appendChild(finalCanvas);
+              if (forces) {
+                let canvasDiv = document.createElement('div');
+                canvasDiv.appendChild(finalCanvas);  
+                forces.appendChild(canvasDiv);  
+              }
+                
             }
         }
     }
