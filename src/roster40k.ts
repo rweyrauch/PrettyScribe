@@ -401,7 +401,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                     unit._models[unit._models.length - 1]._weapons.push(weapon);
                 }
             }
-            else if (propType.includes("Wound Track")) {
+            else if (propType.includes("Wound Track") || propType.includes("Stat Damage")) {
                 let tracker = new WoundTracker();
                 tracker._name = propName;
                 let chars = prop.querySelectorAll("characteristics>characteristic");
