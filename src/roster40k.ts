@@ -30,13 +30,21 @@ export class Weapon {
 export class WoundTracker {
     _name: string = "";
     _table: Map<string, string> = new Map();
-};
+}
 
 export class Explosion {
     _name: string = "";
     _diceRoll: string = "";
     _distance: string = "";
     _mortalWounds: string = "";
+}
+
+export class Psyker {
+    _name: string = "";
+    _cast: string = "";
+    _deny: string = "";
+    _powers: string = "";
+    _other: string = "";
 }
 
 export class PsychicPower {
@@ -65,7 +73,7 @@ export enum UnitRole {
     LEADER,
     SPECIALIST,
     NON_SPECIALIST,
-};
+}
 
 export const UnitRoleToString: string[] = [
     'None',
@@ -105,6 +113,7 @@ export class Model {
     _save: string = "";
 
     _weapons: Weapon[] = [];
+    _psyker: Psyker | null = null;
     _psychicPowers: PsychicPower[] = [];
     _explosions: Explosion[] = [];
 };
@@ -236,14 +245,13 @@ function ParseUnits(root: Element, force: Force, is40k: boolean): void {
     var selections = root.querySelectorAll("force>selections>selection");
     for (let selection of selections) {
         var unit = CreateUnit(selection, is40k);
-        if (unit && unit._role != UnitRole.NONE)
-        {
+        if (unit && unit._role != UnitRole.NONE) {
             force._units.push(unit);
         }
     }
 
     // Sort force units by role.
-    force._units.sort( (a: Unit, b: Unit):number => {
+    force._units.sort((a: Unit, b: Unit): number => {
         if (a._role > b._role) return 1;
         else if (a._role == b._role) return 0;
         return -1;
@@ -357,8 +365,8 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                 }
                 unit._models.push(model);
             }
-            else if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability") || 
-            (propType === "Household Tradition") || (propType === "Warlord Trait") || (propType === "Astra Militarum Orders")) {
+            else if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability") ||
+                (propType === "Household Tradition") || (propType === "Warlord Trait") || (propType === "Astra Militarum Orders")) {
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
@@ -402,7 +410,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                     if (charName && propName) {
                         if (char.textContent) {
                             tracker._table.set(charName, char.textContent);
-                        } 
+                        }
                         else {
                             tracker._table.set(charName, "-");
                         }
@@ -456,6 +464,23 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                     }
                 }
                 unit._models[unit._models.length - 1]._explosions.push(explosion);
+            }
+            else if (propType == "Psyker") {
+                let psyker: Psyker = new Psyker();
+                psyker._name = propName;
+                let chars = prop.querySelectorAll("characteristics>characteristic");
+                for (let char of chars) {
+                    let charName = char.getAttributeNode("name")?.nodeValue;
+                    if (charName && char.textContent) {
+                        switch (charName) {
+                            case 'Cast': psyker._cast = char.textContent; break;
+                            case 'Deny': psyker._deny = char.textContent; break;
+                            case 'Powers Known': psyker._powers = char.textContent; break;
+                            case 'Other': psyker._other = char.textContent; break;
+                        }
+                    }
+                }
+                unit._models[unit._models.length - 1]._psyker = psyker;
             }
             else {
                 console.log("Unknown profile type: " + propType);

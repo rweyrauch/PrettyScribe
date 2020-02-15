@@ -14,7 +14,7 @@
     OF THIS SOFTWARE.
 */
 
-import { Unit, UnitRole, UnitRoleToString, Model, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k";
+import { Unit, UnitRole, UnitRoleToString, Model, PsychicPower, Explosion, Weapon, Roster40k, Psyker } from "./roster40k";
 import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer";
 
 export class Renderer40k implements Renderer {
@@ -23,6 +23,8 @@ export class Renderer40k implements Renderer {
     public static readonly _margin: number = 0;
 
     private static readonly _bevelSize = 15;
+
+    private _showWoundBoxes: boolean = false;
 
     private _roster: Roster40k|null = null;
 
@@ -129,7 +131,7 @@ export class Renderer40k implements Renderer {
             for (let unit of force._units) {
               let canvas = document.createElement('canvas') as HTMLCanvasElement;
               canvas.width = Renderer40k._res * 5.5;
-              canvas.height = Renderer40k._res * 8.5;
+              canvas.height = Renderer40k._res * 12;
               
               const dims = this.renderUnit(unit, canvas, 0, 0);
 
@@ -249,9 +251,11 @@ export class Renderer40k implements Renderer {
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
-            //this._currentY += 2;
+            this._currentY += 4;
             this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w);
+            this._currentY += 2;
             x += w;
+
 
             ctx.save();
             if (i % 2) ctx.fillStyle = Renderer40k._greyLight;
@@ -606,6 +610,7 @@ export class Renderer40k implements Renderer {
         let weapons: Weapon[] = [];
         let spells: PsychicPower[] = [];
         let explosions: Explosion[] = [];
+        let psykers: Psyker[] = [];
         const unitLabelWidths: number[] = [];
         this._unitLabelWidthsNormalized.forEach(element => {
             unitLabelWidths.push(element * this._maxWidth);
@@ -623,6 +628,9 @@ export class Renderer40k implements Renderer {
             }
             for (let expl of model._explosions) {
                 explosions.push(expl);
+            }
+            if (model._psyker) {
+                psykers.push(model._psyker);
             }
         }
 
@@ -662,6 +670,12 @@ export class Renderer40k implements Renderer {
             this.renderAbilities(ctx, unit);
         }
 
+        if (psykers.length > 0) {
+            this.renderLine(ctx);
+            this._currentY += 2;
+            this.renderPsykers(ctx, psykers);
+        }
+
         if (unit._rules.size > 0) {
             this.renderLine(ctx);
             this._currentY += 2;
@@ -687,6 +701,7 @@ export class Renderer40k implements Renderer {
         }
 
         if (unit._woundTracker.length > 0) {
+            this._currentY += 2;
             this.renderLine(ctx);
             const trackerLabelWidths: number[] = [];
             this._trackerLabelWidth.forEach(element => {
@@ -698,6 +713,7 @@ export class Renderer40k implements Renderer {
 
         if (explosions.length > 0) {
             this.renderLine(ctx);
+            this._currentY += 2;
             const explLabelWidths: number[] = [];
             this._explosionLabelWidthNormalized.forEach(element => {
                 explLabelWidths.push(element * this._maxWidth);
@@ -706,16 +722,19 @@ export class Renderer40k implements Renderer {
             this.renderExplosion(ctx, explosions, explLabelWidths);
         }
 
-        // wound tracker boxes
-        let hasTracks = false;
-        for (let model of unit._models) {
-            if (model._wounds > 1) { hasTracks = true; }
+        if (this._showWoundBoxes) {
+            // wound tracker boxes
+            let hasTracks = false;
+            for (let model of unit._models) {
+                if (model._wounds > 1) { hasTracks = true; }
+            }
+            if (hasTracks) {
+                this.renderLine(ctx);
+                this._currentY += 5;
+                this.renderWoundBoxes(ctx, unit);
+            }
         }
-        if (hasTracks) {
-            this.renderLine(ctx);
-            this._currentY += 5;
-            this.renderWoundBoxes(ctx, unit);
-        }
+        this._currentY += 2;
 
         const totalHeight = this._currentY - (yOffset + Renderer40k._margin);
         const totalWidth = this._maxWidth;
@@ -792,4 +811,26 @@ export class Renderer40k implements Renderer {
         this._currentY += titleHeight;
     }
 
+    private renderPsykers(ctx: CanvasRenderingContext2D, psykers: Psyker[]): void {
+        ctx.font = '14px sans-serif';
+        RenderText(ctx, "PSYKERS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+
+        ctx.font = '12px serif';
+        this._currentY += 2;
+        for (let psyker of psykers) {
+            this._currentY = RenderParagraph(ctx, "CAST: " + psyker._cast, this._currentX + 190, this._currentY, 600);
+            this._currentY += 2;
+
+            this._currentY = RenderParagraph(ctx, "DENY: " + psyker._deny, this._currentX + 190, this._currentY, 600);
+            this._currentY += 2;
+
+            this._currentY = RenderParagraph(ctx, "POWERS KNOWN: " + psyker._powers, this._currentX + 190, this._currentY, 600);
+            this._currentY += 2;
+
+            if (psyker._other) {
+                this._currentY = RenderParagraph(ctx, "OTHER: " + psyker._other, this._currentX + 190, this._currentY, 600);
+                this._currentY += 2;    
+            }
+        }
+    }
 };
