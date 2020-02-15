@@ -550,10 +550,11 @@ export class Renderer40k implements Renderer {
 
     private renderWoundBoxes(ctx: CanvasRenderingContext2D, models: Model[]) {
 
-        const woundBoxSize = 30;
-        const boxMargin = 10;
-        const boxStartX = 340;
-        const unitNameWidth = 80;
+        const woundBoxSize = 20;
+        const boxMargin = 5;
+        const boxStartX = 250;
+        const unitNameStartX = 50;
+        const unitNameWidth = 200;
 
         ctx.save();
 
@@ -565,7 +566,7 @@ export class Renderer40k implements Renderer {
                 ctx.font = '14px sans-serif';
                 ctx.fillStyle = Renderer40k._blackColor;
 
-                this._currentY = RenderParagraph(ctx, model._name, this._currentX + unitNameWidth, this._currentY + (woundBoxSize - 14) / 2, boxStartX - unitNameWidth - boxMargin);
+                this._currentY = RenderParagraph(ctx, model._name, this._currentX + unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth - boxMargin);
 
                 let x = this._currentX + boxStartX;
                 ctx.strokeStyle = Renderer40k._blackColor;
