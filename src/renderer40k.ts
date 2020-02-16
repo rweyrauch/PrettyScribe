@@ -572,7 +572,7 @@ export class Renderer40k implements Renderer {
                 ctx.strokeStyle = Renderer40k._blackColor;
                 ctx.fillStyle = '#ffffff';
                 for (let w = 0; w < model._wounds; w++) {
-                    if (w % 10 == 0 && w != 0) {
+                    if (w % 20 == 0 && w != 0) {
                         currentY += woundBoxSize + boxMargin;
                         x = this._currentX + boxStartX;
                     }

@@ -326,6 +326,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
         }
     }
 
+    // First pass - find all models
     var props = root.querySelectorAll(":scope profiles>profile");
     for (let prop of props) {
         // What kind of prop is this
@@ -365,7 +366,16 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                 }
                 unit._models.push(model);
             }
-            else if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability") ||
+        }
+    }
+
+    // Second pass - attach attributes to models.
+    for (let prop of props) {
+        // What kind of prop is this
+        let propName = prop.getAttributeNode("name")?.nodeValue;
+        let propType = prop.getAttributeNode("typeName")?.nodeValue;
+        if (propName && propType) {
+            if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability") ||
                 (propType === "Household Tradition") || (propType === "Warlord Trait") || (propType === "Astra Militarum Orders")) {
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
@@ -399,6 +409,9 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
 
                 if (unit._models.length) {
                     unit._models[unit._models.length - 1]._weapons.push(weapon);
+                }
+                else {
+                    console.log("Unexpected: Created a weapon with an active model.  Unit: " + unitName);
                 }
             }
             else if (propType.includes("Wound Track") || propType.includes("Stat Damage")) {
@@ -445,7 +458,12 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
-                unit._models[unit._models.length - 1]._psychicPowers.push(power);
+                if (unit._models.length) {
+                    unit._models[unit._models.length - 1]._psychicPowers.push(power);
+                }
+                else {
+                    console.log("Unexpected: Created a psychic power with an active model.  Unit: " + unitName);
+                }
             }
             else if (propType.includes("Explosion")) {
                 let explosion: Explosion = new Explosion();
@@ -463,7 +481,12 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
-                unit._models[unit._models.length - 1]._explosions.push(explosion);
+                if (unit._models.length) {
+                    unit._models[unit._models.length - 1]._explosions.push(explosion);
+                }
+                else {
+                    console.log("Unexpected: Created an explosion with an active model.  Unit: " + unitName);
+                }
             }
             else if (propType == "Psyker") {
                 let psyker: Psyker = new Psyker();
@@ -480,7 +503,15 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
-                unit._models[unit._models.length - 1]._psyker = psyker;
+                if (unit._models.length) {
+                    unit._models[unit._models.length - 1]._psyker = psyker;
+                }
+                else {
+                    console.log("Unexpected: Created a psyker with an active model.  Unit: " + unitName);
+                }
+            }
+            else if ((propType === "Unit") || (propType === "Model")) {
+                // Already handled.
             }
             else {
                 console.log("Unknown profile type: " + propType);
