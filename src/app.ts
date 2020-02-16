@@ -90,6 +90,20 @@ function parseXML(xmldata: string) {
           renderer.render(rosterTitle, rosterList, forceUnits);
         }
       }
+      // TODO: add support for 30k and Apocalypse
+      // else if ((gameType == "Warhammer 30,000 - The Horus Heresy") ||
+      //          (gameType == "Warhammer 40,000: Apocalypse")) {
+      //   let roster = Create40kRoster(doc);
+      //   if (roster) {
+      //     if (roster._forces.length > 0) {
+      //       const renderer: Renderer40k = new Renderer40k(roster);
+      //       renderer.render(rosterTitle, rosterList, forceUnits);
+      //     }
+      //   }
+      // }
+      else {
+        alert("Unsupported game type: " + gameType);
+      }
     }
   }
 }
