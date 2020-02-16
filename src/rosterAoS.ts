@@ -349,7 +349,7 @@ function ParseUnit(root: Element): AoSUnit {
                 }
                 unit._prayers.push(prayer);
             }
-            else if (profType.includes("Wound Track") || profType.includes("Damage Table")) {
+            else if (profType.includes("Wound Track") || profType.includes("Damage Table") || profType.includes("Wounds")) {
 
             }
             else {

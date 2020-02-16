@@ -24,9 +24,9 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="37ea-c0fa-c632-db66" name="Faction: &lt;Craftworld&gt;" entryId="fb5a-2f35-6253-b891" primary="false"/>
-            <category id="4b1c-d52b-5fd5-cb6d" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
-            <category id="b7c5-f79f-9e5e-eee3" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="ea4e-928b-51eb-3dca" name="Faction: &lt;Craftworld&gt;" entryId="fb5a-2f35-6253-b891" primary="false"/>
+            <category id="4b01-b1d0-0832-4a32" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
+            <category id="b042-d5f7-bbbc-ecef" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
           </categories>
         </selection>
         <selection id="23fc-30ec-7599-9e29" name="Battle-forged CP" entryId="44e3-c224-ba82-1b55::f29d-8a5d-18b6-a071" number="1" type="upgrade">
@@ -36,7 +36,7 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="8138-8873-572d-fc52" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="9482-1444-1fc7-ea66" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
           </categories>
         </selection>
         <selection id="7a0f-cfd9-1998-8228" name="Detachment CP" entryId="ec87-f19e-eee2-1ba8::9d97-2793-9882-d48a" number="1" type="upgrade">
@@ -46,7 +46,7 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="2915-5b63-efc4-cc09" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="96c4-247b-9f64-5e6f" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
           </categories>
         </selection>
         <selection id="329c-faec-8ea3-8744" name="Farseer" entryId="886e-7355-c1fd-a3ca::85ec-b193-d2df-32cc" number="1" type="model">
@@ -198,7 +198,7 @@
                     <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
                   </costs>
                   <categories>
-                    <category id="0e27-1a8e-3952-4f70" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
+                    <category id="009e-3bcf-d7f1-b5b6" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
                   </categories>
                 </selection>
               </selections>
@@ -215,13 +215,13 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="a15a-7728-61b5-61f0" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
-            <category id="f56f-170a-b4c9-478a" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="f0b0-4286-eb69-36e0" name="Farseer" entryId="47a3-e3b2-a520-1a21" primary="false"/>
-            <category id="44e3-f00c-b75b-3aad" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
-            <category id="d4d6-8b1d-7737-2b25" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="2fa4-ed9a-0ddd-9241" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
-            <category id="8269-ad2b-5877-b3b4" name="Faction: Warhost" entryId="663e-2a3e-e3a4-f250" primary="false"/>
+            <category id="2615-2987-0e73-51c9" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
+            <category id="89bd-0179-fe07-d24e" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="e33f-89ce-f46f-f31f" name="Farseer" entryId="47a3-e3b2-a520-1a21" primary="false"/>
+            <category id="8874-79e9-e258-932f" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
+            <category id="b994-f437-8f54-b59d" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="c12f-d09e-7b76-45ed" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
+            <category id="3ec4-78d4-5710-9323" name="Faction: Warhost" entryId="663e-2a3e-e3a4-f250" primary="false"/>
           </categories>
         </selection>
         <selection id="7f98-562d-6ef0-7309" name="Jain Zar" entryId="22f7-a7ec-4212-c87f::a779-f1f8-6420-0794" number="1" type="model">
@@ -366,14 +366,14 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="9c61-522d-cbc1-79a7" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
-            <category id="e4ad-9d91-64ef-7788" name="Faction: Aspect Warrior" entryId="c1a6-1c19-4bba-5f28" primary="false"/>
-            <category id="8ca8-027e-9ca0-960e" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
-            <category id="bb87-086b-138a-71ec" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="6aa3-603c-2d13-1931" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
-            <category id="9342-1bb9-2c04-ece1" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="b13c-07e8-dd3e-bc55" name="Phoenix Lord" entryId="1df6-6b35-ab52-1df3" primary="false"/>
-            <category id="67f1-999f-a42f-29d4" name="Jain Zar" entryId="884a-56b0-92e7-86e9" primary="false"/>
+            <category id="f2a3-77ff-628d-9e4f" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
+            <category id="5673-4fba-dfa8-338e" name="Faction: Aspect Warrior" entryId="c1a6-1c19-4bba-5f28" primary="false"/>
+            <category id="898f-a786-bada-bcea" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
+            <category id="e8a9-85a9-9d5b-c58c" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="fff0-1576-19d2-9caa" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
+            <category id="cf59-49a3-6315-ef3a" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="dbca-8f8e-ef7f-8943" name="Phoenix Lord" entryId="1df6-6b35-ab52-1df3" primary="false"/>
+            <category id="7b2d-1c91-d6d1-d1d9" name="Jain Zar" entryId="884a-56b0-92e7-86e9" primary="false"/>
           </categories>
         </selection>
         <selection id="6c15-fe0c-7dca-8dae" name="Dire Avengers" entryId="8a44-5aa8-9fc9-9efc::330c-452b-9923-5072" number="1" type="unit">
@@ -473,11 +473,11 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="da95-ed19-50d6-7269" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
-            <category id="7c63-e72e-8793-6a03" name="Faction: Aspect Warrior" entryId="c1a6-1c19-4bba-5f28" primary="false"/>
-            <category id="5aee-bda2-7488-ef3e" name="Dire Avengers" entryId="f09d-c043-9331-30d7" primary="false"/>
-            <category id="2aec-cdb3-ce7d-0b40" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="5056-494f-dcea-1933" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="ed7b-ed9e-efc7-d438" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
+            <category id="98b8-a3aa-7ef4-c07e" name="Faction: Aspect Warrior" entryId="c1a6-1c19-4bba-5f28" primary="false"/>
+            <category id="153c-7c71-5814-6ff7" name="Dire Avengers" entryId="f09d-c043-9331-30d7" primary="false"/>
+            <category id="9b54-f15a-f890-2949" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="0eeb-2df3-930f-392a" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
           </categories>
         </selection>
         <selection id="fc25-ac4f-cba1-1e4f" name="Rangers" entryId="5fba-0b5d-2e8c-9218::5be4-5133-95e3-f6ef" number="1" type="unit">
@@ -591,13 +591,13 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="3c92-8e01-d9e0-9900" name="Faction: &lt;Craftworld&gt;" entryId="fb5a-2f35-6253-b891" primary="false"/>
-            <category id="79d9-e93a-f781-19cb" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
-            <category id="a150-b63e-e180-04d7" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
-            <category id="fafe-86eb-6273-090e" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="3a74-e419-024c-b4d0" name="Rangers" entryId="a814-fb66-a9ba-a309" primary="false"/>
-            <category id="6abd-f0c3-e3e8-1ea8" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
-            <category id="c669-3e74-c2f4-b953" name="Faction: Warhost" entryId="663e-2a3e-e3a4-f250" primary="false"/>
+            <category id="1a4e-ef0f-9b7b-e22b" name="Faction: &lt;Craftworld&gt;" entryId="fb5a-2f35-6253-b891" primary="false"/>
+            <category id="0a3c-42a8-de96-2a3f" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
+            <category id="f374-9293-f2b1-7cf8" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
+            <category id="e161-d7c2-1e88-5e9c" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="b65c-74de-1990-43b8" name="Rangers" entryId="a814-fb66-a9ba-a309" primary="false"/>
+            <category id="14aa-245f-1515-5c08" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="33ee-7389-c0e2-e37c" name="Faction: Warhost" entryId="663e-2a3e-e3a4-f250" primary="false"/>
           </categories>
         </selection>
         <selection id="eaed-43b8-00f9-83d6" name="Storm Guardians" entryId="60ad-8279-f5f8-3c0f::05b8-3755-7efa-00e3" number="1" type="unit">
@@ -700,13 +700,13 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="af50-9e66-e649-eb1e" name="Faction: &lt;Craftworld&gt;" entryId="fb5a-2f35-6253-b891" primary="false"/>
-            <category id="e359-faef-d507-476c" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
-            <category id="3280-e527-12c6-5aa6" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
-            <category id="8c79-b4df-9138-87bb" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="0c4c-e1a2-9fe7-2a5e" name="Storm Guardians" entryId="c767-c3b1-2157-1371" primary="false"/>
-            <category id="6bf8-b493-2d8b-e55d" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
-            <category id="dc16-0910-2e02-07f6" name="Faction: Warhost" entryId="663e-2a3e-e3a4-f250" primary="false"/>
+            <category id="4dd4-37a7-cfa4-9224" name="Faction: &lt;Craftworld&gt;" entryId="fb5a-2f35-6253-b891" primary="false"/>
+            <category id="2e09-414c-58cc-992c" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
+            <category id="11e7-b8f9-3584-6116" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
+            <category id="0b53-2d35-9f04-e8fe" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="74ec-8244-4bee-41b9" name="Storm Guardians" entryId="c767-c3b1-2157-1371" primary="false"/>
+            <category id="2387-f37e-9af5-86a6" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="16d7-ec3e-f126-daef" name="Faction: Warhost" entryId="663e-2a3e-e3a4-f250" primary="false"/>
           </categories>
         </selection>
         <selection id="6f94-2d36-2ec8-6723" name="Crimson Hunter" entryId="1a1c-5d1f-6455-7bec::7505-4db5-8bd4-2871" number="1" type="model">
@@ -865,13 +865,13 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="d9dc-86fa-f48e-4b88" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
-            <category id="2aa9-69fc-97e2-cb16" name="Faction: Aspect Warrior" entryId="c1a6-1c19-4bba-5f28" primary="false"/>
-            <category id="6643-6f0f-d4de-2bbf" name="Crimson Hunter" entryId="a4c6-b600-6bf5-b4a7" primary="false"/>
-            <category id="59ca-2164-f1fa-170b" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="5bd6-4b97-789b-b9c4" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
-            <category id="582c-6e72-0ee4-3a7a" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="bd65-8519-b491-85bb" name="Aircraft" entryId="d569-3d56-cd24-6a31" publicationId="82b3-73d0-72b2-3180" primary="false"/>
+            <category id="b0ce-1e27-e3b0-1964" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
+            <category id="6d66-4b2b-86a6-e8ef" name="Faction: Aspect Warrior" entryId="c1a6-1c19-4bba-5f28" primary="false"/>
+            <category id="b300-56cc-e5ce-f475" name="Crimson Hunter" entryId="a4c6-b600-6bf5-b4a7" primary="false"/>
+            <category id="62e4-6a40-40aa-dca6" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="19d0-0e56-c19e-b19a" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
+            <category id="9df9-cafd-9792-0288" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="5b43-0a72-4450-d8bf" name="Aircraft" entryId="d569-3d56-cd24-6a31" publicationId="82b3-73d0-72b2-3180" primary="false"/>
           </categories>
         </selection>
         <selection id="3b4d-7cad-2f82-7c35" name="Crimson Hunter Exarch" entryId="4cf3-23de-aec0-037d::5c1d-49fc-e16b-8cc9" number="1" type="model">
@@ -1053,13 +1053,13 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="8ae8-1c54-441d-523a" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
-            <category id="dffc-791d-872b-801d" name="Faction: Aspect Warrior" entryId="c1a6-1c19-4bba-5f28" primary="false"/>
-            <category id="9fe7-aedd-d626-8b81" name="Crimson Hunter" entryId="a4c6-b600-6bf5-b4a7" primary="false"/>
-            <category id="e8e0-a119-0f88-7e70" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="46cf-dc00-678b-e10a" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
-            <category id="254a-6498-dd39-8ae6" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="2061-6140-0273-d5ec" name="Aircraft" entryId="d569-3d56-cd24-6a31" publicationId="82b3-73d0-72b2-3180" primary="false"/>
+            <category id="5b08-0cf0-a5e1-d16d" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
+            <category id="33ff-bbf8-70ee-64e1" name="Faction: Aspect Warrior" entryId="c1a6-1c19-4bba-5f28" primary="false"/>
+            <category id="9bbf-29bd-13e2-bb50" name="Crimson Hunter" entryId="a4c6-b600-6bf5-b4a7" primary="false"/>
+            <category id="af39-bcb6-084c-03c7" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="95d5-206e-901e-7b08" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
+            <category id="bc6d-763a-8159-633b" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="b621-4254-ba47-635c" name="Aircraft" entryId="d569-3d56-cd24-6a31" publicationId="82b3-73d0-72b2-3180" primary="false"/>
           </categories>
         </selection>
         <selection id="d4da-27e5-546c-1fe5" name="Wraithlord" entryId="3e23-8772-0588-6c6e::816d-cdb2-dfea-5422" number="1" type="model">
@@ -1172,14 +1172,14 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="67d2-1f84-b985-a451" name="Faction: &lt;Craftworld&gt;" entryId="fb5a-2f35-6253-b891" primary="false"/>
-            <category id="8e69-31b0-d8b9-8036" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
-            <category id="55d8-669e-933c-1714" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
-            <category id="7098-4e25-a2b0-ac8c" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
-            <category id="d55f-fd8b-8675-42fc" name="Monster" entryId="3b77-decb-d468-6bcc" primary="false"/>
-            <category id="44ff-569e-9919-0368" name="Faction: Spirit Host" entryId="9a3e-947f-26da-d343" primary="false"/>
-            <category id="9a32-4307-11ba-752b" name="Wraithlord" entryId="098f-0f1f-3de8-6bdf" primary="false"/>
-            <category id="94ef-091a-62e3-dfac" name="Wraith Construct" entryId="be4f-b265-1ffd-36cd" primary="false"/>
+            <category id="8917-be89-ed65-bbbd" name="Faction: &lt;Craftworld&gt;" entryId="fb5a-2f35-6253-b891" primary="false"/>
+            <category id="4184-9308-d437-a509" name="Faction: Aeldari" entryId="05e9-e880-b1fb-ce90" primary="false"/>
+            <category id="8d11-2afa-5645-0ded" name="Faction: Asuryani" entryId="f406-94c7-4d73-4784" primary="false"/>
+            <category id="994b-944f-8323-da8f" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
+            <category id="b85e-f48e-3e7a-3526" name="Monster" entryId="3b77-decb-d468-6bcc" primary="false"/>
+            <category id="6d0d-65f0-692b-69e7" name="Faction: Spirit Host" entryId="9a3e-947f-26da-d343" primary="false"/>
+            <category id="797e-8c72-0db7-0708" name="Wraithlord" entryId="098f-0f1f-3de8-6bdf" primary="false"/>
+            <category id="b022-58c8-65e0-757a" name="Wraith Construct" entryId="be4f-b265-1ffd-36cd" primary="false"/>
           </categories>
         </selection>
       </selections>
@@ -1206,19 +1206,19 @@
         <publication id="28ec-711c-pubN73170" name="Chapter Approved 2017"/>
       </publications>
       <categories>
-        <category id="da7c-a281-2d54-124a" name="Uncategorised" entryId="(No Category)" primary="false"/>
-        <category id="2dc2-6394-5296-04f8" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
-        <category id="aa1f-2935-9185-95e3" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false"/>
-        <category id="1c01-3579-84e1-ead1" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="false"/>
-        <category id="6063-9d3b-0d99-7368" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="false"/>
-        <category id="84d1-252e-78ed-4c65" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="false"/>
-        <category id="ed0c-c122-fc5b-8aa6" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="false"/>
-        <category id="a090-9c0f-0166-0dad" name="Flyer" entryId="e888-1504-aa61-95ff" primary="false"/>
-        <category id="0310-3975-a420-e6dd" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="false"/>
-        <category id="2df7-f2a4-7d88-4e30" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
-        <category id="ed2a-f56c-6650-f1e1" name="Relic Elites" entryId="8d86-9490-0f7d-a5b5" primary="false"/>
-        <category id="3086-7aeb-2425-0bc2" name="Relic Heavy Support" entryId="6c4c-a416-b8cb-c380" primary="false"/>
-        <category id="242b-3e47-c2eb-9fc4" name="Relic HQ" entryId="655f-e142-dfa9-11a4" primary="false"/>
+        <category id="a3af-f0bd-4d69-942d" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="19cc-ae8a-0bff-4251" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
+        <category id="7dce-db43-e208-0087" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false"/>
+        <category id="e51c-d18c-88dd-0ab7" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="false"/>
+        <category id="b634-8267-48da-df5b" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="false"/>
+        <category id="a96a-bc92-af65-bb33" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="false"/>
+        <category id="e92a-c94e-1ddd-87e4" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="false"/>
+        <category id="ef98-5e1c-c6c5-fb14" name="Flyer" entryId="e888-1504-aa61-95ff" primary="false"/>
+        <category id="b9b8-5c3d-8861-ad39" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="false"/>
+        <category id="7bf4-e055-a6e0-c0f7" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
+        <category id="89ef-d22d-672e-b1d1" name="Relic Elites" entryId="8d86-9490-0f7d-a5b5" primary="false"/>
+        <category id="37a6-7c9c-8bf9-857a" name="Relic Heavy Support" entryId="6c4c-a416-b8cb-c380" primary="false"/>
+        <category id="3c97-f475-7366-b28f" name="Relic HQ" entryId="655f-e142-dfa9-11a4" primary="false"/>
       </categories>
     </force>
     <force id="a8d6-83d0-9518-262a" name="Spearhead Detachment +1CP" entryId="120c-9e15-1d3f-637e" catalogueId="e0a4-2172-4397-e39a" catalogueRevision="66" catalogueName="Aeldari - Drukhari">
@@ -1244,7 +1244,7 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="3257-c114-54b1-5b1b" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="6393-6aa4-5e6d-34db" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
           </categories>
         </selection>
         <selection id="74bf-66ee-371f-58dc" name="Detachment CP" entryId="ec87-f19e-eee2-1ba8::9d97-2793-9882-d48a" number="1" type="upgrade">
@@ -1254,7 +1254,7 @@
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="27ec-9592-ef1d-9fb8" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="fd3c-f3a0-da6d-26e9" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
           </categories>
         </selection>
         <selection id="c7fe-aa3c-def7-5b73" name="Urien Rakarth" entryId="14de-f068-353e-c62d::afb9-7509-4ba6-c415" number="1" type="unit">
@@ -1373,14 +1373,14 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="506d-f64a-90f3-b6c1" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
-            <category id="70aa-e649-e934-515f" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="0e20-c879-b6dc-9d6d" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="8291-a44f-8240-dbbd" name="Faction: Prophets of Flesh" entryId="f16a-5e3b-9a49-2b42" primary="false"/>
-            <category id="d687-7aea-0608-4e97" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="5884-c6a4-d5a4-fbd7" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="9ec2-373f-881a-23b1" name="Haemonculus" entryId="8fca-4ed9-4326-8a23" primary="false"/>
-            <category id="2b80-866a-ffce-d5bc" name="Urien Rakarth" entryId="be89-e5a2-cf0e-c91c" primary="false"/>
+            <category id="13eb-33d0-5337-8919" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
+            <category id="2ebb-ef8e-6472-1792" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="96c9-0edc-5553-6893" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="56cb-e0fa-20d1-7bdd" name="Faction: Prophets of Flesh" entryId="f16a-5e3b-9a49-2b42" primary="false"/>
+            <category id="f373-e5cc-df85-33dc" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="ee5b-1978-adef-7fb3" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="b7e2-58e2-4300-430d" name="Haemonculus" entryId="8fca-4ed9-4326-8a23" primary="false"/>
+            <category id="0684-ce19-d321-f3b0" name="Urien Rakarth" entryId="be89-e5a2-cf0e-c91c" primary="false"/>
           </categories>
         </selection>
         <selection id="0a77-106b-bfb4-c5f7" name="Kabalite Warriors" entryId="3737-f109-c934-f294::40a0-6ba1-e19a-1c60" number="1" type="unit">
@@ -1491,12 +1491,12 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="c66d-1c57-9ae1-fdc9" name="Faction: &lt;Kabal&gt;" entryId="53ad-d29f-5f37-2a82" primary="false"/>
-            <category id="eafe-3ffe-b7c5-cf4c" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="7180-e3c2-174e-0d04" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="01f4-4248-14e5-29a2" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="7a7c-825f-46f9-3935" name="Kabalite Warriors" entryId="a6a2-680c-c64c-587a" primary="false"/>
-            <category id="713d-6079-f96b-a8cb" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="549e-5e2b-a642-bb09" name="Faction: &lt;Kabal&gt;" entryId="53ad-d29f-5f37-2a82" primary="false"/>
+            <category id="83f5-b4ef-e95a-03fb" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="d99b-e2de-d7ff-68c3" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="f065-1bd2-df4d-32cb" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="2d2f-4739-f278-243c" name="Kabalite Warriors" entryId="a6a2-680c-c64c-587a" primary="false"/>
+            <category id="3a35-f1ae-f987-39fd" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
           </categories>
         </selection>
         <selection id="c092-cee0-e8b7-2efb" name="Wracks" entryId="fd41-cc95-81b9-9bf4::870e-ddec-7fd6-366a" number="1" type="unit">
@@ -1614,12 +1614,12 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="71cd-61f5-b9dc-6dea" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
-            <category id="c2a9-a7b3-3ed0-08f0" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="fdab-f2f7-b672-2f9f" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="d9f9-8f52-ad1f-1737" name="Faction: &lt;Haemonculus Coven&gt;" entryId="c3cc-22d9-1014-b496" primary="false"/>
-            <category id="5404-5eb2-6e83-2b05" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="3380-57d0-fab6-03d3" name="Wracks" entryId="93aa-d8fa-b826-9fbc" primary="false"/>
+            <category id="265e-38c6-35ed-fa39" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="cec3-5aed-3d4c-c853" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="0c33-4235-f300-80e5" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="d806-30b4-cb29-483d" name="Faction: &lt;Haemonculus Coven&gt;" entryId="c3cc-22d9-1014-b496" primary="false"/>
+            <category id="dbcf-6329-d832-48dc" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="0a7d-3a15-4c95-ff33" name="Wracks" entryId="93aa-d8fa-b826-9fbc" primary="false"/>
           </categories>
         </selection>
         <selection id="d55d-f2c8-646f-801b" name="Wyches" entryId="1b87-3f42-1264-083c::287c-0434-786c-9ba1" number="1" type="unit">
@@ -1800,12 +1800,12 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="7627-1397-5b2a-e27f" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
-            <category id="b239-1183-8e2d-ea28" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="4c36-be67-22f4-3946" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="b983-f1a7-804b-9afa" name="Faction: &lt;Wych Cult&gt;" entryId="99c9-6127-f78b-1f66" primary="false"/>
-            <category id="bc9f-046f-3519-5ed4" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="f0e0-3175-683d-6bf6" name="Wyches" entryId="5b68-0855-2fb2-1f69" primary="false"/>
+            <category id="5f59-25b6-77d6-5157" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="5c9d-056a-fe01-de0f" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="9024-f265-6625-c375" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="3525-0773-cd43-4bf9" name="Faction: &lt;Wych Cult&gt;" entryId="99c9-6127-f78b-1f66" primary="false"/>
+            <category id="f685-d6fb-e14a-fdde" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="1a13-0cfb-7a32-0eba" name="Wyches" entryId="5b68-0855-2fb2-1f69" primary="false"/>
           </categories>
         </selection>
         <selection id="be3f-6543-9ef1-3498" name="Ravager" entryId="60d4-e96e-6fd7-8fb5::4f27-1486-dd47-0b85" number="1" type="model">
@@ -1964,13 +1964,13 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="6226-fc17-d533-8891" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
-            <category id="ba4f-b03d-d08b-2f21" name="Faction: &lt;Kabal&gt;" entryId="53ad-d29f-5f37-2a82" primary="false"/>
-            <category id="912e-f274-aaf3-fada" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="1632-f6c1-cf6b-7bf9" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="f363-85a9-09b9-1dd4" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="69dd-0745-2174-234a" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="1ee3-7d38-0c0d-bdbd" name="Ravager" entryId="1018-59aa-c195-3ed9" primary="false"/>
+            <category id="ba44-8f5a-8f90-2731" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
+            <category id="ae35-1b07-a5dc-3492" name="Faction: &lt;Kabal&gt;" entryId="53ad-d29f-5f37-2a82" primary="false"/>
+            <category id="deb0-6339-8214-12fb" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="d771-90e8-42ba-8cfb" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="b5a1-568d-5498-423c" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="3c4a-bead-e6b9-cece" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="ed09-3dd7-f557-2da0" name="Ravager" entryId="1018-59aa-c195-3ed9" primary="false"/>
           </categories>
         </selection>
         <selection id="64d1-f8cd-9aec-5821" name="Reaper" entryId="bd21-a09a-0f62-f392::7553-e71e-0216-8610" publicationId="e0a4-2172-pubN101270" page="37" number="1" type="model">
@@ -2125,15 +2125,15 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="602a-9b12-51e1-fe06" name="Faction: &lt;Haemonculus Coven&gt;" entryId="c3cc-22d9-1014-b496" primary="false"/>
-            <category id="3488-1293-4f5b-2190" name="Faction: &lt;Kabal&gt;" entryId="53ad-d29f-5f37-2a82" primary="false"/>
-            <category id="e5ba-0b65-efc6-46b0" name="Faction: &lt;Wych Cult&gt;" entryId="99c9-6127-f78b-1f66" primary="false"/>
-            <category id="befa-8d9d-9480-5640" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="14c4-2909-8c01-5414" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="c2a3-31d2-c9f3-e7dc" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="be96-b30b-3fc6-db6a" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="2caf-7a5a-0c9f-4557" name="Reaper" entryId="8447-1ad0-d85e-4d5a" primary="false"/>
-            <category id="2321-f249-c802-d71c" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
+            <category id="e34f-29c5-160d-03d7" name="Faction: &lt;Haemonculus Coven&gt;" entryId="c3cc-22d9-1014-b496" primary="false"/>
+            <category id="bada-82bd-5a0c-d4f5" name="Faction: &lt;Kabal&gt;" entryId="53ad-d29f-5f37-2a82" primary="false"/>
+            <category id="a35c-68db-bc15-32be" name="Faction: &lt;Wych Cult&gt;" entryId="99c9-6127-f78b-1f66" primary="false"/>
+            <category id="9358-c89b-2978-c492" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="3ff1-d731-add6-89c4" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="8627-2bf1-2b16-5eac" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="80fe-5f10-3fc2-7de3" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="d6a8-8ad8-20e4-3bd0" name="Reaper" entryId="8447-1ad0-d85e-4d5a" primary="false"/>
+            <category id="51e7-4202-aedc-6b20" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
           </categories>
         </selection>
         <selection id="89c6-da14-26e3-51e0" name="Talos" entryId="d4f0-83f2-ff11-6047::3166-b10d-e54e-f46d" number="1" type="model">
@@ -2257,13 +2257,13 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="95b7-8c39-fccf-36d6" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
-            <category id="5141-3cdb-d604-cec3" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="9ab7-9754-5c9f-21b0" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="9c92-c983-121e-8429" name="Faction: &lt;Haemonculus Coven&gt;" entryId="c3cc-22d9-1014-b496" primary="false"/>
-            <category id="e570-9814-4de5-508b" name="Monster" entryId="3b77-decb-d468-6bcc" primary="false"/>
-            <category id="9004-48ad-712b-f847" name="Talos" entryId="d1dc-6993-2368-3809" primary="false"/>
-            <category id="5b60-8cc9-ad8f-1939" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="a47c-1ff5-894f-e2fd" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
+            <category id="f7a4-14fa-5b77-4438" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="8131-bc7e-a9ba-ef1a" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="ba36-1d9f-9a07-c900" name="Faction: &lt;Haemonculus Coven&gt;" entryId="c3cc-22d9-1014-b496" primary="false"/>
+            <category id="a07e-1950-2c37-f4bc" name="Monster" entryId="3b77-decb-d468-6bcc" primary="false"/>
+            <category id="f1e7-dd4d-2cd4-8c05" name="Talos" entryId="d1dc-6993-2368-3809" primary="false"/>
+            <category id="e88d-0a30-8d52-2083" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
           </categories>
         </selection>
         <selection id="f06d-01fc-4a9b-8245" name="Venom" entryId="1d17-8ba3-ae88-b38b::a74d-d706-214e-86a0" number="1" type="unit">
@@ -2390,16 +2390,16 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="c686-2da9-ea3e-52a3" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="true"/>
-            <category id="d0eb-bb20-faca-8550" name="Faction: &lt;Haemonculus Coven&gt;" entryId="c3cc-22d9-1014-b496" primary="false"/>
-            <category id="1d68-7025-4dcd-7483" name="Faction: &lt;Wych Cult&gt;" entryId="99c9-6127-f78b-1f66" primary="false"/>
-            <category id="0c54-1352-f092-1591" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="c661-d324-fc2e-e8c7" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="dab0-17d5-7869-5397" name="Faction: &lt;Kabal&gt;" entryId="53ad-d29f-5f37-2a82" primary="false"/>
-            <category id="d954-6bd5-7d37-707a" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="76f9-f1ba-e558-2876" name="Transport" entryId="6cc4-1b62-8e8a-05cd" primary="false"/>
-            <category id="2830-382a-874f-a354" name="Venom" entryId="2f02-a00c-0e9e-39fc" primary="false"/>
-            <category id="89c9-8304-7684-5a2c" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="44fc-dd97-4f8d-c957" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="true"/>
+            <category id="8833-d9aa-9115-9375" name="Faction: &lt;Haemonculus Coven&gt;" entryId="c3cc-22d9-1014-b496" primary="false"/>
+            <category id="06d3-c151-9bf9-b18e" name="Faction: &lt;Wych Cult&gt;" entryId="99c9-6127-f78b-1f66" primary="false"/>
+            <category id="e127-b73c-f8ac-f81f" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="15a1-3467-f546-5568" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="8479-eca5-bc36-a87b" name="Faction: &lt;Kabal&gt;" entryId="53ad-d29f-5f37-2a82" primary="false"/>
+            <category id="4836-941f-15ca-cf96" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="b7f8-829a-1ec6-01bd" name="Transport" entryId="6cc4-1b62-8e8a-05cd" primary="false"/>
+            <category id="798a-1070-511a-a395" name="Venom" entryId="2f02-a00c-0e9e-39fc" primary="false"/>
+            <category id="7b3e-1831-0c93-309a" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
           </categories>
         </selection>
         <selection id="5b8c-0624-1fa9-1574" name="Incubi" entryId="6b86-6fc3-7c27-7969::0a1e-abbc-c986-0b6c" number="1" type="unit">
@@ -2512,11 +2512,11 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="419c-11fc-d84a-facb" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="true"/>
-            <category id="9685-59a1-f8e3-251e" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="c144-3124-5ed4-256d" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="c0fa-5ecb-fff7-a1f1" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="46ec-bbd7-9754-af92" name="Faction: Incubi" entryId="2081-49f0-1e15-a9f3" primary="false"/>
+            <category id="83f4-9699-9ad7-89b0" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="true"/>
+            <category id="4b82-f3cd-55d3-d5b9" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="0a4c-0c29-e89e-097a" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="f582-bf4b-82d8-5f46" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="c15e-4110-93e5-556a" name="Faction: Incubi" entryId="2081-49f0-1e15-a9f3" primary="false"/>
           </categories>
         </selection>
         <selection id="6354-ac60-da1b-23e9" name="Scourges" entryId="ed3c-d93e-2e1b-f25d::ac7a-8b7f-4e94-ac7f" number="1" type="unit">
@@ -2646,12 +2646,12 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="74a3-0000-9587-8b8c" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="afb1-9a26-ab7b-e5b3" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="9d27-57dc-70be-0407" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="true"/>
-            <category id="7715-de80-d7f2-53f2" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="cdca-8e75-bd36-2ad2" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="77b4-9a7d-d7d5-6d8c" name="Scourges" entryId="1ac5-97d4-4672-c325" primary="false"/>
+            <category id="9d10-f4c6-3052-d9e5" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="0866-8680-76cc-d363" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="c21a-bc37-1cd5-4877" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="true"/>
+            <category id="038b-07a2-1d18-9f4c" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="733c-ddb3-5311-477f" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="177f-d872-88e7-1e10" name="Scourges" entryId="1ac5-97d4-4672-c325" primary="false"/>
           </categories>
         </selection>
         <selection id="dae4-afdd-6a96-cb78" name="Succubus" entryId="f66d-c5d1-f9e0-da53::f82e-71e9-d0fd-dad8" number="1" type="upgrade">
@@ -2751,13 +2751,13 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="ebd4-4216-3ac0-b16b" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
-            <category id="9dcc-e46c-99f4-b65e" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="ae31-4a69-070a-1f4d" name="Faction: &lt;Wych Cult&gt;" entryId="99c9-6127-f78b-1f66" primary="false"/>
-            <category id="7ff6-2754-5006-3fa3" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
-            <category id="8ace-9175-b25c-2110" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
-            <category id="3cb7-9473-fc42-6892" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="786b-0f07-5918-11d1" name="Succubus" entryId="3583-0c0b-f37a-5faa" primary="false"/>
+            <category id="0e33-7729-264c-de03" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
+            <category id="99bf-2e48-b8ce-68a1" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="e6b6-57c4-090f-e342" name="Faction: &lt;Wych Cult&gt;" entryId="99c9-6127-f78b-1f66" primary="false"/>
+            <category id="c527-5cd3-537c-efd2" name="Faction: Aeldari" entryId="6a01-e1fc-d03d-8390" primary="false"/>
+            <category id="ec9e-3e67-a025-4d9d" name="Faction: Drukhari" entryId="bd42-0139-0789-e05b" primary="false"/>
+            <category id="86c5-019c-9b0a-3b27" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="f251-bbe5-d642-1487" name="Succubus" entryId="3583-0c0b-f37a-5faa" primary="false"/>
           </categories>
         </selection>
       </selections>
@@ -2783,19 +2783,19 @@ Battle Round 5+ -  Mantle of Agony: Subtract 1 from the Leadership of enemy unit
         <publication id="28ec-711c-pubN73170" name="Chapter Approved 2017"/>
       </publications>
       <categories>
-        <category id="45dd-3092-d0fd-231c" name="Uncategorised" entryId="(No Category)" primary="false"/>
-        <category id="cc0b-fb24-71d9-4582" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
-        <category id="c52d-609a-a164-dd65" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false"/>
-        <category id="1af8-d87e-7c13-f056" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="false"/>
-        <category id="5e2a-8f1d-9967-50e3" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="false"/>
-        <category id="13ea-0b96-aefa-5e93" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="false"/>
-        <category id="7713-3f2f-bed8-9a76" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="false"/>
-        <category id="ec7b-5b79-fc69-2e46" name="Flyer" entryId="e888-1504-aa61-95ff" primary="false"/>
-        <category id="1bb6-0615-93ff-5c8e" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="false"/>
-        <category id="ec02-f26c-5a61-70ec" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
-        <category id="e998-804e-9fdc-ffb7" name="Relic Elites" entryId="8d86-9490-0f7d-a5b5" primary="false"/>
-        <category id="903f-3bdd-7d4d-9706" name="Relic Heavy Support" entryId="6c4c-a416-b8cb-c380" primary="false"/>
-        <category id="079e-5426-be2c-e804" name="Relic HQ" entryId="655f-e142-dfa9-11a4" primary="false"/>
+        <category id="7711-e91b-2b05-fbae" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="be64-463c-037e-7410" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
+        <category id="ea41-2ab2-a413-2b9f" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false"/>
+        <category id="04ef-b09a-21f5-3a37" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="false"/>
+        <category id="38f9-d4b8-5eaa-3c8d" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="false"/>
+        <category id="ea0c-2b93-bda8-d729" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="false"/>
+        <category id="47ee-a766-d1fd-95b6" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="false"/>
+        <category id="ca5f-5757-d3e3-ec44" name="Flyer" entryId="e888-1504-aa61-95ff" primary="false"/>
+        <category id="6946-0cf9-b950-3dbe" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="false"/>
+        <category id="161f-3c6e-9699-6cb5" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
+        <category id="466f-2cc6-3b0a-8a19" name="Relic Elites" entryId="8d86-9490-0f7d-a5b5" primary="false"/>
+        <category id="1385-d4bd-bb58-eebd" name="Relic Heavy Support" entryId="6c4c-a416-b8cb-c380" primary="false"/>
+        <category id="25d0-2ad5-1729-410e" name="Relic HQ" entryId="655f-e142-dfa9-11a4" primary="false"/>
       </categories>
     </force>
   </forces>
