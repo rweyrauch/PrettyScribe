@@ -763,8 +763,8 @@ export class Renderer40k implements Renderer {
         }
 
         if (explosions.length > 0) {
-            this.renderLine(ctx);
             this._currentY += 2;
+            this.renderLine(ctx);
             const explLabelWidths: number[] = [];
             this._explosionLabelWidthNormalized.forEach(element => {
                 explLabelWidths.push(element * this._maxWidth);
