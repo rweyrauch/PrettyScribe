@@ -23,6 +23,8 @@ export class Renderer40k implements Renderer {
     public static readonly _margin: number = 0;
 
     private static readonly _bevelSize = 15;
+    private readonly _descriptionStartX = 190;
+    private _descriptionWidth: number = 600;
 
     private _showWoundBoxes: boolean = true;
 
@@ -133,6 +135,7 @@ export class Renderer40k implements Renderer {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = Renderer40k._res * 5.5;
                 canvas.height = Renderer40k._res * 12;
+                this._descriptionWidth = canvas.width - this._descriptionStartX - 10;
 
                 const dims = this.renderUnit(unit, canvas, 0, 0);
 
@@ -443,7 +446,7 @@ export class Renderer40k implements Renderer {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 600);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
             this._currentY += 2;
         }
     }
@@ -457,7 +460,7 @@ export class Renderer40k implements Renderer {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 600);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
             this._currentY += 4;
         }
     }
@@ -470,7 +473,7 @@ export class Renderer40k implements Renderer {
         const kwlist = [...unit._keywords];
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 600);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
         this._currentY += 2;
     }
 
@@ -482,7 +485,7 @@ export class Renderer40k implements Renderer {
         const kwlist = [...unit._factions];
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 600);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
         this._currentY += 2;
     }
 
@@ -544,17 +547,20 @@ export class Renderer40k implements Renderer {
         }
 
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, modelList, this._currentX + 190, this._currentY, 600);
+        this._currentY = RenderParagraph(ctx, modelList, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
         this._currentY += 2;
     }
 
     private renderWoundBoxes(ctx: CanvasRenderingContext2D, models: Model[]) {
 
+        ctx.font = '14px sans-serif';
+        RenderText(ctx, "WOUNDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+
         const woundBoxSize = 20;
         const boxMargin = 5;
-        const boxStartX = 250;
-        const unitNameStartX = 50;
-        const unitNameWidth = 200;
+        const unitNameStartX = this._currentX + this._descriptionStartX;
+        const unitNameWidth = 200 - boxMargin;
+        const boxStartX = unitNameStartX + unitNameWidth;
 
         ctx.save();
 
@@ -563,16 +569,16 @@ export class Renderer40k implements Renderer {
 
                 let currentY = this._currentY;
 
-                ctx.font = '14px sans-serif';
+                ctx.font = '12px serif';
                 ctx.fillStyle = Renderer40k._blackColor;
 
-                this._currentY = RenderParagraph(ctx, model._name, this._currentX + unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth - boxMargin);
+                this._currentY = RenderParagraph(ctx, model._name, unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth);
 
                 let x = this._currentX + boxStartX;
                 ctx.strokeStyle = Renderer40k._blackColor;
                 ctx.fillStyle = '#ffffff';
                 for (let w = 0; w < model._wounds; w++) {
-                    if (w % 20 == 0 && w != 0) {
+                    if (w % 15 == 0 && w != 0) {
                         currentY += woundBoxSize + boxMargin;
                         x = this._currentX + boxStartX;
                     }
@@ -581,7 +587,7 @@ export class Renderer40k implements Renderer {
                     x += woundBoxSize + boxMargin;
                 }
                 currentY += woundBoxSize + boxMargin;
-                this._currentY = currentY;
+                this._currentY = Math.max(this._currentY, currentY);
             }
         }
         ctx.restore();
@@ -771,7 +777,7 @@ export class Renderer40k implements Renderer {
             // wound tracker boxes
             let hasTracks = false;
             for (let model of unit._models) {
-                if (model._wounds > 1) { hasTracks = true; }
+                if (model._wounds > 2) { hasTracks = true; }
             }
             if (hasTracks) {
                 this.renderLine(ctx);
@@ -863,17 +869,17 @@ export class Renderer40k implements Renderer {
         ctx.font = '12px serif';
         this._currentY += 2;
         for (let psyker of psykers) {
-            this._currentY = RenderParagraph(ctx, "CAST: " + psyker._cast, this._currentX + 190, this._currentY, 600);
+            this._currentY = RenderParagraph(ctx, "CAST: " + psyker._cast, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
             this._currentY += 2;
 
-            this._currentY = RenderParagraph(ctx, "DENY: " + psyker._deny, this._currentX + 190, this._currentY, 600);
+            this._currentY = RenderParagraph(ctx, "DENY: " + psyker._deny, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
             this._currentY += 2;
 
-            this._currentY = RenderParagraph(ctx, "POWERS KNOWN: " + psyker._powers, this._currentX + 190, this._currentY, 600);
+            this._currentY = RenderParagraph(ctx, "POWERS KNOWN: " + psyker._powers, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
             this._currentY += 2;
 
             if (psyker._other) {
-                this._currentY = RenderParagraph(ctx, "OTHER: " + psyker._other, this._currentX + 190, this._currentY, 600);
+                this._currentY = RenderParagraph(ctx, "OTHER: " + psyker._other, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
                 this._currentY += 2;
             }
         }

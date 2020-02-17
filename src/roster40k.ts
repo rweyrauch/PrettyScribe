@@ -118,6 +118,11 @@ export class Model {
     _explosions: Explosion[] = [];
 };
 
+export class ProfileTable {
+    _name: string = "";
+    _table: Map<string, string>[] = [];
+}
+
 export class Unit {
 
     _name: string = "";
@@ -135,6 +140,8 @@ export class Unit {
     _commandPoints: number = 0;
 
     _woundTracker: WoundTracker[] = [];
+
+    _profileTables: Map<string, ProfileTable> = new Map();
 }
 
 export class Force {
@@ -283,6 +290,20 @@ function LookupRoleKillTeam(roleText: string): UnitRole {
     return UnitRole.NONE;
 }
 
+function parseUnknownProfile(prop: Element, unit: Unit): void {
+
+    let propName = prop.getAttributeNode("name")?.nodeValue;
+    let propType = prop.getAttributeNode("typeName")?.nodeValue;
+
+    console.log("Unknown profile type: " + propType + " with name: " + propName + ".  Found in unit: " + unit._name);
+
+    // TODO: make a table out of the unknown profile.
+    //
+    // <typeName>      Name           <characteristic1.name>    <characteristic2.name> ...
+    //               <profileName>    <characteristic1.text>    <characteristic2.text> ...
+    //
+
+}
 
 function CreateUnit(root: Element, is40k: boolean): Unit | null {
     var unit: Unit = new Unit();
@@ -411,7 +432,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                     unit._models[unit._models.length - 1]._weapons.push(weapon);
                 }
                 else {
-                    console.log("Unexpected: Created a weapon with an active model.  Unit: " + unitName);
+                    console.log("Unexpected: Created a weapon without an active model.  Unit: " + unitName);
                 }
             }
             else if (propType.includes("Wound Track") || propType.includes("Stat Damage")) {
@@ -462,7 +483,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                     unit._models[unit._models.length - 1]._psychicPowers.push(power);
                 }
                 else {
-                    console.log("Unexpected: Created a psychic power with an active model.  Unit: " + unitName);
+                    console.log("Unexpected: Created a psychic power without an active model.  Unit: " + unitName);
                 }
             }
             else if (propType.includes("Explosion")) {
@@ -485,7 +506,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                     unit._models[unit._models.length - 1]._explosions.push(explosion);
                 }
                 else {
-                    console.log("Unexpected: Created an explosion with an active model.  Unit: " + unitName);
+                    console.log("Unexpected: Created an explosion without an active model.  Unit: " + unitName);
                 }
             }
             else if (propType == "Psyker") {
@@ -507,14 +528,14 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                     unit._models[unit._models.length - 1]._psyker = psyker;
                 }
                 else {
-                    console.log("Unexpected: Created a psyker with an active model.  Unit: " + unitName);
+                    console.log("Unexpected: Created a psyker without an active model.  Unit: " + unitName);
                 }
             }
             else if ((propType === "Unit") || (propType === "Model")) {
                 // Already handled.
             }
             else {
-                console.log("Unknown profile type: " + propType);
+                 parseUnknownProfile(prop, unit);
             }
         }
     }

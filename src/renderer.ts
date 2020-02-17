@@ -34,13 +34,13 @@ export function RenderText(ctx: CanvasRenderingContext2D, text: string, x: numbe
         const th = measure.actualBoundingBoxDescent - measure.actualBoundingBoxAscent;
 
         if (how == Justification.Center) {
-            ctx.fillText(text, x + (w - tw) / 2, y + (h - th) / 2);
+            ctx.fillText(text, x + Math.max((w - tw) / 2, 0), y + (h - th) / 2, w);
         }
         else if (how == Justification.Left) {
-            ctx.fillText(text, x, y + (h - th) / 2);
+            ctx.fillText(text, x, y + (h - th) / 2, w);
         }
         else if (how == Justification.Right) {
-            ctx.fillText(text, x + w - tw, y + (h - th) / 2);
+            ctx.fillText(text, x + w - tw, y + (h - th) / 2, w);
         }
     }
 }
