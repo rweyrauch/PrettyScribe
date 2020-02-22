@@ -397,12 +397,13 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
         let propType = prop.getAttributeNode("typeName")?.nodeValue;
         if (propName && propType) {
             if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability") ||
-                (propType === "Household Tradition") || (propType === "Warlord Trait") || (propType === "Astra Militarum Orders")) {
+                (propType === "Household Tradition") || (propType === "Warlord Trait") || (propType === "Astra Militarum Orders") ||
+                (propType === "Tank Orders") || (propType == "Lethal Ambush")) {
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
                     if (charName && char.textContent && propName) {
-                        if ((charName === "Description") || (charName === "Ability")) {
+                        if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
                             unit._abilities.set(propName, char.textContent);
                         }
                     }

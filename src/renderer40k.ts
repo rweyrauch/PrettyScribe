@@ -131,6 +131,26 @@ export class Renderer40k implements Renderer {
                 body.appendChild(tr);
             }
 
+            let allegianceRules = document.createElement('div');
+            if (force._rules.size > 0) {
+                let rulesHeader = document.createElement('h3');
+                allegianceRules.appendChild(rulesHeader);
+                rulesHeader.textContent = force._catalog + " Allegiance Rules";
+                for (let rule of force._rules) {
+                    let row = document.createElement('div');
+                    let name = document.createElement('h4');
+                    name.textContent = rule[0];
+                    let desc = document.createElement('p');
+                    desc.textContent = rule[1];
+                    row.appendChild(name);
+                    row.appendChild(desc);
+                    allegianceRules.appendChild(row);
+                }
+            }
+            
+            if (forces)
+                forces.appendChild(allegianceRules);
+
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = Renderer40k._res * 5.5;

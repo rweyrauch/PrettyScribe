@@ -95,6 +95,42 @@ export class RendererAoS implements Renderer {
               body.appendChild(tr);    
             }
 
+            let allegianceAbilities = document.createElement('div');
+            if (force._allegiance._commandAbilities.size > 0) {
+                let allegianceHeader = document.createElement('h3');
+                allegianceAbilities.appendChild(allegianceHeader);
+                allegianceHeader.textContent = force._allegiance._name + " Allegiance Abilities";
+                for (let command of force._allegiance._commandAbilities) {
+                    let row = document.createElement('div');
+                    let name = document.createElement('h4');
+                    name.textContent = command[0];
+                    let desc = document.createElement('p');
+                    desc.textContent = command[1];
+                    row.appendChild(name);
+                    row.appendChild(desc);
+                    allegianceAbilities.appendChild(row);
+                }
+            }
+
+            if (force._allegiance._battleTraits.size > 0) {
+                let traitHeader = document.createElement('h3');
+                allegianceAbilities.appendChild(traitHeader);
+                traitHeader.textContent = force._allegiance._name + " Allegiance Battle Traits";
+                for (let trait of force._allegiance._battleTraits) {
+                    let row = document.createElement('div');
+                    let name = document.createElement('h4');
+                    name.textContent = trait[0];
+                    let desc = document.createElement('p');
+                    desc.textContent = trait[1];
+                    row.appendChild(name);
+                    row.appendChild(desc);
+                    allegianceAbilities.appendChild(row);
+                }
+            }
+
+            if (forces)
+                forces.appendChild(allegianceAbilities);
+
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = RendererAoS._res * 5.5;
