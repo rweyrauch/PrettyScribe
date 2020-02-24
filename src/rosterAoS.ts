@@ -205,7 +205,6 @@ function ParseForces(doc: XMLDocument, roster: RosterAoS): void {
             roster._forces.push(f);
         }
     }
-    console.log(roster);
 }
 
 function ParseSelections(root: Element, force: AoSForce): void {

@@ -14,10 +14,12 @@
     OF THIS SOFTWARE.
 */
 
-import { Roster40k, Create40kRoster } from "./roster40k";
+import { Create40kRoster } from "./roster40k";
 import { Renderer40k } from "./renderer40k";
 import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
+import { CreateWarcryRoster } from "./rosterWarcry";
+import { RendererWarcry } from "./rendererWarcry";
 import JSZip from 'jszip';
 
 function removeAllChildren(parent: Element | null): void {
@@ -87,6 +89,13 @@ function parseXML(xmldata: string) {
         let roster = CreateAoSRoster(doc);
         if (roster) {
           const renderer: RendererAoS = new RendererAoS(roster);
+          renderer.render(rosterTitle, rosterList, forceUnits);
+        }
+      }
+      else if (gameType == "Warhammer Age of Sigmar: Warcry") {
+        let roster = CreateWarcryRoster(doc);
+        if (roster) {
+          const renderer: RendererWarcry = new RendererWarcry(roster);
           renderer.render(rosterTitle, rosterList, forceUnits);
         }
       }

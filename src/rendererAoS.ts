@@ -24,6 +24,8 @@ export class RendererAoS implements Renderer {
 
     private static readonly _bevelSize = 15;
 
+    private _statsWheel: HTMLImageElement | null = null;
+
     private _roster: RosterAoS|null = null;
 
     private _currentX: number = 0;
@@ -38,6 +40,8 @@ export class RendererAoS implements Renderer {
 
     constructor(roster: RosterAoS) {
         this._roster = roster;
+
+        this._statsWheel = document.getElementById('aos_stats') as HTMLImageElement;
     }
 
     render(title: HTMLElement|null, list: HTMLElement|null, forces: HTMLElement|null): void {
@@ -307,6 +311,9 @@ export class RendererAoS implements Renderer {
 
         let imgX = xStart + 6;
  
+        //if (this._statsWheel)
+        //    ctx.drawImage(this._statsWheel, imgX, yStart + 2, 32, 32);
+
         // unit name
         let iters: number = 0;
         let title_size = 28;

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<roster id="ce5d-eff3-02d5-fdce" name="Stormcast - Vanguard" battleScribeVersion="2.03" gameSystemId="e5fe-db52-95ba-6b62" gameSystemName="Warhammer Age of Sigmar: Warcry" gameSystemRevision="15" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+  <costs>
+    <cost name="pts" typeId="820d-9f65-fcb1-d476" value="990.0"/>
+  </costs>
+  <forces>
+    <force id="1a52-1516-25ef-6c9a" name="Open Play" entryId="b12a-e361-2540-1376" catalogueId="60e6-0f2c-d052-85f6" catalogueRevision="5" catalogueName="Stormcast Vanguard Chamber">
+      <rules>
+        <rule id="d196-2a5a-49c7-8eb7" name="⚁ [Double] Tireless Hunters (Faction: Stormcast Vanguard Chamber)" hidden="false">
+          <description>Add half the value of this ability (rounding up) to the Move characteristic of this fighter for the next move action they make this activation.</description>
+        </rule>
+        <rule id="c5ed-7f31-1f03-8f72" name="⚁ [Double] Righteous Aura (Faction: Stormcast Vanguard Chamber, Leader)" hidden="false">
+          <description>Until the end of the battle round, add 1 to the Toughness characteristic of friendly fighters while they are within 6&quot; of this fighter.</description>
+        </rule>
+        <rule id="3510-c46e-4b2e-8af7" name="⚂ [Triple] Darting Attack (Faction: Stormcast Vanguard Chamber, Beast)" hidden="false">
+          <description>This fighter makes a bonus attack action. Then, they can make a bonus disengage action.</description>
+        </rule>
+        <rule id="ee23-eb68-7b56-b8ca" name="⚂ [Triple] Rapid Fire (Faction: Stormcast Vanguard Chamber, Bulwark)" hidden="false">
+          <description>Add half the value of this ability (rounding up) to the Attacks characteristic of the next attack action made by this fighter this activation.</description>
+        </rule>
+        <rule id="f574-01e8-a7f3-ef39" name="⚁ [Double] Rush" hidden="false">
+          <description>Add 1 to the Move characteristic of this fighter until the end of their activation</description>
+        </rule>
+        <rule id="9806-9e74-bdee-04fb" name="⚂ [Triple] Inspiring Presence" hidden="false">
+          <description>Pick a friendly fighter that has not activated yet this battle round and that is within 6&quot; of this fighter. You can activate that fighter immediately after the activation of this fighter ends.</description>
+        </rule>
+        <rule id="7a9e-f73e-6952-cc73" name="⚁ [Double] Onslaught" hidden="false">
+          <description>Add 1 to the Attacks characteristic of attack actions made by this fighter that have a Range characteristic of 3 or less until the end of their activation.</description>
+        </rule>
+        <rule id="e8bf-46d4-c8bc-103f" name="⚂ [Triple] Respite" hidden="false">
+          <description>A fighter cannot use this ability if they are within 1&quot; of any enemy fighters. Remove a number of damage points allocated to this fighter equal to the value of this ability.</description>
+        </rule>
+        <rule id="3ab2-db70-3462-b5f1" name="⚃ [Quad] Rampage" hidden="false">
+          <description>This fighter makes a bonus move action. Then, they can make a bonus attack action.</description>
+        </rule>
+      </rules>
+      <profiles>
+        <profile id="eb0e-64ba-2568-8678" name="[Double] Rush" hidden="false" typeId="3f17-da96-b02a-c0ef" typeName="Ability">
+          <characteristics>
+            <characteristic name="Runemark" typeId="df65-615b-2ee0-5fb9"/>
+            <characteristic name="Description" typeId="9b71-a24e-4046-7a28">Add 1 to the Move characteristic of this fighter until the end of their activation</characteristic>
+          </characteristics>
+        </profile>
+      </profiles>
+      <selections>
+        <selection id="87cf-ecbe-b51c-0d0e" name="Raptor-Prime with Hurricane Crossbow" entryId="311b-5f30-4f9e-5152::d1e7-eb87-5822-01aa" number="1" type="unit">
+          <rules>
+            <rule id="ca1b-7653-92f4-2a5e" name="Bulwark" hidden="false"/>
+            <rule id="c910-f5c2-a72f-3a48" name="Leader" hidden="false"/>
+            <rule id="311b-5f30-4f9e-5152::3684-7ba5-6fd7-5604::edb7-762d-cded-8f6a" name="Bulwark" hidden="false"/>
+            <rule id="311b-5f30-4f9e-5152::65e4-aee6-78ba-9086::815c-025e-32e1-86b6" name="Leader" hidden="false"/>
+          </rules>
+          <profiles>
+            <profile id="311b-5f30-4f9e-5152::6e35-1a35-11d1-8c13" name="Raptor-Prime" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">4</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">5</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">30</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="311b-5f30-4f9e-5152::959f-bb49-3b79-9cbb" name="Ranged" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">3-15</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">2/6</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="311b-5f30-4f9e-5152::8b7d-3ac9-589d-577b" name="Unarmed" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">1/4</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="245.0"/>
+          </costs>
+          <categories>
+            <category id="d57b-9414-8933-ed68" name="Faction: Stormcast Vanguard Chamber" entryId="9e47-a549-feee-b1a6" primary="false"/>
+            <category id="e3af-dc96-e271-3254" name="Bulwark" entryId="e250-737c-002f-8734" primary="false"/>
+            <category id="0a91-462d-0650-4f27" name="Leader" entryId="4d50-0ab6-f937-3410" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="1c54-770d-cfc2-a228" name="Vanguard-Raptor with Hurricane Crossbow" entryId="5833-198f-0d30-c64d::f9b1-eee0-67f3-c1de" number="1" type="unit">
+          <rules>
+            <rule id="ca1b-7653-92f4-2a5e" name="Bulwark" hidden="false"/>
+            <rule id="5833-198f-0d30-c64d::32f4-e33f-3410-0f7f::edb7-762d-cded-8f6a" name="Bulwark" hidden="false"/>
+          </rules>
+          <profiles>
+            <profile id="5833-198f-0d30-c64d::6504-7381-83ae-0129" name="Vanguard-Raptor" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">4</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">5</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">20</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="5833-198f-0d30-c64d::8c62-7419-a81b-5c70" name="Ranged" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">3-15</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">2/6</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="5833-198f-0d30-c64d::01cb-7491-1508-9e88" name="Unarmed" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">1/4</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="195.0"/>
+          </costs>
+          <categories>
+            <category id="f12a-a495-5de9-53d7" name="Faction: Stormcast Vanguard Chamber" entryId="9e47-a549-feee-b1a6" primary="false"/>
+            <category id="9f5c-be24-1d02-8ee3" name="Fighter" entryId="f2ce-030d-9971-73f0" primary="true"/>
+            <category id="d5c1-d7d6-920e-3e90" name="Bulwark" entryId="e250-737c-002f-8734" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="9d6e-559b-1b85-694b" name="Lord-Celestant" entryId="84e9-89cd-d86c-89a9::c963-b866-39cf-81aa" number="1" type="model">
+          <rules>
+            <rule id="4a7c-0ae6-a983-e756" name="Ally" hidden="false"/>
+            <rule id="e8a5-d849-e8bc-9235" name="Champion" hidden="false"/>
+          </rules>
+          <profiles>
+            <profile id="84e9-89cd-d86c-89a9::3c74-901c-0244-03bb" name="Lord-Celestant" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">4</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">5</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">30</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="84e9-89cd-d86c-89a9::16b3-76ec-d30f-7508" name="Sword" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">5</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">2/5</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="205.0"/>
+          </costs>
+          <categories>
+            <category id="c710-3b56-b55c-f20d" name="Ally" entryId="c2de-1520-8af2-adcb" primary="true"/>
+            <category id="b370-5fcb-3d99-2078" name="Ally: Stormcast Warrior Chamber" entryId="367f-2bf2-a282-c191" primary="false"/>
+            <category id="7bfa-0fb8-321d-4dc8" name="Champion" entryId="3963-7daa-918f-f967" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="9599-41b4-8ddd-fa8b" name="Vanguard-Raptor with Hurricane Crossbow" entryId="5833-198f-0d30-c64d::f9b1-eee0-67f3-c1de" number="1" type="unit">
+          <rules>
+            <rule id="ca1b-7653-92f4-2a5e" name="Bulwark" hidden="false"/>
+            <rule id="5833-198f-0d30-c64d::32f4-e33f-3410-0f7f::edb7-762d-cded-8f6a" name="Bulwark" hidden="false"/>
+          </rules>
+          <profiles>
+            <profile id="5833-198f-0d30-c64d::6504-7381-83ae-0129" name="Vanguard-Raptor" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">4</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">5</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">20</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="5833-198f-0d30-c64d::8c62-7419-a81b-5c70" name="Ranged" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">3-15</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">2/6</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="5833-198f-0d30-c64d::01cb-7491-1508-9e88" name="Unarmed" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">1/4</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="195.0"/>
+          </costs>
+          <categories>
+            <category id="cec8-14ff-e341-7e6e" name="Faction: Stormcast Vanguard Chamber" entryId="9e47-a549-feee-b1a6" primary="false"/>
+            <category id="c650-4851-14e5-d368" name="Fighter" entryId="f2ce-030d-9971-73f0" primary="true"/>
+            <category id="015f-3546-d91b-5ec4" name="Bulwark" entryId="e250-737c-002f-8734" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="c6bc-7e2f-f62a-fca0" name="Gryph-hound" entryId="ae42-3ff3-323b-3a0d::cb3b-cffc-5b22-225f" number="1" type="unit">
+          <rules>
+            <rule id="532c-fd0d-4524-e617" name="Beast" hidden="false"/>
+            <rule id="ae42-3ff3-323b-3a0d::df66-329b-c1d1-84c2::b502-b32e-a66e-dc50" name="Beast" hidden="false"/>
+          </rules>
+          <profiles>
+            <profile id="ae42-3ff3-323b-3a0d::17d5-9d11-4d94-c635" name="Gryph-hound" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">6</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">4</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">20</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="ae42-3ff3-323b-3a0d::cbeb-5018-d129-3cca" name="Claws" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">4</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">2/4</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="150.0"/>
+          </costs>
+          <categories>
+            <category id="58eb-2826-5747-955c" name="Faction: Stormcast Vanguard Chamber" entryId="9e47-a549-feee-b1a6" primary="false"/>
+            <category id="7541-7098-68ec-0b3c" name="Fighter" entryId="f2ce-030d-9971-73f0" primary="true"/>
+            <category id="ea27-e4dc-5752-4dda" name="Beast" entryId="9e65-4c4f-1710-5eda" primary="false"/>
+          </categories>
+        </selection>
+      </selections>
+      <categories>
+        <category id="476d-766f-e9e8-dc65" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="2a8f-8f21-5792-2355" name="Fighter" entryId="f2ce-030d-9971-73f0" primary="false"/>
+        <category id="c5be-d76c-e2b4-12c8" name="Leader" entryId="4d50-0ab6-f937-3410" primary="false">
+          <rules>
+            <rule id="c910-f5c2-a72f-3a48" name="Leader" hidden="false"/>
+          </rules>
+        </category>
+        <category id="0740-102d-81bc-537e" name="Thrall" entryId="a032-0ba0-1821-c59d" primary="false">
+          <rules>
+            <rule id="ca49-881b-70b0-9350" name="Thrall" hidden="false"/>
+          </rules>
+        </category>
+        <category id="aa1a-3bd0-c0db-8e08" name="Ally" entryId="c2de-1520-8af2-adcb" primary="false">
+          <rules>
+            <rule id="4a7c-0ae6-a983-e756" name="Ally" hidden="false"/>
+          </rules>
+        </category>
+      </categories>
+    </force>
+  </forces>
+</roster>
