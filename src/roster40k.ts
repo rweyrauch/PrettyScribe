@@ -230,22 +230,37 @@ function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void 
                 f._catalog = value;
             }
 
-            var rules = root.querySelectorAll("force>rules>rule");
-            for (let rule of rules) {
-                if (rule.hasAttribute("name")) {
-                    let ruleName = rule.getAttributeNode("name")?.nodeValue;
-                    var desc = rule.querySelector("rule>description");
-                    if (ruleName && desc) {
-                        f._rules.set(ruleName, desc.textContent);
+            // TODO: Determine force faction and faction specific rules.
+
+            // Only include the allegiance rules once.
+            if (!DuplicateForce(f, roster)) {
+                var rules = root.querySelectorAll("force>rules>rule");
+                for (let rule of rules) {
+                    if (rule.hasAttribute("name")) {
+                        let ruleName = rule.getAttributeNode("name")?.nodeValue;
+                        var desc = rule.querySelector("rule>description");
+                        if (ruleName && desc) {
+                            f._rules.set(ruleName, desc.textContent);
+                        }
                     }
                 }
             }
 
+        
             ParseUnits(root, f, is40k);
 
             roster._forces.push(f);
         }
     }
+}
+
+function DuplicateForce(force: Force, roster: Roster40k): boolean {
+    if (!roster || !force) return false;
+
+     for (let f of roster._forces) {
+        if (f._catalog === force._catalog) return true;
+    }
+    return false;
 }
 
 function ParseUnits(root: Element, force: Force, is40k: boolean): void {
