@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<roster id="8796-e0d7-0ece-be29" name="Magnus" battleScribeVersion="2.03" gameSystemId="28ec-711c-d87f-3aeb" gameSystemName="Warhammer 40,000 8th Edition" gameSystemRevision="122" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+<roster id="8796-e0d7-0ece-be29" name="Magnus" battleScribeVersion="2.03" gameSystemId="28ec-711c-d87f-3aeb" gameSystemName="Warhammer 40,000 8th Edition" gameSystemRevision="124" xmlns="http://www.battlescribe.net/schema/rosterSchema">
   <costs>
     <cost name=" PL" typeId="e356-c769-5920-6e14" value="79.0"/>
     <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="8.0"/>
     <cost name="pts" typeId="points" value="1315.0"/>
   </costs>
   <forces>
-    <force id="51d6-31cb-2650-b3e2" name="Battalion Detachment +5CP" entryId="564e-55d5-79bc-a4d7" catalogueId="c553-15f3-3890-be39" catalogueRevision="65" catalogueName="Chaos - Thousand Sons">
+    <force id="51d6-31cb-2650-b3e2" name="Battalion Detachment +5CP" entryId="564e-55d5-79bc-a4d7" catalogueId="c553-15f3-3890-be39" catalogueRevision="67" catalogueName="Chaos - Thousand Sons">
       <rules>
         <rule id="b363-f50e-a470-ff87" name="Daemonic Ritual" hidden="false">
           <description>Instead of moving in their Movement phase, any THOUSAND SONS CHARACTER can, at the end of their Movement phase, attempt to summon a TZEENTCH DAEMON unit with this ability by performing a Daemonic Ritual (the character cannot do so if they arrived as reinforcements this turn).
@@ -24,7 +24,7 @@ If your summoning roll included any doubles, your character suffers a mortal wou
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="adaa-cfee-7e07-4a77" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="b5dd-ca0a-a3c2-68c2" name="Configuration" entryId="fcff-0f21-93e6-1ddc" primary="true"/>
           </categories>
         </selection>
         <selection id="092c-9144-1557-9f88" name="Detachment CP" entryId="ec87-f19e-eee2-1ba8::9d97-2793-9882-d48a" number="1" type="upgrade">
@@ -34,7 +34,7 @@ If your summoning roll included any doubles, your character suffers a mortal wou
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="3b83-67a5-e9a6-917f" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="c163-8002-368f-c75b" name="Configuration" entryId="fcff-0f21-93e6-1ddc" primary="true"/>
           </categories>
         </selection>
         <selection id="2ad1-8357-3fd2-41b8" name="Cults of the Legion" entryId="7022-801c-0aaa-cf43::5708-e013-87c5-a84f" number="1" type="upgrade">
@@ -53,7 +53,7 @@ If your summoning roll included any doubles, your character suffers a mortal wou
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="e95f-2f3f-4612-0226" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="9f28-97b9-c70c-4c14" name="Configuration" entryId="fcff-0f21-93e6-1ddc" primary="true"/>
           </categories>
         </selection>
         <selection id="a12f-02c5-d48d-0953" name="Ahriman" entryId="e0d3-6932-c3e8-6ba9::ee14-de68-b811-ebd0" page="" number="1" type="model">
@@ -206,16 +206,16 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="afe3-24c3-9b6b-478a" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
-            <category id="0528-0ec8-70df-8403" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
-            <category id="6f43-82f9-a3f0-f8ae" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
-            <category id="e790-bdd8-4bd7-b38a" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="4484-ad8b-f0f1-89ee" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
-            <category id="a1df-efd3-278c-d416" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="8110-2399-36ea-5a92" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
-            <category id="9daa-dc95-c091-080a" name="Sorcerer" entryId="68f9-33bb-bd2b-c777" primary="false"/>
-            <category id="fb1c-18ca-08e1-05bc" name="Ahriman" entryId="558b-7eec-30a5-96e4" primary="false"/>
-            <category id="bb02-c6f8-59d4-80f2" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
+            <category id="7475-0e67-f5cf-635d" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
+            <category id="25da-f682-5b07-7400" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
+            <category id="840a-c92d-f741-5b9a" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
+            <category id="9ae0-fb4c-71b0-f042" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="22f3-4e37-db50-a6c3" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
+            <category id="4b59-4ad4-949d-1b56" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="a6e0-2e4b-56dc-b761" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
+            <category id="4bbf-4e8e-9992-d03c" name="Sorcerer" entryId="68f9-33bb-bd2b-c777" primary="false"/>
+            <category id="6412-d647-7905-1fdd" name="Ahriman" entryId="558b-7eec-30a5-96e4" primary="false"/>
+            <category id="f9f4-f5d1-30a2-3a35" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
           </categories>
         </selection>
         <selection id="6ec1-8166-28cc-f8c7" name="Tzaangors" entryId="a548-b694-1109-71dc::aa64-5c8e-b2d5-86b0" number="1" type="unit">
@@ -328,13 +328,13 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="bc54-4384-ec40-3edc" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
-            <category id="e5e3-8be7-8750-99c2" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="bfe9-b914-5125-79c0" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
-            <category id="b3d1-5c40-1b0d-3b7f" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
-            <category id="e41e-f8be-47f5-5bbe" name="Tzaangors" entryId="686e-44d9-16b6-bd1c" primary="false"/>
-            <category id="2bc2-b5f7-8863-b66e" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
-            <category id="f18d-c7c1-553d-769c" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
+            <category id="1d63-0776-3fa7-c089" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="6b01-f966-8034-6222" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="eb5b-bca4-34bd-fed8" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
+            <category id="90a0-b760-365d-7739" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
+            <category id="bf66-d76a-a3a0-4ed5" name="Tzaangors" entryId="686e-44d9-16b6-bd1c" primary="false"/>
+            <category id="2bde-006e-5bb2-62ac" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
+            <category id="6a98-2673-214e-af16" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
           </categories>
         </selection>
         <selection id="adfd-f773-9ad4-7bdc" name="Rubric Marines" entryId="c033-b5f9-0707-e533::7142-e365-1c12-efd6" page="" number="1" type="unit">
@@ -410,11 +410,11 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
                     <characteristic name="Other" typeId="c2e2-f115-0003-5d7b">When an Aspiring Sorcerer manifests the Smite psychic power, he inflicts 1 mortal wound instead of D3, or D3 mortal wounds instead of D6 if the Psychic test is more than 10.</characteristic>
                   </characteristics>
                 </profile>
-                <profile id="c033-b5f9-0707-e533::e327-3476-acbc-c92f::d767-3b4f-3c09-c70c" name="Astral Blast" hidden="false" typeId="ae70-4738-0161-bec0" typeName="Psychic Power">
+                <profile id="c033-b5f9-0707-e533::e327-3476-acbc-c92f::f760-fdbf-4524-c0c8" name="Seeded Strategy" hidden="false" typeId="ae70-4738-0161-bec0" typeName="Psychic Power">
                   <characteristics>
                     <characteristic name="Warp Charge" typeId="5ffd-b800-c317-532a">6</characteristic>
-                    <characteristic name="Range" typeId="fd64-cbc4-94de-24cc">9&quot;</characteristic>
-                    <characteristic name="Details" typeId="ad96-dfa4-b4ed-656d">If manifested, the closest enemy unit within 9&quot; of and visible to this psyker suffers D3 mortal wounds and each other unit within 3&quot; of that unit suffers 1 mortal wound. The Brotherhood of Psykers ability only increases the first range of this psychic power.</characteristic>
+                    <characteristic name="Range" typeId="fd64-cbc4-94de-24cc">24&quot;</characteristic>
+                    <characteristic name="Details" typeId="ad96-dfa4-b4ed-656d">If manifested, select one friendly CULT OF SCHEMING unit within 24&quot; of this psyker. That unit can shoot and charge this turn, even if it Fell Back.</characteristic>
                   </characteristics>
                 </profile>
               </profiles>
@@ -515,14 +515,14 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="3cbd-0628-ddb3-b111" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
-            <category id="e0a5-e9a2-153a-7921" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="d1c7-1b2c-8902-ed76" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
-            <category id="5427-116b-7898-d473" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
-            <category id="e410-b2d5-7832-6ca1" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
-            <category id="959a-a1a4-443c-d0b5" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
-            <category id="666a-fe4e-c9be-e724" name="Rubric Marines" entryId="5392-407a-9cd4-4f10" primary="false"/>
-            <category id="3f0f-f232-2625-2e89" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
+            <category id="4844-78e6-e3c5-c12e" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
+            <category id="d996-f2a2-9738-b6be" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="295f-613e-7004-1086" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
+            <category id="0998-4666-bc36-7c5a" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
+            <category id="4a9c-b2ba-f9ab-ba93" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="148b-8faf-eba0-eb97" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
+            <category id="4fb5-7e70-1fef-aa6b" name="Rubric Marines" entryId="5392-407a-9cd4-4f10" primary="false"/>
+            <category id="94d4-1237-96c2-1729" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
           </categories>
         </selection>
         <selection id="0712-61ff-7534-80e3" name="Chaos Cultists" entryId="68a1-ca29-c0ee-362e::94ba-3961-e217-214a" page="" number="1" type="unit">
@@ -625,13 +625,13 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="6782-ea66-2f37-a92b" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
-            <category id="2394-dc67-21bd-be65" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
-            <category id="5276-5832-56ee-9f7d" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="f63c-3ee5-4e2a-c9dc" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
-            <category id="c7a2-3749-2e7c-ca4d" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
-            <category id="a5a4-042d-e16d-c64e" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
-            <category id="21d4-a00a-9420-59d7" name="Chaos Cultists" entryId="0c0a-3974-d2ae-7e7b" primary="false"/>
+            <category id="8a44-65fb-a7ae-438c" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="8b3e-dd27-2109-b365" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
+            <category id="072e-d679-5232-e630" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="e3fe-9c42-d3b6-2d59" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
+            <category id="ece4-67ab-90e7-a74c" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
+            <category id="b1ef-aa22-b9f2-c16d" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
+            <category id="51d7-6255-c3fd-85c6" name="Chaos Cultists" entryId="0c0a-3974-d2ae-7e7b" primary="false"/>
           </categories>
         </selection>
         <selection id="7844-4b5e-1037-d0aa" name="Helbrute" entryId="65d2-4d61-d7fc-f838::5cae-15dc-4a5d-0b9b" page="" number="1" type="model">
@@ -718,13 +718,13 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="6047-f7f2-4b66-8ba9" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
-            <category id="5e39-a1b3-1920-7016" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="true"/>
-            <category id="bc12-608f-b40a-351c" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="c7b5-753a-cb99-e225" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
-            <category id="8a16-e330-8869-e4ed" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
-            <category id="787c-2b23-9a83-5b07" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
-            <category id="7534-b295-e241-dfe2" name="Helbrute" entryId="1559-2058-167a-71c9" primary="false"/>
+            <category id="396a-3e2d-a27f-8bd8" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
+            <category id="987d-fa2f-a266-31eb" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="true"/>
+            <category id="ee5b-6e50-387b-cc72" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="ccc1-390d-21a7-6f2e" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
+            <category id="9b68-01a7-20de-7ea8" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
+            <category id="74df-f212-b466-33bb" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
+            <category id="0269-be9e-4eb2-f5aa" name="Helbrute" entryId="1559-2058-167a-71c9" primary="false"/>
           </categories>
         </selection>
         <selection id="164b-adeb-8d72-a21d" name="Scarab Occult Terminators" entryId="742d-777b-2b31-5e71::c8ba-1df2-c188-f6b8" page="" number="1" type="unit">
@@ -926,15 +926,15 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="7f17-b7ce-cac7-f0ef" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="true"/>
-            <category id="a92b-697c-7e43-d7d4" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="362e-76fb-20a1-9546" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
-            <category id="656e-3b1a-a556-c86b" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
-            <category id="28bf-dc77-d4c5-c703" name="Terminator" entryId="36b8-cf23-7648-ece9" primary="false"/>
-            <category id="8d93-552b-e564-7c20" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
-            <category id="aea5-0d30-28f2-9610" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
-            <category id="ff59-6888-b68e-aaf2" name="Scarab Occult Terminators" entryId="a277-8b97-4b35-7475" primary="false"/>
-            <category id="4789-892a-73e1-55dc" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
+            <category id="c5df-5504-fead-ec66" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="true"/>
+            <category id="6875-f438-4c22-640a" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="3242-e327-2f51-b707" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
+            <category id="aa33-7b77-0aef-1568" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
+            <category id="d796-9826-05f1-f842" name="Terminator" entryId="36b8-cf23-7648-ece9" primary="false"/>
+            <category id="a759-532a-eae0-a7e5" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
+            <category id="6600-12fb-2d7e-6d4d" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
+            <category id="0e6c-458d-0931-c276" name="Scarab Occult Terminators" entryId="a277-8b97-4b35-7475" primary="false"/>
+            <category id="baeb-6be0-fb40-bd3f" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
           </categories>
         </selection>
         <selection id="f702-2b34-98f7-26a7" name="Heldrake" entryId="0c61-92af-76ea-52e3::0d77-1f37-3b32-c978" page="" number="1" type="model">
@@ -1058,16 +1058,16 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="b481-4e4c-31cd-a77f" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
-            <category id="9cae-e40c-c8d3-544f" name="Daemon" entryId="0bc5-6451-5612-4a25" primary="false"/>
-            <category id="7d0b-a8e8-ce5d-ba5a" name="Daemon Engine" entryId="c35d-97e7-5b2a-0a70" primary="false"/>
-            <category id="fc23-c747-f31d-89b7" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
-            <category id="6c84-31c3-b37e-9edd" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="125a-1e02-5a6e-7d73" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="eb7f-1d3f-8c5a-0fd2" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
-            <category id="a128-5859-88c0-8a62" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
-            <category id="bc65-a036-f42c-f5a2" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
-            <category id="f5ac-2896-7727-4572" name="Heldrake" entryId="810e-a919-a9ed-d08f" primary="false"/>
+            <category id="d427-bc7f-9830-9c57" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
+            <category id="8e77-2da0-d2be-98e8" name="Daemon" entryId="0bc5-6451-5612-4a25" primary="false"/>
+            <category id="ec39-0642-f277-2928" name="Daemon Engine" entryId="c35d-97e7-5b2a-0a70" primary="false"/>
+            <category id="4152-99f6-6718-ab4b" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
+            <category id="2b1f-d201-5972-e485" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="0f0d-f9bf-d29e-f831" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="9361-989c-d32b-071d" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
+            <category id="a726-3b23-05b8-c979" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
+            <category id="b273-fb64-678e-6693" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
+            <category id="7554-890f-5e7c-f70f" name="Heldrake" entryId="810e-a919-a9ed-d08f" primary="false"/>
           </categories>
         </selection>
         <selection id="435d-c1b1-6ca4-add5" name="Exalted Sorcerer" entryId="59cc-6c0e-be67-9701::9dc2-52bf-4cec-9183" number="1" type="model">
@@ -1222,16 +1222,16 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="cb18-d1f7-802e-2537" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
-            <category id="61e4-f434-9f10-f539" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="fed2-2fce-c5eb-71f4" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
-            <category id="f4bc-e8c0-6575-5703" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
-            <category id="1619-86cf-3145-30bf" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
-            <category id="986f-4dbe-374b-dd1e" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="9bee-6ecb-e592-fc6f" name="Sorcerer" entryId="68f9-33bb-bd2b-c777" primary="false"/>
-            <category id="5d25-b0b7-214d-7fdd" name="Exalted Sorcerer" entryId="009b-907d-77fd-74b7" primary="false"/>
-            <category id="fe1e-70a8-1a09-a413" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
-            <category id="fe7a-db1d-c8f4-7508" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
+            <category id="1bea-dfd6-1186-60b8" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
+            <category id="afc4-d896-526e-28b4" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="83f4-347c-14c3-f9dc" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
+            <category id="985e-a216-f458-ac02" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
+            <category id="7413-d87a-0cfb-c550" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
+            <category id="3c46-1d3b-c82d-9c5a" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="17a3-1482-f7f1-4656" name="Sorcerer" entryId="68f9-33bb-bd2b-c777" primary="false"/>
+            <category id="6323-603b-c769-659b" name="Exalted Sorcerer" entryId="009b-907d-77fd-74b7" primary="false"/>
+            <category id="27b4-7119-afa6-370d" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
+            <category id="4de7-b3de-b064-1dd7" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
           </categories>
         </selection>
       </selections>
@@ -1254,22 +1254,24 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
         <publication id="28ec-711c-pubN73170" name="Chapter Approved 2017"/>
       </publications>
       <categories>
-        <category id="a096-2d22-32eb-90e9" name="Uncategorised" entryId="(No Category)" primary="false"/>
-        <category id="ae49-a92f-2e90-bbb9" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
-        <category id="63b4-3f8f-d19e-e04b" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false"/>
-        <category id="80ea-767b-676f-fd3e" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="false"/>
-        <category id="0da0-b489-cb8c-7511" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="false"/>
-        <category id="9b13-8c11-7c63-ca95" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="false"/>
-        <category id="d792-cac2-d360-452f" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="false"/>
-        <category id="cc52-f3b3-c13a-2852" name="Flyer" entryId="e888-1504-aa61-95ff" primary="false"/>
-        <category id="af70-c2ae-c17c-2933" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="false"/>
-        <category id="eb8c-e51b-1974-54e3" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
-        <category id="9a08-b954-6cc4-2ae4" name="Relic Elites" entryId="8d86-9490-0f7d-a5b5" primary="false"/>
-        <category id="8f9d-f550-0932-c3db" name="Relic Heavy Support" entryId="6c4c-a416-b8cb-c380" primary="false"/>
-        <category id="8a1b-fabb-5428-1d4d" name="Relic HQ" entryId="655f-e142-dfa9-11a4" primary="false"/>
+        <category id="164e-93b3-dad5-d4a6" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="32cd-5b00-2a9d-d9b9" name="Configuration" entryId="fcff-0f21-93e6-1ddc" primary="false"/>
+        <category id="9094-15c6-e722-bbdb" name="Stratagems" entryId="c845-c72c-6afe-3fc2" primary="false"/>
+        <category id="54f5-8057-f773-65d1" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
+        <category id="2890-5b59-ecfa-0ef1" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false"/>
+        <category id="115d-583d-4d7c-87cb" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="false"/>
+        <category id="86f8-9d7c-e666-3942" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="false"/>
+        <category id="9695-06d1-8df1-ee53" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="false"/>
+        <category id="c924-cc08-19bb-47c9" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="false"/>
+        <category id="f20d-d643-80e0-bf35" name="Flyer" entryId="e888-1504-aa61-95ff" primary="false"/>
+        <category id="2236-9d3b-cdf5-a309" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="false"/>
+        <category id="1f3a-5d64-6b7f-6bfe" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
+        <category id="052a-19cd-701a-1b28" name="Relic Elites" entryId="8d86-9490-0f7d-a5b5" primary="false"/>
+        <category id="16f8-82cc-5e83-1374" name="Relic Heavy Support" entryId="6c4c-a416-b8cb-c380" primary="false"/>
+        <category id="51f9-3214-95a7-a84b" name="Relic HQ" entryId="655f-e142-dfa9-11a4" primary="false"/>
       </categories>
     </force>
-    <force id="936b-73af-17b6-bb1f" name="Super-Heavy Auxiliary Detachment" entryId="224b-1070-218f-fdf4" catalogueId="c553-15f3-3890-be39" catalogueRevision="65" catalogueName="Chaos - Thousand Sons">
+    <force id="936b-73af-17b6-bb1f" name="Super-Heavy Auxiliary Detachment" entryId="224b-1070-218f-fdf4" catalogueId="c553-15f3-3890-be39" catalogueRevision="67" catalogueName="Chaos - Thousand Sons">
       <rules>
         <rule id="b363-f50e-a470-ff87" name="Daemonic Ritual" hidden="false">
           <description>Instead of moving in their Movement phase, any THOUSAND SONS CHARACTER can, at the end of their Movement phase, attempt to summon a TZEENTCH DAEMON unit with this ability by performing a Daemonic Ritual (the character cannot do so if they arrived as reinforcements this turn).
@@ -1421,7 +1423,7 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
                 <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
               </costs>
               <categories>
-                <category id="35ef-c5a7-6ac4-fb21" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
+                <category id="abca-81ae-5ab9-4032" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
               </categories>
             </selection>
           </selections>
@@ -1431,17 +1433,17 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="a8c9-14d5-1a20-5cce" name="Daemon" entryId="0bc5-6451-5612-4a25" primary="false"/>
-            <category id="302c-94d4-cbd4-c68f" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
-            <category id="d1ce-0928-28df-7d70" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
-            <category id="1865-61b8-02fc-05a1" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
-            <category id="38ea-8583-a491-cc53" name="Lord of War" entryId="c888f08a-6cea-4a01-8126-d374a9231554" primary="true"/>
-            <category id="a6fa-4105-a963-ecab" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="ebd3-6838-d805-9c8c" name="Monster" entryId="3b77-decb-d468-6bcc" primary="false"/>
-            <category id="dd6c-721f-052b-de81" name="Primarch" entryId="298f-d173-2159-919f" primary="false"/>
-            <category id="b58c-3111-5e6e-e241" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
-            <category id="ecfc-b309-e28a-029e" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="1ae6-216b-ca33-a8ef" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
+            <category id="9021-7b7c-c66b-8a2a" name="Daemon" entryId="0bc5-6451-5612-4a25" primary="false"/>
+            <category id="5b1f-4737-bb7b-cd6e" name="Faction: Heretic Astartes" entryId="ca10-a5dd-f54f-0ed5" primary="false"/>
+            <category id="0209-3791-7ac4-0b7a" name="Faction: Thousand Sons" entryId="5723-c15a-5882-1f57" primary="false"/>
+            <category id="a50c-2f1f-991c-802d" name="Faction: Tzeentch" entryId="012f-abfc-397b-3519" primary="false"/>
+            <category id="4a07-92a3-8550-3a86" name="Lord of War" entryId="c888f08a-6cea-4a01-8126-d374a9231554" primary="true"/>
+            <category id="3404-46d1-2c08-e574" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="ead3-27e7-d726-59d4" name="Monster" entryId="3b77-decb-d468-6bcc" primary="false"/>
+            <category id="6de6-183d-cb58-586e" name="Primarch" entryId="298f-d173-2159-919f" primary="false"/>
+            <category id="2f20-0cf3-fb5e-b49f" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
+            <category id="0196-6bf1-f81f-64e3" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="9fec-29bc-b2ae-cc01" name="Faction: Chaos" entryId="5cf1-acf2-ca3b-c2e5" primary="false"/>
           </categories>
         </selection>
         <selection id="9c8a-deaf-ef60-6c94" name="Cults of the Legion" entryId="7022-801c-0aaa-cf43::5708-e013-87c5-a84f" number="1" type="upgrade">
@@ -1460,7 +1462,7 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
             <cost name="pts" typeId="points" value="0.0"/>
           </costs>
           <categories>
-            <category id="ed3b-3a16-1ede-df87" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="938b-b346-b901-168a" name="Configuration" entryId="fcff-0f21-93e6-1ddc" primary="true"/>
           </categories>
         </selection>
       </selections>
@@ -1483,10 +1485,12 @@ For the purposes of this ability, a Rapid Fire bolt weapon is any weapon with th
         <publication id="28ec-711c-pubN73170" name="Chapter Approved 2017"/>
       </publications>
       <categories>
-        <category id="5474-324e-e7ea-2dfd" name="Uncategorised" entryId="(No Category)" primary="false"/>
-        <category id="e3f8-069a-a963-af45" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
-        <category id="21df-740f-9ae7-af6e" name="Lord of War" entryId="c888f08a-6cea-4a01-8126-d374a9231554" primary="false"/>
-        <category id="bcb1-35d4-340d-d671" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
+        <category id="996a-f6bd-b58b-a888" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="6229-3ddb-142b-b883" name="Configuration" entryId="fcff-0f21-93e6-1ddc" primary="false"/>
+        <category id="b2c6-2710-10e8-c2bb" name="Stratagems" entryId="c845-c72c-6afe-3fc2" primary="false"/>
+        <category id="3b77-05ed-7a8c-03c3" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
+        <category id="c9ed-01cd-2b69-cf05" name="Lord of War" entryId="c888f08a-6cea-4a01-8126-d374a9231554" primary="false"/>
+        <category id="a172-1b8d-949f-a5c1" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
       </categories>
     </force>
   </forces>

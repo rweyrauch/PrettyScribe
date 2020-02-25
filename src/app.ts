@@ -22,31 +22,16 @@ import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
 import JSZip from 'jszip';
 
-function removeAllChildren(parent: Element | null): void {
-  if (parent) {
-    let first = parent.firstElementChild;
-    while (first) {
-      first.remove();
-      first = parent.firstElementChild;
-    }
-  }
-}
-
 function cleanup(): void {
-  const rosterTitle = document.getElementById('roster-title');
-  removeAllChildren(rosterTitle);
-
-  const rosterList = document.getElementById('roster-lists');
-  removeAllChildren(rosterList);
-
-  const forceUnits = document.getElementById('force-units');
-  removeAllChildren(forceUnits);
+  $('#roster-title').empty();
+  $('#roster-lists').empty();
+  $('#force-units').empty();
 }
 
 function getFileExtension(filename: string): string {
   const substrings = filename.split('.');
   if (substrings.length > 1) {
-    return substrings[substrings.length-1];
+    return substrings[substrings.length-1].toLowerCase();
   }
   return "";
 }
@@ -62,9 +47,9 @@ function parseXML(xmldata: string) {
       const gameType = info.getAttributeNode("gameSystemName")?.nodeValue;
       if (!gameType) return;
 
-      const rosterTitle = document.getElementById('roster-title');
-      const rosterList = document.getElementById('roster-lists');
-      const forceUnits = document.getElementById('force-units');
+      const rosterTitle = $('#roster-title')[0];
+      const rosterList = $('#roster-lists')[0];
+      const forceUnits = $('#force-units')[0];
 
       if (gameType == "Warhammer 40,000 8th Edition") {
         let roster = Create40kRoster(doc);
@@ -111,13 +96,14 @@ function parseXML(xmldata: string) {
       //   }
       // }
       else {
-        alert("Unsupported game type: " + gameType);
+          $('#errorText').html('PrettyScribe does not support game type \'' + gameType + '\'.');
+          $('#errorDialog').modal();    
       }
     }
   }
 }
 
-function handleFileSelect(event: Event) {
+$('#roster-file').on("change", function handleFileSelect(event: Event) {
   const input = event.target as HTMLInputElement;
   const files = input.files;
 
@@ -129,7 +115,7 @@ function handleFileSelect(event: Event) {
     for (let f of files) {
 
       const fileExt = getFileExtension(f.name);
-      if (fileExt == "rosz") {
+      if (fileExt === "rosz" || fileExt.length === 0) {
         let zip = new JSZip();
         zip.loadAsync(f).then(function(zip) {
           zip.forEach(function(path, file) {
@@ -137,9 +123,12 @@ function handleFileSelect(event: Event) {
               parseXML(xmldata);
             });
           })
+        }).catch(function(reason) {
+          $('#errorText').html('Failed to load compressed roster file, ' + f.name + ', reason ' + reason);
+          $('#errorDialog').modal();  
         });
       }
-      else if (fileExt == "ros") {
+      else if (fileExt === "ros") {
         const reader = new FileReader();
         reader.onload = function (e) {
           const re = e.target;
@@ -154,11 +143,9 @@ function handleFileSelect(event: Event) {
         reader.readAsDataURL(f);
       }
       else {
-        alert("PrettyScribe only supports .ros and .rosz files.");
+        $('#errorText').html('PrettyScribe only supports .ros and .rosz files.  Selected file is a \'' + fileExt + "\' file.");
+        $('#errorDialog').modal();
       }
     }
   }
-}
-
-const finput = document.getElementById('roster-file');
-if (finput) finput.addEventListener('change', handleFileSelect, false);
+});
