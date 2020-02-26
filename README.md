@@ -14,3 +14,29 @@ PrettyScribe is very much a work in progress.   Suggestions, bugs, comments are 
 
 If you actually use this tool and find it useful let me know.
 
+## Building
+
+### Quick Start
+
+Prettyscribe is written in Typescript and uses npm for initialization, compiling and launching a 
+test server at http://localhost:8080.
+
+    $ git clone https://github.com/rweyrauch/PrettyScribe.git
+    $ cd PrettyScribe
+    $ npm install
+    $ npm start
+
+### Details
+
+Prettyscribe uses webpack for compilation of the Typescript into Javascript and to bundle the
+Javascript source into a single Javascript file.
+
+Prettyscribe can be built in either a debug or production release.   The default is a debug build.
+To build PrettyScribe for debugging:
+
+    $ npm run build
+
+To build PrettyScribe for release:
+
+    $ npm run buildprod
+
