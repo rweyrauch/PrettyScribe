@@ -16,6 +16,8 @@
 
 import { Create40kRoster } from "./roster40k";
 import { Renderer40k } from "./renderer40k";
+import { Create30kRoster } from "./roster30k";
+import { Renderer30k } from "./renderer30k";
 import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
 import { CreateWarcryRoster } from "./rosterWarcry";
@@ -84,16 +86,24 @@ function parseXML(xmldata: string) {
           renderer.render(rosterTitle, rosterList, forceUnits);
         }
       }
-      // TODO: add support for 30k and Apocalypse
-      // else if ((gameType == "Warhammer 30,000 - The Horus Heresy") ||
-      //          (gameType == "Warhammer 40,000: Apocalypse")) {
-      //   let roster = Create40kRoster(doc);
-      //   if (roster) {
-      //     if (roster._forces.length > 0) {
-      //       const renderer: Renderer40k = new Renderer40k(roster);
-      //       renderer.render(rosterTitle, rosterList, forceUnits);
-      //     }
-      //   }
+      else if (gameType == "Warhammer 30,000 - The Horus Heresy") {
+          let roster = Create30kRoster(doc);
+          if (roster) {
+            if (roster._forces.length > 0) {
+              const renderer: Renderer30k = new Renderer30k(roster);
+              renderer.render(rosterTitle, rosterList, forceUnits);
+            }
+          }
+      }
+      // TODO: add (proper) support for Apocalypse
+      // else if (gameType == "Warhammer 40,000: Apocalypse") {
+      //    let roster = Create40kRoster(doc);
+      //    if (roster) {
+      //      if (roster._forces.length > 0) {
+      //        const renderer: Renderer40k = new Renderer40k(roster);
+      //        renderer.render(rosterTitle, rosterList, forceUnits);
+      //      }
+      //    }
       // }
       else {
           $('#errorText').html('PrettyScribe does not support game type \'' + gameType + '\'.');
