@@ -138,6 +138,13 @@ export class Model30k {
     _psychicPowers: PsychicPower30k[] = [];
 };
 
+export class Fortification30k {
+
+    _name: string = "";
+    _composition: string = "";
+    _type: string = "";
+};
+
 export class Unit30k {
 
     _name: string = "";

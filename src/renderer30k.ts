@@ -241,7 +241,7 @@ export class Renderer30k implements Renderer {
         this._currentY += height;
     }
 
-    private renderSpells(ctx: CanvasRenderingContext2D, spells: PsychicPower30k[], columnWidths: number[] | null): void {
+    private renderPowers(ctx: CanvasRenderingContext2D, powers: PsychicPower30k[], columnWidths: number[] | null): void {
         ctx.font = '12px sans-serif';
 
         const height = 22;
@@ -251,7 +251,7 @@ export class Renderer30k implements Renderer {
 
         ctx.save();
 
-        for (const spell of spells) {
+        for (const power of powers) {
             let ci = 0;
             let x = this._currentX;
 
@@ -260,20 +260,20 @@ export class Renderer30k implements Renderer {
 
             ctx.fillStyle = Renderer30k._blackColor;
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, spell._name.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, power._name.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, spell._warpCharge.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, power._warpCharge.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, spell._range.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, power._range.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
             this._currentY += 4;
-            this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w);
+            this._currentY = RenderParagraph(ctx, power._details, x, this._currentY, w);
             this._currentY += 2;
             x += w;
 
@@ -723,7 +723,7 @@ export class Renderer30k implements Renderer {
         ctx.fillStyle = Renderer30k._blackColor;
 
         let weapons: Weapon30k[] = [];
-        let spells: PsychicPower30k[] = [];
+        let powers: PsychicPower30k[] = [];
         let psykers: Psyker30k[] = [];
         let models: Model30k[] = [];
         const unitLabelWidths: number[] = [];
@@ -748,8 +748,8 @@ export class Renderer30k implements Renderer {
             for (let weapon of model._weapons) {
                 weapons.push(weapon);
             }
-            for (let spell of model._psychicPowers) {
-                spells.push(spell);
+            for (let power of model._psychicPowers) {
+                powers.push(power);
             }
             if (model._psyker) {
                 psykers.push(model._psyker);
@@ -820,14 +820,14 @@ export class Renderer30k implements Renderer {
             this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
         }
 
-        if (spells.length > 0) {
+        if (powers.length > 0) {
             const spellLabelWidths: number[] = [];
             this._spellLabelWidthNormalized.forEach(element => {
                 spellLabelWidths.push(element * this._maxWidth);
             });
             this.renderLine(ctx);
             this.renderTableHeader(ctx, Renderer30k._spellLabels, spellLabelWidths);
-            this.renderSpells(ctx, spells, spellLabelWidths);
+            this.renderPowers(ctx, powers, spellLabelWidths);
         }
 
         if (unit._abilities.size > 0) {
