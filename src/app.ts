@@ -22,7 +22,8 @@ import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
 import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
-import JSZip from 'jszip';
+import JSZip from "jszip";
+import { JSZipObject } from 'jszip';
 
 function cleanup(): void {
   $('#roster-title').empty();
@@ -127,9 +128,9 @@ $('#roster-file').on("change", function handleFileSelect(event: Event) {
       const fileExt = getFileExtension(f.name);
       if (fileExt === "rosz" || fileExt.length === 0) {
         let zip = new JSZip();
-        zip.loadAsync(f).then(function(zip) {
-          zip.forEach(function(path, file) {
-            file.async("string").then(function(xmldata) {
+        zip.loadAsync(f).then(function(zip: JSZip) {
+          zip.forEach(function(path: string, file: JSZipObject) {
+            file.async("text").then(function(xmldata) {
               parseXML(xmldata);
             });
           })
