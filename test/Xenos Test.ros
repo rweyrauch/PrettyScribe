@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<roster id="7707-a6e2-f34f-217c" name="Xenos Test" battleScribeVersion="2.03" gameSystemId="28ec-711c-d87f-3aeb" gameSystemName="Warhammer 40,000 8th Edition" gameSystemRevision="122" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+<roster id="7707-a6e2-f34f-217c" name="Xenos Test" battleScribeVersion="2.03" gameSystemId="28ec-711c-d87f-3aeb" gameSystemName="Warhammer 40,000 8th Edition" gameSystemRevision="124" xmlns="http://www.battlescribe.net/schema/rosterSchema">
   <costs>
     <cost name=" PL" typeId="e356-c769-5920-6e14" value="51.0"/>
     <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="-2.0"/>
     <cost name="pts" typeId="points" value="831.0"/>
   </costs>
   <forces>
-    <force id="126b-8675-2c8a-16f2" name="Battalion Detachment +5CP" entryId="564e-55d5-79bc-a4d7" catalogueId="11b5-77b9-31bf-7b74" catalogueRevision="71" catalogueName="Orks">
+    <force id="126b-8675-2c8a-16f2" name="Battalion Detachment +5CP" entryId="564e-55d5-79bc-a4d7" catalogueId="11b5-77b9-31bf-7b74" catalogueRevision="73" catalogueName="Orks">
       <rules>
         <rule id="fac1-6afc-e5c9-35c2" name="Dis Is Ours! Zog Off!" hidden="false">
           <description>If your army is battle-forged, all Troops units in Ork Detachments gain this ability.  Such a unit that is within range of an objective Markers (as specified in the mission) controls the objective marker even if there are more enemy models within range of that objective marker.  If an enemy unit within range of the same objective marker has a similar ability, then the objective marker is controlled by the player who has the most models within range of it as normal.</description>
@@ -36,7 +36,7 @@
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="e6be-8747-0c86-2a4b" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="true"/>
+            <category id="c29c-cc3f-c9d9-4198" name="Configuration" entryId="fcff-0f21-93e6-1ddc" primary="true"/>
           </categories>
         </selection>
         <selection id="bed9-d4e6-ca06-61f7" name="Big Mek [Legends]" entryId="a4cb-236b-91d7-6343::48c5-847b-42a3-54a9" number="1" type="unit">
@@ -133,7 +133,7 @@
                 <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
               </costs>
               <categories>
-                <category id="e85f-d88b-7a30-e395" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
+                <category id="1c5c-a85e-8f06-9c57" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
               </categories>
             </selection>
             <selection id="3446-358c-9f09-b9f3" name="Grot Oiler" entryId="a4cb-236b-91d7-6343::7307-e52d-66f8-53dc::9459-87f3-a9a1-6840" number="1" type="model">
@@ -165,11 +165,11 @@ When rolling to wound this unit, use the Big Mek’s Toughness while it is on th
                 <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
               </costs>
               <categories>
-                <category id="b9d1-3449-2d81-4776" name="Gretchin" entryId="0b2c-1505-90c2-24ed" primary="false"/>
-                <category id="9a64-5302-0bbd-27a6" name="Grot Oiler" entryId="a3f7-e6a3-3e31-c96f" primary="false"/>
-                <category id="e281-1f7c-1a9e-32c3" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-                <category id="9557-97f9-650e-9a70" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-                <category id="8f7f-b8c7-cebf-0214" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+                <category id="8b92-3350-1977-b545" name="Gretchin" entryId="0b2c-1505-90c2-24ed" primary="false"/>
+                <category id="23c3-389a-4743-f2af" name="Grot Oiler" entryId="a3f7-e6a3-3e31-c96f" primary="false"/>
+                <category id="add6-fc51-2b9d-fba8" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+                <category id="0988-611a-0607-7156" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+                <category id="1b27-d351-0dae-9b0a" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
               </categories>
             </selection>
             <selection id="d739-c937-cafc-f6c1" name="Ard as Nails" entryId="a4cb-236b-91d7-6343::7b68-cc95-980e-d273::7806-6bc9-8199-a247::e940-4535-ae9d-ac2a" entryGroupId="a4cb-236b-91d7-6343::7b68-cc95-980e-d273::b9da-33f9-4b37-d3c8" number="1" type="upgrade">
@@ -193,12 +193,12 @@ When rolling to wound this unit, use the Big Mek’s Toughness while it is on th
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="fd33-a170-c0e0-5c36" name="Big Mek" entryId="0a26-a35d-81bb-13ac" primary="false"/>
-            <category id="15c8-257c-6feb-0c11" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="9b61-3d39-395f-f535" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="a418-a356-3d09-f25a" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="cc50-f917-e809-a22d" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
-            <category id="eb66-3e84-0c55-c3d3" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="ae8a-359d-0441-c3ab" name="Big Mek" entryId="0a26-a35d-81bb-13ac" primary="false"/>
+            <category id="c03c-07b2-bd38-237b" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="1567-3896-cd79-56ee" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="9bc2-0cac-6bc9-67d3" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="2f46-2c07-2aa8-93fd" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
+            <category id="15ce-8bb8-9224-354c" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
           </categories>
         </selection>
         <selection id="1bae-5021-f539-ee73" name="Boyz" entryId="e891-db86-4983-2a05::4923-2dbf-7fd5-8828" number="1" type="unit">
@@ -311,11 +311,11 @@ In addition, immediately make an additional hit roll against the same target usi
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="8027-2fbd-9dea-a772" name="Boyz" entryId="1684-73bb-15f2-2dd3" primary="false"/>
-            <category id="ce21-2401-7278-610e" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="17a2-ea9d-01fa-802b" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="6da6-de94-1652-0f97" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="b5f6-b540-e819-87c7" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="7763-233f-bcca-4722" name="Boyz" entryId="1684-73bb-15f2-2dd3" primary="false"/>
+            <category id="134c-d074-a265-e7d1" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="bd4d-6016-1692-2f30" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="6a36-fab5-8009-ca52" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="e361-bba5-5857-8910" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
           </categories>
         </selection>
         <selection id="fbeb-a0c7-9c64-9cd2" name="Boyz" entryId="e891-db86-4983-2a05::4923-2dbf-7fd5-8828" number="1" type="unit">
@@ -571,11 +571,11 @@ In addition, immediately make an additional hit roll against the same target usi
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="daea-3b50-418b-73a5" name="Boyz" entryId="1684-73bb-15f2-2dd3" primary="false"/>
-            <category id="1ca1-acbc-2b9a-eb11" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="1691-e7fd-c90d-6fa0" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="e461-bbbf-82e8-08c3" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="6c4b-fba0-9b0b-55da" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="991e-86c3-97a9-452c" name="Boyz" entryId="1684-73bb-15f2-2dd3" primary="false"/>
+            <category id="02be-899a-610b-5043" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="4c8b-9ced-85de-8249" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="1f60-db71-018b-331b" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="1664-f4ad-c773-4e55" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
           </categories>
         </selection>
         <selection id="13c9-1adb-9996-be32" name="Boyz" entryId="e891-db86-4983-2a05::4923-2dbf-7fd5-8828" number="1" type="unit">
@@ -783,11 +783,11 @@ In addition, immediately make an additional hit roll against the same target usi
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="c1d9-f55f-7527-4170" name="Boyz" entryId="1684-73bb-15f2-2dd3" primary="false"/>
-            <category id="0403-31ab-87ef-98dd" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="23fd-1b6c-9098-c165" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="e02c-839b-b59d-47aa" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="8f79-df61-2bdd-fa32" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
+            <category id="4913-ff51-eafe-325d" name="Boyz" entryId="1684-73bb-15f2-2dd3" primary="false"/>
+            <category id="fb4a-ffd9-3684-6791" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="9e07-9e2b-0059-4439" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="6ae6-f28d-670e-ea46" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="e5a3-2ef0-ee1c-6e77" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="true"/>
           </categories>
         </selection>
         <selection id="40b2-ea6b-4d99-e49d" name="Weirdboy" entryId="43ed-f88f-fe67-90fd::4087-8bfc-973a-f88b" number="1" type="unit">
@@ -882,13 +882,13 @@ In addition, immediately make an additional hit roll against the same target usi
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="5e89-47b2-562a-7c2b" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="8098-764b-6c64-ccc3" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
-            <category id="db09-58d0-6f82-a159" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="8b7c-0947-8499-d833" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
-            <category id="a6ac-90a7-fdb5-ddf6" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="e889-6561-1ca0-fcbe" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="1e7a-0ab8-7dcc-ffc9" name="Weirdboy" entryId="e480-8b6a-32d0-53cc" primary="false"/>
+            <category id="d2ec-b043-b401-7255" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="de99-a3d7-8973-acf2" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="true"/>
+            <category id="64e2-89bf-103c-3e90" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="0762-0e0a-9e59-c2b8" name="Psyker" entryId="e691-aad7-d21c-1023" primary="false"/>
+            <category id="d70d-c2c3-f918-bfeb" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="9c98-7345-825d-c56e" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="e10c-09a1-3a5d-83a8" name="Weirdboy" entryId="e480-8b6a-32d0-53cc" primary="false"/>
           </categories>
         </selection>
         <selection id="398a-a852-9848-79b7" name="Painboy on Warbike [Legends]" entryId="3b48-7738-9fd4-617a::6f08-a7c2-fdc2-9565" number="1" type="unit">
@@ -1009,13 +1009,13 @@ In addition, immediately make an additional hit roll against the same target usi
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="996f-0efe-a0b7-e58a" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
-            <category id="5108-3bdd-fb67-fac2" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="d92a-862c-c091-5721" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="4b19-e757-0f95-6e7e" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
-            <category id="97dc-1a5d-c32d-13cb" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="true"/>
-            <category id="d647-5f9e-db8a-abf4" name="Painboy" entryId="7fa5-fda7-c9a6-5f51" primary="false"/>
-            <category id="5971-257f-7314-623d" name="Speed Freeks" entryId="258d-e4cb-6f35-fe20" primary="false"/>
+            <category id="c4e2-381c-f832-cbce" name="Character" entryId="ef18-746a-369f-43a4" primary="false"/>
+            <category id="f4ef-6627-8dc5-550b" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="6665-5118-ae23-a95b" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="3de5-a88d-8277-c848" name="Infantry" entryId="3d52-fccf-10c0-3fae" primary="false"/>
+            <category id="eddc-e3ca-e814-0aa2" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="true"/>
+            <category id="3dcf-0c40-8310-1d9e" name="Painboy" entryId="7fa5-fda7-c9a6-5f51" primary="false"/>
+            <category id="63ea-207e-b3b2-96a8" name="Speed Freeks" entryId="258d-e4cb-6f35-fe20" primary="false"/>
           </categories>
         </selection>
         <selection id="3b85-0fdf-06fe-a15c" name="Deff Dread Mob" entryId="9f98-1478-b761-401b::7e8f-2745-5160-1161" number="1" type="unit">
@@ -1116,7 +1116,7 @@ In addition, immediately make an additional hit roll against the same target usi
                     <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
                   </costs>
                   <categories>
-                    <category id="5bae-00e6-b9d7-ad54" name="Artillery" entryId="99f3-bf12-63e0-0b7c" primary="false"/>
+                    <category id="2885-2c2b-0fc5-029f" name="Artillery" entryId="99f3-bf12-63e0-0b7c" primary="false"/>
                   </categories>
                 </selection>
                 <selection id="e05b-e896-3a9f-edad" name="Dread Klaw" entryId="9f98-1478-b761-401b::2a97-09bc-7382-d00d::4a86-c7ac-85e6-1182" entryGroupId="9f98-1478-b761-401b::d9e6-cacb-1545-6f0c" number="1" type="upgrade">
@@ -1138,7 +1138,7 @@ In addition, immediately make an additional hit roll against the same target usi
                     <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
                   </costs>
                   <categories>
-                    <category id="b602-79a0-9f91-b591" name="Artillery" entryId="99f3-bf12-63e0-0b7c" primary="false"/>
+                    <category id="757e-f10b-a3b4-d277" name="Artillery" entryId="99f3-bf12-63e0-0b7c" primary="false"/>
                   </categories>
                 </selection>
               </selections>
@@ -1155,11 +1155,11 @@ In addition, immediately make an additional hit roll against the same target usi
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="2ed4-4e65-ee3b-6463" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="ec55-e782-4ef4-a632" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="f801-7490-2ffc-81bf" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="13b7-84a0-5b05-05f0" name="Deff Dread" entryId="333e-4a17-5197-ddb3" primary="false"/>
-            <category id="8099-701a-63a2-a82f" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
+            <category id="7b46-95c8-4320-90ea" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="8932-e44f-5be9-f357" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="91f1-ae2a-574a-b71a" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="5645-229a-aed7-ac0d" name="Deff Dread" entryId="333e-4a17-5197-ddb3" primary="false"/>
+            <category id="9f32-a164-3d4d-804a" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
           </categories>
         </selection>
         <selection id="81f6-e813-fe98-8673" name="Killa Kans" entryId="3ab3-9709-48c9-5408::963f-1e91-85d2-f6d6" number="1" type="unit">
@@ -1255,12 +1255,12 @@ In addition, immediately make an additional hit roll against the same target usi
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="6f29-da08-67b0-cacc" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="3b7d-9b1d-88d1-8758" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="9f93-f5c8-e265-0628" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="2a6f-847e-6f73-7194" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
-            <category id="e7bb-0007-4d99-078e" name="Killa Kans" entryId="06fd-96ed-49f8-8b07" primary="false"/>
-            <category id="db5c-57f4-1877-a64c" name="Gretchin" entryId="0b2c-1505-90c2-24ed" primary="false"/>
+            <category id="1978-a9a5-3ce1-a46f" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="38f7-df12-5303-760b" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="7a40-85f3-26c0-166c" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="0818-3040-b47d-3ab8" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="true"/>
+            <category id="311b-14c4-35e8-6c16" name="Killa Kans" entryId="06fd-96ed-49f8-8b07" primary="false"/>
+            <category id="1b81-e8ed-94f2-d063" name="Gretchin" entryId="0b2c-1505-90c2-24ed" primary="false"/>
           </categories>
         </selection>
         <selection id="a12e-822f-a02a-5119" name="Blitza-bommer" entryId="24a3-a4a4-34f7-ee58::73ba-a086-3038-c166" number="1" type="unit">
@@ -1389,13 +1389,13 @@ In addition, immediately make an additional hit roll against the same target usi
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="4cec-4cf2-4d4e-5bd3" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="82ec-c85b-1465-5c0e" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="8a78-1fef-cdb1-6066" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="b11d-b4a3-ec5e-de1a" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
-            <category id="011a-61f9-29a2-f148" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="1715-ccb9-c68c-0079" name="Blitza Bommer" entryId="854c-35a6-ff2b-b726" primary="false"/>
-            <category id="2977-2e34-5f35-5b38" name="Aircraft" entryId="d569-3d56-cd24-6a31" publicationId="82b3-73d0-72b2-3180" primary="false"/>
+            <category id="c332-7868-e0e8-86e9" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="583c-b1fd-6c2e-cd07" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="2915-a98e-83b5-acb4" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="a802-a738-23ee-bde5" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
+            <category id="28a6-8ab5-ff60-bcd0" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="8b64-8b6c-137b-ef62" name="Blitza Bommer" entryId="854c-35a6-ff2b-b726" primary="false"/>
+            <category id="d357-204c-c751-ad3f" name="Aircraft" entryId="d569-3d56-cd24-6a31" publicationId="82b3-73d0-72b2-3180" primary="false"/>
           </categories>
         </selection>
         <selection id="ad3c-a8d5-98e5-e8a0" name="Dakkajet" entryId="cd7a-a403-71cd-0269::826d-99ed-ff5d-7082" number="1" type="unit">
@@ -1491,13 +1491,13 @@ In addition, immediately make an additional hit roll against the same target usi
             <cost name="CP" typeId="2d3b-b544-ad49-fb75" value="0.0"/>
           </costs>
           <categories>
-            <category id="d794-f13e-e32c-c4f1" name="Dakkajet" entryId="92e8-1e87-bfe0-efce" primary="false"/>
-            <category id="f741-a116-5082-8722" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
-            <category id="e59b-e5f2-43a5-4a48" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
-            <category id="08bf-c7ce-c756-46d7" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
-            <category id="0738-341c-c965-06b3" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
-            <category id="74bd-e6a5-728c-c692" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
-            <category id="2c87-c75c-5e69-dd7e" name="Aircraft" entryId="d569-3d56-cd24-6a31" publicationId="82b3-73d0-72b2-3180" primary="false"/>
+            <category id="41d3-c20e-a74f-cc5a" name="Dakkajet" entryId="92e8-1e87-bfe0-efce" primary="false"/>
+            <category id="f3fe-5de5-a79f-4210" name="Faction: &lt;Clan&gt;" entryId="2ab6-8d0f-494d-38e2" primary="false"/>
+            <category id="93ee-f931-f66b-52e2" name="Faction: Ork" entryId="1c58-037f-7b58-1223" primary="false"/>
+            <category id="ab9b-f7e5-be37-22a8" name="Fly" entryId="3117-16d8-fcef-4f56" primary="false"/>
+            <category id="c49c-220b-5931-21ad" name="Flyer" entryId="e888-1504-aa61-95ff" primary="true"/>
+            <category id="38d9-5091-d6d7-89c7" name="Vehicle" entryId="c8fd-783f-3230-493e" primary="false"/>
+            <category id="6dc5-316d-eff6-0e92" name="Aircraft" entryId="d569-3d56-cd24-6a31" publicationId="82b3-73d0-72b2-3180" primary="false"/>
           </categories>
         </selection>
       </selections>
@@ -1522,19 +1522,21 @@ In addition, immediately make an additional hit roll against the same target usi
         <publication id="28ec-711c-pubN73170" name="Chapter Approved 2017"/>
       </publications>
       <categories>
-        <category id="8851-50c7-18e3-448f" name="Uncategorised" entryId="(No Category)" primary="false"/>
-        <category id="7261-ebb7-67d9-1b82" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
-        <category id="fd66-c83d-058f-72a0" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false"/>
-        <category id="efc3-f76e-1262-ec94" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="false"/>
-        <category id="e00a-035f-a34c-5ea6" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="false"/>
-        <category id="7671-3b46-63a6-1e54" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="false"/>
-        <category id="10cb-fddc-6f4b-51be" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="false"/>
-        <category id="dd6b-8bfa-e2cc-604f" name="Flyer" entryId="e888-1504-aa61-95ff" primary="false"/>
-        <category id="877f-1c95-f6be-e8b8" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="false"/>
-        <category id="223a-5472-e9f5-e913" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
-        <category id="c5e3-2fb9-34b6-98bc" name="Relic Elites" entryId="8d86-9490-0f7d-a5b5" primary="false"/>
-        <category id="14b9-7844-f106-d0d9" name="Relic Heavy Support" entryId="6c4c-a416-b8cb-c380" primary="false"/>
-        <category id="cbda-4158-8a19-7b8a" name="Relic HQ" entryId="655f-e142-dfa9-11a4" primary="false"/>
+        <category id="4ad4-36be-b715-2f3d" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="8e09-0c90-7306-9679" name="Configuration" entryId="fcff-0f21-93e6-1ddc" primary="false"/>
+        <category id="c7c4-0d9a-a7b8-8c87" name="Stratagems" entryId="c845-c72c-6afe-3fc2" primary="false"/>
+        <category id="31c2-f696-3737-2471" name="No Force Org Slot" entryId="ff36a6f3-19bf-4f48-8956-adacfd28fe74" primary="false"/>
+        <category id="10eb-7a19-fd97-f924" name="HQ" entryId="848a6ff2-0def-4c72-8433-ff7da70e6bc7" primary="false"/>
+        <category id="ca19-8c56-4581-18bd" name="Troops" entryId="5d76b6f5-20ae-4d70-8f59-ade72a2add3a" primary="false"/>
+        <category id="961f-1d02-17a9-6731" name="Elites" entryId="638d74c6-bd97-4de5-b65a-6aaa24e9f4b2" primary="false"/>
+        <category id="f279-c18c-7893-ae58" name="Fast Attack" entryId="c274d0b0-5866-44bc-9810-91c136ae7438" primary="false"/>
+        <category id="08a2-9525-d1ad-129b" name="Heavy Support" entryId="abf5fd55-9ac7-4263-8bc1-a9fb0a8fa6a6" primary="false"/>
+        <category id="20b5-d768-047c-8d5b" name="Flyer" entryId="e888-1504-aa61-95ff" primary="false"/>
+        <category id="28e7-5c4f-55e8-9a49" name="Dedicated Transport" entryId="1b66-3f5f-6705-079a" primary="false"/>
+        <category id="4aee-aca3-f733-0038" name="Warlord" entryId="ae09-117e-a6fa-316b" primary="false"/>
+        <category id="1673-33b7-5036-a9ec" name="Relic Elites" entryId="8d86-9490-0f7d-a5b5" primary="false"/>
+        <category id="9d1d-29b5-d4ec-d51f" name="Relic Heavy Support" entryId="6c4c-a416-b8cb-c380" primary="false"/>
+        <category id="e506-282e-85e9-7ee1" name="Relic HQ" entryId="655f-e142-dfa9-11a4" primary="false"/>
       </categories>
     </force>
   </forces>

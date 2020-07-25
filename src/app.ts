@@ -54,7 +54,8 @@ function parseXML(xmldata: string) {
       const rosterList = $('#roster-lists')[0];
       const forceUnits = $('#force-units')[0];
 
-      if (gameType == "Warhammer 40,000 8th Edition") {
+      if ((gameType == "Warhammer 40,000 8th Edition") ||
+          (gameType == "Warhammer 40,000 9th Edition")) {
         let roster = Create40kRoster(doc);
         if (roster) {
           if (roster._forces.length > 0) {
