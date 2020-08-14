@@ -67,6 +67,7 @@ export enum UnitRole {
     DT,
     FT,
     LW,
+    AGENTS,
 
     // Kill Team
     COMMANDER,
@@ -88,6 +89,7 @@ export const UnitRoleToString: string[] = [
     'Dedicated Transport',
     'Fortification',
     'Lord of War',
+    'Agent of the Imperium',
 
     // Kill Team
     'Commander',
@@ -291,6 +293,7 @@ function LookupRole(roleText: string): UnitRole {
         case 'Dedicated Transport': return UnitRole.DT;
         case 'Fortification': return UnitRole.FT;
         case 'Lord of War': return UnitRole.LW;
+        case 'Agent of the Imperium': return UnitRole.AGENTS;
     }
     return UnitRole.NONE;
 }
