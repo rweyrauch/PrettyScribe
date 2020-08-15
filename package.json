@@ -5,6 +5,7 @@
   "main": "dist/app.js",
   "dependencies": {
     "@types/jquery": "^3.5.0",
+    "@types/lodash": "^4.14.159",
     "jszip": "^3.5.0"
   },
   "devDependencies": {

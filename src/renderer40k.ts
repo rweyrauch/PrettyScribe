@@ -151,13 +151,19 @@ export class Renderer40k implements Renderer {
                     forces.appendChild(allegianceRules);
             }
 
+            let prevUnit: Unit | null = null;
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = Renderer40k._res * 5.5;
                 canvas.height = Renderer40k._res * 12;
                 this._descriptionWidth = canvas.width - this._descriptionStartX - 10;
 
+                if (unit.equal(prevUnit)) {
+                    continue;
+                }
+
                 const dims = this.renderUnit(unit, canvas, 0, 0);
+                prevUnit = unit;
 
                 const border = 25;
                 let finalCanvas = document.createElement('canvas') as HTMLCanvasElement;

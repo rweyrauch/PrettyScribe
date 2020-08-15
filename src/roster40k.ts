@@ -13,6 +13,7 @@
     TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE 
     OF THIS SOFTWARE.
 */
+import * as _ from "lodash";
 
 type WeaponStrength = number | string;
 
@@ -25,6 +26,12 @@ export class Weapon {
     _damage: string = "";
 
     _abilities: string = "";
+
+    equal(weapon: Weapon | null): boolean {
+        if (weapon == null) return false;
+        // Weapons in 40k have unique names
+        return (this._name === weapon._name);
+    }
 }
 
 export class WoundTracker {
@@ -118,6 +125,27 @@ export class Model {
     _psyker: Psyker | null = null;
     _psychicPowers: PsychicPower[] = [];
     _explosions: Explosion[] = [];
+
+    equal(model: Model | null): boolean {
+        if (model == null) return false;
+
+        if ((this._name === model._name) &&
+            (this._count === model._count) &&
+            (this._weapons.length === model._weapons.length)) {
+
+            for (let wi = 0; wi < this._weapons.length; wi++) {
+                if (!this._weapons[wi].equal(model._weapons[wi])) {
+                    return false;
+                }
+            }
+
+            // TODO: check for the same psychic powers
+            if ((this._psyker != null) || (model._psyker != null)) return false;
+
+            return true;
+        }
+        return false;
+    }
 };
 
 export class ProfileTable {
@@ -144,6 +172,30 @@ export class Unit {
     _woundTracker: WoundTracker[] = [];
 
     _profileTables: Map<string, ProfileTable> = new Map();
+
+    equal(unit: Unit | null): boolean {
+        if (unit == null) return false;
+
+        if ((unit._name === this._name) && (unit._role === this._role) &&
+            (unit._models.length === this._models.length)) {
+
+            for (let mi = 0; mi < this._models.length; mi++) {
+                if (!this._models[mi].equal(unit._models[mi])) {
+                    return false;
+                }
+            }
+
+            if (!_.isEqual(this._abilities, unit._abilities)) {
+                return false;
+            }
+            if (!_.isEqual(this._rules, unit._rules)) {
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
 }
 
 export class Force {
@@ -274,10 +326,14 @@ function ParseUnits(root: Element, force: Force, is40k: boolean): void {
         }
     }
 
-    // Sort force units by role.
+    // Sort force units by role and name
     force._units.sort((a: Unit, b: Unit): number => {
         if (a._role > b._role) return 1;
-        else if (a._role == b._role) return 0;
+        else if (a._role == b._role) {
+            if (a._name > b._name) return 1;
+            else if (a._name == b._name) return 0;
+            return -1;
+        }
         return -1;
     });
 }
