@@ -16,7 +16,7 @@
 
 export interface Renderer {
 
-    render(title: HTMLElement|null, list: HTMLElement|null, forces: HTMLElement|null): void;
+    render(title: HTMLElement | null, list: HTMLElement | null, forces: HTMLElement | null): void;
 
 }
 
@@ -35,11 +35,9 @@ export function RenderText(ctx: CanvasRenderingContext2D, text: string, x: numbe
 
         if (how == Justification.Center) {
             ctx.fillText(text, x + Math.max((w - tw) / 2, 0), y + (h - th) / 2, w);
-        }
-        else if (how == Justification.Left) {
+        } else if (how == Justification.Left) {
             ctx.fillText(text, x, y + (h - th) / 2, w);
-        }
-        else if (how == Justification.Right) {
+        } else if (how == Justification.Right) {
             ctx.fillText(text, x + w - tw, y + (h - th) / 2, w);
         }
     }
@@ -76,6 +74,33 @@ export function RenderParagraph(ctx: CanvasRenderingContext2D, text: string, x: 
         }
     }
     return curY;
+}
+
+export function FixDPI(canvas: HTMLCanvasElement) {
+    let dpi: number = window.devicePixelRatio;
+
+    //the + prefix casts it to an integer
+    //the slice method gets rid of "px"
+    //get CSS height
+    let style_height: number = +getComputedStyle(canvas).getPropertyValue("height").slice(0, -2);
+    //get CSS width
+    let style_width: number = +getComputedStyle(canvas).getPropertyValue("width").slice(0, -2);
+
+    if (style_height == 0) style_height = canvas.height;
+    if (style_width == 0) style_width = canvas.width;
+
+    //scale the canvas
+    canvas.setAttribute('height', (style_height * dpi).toString());
+    canvas.setAttribute('width', (style_width * dpi).toString());
+/*
+    var scaleX = window.innerWidth / canvas.width;
+    var scaleY = window.innerHeight / canvas.height;
+
+    var scaleToFit = Math.min(scaleX, scaleY);
+
+    canvas.style.transformOrigin = '0 0'; //scale from top left
+    canvas.style.transform = 'scale(' + scaleToFit + ')';
+ */
 }
 
 

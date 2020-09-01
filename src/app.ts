@@ -109,19 +109,29 @@ function parseXML(xmldata: string) {
       // }
       else {
           $('#errorText').html('PrettyScribe does not support game type \'' + gameType + '\'.');
-          $('#errorDialog').modal();    
+          $('#errorDialog').modal();
       }
     }
   }
 }
 
-$('#roster-file').on("change", function handleFileSelect(event: Event) {
-  const input = event.target as HTMLInputElement;
-  const files = input.files;
+let fileChangeEvent: Event | null = null;
+
+function handleFileSelect(event: Event) {
+
+  let input;
+  let files;
+
+  if (event?.type === "resize") input = fileChangeEvent?.target as HTMLInputElement;
+  else input = event?.target as HTMLInputElement;
+
+  files = input?.files;
 
   cleanup();
 
   if (files) {
+    if (event?.type !== "resize") fileChangeEvent = event;
+
     // files is a FileList of File objects. List some properties.
     let output = [];
     for (let f of files) {
@@ -137,7 +147,7 @@ $('#roster-file').on("change", function handleFileSelect(event: Event) {
           })
         }).catch(function(reason) {
           $('#errorText').html('Failed to load compressed roster file, ' + f.name + ', reason ' + reason);
-          $('#errorDialog').modal();  
+          $('#errorDialog').modal();
         });
       }
       else if (fileExt === "ros") {
@@ -160,4 +170,8 @@ $('#roster-file').on("change", function handleFileSelect(event: Event) {
       }
     }
   }
-});
+}
+
+$(window).on("resize", handleFileSelect);
+
+$('#roster-file').on("change", handleFileSelect);

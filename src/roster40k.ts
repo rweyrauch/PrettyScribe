@@ -19,6 +19,7 @@ type WeaponStrength = number | string;
 
 export class Weapon {
     _name: string = "";
+    _count: number = 0;
     _range: string = "Melee";
     _type: string = "Melee";
     _str: WeaponStrength = "user";
@@ -122,6 +123,8 @@ export class Model {
     _save: string = "";
 
     _weapons: Weapon[] = [];
+    _upgrades: string[] = [];
+    // TODO model upgrades (i.e. tau support systems)
     _psyker: Psyker | null = null;
     _psychicPowers: PsychicPower[] = [];
     _explosions: Explosion[] = [];
@@ -131,10 +134,16 @@ export class Model {
 
         if ((this._name === model._name) &&
             (this._count === model._count) &&
-            (this._weapons.length === model._weapons.length)) {
+            (this._weapons.length === model._weapons.length) &&
+            (this._upgrades.length === model._upgrades.length)) {
 
             for (let wi = 0; wi < this._weapons.length; wi++) {
                 if (!this._weapons[wi].equal(model._weapons[wi])) {
+                    return false;
+                }
+            }
+            for (let wi = 0; wi < this._upgrades.length; wi++) {
+                if (this._upgrades[wi] != model._upgrades[wi]) {
                     return false;
                 }
             }
@@ -145,6 +154,53 @@ export class Model {
             return true;
         }
         return false;
+    }
+
+    name(): string {
+        let name = this._name;
+
+        if (this._weapons.length > 0 || this._upgrades.length > 0) {
+            let mi = 0;
+
+            name += " (";
+            for (const weapon of this._weapons) {
+                if (weapon._count > 1) {
+                    name += weapon._count + "x ";
+                }
+                name += weapon._name;
+                mi++;
+                if (mi != this._weapons.length) {
+                    name += ",  "
+                }
+            }
+
+            if (this._upgrades.length > 0 && !name.endsWith("(")) {
+                name += ",  ";
+            }
+            name += this._upgrades.join(", ");
+
+            name += ")";
+        }
+        return name;
+    }
+
+    normalize(): void {
+        this._weapons.sort(CompareObj);
+        this._upgrades.sort(Compare);
+        for (let i = 0; i < (this._weapons.length - 1); i++) {
+            const weapon = this._weapons[i];
+            if (weapon._name === this._weapons[i+1]._name) {
+                weapon._count++;
+                this._weapons.splice(i+1, 1);
+                i--;
+            }
+        }
+
+        for (let weapon of this._weapons) {
+            if (weapon._count % this._count == 0) {
+                weapon._count /= this._count;
+            }
+        }
     }
 };
 
@@ -188,7 +244,7 @@ export class Unit {
             if (!_.isEqual(this._abilities, unit._abilities)) {
                 return false;
             }
-            if (!_.isEqual(this._rules, unit._rules)) {
+            else if (!_.isEqual(this._rules, unit._rules)) {
                 return false;
             }
 
@@ -196,12 +252,36 @@ export class Unit {
         }
         return false;
     }
+
+    normalize(): void {
+        // Sort force units by role and name
+        this._models.sort(CompareObj);
+
+        for (let model of this._models) {
+            model.normalize();
+        }
+
+        for (let i = 0; i < (this._models.length - 1); i++) {
+            const model = this._models[i];
+
+            if (model.name() === this._models[i+1].name()) {
+                model._count++;
+                this._models.splice(i+1, 1);
+                i--;
+            }
+        }
+
+        for (let model of this._models) {
+            model.normalize();
+        }
+    }
 }
 
 export class Force {
     _catalog: string = "";
     _name: string = "Unknown";
     _faction: string = "Unknown";
+    _factionRules: Map<string, string | null> = new Map();
     _rules: Map<string, string | null> = new Map();
     _units: Unit[] = [];
 
@@ -299,7 +379,6 @@ function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void 
                     }
                 }
             }
-
         
             ParseUnits(root, f, is40k);
 
@@ -317,13 +396,59 @@ function DuplicateForce(force: Force, roster: Roster40k): boolean {
     return false;
 }
 
+function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>): void {
+
+    const props = root.querySelectorAll(":scope profiles>profile");
+    for (const prop of props) {
+        // detachment rules
+        const propName = prop.getAttributeNode("name")?.nodeValue;
+        const propType = prop.getAttributeNode("typeName")?.nodeValue;
+        if (propName && propType) {
+            if ((propType === "Abilities")) {
+                const chars = prop.querySelectorAll("characteristics>characteristic");
+                for (const char of chars) {
+                    const charName = char.getAttributeNode("name")?.nodeValue;
+                    if (charName && char.textContent && propName) {
+                        if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
+                            map.set(propName, char.textContent);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 function ParseUnits(root: Element, force: Force, is40k: boolean): void {
     var selections = root.querySelectorAll("force>selections>selection");
     for (let selection of selections) {
         var unit = CreateUnit(selection, is40k);
         if (unit && unit._role != UnitRole.NONE) {
             force._units.push(unit);
+            for (const entry of unit._rules.entries()) {
+                force._rules.set(entry[0], entry[1]);
+            }
         }
+        else if (selection.getAttributeNode("type")?.nodeValue === "upgrade") {
+            ExtractRuleFromSelection(selection, force._rules);
+
+            const props = selection.querySelectorAll("selections>selection");
+            for (let prop of props) {
+                // sub-faction
+                let propName = prop.getAttributeNode("name")?.nodeValue;
+                let propType = prop.getAttributeNode("type")?.nodeValue;
+                if (propName && propType) {
+                    if ((propType === "upgrade")) {
+                        force._faction = propName;
+                        ExtractRuleFromSelection(prop, force._factionRules);
+                    }
+                }
+            }
+        }
+    }
+
+    for (const key of force._factionRules.keys()) {
+        force._rules.delete(key);
     }
 
     // Sort force units by role and name
@@ -421,15 +546,18 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
         }
     }
 
-    // First pass - find all models
-    var props = root.querySelectorAll(":scope profiles>profile");
+    let props = root.querySelectorAll(":scope profiles>profile");
+    let model: Model = new Model();
+
     for (let prop of props) {
         // What kind of prop is this
         let propName = prop.getAttributeNode("name")?.nodeValue;
         let propType = prop.getAttributeNode("typeName")?.nodeValue;
         if (propName && propType) {
             if ((propType === "Unit") || (propType === "Model")) {
-                var model: Model = new Model();
+                model = new Model();
+                unit._models.push(model);
+
                 model._name = propName;
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
@@ -459,18 +587,11 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
-                unit._models.push(model);
             }
-        }
-    }
-
-    // Second pass - attach attributes to models.
-    for (let prop of props) {
-        // What kind of prop is this
-        let propName = prop.getAttributeNode("name")?.nodeValue;
-        let propType = prop.getAttributeNode("typeName")?.nodeValue;
-        if (propName && propType) {
-            if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability") ||
+            else if ((propType === "upgrade")) {
+                model._upgrades.push(propName);
+            }
+            else if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability") ||
                 (propType === "Household Tradition") || (propType === "Warlord Trait") || (propType === "Astra Militarum Orders") ||
                 (propType === "Tank Orders") || (propType == "Lethal Ambush")) {
                 let chars = prop.querySelectorAll("characteristics>characteristic");
@@ -482,10 +603,31 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
+                if (prop.parentElement && prop.parentElement.parentElement) {
+                    const parentSelection = prop.parentElement.parentElement;
+                    let typeValue = parentSelection.getAttributeNode("type")?.nodeValue;
+                    if (typeValue === "upgrade") {
+                        // are we at the correct level?
+                        if (parentSelection.parentElement && parentSelection.parentElement.parentElement) {
+                            const superParentSelection = parentSelection.parentElement.parentElement;
+                            let typeValue = superParentSelection.getAttributeNode("type")?.nodeValue;
+                            if (typeValue === "model") {
+                                model._upgrades.push(propName);
+                            }
+                        }
+                    }
+                }
             }
             else if (propType === "Weapon") {
                 let weapon: Weapon = new Weapon();
                 weapon._name = propName;
+                if (prop.parentElement && prop.parentElement.parentElement) {
+                    const parentSelection = prop.parentElement.parentElement;
+                    let countValue = parentSelection.getAttributeNode("number")?.nodeValue;
+                    if (countValue) {
+                        weapon._count = +countValue;
+                    }
+                }
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
@@ -503,10 +645,8 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                     }
                 }
 
-                if (unit._models.length) {
-                    unit._models[unit._models.length - 1]._weapons.push(weapon);
-                }
-                else {
+                model._weapons.push(weapon);
+                if (!model._name) {
                     console.log("Unexpected: Created a weapon without an active model.  Unit: " + unitName);
                 }
             }
@@ -554,11 +694,9 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
-                if (unit._models.length) {
-                    unit._models[unit._models.length - 1]._psychicPowers.push(power);
-                }
-                else {
-                    console.log("Unexpected: Created a psychic power without an active model.  Unit: " + unitName);
+                model._psychicPowers.push(power);
+                if (!model._name) {
+                    console.log("Unexpected: Created a psychic without an active model.  Unit: " + unitName);
                 }
             }
             else if (propType.includes("Explosion")) {
@@ -577,11 +715,9 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
-                if (unit._models.length) {
-                    unit._models[unit._models.length - 1]._explosions.push(explosion);
-                }
-                else {
-                    console.log("Unexpected: Created an explosion without an active model.  Unit: " + unitName);
+                model._explosions.push(explosion);
+                if (!model._name) {
+                    console.log("Unexpected: Created a explosion without an active model.  Unit: " + unitName);
                 }
             }
             else if (propType == "Psyker") {
@@ -599,15 +735,10 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
-                if (unit._models.length) {
-                    unit._models[unit._models.length - 1]._psyker = psyker;
-                }
-                else {
+                model._psyker = psyker;
+                if (!model._name) {
                     console.log("Unexpected: Created a psyker without an active model.  Unit: " + unitName);
                 }
-            }
-            else if ((propType === "Unit") || (propType === "Model")) {
-                // Already handled.
             }
             else {
                  parseUnknownProfile(prop, unit);
@@ -646,5 +777,17 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
         }
     }
 
+    unit.normalize();
     return unit;
+}
+
+function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
+    return Compare(a._name, b._name);
+}
+
+
+export function Compare(a: string, b: string): number {
+    if (a > b) return 1;
+    else if (a == b) return 0;
+    return -1;
 }
