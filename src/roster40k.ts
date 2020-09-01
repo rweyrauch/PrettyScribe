@@ -17,8 +17,28 @@ import * as _ from "lodash";
 
 type WeaponStrength = number | string;
 
-export class Weapon {
+export class BaseNotes {
     _name: string = "";
+    _customName: string = "";
+    _customNotes: string = "";
+
+    name(): string {
+        if (this._customName) return this._customName;
+        return this._name;
+    }
+
+    notes(): string | null {
+        return this._customNotes;
+    }
+
+    equal(other: BaseNotes | null): boolean {
+        if (other == null) return false;
+        // Weapons in 40k have unique names
+        return (this._name === other._name);
+    }
+}
+
+export class Weapon extends BaseNotes {
     _count: number = 0;
     _range: string = "Melee";
     _type: string = "Melee";
@@ -27,35 +47,28 @@ export class Weapon {
     _damage: string = "";
 
     _abilities: string = "";
-
-    equal(weapon: Weapon | null): boolean {
-        if (weapon == null) return false;
-        // Weapons in 40k have unique names
-        return (this._name === weapon._name);
-    }
 }
 
-export class WoundTracker {
+export class WoundTracker extends BaseNotes {
     _name: string = "";
     _table: Map<string, string> = new Map();
 }
 
-export class Explosion {
+export class Explosion extends BaseNotes {
     _name: string = "";
     _diceRoll: string = "";
     _distance: string = "";
     _mortalWounds: string = "";
 }
 
-export class Psyker {
-    _name: string = "";
+export class Psyker extends BaseNotes {
     _cast: string = "";
     _deny: string = "";
     _powers: string = "";
     _other: string = "";
 }
 
-export class PsychicPower {
+export class PsychicPower extends BaseNotes {
     _name: string = "";
     _manifest: number = 0;
     _range: string = "";
@@ -106,9 +119,8 @@ export const UnitRoleToString: string[] = [
     'Non-specialist'
 ];
 
-export class Model {
+export class Model extends BaseNotes {
 
-    _name: string = "";
     _count: number = 0;
 
     // Characteristics
@@ -156,8 +168,8 @@ export class Model {
         return false;
     }
 
-    name(): string {
-        let name = this._name;
+    nameAndGear(): string {
+        let name = super.name();
 
         if (this._weapons.length > 0 || this._upgrades.length > 0) {
             let mi = 0;
@@ -167,7 +179,7 @@ export class Model {
                 if (weapon._count > 1) {
                     name += weapon._count + "x ";
                 }
-                name += weapon._name;
+                name += weapon.name();
                 mi++;
                 if (mi != this._weapons.length) {
                     name += ",  "
@@ -202,16 +214,15 @@ export class Model {
             }
         }
     }
-};
+}
 
 export class ProfileTable {
     _name: string = "";
     _table: Map<string, string>[] = [];
 }
 
-export class Unit {
+export class Unit extends BaseNotes {
 
-    _name: string = "";
     _role: UnitRole = UnitRole.NONE;
     _factions: Set<string> = new Set();
     _keywords: Set<string> = new Set();
@@ -264,7 +275,7 @@ export class Unit {
         for (let i = 0; i < (this._models.length - 1); i++) {
             const model = this._models[i];
 
-            if (model.name() === this._models[i+1].name()) {
+            if (model.nameAndGear() === this._models[i+1].nameAndGear()) {
                 model._count++;
                 this._models.splice(i+1, 1);
                 i--;
@@ -277,35 +288,25 @@ export class Unit {
     }
 }
 
-export class Force {
+export class Force extends BaseNotes {
     _catalog: string = "";
-    _name: string = "Unknown";
     _faction: string = "Unknown";
     _factionRules: Map<string, string | null> = new Map();
     _rules: Map<string, string | null> = new Map();
     _units: Unit[] = [];
+}
 
-    constructor() {
-
-    }
-};
-
-export class Roster40k {
+export class Roster40k extends BaseNotes {
     _powerLevel: number = 0;
     _commandPoints: number = 0;
     _points: number = 0;
-    _name: string = "";
     _forces: Force[] = [];
-
-    constructor() {
-
-    }
-};
+}
 
 export function Create40kRoster(doc: Document, is40k: boolean = true): Roster40k | null {
     if (doc) {
         // Determine roster type (game system).
-        var info = doc.querySelector("roster");
+        let info = doc.querySelector("roster");
         if (info) {
             const roster = new Roster40k();
 
@@ -327,7 +328,7 @@ export function Create40kRoster(doc: Document, is40k: boolean = true): Roster40k
 }
 
 function ParseRosterPoints(doc: XMLDocument, roster: Roster40k): void {
-    var costs = doc.querySelectorAll("roster>costs>cost");
+    let costs = doc.querySelectorAll("roster>costs>cost");
     for (let cost of costs) {
         if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
             let which = cost.getAttributeNode("name")?.nodeValue;
@@ -348,7 +349,7 @@ function ParseRosterPoints(doc: XMLDocument, roster: Roster40k): void {
 }
 
 function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void {
-    var forcesRoot = doc.querySelectorAll("roster>forces>force");
+    let forcesRoot = doc.querySelectorAll("roster>forces>force");
     for (let root of forcesRoot) {
         if (root.hasAttribute("name") && root.hasAttribute("catalogueName")) {
 
@@ -420,7 +421,7 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
 }
 
 function ParseUnits(root: Element, force: Force, is40k: boolean): void {
-    var selections = root.querySelectorAll("force>selections>selection");
+    let selections = root.querySelectorAll("force>selections>selection");
     for (let selection of selections) {
         var unit = CreateUnit(selection, is40k);
         if (unit && unit._role != UnitRole.NONE) {
@@ -504,16 +505,42 @@ function parseUnknownProfile(prop: Element, unit: Unit): void {
 
 }
 
-function CreateUnit(root: Element, is40k: boolean): Unit | null {
-    var unit: Unit = new Unit();
-    var unitName = root.getAttributeNode("name")?.nodeValue;
-    if (unitName) {
-        unit._name = unitName;
+function ExpandBaseNotes(root: Element, obj: BaseNotes): string {
+    obj._name = <string>root.getAttributeNode("name")?.nodeValue;
+
+    let element: Element = root;
+    if (root.tagName === "profile" && root.parentElement && root.parentElement.parentElement) {
+        element = root.parentElement.parentElement;
     }
 
-    var categories = root.querySelectorAll(":scope categories>category");
+    obj._customName = <string>element.getAttributeNode("customName")?.nodeValue;
+    let child = element.firstElementChild;
+    if (child && child.tagName === "customNotes") {
+        obj._customNotes = <string>child.textContent;
+    }
+    return obj._name;
+}
+
+function ExtractNumberFromParent(root: Element): number {
+    // Get parent node (a selection) to determine model count.
+    if (root.parentElement && root.parentElement.parentElement) {
+        const parentSelection = root.parentElement.parentElement;
+        const countValue = parentSelection.getAttributeNode("number")?.nodeValue;
+        if (countValue) {
+            return +countValue;
+        }
+    }
+
+    return 0;
+}
+
+function CreateUnit(root: Element, is40k: boolean): Unit | null {
+    let unit: Unit = new Unit();
+    const unitName = ExpandBaseNotes(root, unit);
+
+    let categories = root.querySelectorAll(":scope categories>category");
     for (let cat of categories) {
-        let catName = cat.getAttributeNode("name")?.nodeValue;
+        const catName = cat.getAttributeNode("name")?.nodeValue;
         if (catName) {
             const factPattern = "Faction: ";
             const factIndex = catName.lastIndexOf(factPattern);
@@ -523,7 +550,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
             }
             else {
                 const roleText = catName.trim();
-                var unitRole = LookupRole(roleText);
+                let unitRole = LookupRole(roleText);
                 if (unitRole != UnitRole.NONE) {
                     unit._role = unitRole;
                 }
@@ -551,14 +578,14 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
 
     for (let prop of props) {
         // What kind of prop is this
-        let propName = prop.getAttributeNode("name")?.nodeValue;
-        let propType = prop.getAttributeNode("typeName")?.nodeValue;
+        const propName = prop.getAttributeNode("name")?.nodeValue;
+        const propType = prop.getAttributeNode("typeName")?.nodeValue;
         if (propName && propType) {
             if ((propType === "Unit") || (propType === "Model")) {
                 model = new Model();
                 unit._models.push(model);
+                ExpandBaseNotes(prop, model);
 
-                model._name = propName;
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
@@ -578,14 +605,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
 
-                    // Get parent node (a selection) to determine model count.
-                    if (prop.parentElement && prop.parentElement.parentElement) {
-                        const parentSelection = prop.parentElement.parentElement;
-                        let countValue = parentSelection.getAttributeNode("number")?.nodeValue;
-                        if (countValue) {
-                            model._count = +countValue;
-                        }
-                    }
+                    model._count = ExtractNumberFromParent(prop);
                 }
             }
             else if ((propType === "upgrade")) {
@@ -620,14 +640,9 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
             }
             else if (propType === "Weapon") {
                 let weapon: Weapon = new Weapon();
-                weapon._name = propName;
-                if (prop.parentElement && prop.parentElement.parentElement) {
-                    const parentSelection = prop.parentElement.parentElement;
-                    let countValue = parentSelection.getAttributeNode("number")?.nodeValue;
-                    if (countValue) {
-                        weapon._count = +countValue;
-                    }
-                }
+                ExpandBaseNotes(prop,  weapon);
+                weapon._count = ExtractNumberFromParent(prop);
+
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
@@ -652,7 +667,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
             }
             else if (propType.includes("Wound Track") || propType.includes("Stat Damage")) {
                 let tracker = new WoundTracker();
-                tracker._name = propName;
+                ExpandBaseNotes(prop, tracker);
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
@@ -680,7 +695,8 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
             }
             else if (propType == "Psychic Power") {
                 let power: PsychicPower = new PsychicPower();
-                power._name = propName;
+                ExpandBaseNotes(prop, power);
+
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
@@ -701,7 +717,8 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
             }
             else if (propType.includes("Explosion")) {
                 let explosion: Explosion = new Explosion();
-                explosion._name = propName;
+                ExpandBaseNotes(prop, explosion);
+
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
@@ -722,7 +739,8 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
             }
             else if (propType == "Psyker") {
                 let psyker: Psyker = new Psyker();
-                psyker._name = propName;
+                ExpandBaseNotes(prop, psyker);
+
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
@@ -747,7 +765,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
     }
 
     // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
-    var costs = root.querySelectorAll(":scope costs>cost");
+    let costs = root.querySelectorAll(":scope costs>cost");
     for (let cost of costs) {
         if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
             let which = cost.getAttributeNode("name")?.nodeValue;
@@ -766,11 +784,11 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
         }
     }
 
-    var rules = root.querySelectorAll(":scope rules > rule");
+    let rules = root.querySelectorAll(":scope rules > rule");
     for (let rule of rules) {
         if (rule.hasAttribute("name")) {
             let ruleName = rule.getAttributeNode("name")?.nodeValue;
-            var desc = rule.querySelector("description");
+            let desc = rule.querySelector("description");
             if (ruleName && desc && desc.textContent) {
                 unit._rules.set(ruleName, desc.textContent);
             }

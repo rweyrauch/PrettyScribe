@@ -14,7 +14,7 @@
     OF THIS SOFTWARE.
 */
 
-import {Compare, Explosion, Model, PsychicPower, Psyker, Roster40k, Unit, UnitRole, UnitRoleToString, Weapon} from "./roster40k";
+import {BaseNotes, Compare, Explosion, Model, PsychicPower, Psyker, Roster40k, Unit, UnitRole, UnitRoleToString, Weapon} from "./roster40k";
 import {Justification, Renderer, RenderParagraph, RenderText, FixDPI} from "./renderer";
 
 export class Renderer40k implements Renderer {
@@ -23,7 +23,7 @@ export class Renderer40k implements Renderer {
     public static readonly _margin: number = 0;
 
     private static readonly _bevelSize = 15;
-    private readonly _descriptionStartX = 190;
+    private readonly _descriptionStartX = 140;
     private _descriptionWidth: number = 600;
 
     private _showWoundBoxes: boolean = false;
@@ -47,6 +47,8 @@ export class Renderer40k implements Renderer {
     private static readonly _titleFont = 'bold 16px sans-serif';
     private static readonly _headerFont = 'bold 14px sans-serif';
     private static readonly _font = '14px sans-serif';
+    private static readonly _smallFont = '12px sans-serif';
+    private static readonly _smallBoldFont = 'bold 12px sans-serif';
 
     constructor(roster: Roster40k) {
 
@@ -69,7 +71,7 @@ export class Renderer40k implements Renderer {
         if (this._roster == null) return;
 
         if (title) {
-            title.innerHTML = '<h3>' + this._roster._name + ' (' + this._roster._points + ' pts, ' + this._roster._powerLevel + ' PL, ' + this._roster._commandPoints + ' CP)</h3>';
+            title.innerHTML = '<h3>' + this._roster.name() + ' (' + this._roster._points + ' pts, ' + this._roster._powerLevel + ' PL, ' + this._roster._commandPoints + ' CP)</h3>';
         }
 
         let catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
@@ -79,10 +81,10 @@ export class Renderer40k implements Renderer {
             const forceTitle = document.createElement('div');
             if (forceTitle) {
                 if (force._faction) {
-                    forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + " (" + force._faction + ")" + '</p>';
+                    forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force.name() + " (" + force._faction + ")" + '</p>';
                 }
                 else {
-                    forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + '</p>';
+                    forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force.name() + '</p>';
                 }
             }
             if (list)
@@ -112,7 +114,7 @@ export class Renderer40k implements Renderer {
             for (let unit of force._units) {
                 let tr = document.createElement('tr');
                 let uname = document.createElement('td');
-                uname.innerHTML = unit._name;
+                uname.innerHTML = unit.name();
                 let role = document.createElement('td');
                 role.innerHTML = UnitRoleToString[unit._role];
                 let models = document.createElement('td');
@@ -121,10 +123,10 @@ export class Renderer40k implements Renderer {
                 // TODO: the list of models may not be unique, make the list unique and update counts accordingly.
                 for (const model of unit._models) {
                     if (model._count > 1) {
-                        models.innerHTML += model._count + "x " + model.name();
+                        models.innerHTML += model._count + "x " + model.nameAndGear();
                     }
                     else {
-                        models.innerHTML += model.name();
+                        models.innerHTML += model.nameAndGear();
                     }
                     mi++;
                     if (mi != unit._models.length) {
@@ -284,6 +286,51 @@ export class Renderer40k implements Renderer {
     private renderWatermark(ctx: CanvasRenderingContext2D) {
 
     }
+    
+    private renderNotes(ctx: CanvasRenderingContext2D, title: string,  notes: BaseNotes): void {
+        
+        if (!notes._customNotes) return;
+
+        this.renderLine(ctx);
+        
+        ctx.font = Renderer40k._headerFont;
+        RenderText(ctx, title.toLocaleUpperCase(), this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
+
+        ctx.font = Renderer40k._font;
+        this._currentY += 2;
+        this._currentY = RenderParagraph(ctx, notes._customNotes, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+        this._currentY += 2;
+    }
+
+    private renderNotesArray(ctx: CanvasRenderingContext2D, title: string,  notes: BaseNotes[]): void {
+
+        let count = 0;
+        for (const note of notes) {
+            if (note._customNotes) count++;
+        }
+        if (count == 0) return;
+        this.renderLine(ctx);
+
+        ctx.font = Renderer40k._headerFont;
+        RenderText(ctx, title.toLocaleUpperCase(), this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
+
+        for (const note of notes) {
+            const name = note.name() + ':';
+            const desc = note._customNotes;
+
+            if (!desc) continue;
+
+            ctx.font = Renderer40k._headerFont;
+            this._currentY += 2;
+            RenderText(ctx, name, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left);
+            let offsetX = ctx.measureText(name).width;
+            this._currentY += 2;
+
+            ctx.font = Renderer40k._font;
+            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX + offsetX, this._currentY, this._descriptionWidth - offsetX);
+            this._currentY += 2;
+        }
+    }
 
     private renderLine(ctx: CanvasRenderingContext2D): void {
         ctx.lineWidth = 2;
@@ -309,7 +356,8 @@ export class Renderer40k implements Renderer {
             ctx.font = Renderer40k._headerFont;
             for (let i = 0; i < labels.length; i++) {
                 if (columnWidths) w = columnWidths[i];
-                RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
+                if (i == 0) RenderText(ctx, labels[i], x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
+                else RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
                 x += w;
             }
         }
@@ -318,7 +366,6 @@ export class Renderer40k implements Renderer {
     }
 
     private renderSpells(ctx: CanvasRenderingContext2D, spells: PsychicPower[], columnWidths: number[] | null): void {
-        ctx.font = Renderer40k._font;
 
         const height = 22;
 
@@ -335,8 +382,10 @@ export class Renderer40k implements Renderer {
             let yStart = this._currentY;
 
             ctx.fillStyle = Renderer40k._blackColor;
+            ctx.font = Renderer40k._font;
+
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, spell._name.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, spell.name().toString(), x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
@@ -349,6 +398,7 @@ export class Renderer40k implements Renderer {
 
             if (columnWidths) w = columnWidths[ci++];
             this._currentY += 4;
+            ctx.font = Renderer40k._smallFont;
             this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w);
             this._currentY += 2;
             x += w;
@@ -387,7 +437,7 @@ export class Renderer40k implements Renderer {
             ctx.fillStyle = Renderer40k._blackColor;
 
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, expl._name, x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, expl.name(), x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
@@ -425,7 +475,7 @@ export class Renderer40k implements Renderer {
 
             ctx.fillStyle = Renderer40k._blackColor;
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._name.toString(), x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
+            RenderText(ctx, weapon.name().toString(), x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
@@ -488,7 +538,7 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._font;
 
         if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, model._name.toString(), x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
+        RenderText(ctx, model.name().toString(), x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
         x += w;
 
         if (columnWidths) w = columnWidths[ci++];
@@ -534,7 +584,7 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "ABILITIES", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = 'bold 12px serif';
+        ctx.font = Renderer40k._smallBoldFont;
         let keys = [...unit._abilities.keys()];
         keys.sort(Compare);
 
@@ -549,13 +599,13 @@ export class Renderer40k implements Renderer {
             const content = key.toUpperCase() + ':';
             const desc = unit._abilities.get(key);
 
-            ctx.font = 'bold 12px serif';
+            ctx.font = Renderer40k._smallBoldFont;
             this._currentY += 2;
             RenderText(ctx, content, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left);
             let offsetX = ctx.measureText(content).width;
             this._currentY += 2;
 
-            ctx.font = '12px serif';
+            ctx.font = Renderer40k._smallFont;
             this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX + offsetX, this._currentY, this._descriptionWidth - offsetX);
             this._currentY += 2;
         }
@@ -565,7 +615,7 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "RULES", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = '12px serif';
+        ctx.font = Renderer40k._font;
         for (let rule of unit._rules) {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
@@ -579,7 +629,7 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "KEYWORDS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = '12px serif';
+        ctx.font = Renderer40k._font;
         const kwlist = [...unit._keywords];
         kwlist.sort(Compare)
         const kw = kwlist.join(", ").toLocaleUpperCase();
@@ -592,7 +642,7 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "FACTIONS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = '12px serif';
+        ctx.font = Renderer40k._font;
         const kwlist = [...unit._factions];
         kwlist.sort(Compare)
         const kw = kwlist.join(", ").toLocaleUpperCase();
@@ -625,7 +675,7 @@ export class Renderer40k implements Renderer {
             ctx.font = Renderer40k._font;
             if (columnWidths) w = columnWidths[ci++];
 
-            //RenderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
+            //RenderText(ctx, tracker.name(), x, this._currentY, w, height, Justification.Center);
             x += w;
 
             for (let attr of tracker._table) {
@@ -642,14 +692,14 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "MODELS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = Renderer40k._font;
+        ctx.font = Renderer40k._smallFont;
         for (let model of models) {
             let text: string;
             if (model._count > 1) {
-                text = model._count + "x " + model.name();
+                text = model._count + "x " + model.nameAndGear();
             }
             else {
-                text = model.name();
+                text = model.nameAndGear();
             }
             this._currentY += 2;
             this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
@@ -759,12 +809,14 @@ export class Renderer40k implements Renderer {
         const uniqueModels: Model[] = [];
         const scrathModels: Map<string, Model> = new Map();
         for (const m of models) {
-            if (!scrathModels.has(m._name)) {
-                scrathModels.set(m._name, m);
+            if (!scrathModels.has(m.name())) {
+                scrathModels.set(m.name(), m);
                 uniqueModels.push(m);
             }
         }
 
+        this.renderNotes(ctx, "Unit notes", unit);
+        
         this.renderTableHeader(ctx, Renderer40k._unitLabels, unitLabelWidths);
         let i = 0;
         for (var model of uniqueModels) {
@@ -772,12 +824,14 @@ export class Renderer40k implements Renderer {
             i++;
         }
 
+        this.renderNotesArray(ctx, "Model notes", models);
+
         // Unique list of weapons
         const uniqueWeapons: Weapon[] = [];
         const scratchMap: Map<string, Weapon> = new Map();
         for (const w of weapons) {
-            if (!scratchMap.has(w._name)) {
-                scratchMap.set(w._name, w);
+            if (!scratchMap.has(w.name())) {
+                scratchMap.set(w.name(), w);
                 uniqueWeapons.push(w);
             }
         }
@@ -792,11 +846,7 @@ export class Renderer40k implements Renderer {
             this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
         }
 
-        if (unit._abilities.size > 0 || unit._rules.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderAbilities(ctx, unit);
-        }
+        this.renderNotesArray(ctx, "Weapon notes", weapons);
 
         if (spells.length > 0) {
             const spellLabelWidths: number[] = [];
@@ -808,12 +858,22 @@ export class Renderer40k implements Renderer {
             this.renderSpells(ctx, spells, spellLabelWidths);
         }
 
+        this.renderNotesArray(ctx, "Spell notes", spells);
+
         if (psykers.length > 0) {
             this.renderLine(ctx);
             this._currentY += 2;
             this.renderPsykers(ctx, psykers);
         }
 
+        this.renderNotesArray(ctx, "Psyker notes", psykers);
+
+
+        if (unit._abilities.size > 0 || unit._rules.size > 0) {
+            this.renderLine(ctx);
+            this._currentY += 2;
+            this.renderAbilities(ctx, unit);
+        }
 
         /*
                 if (unit._rules.size > 0) {
@@ -880,6 +940,8 @@ export class Renderer40k implements Renderer {
             this.renderTableHeader(ctx, Renderer40k._explosionLabels, explLabelWidths);
             this.renderExplosion(ctx, explosions, explLabelWidths);
         }
+
+        this.renderNotesArray(ctx, "Explosion notes", explosions);
 
         if (this._showWoundBoxes) {
             // wound tracker boxes
@@ -954,7 +1016,7 @@ export class Renderer40k implements Renderer {
         let title_size = 28;
         const title_x = imgX + 6;
         ctx.font = title_size + 'px ' + 'bold serif';
-        const unitName = unit._name.toLocaleUpperCase();
+        const unitName = unit.name().toLocaleUpperCase();
         let check = ctx.measureText(unitName);
         const maxWidth = this._maxWidth - title_x;
         while (iters < 6 && check.width > maxWidth) {
