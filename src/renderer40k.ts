@@ -14,19 +14,19 @@
     OF THIS SOFTWARE.
 */
 
-import { Unit, UnitRole, UnitRoleToString, Model, PsychicPower, Explosion, Weapon, Roster40k, Psyker } from "./roster40k";
-import { Renderer, Justification, RenderText, RenderParagraph } from "./renderer";
+import {Compare, Explosion, Model, PsychicPower, Psyker, Roster40k, Unit, UnitRole, UnitRoleToString, Weapon} from "./roster40k";
+import {Justification, Renderer, RenderParagraph, RenderText, FixDPI} from "./renderer";
 
 export class Renderer40k implements Renderer {
 
-    public static readonly _res: number = 144;
+    public static readonly _res: number = 144; // original is 144
     public static readonly _margin: number = 0;
 
     private static readonly _bevelSize = 15;
     private readonly _descriptionStartX = 190;
     private _descriptionWidth: number = 600;
 
-    private _showWoundBoxes: boolean = true;
+    private _showWoundBoxes: boolean = false;
 
     private _roster: Roster40k | null = null;
 
@@ -43,6 +43,10 @@ export class Renderer40k implements Renderer {
     private static readonly _grey1 = '#b3bbb5';
     private static readonly _greyLight = '#dde1df';
     private static readonly _fillColor = '#f6f6f6';
+    private static readonly _offset: number = 20;
+    private static readonly _titleFont = 'bold 16px sans-serif';
+    private static readonly _headerFont = 'bold 14px sans-serif';
+    private static readonly _font = '14px sans-serif';
 
     constructor(roster: Roster40k) {
 
@@ -68,10 +72,18 @@ export class Renderer40k implements Renderer {
             title.innerHTML = '<h3>' + this._roster._name + ' (' + this._roster._points + ' pts, ' + this._roster._powerLevel + ' PL, ' + this._roster._commandPoints + ' CP)</h3>';
         }
 
+        let catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
+        let subFactionRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
+
         for (let force of this._roster._forces) {
             const forceTitle = document.createElement('div');
             if (forceTitle) {
-                forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + '</p>';
+                if (force._faction) {
+                    forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + " (" + force._faction + ")" + '</p>';
+                }
+                else {
+                    forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + '</p>';
+                }
             }
             if (list)
                 list.appendChild(forceTitle);
@@ -85,7 +97,7 @@ export class Renderer40k implements Renderer {
             thead.classList.add('thead-light');
             const tr = document.createElement('tr');
             thead.appendChild(tr);
-            const headerInfo = [{ name: "NAME", w: '25%' }, { name: "ROLE", w: '20%' }, { name: "MODELS", w: '25%' }, { name: "POINTS", w: '15%' }, { name: "POWER", w: '15%' }];
+            const headerInfo = [{ name: "NAME", w: '20%' }, { name: "ROLE", w: '15%' }, { name: "MODELS", w: '55%' }, { name: "POINTS", w: '5%' }, { name: "POWER", w: '5%' }];
             headerInfo.forEach(element => {
                 let th = document.createElement('th');
                 th.scope = "col";
@@ -109,14 +121,14 @@ export class Renderer40k implements Renderer {
                 // TODO: the list of models may not be unique, make the list unique and update counts accordingly.
                 for (const model of unit._models) {
                     if (model._count > 1) {
-                        models.innerHTML += model._count + " " + model._name;
+                        models.innerHTML += model._count + "x " + model.name();
                     }
                     else {
-                        models.innerHTML += model._name;
+                        models.innerHTML += model.name();
                     }
                     mi++;
                     if (mi != unit._models.length) {
-                        models.innerHTML += ",  "
+                        models.innerHTML += "<br>"
                     }
                 }
                 let pts = document.createElement('td');
@@ -131,44 +143,53 @@ export class Renderer40k implements Renderer {
                 body.appendChild(tr);
             }
 
-            if (force._rules.size > 0) {
-                let allegianceRules = document.createElement('div');
-                let rulesHeader = document.createElement('h3');
-                allegianceRules.appendChild(rulesHeader);
-                rulesHeader.textContent = force._catalog + " Allegiance Rules";
-                for (let rule of force._rules) {
-                    let row = document.createElement('div');
-                    let name = document.createElement('h4');
-                    name.textContent = rule[0];
-                    let desc = document.createElement('p');
-                    desc.textContent = rule[1];
-                    row.appendChild(name);
-                    row.appendChild(desc);
-                    allegianceRules.appendChild(row);
+
+            if (forces) {
+                const forceTitle = document.createElement('div');
+                forceTitle.style.pageBreakBefore = "always";
+                if (forceTitle) {
+                    if (force._faction) {
+                        forceTitle.innerHTML = '<p>' + force._catalog + " (" + force._faction + ")" + '</p>';
+                    }
+                    else {
+                        forceTitle.innerHTML = '<p>' + force._catalog + '</p>';
+                    }
                 }
-            
-                if (forces)
-                    forces.appendChild(allegianceRules);
+
+                let h3 = document.createElement('h3');
+                h3.appendChild(forceTitle)
+                forces.appendChild(h3);
             }
 
             let prevUnit: Unit | null = null;
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
-                canvas.width = Renderer40k._res * 5.5;
+                canvas.width = Renderer40k._res * 7.5;
                 canvas.height = Renderer40k._res * 12;
+                //canvas.width = window.innerWidth - window.innerWidth / 8;
+                //canvas.height = Renderer40k._res * 12;
+                canvas.style.width = canvas.width.toString();
+                canvas.style.height = canvas.height.toString();
+
                 this._descriptionWidth = canvas.width - this._descriptionStartX - 10;
 
                 if (unit.equal(prevUnit)) {
                     continue;
                 }
 
+                FixDPI(canvas);
                 const dims = this.renderUnit(unit, canvas, 0, 0);
                 prevUnit = unit;
 
-                const border = 25;
+                const border = 15;
                 let finalCanvas = document.createElement('canvas') as HTMLCanvasElement;
+
                 finalCanvas.width = dims[0] + border * 2;
                 finalCanvas.height = dims[1] + border * 2;
+                finalCanvas.style.width = finalCanvas.width.toString();
+                finalCanvas.style.height = finalCanvas.height.toString();
+
+                FixDPI(finalCanvas);
                 let finalCtx = finalCanvas.getContext('2d');
                 finalCtx?.drawImage(canvas, border, border);
                 if (forces) {
@@ -176,7 +197,53 @@ export class Renderer40k implements Renderer {
                     canvasDiv.appendChild(finalCanvas);
                     forces.appendChild(canvasDiv);
                 }
+            }
 
+            if (force._rules.size > 0) {
+                let rules = new Map<string, string|null>();
+                catalogueRules.set(force._catalog, rules);
+                for (let rule of force._rules) {
+                    rules.set(rule[0], rule[1]);
+                }
+            }
+            if (force._factionRules.size > 0) {
+                let rules = new Map<string, string|null>();
+                subFactionRules.set(force._faction, rules);
+                for (let rule of force._factionRules) {
+                    rules.set(rule[0], rule[1]);
+                }
+            }
+        }
+
+        let rules = document.createElement("div");
+        rules.style.pageBreakBefore = "always";
+        this.printRules(catalogueRules, rules);
+        this.printRules(subFactionRules, rules);
+        if (forces)
+            forces.appendChild(rules);
+    }
+
+    private printRules(root: Map<string, Map<string, string | null>>, section: HTMLElement | null) {
+        if (root.size > 0) {
+            for (let [subFaction, rules] of root.entries()) {
+                let allegianceRules = document.createElement('div');
+                let rulesHeader = document.createElement('h3');
+                allegianceRules.appendChild(rulesHeader);
+                rulesHeader.textContent = subFaction;
+
+                for (let rule of rules) {
+                    let row = document.createElement('div');
+                    let name = document.createElement('b');
+                    name.textContent = rule[0];
+                    let desc = document.createElement('p');
+                    desc.textContent = rule[1];
+                    row.appendChild(name);
+                    row.appendChild(desc);
+                    allegianceRules.appendChild(row);
+                }
+
+                if (section)
+                    section.appendChild(allegianceRules);
             }
         }
     }
@@ -236,10 +303,10 @@ export class Renderer40k implements Renderer {
         ctx.fillRect(this._currentX, this._currentY, width, height);
 
         ctx.fillStyle = Renderer40k._blackColor;
-        ctx.font = '14px sans-serif';
+        ctx.font = Renderer40k._titleFont;
         var w = 50;
         if (labels) {
-            ctx.font = '12px sans-serif';
+            ctx.font = Renderer40k._headerFont;
             for (let i = 0; i < labels.length; i++) {
                 if (columnWidths) w = columnWidths[i];
                 RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
@@ -251,7 +318,7 @@ export class Renderer40k implements Renderer {
     }
 
     private renderSpells(ctx: CanvasRenderingContext2D, spells: PsychicPower[], columnWidths: number[] | null): void {
-        ctx.font = '12px sans-serif';
+        ctx.font = Renderer40k._font;
 
         const height = 22;
 
@@ -301,7 +368,7 @@ export class Renderer40k implements Renderer {
     }
 
     private renderExplosion(ctx: CanvasRenderingContext2D, explosions: Explosion[], columnWidths: number[] | null): void {
-        ctx.font = '12px sans-serif';
+        ctx.font = Renderer40k._font;
 
         const height = 22;
 
@@ -340,7 +407,7 @@ export class Renderer40k implements Renderer {
     }
 
     private renderWeapons(ctx: CanvasRenderingContext2D, weapons: Weapon[], columnWidths: number[] | null): void {
-        ctx.font = '12px sans-serif';
+        ctx.font = Renderer40k._font;
 
         const height = 22;
 
@@ -358,7 +425,7 @@ export class Renderer40k implements Renderer {
 
             ctx.fillStyle = Renderer40k._blackColor;
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._name.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, weapon._name.toString(), x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
@@ -366,7 +433,7 @@ export class Renderer40k implements Renderer {
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._type.toString(), x, this._currentY, w, height, Justification.Center);
+            RenderText(ctx, weapon._type.toString(), x, this._currentY, w, height, Justification.Left);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
@@ -415,13 +482,13 @@ export class Renderer40k implements Renderer {
 
         if (bg % 2) ctx.fillStyle = Renderer40k._greyLight;
         else ctx.fillStyle = '#ffffff';
-        ctx.fillRect(x, this._currentY, this._maxWidth, height);
+        ctx.fillRect(this._currentX, this._currentY, this._maxWidth, height);
 
         ctx.fillStyle = Renderer40k._blackColor;
-        ctx.font = '12px sans-serif';
+        ctx.font = Renderer40k._font;
 
         if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, model._name.toString(), x, this._currentY, w, height, Justification.Center);
+        RenderText(ctx, model._name.toString(), x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
         x += w;
 
         if (columnWidths) w = columnWidths[ci++];
@@ -464,22 +531,39 @@ export class Renderer40k implements Renderer {
     }
 
     private renderAbilities(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        ctx.font = '14px sans-serif';
-        RenderText(ctx, "ABILITIES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        ctx.font = Renderer40k._titleFont;
+        RenderText(ctx, "ABILITIES", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = '12px serif';
-        for (let ab of unit._abilities) {
-            const content = ab[0].toUpperCase();
-            const desc = ab[1];
+        ctx.font = 'bold 12px serif';
+        let keys = [...unit._abilities.keys()];
+        keys.sort(Compare);
+
+        let rulesList = [...unit._rules.keys()];
+        rulesList.sort(Compare)
+        const rules = rulesList.join(", ").toLocaleUpperCase();
+        this._currentY += 2;
+        this._currentY = RenderParagraph(ctx, rules, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+        this._currentY += 2;
+
+        for (const key of keys) {
+            const content = key.toUpperCase() + ':';
+            const desc = unit._abilities.get(key);
+
+            ctx.font = 'bold 12px serif';
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            RenderText(ctx, content, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left);
+            let offsetX = ctx.measureText(content).width;
+            this._currentY += 2;
+
+            ctx.font = '12px serif';
+            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX + offsetX, this._currentY, this._descriptionWidth - offsetX);
             this._currentY += 2;
         }
     }
 
     private renderRules(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        ctx.font = '14px sans-serif';
-        RenderText(ctx, "RULES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        ctx.font = Renderer40k._titleFont;
+        RenderText(ctx, "RULES", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
         ctx.font = '12px serif';
         for (let rule of unit._rules) {
@@ -492,11 +576,12 @@ export class Renderer40k implements Renderer {
     }
 
     private renderKeywords(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        ctx.font = '14px sans-serif';
-        RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        ctx.font = Renderer40k._titleFont;
+        RenderText(ctx, "KEYWORDS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
         ctx.font = '12px serif';
         const kwlist = [...unit._keywords];
+        kwlist.sort(Compare)
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
         this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
@@ -504,11 +589,12 @@ export class Renderer40k implements Renderer {
     }
 
     private renderFactions(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        ctx.font = '14px sans-serif';
-        RenderText(ctx, "FACTIONS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        ctx.font = Renderer40k._titleFont;
+        RenderText(ctx, "FACTIONS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
         ctx.font = '12px serif';
         const kwlist = [...unit._factions];
+        kwlist.sort(Compare)
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
         this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
@@ -536,7 +622,7 @@ export class Renderer40k implements Renderer {
             ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
             ctx.fillStyle = Renderer40k._blackColor;
-            ctx.font = '12px sans-serif';
+            ctx.font = Renderer40k._font;
             if (columnWidths) w = columnWidths[ci++];
 
             //RenderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
@@ -553,34 +639,28 @@ export class Renderer40k implements Renderer {
     }
 
     private renderModelList(ctx: CanvasRenderingContext2D, models: Model[]) {
-        ctx.font = '14px sans-serif';
-        RenderText(ctx, "MODELS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        ctx.font = Renderer40k._titleFont;
+        RenderText(ctx, "MODELS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = '12px serif';
-        let modelList = "";
-        let mi = 0;
-        for (const model of models) {
+        ctx.font = Renderer40k._font;
+        for (let model of models) {
+            let text: string;
             if (model._count > 1) {
-                modelList += model._count + " " + model._name;
+                text = model._count + "x " + model.name();
             }
             else {
-                modelList += model._name;
+                text = model.name();
             }
-            mi++;
-            if (mi != models.length) {
-                modelList += ",  "
-            }
+            this._currentY += 2;
+            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            this._currentY += 2;
         }
-
-        this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, modelList, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
-        this._currentY += 2;
     }
 
     private renderWoundBoxes(ctx: CanvasRenderingContext2D, models: Model[]) {
 
-        ctx.font = '14px sans-serif';
-        RenderText(ctx, "WOUNDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        ctx.font = Renderer40k._titleFont;
+        RenderText(ctx, "WOUNDS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
         const woundBoxSize = 20;
         const boxMargin = 5;
@@ -595,7 +675,7 @@ export class Renderer40k implements Renderer {
 
                 let currentY = this._currentY;
 
-                ctx.font = '12px serif';
+                ctx.font = Renderer40k._font;
                 ctx.fillStyle = Renderer40k._blackColor;
 
                 this._currentY = RenderParagraph(ctx, model._name, unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth);
@@ -620,18 +700,18 @@ export class Renderer40k implements Renderer {
     }
 
     private static _unitLabels = ["MODEL", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
-    private _unitLabelWidthsNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077];
+    private _unitLabelWidthsNormalized = [0.2, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
     private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
-    private _weaponLabelWidthNormalized = [0.3, 0.077, 0.077, 0.077, 0.077, 0.077, 0.3];
+    private _weaponLabelWidthNormalized = [0.2, 0.05, 0.05, 0.05, 0.05, 0.05, 0.55];
 
     private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
-    private _spellLabelWidthNormalized = [0.3, 0.1, 0.1, 0.5];
+    private _spellLabelWidthNormalized = [0.2, 0.05, 0.05, 0.7];
 
     private static _explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];
-    private _explosionLabelWidthNormalized = [0.3, 0.15, 0.15, 0.15];
+    private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.10];
 
     private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
-    private _trackerLabelWidth = [0.3, 0.2, 0.15, 0.15, 0.15];
+    private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
 
     protected renderUnit(unit: Unit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
 
@@ -712,6 +792,12 @@ export class Renderer40k implements Renderer {
             this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
         }
 
+        if (unit._abilities.size > 0 || unit._rules.size > 0) {
+            this.renderLine(ctx);
+            this._currentY += 2;
+            this.renderAbilities(ctx, unit);
+        }
+
         if (spells.length > 0) {
             const spellLabelWidths: number[] = [];
             this._spellLabelWidthNormalized.forEach(element => {
@@ -722,24 +808,20 @@ export class Renderer40k implements Renderer {
             this.renderSpells(ctx, spells, spellLabelWidths);
         }
 
-        if (unit._abilities.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderAbilities(ctx, unit);
-        }
-
         if (psykers.length > 0) {
             this.renderLine(ctx);
             this._currentY += 2;
             this.renderPsykers(ctx, psykers);
         }
 
-        if (unit._rules.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderRules(ctx, unit);
-        }
 
+        /*
+                if (unit._rules.size > 0) {
+                    this.renderLine(ctx);
+                    this._currentY += 2;
+                    this.renderRules(ctx, unit);
+                }
+        */
         if (unit._factions.size > 0) {
             this.renderLine(ctx);
             this._currentY += 2;
@@ -755,7 +837,7 @@ export class Renderer40k implements Renderer {
         if (unit._models.length > 0) {
             this.renderLine(ctx);
             this._currentY += 2;
-            this.renderModelList(ctx, uniqueModels);
+            this.renderModelList(ctx, unit._models);
         }
 
         if (unit._woundTracker.length > 0) {
@@ -889,25 +971,21 @@ export class Renderer40k implements Renderer {
     }
 
     private renderPsykers(ctx: CanvasRenderingContext2D, psykers: Psyker[]): void {
-        ctx.font = '14px sans-serif';
-        RenderText(ctx, "PSYKERS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        ctx.font = Renderer40k._titleFont;
+        RenderText(ctx, "PSYKERS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = '12px serif';
+        ctx.font = Renderer40k._font;
         this._currentY += 2;
         for (let psyker of psykers) {
-            this._currentY = RenderParagraph(ctx, "CAST: " + psyker._cast, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
-            this._currentY += 2;
 
-            this._currentY = RenderParagraph(ctx, "DENY: " + psyker._deny, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
-            this._currentY += 2;
-
-            this._currentY = RenderParagraph(ctx, "POWERS KNOWN: " + psyker._powers, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
-            this._currentY += 2;
+            let text = "CAST: " + psyker._cast + ", DENY: " + psyker._deny + ", POWERS KNOWN: " + psyker._powers;
 
             if (psyker._other) {
-                this._currentY = RenderParagraph(ctx, "OTHER: " + psyker._other, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
-                this._currentY += 2;
+                text += ", OTHER: " + psyker._other;
             }
+
+            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            this._currentY += 2;
         }
     }
 };
