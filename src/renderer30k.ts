@@ -15,7 +15,7 @@
 */
 
 import { Unit30k, UnitRole30k, UnitRoleToString30k, Model30k, Vehicle30k, Walker30k, Flyer30k, PsychicPower30k, Weapon30k, Roster30k, Psyker30k } from "./roster30k";
-import { Renderer, Justification, RenderText, RenderParagraph } from "./renderer";
+import { Renderer, Justification, RenderText, RenderParagraph, VertAlign } from "./renderer";
 
 export class Renderer30k implements Renderer {
 
@@ -273,7 +273,7 @@ export class Renderer30k implements Renderer {
 
             if (columnWidths) w = columnWidths[ci++];
             this._currentY += 4;
-            this._currentY = RenderParagraph(ctx, power._details, x, this._currentY, w);
+            this._currentY = RenderParagraph(ctx, power._details, x, this._currentY, w, 0);
             this._currentY += 2;
             x += w;
 
@@ -578,7 +578,7 @@ export class Renderer30k implements Renderer {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
             this._currentY += 2;
         }
     }
@@ -592,7 +592,7 @@ export class Renderer30k implements Renderer {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
             this._currentY += 4;
         }
     }
@@ -605,7 +605,7 @@ export class Renderer30k implements Renderer {
         const kwlist = [...unit._keywords];
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
         this._currentY += 2;
     }
 
@@ -617,7 +617,7 @@ export class Renderer30k implements Renderer {
         const kwlist = [...unit._factions];
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
         this._currentY += 2;
     }
 
@@ -642,7 +642,7 @@ export class Renderer30k implements Renderer {
         }
 
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, modelList, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+        this._currentY = RenderParagraph(ctx, modelList, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
         this._currentY += 2;
     }
 
@@ -667,7 +667,7 @@ export class Renderer30k implements Renderer {
                 ctx.font = '12px serif';
                 ctx.fillStyle = Renderer30k._blackColor;
 
-                this._currentY = RenderParagraph(ctx, model._name, unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth);
+                this._currentY = RenderParagraph(ctx, model._name, unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth, 0);
 
                 let x = this._currentX + boxStartX;
                 ctx.strokeStyle = Renderer30k._blackColor;
@@ -959,10 +959,10 @@ export class Renderer30k implements Renderer {
         ctx.font = '12px serif';
         this._currentY += 2;
         for (let psyker of psykers) {
-            this._currentY = RenderParagraph(ctx, "MASTERY LEVEL: " + psyker._masteryLevel, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            this._currentY = RenderParagraph(ctx, "MASTERY LEVEL: " + psyker._masteryLevel, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
             this._currentY += 2;
 
-            this._currentY = RenderParagraph(ctx, "DISCIPLINES: " + psyker._disciplines, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            this._currentY = RenderParagraph(ctx, "DISCIPLINES: " + psyker._disciplines, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
             this._currentY += 2;
         }
     }
