@@ -365,7 +365,7 @@ export class RendererAoS implements Renderer {
         ctx.font = '12px serif';
         const kwlist = [...unit._keywords]; 
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500, 0);
 
         this._currentY += 4;
     }
@@ -464,7 +464,7 @@ export class RendererAoS implements Renderer {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500, 0);
         }
         this._currentY += 4;
     }
@@ -497,7 +497,7 @@ export class RendererAoS implements Renderer {
 
             if (columnWidths) w = columnWidths[ci++];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, spell._description, x, this._currentY, w);
+            this._currentY = RenderParagraph(ctx, spell._description, x, this._currentY, w, 0);
             x += w;
 
             ctx.save();
@@ -537,7 +537,7 @@ export class RendererAoS implements Renderer {
 
             if (columnWidths) w = columnWidths[ci++];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, prayer._description, x, this._currentY, w);
+            this._currentY = RenderParagraph(ctx, prayer._description, x, this._currentY, w, 0);
             x += w;
 
             ctx.save();

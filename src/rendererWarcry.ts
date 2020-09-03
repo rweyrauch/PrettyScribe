@@ -252,7 +252,7 @@ export class RendererWarcry implements Renderer {
         ctx.font = '12px serif';
         const kwlist = [...unit._keywords]; 
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500, 0);
 
         this._currentY += 4;
     }
