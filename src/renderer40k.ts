@@ -44,11 +44,11 @@ export class Renderer40k implements Renderer {
     private static readonly _greyLight = '#dde1df';
     private static readonly _fillColor = '#f6f6f6';
     private static readonly _offset: number = 20;
-    private static readonly _titleFont = 'bold 16px sans-serif';
+
+    private static readonly _titleFont = 'bold 14px sans-serif';
     private static readonly _headerFont = 'bold 14px sans-serif';
     private static readonly _font = '14px sans-serif';
-    private static readonly _smallFont = '12px sans-serif';
-    private static readonly _smallBoldFont = 'bold 12px sans-serif';
+    private static readonly _boldFont = 'bold 14px sans-serif';
 
     constructor(roster: Roster40k) {
 
@@ -168,8 +168,6 @@ export class Renderer40k implements Renderer {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = Renderer40k._res * 7.5;
                 canvas.height = Renderer40k._res * 12;
-                //canvas.width = window.innerWidth - window.innerWidth / 8;
-                //canvas.height = Renderer40k._res * 12;
                 canvas.style.width = canvas.width.toString();
                 canvas.style.height = canvas.height.toString();
 
@@ -397,7 +395,7 @@ export class Renderer40k implements Renderer {
 
             if (columnWidths) w = columnWidths[ci++];
             this._currentY += 4; // TODO: Fix this kludge to align text and paragraph
-            ctx.font = Renderer40k._smallFont;
+            ctx.font = Renderer40k._font;
             this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w, 0);
             this._currentY += 2;
             x += w;
@@ -583,7 +581,7 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "ABILITIES", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = Renderer40k._smallBoldFont;
+        ctx.font = Renderer40k._boldFont;
         let keys = [...unit._abilities.keys()];
         keys.sort(Compare);
 
@@ -598,12 +596,12 @@ export class Renderer40k implements Renderer {
             const content = key.toUpperCase() + ':';
             const desc = unit._abilities.get(key);
 
-            ctx.font = Renderer40k._smallBoldFont;
+            ctx.font = Renderer40k._boldFont;
             this._currentY += 2;
             RenderTextFull(ctx, content, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left, VertAlign.Top);
             let offsetX = ctx.measureText(content).width;
 
-            ctx.font = Renderer40k._smallFont;
+            ctx.font = Renderer40k._font;
             this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, offsetX);
             this._currentY += 2;
         }
@@ -690,7 +688,7 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "MODELS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = Renderer40k._smallFont;
+        ctx.font = Renderer40k._font;
         for (let model of models) {
             let text: string;
             if (model._count > 1) {

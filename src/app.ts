@@ -172,6 +172,8 @@ function handleFileSelect(event: Event) {
   }
 }
 
-$(window).on("resize", handleFileSelect);
+// TODO: re-render on resize if needed.  Reloading/parsing each time the window is
+// resized yields very poor performance.
+//$(window).on("resize", handleFileSelect);
 
 $('#roster-file').on("change", handleFileSelect);

@@ -15,7 +15,7 @@
 */
 
 import { AoSUnit, AoSUnitRole, AoSUnitRoleToString, AoSWeapon, RosterAoS, AoSSpell, AoSPrayer } from "./rosterAoS";
-import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer";
+import { Renderer, Justification, RenderText, RenderParagraph, RenderTextFull, VertAlign} from "./renderer";
 
 export class RendererAoS implements Renderer {
 
@@ -23,6 +23,8 @@ export class RendererAoS implements Renderer {
     public static readonly _margin: number = 0;
 
     private static readonly _bevelSize = 15;
+    private readonly _descriptionStartX = 190;
+    private _descriptionWidth: number = 600;
 
     private _statsWheel: HTMLImageElement | null = null;
 
@@ -37,6 +39,11 @@ export class RendererAoS implements Renderer {
     private static readonly _grey1 = '#b3bbb5';
     private static readonly _greyLight = '#dde1df';
     private static readonly _fillColor = '#f6f6f6';
+
+    private static readonly _titleFont = 'bold 14px sans-serif';
+    private static readonly _headerFont = 'bold 14px sans-serif';
+    private static readonly _font = '14px sans-serif';
+    private static readonly _boldFont = 'bold 14px sans-serif';
 
     constructor(roster: RosterAoS) {
         this._roster = roster;
@@ -137,9 +144,11 @@ export class RendererAoS implements Renderer {
 
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
-                canvas.width = RendererAoS._res * 5.5;
-                canvas.height = RendererAoS._res * 8.5;
+                canvas.width = RendererAoS._res * 7.5;
+                canvas.height = RendererAoS._res * 12;
                 
+                this._descriptionWidth = canvas.width - this._descriptionStartX - 10;
+
                 const dims = this.renderUnit(unit, canvas, 0, 0);
     
                 const border = 25;
@@ -344,11 +353,10 @@ export class RendererAoS implements Renderer {
         ctx.fillRect(this._currentX, this._currentY, width, height);
 
         ctx.fillStyle = RendererAoS._blackColor;
-        ctx.font = '14px sans-serif';
+        ctx.font = RendererAoS._headerFont;
         var w = 50;
         if (labels) {
-            ctx.font = '12px sans-serif';
-            for (let i = 0; i < labels.length; i++) {
+             for (let i = 0; i < labels.length; i++) {
                 if (columnWidths) w = columnWidths[i];
                 RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
                 x += w;
@@ -359,30 +367,30 @@ export class RendererAoS implements Renderer {
     }
 
     private renderKeywords(ctx: CanvasRenderingContext2D, unit: AoSUnit): void {
-        ctx.font = '14px sans-serif';
+        ctx.font = RendererAoS._titleFont;
         RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = '12px serif';
+        ctx.font = RendererAoS._font;
         const kwlist = [...unit._keywords]; 
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500, 0);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
 
         this._currentY += 4;
     }
 
     private static _unitLabels = ["UNIT", "MOVE", "WOUNDS", "BRAVERY", "SAVE"];
-    private _unitLabelWidthsNormalized = [0.4, 0.15, 0.15, 0.15, 0.15];
+    private _unitLabelWidthsNormalized = [0.3, 0.1, 0.1, 0.1, 0.1];
     private static _weaponLabels = ["MISSILE WEAPONS", "RANGE", "ATTACKS", "TO HIT", "TO WOUND", "REND", "DAMAGE"];
-    private _weaponLabelWidthNormalized = [0.4, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
+    private _weaponLabelWidthNormalized = [0.3, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
     private static _meleeLabels = ["MELEE WEAPONS", "RANGE", "ATTACKS", "TO HIT", "TO WOUND", "REND", "DAMAGE"];
 
     private static _spellLabels = ["SPELL", "CASTING VALUE", "DESCRIPTION"];
-    private _spellLabelWidthNormalized = [0.3, 0.2, 0.5];
+    private _spellLabelWidthNormalized = [0.3, 0.1, 0.5];
 
     private static _prayerLabels = ["PRAYER", "DESCRIPTION"];
-    private _prayerLabelWidthNormalized = [0.4, 0.6];
+    private _prayerLabelWidthNormalized = [0.3, 0.6];
 
-    private _trackerLabelWidth = [0.3, 0.2, 0.15, 0.15, 0.15];
+    private _trackerLabelWidth = [0.3, 0.2, 0.1, 0.1, 0.1];
 
     private renderLine(ctx: CanvasRenderingContext2D): void {
         ctx.lineWidth = 2;
@@ -395,7 +403,7 @@ export class RendererAoS implements Renderer {
     }
 
     private renderWeapons(ctx: CanvasRenderingContext2D, weapons: AoSWeapon[], columnWidths: number[] | null): void {
-        ctx.font = '12px sans-serif';
+        ctx.font = RendererAoS._font;
 
         const height = 22;
 
@@ -456,21 +464,28 @@ export class RendererAoS implements Renderer {
     }
 
     private renderMap(ctx: CanvasRenderingContext2D, title: string, data: Map<string, string>): void {
-        ctx.font = '14px sans-serif';
+        ctx.font = RendererAoS._titleFont;
         RenderText(ctx, title, this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = '12px serif';
+        ctx.font = RendererAoS._font;
         for (let ab of data) {
-            const content = ab[0].toUpperCase();
+            const content = ab[0].toUpperCase() + ':';
             const desc = ab[1];
+
+            ctx.font = RendererAoS._headerFont;
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + 190, this._currentY, 500, 0);
+            RenderTextFull(ctx, content, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left, VertAlign.Top);
+            let offsetX = ctx.measureText(content).width;
+
+            ctx.font = RendererAoS._font;
+            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, offsetX);
+            this._currentY += 2;
         }
         this._currentY += 4;
     }
 
     private renderSpells(ctx: CanvasRenderingContext2D, spells: AoSSpell[], columnWidths: number[] | null): void {
-        ctx.font = '12px sans-serif';
+        ctx.font = RendererAoS._font;
 
         const height = 22;
 
@@ -514,7 +529,7 @@ export class RendererAoS implements Renderer {
     }
 
     private renderPrayers(ctx: CanvasRenderingContext2D, prayers: AoSPrayer[], columnWidths: number[] | null): void {
-        ctx.font = '12px sans-serif';
+        ctx.font = RendererAoS._font;
 
         const height = 22;
 
@@ -566,7 +581,7 @@ export class RendererAoS implements Renderer {
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
         ctx.fillStyle = RendererAoS._blackColor;
-        ctx.font = '12px sans-serif';
+        ctx.font = RendererAoS._font;
 
         if (columnWidths) w = columnWidths[ci++];
         RenderText(ctx, unit._name.toString(), x, this._currentY, w, height, Justification.Center);
@@ -607,7 +622,7 @@ export class RendererAoS implements Renderer {
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
         ctx.fillStyle = RendererAoS._blackColor;
-        ctx.font = '12px sans-serif';
+        ctx.font = RendererAoS._font;
         if (columnWidths) w = columnWidths[ci++];
 
         RenderText(ctx, unit._woundTracker._name, x, this._currentY, w, height, Justification.Center);
