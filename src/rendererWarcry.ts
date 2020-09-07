@@ -30,13 +30,18 @@ export class RendererWarcry implements Renderer {
     private static readonly _greyLight = '#dde1df';
     private static readonly _fillColor = '#f6f6f6';
 
+    private static readonly _titleFont = 'bold 14px sans-serif';
+    private static readonly _headerFont = 'bold 14px sans-serif';
+    private static readonly _font = '14px sans-serif';
+    private static readonly _boldFont = 'bold 14px sans-serif';
+
     private _currentX: number = 0;
     private _currentY: number = 0;
     private _maxWidth: number = 0;
     private _maxHeight: number = 0;
 
     private static _unitLabels = ["UNIT", "MOVE", "WOUNDS", "TOUGHNESS"];
-    private _unitLabelWidthsNormalized = [0.4, 0.20, 0.20, 0.20];
+    private _unitLabelWidthsNormalized = [0.4, 0.15, 0.15, 0.15];
     private static _weaponLabels = ["WEAPON", "RANGE", "ATTACKS", "STRENGTH", "DAMAGE"];
     private _weaponLabelWidthNormalized = [0.4, 0.15, 0.15, 0.15, 0.15];
 
@@ -118,8 +123,8 @@ export class RendererWarcry implements Renderer {
 
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
-                canvas.width = RendererWarcry._res * 5.5;
-                canvas.height = RendererWarcry._res * 8.5;
+                canvas.width = RendererWarcry._res * 7.5;
+                canvas.height = RendererWarcry._res * 12;
                 
                 const dims = this.renderUnit(unit, canvas, 0, 0);
     
@@ -231,10 +236,9 @@ export class RendererWarcry implements Renderer {
         ctx.fillRect(this._currentX, this._currentY, width, height);
 
         ctx.fillStyle = RendererWarcry._blackColor;
-        ctx.font = '14px sans-serif';
         var w = 50;
         if (labels) {
-            ctx.font = '12px sans-serif';
+            ctx.font = RendererWarcry._headerFont;
             for (let i = 0; i < labels.length; i++) {
                 if (columnWidths) w = columnWidths[i];
                 RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
@@ -246,13 +250,13 @@ export class RendererWarcry implements Renderer {
     }
 
     private renderKeywords(ctx: CanvasRenderingContext2D, unit: WarcryUnit): void {
-        ctx.font = '14px sans-serif';
+        ctx.font = RendererWarcry._titleFont;
         RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = '12px serif';
+        ctx.font = RendererWarcry._font;
         const kwlist = [...unit._keywords]; 
         const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500, 0);
 
         this._currentY += 4;
     }
@@ -270,7 +274,7 @@ export class RendererWarcry implements Renderer {
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
         ctx.fillStyle = RendererWarcry._blackColor;
-        ctx.font = '12px sans-serif';
+        ctx.font = RendererWarcry._font;
 
         if (columnWidths) w = columnWidths[ci++];
         RenderText(ctx, unit._name.toString(), x, this._currentY, w, height, Justification.Center);
@@ -292,7 +296,7 @@ export class RendererWarcry implements Renderer {
     }
 
     private renderWeapons(ctx: CanvasRenderingContext2D, weapons: WarcryWeapon[], columnWidths: number[] | null): void {
-        ctx.font = '12px sans-serif';
+        ctx.font = RendererWarcry._font;
 
         const height = 22;
 

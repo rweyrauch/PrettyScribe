@@ -25,25 +25,43 @@ export enum Justification {
     Right,
     Center
 };
+export enum VertAlign {
+    Top,
+    Bottom,
+    Center
+}
 
-export function RenderText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, h: number, how: Justification): void {
+export function RenderTextFull(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, h: number, how: Justification, howVert: VertAlign): void {
     if (ctx && text.length) {
         ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
         let measure = ctx.measureText(text);
         const tw = measure.width;
         const th = measure.actualBoundingBoxDescent - measure.actualBoundingBoxAscent;
 
+        let alignedY = y;
+        if (howVert == VertAlign.Top) {
+            alignedY = y;
+        }
+        else if (howVert == VertAlign.Bottom) {
+            alignedY = y + h - th;
+        }
+        else if (howVert == VertAlign.Center) {
+            alignedY = y + (h - th) / 2;
+        }
         if (how == Justification.Center) {
-            ctx.fillText(text, x + Math.max((w - tw) / 2, 0), y + (h - th) / 2, w);
+            ctx.fillText(text, x + Math.max((w - tw) / 2, 0), alignedY, w);
         } else if (how == Justification.Left) {
-            ctx.fillText(text, x, y + (h - th) / 2, w);
+            ctx.fillText(text, x, alignedY, w);
         } else if (how == Justification.Right) {
-            ctx.fillText(text, x + w - tw, y + (h - th) / 2, w);
+            ctx.fillText(text, x + w - tw, alignedY, w);
         }
     }
 }
+export function RenderText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, h: number, how: Justification): void {
+    RenderTextFull(ctx, text, x, y, w, h, how, VertAlign.Center);
+}
 
-export function RenderParagraph(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number): number {
+export function RenderParagraph(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, indentX: number): number {
     let curY: number = y;
     if (ctx && text.length) {
         let lines: string[] = [];
@@ -54,10 +72,14 @@ export function RenderParagraph(ctx: CanvasRenderingContext2D, text: string, x: 
         const heightMeasure = ctx.measureText(text);
         const th = (heightMeasure.actualBoundingBoxDescent - heightMeasure.actualBoundingBoxAscent) * 1.2;
 
+        const firstLineWidth = w - indentX;
+        let activeWidth = firstLineWidth;
+
         text.split(" ").forEach(function (word) {
             const measure: TextMetrics = ctx.measureText(word);
-            if ((length + measure.width) > w) {
+            if ((length + measure.width) > activeWidth) {
                 lines.push(currentLine.join(" "));
+                activeWidth = w;
                 currentLine.length = 0;
                 length = 0;
             }
@@ -68,8 +90,10 @@ export function RenderParagraph(ctx: CanvasRenderingContext2D, text: string, x: 
             lines.push(currentLine.join(" "));
         }
 
+        let lineStart = x + indentX;
         for (let l of lines) {
-            ctx.fillText(l, x, curY);
+            ctx.fillText(l, lineStart, curY);
+            lineStart = x;
             curY += th;
         }
     }

@@ -15,7 +15,7 @@
 */
 
 import {BaseNotes, Compare, Explosion, Model, PsychicPower, Psyker, Roster40k, Unit, UnitRole, UnitRoleToString, Weapon} from "./roster40k";
-import {Justification, Renderer, RenderParagraph, RenderText, FixDPI} from "./renderer";
+import {Justification, Renderer, RenderParagraph, RenderText, RenderTextFull, FixDPI, VertAlign} from "./renderer";
 
 export class Renderer40k implements Renderer {
 
@@ -44,11 +44,11 @@ export class Renderer40k implements Renderer {
     private static readonly _greyLight = '#dde1df';
     private static readonly _fillColor = '#f6f6f6';
     private static readonly _offset: number = 20;
-    private static readonly _titleFont = 'bold 16px sans-serif';
+
+    private static readonly _titleFont = 'bold 14px sans-serif';
     private static readonly _headerFont = 'bold 14px sans-serif';
     private static readonly _font = '14px sans-serif';
-    private static readonly _smallFont = '12px sans-serif';
-    private static readonly _smallBoldFont = 'bold 12px sans-serif';
+    private static readonly _boldFont = 'bold 14px sans-serif';
 
     constructor(roster: Roster40k) {
 
@@ -168,8 +168,6 @@ export class Renderer40k implements Renderer {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = Renderer40k._res * 7.5;
                 canvas.height = Renderer40k._res * 12;
-                //canvas.width = window.innerWidth - window.innerWidth / 8;
-                //canvas.height = Renderer40k._res * 12;
                 canvas.style.width = canvas.width.toString();
                 canvas.style.height = canvas.height.toString();
 
@@ -297,8 +295,8 @@ export class Renderer40k implements Renderer {
         RenderText(ctx, title.toLocaleUpperCase(), this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
         ctx.font = Renderer40k._font;
-        this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, notes._customNotes, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+        this._currentY += 2; // TODO: fix this kludge to align text and paragraph
+        this._currentY = RenderParagraph(ctx, notes._customNotes, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
         this._currentY += 2;
     }
 
@@ -322,12 +320,11 @@ export class Renderer40k implements Renderer {
 
             ctx.font = Renderer40k._headerFont;
             this._currentY += 2;
-            RenderText(ctx, name, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left);
+            RenderTextFull(ctx, name, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left, VertAlign.Top);
             let offsetX = ctx.measureText(name).width;
-            this._currentY += 2;
 
             ctx.font = Renderer40k._font;
-            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX + offsetX, this._currentY, this._descriptionWidth - offsetX);
+            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, offsetX);
             this._currentY += 2;
         }
     }
@@ -397,9 +394,9 @@ export class Renderer40k implements Renderer {
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
-            this._currentY += 4;
-            ctx.font = Renderer40k._smallFont;
-            this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w);
+            this._currentY += 4; // TODO: Fix this kludge to align text and paragraph
+            ctx.font = Renderer40k._font;
+            this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w, 0);
             this._currentY += 2;
             x += w;
 
@@ -483,7 +480,7 @@ export class Renderer40k implements Renderer {
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._type.toString(), x, this._currentY, w, height, Justification.Left);
+            RenderText(ctx, weapon._type.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
@@ -500,8 +497,8 @@ export class Renderer40k implements Renderer {
 
             if (columnWidths) w = columnWidths[ci++];
             if (weapon._abilities) {
-                this._currentY += 4;
-                this._currentY = RenderParagraph(ctx, weapon._abilities, x, this._currentY, w);
+                this._currentY += 4; // TODO: fix this kludge to align text and the paragraph.
+                this._currentY = RenderParagraph(ctx, weapon._abilities, x, this._currentY, w, 0);
                 this._currentY += 2;
             }
             else {
@@ -584,7 +581,7 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "ABILITIES", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = Renderer40k._smallBoldFont;
+        ctx.font = Renderer40k._boldFont;
         let keys = [...unit._abilities.keys()];
         keys.sort(Compare);
 
@@ -592,21 +589,20 @@ export class Renderer40k implements Renderer {
         rulesList.sort(Compare)
         const rules = rulesList.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, rules, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+        this._currentY = RenderParagraph(ctx, rules, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
         this._currentY += 2;
 
         for (const key of keys) {
             const content = key.toUpperCase() + ':';
             const desc = unit._abilities.get(key);
 
-            ctx.font = Renderer40k._smallBoldFont;
+            ctx.font = Renderer40k._boldFont;
             this._currentY += 2;
-            RenderText(ctx, content, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left);
+            RenderTextFull(ctx, content, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left, VertAlign.Top);
             let offsetX = ctx.measureText(content).width;
-            this._currentY += 2;
 
-            ctx.font = Renderer40k._smallFont;
-            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX + offsetX, this._currentY, this._descriptionWidth - offsetX);
+            ctx.font = Renderer40k._font;
+            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, offsetX);
             this._currentY += 2;
         }
     }
@@ -620,7 +616,7 @@ export class Renderer40k implements Renderer {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
             this._currentY += 4;
         }
     }
@@ -634,7 +630,7 @@ export class Renderer40k implements Renderer {
         kwlist.sort(Compare)
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
         this._currentY += 2;
     }
 
@@ -647,7 +643,7 @@ export class Renderer40k implements Renderer {
         kwlist.sort(Compare)
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
         this._currentY += 2;
     }
 
@@ -692,7 +688,7 @@ export class Renderer40k implements Renderer {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "MODELS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = Renderer40k._smallFont;
+        ctx.font = Renderer40k._font;
         for (let model of models) {
             let text: string;
             if (model._count > 1) {
@@ -702,7 +698,7 @@ export class Renderer40k implements Renderer {
                 text = model.nameAndGear();
             }
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
             this._currentY += 2;
         }
     }
@@ -728,7 +724,7 @@ export class Renderer40k implements Renderer {
                 ctx.font = Renderer40k._font;
                 ctx.fillStyle = Renderer40k._blackColor;
 
-                this._currentY = RenderParagraph(ctx, model._name, unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth);
+                this._currentY = RenderParagraph(ctx, model._name, unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth, 0);
 
                 let x = this._currentX + boxStartX;
                 ctx.strokeStyle = Renderer40k._blackColor;
@@ -750,12 +746,12 @@ export class Renderer40k implements Renderer {
     }
 
     private static _unitLabels = ["MODEL", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
-    private _unitLabelWidthsNormalized = [0.2, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
+    private _unitLabelWidthsNormalized = [0.25, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
     private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
-    private _weaponLabelWidthNormalized = [0.2, 0.05, 0.05, 0.05, 0.05, 0.05, 0.55];
+    private _weaponLabelWidthNormalized = [0.25, 0.05, 0.1, 0.05, 0.05, 0.05, 0.45];
 
     private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
-    private _spellLabelWidthNormalized = [0.2, 0.05, 0.05, 0.7];
+    private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
 
     private static _explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];
     private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.10];
@@ -1046,7 +1042,7 @@ export class Renderer40k implements Renderer {
                 text += ", OTHER: " + psyker._other;
             }
 
-            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth);
+            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
             this._currentY += 2;
         }
     }
