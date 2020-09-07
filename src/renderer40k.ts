@@ -296,7 +296,7 @@ export class Renderer40k implements Renderer {
 
         ctx.font = Renderer40k._font;
         this._currentY += 2; // TODO: fix this kludge to align text and paragraph
-        this._currentY = RenderParagraph(ctx, notes._customNotes, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
+        this._currentY = RenderParagraph(ctx, notes._customNotes, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, 0);
         this._currentY += 2;
     }
 
@@ -324,7 +324,7 @@ export class Renderer40k implements Renderer {
             let offsetX = ctx.measureText(name).width;
 
             ctx.font = Renderer40k._font;
-            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, offsetX);
+            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, offsetX);
             this._currentY += 2;
         }
     }
@@ -396,7 +396,7 @@ export class Renderer40k implements Renderer {
             if (columnWidths) w = columnWidths[ci++];
             this._currentY += 4; // TODO: Fix this kludge to align text and paragraph
             ctx.font = Renderer40k._font;
-            this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w, 0);
+            this._currentY = RenderParagraph(ctx, spell._details, x, this._currentY, w - Renderer40k._offset, 0);
             this._currentY += 2;
             x += w;
 
@@ -498,7 +498,7 @@ export class Renderer40k implements Renderer {
             if (columnWidths) w = columnWidths[ci++];
             if (weapon._abilities) {
                 this._currentY += 4; // TODO: fix this kludge to align text and the paragraph.
-                this._currentY = RenderParagraph(ctx, weapon._abilities, x, this._currentY, w, 0);
+                this._currentY = RenderParagraph(ctx, weapon._abilities, x, this._currentY, w - Renderer40k._offset, 0);
                 this._currentY += 2;
             }
             else {
@@ -589,7 +589,7 @@ export class Renderer40k implements Renderer {
         rulesList.sort(Compare)
         const rules = rulesList.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, rules, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
+        this._currentY = RenderParagraph(ctx, rules, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, 0);
         this._currentY += 2;
 
         for (const key of keys) {
@@ -602,7 +602,7 @@ export class Renderer40k implements Renderer {
             let offsetX = ctx.measureText(content).width;
 
             ctx.font = Renderer40k._font;
-            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, offsetX);
+            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, offsetX);
             this._currentY += 2;
         }
     }
@@ -616,7 +616,7 @@ export class Renderer40k implements Renderer {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
+            this._currentY = RenderParagraph(ctx, content + ": " + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, 0);
             this._currentY += 4;
         }
     }
@@ -630,7 +630,7 @@ export class Renderer40k implements Renderer {
         kwlist.sort(Compare)
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, 0);
         this._currentY += 2;
     }
 
@@ -643,7 +643,7 @@ export class Renderer40k implements Renderer {
         kwlist.sort(Compare)
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, 0);
         this._currentY += 2;
     }
 
@@ -698,7 +698,7 @@ export class Renderer40k implements Renderer {
                 text = model.nameAndGear();
             }
             this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
+            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, 0);
             this._currentY += 2;
         }
     }
@@ -724,7 +724,7 @@ export class Renderer40k implements Renderer {
                 ctx.font = Renderer40k._font;
                 ctx.fillStyle = Renderer40k._blackColor;
 
-                this._currentY = RenderParagraph(ctx, model._name, unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth, 0);
+                this._currentY = RenderParagraph(ctx, model._name, unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth - Renderer40k._offset, 0);
 
                 let x = this._currentX + boxStartX;
                 ctx.strokeStyle = Renderer40k._blackColor;
@@ -1042,7 +1042,7 @@ export class Renderer40k implements Renderer {
                 text += ", OTHER: " + psyker._other;
             }
 
-            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
+            this._currentY = RenderParagraph(ctx, text, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, 0);
             this._currentY += 2;
         }
     }
