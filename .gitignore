@@ -1,3 +1,7 @@
 node_modules
 #dist
 .idea
+/dist/renderer*
+/dist/roster*
+/dist/app*
+

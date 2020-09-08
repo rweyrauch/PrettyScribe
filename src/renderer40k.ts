@@ -14,56 +14,32 @@
     OF THIS SOFTWARE.
 */
 
-import {BaseNotes, Compare, Explosion, Model, PsychicPower, Psyker, Roster40k, Unit, UnitRole, UnitRoleToString, Weapon} from "./roster40k";
-import {Justification, Renderer, RenderParagraph, RenderText, RenderTextFull, FixDPI, VertAlign} from "./renderer";
+import {BaseNotes, Compare, Explosion, Model40k, PsychicPower, Psyker, Roster40k, Unit40k, UnitRole40k, UnitRoleToString, Weapon} from "./roster40k";
+import {AbstractRenderer, FixDPI, Justification, RenderParagraph, RenderText, RenderTextFull, VertAlign} from "./renderer";
 
-export class Renderer40k implements Renderer {
-
-    public static readonly _res: number = 144; // original is 144
-    public static readonly _margin: number = 0;
-
-    private static readonly _bevelSize = 15;
-    private readonly _descriptionStartX = 140;
-    private _descriptionWidth: number = 600;
+export class Renderer40k extends AbstractRenderer {
 
     private _showWoundBoxes: boolean = false;
 
     private _roster: Roster40k | null = null;
-
-    private _currentX: number = 0;
-    private _currentY: number = 0;
-    private _maxWidth: number = 0;
-    private _maxHeight: number = 0;
-
     private _octagon: HTMLImageElement | null = null;
 
-    private _roles: Map<UnitRole, HTMLImageElement | null> = new Map();
-
-    private static readonly _blackColor = '#1d272a';
-    private static readonly _grey1 = '#b3bbb5';
-    private static readonly _greyLight = '#dde1df';
-    private static readonly _fillColor = '#f6f6f6';
-    private static readonly _offset: number = 20;
-
-    private static readonly _titleFont = 'bold 14px sans-serif';
-    private static readonly _headerFont = 'bold 14px sans-serif';
-    private static readonly _font = '14px sans-serif';
-    private static readonly _boldFont = 'bold 14px sans-serif';
+    private _roles: Map<UnitRole40k, HTMLImageElement | null> = new Map();
 
     constructor(roster: Roster40k) {
-
+        super();
         this._roster = roster;
         this._octagon = document.getElementById('octagon') as HTMLImageElement;
 
-        this._roles.set(UnitRole.HQ, document.getElementById('role_hq') as HTMLImageElement);
-        this._roles.set(UnitRole.TR, document.getElementById('role_tr') as HTMLImageElement);
-        this._roles.set(UnitRole.EL, document.getElementById('role_el') as HTMLImageElement);
-        this._roles.set(UnitRole.FA, document.getElementById('role_fa') as HTMLImageElement);
-        this._roles.set(UnitRole.HS, document.getElementById('role_hs') as HTMLImageElement);
-        this._roles.set(UnitRole.FL, document.getElementById('role_fl') as HTMLImageElement);
-        this._roles.set(UnitRole.DT, document.getElementById('role_dt') as HTMLImageElement);
-        this._roles.set(UnitRole.FT, document.getElementById('role_ft') as HTMLImageElement);
-        this._roles.set(UnitRole.LW, document.getElementById('role_lw') as HTMLImageElement);
+        this._roles.set(UnitRole40k.HQ, document.getElementById('role_hq') as HTMLImageElement);
+        this._roles.set(UnitRole40k.TR, document.getElementById('role_tr') as HTMLImageElement);
+        this._roles.set(UnitRole40k.EL, document.getElementById('role_el') as HTMLImageElement);
+        this._roles.set(UnitRole40k.FA, document.getElementById('role_fa') as HTMLImageElement);
+        this._roles.set(UnitRole40k.HS, document.getElementById('role_hs') as HTMLImageElement);
+        this._roles.set(UnitRole40k.FL, document.getElementById('role_fl') as HTMLImageElement);
+        this._roles.set(UnitRole40k.DT, document.getElementById('role_dt') as HTMLImageElement);
+        this._roles.set(UnitRole40k.FT, document.getElementById('role_ft') as HTMLImageElement);
+        this._roles.set(UnitRole40k.LW, document.getElementById('role_lw') as HTMLImageElement);
     }
 
     render(title: HTMLElement | null, list: HTMLElement | null, forces: HTMLElement | null): void {
@@ -163,7 +139,7 @@ export class Renderer40k implements Renderer {
                 forces.appendChild(h3);
             }
 
-            let prevUnit: Unit | null = null;
+            let prevUnit: Unit40k | null = null;
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = Renderer40k._res * 7.5;
@@ -248,43 +224,6 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-        ctx.strokeStyle = Renderer40k._blackColor;
-
-        ctx.beginPath();
-        ctx.moveTo(x, y + Renderer40k._bevelSize);
-        ctx.lineTo(x, y + h - Renderer40k._bevelSize);
-        ctx.lineTo(x + Renderer40k._bevelSize, y + h);
-        ctx.lineTo(x + w - Renderer40k._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - Renderer40k._bevelSize);
-        ctx.lineTo(x + w, y + Renderer40k._bevelSize);
-        ctx.lineTo(x + w - Renderer40k._bevelSize, y);
-        ctx.lineTo(x + Renderer40k._bevelSize, y);
-        ctx.closePath();
-        ctx.stroke();
-
-        ctx.save();
-        ctx.fillStyle = Renderer40k._fillColor;
-        ctx.globalCompositeOperation = "destination-over";
-        ctx.beginPath();
-        ctx.moveTo(x, y + Renderer40k._bevelSize);
-        ctx.lineTo(x, y + h - Renderer40k._bevelSize);
-        ctx.lineTo(x + Renderer40k._bevelSize, y + h);
-        ctx.lineTo(x + w - Renderer40k._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - Renderer40k._bevelSize);
-        ctx.lineTo(x + w, y + Renderer40k._bevelSize);
-        ctx.lineTo(x + w - Renderer40k._bevelSize, y);
-        ctx.lineTo(x + Renderer40k._bevelSize, y);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.restore();
-    }
-
-    private renderWatermark(ctx: CanvasRenderingContext2D) {
-
-    }
-    
     private renderNotes(ctx: CanvasRenderingContext2D, title: string,  notes: BaseNotes): void {
         
         if (!notes._customNotes) return;
@@ -329,39 +268,6 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private renderLine(ctx: CanvasRenderingContext2D): void {
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = Renderer40k._blackColor;
-        ctx.beginPath();
-        ctx.moveTo(this._currentX, this._currentY);
-        ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
-        ctx.stroke();
-        this._currentY += 1;
-    }
-
-    private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[] | null) {
-        let x = this._currentX;
-        const height = 22;
-        const width = this._maxWidth;
-        ctx.fillStyle = Renderer40k._grey1;
-        ctx.fillRect(this._currentX, this._currentY, width, height);
-
-        ctx.fillStyle = Renderer40k._blackColor;
-        ctx.font = Renderer40k._titleFont;
-        var w = 50;
-        if (labels) {
-            ctx.font = Renderer40k._headerFont;
-            for (let i = 0; i < labels.length; i++) {
-                if (columnWidths) w = columnWidths[i];
-                if (i == 0) RenderText(ctx, labels[i], x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
-                else RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
-                x += w;
-            }
-        }
-
-        this._currentY += height;
-    }
-
     private renderSpells(ctx: CanvasRenderingContext2D, spells: PsychicPower[], columnWidths: number[] | null): void {
 
         const height = 22;
@@ -402,7 +308,7 @@ export class Renderer40k implements Renderer {
 
 
             ctx.save();
-            if (i % 2) ctx.fillStyle = Renderer40k._greyLight;
+            if (i % 2) ctx.fillStyle = Renderer40k._grey;
             else ctx.fillStyle = '#ffffff';
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
@@ -426,7 +332,7 @@ export class Renderer40k implements Renderer {
             let ci = 0;
             let x = this._currentX;
 
-            if (i % 2) ctx.fillStyle = Renderer40k._greyLight;
+            if (i % 2) ctx.fillStyle = Renderer40k._grey;
             else ctx.fillStyle = '#ffffff';
             ctx.fillRect(x, this._currentY, this._maxWidth, height);
             i++;
@@ -509,7 +415,7 @@ export class Renderer40k implements Renderer {
             ctx.save();
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
-            if (i % 2) ctx.fillStyle = Renderer40k._greyLight;
+            if (i % 2) ctx.fillStyle = Renderer40k._grey;
             else ctx.fillStyle = '#ffffff';
             ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
             i++;
@@ -519,7 +425,7 @@ export class Renderer40k implements Renderer {
         ctx.restore();
     }
 
-    private renderModel(ctx: CanvasRenderingContext2D, model: Model, columnWidths: number[] | null, bg: number): void {
+    private renderModel(ctx: CanvasRenderingContext2D, model: Model40k, columnWidths: number[] | null, bg: number): void {
 
         const height = 24;
 
@@ -527,7 +433,7 @@ export class Renderer40k implements Renderer {
         let x = this._currentX;
         let ci = 0;
 
-        if (bg % 2) ctx.fillStyle = Renderer40k._greyLight;
+        if (bg % 2) ctx.fillStyle = Renderer40k._grey;
         else ctx.fillStyle = '#ffffff';
         ctx.fillRect(this._currentX, this._currentY, this._maxWidth, height);
 
@@ -577,7 +483,7 @@ export class Renderer40k implements Renderer {
         this._currentY += height;
     }
 
-    private renderAbilities(ctx: CanvasRenderingContext2D, unit: Unit): void {
+    private renderAbilities(ctx: CanvasRenderingContext2D, unit: Unit40k): void {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "ABILITIES", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
@@ -607,7 +513,7 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private renderRules(ctx: CanvasRenderingContext2D, unit: Unit): void {
+    private renderRules(ctx: CanvasRenderingContext2D, unit: Unit40k): void {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "RULES", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
@@ -621,20 +527,7 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private renderKeywords(ctx: CanvasRenderingContext2D, unit: Unit): void {
-        ctx.font = Renderer40k._titleFont;
-        RenderText(ctx, "KEYWORDS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
-
-        ctx.font = Renderer40k._font;
-        const kwlist = [...unit._keywords];
-        kwlist.sort(Compare)
-        const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth - Renderer40k._offset, 0);
-        this._currentY += 2;
-    }
-
-    private renderFactions(ctx: CanvasRenderingContext2D, unit: Unit): void {
+    private renderFactions(ctx: CanvasRenderingContext2D, unit: Unit40k): void {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "FACTIONS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
@@ -647,7 +540,7 @@ export class Renderer40k implements Renderer {
         this._currentY += 2;
     }
 
-    private renderWoundTable(ctx: CanvasRenderingContext2D, unit: Unit, columnWidths: number[] | null): void {
+    private renderWoundTable(ctx: CanvasRenderingContext2D, unit: Unit40k, columnWidths: number[] | null): void {
         const height = 22;
 
         let w = 50;
@@ -664,7 +557,7 @@ export class Renderer40k implements Renderer {
             let x = this._currentX;
             let ci = 0;
 
-            ctx.fillStyle = Renderer40k._greyLight;
+            ctx.fillStyle = Renderer40k._grey;
             ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
             ctx.fillStyle = Renderer40k._blackColor;
@@ -684,7 +577,7 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private renderModelList(ctx: CanvasRenderingContext2D, models: Model[]) {
+    private renderModelList(ctx: CanvasRenderingContext2D, models: Model40k[]) {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "MODELS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
 
@@ -703,7 +596,7 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private renderWoundBoxes(ctx: CanvasRenderingContext2D, models: Model[]) {
+    private renderWoundBoxes(ctx: CanvasRenderingContext2D, models: Model40k[]) {
 
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "WOUNDS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);
@@ -745,246 +638,7 @@ export class Renderer40k implements Renderer {
         ctx.restore();
     }
 
-    private static _unitLabels = ["MODEL", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
-    private _unitLabelWidthsNormalized = [0.25, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
-    private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
-    private _weaponLabelWidthNormalized = [0.25, 0.05, 0.1, 0.05, 0.05, 0.05, 0.45];
-
-    private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
-    private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
-
-    private static _explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];
-    private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.10];
-
-    private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
-    private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
-
-    protected renderUnit(unit: Unit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
-
-        let ctx = canvas.getContext('2d');
-        if (!ctx) {
-            return [0, 0];
-        }
-
-        this._currentX = xOffset + Renderer40k._margin;
-        this._currentY = yOffset + Renderer40k._margin;
-        this._maxWidth = canvas.width - this._currentX;
-        this._maxHeight = Math.max(0, canvas.height - this._currentY);
-
-        this.renderHeader(unit, ctx);
-
-        ctx.fillStyle = Renderer40k._blackColor;
-
-        let weapons: Weapon[] = [];
-        let spells: PsychicPower[] = [];
-        let explosions: Explosion[] = [];
-        let psykers: Psyker[] = [];
-        let models: Model[] = [];
-        const unitLabelWidths: number[] = [];
-        this._unitLabelWidthsNormalized.forEach(element => {
-            unitLabelWidths.push(element * this._maxWidth);
-        });
-
-        for (var model of unit._models) {
-            models.push(model);
-            for (let weapon of model._weapons) {
-                weapons.push(weapon);
-            }
-            for (let spell of model._psychicPowers) {
-                spells.push(spell);
-            }
-            for (let expl of model._explosions) {
-                explosions.push(expl);
-            }
-            if (model._psyker) {
-                psykers.push(model._psyker);
-            }
-        }
-
-        // Unique list of models
-        const uniqueModels: Model[] = [];
-        const scrathModels: Map<string, Model> = new Map();
-        for (const m of models) {
-            if (!scrathModels.has(m.name())) {
-                scrathModels.set(m.name(), m);
-                uniqueModels.push(m);
-            }
-        }
-
-        this.renderNotes(ctx, "Unit notes", unit);
-        
-        this.renderTableHeader(ctx, Renderer40k._unitLabels, unitLabelWidths);
-        let i = 0;
-        for (var model of uniqueModels) {
-            this.renderModel(ctx, model, unitLabelWidths, i % 2);
-            i++;
-        }
-
-        this.renderNotesArray(ctx, "Model notes", models);
-
-        // Unique list of weapons
-        const uniqueWeapons: Weapon[] = [];
-        const scratchMap: Map<string, Weapon> = new Map();
-        for (const w of weapons) {
-            if (!scratchMap.has(w.name())) {
-                scratchMap.set(w.name(), w);
-                uniqueWeapons.push(w);
-            }
-        }
-
-        if (uniqueWeapons.length > 0) {
-            const weaponLabelWidths: number[] = [];
-            this._weaponLabelWidthNormalized.forEach(element => {
-                weaponLabelWidths.push(element * this._maxWidth);
-            });
-            this.renderLine(ctx);
-            this.renderTableHeader(ctx, Renderer40k._weaponLabels, weaponLabelWidths);
-            this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
-        }
-
-        this.renderNotesArray(ctx, "Weapon notes", weapons);
-
-        if (spells.length > 0) {
-            const spellLabelWidths: number[] = [];
-            this._spellLabelWidthNormalized.forEach(element => {
-                spellLabelWidths.push(element * this._maxWidth);
-            });
-            this.renderLine(ctx);
-            this.renderTableHeader(ctx, Renderer40k._spellLabels, spellLabelWidths);
-            this.renderSpells(ctx, spells, spellLabelWidths);
-        }
-
-        this.renderNotesArray(ctx, "Spell notes", spells);
-
-        if (psykers.length > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderPsykers(ctx, psykers);
-        }
-
-        this.renderNotesArray(ctx, "Psyker notes", psykers);
-
-
-        if (unit._abilities.size > 0 || unit._rules.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderAbilities(ctx, unit);
-        }
-
-        /*
-                if (unit._rules.size > 0) {
-                    this.renderLine(ctx);
-                    this._currentY += 2;
-                    this.renderRules(ctx, unit);
-                }
-        */
-        if (unit._factions.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderFactions(ctx, unit);
-        }
-
-        if (unit._keywords.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderKeywords(ctx, unit);
-        }
-
-        if (unit._models.length > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderModelList(ctx, unit._models);
-        }
-
-        if (unit._woundTracker.length > 0) {
-            this._currentY += 2;
-            this.renderLine(ctx);
-            const trackerLabelWidths: number[] = [];
-            this._trackerLabelWidth.forEach(element => {
-                trackerLabelWidths.push(element * this._maxWidth);
-            });
-
-            let labels = Renderer40k._trackerLabels;
-
-            // Determine wound table headers.
-            if (unit._woundTracker.length == 4) {
-                // Use first entry in table as labels.
-                let i = 1;
-                // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
-                for (let key of unit._woundTracker[0]._table.values()) {
-                    labels[i++] = key;
-                }
-            }
-            else if (unit._woundTracker.length == 3) {
-                // Use keys as labels.
-                let i = 1;
-                for (let key of unit._woundTracker[0]._table.keys()) {
-                    labels[i++] = key;
-                }
-            }
-            this.renderTableHeader(ctx, labels, trackerLabelWidths);
-            this.renderWoundTable(ctx, unit, trackerLabelWidths);
-        }
-
-        if (explosions.length > 0) {
-            this._currentY += 2;
-            this.renderLine(ctx);
-            const explLabelWidths: number[] = [];
-            this._explosionLabelWidthNormalized.forEach(element => {
-                explLabelWidths.push(element * this._maxWidth);
-            });
-            this.renderTableHeader(ctx, Renderer40k._explosionLabels, explLabelWidths);
-            this.renderExplosion(ctx, explosions, explLabelWidths);
-        }
-
-        this.renderNotesArray(ctx, "Explosion notes", explosions);
-
-        if (this._showWoundBoxes) {
-            // wound tracker boxes
-            let hasTracks = false;
-            for (let model of unit._models) {
-                if (model._wounds > 2) { hasTracks = true; }
-            }
-            if (hasTracks) {
-                this.renderLine(ctx);
-                this._currentY += 5;
-                this.renderWoundBoxes(ctx, unit._models);
-            }
-        }
-        this._currentY += 2;
-
-        const totalHeight = this._currentY - (yOffset + Renderer40k._margin);
-        const totalWidth = this._maxWidth;
-
-        this.renderBorder(ctx, this._currentX, yOffset + Renderer40k._margin, totalWidth, totalHeight);
-        this.renderWatermark(ctx);
-
-        return [this._maxWidth, this._currentY];
-    }
-
-    private renderHeader(unit: Unit, ctx: CanvasRenderingContext2D): void {
-
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = Renderer40k._blackColor;
-
-        const xStart = this._currentX;
-        const xEnd = this._currentX + this._maxWidth;
-        const yStart = this._currentY;
-        const titleHeight = 36;
-        const yEnd = yStart + titleHeight;
-
-        ctx.beginPath();
-        ctx.moveTo(xStart, yStart + Renderer40k._bevelSize);
-        ctx.lineTo(xStart, yEnd);
-        ctx.lineTo(xEnd, yEnd);
-        ctx.lineTo(xEnd, yStart + Renderer40k._bevelSize);
-        ctx.lineTo(xEnd - Renderer40k._bevelSize, yStart);
-        ctx.lineTo(xStart + Renderer40k._bevelSize, yStart);
-        ctx.closePath();
-        ctx.fill();
-
-        let imgX = xStart + 6;
-
+    protected renderUnitCost(unit: Unit40k, ctx: CanvasRenderingContext2D, imgX: number, yStart: number): void {
         if (this._octagon) {
 
             // Unit battlefield role icon
@@ -1006,28 +660,194 @@ export class Renderer40k implements Renderer {
             ctx.drawImage(this._octagon, imgX, yStart + 2, 32, 32);
             RenderText(ctx, unit._points.toString(), imgX, yStart + 2, 32, 32, Justification.Center);
         }
-
-        // unit name
-        let iters: number = 0;
-        let title_size = 28;
-        const title_x = imgX + 6;
-        ctx.font = title_size + 'px ' + 'bold serif';
-        const unitName = unit.name().toLocaleUpperCase();
-        let check = ctx.measureText(unitName);
-        const maxWidth = this._maxWidth - title_x;
-        while (iters < 6 && check.width > maxWidth) {
-            iters += 1;
-            title_size -= 2;
-            ctx.font = title_size + 'px ' + 'bold serif';
-            check = ctx.measureText(unitName);
-        }
-        ctx.fillStyle = 'white';
-        ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
-        RenderText(ctx, unitName, title_x, yStart, maxWidth, titleHeight, Justification.Center);
-
-        this._currentY += titleHeight;
     }
 
+    private static _unitLabels = ["MODEL", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
+    private _unitLabelWidthsNormalized = [0.25, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
+    private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
+    private _weaponLabelWidthNormalized = [0.25, 0.05, 0.1, 0.05, 0.05, 0.05, 0.45];
+
+    private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
+    private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
+
+    private static _explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];
+    private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.10];
+
+    private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
+    private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
+
+    protected renderUnit(unit: Unit40k, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
+        let ctx = canvas.getContext('2d');
+        if (!ctx) {
+            return [0, 0];
+        }
+        this._currentX = xOffset + Renderer40k._margin;
+        this._currentY = yOffset + Renderer40k._margin;
+        this._maxWidth = canvas.width - this._currentX;
+        this._maxHeight = Math.max(0, canvas.height - this._currentY);
+        this.renderHeader(unit, ctx);
+        ctx.fillStyle = Renderer40k._blackColor;
+        let weapons: Weapon[] = [];
+        let spells: PsychicPower[] = [];
+        let explosions: Explosion[] = [];
+        let psykers: Psyker[] = [];
+        let models: Model40k[] = [];
+        const unitLabelWidths: number[] = [];
+        this._unitLabelWidthsNormalized.forEach(element => {
+            unitLabelWidths.push(element * this._maxWidth);
+        });
+        for (var model of unit._models) {
+            models.push(model);
+            for (let weapon of model._weapons) {
+                weapons.push(weapon);
+            }
+            for (let spell of model._psychicPowers) {
+                spells.push(spell);
+            }
+            for (let expl of model._explosions) {
+                explosions.push(expl);
+            }
+            if (model._psyker) {
+                psykers.push(model._psyker);
+            }
+        }
+        // Unique list of models
+        const uniqueModels: Model40k[] = [];
+        const scrathModels: Map<string, Model40k> = new Map();
+        for (const m of models) {
+            if (!scrathModels.has(m.name())) {
+                scrathModels.set(m.name(), m);
+                uniqueModels.push(m);
+            }
+        }
+        this.renderNotes(ctx, "Unit notes", unit);
+        this.renderTableHeader(ctx, Renderer40k._unitLabels, unitLabelWidths);
+        let i = 0;
+        for (var model of uniqueModels) {
+            this.renderModel(ctx, model, unitLabelWidths, i % 2);
+            i++;
+        }
+        this.renderNotesArray(ctx, "Model notes", models);
+        // Unique list of weapons
+        const uniqueWeapons: Weapon[] = [];
+        const scratchMap: Map<string, Weapon> = new Map();
+        for (const w of weapons) {
+            if (!scratchMap.has(w.name())) {
+                scratchMap.set(w.name(), w);
+                uniqueWeapons.push(w);
+            }
+        }
+        if (uniqueWeapons.length > 0) {
+            const weaponLabelWidths: number[] = [];
+            this._weaponLabelWidthNormalized.forEach(element => {
+                weaponLabelWidths.push(element * this._maxWidth);
+            });
+            this.renderLine(ctx);
+            this.renderTableHeader(ctx, Renderer40k._weaponLabels, weaponLabelWidths);
+            this.renderWeapons(ctx, uniqueWeapons, weaponLabelWidths);
+        }
+        this.renderNotesArray(ctx, "Weapon notes", weapons);
+        if (spells.length > 0) {
+            const spellLabelWidths: number[] = [];
+            this._spellLabelWidthNormalized.forEach(element => {
+                spellLabelWidths.push(element * this._maxWidth);
+            });
+            this.renderLine(ctx);
+            this.renderTableHeader(ctx, Renderer40k._spellLabels, spellLabelWidths);
+            this.renderSpells(ctx, spells, spellLabelWidths);
+        }
+        this.renderNotesArray(ctx, "Spell notes", spells);
+        if (psykers.length > 0) {
+            this.renderLine(ctx);
+            this._currentY += 2;
+            this.renderPsykers(ctx, psykers);
+        }
+        this.renderNotesArray(ctx, "Psyker notes", psykers);
+        if (unit._abilities.size > 0 || unit._rules.size > 0) {
+            this.renderLine(ctx);
+            this._currentY += 2;
+            this.renderAbilities(ctx, unit);
+        }
+        /*
+                if (unit._rules.size > 0) {
+                    this.renderLine(ctx);
+                    this._currentY += 2;
+                    this.renderRules(ctx, unit);
+                }
+        */
+        if (unit._factions.size > 0) {
+            this.renderLine(ctx);
+            this._currentY += 2;
+            this.renderFactions(ctx, unit);
+        }
+        if (unit._keywords.size > 0) {
+            this.renderLine(ctx);
+            this._currentY += 2;
+            this.renderKeywords(ctx, unit);
+        }
+        if (unit._models.length > 0) {
+            this.renderLine(ctx);
+            this._currentY += 2;
+            this.renderModelList(ctx, unit._models);
+        }
+        if (unit._woundTracker.length > 0) {
+            this._currentY += 2;
+            this.renderLine(ctx);
+            const trackerLabelWidths: number[] = [];
+            this._trackerLabelWidth.forEach(element => {
+                trackerLabelWidths.push(element * this._maxWidth);
+            });
+            let labels = Renderer40k._trackerLabels;
+            // Determine wound table headers.
+            if (unit._woundTracker.length == 4) {
+                // Use first entry in table as labels.
+                let i = 1;
+                // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
+                for (let key of unit._woundTracker[0]._table.values()) {
+                    labels[i++] = key;
+                }
+            } else if (unit._woundTracker.length == 3) {
+                // Use keys as labels.
+                let i = 1;
+                for (let key of unit._woundTracker[0]._table.keys()) {
+                    labels[i++] = key;
+                }
+            }
+            this.renderTableHeader(ctx, labels, trackerLabelWidths);
+            this.renderWoundTable(ctx, unit, trackerLabelWidths);
+        }
+        if (explosions.length > 0) {
+            this._currentY += 2;
+            this.renderLine(ctx);
+            const explLabelWidths: number[] = [];
+            this._explosionLabelWidthNormalized.forEach(element => {
+                explLabelWidths.push(element * this._maxWidth);
+            });
+            this.renderTableHeader(ctx, Renderer40k._explosionLabels, explLabelWidths);
+            this.renderExplosion(ctx, explosions, explLabelWidths);
+        }
+        this.renderNotesArray(ctx, "Explosion notes", explosions);
+        if (this._showWoundBoxes) {
+            // wound tracker boxes
+            let hasTracks = false;
+            for (let model of unit._models) {
+                if (model._wounds > 2) {
+                    hasTracks = true;
+                }
+            }
+            if (hasTracks) {
+                this.renderLine(ctx);
+                this._currentY += 5;
+                this.renderWoundBoxes(ctx, unit._models);
+            }
+        }
+        this._currentY += 2;
+        const totalHeight = this._currentY - (yOffset + Renderer40k._margin);
+        const totalWidth = this._maxWidth;
+        this.renderBorder(ctx, this._currentX, yOffset + Renderer40k._margin, totalWidth, totalHeight);
+        this.renderWatermark(ctx);
+        return [this._maxWidth, this._currentY];
+    }
     private renderPsykers(ctx: CanvasRenderingContext2D, psykers: Psyker[]): void {
         ctx.font = Renderer40k._titleFont;
         RenderText(ctx, "PSYKERS", this._currentX + Renderer40k._offset, this._currentY, 100, 16, Justification.Left);

@@ -15,42 +15,22 @@
 */
 
 import { Unit30k, UnitRole30k, UnitRoleToString30k, Model30k, Vehicle30k, Walker30k, Flyer30k, PsychicPower30k, Weapon30k, Roster30k, Psyker30k } from "./roster30k";
-import { Renderer, Justification, RenderText, RenderTextFull, RenderParagraph, VertAlign, FixDPI } from "./renderer";
+import {Renderer, Justification, RenderText, RenderTextFull, RenderParagraph, VertAlign, FixDPI, AbstractRenderer} from "./renderer";
+import {Unit40k} from "./roster40k";
 
-export class Renderer30k implements Renderer {
-
-    public static readonly _res: number = 144;
-    public static readonly _margin: number = 0;
-
-    private static readonly _bevelSize = 15;
-    private readonly _descriptionStartX = 190;
-    private _descriptionWidth: number = 600;
+export class Renderer30k extends AbstractRenderer {
 
     private _showWoundBoxes: boolean = false;
 
     private _roster: Roster30k | null = null;
 
-    private _currentX: number = 0;
-    private _currentY: number = 0;
-    private _maxWidth: number = 0;
-    private _maxHeight: number = 0;
-
     private _octagon: HTMLImageElement | null = null;
 
     private _roles: Map<UnitRole30k, HTMLImageElement | null> = new Map();
 
-    private static readonly _blackColor = '#1d272a';
-    private static readonly _grey1 = '#b3bbb5';
-    private static readonly _greyLight = '#dde1df';
-    private static readonly _fillColor = '#f6f6f6';
-
-    private static readonly _titleFont = 'bold 14px sans-serif';
-    private static readonly _headerFont = 'bold 14px sans-serif';
-    private static readonly _font = '14px sans-serif';
-    private static readonly _boldFont = 'bold 14px sans-serif';
 
     constructor(roster: Roster30k) {
-
+        super();
         this._roster = roster;
         this._octagon = document.getElementById('octagon') as HTMLImageElement;
 
@@ -155,8 +135,8 @@ export class Renderer30k implements Renderer {
 
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
-                canvas.width = Renderer30k._res * 7.5;
-                canvas.height = Renderer30k._res * 12;
+                canvas.width = AbstractRenderer._res * 7.5;
+                canvas.height = AbstractRenderer._res * 12;
                 this._descriptionWidth = canvas.width - this._descriptionStartX - 10;
 
                 FixDPI(canvas);
@@ -177,78 +157,9 @@ export class Renderer30k implements Renderer {
             }
         }
     }
-
-    private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-        ctx.strokeStyle = Renderer30k._blackColor;
-
-        ctx.beginPath();
-        ctx.moveTo(x, y + Renderer30k._bevelSize);
-        ctx.lineTo(x, y + h - Renderer30k._bevelSize);
-        ctx.lineTo(x + Renderer30k._bevelSize, y + h);
-        ctx.lineTo(x + w - Renderer30k._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - Renderer30k._bevelSize);
-        ctx.lineTo(x + w, y + Renderer30k._bevelSize);
-        ctx.lineTo(x + w - Renderer30k._bevelSize, y);
-        ctx.lineTo(x + Renderer30k._bevelSize, y);
-        ctx.closePath();
-        ctx.stroke();
-
-        ctx.save();
-        ctx.fillStyle = Renderer30k._fillColor;
-        ctx.globalCompositeOperation = "destination-over";
-        ctx.beginPath();
-        ctx.moveTo(x, y + Renderer30k._bevelSize);
-        ctx.lineTo(x, y + h - Renderer30k._bevelSize);
-        ctx.lineTo(x + Renderer30k._bevelSize, y + h);
-        ctx.lineTo(x + w - Renderer30k._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - Renderer30k._bevelSize);
-        ctx.lineTo(x + w, y + Renderer30k._bevelSize);
-        ctx.lineTo(x + w - Renderer30k._bevelSize, y);
-        ctx.lineTo(x + Renderer30k._bevelSize, y);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.restore();
-    }
-
-    private renderWatermark(ctx: CanvasRenderingContext2D) {
-
-    }
-
-    private renderLine(ctx: CanvasRenderingContext2D): void {
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = Renderer30k._blackColor;
-        ctx.beginPath();
-        ctx.moveTo(this._currentX, this._currentY);
-        ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
-        ctx.stroke();
-        this._currentY += 1;
-    }
-
-    private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[] | null) {
-        let x = this._currentX;
-        const height = 22;
-        const width = this._maxWidth;
-        ctx.fillStyle = Renderer30k._grey1;
-        ctx.fillRect(this._currentX, this._currentY, width, height);
-
-        ctx.fillStyle = Renderer30k._blackColor;
-        ctx.font = Renderer30k._titleFont;
-        var w = 50;
-        if (labels) {
-            ctx.font = Renderer30k._headerFont;
-            for (let i = 0; i < labels.length; i++) {
-                if (columnWidths) w = columnWidths[i];
-                RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
-                x += w;
-            }
-        }
-
-        this._currentY += height;
-    }
-
+    
     private renderPowers(ctx: CanvasRenderingContext2D, powers: PsychicPower30k[], columnWidths: number[] | null): void {
-        ctx.font = Renderer30k._font;
+        ctx.font = AbstractRenderer._font;
 
         const height = 22;
 
@@ -264,7 +175,7 @@ export class Renderer30k implements Renderer {
             let xStart = this._currentX;
             let yStart = this._currentY;
 
-            ctx.fillStyle = Renderer30k._blackColor;
+            ctx.fillStyle = AbstractRenderer._blackColor;
             if (columnWidths) w = columnWidths[ci++];
             RenderText(ctx, power._name.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
@@ -285,8 +196,8 @@ export class Renderer30k implements Renderer {
 
 
             ctx.save();
-            if (i % 2) ctx.fillStyle = Renderer30k._greyLight;
-            else ctx.fillStyle = '#ffffff';
+            if (i % 2) ctx.fillStyle = AbstractRenderer._grey;
+            else ctx.fillStyle = AbstractRenderer._fillColor;
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
             ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
@@ -298,7 +209,7 @@ export class Renderer30k implements Renderer {
     }
 
     private renderWeapons(ctx: CanvasRenderingContext2D, weapons: Weapon30k[], columnWidths: number[] | null): void {
-        ctx.font = Renderer30k._font;
+        ctx.font = AbstractRenderer._font;
 
         const height = 22;
 
@@ -314,7 +225,7 @@ export class Renderer30k implements Renderer {
             let xStart = this._currentX;
             let yStart = this._currentY;
 
-            ctx.fillStyle = Renderer30k._blackColor;
+            ctx.fillStyle = AbstractRenderer._blackColor;
             if (columnWidths) w = columnWidths[ci++];
             RenderText(ctx, weapon._name.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
@@ -341,8 +252,8 @@ export class Renderer30k implements Renderer {
             ctx.save();
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
-            if (i % 2) ctx.fillStyle = Renderer30k._greyLight;
-            else ctx.fillStyle = '#ffffff';
+            if (i % 2) ctx.fillStyle = AbstractRenderer._grey;
+            else ctx.fillStyle = AbstractRenderer._fillColor;
             ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
             i++;
 
@@ -359,12 +270,12 @@ export class Renderer30k implements Renderer {
         let x = this._currentX;
         let ci = 0;
 
-        if (bg % 2) ctx.fillStyle = Renderer30k._greyLight;
-        else ctx.fillStyle = '#ffffff';
+        if (bg % 2) ctx.fillStyle = AbstractRenderer._grey;
+        else ctx.fillStyle = AbstractRenderer._fillColor;
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
-        ctx.fillStyle = Renderer30k._blackColor;
-        ctx.font = Renderer30k._font;
+        ctx.fillStyle = AbstractRenderer._blackColor;
+        ctx.font = AbstractRenderer._font;
 
         if (columnWidths) w = columnWidths[ci++];
         RenderText(ctx, model._name.toString(), x, this._currentY, w, height, Justification.Center);
@@ -417,12 +328,12 @@ export class Renderer30k implements Renderer {
         let x = this._currentX;
         let ci = 0;
 
-        if (bg % 2) ctx.fillStyle = Renderer30k._greyLight;
-        else ctx.fillStyle = '#ffffff';
+        if (bg % 2) ctx.fillStyle = AbstractRenderer._grey;
+        else ctx.fillStyle = AbstractRenderer._fillColor;
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
-        ctx.fillStyle = Renderer30k._blackColor;
-        ctx.font = Renderer30k._font;
+        ctx.fillStyle = AbstractRenderer._blackColor;
+        ctx.font = AbstractRenderer._font;
 
         if (columnWidths) w = columnWidths[ci++];
         RenderText(ctx, model._name.toString(), x, this._currentY, w, height, Justification.Center);
@@ -463,12 +374,12 @@ export class Renderer30k implements Renderer {
         let x = this._currentX;
         let ci = 0;
 
-        if (bg % 2) ctx.fillStyle = Renderer30k._greyLight;
-        else ctx.fillStyle = '#ffffff';
+        if (bg % 2) ctx.fillStyle = AbstractRenderer._grey;
+        else ctx.fillStyle = AbstractRenderer._fillColor;
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
-        ctx.fillStyle = Renderer30k._blackColor;
-        ctx.font = Renderer30k._font;
+        ctx.fillStyle = AbstractRenderer._blackColor;
+        ctx.font = AbstractRenderer._font;
 
         if (columnWidths) w = columnWidths[ci++];
         RenderText(ctx, model._name.toString(), x, this._currentY, w, height, Justification.Center);
@@ -525,12 +436,12 @@ export class Renderer30k implements Renderer {
         let x = this._currentX;
         let ci = 0;
 
-        if (bg % 2) ctx.fillStyle = Renderer30k._greyLight;
-        else ctx.fillStyle = '#ffffff';
+        if (bg % 2) ctx.fillStyle = AbstractRenderer._grey;
+        else ctx.fillStyle = AbstractRenderer._fillColor;
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
-        ctx.fillStyle = Renderer30k._blackColor;
-        ctx.font = Renderer30k._font;
+        ctx.fillStyle = AbstractRenderer._blackColor;
+        ctx.font = AbstractRenderer._font;
 
         if (columnWidths) w = columnWidths[ci++];
         RenderText(ctx, model._name.toString(), x, this._currentY, w, height, Justification.Center);
@@ -576,72 +487,48 @@ export class Renderer30k implements Renderer {
     }
 
     private renderAbilities(ctx: CanvasRenderingContext2D, unit: Unit30k): void {
-        ctx.font = Renderer30k._titleFont;
+        ctx.font = AbstractRenderer._titleFont;
         RenderText(ctx, "ABILITIES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         for (let ab of unit._abilities) {
             const content = ab[0].toUpperCase();
             const desc = ab[1];
 
-            ctx.font = Renderer30k._boldFont;
+            ctx.font = AbstractRenderer._boldFont;
             this._currentY += 2;
             RenderTextFull(ctx, content, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left, VertAlign.Top);
             let offsetX = ctx.measureText(content).width;
 
-            ctx.font = Renderer30k._font;
+            ctx.font = AbstractRenderer._font;
             this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, offsetX);
             this._currentY += 2;
         }
     }
 
     private renderRules(ctx: CanvasRenderingContext2D, unit: Unit30k): void {
-        ctx.font = Renderer30k._titleFont;
+        ctx.font = AbstractRenderer._titleFont;
         RenderText(ctx, "RULES", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         for (let rule of unit._rules) {
             const content = rule[0].toUpperCase();
             const desc = rule[1];
 
-            ctx.font = Renderer30k._boldFont;
+            ctx.font = AbstractRenderer._boldFont;
             this._currentY += 2;
             RenderTextFull(ctx, content, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left, VertAlign.Top);
             let offsetX = ctx.measureText(content).width;
 
-            ctx.font = Renderer30k._font;
+            ctx.font = AbstractRenderer._font;
             this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, offsetX);
             this._currentY += 2;
         }
     }
-
-    private renderKeywords(ctx: CanvasRenderingContext2D, unit: Unit30k): void {
-        ctx.font = Renderer30k._titleFont;
-        RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
-
-        ctx.font = Renderer30k._font;
-        const kwlist = [...unit._keywords];
-        const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
-        this._currentY += 2;
-    }
-
-    private renderFactions(ctx: CanvasRenderingContext2D, unit: Unit30k): void {
-        ctx.font = Renderer30k._titleFont;
-        RenderText(ctx, "FACTIONS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
-
-        ctx.font = Renderer30k._font;
-        const kwlist = [...unit._factions];
-        const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY += 2;
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
-        this._currentY += 2;
-    }
-
+    
     private renderModelList(ctx: CanvasRenderingContext2D, models: Model30k[]) {
-        ctx.font = Renderer30k._titleFont;
+        ctx.font = AbstractRenderer._titleFont;
         RenderText(ctx, "MODELS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = Renderer30k._font;
+        ctx.font = AbstractRenderer._font;
         let modelList = "";
         let mi = 0;
         for (const model of models) {
@@ -662,8 +549,20 @@ export class Renderer30k implements Renderer {
         this._currentY += 2;
     }
 
-    private renderWoundBoxes(ctx: CanvasRenderingContext2D, models: Model30k[]) {
+    private renderFactions(ctx: CanvasRenderingContext2D, unit: Unit30k): void {
         ctx.font = Renderer30k._titleFont;
+        RenderText(ctx, "FACTIONS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+
+        ctx.font = Renderer30k._font;
+        const kwlist = [...unit._factions];
+        const kw = kwlist.join(", ").toLocaleUpperCase();
+        this._currentY += 2;
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
+        this._currentY += 2;
+    }
+
+    private renderWoundBoxes(ctx: CanvasRenderingContext2D, models: Model30k[]) {
+        ctx.font = AbstractRenderer._titleFont;
         RenderText(ctx, "WOUNDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         const woundBoxSize = 20;
@@ -679,14 +578,14 @@ export class Renderer30k implements Renderer {
 
                 let currentY = this._currentY;
 
-                ctx.font = Renderer30k._font;
-                ctx.fillStyle = Renderer30k._blackColor;
+                ctx.font = AbstractRenderer._font;
+                ctx.fillStyle = AbstractRenderer._blackColor;
 
                 this._currentY = RenderParagraph(ctx, model._name, unitNameStartX, this._currentY + (woundBoxSize - 14) / 2, unitNameWidth, 0);
 
                 let x = this._currentX + boxStartX;
-                ctx.strokeStyle = Renderer30k._blackColor;
-                ctx.fillStyle = '#ffffff';
+                ctx.strokeStyle = AbstractRenderer._blackColor;
+                ctx.fillStyle = AbstractRenderer._fillColor;
                 for (let w = 0; w < model._wounds; w++) {
                     if (w % 15 == 0 && w != 0) {
                         currentY += woundBoxSize + boxMargin;
@@ -728,14 +627,14 @@ export class Renderer30k implements Renderer {
             return [0, 0];
         }
 
-        this._currentX = xOffset + Renderer30k._margin;
-        this._currentY = yOffset + Renderer30k._margin;
+        this._currentX = xOffset + AbstractRenderer._margin;
+        this._currentY = yOffset + AbstractRenderer._margin;
         this._maxWidth = canvas.width - this._currentX;
         this._maxHeight = Math.max(0, canvas.height - this._currentY);
 
         this.renderHeader(unit, ctx);
 
-        ctx.fillStyle = Renderer30k._blackColor;
+        ctx.fillStyle = AbstractRenderer._blackColor;
 
         let weapons: Weapon30k[] = [];
         let powers: PsychicPower30k[] = [];
@@ -896,38 +795,16 @@ export class Renderer30k implements Renderer {
         }
         this._currentY += 2;
 
-        const totalHeight = this._currentY - (yOffset + Renderer30k._margin);
+        const totalHeight = this._currentY - (yOffset + AbstractRenderer._margin);
         const totalWidth = this._maxWidth;
 
-        this.renderBorder(ctx, this._currentX, yOffset + Renderer30k._margin, totalWidth, totalHeight);
+        this.renderBorder(ctx, this._currentX, yOffset + AbstractRenderer._margin, totalWidth, totalHeight);
         this.renderWatermark(ctx);
 
         return [this._maxWidth, this._currentY];
     }
 
-    private renderHeader(unit: Unit30k, ctx: CanvasRenderingContext2D): void {
-
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = Renderer30k._blackColor;
-
-        const xStart = this._currentX;
-        const xEnd = this._currentX + this._maxWidth;
-        const yStart = this._currentY;
-        const titleHeight = 36;
-        const yEnd = yStart + titleHeight;
-
-        ctx.beginPath();
-        ctx.moveTo(xStart, yStart + Renderer30k._bevelSize);
-        ctx.lineTo(xStart, yEnd);
-        ctx.lineTo(xEnd, yEnd);
-        ctx.lineTo(xEnd, yStart + Renderer30k._bevelSize);
-        ctx.lineTo(xEnd - Renderer30k._bevelSize, yStart);
-        ctx.lineTo(xStart + Renderer30k._bevelSize, yStart);
-        ctx.closePath();
-        ctx.fill();
-
-        let imgX = xStart + 6;
-
+    protected renderUnitCost(unit: Unit30k, ctx: CanvasRenderingContext2D, imgX: number, yStart: number): void {
         if (this._octagon) {
 
             // Unit battlefield role icon
@@ -945,33 +822,13 @@ export class Renderer30k implements Renderer {
             ctx.drawImage(this._octagon, imgX, yStart + 2, 32, 32);
             RenderText(ctx, unit._points.toString(), imgX, yStart + 2, 32, 32, Justification.Center);
         }
-
-        // unit name
-        let iters: number = 0;
-        let title_size = 28;
-        const title_x = imgX + 6;
-        ctx.font = title_size + 'px ' + 'bold serif';
-        const unitName = unit._name.toLocaleUpperCase();
-        let check = ctx.measureText(unitName);
-        const maxWidth = this._maxWidth - title_x;
-        while (iters < 6 && check.width > maxWidth) {
-            iters += 1;
-            title_size -= 2;
-            ctx.font = title_size + 'px ' + 'bold serif';
-            check = ctx.measureText(unitName);
-        }
-        ctx.fillStyle = 'white';
-        ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
-        RenderText(ctx, unitName, title_x, yStart, maxWidth, titleHeight, Justification.Center);
-
-        this._currentY += titleHeight;
     }
 
     private renderPsykers(ctx: CanvasRenderingContext2D, psykers: Psyker30k[]): void {
-        ctx.font = Renderer30k._titleFont;
+        ctx.font = AbstractRenderer._titleFont;
         RenderText(ctx, "PSYKERS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
-        ctx.font = Renderer30k._font;
+        ctx.font = AbstractRenderer._font;
         this._currentY += 2;
         for (let psyker of psykers) {
             this._currentY = RenderParagraph(ctx, "MASTERY LEVEL: " + psyker._masteryLevel, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);

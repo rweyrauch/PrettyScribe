@@ -14,6 +14,8 @@
     OF THIS SOFTWARE.
 */
 
+import {Unit} from "./roster";
+
 export class WarcryAllegiance {
     _name: string = "";
     _rules: Map<string, string> = new Map();
@@ -43,12 +45,8 @@ export const WarcryUnitRoleToString: string[] = [
     'Ally'
 ];
 
-export class WarcryUnit {
-    _name: string = "";
+export class WarcryUnit extends Unit {
     _role: WarcryUnitRole = WarcryUnitRole.NONE;
-    _keywords: Set<string> = new Set();
-
-    _abilities: Map<string, string> = new Map();
 
     // Characteristics
     _move: number = 1;

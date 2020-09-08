@@ -15,39 +15,17 @@
 */
 
 import { AoSUnit, AoSUnitRole, AoSUnitRoleToString, AoSWeapon, RosterAoS, AoSSpell, AoSPrayer } from "./rosterAoS";
-import { Renderer, Justification, RenderText, RenderParagraph, RenderTextFull, VertAlign} from "./renderer";
+import {Renderer, Justification, RenderText, RenderParagraph, RenderTextFull, VertAlign, AbstractRenderer} from "./renderer";
 
-export class RendererAoS implements Renderer {
-
-    public static readonly _res: number = 144;
-    public static readonly _margin: number = 0;
-
-    private static readonly _bevelSize = 15;
-    private readonly _descriptionStartX = 190;
-    private _descriptionWidth: number = 600;
+export class RendererAoS extends AbstractRenderer {
 
     private _statsWheel: HTMLImageElement | null = null;
 
     private _roster: RosterAoS|null = null;
 
-    private _currentX: number = 0;
-    private _currentY: number = 0;
-    private _maxWidth: number = 0;
-    private _maxHeight: number = 0;
-
-    private static readonly _blackColor = '#1d272a';
-    private static readonly _grey1 = '#b3bbb5';
-    private static readonly _greyLight = '#dde1df';
-    private static readonly _fillColor = '#f6f6f6';
-
-    private static readonly _titleFont = 'bold 14px sans-serif';
-    private static readonly _headerFont = 'bold 14px sans-serif';
-    private static readonly _font = '14px sans-serif';
-    private static readonly _boldFont = 'bold 14px sans-serif';
-
     constructor(roster: RosterAoS) {
+        super();
         this._roster = roster;
-
         this._statsWheel = document.getElementById('aos_stats') as HTMLImageElement;
     }
 
@@ -297,85 +275,8 @@ export class RendererAoS implements Renderer {
         return [this._maxWidth, this._currentY];
     }
 
-    private renderHeader(unit: AoSUnit, ctx: CanvasRenderingContext2D): void {
-
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = RendererAoS._blackColor;
-
-        const xStart = this._currentX;
-        const xEnd = this._currentX + this._maxWidth;
-        const yStart = this._currentY;
-        const titleHeight = 36;
-        const yEnd = yStart + titleHeight;
-
-        ctx.beginPath();
-        ctx.moveTo(xStart, yStart + RendererAoS._bevelSize);
-        ctx.lineTo(xStart, yEnd);
-        ctx.lineTo(xEnd, yEnd);
-        ctx.lineTo(xEnd, yStart + RendererAoS._bevelSize);
-        ctx.lineTo(xEnd - RendererAoS._bevelSize, yStart);
-        ctx.lineTo(xStart + RendererAoS._bevelSize, yStart);
-        ctx.closePath();
-        ctx.fill();
-
-        let imgX = xStart + 6;
- 
-        //if (this._statsWheel)
-        //    ctx.drawImage(this._statsWheel, imgX, yStart + 2, 32, 32);
-
-        // unit name
-        let iters: number = 0;
-        let title_size = 28;
-        const title_x = imgX + 6;
-        ctx.font = title_size + 'px ' + 'bold serif';
-        const unitName = unit._name.toLocaleUpperCase();
-        let check = ctx.measureText(unitName);
-        const maxWidth = this._maxWidth - title_x;
-        while (iters < 6 && check.width > maxWidth) {
-            iters += 1;
-            title_size -= 2;
-            ctx.font = title_size + 'px ' + 'bold serif';
-            check = ctx.measureText(unitName);
-        }
-        ctx.fillStyle = 'white';
-        ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
-        RenderText(ctx, unitName, title_x, yStart, maxWidth, titleHeight, Justification.Center);
-
-        this._currentY += titleHeight;
-
-    }
-
-    private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[] | null) {
-        let x = this._currentX;
-        const height = 22;
-        const width = this._maxWidth;
-        ctx.fillStyle = RendererAoS._grey1;
-        ctx.fillRect(this._currentX, this._currentY, width, height);
-
-        ctx.fillStyle = RendererAoS._blackColor;
-        ctx.font = RendererAoS._headerFont;
-        var w = 50;
-        if (labels) {
-             for (let i = 0; i < labels.length; i++) {
-                if (columnWidths) w = columnWidths[i];
-                RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
-                x += w;
-            }
-        }
-
-        this._currentY += height;
-    }
-
-    private renderKeywords(ctx: CanvasRenderingContext2D, unit: AoSUnit): void {
-        ctx.font = RendererAoS._titleFont;
-        RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
-
-        ctx.font = RendererAoS._font;
-        const kwlist = [...unit._keywords]; 
-        const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
-
-        this._currentY += 4;
+    protected renderUnitCost(unit: AoSUnit, ctx: CanvasRenderingContext2D, imgX: number, yStart: number): void {
+        // intentionally empty
     }
 
     private static _unitLabels = ["UNIT", "MOVE", "WOUNDS", "BRAVERY", "SAVE"];
@@ -391,16 +292,6 @@ export class RendererAoS implements Renderer {
     private _prayerLabelWidthNormalized = [0.3, 0.6];
 
     private _trackerLabelWidth = [0.3, 0.2, 0.1, 0.1, 0.1];
-
-    private renderLine(ctx: CanvasRenderingContext2D): void {
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = RendererAoS._blackColor;
-        ctx.beginPath();
-        ctx.moveTo(this._currentX, this._currentY);
-        ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
-        ctx.stroke();
-        this._currentY += 1;
-    }
 
     private renderWeapons(ctx: CanvasRenderingContext2D, weapons: AoSWeapon[], columnWidths: number[] | null): void {
         ctx.font = RendererAoS._font;
@@ -453,7 +344,7 @@ export class RendererAoS implements Renderer {
             ctx.save();
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
-            if (i % 2) ctx.fillStyle = RendererAoS._greyLight;
+            if (i % 2) ctx.fillStyle = RendererAoS._grey;
             else ctx.fillStyle =  '#ffffff';
             ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
             i++;
@@ -516,7 +407,7 @@ export class RendererAoS implements Renderer {
             x += w;
 
             ctx.save();
-            if (i % 2) ctx.fillStyle = RendererAoS._greyLight;
+            if (i % 2) ctx.fillStyle = RendererAoS._grey;
             else ctx.fillStyle = '#ffffff';
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
@@ -556,7 +447,7 @@ export class RendererAoS implements Renderer {
             x += w;
 
             ctx.save();
-            if (i % 2) ctx.fillStyle = RendererAoS._greyLight;
+            if (i % 2) ctx.fillStyle = RendererAoS._grey;
             else ctx.fillStyle = '#ffffff';
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
@@ -576,7 +467,7 @@ export class RendererAoS implements Renderer {
         let x = this._currentX;
         let ci = 0;
 
-        if (bg % 2) ctx.fillStyle = RendererAoS._greyLight;
+        if (bg % 2) ctx.fillStyle = RendererAoS._grey;
         else ctx.fillStyle = '#ffffff';
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
@@ -618,7 +509,7 @@ export class RendererAoS implements Renderer {
         let x = this._currentX;
         let ci = 0;
 
-        ctx.fillStyle = RendererAoS._greyLight;
+        ctx.fillStyle = RendererAoS._grey;
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
         ctx.fillStyle = RendererAoS._blackColor;
@@ -636,38 +527,4 @@ export class RendererAoS implements Renderer {
 
         this._currentY += height;
     }
-
-    private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-        ctx.strokeStyle = RendererAoS._blackColor;
-
-        ctx.beginPath();
-        ctx.moveTo(x, y + RendererAoS._bevelSize);
-        ctx.lineTo(x, y + h - RendererAoS._bevelSize);
-        ctx.lineTo(x + RendererAoS._bevelSize, y + h);
-        ctx.lineTo(x + w - RendererAoS._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - RendererAoS._bevelSize);
-        ctx.lineTo(x + w, y + RendererAoS._bevelSize);
-        ctx.lineTo(x + w - RendererAoS._bevelSize, y);
-        ctx.lineTo(x + RendererAoS._bevelSize, y);
-        ctx.closePath();
-        ctx.stroke();
-
-        ctx.save();
-        ctx.fillStyle = RendererAoS._fillColor;
-        ctx.globalCompositeOperation = "destination-over";
-        ctx.beginPath();
-        ctx.moveTo(x, y + RendererAoS._bevelSize);
-        ctx.lineTo(x, y + h - RendererAoS._bevelSize);
-        ctx.lineTo(x + RendererAoS._bevelSize, y + h);
-        ctx.lineTo(x + w - RendererAoS._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - RendererAoS._bevelSize);
-        ctx.lineTo(x + w, y + RendererAoS._bevelSize);
-        ctx.lineTo(x + w - RendererAoS._bevelSize, y);
-        ctx.lineTo(x + RendererAoS._bevelSize, y);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.restore();
-    }
-
 }

@@ -75,7 +75,7 @@ export class PsychicPower extends BaseNotes {
     _details: string = "";
 }
 
-export enum UnitRole {
+export enum UnitRole40k {
     NONE,
 
     // 40k
@@ -119,7 +119,7 @@ export const UnitRoleToString: string[] = [
     'Non-specialist'
 ];
 
-export class Model extends BaseNotes {
+export class Model40k extends BaseNotes {
 
     _count: number = 0;
 
@@ -141,7 +141,7 @@ export class Model extends BaseNotes {
     _psychicPowers: PsychicPower[] = [];
     _explosions: Explosion[] = [];
 
-    equal(model: Model | null): boolean {
+    equal(model: Model40k | null): boolean {
         if (model == null) return false;
 
         if ((this._name === model._name) &&
@@ -221,16 +221,16 @@ export class ProfileTable {
     _table: Map<string, string>[] = [];
 }
 
-export class Unit extends BaseNotes {
+export class Unit40k extends BaseNotes {
 
-    _role: UnitRole = UnitRole.NONE;
+    _role: UnitRole40k = UnitRole40k.NONE;
     _factions: Set<string> = new Set();
     _keywords: Set<string> = new Set();
 
     _abilities: Map<string, string> = new Map();
     _rules: Map<string, string> = new Map();
 
-    _models: Model[] = [];
+    _models: Model40k[] = [];
 
     _points: number = 0;
     _powerLevel: number = 0;
@@ -240,7 +240,7 @@ export class Unit extends BaseNotes {
 
     _profileTables: Map<string, ProfileTable> = new Map();
 
-    equal(unit: Unit | null): boolean {
+    equal(unit: Unit40k | null): boolean {
         if (unit == null) return false;
 
         if ((unit._name === this._name) && (unit._role === this._role) &&
@@ -293,7 +293,7 @@ export class Force extends BaseNotes {
     _faction: string = "Unknown";
     _factionRules: Map<string, string | null> = new Map();
     _rules: Map<string, string | null> = new Map();
-    _units: Unit[] = [];
+    _units: Unit40k[] = [];
 }
 
 export class Roster40k extends BaseNotes {
@@ -424,7 +424,7 @@ function ParseUnits(root: Element, force: Force, is40k: boolean): void {
     let selections = root.querySelectorAll("force>selections>selection");
     for (let selection of selections) {
         var unit = CreateUnit(selection, is40k);
-        if (unit && unit._role != UnitRole.NONE) {
+        if (unit && unit._role != UnitRole40k.NONE) {
             force._units.push(unit);
             for (const entry of unit._rules.entries()) {
                 force._rules.set(entry[0], entry[1]);
@@ -453,7 +453,7 @@ function ParseUnits(root: Element, force: Force, is40k: boolean): void {
     }
 
     // Sort force units by role and name
-    force._units.sort((a: Unit, b: Unit): number => {
+    force._units.sort((a: Unit40k, b: Unit40k): number => {
         if (a._role > b._role) return 1;
         else if (a._role == b._role) {
             if (a._name > b._name) return 1;
@@ -464,33 +464,33 @@ function ParseUnits(root: Element, force: Force, is40k: boolean): void {
     });
 }
 
-function LookupRole(roleText: string): UnitRole {
+function LookupRole(roleText: string): UnitRole40k {
     switch (roleText) {
-        case 'HQ': return UnitRole.HQ;
-        case 'Troops': return UnitRole.TR;
-        case 'Elites': return UnitRole.EL;
-        case 'Fast Attack': return UnitRole.FA;
-        case 'Heavy Support': return UnitRole.HS;
-        case 'Flyer': return UnitRole.FL;
-        case 'Dedicated Transport': return UnitRole.DT;
-        case 'Fortification': return UnitRole.FT;
-        case 'Lord of War': return UnitRole.LW;
-        case 'Agent of the Imperium': return UnitRole.AGENTS;
+        case 'HQ': return UnitRole40k.HQ;
+        case 'Troops': return UnitRole40k.TR;
+        case 'Elites': return UnitRole40k.EL;
+        case 'Fast Attack': return UnitRole40k.FA;
+        case 'Heavy Support': return UnitRole40k.HS;
+        case 'Flyer': return UnitRole40k.FL;
+        case 'Dedicated Transport': return UnitRole40k.DT;
+        case 'Fortification': return UnitRole40k.FT;
+        case 'Lord of War': return UnitRole40k.LW;
+        case 'Agent of the Imperium': return UnitRole40k.AGENTS;
     }
-    return UnitRole.NONE;
+    return UnitRole40k.NONE;
 }
 
-function LookupRoleKillTeam(roleText: string): UnitRole {
+function LookupRoleKillTeam(roleText: string): UnitRole40k {
     switch (roleText) {
-        case 'Commander': return UnitRole.COMMANDER;
-        case 'Leader': return UnitRole.LEADER;
-        case 'Specialist': return UnitRole.SPECIALIST;
-        case 'Non-specialist': return UnitRole.NON_SPECIALIST;
+        case 'Commander': return UnitRole40k.COMMANDER;
+        case 'Leader': return UnitRole40k.LEADER;
+        case 'Specialist': return UnitRole40k.SPECIALIST;
+        case 'Non-specialist': return UnitRole40k.NON_SPECIALIST;
     }
-    return UnitRole.NONE;
+    return UnitRole40k.NONE;
 }
 
-function parseUnknownProfile(prop: Element, unit: Unit): void {
+function parseUnknownProfile(prop: Element, unit: Unit40k): void {
 
     let propName = prop.getAttributeNode("name")?.nodeValue;
     let propType = prop.getAttributeNode("typeName")?.nodeValue;
@@ -534,8 +534,8 @@ function ExtractNumberFromParent(root: Element): number {
     return 0;
 }
 
-function CreateUnit(root: Element, is40k: boolean): Unit | null {
-    let unit: Unit = new Unit();
+function CreateUnit(root: Element, is40k: boolean): Unit40k | null {
+    let unit: Unit40k = new Unit40k();
     const unitName = ExpandBaseNotes(root, unit);
 
     let categories = root.querySelectorAll(":scope categories>category");
@@ -551,13 +551,13 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
             else {
                 const roleText = catName.trim();
                 let unitRole = LookupRole(roleText);
-                if (unitRole != UnitRole.NONE) {
+                if (unitRole != UnitRole40k.NONE) {
                     unit._role = unitRole;
                 }
                 else {
                     if (!is40k) {
                         unitRole = LookupRoleKillTeam(roleText);
-                        if (unitRole != UnitRole.NONE) {
+                        if (unitRole != UnitRole40k.NONE) {
                             unit._role = unitRole;
                         }
                         else {
@@ -574,7 +574,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
     }
 
     let props = root.querySelectorAll(":scope profiles>profile");
-    let model: Model = new Model();
+    let model: Model40k = new Model40k();
 
     for (let prop of props) {
         // What kind of prop is this
@@ -582,7 +582,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
         const propType = prop.getAttributeNode("typeName")?.nodeValue;
         if (propName && propType) {
             if ((propType === "Unit") || (propType === "Model")) {
-                model = new Model();
+                model = new Model40k();
                 unit._models.push(model);
                 ExpandBaseNotes(prop, model);
 
