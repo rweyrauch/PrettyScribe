@@ -14,7 +14,7 @@
     OF THIS SOFTWARE.
 */
 
-type WeaponStrength = number | string;
+export type WeaponStrength = number | string;
 
 export class BaseNotes {
     _name: string = "";

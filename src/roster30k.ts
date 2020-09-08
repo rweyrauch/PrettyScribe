@@ -16,7 +16,7 @@
 
 import {Unit} from "./roster";
 
-type WeaponStrength = number | string;
+import {WeaponStrength} from "./roster";
 
 export class Weapon30k {
     _name: string = "";

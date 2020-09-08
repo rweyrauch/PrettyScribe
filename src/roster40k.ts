@@ -15,7 +15,7 @@
 */
 import * as _ from "lodash";
 
-type WeaponStrength = number | string;
+import {WeaponStrength} from "./roster";
 
 export class BaseNotes {
     _name: string = "";
