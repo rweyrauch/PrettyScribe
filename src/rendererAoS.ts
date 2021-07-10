@@ -139,9 +139,38 @@ export class RendererAoS implements Renderer {
                 }
             }
 
+            if (force._grandStrategy && force._grandStrategy._name != "") {
+                let header = document.createElement('h3');
+                allegianceAbilities.appendChild(header);
+                header.textContent = "Grand Strategy";
+                let row = document.createElement('div');
+                let name = document.createElement('h4');
+                name.textContent = force._grandStrategy._name;
+                let desc = document.createElement('p');
+                desc.textContent = force._grandStrategy._description;
+                row.appendChild(name);
+                row.appendChild(desc);
+                allegianceAbilities.appendChild(row);
+            }
+
+            if (force._triumph && force._triumph._name != "") {
+                let header = document.createElement('h3');
+                allegianceAbilities.appendChild(header);
+                header.textContent = "Triumph";
+                let row = document.createElement('div');
+                let name = document.createElement('h4');
+                name.textContent = force._triumph._name;
+                let desc = document.createElement('p');
+                desc.textContent = force._triumph._description;
+                row.appendChild(name);
+                row.appendChild(desc);
+                allegianceAbilities.appendChild(row);
+            }
+
             if (forces)
                 forces.appendChild(allegianceAbilities);
 
+            let prevUnit: AoSUnit | null = null;
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = RendererAoS._res * 7.5;
@@ -149,8 +178,13 @@ export class RendererAoS implements Renderer {
                 
                 this._descriptionWidth = canvas.width - this._descriptionStartX - 10;
 
+                if (unit.equal(prevUnit)) {
+                    continue;
+                }
+
                 const dims = this.renderUnit(unit, canvas, 0, 0);
-    
+                prevUnit = unit;
+  
                 const border = 25;
                 let finalCanvas = document.createElement('canvas') as HTMLCanvasElement;
                 finalCanvas.width = dims[0] + border * 2;
@@ -177,12 +211,23 @@ export class RendererAoS implements Renderer {
 
         this.renderHeader(unit, ctx);
 
-        const unitLabelWidths: number[] = [];
-        this._unitLabelWidthsNormalized.forEach(element => {
-            unitLabelWidths.push(element * this._maxWidth);
-        });
-        this.renderTableHeader(ctx, RendererAoS._unitLabels, unitLabelWidths);
-        this.renderUnitStats(ctx, unit, unitLabelWidths, 0);
+        if (unit._role == AoSUnitRole.MALIGN_SORCERY) {
+
+        }
+        else if (unit._role == AoSUnitRole.SCENERY) {
+
+        }
+        else if (unit._role == AoSUnitRole.REALM) {
+
+        }
+        else {
+            const unitLabelWidths: number[] = [];
+            this._unitLabelWidthsNormalized.forEach(element => {
+                unitLabelWidths.push(element * this._maxWidth);
+            });
+            this.renderTableHeader(ctx, RendererAoS._unitLabels, unitLabelWidths);
+            this.renderUnitStats(ctx, unit, unitLabelWidths, 0);
+        }
 
         const uniqueWeapons: AoSWeapon[] = [];
         const scratchMap: Map<string, AoSWeapon> = new Map();
@@ -273,13 +318,33 @@ export class RendererAoS implements Renderer {
             this.renderMap(ctx, "MAGIC", unit._magic);
         }
 
-        if (unit._woundTracker) {
+        if (unit._woundTracker.length > 0) {
+            this._currentY += 2;
             this.renderLine(ctx);
             const trackerLabelWidths: number[] = [];
             this._trackerLabelWidth.forEach(element => {
                 trackerLabelWidths.push(element * this._maxWidth);
             });
-            this.renderTableHeader(ctx, unit._woundTracker._woundTrackerLabels, trackerLabelWidths);
+
+            let labels = RendererAoS._trackerLabels;
+
+            // Determine wound table headers.
+            if (unit._woundTracker.length == 4) {
+                // Use first entry in table as labels.
+                let i = 1;
+                // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
+                for (let key of unit._woundTracker[0]._table.values()) {
+                    labels[i++] = key;
+                }
+            }
+            else if (unit._woundTracker.length == 3) {
+                // Use keys as labels.
+                let i = 1;
+                for (let key of unit._woundTracker[0]._table.keys()) {
+                    labels[i++] = key;
+                }
+            }
+            this.renderTableHeader(ctx, labels, trackerLabelWidths);
             this.renderWoundTable(ctx, unit, trackerLabelWidths);
         }
 
@@ -371,6 +436,7 @@ export class RendererAoS implements Renderer {
         RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font = RendererAoS._font;
+        ctx.fillStyle = RendererAoS._blackColor;
         const kwlist = [...unit._keywords]; 
         const kw = kwlist.join(", ").toLocaleUpperCase();
         this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
@@ -380,17 +446,19 @@ export class RendererAoS implements Renderer {
 
     private static _unitLabels = ["UNIT", "MOVE", "WOUNDS", "BRAVERY", "SAVE"];
     private _unitLabelWidthsNormalized = [0.3, 0.1, 0.1, 0.1, 0.1];
+
     private static _weaponLabels = ["MISSILE WEAPONS", "RANGE", "ATTACKS", "TO HIT", "TO WOUND", "REND", "DAMAGE"];
-    private _weaponLabelWidthNormalized = [0.3, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
     private static _meleeLabels = ["MELEE WEAPONS", "RANGE", "ATTACKS", "TO HIT", "TO WOUND", "REND", "DAMAGE"];
+    private _weaponLabelWidthNormalized = [0.3, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
 
-    private static _spellLabels = ["SPELL", "CASTING VALUE", "DESCRIPTION"];
-    private _spellLabelWidthNormalized = [0.3, 0.1, 0.5];
+    private static _spellLabels = ["SPELL", "CASTING VALUE", "RANGE", "DESCRIPTION"];
+    private _spellLabelWidthNormalized = [0.2, 0.1, 0.2, 0.5];
 
-    private static _prayerLabels = ["PRAYER", "DESCRIPTION"];
-    private _prayerLabelWidthNormalized = [0.3, 0.6];
+    private static _prayerLabels = ["PRAYER", "ANSWER VALUE", "RANGE", "DESCRIPTION"];
+    private _prayerLabelWidthNormalized = [0.2, 0.1, 0.2, 0.5];
 
-    private _trackerLabelWidth = [0.3, 0.2, 0.1, 0.1, 0.1];
+    private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
+    private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
 
     private renderLine(ctx: CanvasRenderingContext2D): void {
         ctx.lineWidth = 2;
@@ -404,6 +472,7 @@ export class RendererAoS implements Renderer {
 
     private renderWeapons(ctx: CanvasRenderingContext2D, weapons: AoSWeapon[], columnWidths: number[] | null): void {
         ctx.font = RendererAoS._font;
+        ctx.fillStyle = RendererAoS._blackColor;
 
         const height = 22;
 
@@ -465,6 +534,8 @@ export class RendererAoS implements Renderer {
 
     private renderMap(ctx: CanvasRenderingContext2D, title: string, data: Map<string, string>): void {
         ctx.font = RendererAoS._titleFont;
+        ctx.fillStyle = RendererAoS._blackColor;
+
         RenderText(ctx, title, this._currentX + 20, this._currentY, 100, 16, Justification.Left);
 
         ctx.font = RendererAoS._font;
@@ -486,6 +557,7 @@ export class RendererAoS implements Renderer {
 
     private renderSpells(ctx: CanvasRenderingContext2D, spells: AoSSpell[], columnWidths: number[] | null): void {
         ctx.font = RendererAoS._font;
+        ctx.fillStyle = RendererAoS._blackColor;
 
         const height = 22;
 
@@ -511,6 +583,10 @@ export class RendererAoS implements Renderer {
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
+            RenderText(ctx, spell._range.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
             this._currentY += 2;
             this._currentY = RenderParagraph(ctx, spell._description, x, this._currentY, w, 0);
             x += w;
@@ -530,6 +606,7 @@ export class RendererAoS implements Renderer {
 
     private renderPrayers(ctx: CanvasRenderingContext2D, prayers: AoSPrayer[], columnWidths: number[] | null): void {
         ctx.font = RendererAoS._font;
+        ctx.fillStyle = RendererAoS._blackColor;
 
         const height = 22;
 
@@ -548,6 +625,14 @@ export class RendererAoS implements Renderer {
             ctx.fillStyle = RendererAoS._blackColor;
             if (columnWidths) w = columnWidths[ci++];
             RenderText(ctx, prayer._name.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            RenderText(ctx, prayer._answerValue.toString(), x, this._currentY, w, height, Justification.Center);
+            x += w;
+
+            if (columnWidths) w = columnWidths[ci++];
+            RenderText(ctx, prayer._range.toString(), x, this._currentY, w, height, Justification.Center);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
@@ -609,34 +694,40 @@ export class RendererAoS implements Renderer {
     private renderWoundTable(ctx: CanvasRenderingContext2D, unit: AoSUnit, columnWidths: number[] | null): void {
         const height = 22;
 
-        if (unit._woundTracker == null) {
-            return;
-        }
-
         let w = 50;
 
-        let x = this._currentX;
-        let ci = 0;
+        let firstRow = true;
+        for (let tracker of unit._woundTracker) {
 
-        ctx.fillStyle = RendererAoS._greyLight;
-        ctx.fillRect(x, this._currentY, this._maxWidth, height);
+            // if (firstRow && (unit._woundTracker.length == 4)) {
+            //     // Skip column labels
+            //     firstRow = false;
+            //     continue;
+            // }
 
-        ctx.fillStyle = RendererAoS._blackColor;
-        ctx.font = RendererAoS._font;
-        if (columnWidths) w = columnWidths[ci++];
+            let x = this._currentX;
+            let ci = 0;
 
-        RenderText(ctx, unit._woundTracker._name, x, this._currentY, w, height, Justification.Center);
-        x += w;
+            ctx.fillStyle = RendererAoS._greyLight;
+            ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
-        for (let attr of  unit._woundTracker._table) {
+            ctx.fillStyle = RendererAoS._blackColor;
+            ctx.font = RendererAoS._font;
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, attr[1], x, this._currentY, w, height, Justification.Center);
+
+            RenderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
             x += w;
+
+            for (let attr of tracker._table) {
+                if (columnWidths) w = columnWidths[ci++];
+                RenderText(ctx, attr[1], x, this._currentY, w, height, Justification.Center);
+                x += w;
+            }
+
+            this._currentY += height;
         }
-
-        this._currentY += height;
     }
-
+    
     private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
         ctx.strokeStyle = RendererAoS._blackColor;
 

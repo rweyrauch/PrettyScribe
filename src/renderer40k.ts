@@ -177,7 +177,6 @@ export class Renderer40k implements Renderer {
                     continue;
                 }
 
-                FixDPI(canvas);
                 const dims = this.renderUnit(unit, canvas, 0, 0);
                 prevUnit = unit;
 
@@ -189,7 +188,6 @@ export class Renderer40k implements Renderer {
                 finalCanvas.style.width = finalCanvas.width.toString();
                 finalCanvas.style.height = finalCanvas.height.toString();
 
-                FixDPI(finalCanvas);
                 let finalCtx = finalCanvas.getContext('2d');
                 finalCtx?.drawImage(canvas, border, border);
                 if (forces) {
