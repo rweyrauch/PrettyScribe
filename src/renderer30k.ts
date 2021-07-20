@@ -156,7 +156,7 @@ export class Renderer30k implements Renderer {
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = Renderer30k._res * 7.5;
-                canvas.height = Renderer30k._res * 12;
+                canvas.height = Renderer30k._res * 20;
                 this._descriptionWidth = canvas.width - this._descriptionStartX - 10;
 
                 FixDPI(canvas);

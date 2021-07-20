@@ -66,6 +66,18 @@ export class AoSCoreBattalion {
     _abilities: string = "";
 }
 
+export class AoSSpecialRules {
+    _name: string = "";
+    _description: string = "";
+}
+
+export class AoSRealmOfBattle {
+    _name: string = "";
+    _spells: AoSSpell[] = [];
+    _commandAbilities: Map<string, string> = new Map();    
+    _rules: AoSSpecialRules[] = [];
+}
+
 export enum AoSUnitRole {
     NONE,
 
@@ -148,12 +160,14 @@ export class AoSForce {
     _grandStrategy: AoSGrandStrategy;
     _triumph: AoSTriumph;
     _battalion: AoSCoreBattalion;
+    _realmOfBattle: AoSRealmOfBattle;
 
     constructor() {
         this._allegiance = new AoSAllegiance();
         this._grandStrategy = new AoSGrandStrategy();
         this._battalion = new AoSCoreBattalion();
         this._triumph = new AoSTriumph();
+        this._realmOfBattle = new AoSRealmOfBattle();
     }
 };
 

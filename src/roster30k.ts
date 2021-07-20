@@ -369,7 +369,7 @@ function CreateUnit(root: Element): Unit30k | null {
                                 case 'W': activeModel._wounds = +char.textContent; break;
                                 case 'I': activeModel._initiative = +char.textContent; break;
                                 case 'A': activeModel._attacks = char.textContent; break;
-                                case 'Ld': activeModel._leadership = +char.textContent; break;
+                                case 'LD': activeModel._leadership = +char.textContent; break;
                                 case 'Save': activeModel._save = char.textContent; break;
                             }
                         }

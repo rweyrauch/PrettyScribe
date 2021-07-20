@@ -381,11 +381,69 @@ function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void 
                 }
             }
         
-            ParseUnits(root, f, is40k);
+            ParseSelections(root, f, is40k);
 
             roster._forces.push(f);
         }
     }
+}
+
+function ParseSelections(root: Element, force: Force, is40k: boolean): void {
+    let selections = root.querySelectorAll("force>selections>selection");
+
+    for (let selection of selections) {
+        // What kind of selection is this
+        let selectionName = selection.getAttributeNode("name")?.nodeValue;
+        if (!selectionName) continue;
+
+        if (selectionName.includes("Detachment Command Cost")) {
+            console.log("Found Detachment Command Cost");
+        }
+        else if (selectionName.includes('Dynasty Choice')) {
+            console.log("Found Necron Dynasty Choice");
+        }
+        else {
+            let unit = ParseUnit(selection, is40k);
+            if (unit && unit._role != UnitRole.NONE) {
+                force._units.push(unit);
+                for (const entry of unit._rules.entries()) {
+                    force._rules.set(entry[0], entry[1]);
+                }
+            }
+            else if (root.getAttributeNode("type")?.nodeValue === "upgrade") {
+                ExtractRuleFromSelection(root, force._rules);
+        
+                const props = root.querySelectorAll("selections>selection");
+                for (let prop of props) {
+                    // sub-faction
+                    let propName = prop.getAttributeNode("name")?.nodeValue;
+                    let propType = prop.getAttributeNode("type")?.nodeValue;
+                    if (propName && propType) {
+                        if ((propType === "upgrade")) {
+                            force._faction = propName;
+                            ExtractRuleFromSelection(prop, force._factionRules);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    for (const key of force._factionRules.keys()) {
+        force._rules.delete(key);
+    }
+
+    // Sort force units by role and name
+    force._units.sort((a: Unit, b: Unit): number => {
+        if (a._role > b._role) return 1;
+        else if (a._role == b._role) {
+            if (a._name > b._name) return 1;
+            else if (a._name == b._name) return 0;
+            return -1;
+        }
+        return -1;
+    });
 }
 
 function DuplicateForce(force: Force, roster: Roster40k): boolean {
@@ -418,50 +476,6 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
             }
         }
     }
-}
-
-function ParseUnits(root: Element, force: Force, is40k: boolean): void {
-    let selections = root.querySelectorAll("force>selections>selection");
-    for (let selection of selections) {
-        var unit = CreateUnit(selection, is40k);
-        if (unit && unit._role != UnitRole.NONE) {
-            force._units.push(unit);
-            for (const entry of unit._rules.entries()) {
-                force._rules.set(entry[0], entry[1]);
-            }
-        }
-        else if (selection.getAttributeNode("type")?.nodeValue === "upgrade") {
-            ExtractRuleFromSelection(selection, force._rules);
-
-            const props = selection.querySelectorAll("selections>selection");
-            for (let prop of props) {
-                // sub-faction
-                let propName = prop.getAttributeNode("name")?.nodeValue;
-                let propType = prop.getAttributeNode("type")?.nodeValue;
-                if (propName && propType) {
-                    if ((propType === "upgrade")) {
-                        force._faction = propName;
-                        ExtractRuleFromSelection(prop, force._factionRules);
-                    }
-                }
-            }
-        }
-    }
-
-    for (const key of force._factionRules.keys()) {
-        force._rules.delete(key);
-    }
-
-    // Sort force units by role and name
-    force._units.sort((a: Unit, b: Unit): number => {
-        if (a._role > b._role) return 1;
-        else if (a._role == b._role) {
-            if (a._name > b._name) return 1;
-            else if (a._name == b._name) return 0;
-            return -1;
-        }
-        return -1;
-    });
 }
 
 function LookupRole(roleText: string): UnitRole {
@@ -534,7 +548,7 @@ function ExtractNumberFromParent(root: Element): number {
     return 0;
 }
 
-function CreateUnit(root: Element, is40k: boolean): Unit | null {
+function ParseUnit(root: Element, is40k: boolean): Unit | null {
     let unit: Unit = new Unit();
     const unitName = ExpandBaseNotes(root, unit);
 
@@ -575,6 +589,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
 
     let props = root.querySelectorAll(":scope profiles>profile");
     let model: Model = new Model();
+    let weapon: Weapon|null = null;
 
     for (let prop of props) {
         // What kind of prop is this
@@ -584,6 +599,8 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
             if ((propType === "Unit") || (propType === "Model")) {
                 model = new Model();
                 unit._models.push(model);
+                if (weapon) model._weapons.push(weapon);
+
                 ExpandBaseNotes(prop, model);
 
                 let chars = prop.querySelectorAll("characteristics>characteristic");
@@ -639,7 +656,7 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                 }
             }
             else if (propType === "Weapon") {
-                let weapon: Weapon = new Weapon();
+                weapon = new Weapon();
                 ExpandBaseNotes(prop,  weapon);
                 weapon._count = ExtractNumberFromParent(prop);
 
@@ -658,11 +675,6 @@ function CreateUnit(root: Element, is40k: boolean): Unit | null {
                             }
                         }
                     }
-                }
-
-                model._weapons.push(weapon);
-                if (!model._name) {
-                    console.log("Unexpected: Created a weapon without an active model.  Unit: " + unitName);
                 }
             }
             else if (propType.includes("Wound Track") || propType.includes("Stat Damage")) {
