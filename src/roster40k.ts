@@ -400,7 +400,7 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
             console.log("Found Detachment Command Cost");
         }
         else if (selectionName.includes('Dynasty Choice')) {
-            console.log("Found Necron Dynasty Choice");
+            ExtractRuleFromSelection(root, force._rules);
         }
         else {
             let unit = ParseUnit(selection, is40k);
@@ -462,8 +462,10 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
         // detachment rules
         const propName = prop.getAttributeNode("name")?.nodeValue;
         const propType = prop.getAttributeNode("typeName")?.nodeValue;
+        console.log("Prop name:" + propName + "  Type: " + propType);
+
         if (propName && propType) {
-            if ((propType === "Abilities")) {
+            if ((propType === "Abilities") || (propType === "Dynastic Code")) {
                 const chars = prop.querySelectorAll("characteristics>characteristic");
                 for (const char of chars) {
                     const charName = char.getAttributeNode("name")?.nodeValue;
