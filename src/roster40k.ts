@@ -678,6 +678,9 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
+                if (model._name) {
+                    model._weapons.push(weapon);
+                }
             }
             else if (propType.includes("Wound Track") || propType.includes("Stat Damage")) {
                 let tracker = new WoundTracker();
