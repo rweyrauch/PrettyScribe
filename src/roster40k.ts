@@ -1,16 +1,16 @@
 /*
     Copyright 2020 Rick Weyrauch,
 
-    Permission to use, copy, modify, and/or distribute this software for any purpose 
+    Permission to use, copy, modify, and/or distribute this software for any purpose
     with or without fee is hereby granted, provided that the above copyright notice
     and this permission notice appear in all copies.
 
-    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH 
-    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND 
-    FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, 
-    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS 
-    OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER 
-    TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE 
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+    FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+    OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+    TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
     OF THIS SOFTWARE.
 */
 import * as _ from "lodash";
@@ -89,6 +89,7 @@ export enum UnitRole {
     FT,
     LW,
     AGENTS,
+    NF,
 
     // Kill Team
     COMMANDER,
@@ -111,6 +112,7 @@ export const UnitRoleToString: string[] = [
     'Fortification',
     'Lord of War',
     'Agent of the Imperium',
+    'No Force Org Slot',
 
     // Kill Team
     'Commander',
@@ -380,7 +382,7 @@ function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void 
                     }
                 }
             }
-        
+
             ParseSelections(root, f, is40k);
 
             roster._forces.push(f);
@@ -399,9 +401,6 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
         if (selectionName.includes("Detachment Command Cost")) {
             console.log("Found Detachment Command Cost");
         }
-        else if (selectionName.includes('Dynasty Choice')) {
-            ExtractRuleFromSelection(root, force._rules);
-        }
         else {
             let unit = ParseUnit(selection, is40k);
             if (unit && unit._role != UnitRole.NONE) {
@@ -410,21 +409,20 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
                     force._rules.set(entry[0], entry[1]);
                 }
             }
-            else if (root.getAttributeNode("type")?.nodeValue === "upgrade") {
-                ExtractRuleFromSelection(root, force._rules);
-        
-                const props = root.querySelectorAll("selections>selection");
-                for (let prop of props) {
-                    // sub-faction
-                    let propName = prop.getAttributeNode("name")?.nodeValue;
-                    let propType = prop.getAttributeNode("type")?.nodeValue;
-                    if (propName && propType) {
-                        if ((propType === "upgrade")) {
-                            force._faction = propName;
-                            ExtractRuleFromSelection(prop, force._factionRules);
-                        }
+            else if (selection.getAttribute("type") === "upgrade") {
+              ExtractRuleFromSelection(selection, force._rules);
+              const props = selection.querySelectorAll("selections>selection");
+              for (let prop of props) {
+                  // sub-faction
+                  const name = prop.getAttribute("name");
+                  if (name && prop.getAttribute("type") === "upgrade") {
+                      if (force._faction === "Unknown") {
+                          // pick the first upgrade we see
+                          force._faction = name;
+                      }
+                      ExtractRuleFromSelection(prop, force._factionRules);
                     }
-                }
+                  }
             }
         }
     }
@@ -465,7 +463,7 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
         console.log("Prop name:" + propName + "  Type: " + propType);
 
         if (propName && propType) {
-            if ((propType === "Abilities") || (propType === "Dynastic Code")) {
+            if (propType === "Abilities" || propType === "Dynastic Code") {
                 const chars = prop.querySelectorAll("characteristics>characteristic");
                 for (const char of chars) {
                     const charName = char.getAttributeNode("name")?.nodeValue;
@@ -492,6 +490,7 @@ function LookupRole(roleText: string): UnitRole {
         case 'Fortification': return UnitRole.FT;
         case 'Lord of War': return UnitRole.LW;
         case 'Agent of the Imperium': return UnitRole.AGENTS;
+        case 'No Force Org Slot': return UnitRole.NF;
     }
     return UnitRole.NONE;
 }
@@ -589,19 +588,75 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         }
     }
 
-    let props = root.querySelectorAll(":scope profiles>profile");
-    let model: Model = new Model();
-    let weapon: Weapon|null = null;
+    // First, look for individual models within the selection. The selection's
+    // type attribute can vary, but it should have a profile with typeName=Unit.
+    let seenProfiles: Element[] = [];
+    for (let profile of root.querySelectorAll('profile[typeName="Unit"]')) {
+      let selection = profile.parentElement?.parentElement;
+      let props = Array.from(selection?.querySelectorAll(":scope profiles>profile") || []);
+      seenProfiles = seenProfiles.concat(props);
+      ParseModelProfiles(props, unit, unitName);
+    }
 
+    // Now, go thru any other profiles we missed. This may include weapons or
+    // other upgrades, which will be applied to all models in the unit.
+    let props = Array.from(root.querySelectorAll(":scope profiles>profile"));
+    let unseenProps = props.filter((e: Element) => !seenProfiles.includes(e));
+    ParseModelProfiles(unseenProps, unit, unitName, /* appliesToAllModels= */ true);
+
+    // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
+    let costs = root.querySelectorAll(":scope costs>cost");
+    for (let cost of costs) {
+        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
+            let which = cost.getAttributeNode("name")?.nodeValue;
+            let value = cost.getAttributeNode("value")?.nodeValue;
+            if (value) {
+                if (which == " PL") {
+                    unit._powerLevel += +value;
+                }
+                else if (which == "pts") {
+                    unit._points += +value;
+                }
+                else if (which == "CP") {
+                    unit._commandPoints += +value;
+                }
+            }
+        }
+    }
+
+    let rules = root.querySelectorAll(":scope rules > rule");
+    for (let rule of rules) {
+        if (rule.hasAttribute("name")) {
+            let ruleName = rule.getAttributeNode("name")?.nodeValue;
+            let desc = rule.querySelector("description");
+            if (ruleName && desc && desc.textContent) {
+                unit._rules.set(ruleName, desc.textContent);
+            }
+        }
+    }
+
+    unit.normalize();
+    return unit;
+}
+
+function ParseModelProfiles(props: Element[], unit: Unit, unitName: string, appliesToAllModels = false) {
+    let model = new Model();
+    let propsWithoutModel: string[] = [];
     for (let prop of props) {
         // What kind of prop is this
         const propName = prop.getAttributeNode("name")?.nodeValue;
         const propType = prop.getAttributeNode("typeName")?.nodeValue;
         if (propName && propType) {
             if ((propType === "Unit") || (propType === "Model")) {
-                model = new Model();
+                if (model._name) {
+                  // Older versions of BattleScript expect Model to be before
+                  // model descriptions, but newer ones might have Model after
+                  // the descriptions.
+                  model = new Model();
+                } else {
+                  propsWithoutModel = [];
+                }
                 unit._models.push(model);
-                if (weapon) model._weapons.push(weapon);
 
                 ExpandBaseNotes(prop, model);
 
@@ -658,7 +713,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
                 }
             }
             else if (propType === "Weapon") {
-                weapon = new Weapon();
+                let weapon = new Weapon();
                 ExpandBaseNotes(prop,  weapon);
                 weapon._count = ExtractNumberFromParent(prop);
 
@@ -678,8 +733,9 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
                         }
                     }
                 }
-                if (model._name) {
-                    model._weapons.push(weapon);
+                model._weapons.push(weapon);
+                if (!model._name) {
+                    propsWithoutModel.push("Unexpected: Created a weapon without an active model.  Unit: " + unitName);
                 }
             }
             else if (propType.includes("Wound Track") || propType.includes("Stat Damage")) {
@@ -729,7 +785,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
                 }
                 model._psychicPowers.push(power);
                 if (!model._name) {
-                    console.log("Unexpected: Created a psychic without an active model.  Unit: " + unitName);
+                    propsWithoutModel.push("Unexpected: Created a psychic without an active model.  Unit: " + unitName);
                 }
             }
             else if (propType.includes("Explosion")) {
@@ -751,7 +807,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
                 }
                 model._explosions.push(explosion);
                 if (!model._name) {
-                    console.log("Unexpected: Created a explosion without an active model.  Unit: " + unitName);
+                    propsWithoutModel.push("Unexpected: Created a explosion without an active model.  Unit: " + unitName);
                 }
             }
             else if (propType == "Psyker") {
@@ -772,7 +828,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
                 }
                 model._psyker = psyker;
                 if (!model._name) {
-                    console.log("Unexpected: Created a psyker without an active model.  Unit: " + unitName);
+                    propsWithoutModel.push("Unexpected: Created a psyker without an active model.  Unit: " + unitName);
                 }
             }
             else {
@@ -780,40 +836,18 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
             }
         }
     }
-
-    // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
-    let costs = root.querySelectorAll(":scope costs>cost");
-    for (let cost of costs) {
-        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
-            let which = cost.getAttributeNode("name")?.nodeValue;
-            let value = cost.getAttributeNode("value")?.nodeValue;
-            if (value) {
-                if (which == " PL") {
-                    unit._powerLevel += +value;
-                }
-                else if (which == "pts") {
-                    unit._points += +value;
-                }
-                else if (which == "CP") {
-                    unit._commandPoints += +value;
-                }
-            }
+    if (appliesToAllModels && propsWithoutModel) {
+        for (let unitModel of unit._models) {
+          unitModel._weapons.push(...model._weapons);
+          unitModel._psychicPowers.push(...model._psychicPowers);
+          unitModel._explosions.push(...model._explosions);
+          if (model._psyker && !unitModel._psyker) {
+            unitModel._psyker = model._psyker;
+          }
         }
+    } else {
+        propsWithoutModel.forEach(e => console.log(e));
     }
-
-    let rules = root.querySelectorAll(":scope rules > rule");
-    for (let rule of rules) {
-        if (rule.hasAttribute("name")) {
-            let ruleName = rule.getAttributeNode("name")?.nodeValue;
-            let desc = rule.querySelector("description");
-            if (ruleName && desc && desc.textContent) {
-                unit._rules.set(ruleName, desc.textContent);
-            }
-        }
-    }
-
-    unit.normalize();
-    return unit;
 }
 
 function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
