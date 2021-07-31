@@ -471,7 +471,7 @@ export class Renderer40k implements Renderer {
 
             ctx.fillStyle = Renderer40k._blackColor;
             if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon.name().toString(), x + Renderer40k._offset, this._currentY, w, height, Justification.Left);
+            RenderText(ctx, weapon.name().toString(), x + Renderer40k._offset, this._currentY, w - Renderer40k._offset, height, Justification.Left);
             x += w;
 
             if (columnWidths) w = columnWidths[ci++];
