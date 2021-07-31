@@ -234,7 +234,8 @@ export class Renderer40k implements Renderer {
                     let name = document.createElement('b');
                     name.textContent = rule[0];
                     let desc = document.createElement('p');
-                    desc.textContent = rule[1];
+                    desc.setAttribute("style", "white-space: pre-wrap;");
+                    desc.appendChild(document.createTextNode(rule[1] || ''));
                     row.appendChild(name);
                     row.appendChild(desc);
                     allegianceRules.appendChild(row);
@@ -820,7 +821,37 @@ export class Renderer40k implements Renderer {
 
         this.renderNotesArray(ctx, "Model notes", models);
 
-        // Unique list of weapons
+        if (unit._woundTracker.length > 0) {
+          this._currentY += 2;
+          this.renderLine(ctx);
+          const trackerLabelWidths: number[] = [];
+          this._trackerLabelWidth.forEach(element => {
+              trackerLabelWidths.push(element * this._maxWidth);
+          });
+
+          let labels = Renderer40k._trackerLabels;
+
+          // Determine wound table headers.
+          if (unit._woundTracker.length == 4) {
+              // Use first entry in table as labels.
+              let i = 1;
+              // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
+              for (let key of unit._woundTracker[0]._table.values()) {
+                  labels[i++] = key;
+              }
+          }
+          else if (unit._woundTracker.length == 3) {
+              // Use keys as labels.
+              let i = 1;
+              for (let key of unit._woundTracker[0]._table.keys()) {
+                  labels[i++] = key;
+              }
+          }
+          this.renderTableHeader(ctx, labels, trackerLabelWidths);
+          this.renderWoundTable(ctx, unit, trackerLabelWidths);
+      }
+
+      // Unique list of weapons
         const uniqueWeapons: Weapon[] = [];
         const scratchMap: Map<string, Weapon> = new Map();
         for (const w of weapons) {
@@ -892,36 +923,6 @@ export class Renderer40k implements Renderer {
             this.renderLine(ctx);
             this._currentY += 2;
             this.renderModelList(ctx, unit._models);
-        }
-
-        if (unit._woundTracker.length > 0) {
-            this._currentY += 2;
-            this.renderLine(ctx);
-            const trackerLabelWidths: number[] = [];
-            this._trackerLabelWidth.forEach(element => {
-                trackerLabelWidths.push(element * this._maxWidth);
-            });
-
-            let labels = Renderer40k._trackerLabels;
-
-            // Determine wound table headers.
-            if (unit._woundTracker.length == 4) {
-                // Use first entry in table as labels.
-                let i = 1;
-                // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
-                for (let key of unit._woundTracker[0]._table.values()) {
-                    labels[i++] = key;
-                }
-            }
-            else if (unit._woundTracker.length == 3) {
-                // Use keys as labels.
-                let i = 1;
-                for (let key of unit._woundTracker[0]._table.keys()) {
-                    labels[i++] = key;
-                }
-            }
-            this.renderTableHeader(ctx, labels, trackerLabelWidths);
-            this.renderWoundTable(ctx, unit, trackerLabelWidths);
         }
 
         if (explosions.length > 0) {

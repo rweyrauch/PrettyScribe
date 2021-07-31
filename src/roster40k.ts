@@ -90,6 +90,7 @@ export enum UnitRole {
     LW,
     AGENTS,
     NF,
+    SCD,
 
     // Kill Team
     COMMANDER,
@@ -113,6 +114,7 @@ export const UnitRoleToString: string[] = [
     'Lord of War',
     'Agent of the Imperium',
     'No Force Org Slot',
+    'Supreme Command Detachment',
 
     // Kill Team
     'Commander',
@@ -491,6 +493,7 @@ function LookupRole(roleText: string): UnitRole {
         case 'Lord of War': return UnitRole.LW;
         case 'Agent of the Imperium': return UnitRole.AGENTS;
         case 'No Force Org Slot': return UnitRole.NF;
+        case 'Primarch | Daemon Primarch | Supreme Commander': return UnitRole.SCD;
     }
     return UnitRole.NONE;
 }
@@ -591,11 +594,18 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
     // First, look for individual models within the selection. The selection's
     // type attribute can vary, but it should have a profile with typeName=Unit.
     let seenProfiles: Element[] = [];
+    let seenSelections: Element[] = [];
     for (let profile of root.querySelectorAll('profile[typeName="Unit"]')) {
       let selection = profile.parentElement?.parentElement;
-      let props = Array.from(selection?.querySelectorAll(":scope profiles>profile") || []);
-      seenProfiles = seenProfiles.concat(props);
+      if (!selection || seenSelections.includes(selection)) {
+        // Some units (eg TSK) have separate Unit entries for Wounds brackets,
+        // so make sure we don't count each of those Units as a separate model.
+        continue;
+      }
+      seenSelections.push(selection);
+      let props = Array.from(selection.querySelectorAll(":scope profiles>profile") || []);
       ParseModelProfiles(props, unit, unitName);
+      seenProfiles = seenProfiles.concat(props);
     }
 
     // Now, go thru any other profiles we missed. This may include weapons or
@@ -841,6 +851,7 @@ function ParseModelProfiles(props: Element[], unit: Unit, unitName: string, appl
           unitModel._weapons.push(...model._weapons);
           unitModel._psychicPowers.push(...model._psychicPowers);
           unitModel._explosions.push(...model._explosions);
+          model._explosions.splice(0);  // Only add explosions to the first model.
           if (model._psyker && !unitModel._psyker) {
             unitModel._psyker = model._psyker;
           }
