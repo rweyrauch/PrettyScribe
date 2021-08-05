@@ -63,7 +63,7 @@ export class AoSTriumph {
 
 export class AoSCoreBattalion {
     _name: string = "";
-    _abilities: string = "";
+    _abilities: Map<string, string> = new Map();
 }
 
 export class AoSSpecialRules {
@@ -159,13 +159,13 @@ export class AoSForce {
     _units: AoSUnit[] = [];
     _grandStrategy: AoSGrandStrategy;
     _triumph: AoSTriumph;
-    _battalion: AoSCoreBattalion;
+    _battalions: AoSCoreBattalion[] = [];
     _realmOfBattle: AoSRealmOfBattle;
+    _rules: Map<string, string> = new Map();
 
     constructor() {
         this._allegiance = new AoSAllegiance();
         this._grandStrategy = new AoSGrandStrategy();
-        this._battalion = new AoSCoreBattalion();
         this._triumph = new AoSTriumph();
         this._realmOfBattle = new AoSRealmOfBattle();
     }
@@ -176,7 +176,7 @@ export class RosterAoS {
     _points: number = 0;
     _name: string = "";
     _forces: AoSForce[] = [];
-    
+
     constructor() {
 
     }
@@ -255,6 +255,8 @@ function ParseForces(doc: XMLDocument, roster: RosterAoS): void {
 
             ParseSelections(root, f);
 
+            ParseRules(root, f);
+
             roster._forces.push(f);
         }
     }
@@ -284,7 +286,27 @@ function ParseSelections(root: Element, force: AoSForce): void {
             // TODO: implement Game Type
         }
         else if (selectionName.includes('Core Battalion')) {
-           // TODO: implement Core Battalions
+            let battalion = new AoSCoreBattalion();
+
+            battalion._name = selectionName
+
+            let profiles = selection.querySelectorAll("profiles>profile");
+            for (let prof of profiles) {
+                for (let prof of profiles) {
+                    let profName = prof.getAttributeNode("name")?.nodeValue;
+                    let profType = prof.getAttributeNode("typeName")?.nodeValue;
+                    if (profName && profType) {
+                        let chars = prof.querySelectorAll("characteristics>characteristic");
+                        for (let char of chars) {
+                            let charName = char.getAttributeNode("name")?.nodeValue;
+                            if (charName && char.textContent) {
+                                battalion._abilities.set(charName, char.textContent);
+                            }        
+                        }
+                    }
+                }        
+            }
+            force._battalions.push(battalion);
         }
         else if (selectionName.includes('Realm of Battle')) {
            // TODO: implement Realm of Battle
@@ -309,6 +331,23 @@ function ParseSelections(root: Element, force: AoSForce): void {
         else if (a._role == b._role) return 0;
         return -1;
     });
+}
+
+function ParseRules(root: Element, force: AoSForce): void {
+    let rules = root.querySelectorAll("force>rules>rule");
+
+    for (let rule of rules) {
+        let ruleName = rule.getAttributeNode("name")?.nodeValue;
+        let descriptions = rule.querySelectorAll("description");
+        if (!ruleName || !descriptions) {
+            continue;
+        }
+
+        for (let desc of descriptions) {
+            if (desc.textContent)
+                force._rules.set(ruleName, desc.textContent);
+        }
+    }   
 }
 
 function ParseUnit(root: Element): AoSUnit {

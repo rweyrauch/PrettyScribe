@@ -167,6 +167,36 @@ export class RendererAoS implements Renderer {
                 allegianceAbilities.appendChild(row);
             }
 
+            for (let rule of force._rules) {
+                let header = document.createElement('h3');
+                allegianceAbilities.appendChild(header);
+                header.textContent = "Rules";
+                let row = document.createElement('div');
+                let name = document.createElement('h4');
+                name.textContent = rule[0];
+                let desc = document.createElement('p');
+                desc.textContent = rule[1];
+                row.appendChild(name);
+                row.appendChild(desc);
+                allegianceAbilities.appendChild(row);               
+            }
+
+            for (let battalion of force._battalions) {
+                let battalionHeader = document.createElement('h3');
+                allegianceAbilities.appendChild(battalionHeader);
+                battalionHeader.textContent = battalion._name;
+                for (let ability of battalion._abilities) {
+                    let row = document.createElement('div');
+                    let name = document.createElement('h4');
+                    name.textContent = ability[0];
+                    let desc = document.createElement('p');
+                    desc.textContent = ability[1];
+                    row.appendChild(name);
+                    row.appendChild(desc);
+                    allegianceAbilities.appendChild(row);
+                }
+            }
+
             if (forces)
                 forces.appendChild(allegianceAbilities);
 
