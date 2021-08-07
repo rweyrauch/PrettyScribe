@@ -136,6 +136,8 @@ export class AoSUnit {
 
     _woundTracker: AoSWoundTracker[] = [];
 
+    _selections: Set<string> = new Set();
+
     equal(unit: AoSUnit | null): boolean {
         if (unit == null) return false;
 
@@ -488,6 +490,15 @@ function ParseUnit(root: Element): AoSUnit {
             }
             else {
                 console.log("Unknown unit profile type: " + profType);
+            }
+        }
+
+
+        let selections = root.querySelectorAll("selections>selection");
+        for (let selection of selections) {
+            let selectionName = selection.getAttributeNode("name")?.nodeValue;
+            if (selectionName) {
+                unit._selections.add(selectionName);
             }
         }
     }

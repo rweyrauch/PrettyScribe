@@ -77,7 +77,7 @@ export class RendererAoS implements Renderer {
             thead.classList.add('thead-light');
             const tr = document.createElement('tr');
             thead.appendChild(tr);
-            const headerInfo = [{ name: "NAME", w: '35%'}, {name:"ROLE", w:'25%'}, {name:"MODELS", w:'25%'}, {name:"POINTS", w:'15%'}];
+            const headerInfo = [{ name: "NAME", w: '35%'}, {name:"ROLE", w:'15%'}, {name:"SELECTIONS", w:'40%'}, {name:"POINTS", w:'10%'}];
             headerInfo.forEach(element => {
               let th = document.createElement('th');
               th.scope = "col";
@@ -95,13 +95,18 @@ export class RendererAoS implements Renderer {
               uname.innerHTML = unit._name;
               let role = document.createElement('td');
               role.innerHTML = AoSUnitRoleToString[unit._role];
-              let models = document.createElement('td');
-              models.innerHTML = "";
+              let selections = document.createElement('td');
+              selections.innerHTML = "";
+              let mi = 0;
+              for (const selection of unit._selections) {
+                    selections.innerHTML += selection + "<br>";
+              }
+
               let pts = document.createElement('td');
               pts.innerHTML = unit._points.toString();
               tr.appendChild(uname);
               tr.appendChild(role);
-              tr.appendChild(models);
+              tr.appendChild(selections);
               tr.appendChild(pts);
               body.appendChild(tr);    
             }
