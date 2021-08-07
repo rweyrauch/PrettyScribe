@@ -68,23 +68,8 @@ export class RendererAoS implements Renderer {
             if (list)
                 list.appendChild(forceTitle);
 
-            const table = document.createElement('table');
-            table.classList.add('table');
-            table.classList.add('table-sm');
-            table.classList.add('table-striped');
-            const thead = document.createElement('thead');
-            table.appendChild(thead);
-            thead.classList.add('thead-light');
-            const tr = document.createElement('tr');
-            thead.appendChild(tr);
-            const headerInfo = [{ name: "NAME", w: '35%'}, {name:"ROLE", w:'15%'}, {name:"SELECTIONS", w:'40%'}, {name:"POINTS", w:'10%'}];
-            headerInfo.forEach(element => {
-              let th = document.createElement('th');
-              th.scope = "col";
-              th.innerHTML = element.name;
-              th.style.width = element.w;
-              tr.appendChild(th);
-            });
+            const headerInfo = [{ name: "NAME", width: '35%'}, {name:"ROLE", width:'15%'}, {name:"SELECTIONS", width:'40%'}, {name:"POINTS", width:'10%'}];
+            const table = this.createTable(headerInfo);
             forceTitle.appendChild(table);
 
             let body = document.createElement('tbody');
@@ -172,6 +157,65 @@ export class RendererAoS implements Renderer {
                 allegianceAbilities.appendChild(row);
             }
 
+            if (force._realmOfBattle) {
+                let header = document.createElement('h3');
+                allegianceAbilities.appendChild(header);
+                header.textContent = "Realm of Battle (" + force._realmOfBattle._name + ")";
+                
+                if (force._realmOfBattle._spells.length > 0) {
+                    let title = document.createElement('h4');
+                    title.innerHTML = "Realm Spells";
+                    allegianceAbilities.append(title);
+
+                    const headerInfo = [{ name: "NAME", width: '25%'}, {name:"CASTING VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
+                    const table = this.createTable(headerInfo);
+                    let body = document.createElement('tbody');
+                    table.appendChild(body);        
+                    for (let spell of force._realmOfBattle._spells) {
+                        let tr = document.createElement('tr');
+                        let spellName = document.createElement('td');
+                        spellName.innerHTML = spell._name;
+                        let value = document.createElement('td');
+                        value.innerHTML = spell._castingValue.toString();
+                        let range = document.createElement('td');
+                        range.innerHTML = spell._range.toString();
+                        let desc = document.createElement('td');
+                        desc.innerHTML = spell._description;
+                        tr.appendChild(spellName);
+                        tr.appendChild(value);
+                        tr.appendChild(range);
+                        tr.appendChild(desc);
+                        body.appendChild(tr);                       
+                    }
+                    allegianceAbilities.appendChild(table);
+                }
+
+                if (force._realmOfBattle._commandAbilities.size > 0) {
+                    let title = document.createElement('h4');
+                    title.innerHTML = "Realm Command Abilities";
+                    allegianceAbilities.append(title);
+                    for (let ability of force._realmOfBattle._commandAbilities) {    
+                        let row = document.createElement('div');
+                        let desc = document.createElement('p');
+                        desc.textContent = ability[0] + ": " + ability[1];
+                        row.appendChild(desc);
+                        allegianceAbilities.appendChild(row); 
+                    }                       
+                }
+                if (force._realmOfBattle._rules.length > 0) {
+                    let title = document.createElement('h4');
+                    title.innerHTML = "Realm Special Rules";
+                    allegianceAbilities.append(title);
+                    for (let rule of force._realmOfBattle._rules) {    
+                        let row = document.createElement('div');
+                        let desc = document.createElement('p');
+                        desc.textContent = rule._name + ": " + rule._description;
+                        row.appendChild(desc);
+                        allegianceAbilities.appendChild(row); 
+                    }                       
+                }
+            }
+
             for (let rule of force._rules) {
                 let header = document.createElement('h3');
                 allegianceAbilities.appendChild(header);
@@ -230,6 +274,27 @@ export class RendererAoS implements Renderer {
                   forces.appendChild(finalCanvas);
             }    
         }
+    }
+
+    protected createTable(heading: {name: string, width: string}[]): HTMLTableElement {
+        const table = document.createElement('table');
+        table.classList.add('table');
+        table.classList.add('table-sm');
+        table.classList.add('table-striped');
+        const thead = document.createElement('thead');
+        table.appendChild(thead);
+        thead.classList.add('thead-light');
+        const tr = document.createElement('tr');
+        thead.appendChild(tr);
+        heading.forEach(element => {
+            let th = document.createElement('th');
+            th.scope = "col";
+            th.innerHTML = element.name;
+            th.style.width = element.width;
+            tr.appendChild(th);
+        });
+
+        return table;
     }
 
     protected renderUnit(unit: AoSUnit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
