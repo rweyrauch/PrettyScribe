@@ -812,9 +812,9 @@ In addition, you can re-roll charge rolls for this unit if it was set-up on the 
             <category id="098d-c6c9-baa3-391c" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="true"/>
           </categories>
         </selection>
-        <selection id="89b8-79db-bc6e-0beb" name="Endless Spell: The B﻿urning Head﻿﻿﻿" entryId="3b5f-6153-8453-ecae::3ad9-857b-32ff-e44e" number="1" type="upgrade">
+        <selection id="89b8-79db-bc6e-0beb" name="Endless Spell: The Burning Head" entryId="3b5f-6153-8453-ecae::3ad9-857b-32ff-e44e" number="1" type="upgrade">
           <profiles>
-            <profile id="3b5f-6153-8453-ecae::d37a-5a1b-11ad-fb89" name="Summon B﻿urning Head﻿﻿﻿" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+            <profile id="3b5f-6153-8453-ecae::d37a-5a1b-11ad-fb89" name="Summon Burning Head" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
               <characteristics>
                 <characteristic name="Casting Value" typeId="2508-b604-1258-a920">7</characteristic>
                 <characteristic name="Range" typeId="5b5c-1fd1-4c0f-5705">6&quot;</characteristic>

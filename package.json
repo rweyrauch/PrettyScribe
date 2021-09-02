@@ -6,6 +6,7 @@
   "dependencies": {
     "@types/jquery": "^3.5.5",
     "@types/lodash": "^4.14.168",
+    "bootswatch": "^5.1.0",
     "jszip": "^3.5.0"
   },
   "devDependencies": {
