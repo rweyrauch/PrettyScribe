@@ -14,8 +14,6 @@
     OF THIS SOFTWARE.
 */
 
-import {Unit} from "./roster";
-
 export class WarcryAllegiance {
     _name: string = "";
     _rules: Map<string, string> = new Map();
@@ -34,7 +32,10 @@ export enum WarcryUnitRole {
 
     LEADER,
     FIGHTER,
-    ALLY
+    ALLY,
+    MONSTER,
+    HERO,
+    THRALL,
 };
 
 export const WarcryUnitRoleToString: string[] = [
@@ -42,11 +43,23 @@ export const WarcryUnitRoleToString: string[] = [
 
     'Leader',
     'Fighter',
-    'Ally'
+    'Ally',
+    'Monster',
+    'Hero',
+    'Thrall'
 ];
 
-export class WarcryUnit extends Unit {
+export class WarcryDamageTable {
+    _name: string = "";
+    _table: Map<string, string> = new Map();
+};
+
+export class WarcryUnit {
+    _name: string = "";
     _role: WarcryUnitRole = WarcryUnitRole.NONE;
+    _keywords: Set<string> = new Set();
+
+    _abilities: Map<string, string> = new Map();
 
     // Characteristics
     _move: number = 1;
@@ -55,6 +68,8 @@ export class WarcryUnit extends Unit {
 
     _weapons: WarcryWeapon[] = [];
  
+    _damageTable: WarcryDamageTable[] = [];
+
     _points: number = 0;
 }
 
@@ -80,11 +95,12 @@ export class RosterWarcry {
 };
 
 function LookupRole(roleText: string): WarcryUnitRole {
-    switch (roleText) {
-        case 'Leader': return WarcryUnitRole.LEADER;
-        case 'Fighter': return WarcryUnitRole.FIGHTER;
-        case 'Ally': return WarcryUnitRole.ALLY;
-    }
+    if (roleText.includes('Leader')) return WarcryUnitRole.LEADER;
+    else if (roleText.includes('Fighter')) return WarcryUnitRole.FIGHTER;
+    else if (roleText.includes('Allies') || roleText.includes('Ally')) return WarcryUnitRole.ALLY;
+    else if (roleText.includes('Monster')) return WarcryUnitRole.MONSTER;
+    else if (roleText.includes('Hero')) return WarcryUnitRole.HERO;
+    else if (roleText.includes('Thrall')) return WarcryUnitRole.THRALL;
     return WarcryUnitRole.NONE;
 }
 
@@ -175,7 +191,10 @@ function ParseSelections(root: Element, force: WarcryForce): void {
         // What kind of selection is this
         let selectionType = selection.getAttributeNode("type")?.nodeValue;
         if (!selectionType) continue;
+        
         let selectionName = selection.getAttributeNode("name")?.nodeValue;
+        if (!selectionName) continue;
+    
         let unit = ParseUnit(selection);
         if (unit && (unit._role != WarcryUnitRole.NONE)) {
             force._units.push(unit);
@@ -229,6 +248,23 @@ function ParseUnit(root: Element): WarcryUnit {
                 }
                 unit._weapons.push(weapon);
             }
+            else if (profType == "Damage Points Allocated") {
+                let table = new WarcryDamageTable();
+                table._name = profName;
+                let chars = prof.querySelectorAll("characteristics>characteristic");
+                for (let char of chars) {
+                    let charName = char.getAttributeNode("name")?.nodeValue;
+                    if (charName && profName) {
+                        if (char.textContent) {
+                            table._table.set(charName, char.textContent);
+                        }
+                        else {
+                            table._table.set(charName, "-");
+                        }
+                    }
+                }
+                unit._damageTable.push(table);
+            }
             else {
                 console.log("Unknown unit profile type: " + profType);  
             }
@@ -251,7 +287,6 @@ function ParseUnit(root: Element): WarcryUnit {
     let categories = root.querySelectorAll(":scope categories>category");
     for (let category of categories) {
         let catName = category.getAttributeNode("name")?.nodeValue;
-        let catPrimary = category.getAttributeNode("primary")?.nodeValue;
         if (catName) {
             const roleText = catName.trim();
             var unitRole = LookupRole(roleText);
@@ -259,11 +294,19 @@ function ParseUnit(root: Element): WarcryUnit {
                 unit._role = unitRole;
             }
             else {
-                // Keyword
+                // Keyword (old Warcry rosters)
                 unit._keywords.add(catName);
             }
         }
     }
 
+    let upgrades = root.querySelectorAll(":scope selections>selection");
+    for (let upgrade of upgrades) {
+        let name = upgrade.getAttributeNode("name")?.nodeValue;
+        if (name) {
+            // Keyword
+            unit._keywords.add(name);
+        }
+    }
     return unit;
 }

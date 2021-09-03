@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<roster id="4de4-dc90-efb7-fd21" name="PS Test" battleScribeVersion="2.03" gameSystemId="e5fe-db52-95ba-6b62" gameSystemName="Warhammer Age of Sigmar: Warcry" gameSystemRevision="30" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+  <costs>
+    <cost name="pts" typeId="820d-9f65-fcb1-d476" value="915.0"/>
+  </costs>
+  <forces>
+    <force id="31b9-c61d-6d78-dfd8" name="Open Play" entryId="b12a-e361-2540-1376" catalogueId="e9cf-feae-a695-5d0e" catalogueRevision="4" catalogueName="Chaos - Maggotkin of Nurgle - Daemons">
+      <rules>
+        <rule id="f574-01e8-a7f3-ef39" name=" ⚁ [Double] Rush" hidden="false">
+          <description>Add 1 to the Move characteristic of this fighter until the end of their activation.
+⠀</description>
+        </rule>
+        <rule id="e8bf-46d4-c8bc-103f" name=" ⚂ [Triple] Respite" hidden="false">
+          <description>A fighter cannot use this ability if they are within 1&quot; of any enemy fighters. Remove a number of damage points allocated to this fighter equal to the value of this ability.
+⠀</description>
+        </rule>
+        <rule id="3ab2-db70-3462-b5f1" name=" ⚃ [Quad] Rampage" hidden="false">
+          <description>This fighter makes a bonus move action. Then, they can make a bonus attack action.
+⠀</description>
+        </rule>
+        <rule id="75a5-83b2-7b92-12d8" name=" ⚁ [Double] Onslaught" hidden="false">
+          <description>Add 1 to the Attacks characteristic of attack actions made by this fighter that have a Range characteristic of 3 or less until the end of their activation.
+⠀</description>
+        </rule>
+        <rule id="a9e3-c5bd-646d-b0e8" name=" ⚀ ⚁ ⚂ Universal Abiltiies ⚂ ⚁ ⚀" hidden="false">
+          <description>⠀
+⠀</description>
+        </rule>
+        <rule id="23d7-2de0-452e-ec4b" name=" ⚅ ⚄ ⚃ Faction Abiltiies ⚃ ⚄ ⚅" hidden="false">
+          <description>⠀
+⠀</description>
+        </rule>
+      </rules>
+      <selections>
+        <selection id="317a-43e1-f2d5-18e4" name="Chimera" entryId="d6a9-401d-a839-754f::70f3-5140-5e56-ed3b" number="1" type="model">
+          <profiles>
+            <profile id="d6a9-401d-a839-754f::1f3d-2cd0-0661-0161" name="Chimera" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">✹</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">4</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">60</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="d6a9-401d-a839-754f::b75d-c67d-1843-ee88" name="Mauling Claws" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">2</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">6</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">6</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">✹/✹</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="d6a9-401d-a839-754f::750d-a353-f35f-5212" name="0-10" hidden="false" typeId="575c-b39f-7b5a-ea68" typeName="Damage Points Allocated">
+              <characteristics>
+                <characteristic name="Move" typeId="d86c-8efd-c0fc-becd">12</characteristic>
+                <characteristic name="Damage" typeId="a830-e875-cf90-385f">5/10</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="d6a9-401d-a839-754f::64ac-c84d-9d59-5def" name="11-20" hidden="false" typeId="575c-b39f-7b5a-ea68" typeName="Damage Points Allocated">
+              <characteristics>
+                <characteristic name="Move" typeId="d86c-8efd-c0fc-becd">10</characteristic>
+                <characteristic name="Damage" typeId="a830-e875-cf90-385f">4/8</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="d6a9-401d-a839-754f::58d1-3d61-0301-915f" name="21-30" hidden="false" typeId="575c-b39f-7b5a-ea68" typeName="Damage Points Allocated">
+              <characteristics>
+                <characteristic name="Move" typeId="d86c-8efd-c0fc-becd">8</characteristic>
+                <characteristic name="Damage" typeId="a830-e875-cf90-385f">3/6</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="d6a9-401d-a839-754f::d3e8-f797-c866-6030" name="31-40" hidden="false" typeId="575c-b39f-7b5a-ea68" typeName="Damage Points Allocated">
+              <characteristics>
+                <characteristic name="Move" typeId="d86c-8efd-c0fc-becd">6</characteristic>
+                <characteristic name="Damage" typeId="a830-e875-cf90-385f">2/4</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="d6a9-401d-a839-754f::08ad-95f3-459b-7ef4" name="41-50" hidden="false" typeId="575c-b39f-7b5a-ea68" typeName="Damage Points Allocated">
+              <characteristics>
+                <characteristic name="Move" typeId="d86c-8efd-c0fc-becd">4</characteristic>
+                <characteristic name="Damage" typeId="a830-e875-cf90-385f">1/2</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="7f90-7dbf-7cca-efa1" name=" Chaotic Beasts" entryId="d6a9-401d-a839-754f::87d8-b7ec-5d1c-0cbb::d557-7c5b-5126-4e8a" entryGroupId="d6a9-401d-a839-754f::6ad4-cc15-615e-0f1e::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="de7d-e98a-588b-ff41" name=" Gargantuan" entryId="d6a9-401d-a839-754f::5983-314e-036e-b302::f309-c6a9-6f7d-a3f8" entryGroupId="d6a9-401d-a839-754f::6ad4-cc15-615e-0f1e::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="5b1d-56c8-9856-e5b3" name=" Fly" entryId="d6a9-401d-a839-754f::8fc0-bba9-56bc-9f32::9488-26b8-09dc-98f7" entryGroupId="d6a9-401d-a839-754f::6ad4-cc15-615e-0f1e::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="ad31-c6ff-919d-af3b" name=" Bulwark" entryId="d6a9-401d-a839-754f::36c4-510f-4af6-414f::c26f-4300-fb59-c645" entryGroupId="d6a9-401d-a839-754f::6ad4-cc15-615e-0f1e::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="360.0"/>
+          </costs>
+          <categories>
+            <category id="4c27-c92c-3bb8-2fb1" name="Monsters" entryId="e311-66c4-5d05-cd1e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="fe16-14a4-7917-7cd0" name="Plagueridden" entryId="2f17-9a45-e796-ffd5::c9a6-3aeb-fbf5-0248" number="1" type="model">
+          <profiles>
+            <profile id="2f17-9a45-e796-ffd5::3bfb-faf1-a78c-f133" name="Plagueridden" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">3</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">3</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">20</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="2f17-9a45-e796-ffd5::51dd-c140-5839-5719" name="Plagueridden Plaguesword" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">4</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">3</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">2/4</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="a055-bb02-a928-f226" name=" Maggotkin of Nurgle Daemons" entryId="2f17-9a45-e796-ffd5::a86b-17a7-4e3f-652b::ceae-d869-5146-6477" entryGroupId="2f17-9a45-e796-ffd5::646a-71ba-411e-0d70::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="715c-ad64-6e22-9bc6" name=" Warrior" entryId="2f17-9a45-e796-ffd5::eb28-d5d1-0afa-7fca::47ac-9fa2-ed46-d6db" entryGroupId="2f17-9a45-e796-ffd5::646a-71ba-411e-0d70::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="51bc-6c41-e257-7e54" name=" Leader" entryId="2f17-9a45-e796-ffd5::6c44-c113-ed7e-3ca4::4992-8710-6244-a9b8" entryGroupId="2f17-9a45-e796-ffd5::646a-71ba-411e-0d70::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="120.0"/>
+          </costs>
+          <categories>
+            <category id="d4a8-88a2-1553-1868" name="Heroes" entryId="5ed1-bb68-7a31-b173" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="8fbd-8636-160b-088d" name="Chaos Warhound" entryId="0710-5cc5-2564-3b73::1db1-77ac-b0f3-34ff" number="1" type="model">
+          <profiles>
+            <profile id="0710-5cc5-2564-3b73::27c1-4245-4bfe-de6c" name="Slavering Jaws" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">3</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">1/3</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="0710-5cc5-2564-3b73::b332-cc01-efa5-105c" name="Chaos Warhound" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">8</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">3</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">10</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="2b50-bb26-669a-1cb5" name=" Chaotic Beasts" entryId="0710-5cc5-2564-3b73::981c-2ea3-8b0d-0e93::d557-7c5b-5126-4e8a" entryGroupId="0710-5cc5-2564-3b73::9a0e-2615-d070-f071::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="1662-e946-ecfb-eced" name=" Beast" entryId="0710-5cc5-2564-3b73::9bab-5420-e628-3f70::2c07-fa6a-0279-0c91" entryGroupId="0710-5cc5-2564-3b73::9a0e-2615-d070-f071::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="6ea4-796c-c6de-4399" name=" Scout" entryId="0710-5cc5-2564-3b73::9653-3ee1-1905-0d98::7507-ed71-37d4-12b6" entryGroupId="0710-5cc5-2564-3b73::9a0e-2615-d070-f071::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="c4b7-87ca-7c9d-a3f3" name=" Thrall" entryId="0710-5cc5-2564-3b73::69e2-0103-c935-b9e4::231e-509a-2ced-f559" entryGroupId="0710-5cc5-2564-3b73::9a0e-2615-d070-f071::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="70.0"/>
+          </costs>
+          <categories>
+            <category id="808c-6948-fac8-705b" name="Thralls" entryId="aadf-5830-72a8-d164" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="0b15-0873-bc9c-526e" name="Plagueridden" entryId="e43c-9077-f1de-b839::c9a6-3aeb-fbf5-0248" number="1" type="model">
+          <profiles>
+            <profile id="e43c-9077-f1de-b839::3bfb-faf1-a78c-f133" name="Plagueridden" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">3</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">3</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">20</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e43c-9077-f1de-b839::51dd-c140-5839-5719" name="Plagueridden Plaguesword" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">4</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">3</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">2/4</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="e50e-afe6-6878-42e9" name=" Maggotkin of Nurgle Daemons" entryId="e43c-9077-f1de-b839::a86b-17a7-4e3f-652b::ceae-d869-5146-6477" entryGroupId="e43c-9077-f1de-b839::646a-71ba-411e-0d70::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="471b-9b4b-9c0d-dc0a" name=" Warrior" entryId="e43c-9077-f1de-b839::eb28-d5d1-0afa-7fca::47ac-9fa2-ed46-d6db" entryGroupId="e43c-9077-f1de-b839::646a-71ba-411e-0d70::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="0712-e1ea-ef35-fa6a" name=" Leader" entryId="e43c-9077-f1de-b839::6c44-c113-ed7e-3ca4::4992-8710-6244-a9b8" entryGroupId="e43c-9077-f1de-b839::646a-71ba-411e-0d70::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="120.0"/>
+          </costs>
+          <categories>
+            <category id="77c3-f400-9ca3-cb60" name="Leaders" entryId="0ca4-e66d-9403-64a5" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="341e-93fb-d446-5b7c" name="Skullseeker" entryId="1cce-abca-e34a-3fa5::c000-5cec-0fac-7c54" number="1" type="model">
+          <profiles>
+            <profile id="1cce-abca-e34a-3fa5::c09a-7959-0fbc-841a" name="Skullseeker" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">4</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">4</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">30</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="1cce-abca-e34a-3fa5::c15e-eedc-de3f-fbdd" name="Skullseeker&apos;s Spinecleaver" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">4</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">2/4</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="556d-0e95-aaef-f040" name=" Blades of  Khorne: Bloodbound" entryId="1cce-abca-e34a-3fa5::b6a5-4169-fa07-a2b8::66e8-954c-b66f-7c68" entryGroupId="1cce-abca-e34a-3fa5::b8e1-f642-5e4f-2ea9::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="8473-f8e9-f736-2a04" name=" Leader" entryId="1cce-abca-e34a-3fa5::4af8-8452-7f8b-aeae::4992-8710-6244-a9b8" entryGroupId="1cce-abca-e34a-3fa5::b8e1-f642-5e4f-2ea9::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="c969-756c-6e74-2952" name=" Destroyer" entryId="1cce-abca-e34a-3fa5::5f77-28df-0a3d-7696::ac09-2c36-a1a2-920b" entryGroupId="1cce-abca-e34a-3fa5::b8e1-f642-5e4f-2ea9::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="195.0"/>
+          </costs>
+          <categories>
+            <category id="c3a0-2a08-37b9-55d1" name="Allies" entryId="45ea-7617-f6a7-7fcb" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="d7c2-efbe-8414-6008" name="Plaguebearer" entryId="a130-e225-75f5-405e::b646-3ad0-5377-fa33" number="1" type="model">
+          <profiles>
+            <profile id="a130-e225-75f5-405e::d625-38fc-7d49-7e7c" name="Plaguebearer" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">3</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">3</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">10</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="a130-e225-75f5-405e::8b89-dde4-a4d9-b673" name="Plaguesword" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">3</characteristic>
+                <characteristic name="Damage" typeId="446b-a910-1596-123b">1/4</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="b1a0-c6e4-7505-6c1c" name=" Maggotkin of Nurgle Daemons" entryId="a130-e225-75f5-405e::40f1-5de7-c747-3380::ceae-d869-5146-6477" entryGroupId="a130-e225-75f5-405e::04f2-88f2-c924-7c56::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="91d7-c226-1d69-d330" name=" Warrior" entryId="a130-e225-75f5-405e::6e7f-29f5-65a4-c4c1::47ac-9fa2-ed46-d6db" entryGroupId="a130-e225-75f5-405e::04f2-88f2-c924-7c56::cfa0-ed89-dc32-1e75" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="50.0"/>
+          </costs>
+          <categories>
+            <category id="9c50-8e16-70d1-b85e" name="Fighters" entryId="f2ce-030d-9971-73f0" primary="true"/>
+          </categories>
+        </selection>
+      </selections>
+      <categories>
+        <category id="ee51-f678-6222-a667" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="b344-f633-3323-8980" name="Fighters" entryId="f2ce-030d-9971-73f0" primary="false"/>
+        <category id="7bf9-68ba-2bca-df6d" name="Allies" entryId="45ea-7617-f6a7-7fcb" primary="false"/>
+        <category id="68cd-d829-ed57-efab" name="Leaders" entryId="0ca4-e66d-9403-64a5" primary="false"/>
+        <category id="f7e4-eb26-9a78-159d" name="Thralls" entryId="aadf-5830-72a8-d164" primary="false"/>
+        <category id="1caa-95aa-333a-b73c" name="Heroes" entryId="5ed1-bb68-7a31-b173" primary="false"/>
+        <category id="332e-7960-42a1-a963" name="Monsters" entryId="e311-66c4-5d05-cd1e" primary="false"/>
+      </categories>
+    </force>
+  </forces>
+</roster>
