@@ -13,6 +13,7 @@
     TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE 
     OF THIS SOFTWARE.
 */
+import * as _ from "lodash";
 
 import {Unit} from "./roster";
 
@@ -29,18 +30,20 @@ export class AoSWeapon {
 
 export class AoSWoundTracker {
     _name: string = "";
-    _woundTrackerLabels: string[] = [];
     _table: Map<string, string> = new Map();
 };
 
 export class AoSSpell {
     _name: string = "";
     _castingValue: number = 0;
+    _range: string = "";
     _description: string = "";
 }
 
 export class AoSPrayer {
     _name: string = "";
+    _answerValue: number = 0;
+    _range: string = "";
     _description: string = "";
 }
 
@@ -48,6 +51,33 @@ export class AoSAllegiance {
     _name: string = "";
     _battleTraits: Map<string, string> = new Map();
     _commandAbilities: Map<string, string> = new Map();
+}
+
+export class AoSGrandStrategy {
+    _name: string = "";
+    _description: string = "";
+}
+
+export class AoSTriumph {
+    _name: string = "";
+    _description: string = "";
+}
+
+export class AoSCoreBattalion {
+    _name: string = "";
+    _abilities: Map<string, string> = new Map();
+}
+
+export class AoSSpecialRules {
+    _name: string = "";
+    _description: string = "";
+}
+
+export class AoSRealmOfBattle {
+    _name: string = "";
+    _spells: AoSSpell[] = [];
+    _commandAbilities: Map<string, string> = new Map();    
+    _rules: AoSSpecialRules[] = [];
 }
 
 export enum AoSUnitRole {
@@ -103,7 +133,27 @@ export class AoSUnit extends Unit {
 
     _points: number = 0;
 
-    _woundTracker: AoSWoundTracker|null = null;
+    _woundTracker: AoSWoundTracker[] = [];
+
+    _selections: Set<string> = new Set();
+
+    equal(unit: AoSUnit | null): boolean {
+        if (unit == null) return false;
+
+        if ((unit._name === this._name) && (unit._role === this._role)) {
+            if (!_.isEqual(this._commandTraits, unit._commandTraits)) {
+                return false;
+            }
+            if (!_.isEqual(this._artefacts, unit._artefacts)) {
+                return false;
+            }
+            if (!_.isEqual(this._weapons, unit._weapons)) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }
 
 export class AoSForce {
@@ -111,9 +161,17 @@ export class AoSForce {
     _name: string = "Unknown";
     _allegiance: AoSAllegiance;
     _units: AoSUnit[] = [];
+    _grandStrategy: AoSGrandStrategy;
+    _triumph: AoSTriumph;
+    _battalions: AoSCoreBattalion[] = [];
+    _realmOfBattle: AoSRealmOfBattle;
+    _rules: Map<string, string> = new Map();
 
     constructor() {
         this._allegiance = new AoSAllegiance();
+        this._grandStrategy = new AoSGrandStrategy();
+        this._triumph = new AoSTriumph();
+        this._realmOfBattle = new AoSRealmOfBattle();
     }
 };
 
@@ -201,6 +259,8 @@ function ParseForces(doc: XMLDocument, roster: RosterAoS): void {
 
             ParseSelections(root, f);
 
+            ParseRules(root, f);
+
             roster._forces.push(f);
         }
     }
@@ -211,14 +271,59 @@ function ParseSelections(root: Element, force: AoSForce): void {
 
     for (let selection of selections) {
         // What kind of selection is this
-        let selectionType = selection.getAttributeNode("type")?.nodeValue;
-        if (!selectionType) continue;
         let selectionName = selection.getAttributeNode("name")?.nodeValue;
-        if (selectionName && (selectionName.includes("Allegiance"))) {
+        if (!selectionName) continue;
+
+        if (selectionName.includes("Allegiance")) {
             let allegiance = ParseAllegiance(selection);
             if (allegiance) {
                 force._allegiance = allegiance;
             }     
+        }
+        else if (selectionName.includes('Grand Strategy')) {
+            let strategy = ParseGrandStrategy(selection);
+            if (strategy) {
+                force._grandStrategy = strategy;
+            }
+        }
+        else if (selectionName.includes('Game Type')) {
+            // TODO: implement Game Type
+        }
+        else if (selectionName.includes('Core Battalion')) {
+            let battalion = new AoSCoreBattalion();
+
+            battalion._name = selectionName
+
+            let profiles = selection.querySelectorAll("profiles>profile");
+            for (let prof of profiles) {
+                for (let prof of profiles) {
+                    let profName = prof.getAttributeNode("name")?.nodeValue;
+                    let profType = prof.getAttributeNode("typeName")?.nodeValue;
+                    if (profName && profType) {
+                        let chars = prof.querySelectorAll("characteristics>characteristic");
+                        for (let char of chars) {
+                            let charName = char.getAttributeNode("name")?.nodeValue;
+                            if (charName && char.textContent) {
+                                battalion._abilities.set(charName, char.textContent);
+                            }        
+                        }
+                    }
+                }        
+            }
+            force._battalions.push(battalion);
+        }
+        else if (selectionName.includes('Realm of Battle')) {
+           // TODO: implement Realm of Battle
+           let realm = ParseRealmOfBattle(selection);
+           if (realm) {
+               force._realmOfBattle = realm;
+           }
+        }
+        else if (selectionName.includes('Triumphs')) {
+            let triumph = ParseTriumph(selection);
+            if (triumph) {
+                force._triumph = triumph;
+            }
         }
         else {
             let unit = ParseUnit(selection);
@@ -236,8 +341,30 @@ function ParseSelections(root: Element, force: AoSForce): void {
     });
 }
 
+function ParseRules(root: Element, force: AoSForce): void {
+    let rules = root.querySelectorAll("force>rules>rule");
+
+    for (let rule of rules) {
+        let ruleName = rule.getAttributeNode("name")?.nodeValue;
+        let descriptions = rule.querySelectorAll("description");
+        if (!ruleName || !descriptions) {
+            continue;
+        }
+
+        for (let desc of descriptions) {
+            if (desc.textContent)
+                force._rules.set(ruleName, desc.textContent);
+        }
+    }   
+}
+
 function ParseUnit(root: Element): AoSUnit {
     let unit: AoSUnit = new AoSUnit();
+
+    let defaultName = root.getAttributeNode("name")?.nodeValue;
+    if (defaultName) {
+        unit._name = defaultName;
+    }
 
     let profiles = root.querySelectorAll("profiles>profile");
     for (let prof of profiles) {
@@ -295,6 +422,7 @@ function ParseUnit(root: Element): AoSUnit {
                     if (charName && char.textContent) {
                         switch (charName) {
                             case 'Casting Value': spell._castingValue = +char.textContent; break;
+                            case 'Range': spell._range = char.textContent; break;
                             case 'Description': spell._description = char.textContent; break;
                         }
                     }
@@ -341,6 +469,8 @@ function ParseUnit(root: Element): AoSUnit {
                     let charName = char.getAttributeNode("name")?.nodeValue;
                     if (charName && char.textContent) {
                         switch (charName) {
+                            case 'Answer Value': prayer._answerValue = +char.textContent; break;
+                            case 'Range': prayer._range = char.textContent; break;
                             case 'Description': prayer._description = char.textContent; break;
                         }
                     }
@@ -348,10 +478,33 @@ function ParseUnit(root: Element): AoSUnit {
                 unit._prayers.push(prayer);
             }
             else if (profType.includes("Wound Track") || profType.includes("Damage Table") || profType.includes("Wounds")) {
-
+                let tracker = new AoSWoundTracker();
+                tracker._name = profName;
+                let chars = prof.querySelectorAll("characteristics>characteristic");
+                for (let char of chars) {
+                    let charName = char.getAttributeNode("name")?.nodeValue;
+                    if (charName && profName) {
+                        if (char.textContent) {
+                            tracker._table.set(charName, char.textContent);
+                        }
+                        else {
+                            tracker._table.set(charName, "-");
+                        }
+                    }
+                }
+                unit._woundTracker.push(tracker);
             }
             else {
                 console.log("Unknown unit profile type: " + profType);
+            }
+        }
+
+
+        let selections = root.querySelectorAll("selections>selection");
+        for (let selection of selections) {
+            let selectionName = selection.getAttributeNode("name")?.nodeValue;
+            if (selectionName) {
+                unit._selections.add(selectionName);
             }
         }
     }
@@ -428,4 +581,123 @@ function ParseAllegiance(root: Element): AoSAllegiance | null {
         }
     }
     return allegiance;
+}
+
+function ParseGrandStrategy(root: Element): AoSGrandStrategy | null {
+    let strategy: AoSGrandStrategy | null = null;
+    let selection = root.querySelector("selections>selection");
+    if (selection) {
+        let name = selection.getAttributeNode("name")?.nodeValue;
+        if (name) {
+            strategy = new AoSGrandStrategy();
+            strategy._name = name;
+        }
+        let profiles = selection.querySelectorAll("profiles>profile");
+        for (let prof of profiles) {
+            let profName = prof.getAttributeNode("name")?.nodeValue;
+            let profType = prof.getAttributeNode("typeName")?.nodeValue;
+            if (profName && profType) {
+                if (profType == "Grand Strategy") {
+                    let desc = prof.querySelector("characteristics>characteristic");
+                    if (desc) {
+                        let description = desc.textContent;
+                        if (description) {
+                            if (strategy) strategy._description = description;
+                        }
+                    }
+                }
+                else {
+                    console.log("Unexpected Grand Strategy profile type: " + profType);
+                }
+            }
+        }
+    }
+    return strategy;
+}
+
+function ParseTriumph(root: Element): AoSTriumph | null {
+    let triumph: AoSTriumph | null = null;
+    let selection = root.querySelector("selections>selection");
+    if (selection) {
+        let name = selection.getAttributeNode("name")?.nodeValue;
+        if (name) {
+            triumph = new AoSTriumph();
+            triumph._name = name;
+        }
+        let profiles = selection.querySelectorAll("profiles>profile");
+        for (let prof of profiles) {
+            let profName = prof.getAttributeNode("name")?.nodeValue;
+            let profType = prof.getAttributeNode("typeName")?.nodeValue;
+            if (profName && profType) {
+                if (profType == "Triumph") {
+                    let desc = prof.querySelector("characteristics>characteristic");
+                    if (desc) {
+                        let description = desc.textContent;
+                        if (description) {
+                            if (triumph) triumph._description = description;
+                        }
+                    }
+                }
+                else {
+                    console.log("Unexpected Triumph profile type: " + profType);
+                }
+            }
+        }
+    }
+    return triumph;
+}
+
+function ParseRealmOfBattle(root: Element): AoSRealmOfBattle | null {
+    let realm: AoSRealmOfBattle | null = null;
+    let selection = root.querySelector("selections>selection");
+    if (selection) {
+        let name = selection.getAttributeNode("name")?.nodeValue;
+        if (name) {
+            realm = new AoSRealmOfBattle();
+            realm._name = name;
+        
+            let profiles = selection.querySelectorAll("profiles>profile");
+            for (let prof of profiles) {
+                let profName = prof.getAttributeNode("name")?.nodeValue;
+                let profType = prof.getAttributeNode("typeName")?.nodeValue;
+                if (profName && profType) {
+                    if (profType == "Spell") {
+                        let spell = new AoSSpell();
+                        spell._name = profName;
+                        let chars = prof.querySelectorAll("characteristics>characteristic");
+                        for (let char of chars) {
+                            let charName = char.getAttributeNode("name")?.nodeValue;
+                            if (charName && char.textContent) {
+                                switch (charName) {
+                                    case 'Casting Value': spell._castingValue = +char.textContent; break;
+                                    case 'Range': spell._range = char.textContent; break;
+                                    case 'Description': spell._description = char.textContent; break;
+                                }
+                            }
+                        }
+                        realm._spells.push(spell);
+                    }
+                    else if (profType == "Command Abilities") {
+                        let char = prof.querySelector("characteristics>characteristic");
+                        if (char && char.textContent) {
+                            realm._commandAbilities.set(profName, char.textContent);
+                        }    
+                    }
+                    else if (profType == "Special Rules") {
+                        let char = prof.querySelector("characteristics>characteristic");
+                        if (char && char.textContent) {
+                            let rule = new AoSSpecialRules();
+                            rule._name = profName;
+                            rule._description = char.textContent;
+                            realm._rules.push(rule);
+                        }    
+                    }
+                    else {
+                        console.log("Unexpected Realm of Battle profile type: " + profType);
+                    }
+                }
+            }    
+        }
+    }
+    return realm;
 }
