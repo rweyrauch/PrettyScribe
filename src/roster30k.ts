@@ -14,9 +14,7 @@
     OF THIS SOFTWARE.
 */
 
-import {Unit} from "./roster";
-
-import {WeaponStrength} from "./roster";
+type WeaponStrength = number | string;
 
 export class Weapon30k {
     _name: string = "";
@@ -147,10 +145,15 @@ export class Fortification30k {
     _type: string = "";
 };
 
-export class Unit30k extends Unit {
+export class Unit30k {
 
+    _name: string = "";
     _role: UnitRole30k = UnitRole30k.NONE;
+    _factions: Set<string> = new Set();
+    _keywords: Set<string> = new Set();
 
+    _abilities: Map<string, string> = new Map();
+    _rules: Map<string, string> = new Map();
 
     _models: Model30k[] = [];
     _walkers: Walker30k[] = [];

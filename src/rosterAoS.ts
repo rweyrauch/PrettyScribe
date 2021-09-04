@@ -15,8 +15,6 @@
 */
 import * as _ from "lodash";
 
-import {Unit} from "./roster";
-
 export class AoSWeapon {
     _name: string = "";
     _type: string = "Melee"; // or "Missile"
@@ -110,10 +108,13 @@ export const AoSUnitRoleToString: string[] = [
     'Realm'
 ];
 
-export class AoSUnit extends Unit {
+export class AoSUnit {
 
+    _name: string = "";
     _role: AoSUnitRole = AoSUnitRole.NONE;
+    _keywords: Set<string> = new Set();
 
+    _abilities: Map<string, string> = new Map();
     _commandAbilities: Map<string, string> = new Map();
     _commandTraits: Map<string, string> = new Map();
     _magic: Map<string, string> = new Map();

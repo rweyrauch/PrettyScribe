@@ -15,12 +15,30 @@
 */
 
 import { WarcryUnit, WarcryForce, WarcryWeapon, WarcryUnitRoleToString, RosterWarcry } from "./rosterWarcry";
-import {Renderer, Justification, RenderText, RenderParagraph, AbstractRenderer} from "./renderer";
-import {AoSUnit} from "./rosterAoS";
+import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer";
 
-export class RendererWarcry extends AbstractRenderer {
+export class RendererWarcry implements Renderer {
+
+    public static readonly _res: number = 144;
+    public static readonly _margin: number = 0;
 
     private _roster: RosterWarcry|null = null;
+
+    private static readonly _bevelSize = 15;
+    private static readonly _blackColor = '#1d272a';
+    private static readonly _grey1 = '#b3bbb5';
+    private static readonly _greyLight = '#dde1df';
+    private static readonly _fillColor = '#f6f6f6';
+
+    private static readonly _titleFont = 'bold 14px sans-serif';
+    private static readonly _headerFont = 'bold 14px sans-serif';
+    private static readonly _font = '14px sans-serif';
+    private static readonly _boldFont = 'bold 14px sans-serif';
+
+    private _currentX: number = 0;
+    private _currentY: number = 0;
+    private _maxWidth: number = 0;
+    private _maxHeight: number = 0;
 
     private static _unitLabels = ["UNIT", "MOVE", "WOUNDS", "TOUGHNESS"];
     private _unitLabelWidthsNormalized = [0.4, 0.15, 0.15, 0.15];
@@ -28,7 +46,6 @@ export class RendererWarcry extends AbstractRenderer {
     private _weaponLabelWidthNormalized = [0.4, 0.15, 0.15, 0.15, 0.15];
 
     constructor(roster: RosterWarcry) {
-        super();
         this._roster = roster;
     }
 
@@ -166,8 +183,82 @@ export class RendererWarcry extends AbstractRenderer {
         return [this._maxWidth, this._currentY];
     }
 
-    protected renderUnitCost(unit: AoSUnit, ctx: CanvasRenderingContext2D, imgX: number, yStart: number): void {
-        // intentionally empty
+    private renderHeader(unit: WarcryUnit, ctx: CanvasRenderingContext2D): void {
+
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = RendererWarcry._blackColor;
+
+        const xStart = this._currentX;
+        const xEnd = this._currentX + this._maxWidth;
+        const yStart = this._currentY;
+        const titleHeight = 36;
+        const yEnd = yStart + titleHeight;
+
+        ctx.beginPath();
+        ctx.moveTo(xStart, yStart + RendererWarcry._bevelSize);
+        ctx.lineTo(xStart, yEnd);
+        ctx.lineTo(xEnd, yEnd);
+        ctx.lineTo(xEnd, yStart + RendererWarcry._bevelSize);
+        ctx.lineTo(xEnd - RendererWarcry._bevelSize, yStart);
+        ctx.lineTo(xStart + RendererWarcry._bevelSize, yStart);
+        ctx.closePath();
+        ctx.fill();
+
+        let imgX = xStart + 6;
+
+        // unit name
+        let iters: number = 0;
+        let title_size = 28;
+        const title_x = imgX + 6;
+        ctx.font = title_size + 'px ' + 'bold serif';
+        const unitName = unit._name.toLocaleUpperCase();
+        let check = ctx.measureText(unitName);
+        const maxWidth = this._maxWidth - title_x;
+        while (iters < 6 && check.width > maxWidth) {
+            iters += 1;
+            title_size -= 2;
+            ctx.font = title_size + 'px ' + 'bold serif';
+            check = ctx.measureText(unitName);
+        }
+        ctx.fillStyle = 'white';
+        ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
+        RenderText(ctx, unitName, title_x, yStart, maxWidth, titleHeight, Justification.Center);
+
+        this._currentY += titleHeight;
+
+    }
+
+    private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[] | null) {
+        let x = this._currentX;
+        const height = 22;
+        const width = this._maxWidth;
+        ctx.fillStyle = RendererWarcry._grey1;
+        ctx.fillRect(this._currentX, this._currentY, width, height);
+
+        ctx.fillStyle = RendererWarcry._blackColor;
+        var w = 50;
+        if (labels) {
+            ctx.font = RendererWarcry._headerFont;
+            for (let i = 0; i < labels.length; i++) {
+                if (columnWidths) w = columnWidths[i];
+                RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
+                x += w;
+            }
+        }
+
+        this._currentY += height;
+    }
+
+    private renderKeywords(ctx: CanvasRenderingContext2D, unit: WarcryUnit): void {
+        ctx.font = RendererWarcry._titleFont;
+        RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+
+        ctx.font = RendererWarcry._font;
+        const kwlist = [...unit._keywords];
+        const kw = kwlist.join(", ").toLocaleUpperCase();
+        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500, 0);
+
+        this._currentY += 4;
     }
 
     private renderUnitStats(ctx: CanvasRenderingContext2D, unit: WarcryUnit, columnWidths: number[] | null, bg: number): void {
@@ -178,8 +269,8 @@ export class RendererWarcry extends AbstractRenderer {
         let x = this._currentX;
         let ci = 0;
 
-        if (bg % 2) ctx.fillStyle = RendererWarcry._grey;
-        else ctx.fillStyle = RendererWarcry._fillColor;
+        if (bg % 2) ctx.fillStyle = RendererWarcry._greyLight;
+        else ctx.fillStyle = '#ffffff';
         ctx.fillRect(x, this._currentY, this._maxWidth, height);
 
         ctx.fillStyle = RendererWarcry._blackColor;
@@ -247,8 +338,8 @@ export class RendererWarcry extends AbstractRenderer {
             ctx.save();
             ctx.globalCompositeOperation = "destination-over";
             const actualHeight = this._currentY - yStart;
-            if (i % 2) ctx.fillStyle = RendererWarcry._grey;
-            else ctx.fillStyle = RendererWarcry._fillColor;
+            if (i % 2) ctx.fillStyle = RendererWarcry._greyLight;
+            else ctx.fillStyle =  '#ffffff';
             ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
             i++;
 
@@ -256,4 +347,48 @@ export class RendererWarcry extends AbstractRenderer {
         }
         ctx.restore();
     }
+
+    private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
+        ctx.strokeStyle = RendererWarcry._blackColor;
+
+        ctx.beginPath();
+        ctx.moveTo(x, y + RendererWarcry._bevelSize);
+        ctx.lineTo(x, y + h - RendererWarcry._bevelSize);
+        ctx.lineTo(x + RendererWarcry._bevelSize, y + h);
+        ctx.lineTo(x + w - RendererWarcry._bevelSize, y + h);
+        ctx.lineTo(x + w, y + h - RendererWarcry._bevelSize);
+        ctx.lineTo(x + w, y + RendererWarcry._bevelSize);
+        ctx.lineTo(x + w - RendererWarcry._bevelSize, y);
+        ctx.lineTo(x + RendererWarcry._bevelSize, y);
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.save();
+        ctx.fillStyle = RendererWarcry._fillColor;
+        ctx.globalCompositeOperation = "destination-over";
+        ctx.beginPath();
+        ctx.moveTo(x, y + RendererWarcry._bevelSize);
+        ctx.lineTo(x, y + h - RendererWarcry._bevelSize);
+        ctx.lineTo(x + RendererWarcry._bevelSize, y + h);
+        ctx.lineTo(x + w - RendererWarcry._bevelSize, y + h);
+        ctx.lineTo(x + w, y + h - RendererWarcry._bevelSize);
+        ctx.lineTo(x + w, y + RendererWarcry._bevelSize);
+        ctx.lineTo(x + w - RendererWarcry._bevelSize, y);
+        ctx.lineTo(x + RendererWarcry._bevelSize, y);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+    private renderLine(ctx: CanvasRenderingContext2D): void {
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = RendererWarcry._blackColor;
+        ctx.beginPath();
+        ctx.moveTo(this._currentX, this._currentY);
+        ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
+        ctx.stroke();
+        this._currentY += 1;
+    }
+
 }

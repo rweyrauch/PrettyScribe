@@ -14,7 +14,7 @@
     OF THIS SOFTWARE.
 */
 
-import { Unit40k, UnitRole40k, UnitRoleToString, Model40k, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k";
+import { Unit, UnitRole, UnitRoleToString, Model, PsychicPower, Explosion, Weapon, Roster40k } from "./roster40k";
 import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer";
 
 export class RendererKT implements Renderer {
