@@ -4,4 +4,4 @@ node_modules
 /dist/renderer*
 /dist/roster*
 /dist/app*
-/dist/*
+
