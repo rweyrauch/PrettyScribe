@@ -120,7 +120,10 @@ export class RendererWarcry implements Renderer {
 
             if (forces)
                 forces.appendChild(allegianceAbilities);
+            else
+                return;
 
+            let unitsRegion = document.createElement('div');
             for (let unit of force._units) {
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = RendererWarcry._res * 7.5;
@@ -134,9 +137,14 @@ export class RendererWarcry implements Renderer {
                 finalCanvas.height = dims[1] + border * 2;
                 let finalCtx = finalCanvas.getContext('2d');
                 finalCtx?.drawImage(canvas, border, border);
-                if (forces) 
-                    forces.appendChild(finalCanvas);
+                forces.appendChild(finalCanvas);
+                /*
+                const unitDiv = document.createElement('div');
+                unitDiv.innerHTML = this.renderUnit_(unit);
+                unitsRegion.append(unitDiv);   
+                */
             }                
+            forces.appendChild(unitsRegion);
         }
     }
 
@@ -182,6 +190,15 @@ export class RendererWarcry implements Renderer {
 
         return [this._maxWidth, this._currentY];
     }
+
+    protected renderUnit_(unit: WarcryUnit): string {
+        return `
+            <div class="warcry_unit">
+                <h2>${unit._name}</h2>
+
+        `;
+    }
+
 
     private renderHeader(unit: WarcryUnit, ctx: CanvasRenderingContext2D): void {
 

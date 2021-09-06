@@ -16,6 +16,7 @@
 
 import { AoSUnit, AoSUnitRole, AoSUnitRoleToString, AoSWeapon, RosterAoS, AoSSpell, AoSPrayer } from "./rosterAoS";
 import { Renderer, Justification, RenderText, RenderParagraph, RenderTextFull, VertAlign} from "./renderer";
+import { UnitRoleToString } from "./roster40k";
 
 export class RendererAoS implements Renderer {
 
@@ -248,9 +249,12 @@ export class RendererAoS implements Renderer {
 
             if (forces)
                 forces.appendChild(allegianceAbilities);
+            else
+                continue;
 
             let prevUnit: AoSUnit | null = null;
             for (let unit of force._units) {
+                /*
                 let canvas = document.createElement('canvas') as HTMLCanvasElement;
                 canvas.width = RendererAoS._res * 7.5;
                 canvas.height = RendererAoS._res * 12;
@@ -272,6 +276,12 @@ export class RendererAoS implements Renderer {
                 finalCtx?.drawImage(canvas, border, border);
                 if (forces) 
                   forces.appendChild(finalCanvas);
+                */
+               forces.appendChild(this.renderUnitHtml(unit));  
+               
+               let divider = document.createElement('hr');
+               divider.className = "aos_dark";
+               forces.appendChild(divider);             
             }    
         }
     }
@@ -295,6 +305,227 @@ export class RendererAoS implements Renderer {
         });
 
         return table;
+    }
+
+    protected renderUnitHtml(unit: AoSUnit): HTMLDivElement {
+
+        let unitRoot = document.createElement('div');
+        unitRoot.className = "container-fluid";
+        let unitRow = document.createElement('div');
+        unitRow.className = "row";
+        unitRoot.append(unitRow);
+
+        let unitStats = document.createElement('div');
+        unitStats.className = "col-3";
+        unitStats.innerHTML = `<div class="aos_unit_stats">
+            <div class="aos_unit_move"><p class="h2">${unit._move}</p></div>
+            <div class="aos_unit_wounds"><p class="h2">${unit._wounds}</p></div>
+            <div class="aos_unit_bravery"><p class="h2">${unit._bravery}</p></div>
+            <div class="aos_unit_save"><p class="h2">${unit._save}</p></div>      
+            </div>`;
+
+        unitRow.append(unitStats);
+
+        let unitInfo = document.createElement('div');
+        unitInfo.className = "col";
+        unitInfo.innerHTML = `<div class="p-2 mb-2 aos_medium text-center text-uppercase text-black">
+            <span class="h3">${unit._name}</span></div>`;
+
+        let missileWeaponTable = document.createElement('table');
+        missileWeaponTable.className = "table table-sm aos_font text-center";
+        missileWeaponTable.tHead = document.createElement('thead');
+        missileWeaponTable.tHead.className = "aos_light";
+        missileWeaponTable.innerHTML = 
+            `<tr>
+                <th>Missile Weapons</th>
+                <th>Range</th>
+                <th>Attacks</th>
+                <th>To Hit</th>
+                <th>To Wound</th>
+                <th>Rend</th>
+                <th>Damage</th>
+            </tr>`;
+        let missileWeaponBody = document.createElement('tbody');
+        missileWeaponTable.appendChild(missileWeaponBody);
+
+        let meleeWeaponTable = document.createElement('table');
+        meleeWeaponTable.className = "table table-sm aos_font text-center";
+        meleeWeaponTable.tHead = document.createElement('thead');
+        meleeWeaponTable.tHead.className = "aos_light";
+        meleeWeaponTable.innerHTML = 
+            `<tr>
+                <th>Melee Weapons</th>
+                <th>Range</th>
+                <th>Attacks</th>
+                <th>To Hit</th>
+                <th>To Wound</th>
+                <th>Rend</th>
+                <th>Damage</th>
+            </tr>`;
+        let meleeWeaponBody = document.createElement('tbody');
+        meleeWeaponTable.appendChild(meleeWeaponBody);
+
+        let haveMissile = false;
+        let haveMelee = false;
+        for (let weapon of unit._weapons) {
+            if (weapon._type === "Missile") {
+                let row = document.createElement('tr');
+                row.innerHTML = `<td>${weapon._name}</td><td>${weapon._range}</td><td>${weapon._attacks}</td>
+                                 <td>${weapon._toHit}</td><td>${weapon._toWound}</td><td>${weapon._rend}</td><td>${weapon._damage}</td>`;
+                missileWeaponBody.appendChild(row);  
+                haveMissile = true;                               
+            }
+            else if (weapon._type === "Melee") {
+                let row = document.createElement('tr');
+                row.innerHTML = `<td>${weapon._name}</td><td>${weapon._range}</td><td>${weapon._attacks}</td>
+                                 <td>${weapon._toHit}</td><td>${weapon._toWound}</td><td>${weapon._rend}</td><td>${weapon._damage}</td>`;
+                meleeWeaponBody.appendChild(row);
+                haveMelee = true;                                 
+            }
+        }
+        if (haveMissile) {
+            unitInfo.appendChild(missileWeaponTable);
+        }
+        if (haveMelee) {
+            unitInfo.appendChild(meleeWeaponTable);
+        }
+        unitRow.append(unitInfo);
+
+        if (unit._abilities.size > 0) {
+            let abilities = document.createElement('h4');
+            abilities.innerHTML = "ABILITIES";
+            unitInfo.appendChild(abilities);
+            for (let ability of unit._abilities) {
+                let ab = document.createElement('p');
+                ab.className = "aos_font";
+                ab.innerHTML = `<strong>${ability[0]}:  </strong>${ability[1]}`;
+                abilities.appendChild(ab);
+            }
+        }
+
+        if (unit._commandAbilities.size > 0) {
+            let abilities = document.createElement('h4');
+            abilities.innerHTML = "COMMAND ABILITIES";
+            unitInfo.appendChild(abilities);
+            for (let ability of unit._commandAbilities) {
+                let ab = document.createElement('p');
+                ab.className = "aos_font";
+                ab.innerHTML = `<strong>${ability[0]}:  </strong>${ability[1]}`;
+                abilities.appendChild(ab);
+            }
+        }
+
+        if (unit._commandTraits.size > 0) {
+            let traits = document.createElement('h4');
+            traits.innerHTML = "COMMAND TRAITS";
+            unitInfo.appendChild(traits);
+            for (let trait of unit._commandTraits) {
+                let t = document.createElement('p');
+                t.className = "aos_font";
+                t.innerHTML = `<strong>${trait[0]}:  </strong>${trait[1]}`;
+                traits.appendChild(t);
+            }
+        }
+
+        if (unit._magic.size > 0) {
+            let magic = document.createElement('h4');
+            magic.innerHTML = "MAGIC";
+            unitInfo.appendChild(magic);
+            for (let mg of unit._magic) {
+                let a = document.createElement('p');
+                a.className = "aos_font";
+                a.innerHTML = `<strong>${mg[0]}:  </strong>${mg[1]}`;
+                magic.appendChild(a);
+            }
+        }
+
+        if (unit._spells.length > 0) {
+            let spells = document.createElement('h4');
+            spells.innerHTML = "SPELLS";
+            unitInfo.appendChild(spells);
+
+            const headerInfo = [{ name: "NAME", width: '25%'}, {name:"CASTING VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
+            const table = this.createTable(headerInfo);
+            let body = document.createElement('tbody');
+            table.appendChild(body);        
+            for (let spell of unit._spells) {
+                let tr = document.createElement('tr');
+                let spellName = document.createElement('td');
+                spellName.innerHTML = spell._name;
+                let value = document.createElement('td');
+                value.innerHTML = spell._castingValue.toString();
+                let range = document.createElement('td');
+                range.innerHTML = spell._range.toString();
+                let desc = document.createElement('td');
+                desc.innerHTML = spell._description;
+                tr.appendChild(spellName);
+                tr.appendChild(value);
+                tr.appendChild(range);
+                tr.appendChild(desc);
+                body.appendChild(tr);                       
+            }
+            unitInfo.appendChild(table);
+        }
+        if (unit._prayers.length > 0) {
+            let prayers = document.createElement('h4');
+            prayers.innerHTML = "PRAYERS";
+            unitInfo.appendChild(prayers);
+            const headerInfo = [{ name: "NAME", width: '25%'}, {name:"ANSWER VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
+            const table = this.createTable(headerInfo);
+            let body = document.createElement('tbody');
+            table.appendChild(body);        
+            for (let prayer of unit._prayers) {
+                let tr = document.createElement('tr');
+                let name = document.createElement('td');
+                name.innerHTML = prayer._name;
+                let value = document.createElement('td');
+                value.innerHTML = prayer._answerValue.toString();
+                let range = document.createElement('td');
+                range.innerHTML = prayer._range.toString();
+                let desc = document.createElement('td');
+                desc.innerHTML = prayer._description;
+                tr.appendChild(name);
+                tr.appendChild(value);
+                tr.appendChild(range);
+                tr.appendChild(desc);
+                body.appendChild(tr);                       
+            }
+            unitInfo.appendChild(table);
+        }
+
+        if (unit._artefacts.size > 0) {
+            let artefacts = document.createElement('h4');
+            artefacts.innerHTML = "ARTEFACTS";
+            unitInfo.appendChild(artefacts);
+            for (let artefact of unit._artefacts) {
+                let a = document.createElement('p');
+                a.className = "aos_font";
+                a.innerHTML = `<strong>${artefact[0]}:  </strong>${artefact[1]}`;
+                artefacts.appendChild(a);
+            }
+        }
+
+        let keywords = document.createElement('div');
+        keywords.className = "container";
+        let row = document.createElement('div');
+        row.className = "row";
+        keywords.appendChild(row);
+        let label = document.createElement('div');
+        label.className = "col-2 border aos_dark text-center";
+        label.innerText = "KEYWORDS";
+        row.appendChild(label);
+        let all_keywords = "";
+        for (let kw of unit._keywords) {
+            all_keywords += kw;
+            all_keywords += " "; 
+        }
+        let values = document.createElement('div');
+        values.className = "col border text-left text-uppercase";
+        values.innerText = all_keywords;
+        row.appendChild(values);
+        unitInfo.appendChild(keywords);
+
+        return unitRoot;
     }
 
     protected renderUnit(unit: AoSUnit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {

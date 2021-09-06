@@ -1,6 +1,73 @@
 body {
     /* font-family: 'Fjalla One', sans-serif; */
     font-family: 'Source Sans Pro', sans-serif;
-    font-family: 'PT Serif', serif;
+    font-family: 'Crimson Pro', serif;
     break-after: avoid;
 }
+
+.aos_font {
+    font-size: 14px;
+    font-family: 'Crimson Pro', serif;
+}
+
+.aos_unit_move {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.aos_unit_wounds {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
+
+.aos_unit_bravery {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.aos_unit_save {
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+}
+
+.aos_unit_stats {
+    background-image: url(/assets/aos_stats_min.svg); 
+    background-repeat: no-repeat; 
+    background-size: contain;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin: 0, auto;
+}
+
+.aos_unit_stats::after {
+    padding-top: 100%;
+    display: block;
+    content: '';
+}
+
+.aos_light {
+    background-color: #e8e3ca;
+}
+
+.aos_medium {
+    background-color: #d1c89a;
+}
+
+.aos_dark {
+    background-color: #8a7c32;
+}
+
+.table {
+    border-top: 1px solid #8a7c32;
+    border-bottom: 1px solid #8a7c32;;
+}
+

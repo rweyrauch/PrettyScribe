@@ -65,7 +65,7 @@
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
     <circle
-       style="fill:#f9f9f9;fill-opacity:1;stroke:#959595;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#f9f9f9;fill-opacity:1;stroke:#d1c89a;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path4504"
        cx="128.5"
        cy="129"
@@ -73,61 +73,61 @@
     <path
        id="path5372"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:2.30939937"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:2.30939937"
        d="m 124.73205,11 h 11.547 l -5.7735,-10 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-6"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:2.30939937"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:2.30939937"
        d="m 124.7,246 h 11.547 l -5.7735,10 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 246.58442,125.726 v 7 l 10,-3.5 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-0"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 9.9999996,125.623 v 7 L 0,129.123 Z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-1"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:7.44483566"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:7.44483566"
        d="m 131.59431,124.23648 -7.07107,7.07107 88.38835,81.31727 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-1-5"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:7.44483566"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:7.44483566"
        d="m 124.47117,131.69693 7.07107,-7.07107 -88.38835,-81.317272 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-1-0"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:7.44483566"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:7.44483566"
        d="m 130.1334,132.93767 -7.07107,-7.07107 -81.317276,88.38834 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-1-6"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:7.44483566"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:7.44483566"
        d="m 124.30307,124.90763 7.07107,7.07107 81.31726,-88.38835 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-4"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 234.10495,184.5352 -3.5,6.06218 10.41026,1.96891 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-6"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 192.13329,228.78727 -6.06218,3.5 8.03109,6.91026 z"
        inkscape:connector-curvature="0"
        inkscape:transform-center-x="-40.574586"
@@ -135,13 +135,13 @@
     <path
        id="path5372-8-4-2"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 22.555963,76.584602 3.5,-6.06218 -10.41026,-1.96891 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-6-5"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 67.268281,28.746569 6.06218,-3.5 -8.03109,-6.91026 z"
        inkscape:connector-curvature="0"
        inkscape:transform-center-x="40.574586"
@@ -149,7 +149,7 @@
     <path
        id="path5372-8-6-2"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 229.2258,67.141206 3.5,6.06218 6.91026,-8.03109 z"
        inkscape:connector-curvature="0"
        inkscape:transform-center-x="180.04972"
@@ -157,19 +157,19 @@
     <path
        id="path5372-8-0-4"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 67.374988,228.78727 6.062178,3.5 -8.031089,6.91026 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-0-7"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 24.839795,184.81697 3.5,6.06218 -10.410254,1.96891 z"
        inkscape:connector-curvature="0" />
     <path
        id="path5372-8-0-2"
        inkscape:label="Triangle"
-       style="fill:#959595;fill-opacity:1;stroke:none;stroke-width:1.79809844"
+       style="fill:#d1c89a;fill-opacity:1;stroke:none;stroke-width:1.79809844"
        d="m 190.65611,29.280403 -6.06218,-3.5 8.03109,-6.910254 z"
        inkscape:connector-curvature="0" />
     <path
