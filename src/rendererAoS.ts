@@ -254,31 +254,8 @@ export class RendererAoS implements Renderer {
 
             let prevUnit: AoSUnit | null = null;
             for (let unit of force._units) {
-                /*
-                let canvas = document.createElement('canvas') as HTMLCanvasElement;
-                canvas.width = RendererAoS._res * 7.5;
-                canvas.height = RendererAoS._res * 12;
-                
-                this._descriptionWidth = canvas.width - this._descriptionStartX - 10;
-
-                if (unit.equal(prevUnit)) {
-                    continue;
-                }
-
-                const dims = this.renderUnit(unit, canvas, 0, 0);
-                prevUnit = unit;
-  
-                const border = 25;
-                let finalCanvas = document.createElement('canvas') as HTMLCanvasElement;
-                finalCanvas.width = dims[0] + border * 2;
-                finalCanvas.height = dims[1] + border * 2;
-                let finalCtx = finalCanvas.getContext('2d');
-                finalCtx?.drawImage(canvas, border, border);
-                if (forces) 
-                  forces.appendChild(finalCanvas);
-                */
                forces.appendChild(this.renderUnitHtml(unit));  
-               
+
                let divider = document.createElement('hr');
                divider.className = "aos_dark";
                forces.appendChild(divider);             
@@ -288,9 +265,7 @@ export class RendererAoS implements Renderer {
 
     protected createTable(heading: {name: string, width: string}[]): HTMLTableElement {
         const table = document.createElement('table');
-        table.classList.add('table');
-        table.classList.add('table-sm');
-        table.classList.add('table-striped');
+        table.className = "table aos_table table-sm";
         const thead = document.createElement('thead');
         table.appendChild(thead);
         thead.classList.add('thead-light');
@@ -317,13 +292,17 @@ export class RendererAoS implements Renderer {
 
         let unitStats = document.createElement('div');
         unitStats.className = "col-3";
-        unitStats.innerHTML = `<div class="aos_unit_stats">
-            <div class="aos_unit_move"><p class="h2">${unit._move}</p></div>
-            <div class="aos_unit_wounds"><p class="h2">${unit._wounds}</p></div>
-            <div class="aos_unit_bravery"><p class="h2">${unit._bravery}</p></div>
-            <div class="aos_unit_save"><p class="h2">${unit._save}</p></div>      
-            </div>`;
-
+        if (unit.isNormalUnit()) {
+            unitStats.innerHTML = `<div class="aos_unit_stats">
+                <div class="aos_unit_move"><p class="h2">${unit._move}</p></div>
+                <div class="aos_unit_wounds"><p class="h2">${unit._wounds}</p></div>
+                <div class="aos_unit_bravery"><p class="h2">${unit._bravery}</p></div>
+                <div class="aos_unit_save"><p class="h2">${unit._save}</p></div>      
+                </div>`;
+        }
+        else {
+            unitStats.innerHTML = '<div></div>';
+        }
         unitRow.append(unitStats);
 
         let unitInfo = document.createElement('div');
@@ -505,159 +484,8 @@ export class RendererAoS implements Renderer {
             }
         }
 
-        let keywords = document.createElement('div');
-        keywords.className = "container";
-        let row = document.createElement('div');
-        row.className = "row";
-        keywords.appendChild(row);
-        let label = document.createElement('div');
-        label.className = "col-2 border aos_dark text-center";
-        label.innerText = "KEYWORDS";
-        row.appendChild(label);
-        let all_keywords = "";
-        for (let kw of unit._keywords) {
-            all_keywords += kw;
-            all_keywords += " "; 
-        }
-        let values = document.createElement('div');
-        values.className = "col border text-left text-uppercase";
-        values.innerText = all_keywords;
-        row.appendChild(values);
-        unitInfo.appendChild(keywords);
-
-        return unitRoot;
-    }
-
-    protected renderUnit(unit: AoSUnit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
-
-        let ctx = canvas.getContext('2d');
-        if (!ctx) {
-            return [0, 0];
-        }
-
-        this._currentX = xOffset + RendererAoS._margin;
-        this._currentY = yOffset + RendererAoS._margin;
-        this._maxWidth = canvas.width - this._currentX;
-        this._maxHeight = Math.max(0, canvas.height - this._currentY);
-
-        this.renderHeader(unit, ctx);
-
-        if (unit._role == AoSUnitRole.MALIGN_SORCERY) {
-
-        }
-        else if (unit._role == AoSUnitRole.SCENERY) {
-
-        }
-        else if (unit._role == AoSUnitRole.REALM) {
-
-        }
-        else {
-            const unitLabelWidths: number[] = [];
-            this._unitLabelWidthsNormalized.forEach(element => {
-                unitLabelWidths.push(element * this._maxWidth);
-            });
-            this.renderTableHeader(ctx, RendererAoS._unitLabels, unitLabelWidths);
-            this.renderUnitStats(ctx, unit, unitLabelWidths, 0);
-        }
-
-        const uniqueWeapons: AoSWeapon[] = [];
-        const scratchMap: Map<string, AoSWeapon> = new Map();
-        for (const w of unit._weapons) {
-            if (!scratchMap.has(w._name)) {
-                scratchMap.set(w._name, w);
-                uniqueWeapons.push(w);
-            }
-        }
-
-        let missileWeapons: AoSWeapon[] = [];
-        let meleeWeapons: AoSWeapon[] = [];
-        for (let weapon of uniqueWeapons) {
-            if (weapon._type == "Melee") {
-                meleeWeapons.push(weapon);
-            }
-            else {
-                missileWeapons.push(weapon);
-            }
-        }
-        if (missileWeapons.length) {
-            const weaponLabelWidths: number[] = [];
-            this._weaponLabelWidthNormalized.forEach(element => {
-                weaponLabelWidths.push(element * this._maxWidth);
-            });
-            this.renderLine(ctx);
-            this.renderTableHeader(ctx, RendererAoS._weaponLabels, weaponLabelWidths);
-            this.renderWeapons(ctx, missileWeapons, weaponLabelWidths);
-        }
-
-        if (meleeWeapons.length) {
-            const meleeLabelWidths: number[] = [];
-            this._weaponLabelWidthNormalized.forEach(element => {
-                meleeLabelWidths.push(element * this._maxWidth);
-            });
-            this.renderLine(ctx);
-            this.renderTableHeader(ctx, RendererAoS._meleeLabels, meleeLabelWidths);
-            this.renderWeapons(ctx, meleeWeapons, meleeLabelWidths);
-        }
-
-        if (unit._spells.length > 0) {
-            const spellLabelWidths: number[] = [];
-            this._spellLabelWidthNormalized.forEach(element => {
-                spellLabelWidths.push(element * this._maxWidth);
-            });
-            this.renderLine(ctx);
-            this.renderTableHeader(ctx, RendererAoS._spellLabels, spellLabelWidths);
-            this.renderSpells(ctx, unit._spells, spellLabelWidths);
-        }
-
-        if (unit._prayers.length > 0) {
-            const prayerLabelWidths: number[] = [];
-            this._prayerLabelWidthNormalized.forEach(element => {
-                prayerLabelWidths.push(element * this._maxWidth);
-            });
-            this.renderLine(ctx);
-            this.renderTableHeader(ctx, RendererAoS._prayerLabels, prayerLabelWidths);
-            this.renderPrayers(ctx, unit._prayers, prayerLabelWidths);
-        }
-
-        if (unit._abilities.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderMap(ctx, "ABILITIES", unit._abilities);
-        }
-
-        if (unit._commandAbilities.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderMap(ctx, "COMMAND ABILITIES", unit._commandAbilities);
-        }
-
-        if (unit._commandTraits.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderMap(ctx, "COMMAND TRAITS", unit._commandTraits);
-        }
-
-        if (unit._artefacts.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderMap(ctx, "ARTEFACTS", unit._artefacts);
-        }
-
-        if (unit._magic.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderMap(ctx, "MAGIC", unit._magic);
-        }
-
         if (unit._woundTracker.length > 0) {
-            this._currentY += 2;
-            this.renderLine(ctx);
-            const trackerLabelWidths: number[] = [];
-            this._trackerLabelWidth.forEach(element => {
-                trackerLabelWidths.push(element * this._maxWidth);
-            });
-
-            let labels = RendererAoS._trackerLabels;
+            let labels = [{ name: "Wounds Suffered", width: '25%'}, {name:"Attribute 1", width:'25%'}, {name:"Attribute 2", width:'25%'}, {name:"Attribute 3", width:'25%'}];
 
             // Determine wound table headers.
             if (unit._woundTracker.length == 4) {
@@ -665,431 +493,59 @@ export class RendererAoS implements Renderer {
                 let i = 1;
                 // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
                 for (let key of unit._woundTracker[0]._table.values()) {
-                    labels[i++] = key;
+                    labels[i++].name = key;
                 }
             }
-            else if (unit._woundTracker.length == 3) {
+            else {
                 // Use keys as labels.
                 let i = 1;
                 for (let key of unit._woundTracker[0]._table.keys()) {
-                    labels[i++] = key;
+                    labels[i++].name = key;
                 }
             }
-            this.renderTableHeader(ctx, labels, trackerLabelWidths);
-            this.renderWoundTable(ctx, unit, trackerLabelWidths);
+            const table = this.createTable(labels);
+            table.className = "table table-sm aos_font text-center";
+            unitInfo.appendChild(table);
+
+            let body = document.createElement('tbody');
+            table.appendChild(body);        
+
+            for (let wt of unit._woundTracker) {
+                let tr = document.createElement('tr');
+                let name = document.createElement('td');
+                name.innerHTML = wt._name;
+                tr.appendChild(name);
+                for (let value of wt._table.values()) {
+                    let v = document.createElement('td');
+                    v.innerHTML = value;
+                    tr.appendChild(v);
+                }
+                body.appendChild(tr);                                      
+            }
         }
 
         if (unit._keywords.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderKeywords(ctx, unit);
-        }
-
-        const totalHeight = this._currentY - (yOffset + RendererAoS._margin);
-        const totalWidth = this._maxWidth;
-
-        this.renderBorder(ctx, this._currentX, yOffset + RendererAoS._margin, totalWidth, totalHeight);
-
-        return [this._maxWidth, this._currentY];
-    }
-
-    private renderHeader(unit: AoSUnit, ctx: CanvasRenderingContext2D): void {
-
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = RendererAoS._blackColor;
-
-        const xStart = this._currentX;
-        const xEnd = this._currentX + this._maxWidth;
-        const yStart = this._currentY;
-        const titleHeight = 36;
-        const yEnd = yStart + titleHeight;
-
-        ctx.beginPath();
-        ctx.moveTo(xStart, yStart + RendererAoS._bevelSize);
-        ctx.lineTo(xStart, yEnd);
-        ctx.lineTo(xEnd, yEnd);
-        ctx.lineTo(xEnd, yStart + RendererAoS._bevelSize);
-        ctx.lineTo(xEnd - RendererAoS._bevelSize, yStart);
-        ctx.lineTo(xStart + RendererAoS._bevelSize, yStart);
-        ctx.closePath();
-        ctx.fill();
-
-        let imgX = xStart + 6;
- 
-        //if (this._statsWheel)
-        //    ctx.drawImage(this._statsWheel, imgX, yStart + 2, 32, 32);
-
-        // unit name
-        let iters: number = 0;
-        let title_size = 28;
-        const title_x = imgX + 6;
-        ctx.font = title_size + 'px ' + 'bold serif';
-        const unitName = unit._name.toLocaleUpperCase();
-        let check = ctx.measureText(unitName);
-        const maxWidth = this._maxWidth - title_x;
-        while (iters < 6 && check.width > maxWidth) {
-            iters += 1;
-            title_size -= 2;
-            ctx.font = title_size + 'px ' + 'bold serif';
-            check = ctx.measureText(unitName);
-        }
-        ctx.fillStyle = 'white';
-        ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
-        RenderText(ctx, unitName, title_x, yStart, maxWidth, titleHeight, Justification.Center);
-
-        this._currentY += titleHeight;
-
-    }
-
-    private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[] | null) {
-        let x = this._currentX;
-        const height = 22;
-        const width = this._maxWidth;
-        ctx.fillStyle = RendererAoS._grey1;
-        ctx.fillRect(this._currentX, this._currentY, width, height);
-
-        ctx.fillStyle = RendererAoS._blackColor;
-        ctx.font = RendererAoS._headerFont;
-        var w = 50;
-        if (labels) {
-             for (let i = 0; i < labels.length; i++) {
-                if (columnWidths) w = columnWidths[i];
-                RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
-                x += w;
+            let keywords = document.createElement('div');
+            keywords.className = "container";
+            let row = document.createElement('div');
+            row.className = "row";
+            keywords.appendChild(row);
+            let label = document.createElement('div');
+            label.className = "col-2 border aos_dark text-center";
+            label.innerHTML = "<strong>KEYWORDS</strong>";
+            row.appendChild(label);
+            let all_keywords = "";
+            for (let kw of unit._keywords) {
+                all_keywords += kw;
+                all_keywords += " "; 
             }
+            let values = document.createElement('div');
+            values.className = "col border text-left text-uppercase";
+            values.innerText = all_keywords;
+            row.appendChild(values);
+            unitInfo.appendChild(keywords);
         }
 
-        this._currentY += height;
+        return unitRoot;
     }
-
-    private renderKeywords(ctx: CanvasRenderingContext2D, unit: AoSUnit): void {
-        ctx.font = RendererAoS._titleFont;
-        RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
-
-        ctx.font = RendererAoS._font;
-        ctx.fillStyle = RendererAoS._blackColor;
-        const kwlist = [...unit._keywords]; 
-        const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 0);
-
-        this._currentY += 4;
-    }
-
-    private static _unitLabels = ["UNIT", "MOVE", "WOUNDS", "BRAVERY", "SAVE"];
-    private _unitLabelWidthsNormalized = [0.3, 0.1, 0.1, 0.1, 0.1];
-
-    private static _weaponLabels = ["MISSILE WEAPONS", "RANGE", "ATTACKS", "TO HIT", "TO WOUND", "REND", "DAMAGE"];
-    private static _meleeLabels = ["MELEE WEAPONS", "RANGE", "ATTACKS", "TO HIT", "TO WOUND", "REND", "DAMAGE"];
-    private _weaponLabelWidthNormalized = [0.3, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
-
-    private static _spellLabels = ["SPELL", "CASTING VALUE", "RANGE", "DESCRIPTION"];
-    private _spellLabelWidthNormalized = [0.2, 0.1, 0.2, 0.5];
-
-    private static _prayerLabels = ["PRAYER", "ANSWER VALUE", "RANGE", "DESCRIPTION"];
-    private _prayerLabelWidthNormalized = [0.2, 0.1, 0.2, 0.5];
-
-    private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
-    private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
-
-    private renderLine(ctx: CanvasRenderingContext2D): void {
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = RendererAoS._blackColor;
-        ctx.beginPath();
-        ctx.moveTo(this._currentX, this._currentY);
-        ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
-        ctx.stroke();
-        this._currentY += 1;
-    }
-
-    private renderWeapons(ctx: CanvasRenderingContext2D, weapons: AoSWeapon[], columnWidths: number[] | null): void {
-        ctx.font = RendererAoS._font;
-        ctx.fillStyle = RendererAoS._blackColor;
-
-        const height = 22;
-
-        ctx.save();
-
-        let i = 0;
-        let w = 50;
-        for (const weapon of weapons) {
-
-            let ci = 0;
-            let x = this._currentX;
-
-            let xStart = this._currentX;
-            let yStart = this._currentY;
-
-            ctx.fillStyle = RendererAoS._blackColor;
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._name.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._range.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._attacks.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._toHit.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._toWound.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._rend.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._damage.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            this._currentY += height;
-
-            ctx.save();
-            ctx.globalCompositeOperation = "destination-over";
-            const actualHeight = this._currentY - yStart;
-            if (i % 2) ctx.fillStyle = RendererAoS._greyLight;
-            else ctx.fillStyle =  '#ffffff';
-            ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
-            i++;
-
-            ctx.restore();
-        }
-        ctx.restore();
-    }
-
-    private renderMap(ctx: CanvasRenderingContext2D, title: string, data: Map<string, string>): void {
-        ctx.font = RendererAoS._titleFont;
-        ctx.fillStyle = RendererAoS._blackColor;
-
-        RenderText(ctx, title, this._currentX + 20, this._currentY, 100, 16, Justification.Left);
-
-        ctx.font = RendererAoS._font;
-        for (let ab of data) {
-            const content = ab[0].toUpperCase() + ':';
-            const desc = ab[1];
-
-            ctx.font = RendererAoS._headerFont;
-            this._currentY += 2;
-            RenderTextFull(ctx, content, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, 16, Justification.Left, VertAlign.Top);
-            let offsetX = ctx.measureText(content).width;
-
-            ctx.font = RendererAoS._font;
-            this._currentY = RenderParagraph(ctx, ' ' + desc, this._currentX + this._descriptionStartX, this._currentY, this._descriptionWidth, offsetX);
-            this._currentY += 2;
-        }
-        this._currentY += 4;
-    }
-
-    private renderSpells(ctx: CanvasRenderingContext2D, spells: AoSSpell[], columnWidths: number[] | null): void {
-        ctx.font = RendererAoS._font;
-        ctx.fillStyle = RendererAoS._blackColor;
-
-        const height = 22;
-
-        let i = 0;
-        let w = 50;
-
-        ctx.save();
-
-        for (const spell of spells) {
-            let ci = 0;
-            let x = this._currentX;
-
-            let xStart = this._currentX;
-            let yStart = this._currentY;
-
-            ctx.fillStyle = RendererAoS._blackColor;
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, spell._name.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, spell._castingValue.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, spell._range.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, spell._description, x, this._currentY, w, 0);
-            x += w;
-
-            ctx.save();
-            if (i % 2) ctx.fillStyle = RendererAoS._greyLight;
-            else ctx.fillStyle = '#ffffff';
-            ctx.globalCompositeOperation = "destination-over";
-            const actualHeight = this._currentY - yStart;
-            ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
-            i++;
-
-            ctx.restore();
-        }
-        ctx.restore();
-    }
-
-    private renderPrayers(ctx: CanvasRenderingContext2D, prayers: AoSPrayer[], columnWidths: number[] | null): void {
-        ctx.font = RendererAoS._font;
-        ctx.fillStyle = RendererAoS._blackColor;
-
-        const height = 22;
-
-        let i = 0;
-        let w = 50;
-
-        ctx.save();
-
-        for (const prayer of prayers) {
-            let ci = 0;
-            let x = this._currentX;
-
-            let xStart = this._currentX;
-            let yStart = this._currentY;
-
-            ctx.fillStyle = RendererAoS._blackColor;
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, prayer._name.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, prayer._answerValue.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, prayer._range.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            this._currentY += 2;
-            this._currentY = RenderParagraph(ctx, prayer._description, x, this._currentY, w, 0);
-            x += w;
-
-            ctx.save();
-            if (i % 2) ctx.fillStyle = RendererAoS._greyLight;
-            else ctx.fillStyle = '#ffffff';
-            ctx.globalCompositeOperation = "destination-over";
-            const actualHeight = this._currentY - yStart;
-            ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
-            i++;
-
-            ctx.restore();
-        }
-        ctx.restore();
-    }
-
-    private renderUnitStats(ctx: CanvasRenderingContext2D, unit: AoSUnit, columnWidths: number[] | null, bg: number): void {
-
-        const height = 22;
-
-        let w = 50;
-        let x = this._currentX;
-        let ci = 0;
-
-        if (bg % 2) ctx.fillStyle = RendererAoS._greyLight;
-        else ctx.fillStyle = '#ffffff';
-        ctx.fillRect(x, this._currentY, this._maxWidth, height);
-
-        ctx.fillStyle = RendererAoS._blackColor;
-        ctx.font = RendererAoS._font;
-
-        if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, unit._name.toString(), x, this._currentY, w, height, Justification.Center);
-        x += w;
-
-        if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, unit._move.toString(), x, this._currentY, w, height, Justification.Center);
-        x += w;
-
-        if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, unit._wounds.toString(), x, this._currentY, w, height, Justification.Center);
-        x += w;
-
-        if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, unit._bravery.toString(), x, this._currentY, w, height, Justification.Center);
-        x += w;
-
-        if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, unit._save.toString(), x, this._currentY, w, height, Justification.Center);
-        x += w;
-
-        this._currentY += height;
-    }
-
-    private renderWoundTable(ctx: CanvasRenderingContext2D, unit: AoSUnit, columnWidths: number[] | null): void {
-        const height = 22;
-
-        let w = 50;
-
-        let firstRow = true;
-        for (let tracker of unit._woundTracker) {
-
-            // if (firstRow && (unit._woundTracker.length == 4)) {
-            //     // Skip column labels
-            //     firstRow = false;
-            //     continue;
-            // }
-
-            let x = this._currentX;
-            let ci = 0;
-
-            ctx.fillStyle = RendererAoS._greyLight;
-            ctx.fillRect(x, this._currentY, this._maxWidth, height);
-
-            ctx.fillStyle = RendererAoS._blackColor;
-            ctx.font = RendererAoS._font;
-            if (columnWidths) w = columnWidths[ci++];
-
-            RenderText(ctx, tracker._name, x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            for (let attr of tracker._table) {
-                if (columnWidths) w = columnWidths[ci++];
-                RenderText(ctx, attr[1], x, this._currentY, w, height, Justification.Center);
-                x += w;
-            }
-
-            this._currentY += height;
-        }
-    }
-    
-    private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-        ctx.strokeStyle = RendererAoS._blackColor;
-
-        ctx.beginPath();
-        ctx.moveTo(x, y + RendererAoS._bevelSize);
-        ctx.lineTo(x, y + h - RendererAoS._bevelSize);
-        ctx.lineTo(x + RendererAoS._bevelSize, y + h);
-        ctx.lineTo(x + w - RendererAoS._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - RendererAoS._bevelSize);
-        ctx.lineTo(x + w, y + RendererAoS._bevelSize);
-        ctx.lineTo(x + w - RendererAoS._bevelSize, y);
-        ctx.lineTo(x + RendererAoS._bevelSize, y);
-        ctx.closePath();
-        ctx.stroke();
-
-        ctx.save();
-        ctx.fillStyle = RendererAoS._fillColor;
-        ctx.globalCompositeOperation = "destination-over";
-        ctx.beginPath();
-        ctx.moveTo(x, y + RendererAoS._bevelSize);
-        ctx.lineTo(x, y + h - RendererAoS._bevelSize);
-        ctx.lineTo(x + RendererAoS._bevelSize, y + h);
-        ctx.lineTo(x + w - RendererAoS._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - RendererAoS._bevelSize);
-        ctx.lineTo(x + w, y + RendererAoS._bevelSize);
-        ctx.lineTo(x + w - RendererAoS._bevelSize, y);
-        ctx.lineTo(x + RendererAoS._bevelSize, y);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.restore();
-    }
-
 }

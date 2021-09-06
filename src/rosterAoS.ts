@@ -155,6 +155,14 @@ export class AoSUnit {
         }
         return false;
     }
+
+    isNormalUnit(): boolean {
+        return (this._role == AoSUnitRole.ARTILLERY ||
+            this._role == AoSUnitRole.BATTLELINE ||
+            this._role == AoSUnitRole.BEHEMOTH ||
+            this._role == AoSUnitRole.LEADER ||
+            this._role == AoSUnitRole.OTHER);
+    }
 }
 
 export class AoSForce {
