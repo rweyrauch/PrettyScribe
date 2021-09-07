@@ -252,6 +252,10 @@ export class RendererAoS implements Renderer {
             else
                 continue;
 
+            let divider = document.createElement('hr');
+            divider.className = "aos_dark";
+            forces.appendChild(divider);             
+ 
             let prevUnit: AoSUnit | null = null;
             for (let unit of force._units) {
                forces.appendChild(this.renderUnitHtml(unit));  
@@ -265,10 +269,10 @@ export class RendererAoS implements Renderer {
 
     protected createTable(heading: {name: string, width: string}[]): HTMLTableElement {
         const table = document.createElement('table');
-        table.className = "table aos_table table-sm";
+        table.className = "table aos_table aos_font table-sm";
         const thead = document.createElement('thead');
         table.appendChild(thead);
-        thead.classList.add('thead-light');
+        thead.classList.add('aos_light');
         const tr = document.createElement('tr');
         thead.appendChild(tr);
         heading.forEach(element => {
@@ -312,10 +316,10 @@ export class RendererAoS implements Renderer {
 
         let missileWeaponTable = document.createElement('table');
         missileWeaponTable.className = "table table-sm aos_font text-center";
-        missileWeaponTable.tHead = document.createElement('thead');
-        missileWeaponTable.tHead.className = "aos_light";
+        let thead = document.createElement('thead');
+        missileWeaponTable.appendChild(thead);
         missileWeaponTable.innerHTML = 
-            `<tr>
+            `<tr class="aos_light">
                 <th>Missile Weapons</th>
                 <th>Range</th>
                 <th>Attacks</th>
@@ -329,10 +333,10 @@ export class RendererAoS implements Renderer {
 
         let meleeWeaponTable = document.createElement('table');
         meleeWeaponTable.className = "table table-sm aos_font text-center";
-        meleeWeaponTable.tHead = document.createElement('thead');
-        meleeWeaponTable.tHead.className = "aos_light";
+        thead = document.createElement('thead');
+        meleeWeaponTable.appendChild(thead);
         meleeWeaponTable.innerHTML = 
-            `<tr>
+            `<tr class="aos_light">
                 <th>Melee Weapons</th>
                 <th>Range</th>
                 <th>Attacks</th>
@@ -484,25 +488,15 @@ export class RendererAoS implements Renderer {
             }
         }
 
-        if (unit._woundTracker.length > 0) {
+        if (unit._woundTracker) {
             let labels = [{ name: "Wounds Suffered", width: '25%'}, {name:"Attribute 1", width:'25%'}, {name:"Attribute 2", width:'25%'}, {name:"Attribute 3", width:'25%'}];
 
-            // Determine wound table headers.
-            if (unit._woundTracker.length == 4) {
-                // Use first entry in table as labels.
-                let i = 1;
-                // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
-                for (let key of unit._woundTracker[0]._table.values()) {
-                    labels[i++].name = key;
-                }
+            //console.log("Num Labels: " + unit._woundTracker._labels.length);
+            let i = 0;
+            for (let key of unit._woundTracker._labels) {
+                 labels[i++].name = key;
             }
-            else {
-                // Use keys as labels.
-                let i = 1;
-                for (let key of unit._woundTracker[0]._table.keys()) {
-                    labels[i++].name = key;
-                }
-            }
+            
             const table = this.createTable(labels);
             table.className = "table table-sm aos_font text-center";
             unitInfo.appendChild(table);
@@ -510,12 +504,9 @@ export class RendererAoS implements Renderer {
             let body = document.createElement('tbody');
             table.appendChild(body);        
 
-            for (let wt of unit._woundTracker) {
+            for (let wt of unit._woundTracker._table) {
                 let tr = document.createElement('tr');
-                let name = document.createElement('td');
-                name.innerHTML = wt._name;
-                tr.appendChild(name);
-                for (let value of wt._table.values()) {
+                for (let value of wt) {
                     let v = document.createElement('td');
                     v.innerHTML = value;
                     tr.appendChild(v);

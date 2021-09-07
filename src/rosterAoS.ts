@@ -27,8 +27,9 @@ export class AoSWeapon {
 }
 
 export class AoSWoundTracker {
-    _name: string = "";
-    _table: Map<string, string> = new Map();
+    _title: string ="";
+    _labels: string[] = [];
+    _table: [string[]] = [[]];
 };
 
 export class AoSSpell {
@@ -134,7 +135,7 @@ export class AoSUnit {
 
     _points: number = 0;
 
-    _woundTracker: AoSWoundTracker[] = [];
+    _woundTracker: AoSWoundTracker | null = null;
 
     _selections: Set<string> = new Set();
 
@@ -485,35 +486,115 @@ function ParseUnit(root: Element): AoSUnit {
                     }
                 }
                 unit._prayers.push(prayer);
-            }
-            else if (profType.includes("Wound Track") || profType.includes("Damage Table") || profType.includes("Wounds")) {
-                let tracker = new AoSWoundTracker();
-                tracker._name = profName;
-                let chars = prof.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName && profName) {
-                        if (char.textContent) {
-                            tracker._table.set(charName, char.textContent);
-                        }
-                        else {
-                            tracker._table.set(charName, "-");
+            }           
+            else if (profType.includes("Damage Table") || profType.includes("Wounds Suffered")) {
+                let values: string[] = [];
+                if (!unit._woundTracker) {
+                    unit._woundTracker = new AoSWoundTracker();
+                    unit._woundTracker._title = profType;
+                    // Construct labels (the first profile in the group)
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    if (chars.length == 3) {
+                        unit._woundTracker._labels.push("Wounds Suffered");
+                        values.push(profName);
+                        for (let char of chars) {
+                            let label = char.getAttributeNode("name")?.nodeValue;
+                            if (label)
+                                unit._woundTracker._labels.push(label);
+                            else 
+                                unit._woundTracker._labels.push("Unknown");
+
+                            if (char.textContent)
+                                values.push(char.textContent);
+                            else 
+                                values.push("Unknown");
                         }
                     }
+                    else {
+                        for (let char of chars) {
+                            if (char.textContent)
+                                unit._woundTracker._labels.push(char.textContent);
+                            else 
+                                unit._woundTracker._labels.push("Unknown");
+
+                        }
+                    }
+                    unit._woundTracker._table.push(values);
+                    values = [];
                 }
-                unit._woundTracker.push(tracker);
-            }
+                else {
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    if (chars.length == 3) {
+                        let label = profName;
+                        if (label)
+                            values.push(label);
+                        else 
+                            values.push("Unknown");
+                        for (let char of chars) {
+                            if (char.textContent)
+                                values.push(char.textContent);
+                            else 
+                                values.push("Unknown");
+                        }
+                    } else {
+                        for (let char of chars) {
+                            if (char.textContent)
+                                values.push(char.textContent);
+                            else 
+                                values.push("Unknown");
+                        }
+                    }
+                    unit._woundTracker._table.push(values);
+                    values = [];
+                }
+            }                
             else {
                 console.log("Unknown unit profile type: " + profType);
             }
         }
+    }
 
+    let selections = root.querySelectorAll("selections>selection");
+    for (let selection of selections) {
+        let selectionName = selection.getAttributeNode("name")?.nodeValue;
+        if (selectionName) {
+            unit._selections.add(selectionName);
 
-        let selections = root.querySelectorAll("selections>selection");
-        for (let selection of selections) {
-            let selectionName = selection.getAttributeNode("name")?.nodeValue;
-            if (selectionName) {
-                unit._selections.add(selectionName);
+            if (selectionName.includes("Wound Track")) {
+                //console.log(selectionName);
+                unit._woundTracker = new AoSWoundTracker();
+                unit._woundTracker._title = selectionName;
+                unit._woundTracker._labels = ["Wounds Suffered"];
+            
+                let profiles = selection.querySelectorAll("profiles>profile");
+                let firstProfile: boolean = true;
+                for (let prof of profiles) {
+                    let wounds = prof.getAttributeNode("name")?.nodeValue;
+                    //console.log(wounds);
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    let values: string[] = [];
+                    if (wounds)
+                        values.push(wounds);
+                    else
+                        values.push("--");    
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        let textValue = char.textContent;
+                        //console.log(charName + " - " + textValue);
+                        if (firstProfile) {
+                            if (charName)
+                                unit._woundTracker._labels.push(charName);
+                            else    
+                                unit._woundTracker._labels.push("Unknown");
+                        }
+                        if (textValue)
+                            values.push(textValue);
+                        else    
+                            values.push("Unknown");
+                    }
+                    firstProfile = false;
+                    unit._woundTracker._table.push(values);
+                }
             }
         }
     }
