@@ -259,6 +259,17 @@ export class RendererAoS implements Renderer {
         return table;
     }
 
+    private internalKeyword(keyword: string): boolean {
+        const kw_lower = keyword.toLowerCase();
+        if ((kw_lower == "6_under_wounds") ||
+            (kw_lower == "9 or less wounds leader") ||
+            (kw_lower == "reinforced") ||
+            (kw_lower == "artefact")) {
+            return true;
+        }
+        return false;
+    }
+
     protected renderUnitHtml(unit: AoSUnit): HTMLDivElement {
 
         let unitRoot = document.createElement('div');
@@ -500,8 +511,10 @@ export class RendererAoS implements Renderer {
             row.appendChild(label);
             let all_keywords = "";
             for (let kw of unit._keywords) {
-                all_keywords += kw;
-                all_keywords += " "; 
+                if (!this.internalKeyword(kw)) {
+                    all_keywords += kw;
+                    all_keywords += ", "; 
+                }
             }
             let values = document.createElement('div');
             values.className = "col border text-left text-uppercase";
