@@ -14,42 +14,15 @@
     OF THIS SOFTWARE.
 */
 
-import { AoSUnit, AoSUnitRole, AoSUnitRoleToString, AoSWeapon, RosterAoS, AoSSpell, AoSPrayer } from "./rosterAoS";
-import { Renderer, Justification, RenderText, RenderParagraph, RenderTextFull, VertAlign} from "./renderer";
-import { UnitRoleToString } from "./roster40k";
+import { AoSUnit, AoSUnitRoleToString, RosterAoS } from "./rosterAoS";
+import { Renderer } from "./renderer";
 
 export class RendererAoS implements Renderer {
 
-    public static readonly _res: number = 144;
-    public static readonly _margin: number = 0;
-
-    private static readonly _bevelSize = 15;
-    private readonly _descriptionStartX = 190;
-    private _descriptionWidth: number = 600;
-
-    private _statsWheel: HTMLImageElement | null = null;
-
     private _roster: RosterAoS|null = null;
-
-    private _currentX: number = 0;
-    private _currentY: number = 0;
-    private _maxWidth: number = 0;
-    private _maxHeight: number = 0;
-
-    private static readonly _blackColor = '#1d272a';
-    private static readonly _grey1 = '#b3bbb5';
-    private static readonly _greyLight = '#dde1df';
-    private static readonly _fillColor = '#f6f6f6';
-
-    private static readonly _titleFont = 'bold 14px sans-serif';
-    private static readonly _headerFont = 'bold 14px sans-serif';
-    private static readonly _font = '14px sans-serif';
-    private static readonly _boldFont = 'bold 14px sans-serif';
 
     constructor(roster: RosterAoS) {
         this._roster = roster;
-
-        this._statsWheel = document.getElementById('aos_stats') as HTMLImageElement;
     }
 
     render(title: HTMLElement|null, list: HTMLElement|null, forces: HTMLElement|null): void {
