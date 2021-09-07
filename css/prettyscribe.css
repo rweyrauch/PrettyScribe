@@ -39,7 +39,7 @@ body {
 }
 
 .aos_unit_stats {
-    background-image: url(/assets/aos_stats_min.svg); 
+    background-image: url('../assets/aos_stats_min.svg'); 
     background-repeat: no-repeat; 
     background-size: contain;
     display: inline-block;
