@@ -5,6 +5,18 @@ body {
     break-after: avoid;
 }
 
+@font-face {
+    font-family: "rodchenkoctt";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../assets/fonts/rodchenkoctt.eot");
+    src: url("../assets/fonts/rodchenkoctt.eot?#iefix") format("embedded-opentype"),
+         url("../assets/fonts/rodchenkoctt.woff2") format("woff2"),
+         url("../assets/fonts/rodchenkoctt.woff") format("woff"),
+         url("../assets/fonts/rodchenkoctt.ttf") format("truetype"),
+         url("../assets/fonts/rodchenkoctt.svg#rodchenkoctt") format("svg");         
+}
+
 .aos_font {
     font-size: 14px;
     font-family: 'Crimson Pro', serif;
@@ -71,3 +83,27 @@ body {
     border-bottom: 1px solid #8a7c32;;
 }
 
+.warcry_font {
+    font-family: "rodchenkoctt";
+    font-size: 1.5em;
+}
+
+.warcry_card {
+    width: 64px;
+    height: 72px;
+    margin-top: 3px;
+    border-color: #222222;
+}
+
+.warcry_card_img {
+    height: 32px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.warcry_card_label {
+    height: 32px;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 0;
+}

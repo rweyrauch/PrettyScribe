@@ -13,10 +13,10 @@
       <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro&display=swap" rel="stylesheet">
 
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
       <link rel="stylesheet" href="./css/prettyscribe.css">
-
+      
       <script src="https://kit.fontawesome.com/324895d590.js" crossorigin="anonymous"></script>
 </head>
 
@@ -36,29 +36,31 @@
       </div>
 
       <nav class="navbar navbar-expand-md navbar-light bg-light justify-content-between">
-            <a href="index.html"><span class="navbar-brand">PrettyScribe</span></a>
-            <div>A pretty-printer for BattleScribe rosters.</div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"
-                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                  <ul class="navbar-nav ml-auto">
+            <div class="container">
+                <a href="index.html"><span class="navbar-brand">PrettyScribe</span></a>
+                <div>A pretty-printer for BattleScribe rosters.</div>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbarAbout"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbarAbout">
+                    <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                              <a class="nav-link" href="help.html">Help</a>
+                            <a class="nav-link" href="help.html">Help</a>
                         </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="about.html">About</a>
+                        <li class="nav-item active">
+                            <a class="nav-link active" href="about.html">About</a>
                         </li>
-                  </ul>
+                    </ul>
+                </div>
             </div>
       </nav>
 
-      <div class="input-group mb-3">
-            <div class="custom-file">
-                  <input type="file" class="custom-file-input" files="roster-file" id="roster-file" name="roster-file">
-                  <label class="custom-file-label" for="roster-file">Select roster file (.ros, .rosz)</label>
-            </div>
+      <div class="container">
+            <div class="input-group mb-3">
+                  <input type="file" class="form-control" files="roster-file" id="roster-file" name="roster-file">
+                  <label class="input-group-text" for="roster-file">Select roster file (.ros, .rosz)</label>
+            </div>      
       </div>
 
       <hr class="border-top border-primary">
@@ -72,46 +74,143 @@
       </div>
 
       <!-- AoS Warcry Unit Display prototype -->
-      <div class="container border" style="display:none;">
-            <div class="row">
-                  <div class="col-6">
-                        <p>--Unit Name--</p>
+      <div class="container-fluid border" style="display:none;>
+            <div class="row align-items-center">
+                  <div class="col">
+                        <p class="warcry_font" style="font-size: 2.2em;">Gaunt Summoner on Disc</p>
                   </div>
-                  <div class="col-6">
-                       <span class="border rounded-circle">--Faction--</span>
-                       <span class="border rounded-circle">--Points--</span>
-                  </div>
-            </div>
-            <div class="row">
-                  <div class="col-6">
-                        <div>
-                              <span class="border">Icon</span>
-                              <span class="border">Range</span>
-                              <span class="border">Attacks</span>
-                              <span class="border">Str</span>
-                              <span class="border">Damage</span>
+                  <div class="col">
+                        <div class="row align-items-center">
+                              <div class="col">
+                                    <img class="border border-dark rounded-circle warcry_card" src="./assets/warcry/runemarks/black/factions-chaos-tzeentch-arcanites.svg" alt="">
+                              </div>
+                              <div class="col">
+                                    <span class="border border-dark rounded-circle warcry_font">260</span>
+                              </div>
                         </div>
                   </div>
-                  <div class="col-6">
-                        <span class="border rounded-circle">Rune 0</span>
-                        <span class="border rounded-circle">Rune 1</span>
-                        <span class="border rounded-circle">Rune 2</span>
-                  </div>
             </div>
-            <div class="row">
-                  <div class="col-6">
-                        <div>
-                              <span class="border">Icon</span>
-                              <span class="border">Range</span>
-                              <span class="border">Attacks</span>
-                              <span class="border">Str</span>
-                              <span class="border">Damage</span>
+            <div class="row align-items-center">
+                  <div class="col">
+                        <div class="row align-items-center">
+                              <div class="col">
+                                    <img class="border border-dark rounded warcry_card" src="./assets/warcry/runemarks/black/weapons-blast.svg" alt="">
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-range.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">3-7</p>
+                                          </div>
+                                    </div>      
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-attacks.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">2</p>
+                                          </div>
+                                    </div>      
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-strength.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">3</p>
+                                          </div>
+                                    </div>      
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-damage.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">3/6</p>
+                                          </div>
+                                    </div>      
+                              </div>
                         </div>
                   </div>
-                  <div class="col-6">
-                        <span class="border">Move</span>
-                        <span class="border">Toughness</span>
-                        <span class="border">Wounds</span>
+                  <div class="col">
+                        <div class="row align-items-center">
+                              <div class="col">
+                                    <img class="border border-dark rounded-circle warcry_card" src="./assets/warcry/runemarks/black/fighters-agile.svg" alt="">
+                              </div>
+                              <div class="col">
+                                    <img class="border border-dark rounded-circle warcry_card" src="./assets/warcry/runemarks/black/fighters-champion.svg" alt="">
+                              </div>
+                              <div class="col">
+                                    <img class="border border-dark rounded-circle warcry_card" src="./assets/warcry/runemarks/black/fighters-mount.svg" alt="">      
+                              </div>
+                        </div>
+                  </div>
+            </div>
+            <div class="row align-items-center">
+                  <div class="col">
+                        <div class="row align-items-center">
+                              <div class="col">
+                                    <img class="border border-dark rounded warcry_card" src="./assets/warcry/runemarks/black/weapons-fangs.svg" alt="">
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-range.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">1</p>
+                                          </div>
+                                    </div>      
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-attacks.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">4</p>
+                                          </div>
+                                    </div>      
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-strength.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">4</p>
+                                          </div>
+                                    </div>      
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-damage.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">2/4</p>
+                                          </div>
+                                    </div>      
+                              </div>
+                         </div>
+                  </div>
+                  <div class="col">
+                        <div class="row align-items-center">
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-move.svg" alt="">
+                                          <div class="card-body  warcry_card_label">
+                                                <p class="card-title warcry_font">10</p>
+                                          </div>
+                                    </div>      
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-toughness.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-text warcry_font">4</p>
+                                          </div>
+                                    </div>      
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-wounds.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">30</p>
+                                          </div>
+                                    </div>      
+                              </div>                             
+                        </div>
                   </div>
             </div>
       </div>
@@ -301,9 +400,9 @@
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-            crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
       <script type="module" src="./dist/prettyscribe.js"></script>
 
 </body>
