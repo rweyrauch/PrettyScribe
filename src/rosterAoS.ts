@@ -615,7 +615,6 @@ function ParseUnit(root: Element): AoSUnit {
     let categories = root.querySelectorAll(":scope categories>category");
     for (let category of categories) {
         let catName = category.getAttributeNode("name")?.nodeValue;
-        let catPrimary = category.getAttributeNode("primary")?.nodeValue;
         if (catName) {
             const roleText = catName.trim();
             var unitRole = LookupRole(roleText);

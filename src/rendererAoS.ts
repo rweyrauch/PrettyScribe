@@ -260,11 +260,9 @@ export class RendererAoS implements Renderer {
     }
 
     private internalKeyword(keyword: string): boolean {
-        const kw_lower = keyword.toLowerCase();
-        if ((kw_lower == "6_under_wounds") ||
-            (kw_lower == "9 or less wounds leader") ||
-            (kw_lower == "reinforced") ||
-            (kw_lower == "artefact")) {
+        // Internal keywords _not_ all upper case.
+        const kw_upper = keyword.toUpperCase();
+        if (kw_upper != keyword) {
             return true;
         }
         return false;
