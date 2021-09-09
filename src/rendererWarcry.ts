@@ -193,8 +193,7 @@ export class RendererWarcry implements Renderer {
 
         let points = document.createElement('div');
         points.className = "col-1";
-        points.innerHTML = `<div class="border border-dark rounded-circle" style="width: 72px; height: 72px">
-            <p class="warcry_font text-center">${unit._points}</p></div>`;
+        points.innerHTML = `<div class="border border-dark text-center rounded-circle warcry_font" style="width: 72px; height: 72px; line-height: 72px;">${unit._points}</div>`;
         row0.appendChild(points);
 
         let row1 = document.createElement('div');
