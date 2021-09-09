@@ -14,37 +14,14 @@
     OF THIS SOFTWARE.
 */
 
-import { WarcryUnit, WarcryForce, WarcryWeapon, WarcryUnitRoleToString, RosterWarcry } from "./rosterWarcry";
-import { Renderer, Justification, RenderText, RenderParagraph} from "./renderer";
+import { WarcryUnit, WarcryUnitRoleToString, RosterWarcry, WarcryWeapon } from "./rosterWarcry";
+import { Renderer} from "./renderer";
+
 
 export class RendererWarcry implements Renderer {
 
-    public static readonly _res: number = 144;
-    public static readonly _margin: number = 0;
-
     private _roster: RosterWarcry|null = null;
-
-    private static readonly _bevelSize = 15;
-    private static readonly _blackColor = '#1d272a';
-    private static readonly _grey1 = '#b3bbb5';
-    private static readonly _greyLight = '#dde1df';
-    private static readonly _fillColor = '#f6f6f6';
-
-    private static readonly _titleFont = 'bold 14px sans-serif';
-    private static readonly _headerFont = 'bold 14px sans-serif';
-    private static readonly _font = '14px sans-serif';
-    private static readonly _boldFont = 'bold 14px sans-serif';
-
-    private _currentX: number = 0;
-    private _currentY: number = 0;
-    private _maxWidth: number = 0;
-    private _maxHeight: number = 0;
-
-    private static _unitLabels = ["UNIT", "MOVE", "WOUNDS", "TOUGHNESS"];
-    private _unitLabelWidthsNormalized = [0.4, 0.15, 0.15, 0.15];
-    private static _weaponLabels = ["WEAPON", "RANGE", "ATTACKS", "STRENGTH", "DAMAGE"];
-    private _weaponLabelWidthNormalized = [0.4, 0.15, 0.15, 0.15, 0.15];
-
+   
     constructor(roster: RosterWarcry) {
         this._roster = roster;
     }
@@ -125,287 +102,316 @@ export class RendererWarcry implements Renderer {
 
             let unitsRegion = document.createElement('div');
             for (let unit of force._units) {
-                let canvas = document.createElement('canvas') as HTMLCanvasElement;
-                canvas.width = RendererWarcry._res * 7.5;
-                canvas.height = RendererWarcry._res * 12;
-                
-                const dims = this.renderUnit(unit, canvas, 0, 0);
-    
-                const border = 25;
-                let finalCanvas = document.createElement('canvas') as HTMLCanvasElement;
-                finalCanvas.width = dims[0] + border * 2;
-                finalCanvas.height = dims[1] + border * 2;
-                let finalCtx = finalCanvas.getContext('2d');
-                finalCtx?.drawImage(canvas, border, border);
-                forces.appendChild(finalCanvas);
-                /*
-                const unitDiv = document.createElement('div');
-                unitDiv.innerHTML = this.renderUnit_(unit);
-                unitsRegion.append(unitDiv);   
-                */
+                unitsRegion.appendChild(this.renderUnitHtml(unit));  
+
+                let divider = document.createElement('hr');
+                divider.className = "aos_dark";
+                unitsRegion.appendChild(divider);             
             }                
             forces.appendChild(unitsRegion);
         }
     }
 
-    protected renderUnit(unit: WarcryUnit, canvas: HTMLCanvasElement, xOffset: number, yOffset: number): number[] {
+    protected createCharacteristicCard(label: string, value: string): HTMLDivElement {
+        let root = document.createElement('div');
+        root.className = "col";
+        root.innerHTML = `
+            <div class="card warcry_card">
+                <img class="card-img-top warcry_card_img" src="./assets/warcry/runemarks/black/characteristics-${label}.svg" alt="">
+                <div class="card-body warcry_card_label">
+                    <p class="card-title warcry_font">${value}</p>
+                </div>
+            </div>`;
+        return root;            
+    }
 
-        let ctx = canvas.getContext('2d');
-        if (!ctx) {
-            return [0, 0];
-        }
+    protected createWeapon(weapon: WarcryWeapon, parent: HTMLDivElement) {
+        let weaponName = document.createElement('p');
+        weaponName.className = "card-title warcry_font";
+        weaponName.innerHTML = weapon._name;
+        parent.appendChild(weaponName);
 
-        this._currentX = xOffset + RendererWarcry._margin;
-        this._currentY = yOffset + RendererWarcry._margin;
-        this._maxWidth = canvas.width - this._currentX;
-        this._maxHeight = Math.max(0, canvas.height - this._currentY);
+        let weaponRow = document.createElement('div');
+        weaponRow.className = "row";
+        parent.appendChild(weaponRow);
 
-        this.renderHeader(unit, ctx);
+        let weaponTypeName = this.getWeaponTypeRunemark(weapon._name);
+        let weaponType = document.createElement('div');
+        weaponType.className = "col";
+        weaponType.innerHTML = `
+            <div class="card warcry_card">
+                <img src="./assets/warcry/runemarks/black/weapons-${weaponTypeName}.svg" alt="">
+            </div>`;
+        weaponRow.appendChild(weaponType);
 
-        const unitLabelWidths: number[] = [];
-        this._unitLabelWidthsNormalized.forEach(element => {
-            unitLabelWidths.push(element * this._maxWidth);
-        });
-        this.renderTableHeader(ctx, RendererWarcry._unitLabels, unitLabelWidths);
-        this.renderUnitStats(ctx, unit, unitLabelWidths, 0);
+        let weaponRange = this.createCharacteristicCard("range", weapon._range);
+        weaponRow.appendChild(weaponRange);
 
-        const weaponLabelWidths: number[] = [];
-        this._weaponLabelWidthNormalized.forEach(element => {
-            weaponLabelWidths.push(element * this._maxWidth);
-        });
-        this.renderLine(ctx);
-        this.renderTableHeader(ctx, RendererWarcry._weaponLabels, weaponLabelWidths);
-        this.renderWeapons(ctx, unit._weapons, weaponLabelWidths);
+        let weaponAttacks = this.createCharacteristicCard("attacks", weapon._attacks);
+        weaponRow.appendChild(weaponAttacks);
+ 
+        let weaponStr = this.createCharacteristicCard("strength", weapon._strength);
+        weaponRow.appendChild(weaponStr);
+
+        let weaponDam = this.createCharacteristicCard("damage", weapon._damage);
+        weaponRow.appendChild(weaponDam);          
+    }
+
+    protected renderUnitHtml(unit: WarcryUnit): HTMLDivElement {
+
+        let unitRoot = document.createElement('div');
+        unitRoot.className = "container-fluid border";
+
+        let row0 = document.createElement('div');
+        row0.className = "row align-items-center";
+        unitRoot.append(row0);
+       
+        let factionName = "chaos-tzeentch-arcanites";        
+        let factionImg = document.createElement('div');
+        factionImg.className = "col-1";
+        factionImg.innerHTML = `<img class="border border-dark rounded-circle warcry_card" src="./assets/warcry/runemarks/black/factions-${factionName}.svg" alt="">`;
+        row0.appendChild(factionImg);
+
+        let unitName = document.createElement('div');
+        unitName.className = "col";
+        unitName.innerHTML = `<span class="warcry_font" style="font-size: 2.2em;">${unit._name}</span>`;
+        row0.appendChild(unitName);
         
-        if (unit._keywords.size > 0) {
-            this.renderLine(ctx);
-            this._currentY += 2;
-            this.renderKeywords(ctx, unit);
-        }
-
-        const totalHeight = this._currentY - (yOffset + RendererWarcry._margin);
-        const totalWidth = this._maxWidth;
-
-        this.renderBorder(ctx, this._currentX, yOffset + RendererWarcry._margin, totalWidth, totalHeight);
-
-        return [this._maxWidth, this._currentY];
-    }
-
-    protected renderUnit_(unit: WarcryUnit): string {
-        return `
-            <div class="warcry_unit">
-                <h2>${unit._name}</h2>
-
-        `;
-    }
-
-
-    private renderHeader(unit: WarcryUnit, ctx: CanvasRenderingContext2D): void {
-
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = RendererWarcry._blackColor;
-
-        const xStart = this._currentX;
-        const xEnd = this._currentX + this._maxWidth;
-        const yStart = this._currentY;
-        const titleHeight = 36;
-        const yEnd = yStart + titleHeight;
-
-        ctx.beginPath();
-        ctx.moveTo(xStart, yStart + RendererWarcry._bevelSize);
-        ctx.lineTo(xStart, yEnd);
-        ctx.lineTo(xEnd, yEnd);
-        ctx.lineTo(xEnd, yStart + RendererWarcry._bevelSize);
-        ctx.lineTo(xEnd - RendererWarcry._bevelSize, yStart);
-        ctx.lineTo(xStart + RendererWarcry._bevelSize, yStart);
-        ctx.closePath();
-        ctx.fill();
-
-        let imgX = xStart + 6;
-
-        // unit name
-        let iters: number = 0;
-        let title_size = 28;
-        const title_x = imgX + 6;
-        ctx.font = title_size + 'px ' + 'bold serif';
-        const unitName = unit._name.toLocaleUpperCase();
-        let check = ctx.measureText(unitName);
-        const maxWidth = this._maxWidth - title_x;
-        while (iters < 6 && check.width > maxWidth) {
-            iters += 1;
-            title_size -= 2;
-            ctx.font = title_size + 'px ' + 'bold serif';
-            check = ctx.measureText(unitName);
-        }
-        ctx.fillStyle = 'white';
-        ctx.textBaseline = 'top'; // Make the text origin at the upper-left to make positioning easier
-        RenderText(ctx, unitName, title_x, yStart, maxWidth, titleHeight, Justification.Center);
-
-        this._currentY += titleHeight;
-
-    }
-
-    private renderTableHeader(ctx: CanvasRenderingContext2D, labels: string[], columnWidths: number[] | null) {
-        let x = this._currentX;
-        const height = 22;
-        const width = this._maxWidth;
-        ctx.fillStyle = RendererWarcry._grey1;
-        ctx.fillRect(this._currentX, this._currentY, width, height);
-
-        ctx.fillStyle = RendererWarcry._blackColor;
-        var w = 50;
-        if (labels) {
-            ctx.font = RendererWarcry._headerFont;
-            for (let i = 0; i < labels.length; i++) {
-                if (columnWidths) w = columnWidths[i];
-                RenderText(ctx, labels[i], x, this._currentY, w, height, Justification.Center);
-                x += w;
+        let abilities = document.createElement('div');
+        abilities.className = "col-4";
+        row0.appendChild(abilities);
+        for (let key of unit._keywords) {
+            // is key a unit ability?
+            const ability = this.getAbilityRunemark(key);
+            if (ability != "") {
+                let runemark = new Image();
+                runemark.className = "border border-dark rounded-circle warcry_card";
+                runemark.src = `./assets/warcry/runemarks/black/fighters-${ability}.svg`;
+                abilities.appendChild(runemark);
             }
         }
 
-        this._currentY += height;
-    }
+        let points = document.createElement('div');
+        points.className = "col-1";
+        points.innerHTML = `<div class="border border-dark rounded-circle" style="width: 72px; height: 72px">
+            <p class="warcry_font text-center">${unit._points}</p></div>`;
+        row0.appendChild(points);
 
-    private renderKeywords(ctx: CanvasRenderingContext2D, unit: WarcryUnit): void {
-        ctx.font = RendererWarcry._titleFont;
-        RenderText(ctx, "KEYWORDS", this._currentX + 20, this._currentY, 100, 16, Justification.Left);
+        let row1 = document.createElement('div');
+        row1.className = "row align-items-center";
+        unitRoot.append(row1);
 
-        ctx.font = RendererWarcry._font;
-        const kwlist = [...unit._keywords]; 
-        const kw = kwlist.join(", ").toLocaleUpperCase();
-        this._currentY = RenderParagraph(ctx, kw, this._currentX + 190, this._currentY, 500, 0);
-
-        this._currentY += 4;
-    }
-
-    private renderUnitStats(ctx: CanvasRenderingContext2D, unit: WarcryUnit, columnWidths: number[] | null, bg: number): void {
-
-        const height = 22;
-
-        let w = 50;
-        let x = this._currentX;
-        let ci = 0;
-
-        if (bg % 2) ctx.fillStyle = RendererWarcry._greyLight;
-        else ctx.fillStyle = '#ffffff';
-        ctx.fillRect(x, this._currentY, this._maxWidth, height);
-
-        ctx.fillStyle = RendererWarcry._blackColor;
-        ctx.font = RendererWarcry._font;
-
-        if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, unit._name.toString(), x, this._currentY, w, height, Justification.Center);
-        x += w;
-
-        if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, unit._move.toString(), x, this._currentY, w, height, Justification.Center);
-        x += w;
-
-        if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, unit._wounds.toString(), x, this._currentY, w, height, Justification.Center);
-        x += w;
-
-        if (columnWidths) w = columnWidths[ci++];
-        RenderText(ctx, unit._toughness.toString(), x, this._currentY, w, height, Justification.Center);
-        x += w;
-
-        this._currentY += height;
-    }
-
-    private renderWeapons(ctx: CanvasRenderingContext2D, weapons: WarcryWeapon[], columnWidths: number[] | null): void {
-        ctx.font = RendererWarcry._font;
-
-        const height = 22;
-
-        ctx.save();
-
-        let i = 0;
-        let w = 50;
-        for (const weapon of weapons) {
-
-            let ci = 0;
-            let x = this._currentX;
-
-            let xStart = this._currentX;
-            let yStart = this._currentY;
-
-            ctx.fillStyle = RendererWarcry._blackColor;
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._name.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._range.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._attacks.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._strength.toString(), x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            if (columnWidths) w = columnWidths[ci++];
-            RenderText(ctx, weapon._damage, x, this._currentY, w, height, Justification.Center);
-            x += w;
-
-            this._currentY += height;
-
-            ctx.save();
-            ctx.globalCompositeOperation = "destination-over";
-            const actualHeight = this._currentY - yStart;
-            if (i % 2) ctx.fillStyle = RendererWarcry._greyLight;
-            else ctx.fillStyle =  '#ffffff';
-            ctx.fillRect(xStart, yStart, this._maxWidth, actualHeight);
-            i++;
-
-            ctx.restore();
+        let weapon1 = document.createElement('div');
+        weapon1.className = "col";
+        row1.appendChild(weapon1);
+        if (unit._weapons.length == 2) {
+            this.createWeapon(unit._weapons[1], weapon1);
         }
-        ctx.restore();
+
+        let blank1 = document.createElement('div');
+        blank1.className = "col";
+        row1.appendChild(blank1);
+
+        let row2 = document.createElement('div');
+        row2.className = "row align-items-center";
+        unitRoot.append(row2);
+
+        let weapon2 = document.createElement('div');
+        weapon2.className = "col";
+        row2.appendChild(weapon2);
+        if (unit._weapons.length >= 1) {
+            this.createWeapon(unit._weapons[0], weapon2);
+        }
+
+        let stats = document.createElement('div');
+        stats.className = "col";
+        row2.appendChild(stats);
+        let statsRow = document.createElement('div');
+        statsRow.className = "row";
+        stats.appendChild(statsRow);
+
+        let blank2 = document.createElement('div');
+        blank2.className = "col";
+        statsRow.appendChild(blank2);
+
+        let move = this.createCharacteristicCard("move", unit._move.toString());    
+        statsRow.appendChild(move);
+
+        let toughness = this.createCharacteristicCard("toughness", unit._toughness.toString());
+        statsRow.appendChild(toughness);
+    
+        let wounds = this.createCharacteristicCard("wounds", unit._wounds.toString());
+        statsRow.appendChild(wounds);
+
+        return unitRoot;
     }
 
-    private renderBorder(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
-        ctx.strokeStyle = RendererWarcry._blackColor;
+    private getFactionRunemark(name: string) : string {
+        const name_ref = name.toLowerCase();
+        if (name_ref.includes("beasts of chaos")) {
+            return "chaos-beasts-of-chaos";
+        }
+        else if (name_ref.includes("corvus")) {
+            return "chaos-corvus-cabal";
+        }
+        else if (name_ref.includes("cypher")) {
+            return "chaos-cypher-lords";
+        }
+        else if (name_ref.includes("everchosen")) {
+            return "chaos-everchosen";
+        }
+        else if (name_ref.includes("golems")) {
+            return "chaos-iron-golems";
+        }
+        else if (name_ref.includes("khorne") && name_ref.includes("bloodbound")) {
+            return "chaos-khorne-bloodbound";
+        }
+        else if (name_ref.includes("khorne") && name_ref.includes("daemon")) {
+            return "chaos-khorne-daemons";
+        }
+        else if (name_ref.includes("nurgle") && name_ref.includes("rotbringer")) {
+            return "chaos-nurgle-rotbringers";
+        }
+        else if (name_ref.includes("nurgle") && name_ref.includes("daemon")) {
+            return "chaos-nurgle-daemons";
+        }
+        else if (name_ref.includes("scions")) {
+            return "chaos-scions-of-the-flame";
+        }
+        else if (name_ref.includes("skaven")) {
+            return "chaos-skaven";
+        }
+        else if (name_ref.includes("slaanesh") && name_ref.includes("sybariteI g")) {
+            return "chaos-slaanesh-syberites";
+        }
+        else if (name_ref.includes("slaanesh") && name_ref.includes("daemon")) {
+            return "chaos-slaanesh-daemons";
+        }
+        else if (name_ref.includes("slaves")) {
+            return "chaos-slaves-to-darkness";
+        }
+        else if (name_ref.includes("spire")) {
+            return "chaos-spire-tyrants";
+        }
+        else if (name_ref.includes("splintered")) {
+            return "chaos-splintered-fang";
+        }
+        else if (name_ref.includes("unmade")) {
+            return "chaos-the-unmade";
+        }
+        else if (name_ref.includes("tzeentch") && name_ref.includes("arcanite")) {
+            return "chaos-tzeentch-arcanites";
+        }
+        else if (name_ref.includes("tzeentch") && name_ref.includes("daemon")) {
+            return "chaos-tzeentch-daemons";
+        }
+        else if (name_ref.includes("untamed")) {
+            return "chaos-untamed-beasts";
+        }
+        else if (name_ref.includes("flesh")) {
+            return "death-flesh-eater-courts";
+        }
 
-        ctx.beginPath();
-        ctx.moveTo(x, y + RendererWarcry._bevelSize);
-        ctx.lineTo(x, y + h - RendererWarcry._bevelSize);
-        ctx.lineTo(x + RendererWarcry._bevelSize, y + h);
-        ctx.lineTo(x + w - RendererWarcry._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - RendererWarcry._bevelSize);
-        ctx.lineTo(x + w, y + RendererWarcry._bevelSize);
-        ctx.lineTo(x + w - RendererWarcry._bevelSize, y);
-        ctx.lineTo(x + RendererWarcry._bevelSize, y);
-        ctx.closePath();
-        ctx.stroke();
-
-        ctx.save();
-        ctx.fillStyle = RendererWarcry._fillColor;
-        ctx.globalCompositeOperation = "destination-over";
-        ctx.beginPath();
-        ctx.moveTo(x, y + RendererWarcry._bevelSize);
-        ctx.lineTo(x, y + h - RendererWarcry._bevelSize);
-        ctx.lineTo(x + RendererWarcry._bevelSize, y + h);
-        ctx.lineTo(x + w - RendererWarcry._bevelSize, y + h);
-        ctx.lineTo(x + w, y + h - RendererWarcry._bevelSize);
-        ctx.lineTo(x + w, y + RendererWarcry._bevelSize);
-        ctx.lineTo(x + w - RendererWarcry._bevelSize, y);
-        ctx.lineTo(x + RendererWarcry._bevelSize, y);
-        ctx.closePath();
-        ctx.fill();
-
-        ctx.restore();
+        return "";
     }
 
-    private renderLine(ctx: CanvasRenderingContext2D): void {
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = RendererWarcry._blackColor;
-        ctx.beginPath();
-        ctx.moveTo(this._currentX, this._currentY);
-        ctx.lineTo(this._currentX + this._maxWidth, this._currentY);
-        ctx.stroke();
-        this._currentY += 1;
+    private getAbilityRunemark(name: string) : string {
+        const name_ref = name.toLowerCase();
+        if (name_ref.includes("agile")) {
+            return "agile";
+        }
+        else if (name_ref.includes("ally")) {
+            return "ally";
+        }
+        else if (name_ref.includes("beast")) {
+            return "beast";
+        }
+        else if (name_ref.includes("berserker")) {
+            return "berserker";
+        }
+        else if (name_ref.includes("brute")) {
+            return "brute";
+        }
+        else if (name_ref.includes("bulwark")) {
+            return "bulwark";
+        }
+        else if (name_ref.includes("champion")) {
+            return "champion";
+        }
+        else if (name_ref.includes("destroyer")) {
+            return "destroyer";
+        }
+        else if (name_ref.includes("elite")) {
+            return "elite";
+        }
+        else if (name_ref.includes("ferocious")) {
+            return "ferocious";
+        }
+        else if (name_ref.includes("fly")) {
+            return "fly";
+        }
+        else if (name_ref.includes("frenzied")) {
+            return "frenzied";
+        }
+        else if (name_ref.includes("gargantuan")) {
+            return "gargantuan";
+        }
+        else if (name_ref.includes("icon")) {
+            return "icon-bearer";
+        }
+        else if (name_ref.includes("leader")) {
+            return "leader";
+        }
+        else if (name_ref.includes("minion")) {
+            return "minion";
+        }
+        else if (name_ref.includes("mount")) {
+            return "mount";
+        }
+        else if (name_ref.includes("mystic")) {
+            return "mystic";
+        }
+        else if (name_ref.includes("priest")) {
+            return "priest";
+        }
+        else if (name_ref.includes("scout")) {
+            return "scout";
+        }
+        else if (name_ref.includes("sentience")) {
+            return "sentience";
+        }
+        else if (name_ref.includes("terrifying")) {
+            return "terrifying";
+        }
+        else if (name_ref.includes("thrall")) {
+            return "thrall";
+        }
+        else if (name_ref.includes("trapper")) {
+            return "trapper";
+        }
+        else if (name_ref.includes("warrior")) {
+            return "warrior";
+        }
+
+        // Unknown
+        return "";
+    }
+
+    private getWeaponTypeRunemark(name: string) : string {
+        const name_ref = name.toLowerCase();
+        if (name_ref.includes("axe") || name_ref.includes("cleaver")) return "axe";
+        else if (name_ref.includes("claws")) return "claws";
+        else if (name_ref.includes("club")) return "club";
+        else if (name_ref.includes("dagger")) return "dagger";
+        else if (name_ref.includes("fangs") || name_ref.includes("teeth") || name_ref.includes("jaws")) return "fangs";
+        else if (name_ref.includes("hammer")) return "hammer";
+        else if (name_ref.includes("mace") || name_ref.includes("staff") || name_ref.includes("stave")) return "mace";
+        else if (name_ref.includes("scythe")) return "scythe";
+        else if (name_ref.includes("spear")) return "spear";
+        else if (name_ref.includes("sword") || name_ref.includes("blade")) return "sword";
+        else if (name_ref.includes("arcane bolt") || name_ref.includes("sorcerous bolt")) return "blast";
+        else if (name_ref.includes("bow")) return "ranged-weapon";
+        return "unarmed";
     }
 
 }
