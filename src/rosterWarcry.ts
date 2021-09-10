@@ -57,6 +57,7 @@ export class WarcryDamageTable {
 export class WarcryUnit {
     _name: string = "";
     _role: WarcryUnitRole = WarcryUnitRole.NONE;
+    _faction: string = "chaos-iron-golems";
     _keywords: Set<string> = new Set();
 
     _abilities: Map<string, string> = new Map();
@@ -93,6 +94,142 @@ export class RosterWarcry {
 
     }
 };
+
+function GetFactionFromKeyword(name: string) : string {
+    const name_ref = name.toLowerCase();
+    if (name_ref.includes("chaotic beasts")) {
+        return "chaos-beasts-of-chaos";
+    }
+    else if (name_ref.includes("corvus")) {
+        return "chaos-corvus-cabal";
+    }
+    else if (name_ref.includes("cypher")) {
+        return "chaos-cypher-lords";
+    }
+    else if (name_ref.includes("everchosen")) {
+        return "chaos-everchosen";
+    }
+    else if (name_ref.includes("golems")) {
+        return "chaos-iron-golems";
+    }
+    else if (name_ref.includes("khorne") && name_ref.includes("bloodbound")) {
+        return "chaos-khorne-bloodbound";
+    }
+    else if (name_ref.includes("khorne") && name_ref.includes("daemon")) {
+        return "chaos-khorne-daemons";
+    }
+    else if (name_ref.includes("nurgle") && name_ref.includes("rotbringer")) {
+        return "chaos-nurgle-rotbringers";
+    }
+    else if (name_ref.includes("nurgle") && name_ref.includes("daemon")) {
+        return "chaos-nurgle-daemons";
+    }
+    else if (name_ref.includes("scions")) {
+        return "chaos-scions-of-the-flame";
+    }
+    else if (name_ref.includes("skaven")) {
+        return "chaos-skaven";
+    }
+    else if (name_ref.includes("slaanesh") && name_ref.includes("sybariteI g")) {
+        return "chaos-slaanesh-syberites";
+    }
+    else if (name_ref.includes("slaanesh") && name_ref.includes("daemon")) {
+        return "chaos-slaanesh-daemons";
+    }
+    else if (name_ref.includes("slaves")) {
+        return "chaos-slaves-to-darkness";
+    }
+    else if (name_ref.includes("spire")) {
+        return "chaos-spire-tyrants";
+    }
+    else if (name_ref.includes("splintered")) {
+        return "chaos-splintered-fang";
+    }
+    else if (name_ref.includes("unmade")) {
+        return "chaos-the-unmade";
+    }
+    else if (name_ref.includes("tzeentch") && name_ref.includes("arcanite")) {
+        return "chaos-tzeentch-arcanites";
+    }
+    else if (name_ref.includes("tzeentch") && name_ref.includes("daemon")) {
+        return "chaos-tzeentch-daemons";
+    }
+    else if (name_ref.includes("untamed")) {
+        return "chaos-untamed-beasts";
+    }
+    else if (name_ref.includes("flesh")) {
+        return "death-flesh-eater-courts";
+    }
+    else if (name_ref.includes("nagash")) {
+        return "death-legions-of-nagash";
+    }
+    else if (name_ref.includes("nighthaunt")) {
+        return "death-nighthaunt";
+    }
+    else if (name_ref.includes("ossiarch")) {
+        return "death-ossiarch-bonereapers";
+    }
+    else if (name_ref.includes("soulblight")) {
+        return "death-soulblight-gravelords";
+    }
+    else if (name_ref.includes("bonesplitterz")) {
+        return "destruction-bonesplitterz";
+    }
+    else if (name_ref.includes("fimirach")) {
+        return "destruction-fimirach";
+    }
+    else if (name_ref.includes("gloomspite")) {
+        return "destruction-gloomspite-gitz";
+    }
+    else if (name_ref.includes("ironjawz")) {
+        return "destruction-ironjawz";
+    }
+    else if (name_ref.includes("kruleboyz")) {
+        return "destruction-kruleboyz";
+    }
+    else if (name_ref.includes("ogor")) {
+        return "destruction-ogor-mawtribes";
+    }
+    else if (name_ref.includes("cities of sigmar")) {
+        return "order-cities-of-sigmar";
+    }
+    else if (name_ref.includes("khaine")) {
+        return "order-daughters-of-khaine";
+    }
+    else if (name_ref.includes("fyreslayers")) {
+        return "order-fyreslayers";
+    }
+    else if (name_ref.includes("idoneth")) {
+        return "order-idoneth-deepkin";
+    }
+    else if (name_ref.includes("shadowstalkers")) {
+        return "order-khainite-shadowstalkers";
+    }
+    else if (name_ref.includes("kharadron")) {
+        return "order-kharadron-overlords";
+    }
+    else if (name_ref.includes("lumineth")) {
+        return "order-lumineth-realmlords";
+    }
+    else if (name_ref.includes("seraphon")) {
+        return "order-seraphon";
+    }
+    else if (name_ref.includes("stormcast")) {
+        if (name_ref.includes("sacrosanct"))
+            return "order-stormcast-eternals-sacrosanct";
+        else if (name_ref.includes("thunderstrike"))
+            return "order-stormcast-eternals-thunderstrike";
+        else if (name_ref.includes("vanguard"))
+            return "order-stormcast-eternals-vanguard";
+        else
+            return "order-stormcast-eternals-warrior";
+    }
+    else if (name_ref.includes("sylvaneth")) {
+        return "order-sylvaneth";
+    }
+
+    return "";
+}
 
 function LookupRole(roleText: string): WarcryUnitRole {
     if (roleText.includes('Leader')) return WarcryUnitRole.LEADER;
@@ -304,8 +441,15 @@ function ParseUnit(root: Element): WarcryUnit {
     for (let upgrade of upgrades) {
         let name = upgrade.getAttributeNode("name")?.nodeValue;
         if (name) {
-            // Keyword
-            unit._keywords.add(name);
+            // Factions (by convention?) start with a leading space.
+            let factionName = GetFactionFromKeyword(name);
+            if (factionName.length > 0) {
+                unit._faction = factionName;
+            }
+            else {
+                // Keyword
+                unit._keywords.add(name);
+            }
         }
     }
     return unit;

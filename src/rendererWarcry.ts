@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Rick Weyrauch,
+    Copyright 2020-2021 Rick Weyrauch,
 
     Permission to use, copy, modify, and/or distribute this software for any purpose 
     with or without fee is hereby granted, provided that the above copyright notice
@@ -160,16 +160,15 @@ export class RendererWarcry implements Renderer {
     protected renderUnitHtml(unit: WarcryUnit): HTMLDivElement {
 
         let unitRoot = document.createElement('div');
-        unitRoot.className = "container-fluid border";
+        unitRoot.className = "container-fluid border bg-light";
 
         let row0 = document.createElement('div');
         row0.className = "row align-items-center";
         unitRoot.append(row0);
        
-        let factionName = "chaos-tzeentch-arcanites";        
         let factionImg = document.createElement('div');
         factionImg.className = "col-1";
-        factionImg.innerHTML = `<img class="border border-dark rounded-circle warcry_card" src="./assets/warcry/runemarks/black/factions-${factionName}.svg" alt="">`;
+        factionImg.innerHTML = `<img class="border border-dark rounded-circle warcry_card" src="./assets/warcry/runemarks/black/factions-${unit._faction}.svg" alt="">`;
         row0.appendChild(factionImg);
 
         let unitName = document.createElement('div');
@@ -243,75 +242,6 @@ export class RendererWarcry implements Renderer {
         statsRow.appendChild(wounds);
 
         return unitRoot;
-    }
-
-    private getFactionRunemark(name: string) : string {
-        const name_ref = name.toLowerCase();
-        if (name_ref.includes("beasts of chaos")) {
-            return "chaos-beasts-of-chaos";
-        }
-        else if (name_ref.includes("corvus")) {
-            return "chaos-corvus-cabal";
-        }
-        else if (name_ref.includes("cypher")) {
-            return "chaos-cypher-lords";
-        }
-        else if (name_ref.includes("everchosen")) {
-            return "chaos-everchosen";
-        }
-        else if (name_ref.includes("golems")) {
-            return "chaos-iron-golems";
-        }
-        else if (name_ref.includes("khorne") && name_ref.includes("bloodbound")) {
-            return "chaos-khorne-bloodbound";
-        }
-        else if (name_ref.includes("khorne") && name_ref.includes("daemon")) {
-            return "chaos-khorne-daemons";
-        }
-        else if (name_ref.includes("nurgle") && name_ref.includes("rotbringer")) {
-            return "chaos-nurgle-rotbringers";
-        }
-        else if (name_ref.includes("nurgle") && name_ref.includes("daemon")) {
-            return "chaos-nurgle-daemons";
-        }
-        else if (name_ref.includes("scions")) {
-            return "chaos-scions-of-the-flame";
-        }
-        else if (name_ref.includes("skaven")) {
-            return "chaos-skaven";
-        }
-        else if (name_ref.includes("slaanesh") && name_ref.includes("sybariteI g")) {
-            return "chaos-slaanesh-syberites";
-        }
-        else if (name_ref.includes("slaanesh") && name_ref.includes("daemon")) {
-            return "chaos-slaanesh-daemons";
-        }
-        else if (name_ref.includes("slaves")) {
-            return "chaos-slaves-to-darkness";
-        }
-        else if (name_ref.includes("spire")) {
-            return "chaos-spire-tyrants";
-        }
-        else if (name_ref.includes("splintered")) {
-            return "chaos-splintered-fang";
-        }
-        else if (name_ref.includes("unmade")) {
-            return "chaos-the-unmade";
-        }
-        else if (name_ref.includes("tzeentch") && name_ref.includes("arcanite")) {
-            return "chaos-tzeentch-arcanites";
-        }
-        else if (name_ref.includes("tzeentch") && name_ref.includes("daemon")) {
-            return "chaos-tzeentch-daemons";
-        }
-        else if (name_ref.includes("untamed")) {
-            return "chaos-untamed-beasts";
-        }
-        else if (name_ref.includes("flesh")) {
-            return "death-flesh-eater-courts";
-        }
-
-        return "";
     }
 
     private getAbilityRunemark(name: string) : string {
