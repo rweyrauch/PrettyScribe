@@ -241,7 +241,66 @@ export class RendererWarcry implements Renderer {
         let wounds = this.createCharacteristicCard("wounds", unit._wounds.toString());
         statsRow.appendChild(wounds);
 
+        if (unit._damageTable.length > 0) {
+
+            let row3 = document.createElement('div');
+            row3.className = "row w-75 align-items-center";
+            unitRoot.append(row3);
+    
+            let title = document.createElement('div');
+            title.className = "p-2 mb-2 text-center text-uppercase text-black";
+            title.innerHTML = `<span class="warcry_font">Damage Table</span>`;
+            row3.appendChild(title);
+
+            let labels = [{ name: "Damage Points Allocated", width: '50%'}, {name:"Move", width:'25%'}, {name:"Damage ", width:'25%'}];
+
+            let i = 1;
+            for (let dt of unit._damageTable[0]._table) {
+                 labels[i++].name = dt[0];
+            }
+            
+            const table = this.createTable(labels);
+            row3.appendChild(table);
+
+            let body = document.createElement('tbody');
+            table.appendChild(body);        
+
+            for (let wt of unit._damageTable) {
+                 let tr = document.createElement('tr');
+
+                 let v = document.createElement('td');
+                 v.innerHTML = wt._name;
+                 tr.appendChild(v);
+
+                 for (let value of wt._table) {
+                     let v = document.createElement('td');
+                     v.innerHTML = value[1];
+                     tr.appendChild(v);
+                 }
+                 body.appendChild(tr);                                      
+            }
+       }
+
         return unitRoot;
+    }
+
+    protected createTable(heading: {name: string, width: string}[]): HTMLTableElement {
+        const table = document.createElement('table');
+        table.className = "table table-bordered table-sm text-center";
+        const thead = document.createElement('thead');
+        table.appendChild(thead);
+        thead.classList.add('warcry_light');
+        const tr = document.createElement('tr');
+        thead.appendChild(tr);
+        heading.forEach(element => {
+            let th = document.createElement('th');
+            th.scope = "col";
+            th.innerHTML = element.name;
+            th.style.width = element.width;
+            tr.appendChild(th);
+        });
+
+        return table;
     }
 
     private getAbilityRunemark(name: string) : string {

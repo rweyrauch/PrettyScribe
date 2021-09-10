@@ -63,9 +63,9 @@ export class WarcryUnit {
     _abilities: Map<string, string> = new Map();
 
     // Characteristics
-    _move: number = 1;
-    _wounds: number = 1;
-    _toughness: number = 1;
+    _move: string = "1";
+    _wounds: string = "1";
+    _toughness: string = "1";
 
     _weapons: WarcryWeapon[] = [];
  
@@ -371,9 +371,9 @@ function ParseUnit(root: Element): WarcryUnit {
                     let charName = char.getAttributeNode("name")?.nodeValue;
                     if (charName && char.textContent) {
                         switch (charName) {
-                            case 'Move': unit._move = +char.textContent; break;
-                            case 'Wounds': unit._wounds = +char.textContent; break;
-                            case 'Toughness': unit._toughness = +char.textContent; break;
+                            case 'Move': unit._move = char.textContent; break;
+                            case 'Wounds': unit._wounds = char.textContent; break;
+                            case 'Toughness': unit._toughness = char.textContent; break;
                         }
                     }
                 }
@@ -451,7 +451,6 @@ function ParseUnit(root: Element): WarcryUnit {
     for (let upgrade of upgrades) {
         let name = upgrade.getAttributeNode("name")?.nodeValue;
         if (name) {
-            // Factions (by convention?) start with a leading space.
             let factionName = GetFactionRunemarkFromKeyword(name);
             if (factionName.length > 0) {
                 unit._faction = factionName;
