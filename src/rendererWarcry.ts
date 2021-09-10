@@ -399,17 +399,20 @@ export class RendererWarcry implements Renderer {
     private getWeaponTypeRunemark(name: string) : string {
         const name_ref = name.toLowerCase();
         if (name_ref.includes("axe") || name_ref.includes("cleaver")) return "axe";
-        else if (name_ref.includes("claws")) return "claws";
+        else if (name_ref.includes("claws") || name_ref.includes("talon") || name_ref.includes("grasping") || name_ref.includes("pincher")) return "claws";
         else if (name_ref.includes("club")) return "club";
-        else if (name_ref.includes("dagger")) return "dagger";
-        else if (name_ref.includes("fangs") || name_ref.includes("teeth") || name_ref.includes("jaws")) return "fangs";
-        else if (name_ref.includes("hammer")) return "hammer";
-        else if (name_ref.includes("mace") || name_ref.includes("staff") || name_ref.includes("stave")) return "mace";
+        else if (name_ref.includes("dagger") || name_ref.includes("shank")) return "dagger";
+        else if (name_ref.includes("fangs") || name_ref.includes("teeth") || name_ref.includes("jaws") || name_ref.includes("maw")) return "fangs";
+        else if (name_ref.includes("hammer") || name_ref.includes("anvil")) return "hammer";
+        else if (name_ref.includes("mace") || name_ref.includes("staff") || name_ref.includes("stave") || name_ref.includes("flail")) return "mace";
         else if (name_ref.includes("scythe")) return "scythe";
-        else if (name_ref.includes("spear")) return "spear";
-        else if (name_ref.includes("sword") || name_ref.includes("blade")) return "sword";
+        else if (name_ref.includes("spear") || name_ref.includes("glaive") || name_ref.includes("halberd") || 
+                 name_ref.includes("lance") || name_ref.includes("harpoon") || name_ref.includes("polearm")) return "spear";
+        else if (name_ref.includes("sword") || name_ref.includes("blade") || name_ref.includes("sickles")) return "sword";
         else if (name_ref.includes("arcane bolt") || name_ref.includes("sorcerous bolt")) return "blast";
-        else if (name_ref.includes("bow")) return "ranged-weapon";
+        else if (name_ref.includes("bow") || name_ref.includes("bolas") || name_ref.includes("cannon") || 
+                 name_ref.includes("pistol") || name_ref.includes("javelin")) return "ranged-weapon";
+        else if (name_ref.includes("whip")) return "reach-weapon";
         return "unarmed";
     }
 
