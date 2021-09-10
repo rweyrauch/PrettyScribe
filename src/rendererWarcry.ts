@@ -168,7 +168,7 @@ export class RendererWarcry implements Renderer {
        
         let factionImg = document.createElement('div');
         factionImg.className = "col-1";
-        factionImg.innerHTML = `<img class="border border-dark rounded-circle warcry_card" src="./assets/warcry/runemarks/black/factions-${unit._faction}.svg" alt="">`;
+        factionImg.innerHTML = `<img class="border border-dark rounded-circle warcry_card" src="./assets/warcry/runemarks/black/${unit._faction}.svg" alt="">`;
         row0.appendChild(factionImg);
 
         let unitName = document.createElement('div');
