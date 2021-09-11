@@ -382,7 +382,8 @@ function ParseUnit(root: Element): AoSUnit {
         let profType = prof.getAttributeNode("typeName")?.nodeValue;
         if (profName && profType) {
             if (profType == "Unit") {
-                unit._name = profName;
+                if (!unit._name)
+                    unit._name = profName;
                 let chars = prof.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;
