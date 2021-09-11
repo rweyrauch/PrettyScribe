@@ -271,7 +271,7 @@ export class RendererAoS implements Renderer {
     protected renderUnitHtml(unit: AoSUnit): HTMLDivElement {
 
         let unitRoot = document.createElement('div');
-        unitRoot.className = "container-fluid";
+        unitRoot.className = "container-fluid aos_unit";
         let unitRow = document.createElement('div');
         unitRow.className = "row";
         unitRoot.append(unitRow);
@@ -504,7 +504,7 @@ export class RendererAoS implements Renderer {
             row.className = "row";
             keywords.appendChild(row);
             let label = document.createElement('div');
-            label.className = "col-2 border aos_dark text-center";
+            label.className = "col-3 border aos_dark text-center";
             label.innerHTML = "<strong>KEYWORDS</strong>";
             row.appendChild(label);
             let all_keywords = "";

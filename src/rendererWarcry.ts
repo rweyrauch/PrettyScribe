@@ -160,7 +160,7 @@ export class RendererWarcry implements Renderer {
     protected renderUnitHtml(unit: WarcryUnit): HTMLDivElement {
 
         let unitRoot = document.createElement('div');
-        unitRoot.className = "container-fluid border bg-light";
+        unitRoot.className = "container-fluid warcry_unit border bg-light";
 
         let row0 = document.createElement('div');
         row0.className = "row align-items-center";
@@ -200,7 +200,7 @@ export class RendererWarcry implements Renderer {
         unitRoot.append(row1);
 
         let weapon1 = document.createElement('div');
-        weapon1.className = "col";
+        weapon1.className = "col-7";
         row1.appendChild(weapon1);
         if (unit._weapons.length == 2) {
             this.createWeapon(unit._weapons[1], weapon1);
@@ -215,7 +215,7 @@ export class RendererWarcry implements Renderer {
         unitRoot.append(row2);
 
         let weapon2 = document.createElement('div');
-        weapon2.className = "col";
+        weapon2.className = "col-7";
         row2.appendChild(weapon2);
         if (unit._weapons.length >= 1) {
             this.createWeapon(unit._weapons[0], weapon2);

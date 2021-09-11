@@ -2,7 +2,6 @@ body {
     /* font-family: 'Fjalla One', sans-serif; */
     font-family: 'Source Sans Pro', sans-serif;
     font-family: 'Crimson Pro', serif;
-    break-after: avoid;
 }
 
 @font-face {
@@ -15,6 +14,10 @@ body {
          url("../assets/fonts/rodchenkoctt.woff") format("woff"),
          url("../assets/fonts/rodchenkoctt.ttf") format("truetype"),
          url("../assets/fonts/rodchenkoctt.svg#rodchenkoctt") format("svg");         
+}
+
+.aos_unit {
+    break-inside: avoid;
 }
 
 .aos_font {
@@ -81,6 +84,10 @@ body {
 .aos_table {
     border-top: 1px solid #8a7c32;
     border-bottom: 1px solid #8a7c32;;
+}
+
+.warcry_unit {
+    break-inside: avoid;
 }
 
 .warcry_font {
