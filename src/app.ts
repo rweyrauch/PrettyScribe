@@ -14,6 +14,8 @@
     OF THIS SOFTWARE.
 */
 
+import { CreateKT21Roster } from "./rosterKT21";
+import { RendererKT21 } from "./rendererKT21";
 import { Create40kRoster } from "./roster40k";
 import { Renderer40k } from "./renderer40k";
 import { Create30kRoster } from "./roster30k";
@@ -70,6 +72,16 @@ function parseXML(xmldata: string) {
         if (roster) {
           if (roster._forces.length > 0) {
             const renderer: Renderer40k = new Renderer40k(roster);
+            renderer.render(rosterTitle, rosterList, forceUnits);
+          }
+        }
+      }
+      else if (gameType == "Warhammer 40,000: Kill Team (2021)") {
+        //alert("Kill Team not supported yet.");
+        let roster = CreateKT21Roster(doc);
+        if (roster) {
+          if (roster._forces.length > 0) {
+            const renderer: RendererKT21 = new RendererKT21(roster);
             renderer.render(rosterTitle, rosterList, forceUnits);
           }
         }

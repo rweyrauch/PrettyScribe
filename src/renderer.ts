@@ -57,6 +57,7 @@ export function RenderTextFull(ctx: CanvasRenderingContext2D, text: string, x: n
         }
     }
 }
+
 export function RenderText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, h: number, how: Justification): void {
     RenderTextFull(ctx, text, x, y, w, h, how, VertAlign.Center);
 }
