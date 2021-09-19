@@ -44,6 +44,7 @@ export class RendererAoS implements Renderer {
 
             const headerInfo = [{ name: "NAME", width: '35%'}, {name:"ROLE", width:'15%'}, {name:"SELECTIONS", width:'40%'}, {name:"POINTS", width:'10%'}];
             const table = this.createTable(headerInfo);
+            table.className = "table table-sm aos_font";
             forceTitle.appendChild(table);
 
             let body = document.createElement('tbody');
@@ -143,6 +144,7 @@ export class RendererAoS implements Renderer {
 
                     const headerInfo = [{ name: "NAME", width: '25%'}, {name:"CASTING VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
                     const table = this.createTable(headerInfo);
+                    table.className = "table table-sm aos_font";
                     let body = document.createElement('tbody');
                     table.appendChild(body);        
                     for (let spell of force._realmOfBattle._spells) {
@@ -242,7 +244,6 @@ export class RendererAoS implements Renderer {
 
     protected createTable(heading: {name: string, width: string}[]): HTMLTableElement {
         const table = document.createElement('table');
-        table.className = "table aos_table aos_font table-sm";
         const thead = document.createElement('thead');
         table.appendChild(thead);
         thead.classList.add('aos_light');
@@ -291,13 +292,14 @@ export class RendererAoS implements Renderer {
         }
         unitRow.append(unitStats);
 
+
         let unitInfo = document.createElement('div');
         unitInfo.className = "col";
         unitInfo.innerHTML = `<div class="p-2 mb-2 aos_medium text-center text-uppercase text-black">
             <span class="h3">${unit._name}</span></div>`;
 
         let missileWeaponTable = document.createElement('table');
-        missileWeaponTable.className = "table table-sm aos_font text-center";
+        missileWeaponTable.className = "table table-sm aos_table aos_font text-center";
         let thead = document.createElement('thead');
         missileWeaponTable.appendChild(thead);
         missileWeaponTable.innerHTML = 
@@ -314,7 +316,7 @@ export class RendererAoS implements Renderer {
         missileWeaponTable.appendChild(missileWeaponBody);
 
         let meleeWeaponTable = document.createElement('table');
-        meleeWeaponTable.className = "table table-sm aos_font text-center";
+        meleeWeaponTable.className = "table table-sm aos_table aos_font text-center";
         thead = document.createElement('thead');
         meleeWeaponTable.appendChild(thead);
         meleeWeaponTable.innerHTML = 
@@ -355,6 +357,33 @@ export class RendererAoS implements Renderer {
             unitInfo.appendChild(meleeWeaponTable);
         }
         unitRow.append(unitInfo);
+
+        if (unit._woundTracker) {
+            let labels = [{ name: "Wounds Suffered", width: '25%'}, {name:"Attribute 1", width:'25%'}, {name:"Attribute 2", width:'25%'}, {name:"Attribute 3", width:'25%'}];
+
+            //console.log("Num Labels: " + unit._woundTracker._labels.length);
+            let i = 0;
+            for (let key of unit._woundTracker._labels) {
+                 labels[i++].name = key;
+            }
+            
+            const table = this.createTable(labels);
+            table.className = "table table-sm aos_table aos_font text-center";
+            unitInfo.appendChild(table);
+
+            let body = document.createElement('tbody');
+            table.appendChild(body);        
+
+            for (let wt of unit._woundTracker._table) {
+                let tr = document.createElement('tr');
+                for (let value of wt) {
+                    let v = document.createElement('td');
+                    v.innerHTML = value;
+                    tr.appendChild(v);
+                }
+                body.appendChild(tr);                                      
+            }
+        }
 
         if (unit._abilities.size > 0) {
             let abilities = document.createElement('h4');
@@ -409,8 +438,9 @@ export class RendererAoS implements Renderer {
             spells.innerHTML = "SPELLS";
             unitInfo.appendChild(spells);
 
-            const headerInfo = [{ name: "NAME", width: '25%'}, {name:"CASTING VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
+            const headerInfo = [{ name: "NAME", width: '20%'}, {name:"CASTING VALUE", width:'10%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'60%'}];
             const table = this.createTable(headerInfo);
+            table.className = "table table-sm aos_table aos_font";
             let body = document.createElement('tbody');
             table.appendChild(body);        
             for (let spell of unit._spells) {
@@ -435,8 +465,9 @@ export class RendererAoS implements Renderer {
             let prayers = document.createElement('h4');
             prayers.innerHTML = "PRAYERS";
             unitInfo.appendChild(prayers);
-            const headerInfo = [{ name: "NAME", width: '25%'}, {name:"ANSWER VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
+            const headerInfo = [{ name: "NAME", width: '20%'}, {name:"ANSWER VALUE", width:'10%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'60%'}];
             const table = this.createTable(headerInfo);
+            table.className = "table table-sm aos_table aos_font";
             let body = document.createElement('tbody');
             table.appendChild(body);        
             for (let prayer of unit._prayers) {
@@ -467,33 +498,6 @@ export class RendererAoS implements Renderer {
                 a.className = "aos_font";
                 a.innerHTML = `<strong>${artefact[0]}:  </strong>${artefact[1]}`;
                 artefacts.appendChild(a);
-            }
-        }
-
-        if (unit._woundTracker) {
-            let labels = [{ name: "Wounds Suffered", width: '25%'}, {name:"Attribute 1", width:'25%'}, {name:"Attribute 2", width:'25%'}, {name:"Attribute 3", width:'25%'}];
-
-            //console.log("Num Labels: " + unit._woundTracker._labels.length);
-            let i = 0;
-            for (let key of unit._woundTracker._labels) {
-                 labels[i++].name = key;
-            }
-            
-            const table = this.createTable(labels);
-            table.className = "table table-sm aos_font text-center";
-            unitInfo.appendChild(table);
-
-            let body = document.createElement('tbody');
-            table.appendChild(body);        
-
-            for (let wt of unit._woundTracker._table) {
-                let tr = document.createElement('tr');
-                for (let value of wt) {
-                    let v = document.createElement('td');
-                    v.innerHTML = value;
-                    tr.appendChild(v);
-                }
-                body.appendChild(tr);                                      
             }
         }
 
