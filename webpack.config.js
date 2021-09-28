@@ -23,5 +23,10 @@ module.exports = {
             '.ts', '.js'
         ],
         fallback: { "stream": false }
+    },
+    devServer: {
+        static: {
+            directory: __dirname,
+        },
     }
 };
