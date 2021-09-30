@@ -106,7 +106,7 @@ export class RendererAoS implements Renderer {
 
             if (force._allegiance._spells.length > 0) {
                 let title = document.createElement('h4');
-                title.innerHTML = "Allegiance Spells";
+                title.innerHTML = "ALLEGIANCE SPELLS";
                 allegianceAbilities.append(title);
 
                 const headerInfo = [{ name: "NAME", width: '25%'}, {name:"CASTING VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
@@ -136,7 +136,7 @@ export class RendererAoS implements Renderer {
             if (force._grandStrategy && force._grandStrategy._name != "") {
                 let header = document.createElement('h3');
                 allegianceAbilities.appendChild(header);
-                header.textContent = "Grand Strategy";
+                header.textContent = "GRAND STRATEGY";
                 let row = document.createElement('div');
                 let name = document.createElement('h4');
                 name.textContent = force._grandStrategy._name;
@@ -150,7 +150,7 @@ export class RendererAoS implements Renderer {
             if (force._triumph && force._triumph._name != "") {
                 let header = document.createElement('h3');
                 allegianceAbilities.appendChild(header);
-                header.textContent = "Triumph";
+                header.textContent = "TRIUMPH";
                 let row = document.createElement('div');
                 let name = document.createElement('h4');
                 name.textContent = force._triumph._name;
@@ -161,10 +161,10 @@ export class RendererAoS implements Renderer {
                 allegianceAbilities.appendChild(row);
             }
 
-            if (force._realmOfBattle) {
+            if (force._realmOfBattle && force._realmOfBattle._name.length > 0) {
                 let header = document.createElement('h3');
                 allegianceAbilities.appendChild(header);
-                header.textContent = "Realm of Battle (" + force._realmOfBattle._name + ")";
+                header.textContent = "REALM OF BATTLE (" + force._realmOfBattle._name + ")";
                 
                 if (force._realmOfBattle._spells.length > 0) {
                     let title = document.createElement('h4');
@@ -224,7 +224,7 @@ export class RendererAoS implements Renderer {
             for (let rule of force._rules) {
                 let header = document.createElement('h3');
                 allegianceAbilities.appendChild(header);
-                header.textContent = "Rules";
+                header.textContent = "RULES";
                 let row = document.createElement('div');
                 let name = document.createElement('h4');
                 name.textContent = rule[0];
@@ -238,7 +238,7 @@ export class RendererAoS implements Renderer {
             for (let battalion of force._battalions) {
                 let battalionHeader = document.createElement('h3');
                 allegianceAbilities.appendChild(battalionHeader);
-                battalionHeader.textContent = battalion._name;
+                battalionHeader.textContent = battalion._name.toUpperCase();
                 for (let ability of battalion._abilities) {
                     let row = document.createElement('div');
                     let name = document.createElement('h4');
