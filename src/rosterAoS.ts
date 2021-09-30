@@ -50,6 +50,7 @@ export class AoSAllegiance {
     _name: string = "";
     _battleTraits: Map<string, string> = new Map();
     _commandAbilities: Map<string, string> = new Map();
+    _spells: AoSSpell[] = [];
 }
 
 export class AoSGrandStrategy {
@@ -663,6 +664,22 @@ function ParseAllegiance(root: Element): AoSAllegiance | null {
                             allegiance?._commandAbilities.set(profName, description);
                         }
                     }
+                }
+                else if (profType == "Spell") {
+                    let spell = new AoSSpell();
+                    spell._name = profName;
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                         if (charName && char.textContent) {
+                            switch (charName) {
+                                case 'Casting Value': spell._castingValue = +char.textContent; break;
+                                case 'Range': spell._range = char.textContent; break;
+                                case 'Description': spell._description = char.textContent; break;
+                            }
+                        }
+                    }
+                    allegiance?._spells.push(spell);
                 }
                 else {
                     console.log("Unexpected allegiance profile type: " + profType);

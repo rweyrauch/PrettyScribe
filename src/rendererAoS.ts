@@ -104,6 +104,35 @@ export class RendererAoS implements Renderer {
                 }
             }
 
+            if (force._allegiance._spells.length > 0) {
+                let title = document.createElement('h4');
+                title.innerHTML = "Allegiance Spells";
+                allegianceAbilities.append(title);
+
+                const headerInfo = [{ name: "NAME", width: '25%'}, {name:"CASTING VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
+                const table = this.createTable(headerInfo);
+                table.className = "table table-sm aos_font";
+                let body = document.createElement('tbody');
+                table.appendChild(body);        
+                for (let spell of force._allegiance._spells) {
+                    let tr = document.createElement('tr');
+                    let spellName = document.createElement('td');
+                    spellName.innerHTML = spell._name;
+                    let value = document.createElement('td');
+                    value.innerHTML = spell._castingValue.toString();
+                    let range = document.createElement('td');
+                    range.innerHTML = spell._range.toString();
+                    let desc = document.createElement('td');
+                    desc.innerHTML = spell._description;
+                    tr.appendChild(spellName);
+                    tr.appendChild(value);
+                    tr.appendChild(range);
+                    tr.appendChild(desc);
+                    body.appendChild(tr);                       
+                }
+                allegianceAbilities.appendChild(table);
+            }
+
             if (force._grandStrategy && force._grandStrategy._name != "") {
                 let header = document.createElement('h3');
                 allegianceAbilities.appendChild(header);
