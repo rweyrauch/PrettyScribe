@@ -26,6 +26,7 @@ import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
 import JSZip from "jszip";
 import { JSZipObject } from 'jszip';
+import { reject } from "lodash";
 
 function cleanup(): void {
   $('#roster-title').empty();
@@ -127,6 +128,16 @@ function parseXML(xmldata: string) {
   }
 }
 
+const unzip = async (file: string) : Promise<string> => {
+  if (file.charAt(0) !== 'P') {
+    return file
+  } else {
+    const jszip = new JSZip()
+    const zip = await jszip.loadAsync(file)
+    return zip.file(/[^/]+\.ros/)[0].async('string') // Get roster files that are in the root
+  }
+}
+
 let fileChangeEvent: Event | null = null;
 
 function handleFileSelect(event: Event) {
@@ -144,43 +155,17 @@ function handleFileSelect(event: Event) {
   if (files) {
     if (event?.type !== "resize") fileChangeEvent = event;
 
-    // files is a FileList of File objects. List some properties.
-    let output = [];
-    for (let f of files) {
-
-      const fileExt = getFileExtension(f.name);
-      if (fileExt === "rosz" || fileExt.length === 0) {
-        let zip = new JSZip();
-        zip.loadAsync(f).then(function(zip: JSZip) {
-          zip.forEach(function(path: string, file: JSZipObject) {
-            file.async("text").then(function(xmldata) {
-              parseXML(xmldata);
-            });
-          })
-        }).catch(function(reason) {
-          $('#errorText').html('Failed to load compressed roster file, ' + f.name + ', reason ' + reason);
-          $('#errorDialog').modal();
-        });
-      }
-      else if (fileExt === "ros") {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const re = e.target;
-          if (re && re.result) {
-            let sourceData = re.result;
-            // Skip encoding tag
-            const xmldatastart = sourceData.toString().indexOf(',') + 1;
-            const xmldata = window.atob(sourceData.toString().slice(xmldatastart));
-            parseXML(xmldata);
-          }
-        }
-        reader.readAsDataURL(f);
-      }
-      else {
-        $('#errorText').html('PrettyScribe only supports .ros and .rosz files.  Selected file is a \'' + fileExt + "\' file.");
-        $('#errorDialog').modal();
-      }
+    const reader = new FileReader();
+    reader.onerror = () => {
+      reader.abort();
+      reject(new DOMException('Failed to read roster file.'));
     }
+    reader.onloadend = async () => {
+      const content = reader.result as string;
+      const xmldata = await unzip(content);
+      parseXML(xmldata);
+    }
+    reader.readAsBinaryString(files[0]);
   }
 }
 

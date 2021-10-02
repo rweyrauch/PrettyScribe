@@ -6,7 +6,8 @@ module.exports = {
     output: {
         filename: 'prettyscribe.js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'dist'
+        publicPath: 'dist',
+        clean: true,
     },
     devtool: 'inline-source-map',
     module: {
@@ -14,7 +15,15 @@ module.exports = {
             {
                 test: /\.ts$/,
                 use: 'ts-loader',
-                exclude: /node_modules/
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
             }
         ]
     },

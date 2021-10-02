@@ -10,15 +10,24 @@ module.exports = {
                 test: /\.ts$/,
                 use: 'ts-loader',
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: 'asset/resource',
             }
         ]
     },
     plugins: [
-        new CleanPlugin.CleanWebpackPlugin()
+        new CleanPlugin.CleanWebpackPlugin(),
     ],
     output: {
         filename: 'prettyscribe.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        clean: true,
     },
     resolve: {
         extensions: [
