@@ -25,7 +25,6 @@ import { RendererAoS } from "./rendererAoS";
 import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
 import JSZip from "jszip";
-import { JSZipObject } from 'jszip';
 import { reject } from "lodash";
 
 function cleanup(): void {
