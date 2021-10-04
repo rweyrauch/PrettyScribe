@@ -235,6 +235,29 @@ export class RendererAoS implements Renderer {
                 allegianceAbilities.appendChild(row);               
             }
 
+            if (force._battleTactics.size > 0) {
+                let header = document.createElement('h3');
+                header.innerHTML = "BATTLE TACTICS";
+                allegianceAbilities.appendChild(header);
+    
+                const headerInfo = [{ name: "NAME", width: '20%'}, {name:"DESCRIPTION", width:'80%'}];
+                const table = this.createTable(headerInfo);
+                table.className = "table table-sm aos_table aos_font";
+                let body = document.createElement('tbody');
+                table.appendChild(body);        
+                for (let tactic of force._battleTactics) {
+                    let tr = document.createElement('tr');
+                    let tacticName = document.createElement('td');
+                    tacticName.innerHTML = tactic[0];
+                    let desc = document.createElement('td');
+                    desc.innerHTML = tactic[1];
+                    tr.appendChild(tacticName);
+                    tr.appendChild(desc);
+                    body.appendChild(tr);                       
+                }
+                allegianceAbilities.appendChild(table);
+            }
+
             for (let battalion of force._battalions) {
                 let battalionHeader = document.createElement('h3');
                 allegianceAbilities.appendChild(battalionHeader);

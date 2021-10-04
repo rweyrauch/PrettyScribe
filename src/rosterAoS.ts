@@ -177,6 +177,7 @@ export class AoSForce {
     _battalions: AoSCoreBattalion[] = [];
     _realmOfBattle: AoSRealmOfBattle;
     _rules: Map<string, string> = new Map();
+    _battleTactics: Map<string, string> = new Map();
 
     constructor() {
         this._allegiance = new AoSAllegiance();
@@ -334,6 +335,24 @@ function ParseSelections(root: Element, force: AoSForce): void {
             let triumph = ParseTriumph(selection);
             if (triumph) {
                 force._triumph = triumph;
+            }
+        }
+        else if (selectionName.includes("Battle Tactic")) {
+            let profiles = selection.querySelectorAll("profiles>profile");
+            for (let prof of profiles) {
+                for (let prof of profiles) {
+                    let profName = prof.getAttributeNode("name")?.nodeValue;
+                    let profType = prof.getAttributeNode("typeName")?.nodeValue;
+                    if (profName && profType) {
+                        let chars = prof.querySelectorAll("characteristics>characteristic");
+                        for (let char of chars) {
+                            let charName = char.getAttributeNode("name")?.nodeValue;
+                            if (charName && char.textContent) {
+                                force._battleTactics.set(profName, char.textContent);
+                            }        
+                        }
+                    }
+                }        
             }
         }
         else {
@@ -549,7 +568,7 @@ function ParseUnit(root: Element): AoSUnit {
                     unit._woundTracker._table.push(values);
                     values = [];
                 }
-            }                
+            }
             else {
                 console.log("Unknown unit profile type: " + profType);
             }
