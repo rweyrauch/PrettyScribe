@@ -52,10 +52,11 @@ export class RendererAoS implements Renderer {
 
             let body = document.createElement('tbody');
             table.appendChild(body);
+
             for (let unit of force._units) {
               let tr = document.createElement('tr');
               let uname = document.createElement('td');
-              uname.innerHTML = unit._name;
+              uname.innerHTML = `<a href="#unit_${unit._id}">${unit._name}</a>`;
               let role = document.createElement('td');
               role.innerHTML = AoSUnitRoleToString[unit._role];
               let selections = document.createElement('td');
@@ -71,7 +72,7 @@ export class RendererAoS implements Renderer {
               tr.appendChild(role);
               tr.appendChild(selections);
               tr.appendChild(pts);
-              body.appendChild(tr);    
+              body.appendChild(tr);  
             }
 
             let allegianceAbilities = document.createElement('div');
@@ -290,7 +291,6 @@ export class RendererAoS implements Renderer {
             divider.className = "aos_dark";
             forces.appendChild(divider);             
  
-            let prevUnit: AoSUnit | null = null;
             for (let unit of force._units) {
                forces.appendChild(this.renderUnitHtml(unit));  
 
@@ -332,10 +332,9 @@ export class RendererAoS implements Renderer {
 
         let unitRoot = document.createElement('div');
         unitRoot.className = "container-fluid aos_unit";
-
-        let unitName = document.createElement('div');
+         let unitName = document.createElement('div');
         unitName.className = "p-2 mb-2 aos_medium text-center text-uppercase text-black";
-        unitName.innerHTML = `<span class="h3">${unit._name}</span>`;
+        unitName.innerHTML = `<span class="h3"><a name="unit_${unit._id}">${unit._name}</a></span>`;
         unitRoot.append(unitName);
 
         let unitRow = document.createElement('div');

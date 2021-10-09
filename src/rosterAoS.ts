@@ -113,6 +113,7 @@ export const AoSUnitRoleToString: string[] = [
 export class AoSUnit {
 
     _name: string = "";
+    _id: number = 0;
     _role: AoSUnitRole = AoSUnitRole.NONE;
     _keywords: Set<string> = new Set();
 
@@ -281,6 +282,7 @@ function ParseForces(doc: XMLDocument, roster: RosterAoS): void {
 function ParseSelections(root: Element, force: AoSForce): void {
     let selections = root.querySelectorAll("force>selections>selection");
 
+    let unit_id = 0;
     for (let selection of selections) {
         // What kind of selection is this
         let selectionName = selection.getAttributeNode("name")?.nodeValue;
@@ -358,6 +360,7 @@ function ParseSelections(root: Element, force: AoSForce): void {
         else {
             let unit = ParseUnit(selection);
             if (unit && (unit._role != AoSUnitRole.NONE)) {
+                unit._id = unit_id++;
                 force._units.push(unit);
             }
         }
