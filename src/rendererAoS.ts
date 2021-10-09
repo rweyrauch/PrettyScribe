@@ -31,7 +31,10 @@ export class RendererAoS implements Renderer {
         }
 
         if (title) {
-            title.innerHTML = '<h3>' + this._roster._name + ' (' + this._roster._points + ' pts, ' + this._roster._commandPoints + ' CP)</h3>';
+            title.innerHTML = '<h3>' + this._roster._name.toUpperCase() + ' (' + this._roster._points + ' pts, ' + this._roster._commandPoints + ' CP)</h3>';
+            let roster = document.createElement('h3');
+            roster.textContent = "ROSTER";
+            title.appendChild(roster);
         }
 
         for (let force of this._roster._forces) {
@@ -72,10 +75,14 @@ export class RendererAoS implements Renderer {
             }
 
             let allegianceAbilities = document.createElement('div');
+            let allegianceHeader = document.createElement('h3');
+            allegianceHeader.textContent = force._allegiance._name.toUpperCase();
+            allegianceAbilities.appendChild(allegianceHeader);
+            
             if (force._allegiance._commandAbilities.size > 0) {
-                let allegianceHeader = document.createElement('h3');
-                allegianceAbilities.appendChild(allegianceHeader);
-                allegianceHeader.textContent = force._allegiance._name + " Allegiance Abilities";
+                let abilityHeader = document.createElement('h4');
+                allegianceAbilities.appendChild(abilityHeader);
+                abilityHeader.textContent = "ABILITIES";
                 for (let command of force._allegiance._commandAbilities) {
                     let row = document.createElement('div');
                     let name = document.createElement('h4');
@@ -89,9 +96,9 @@ export class RendererAoS implements Renderer {
             }
 
             if (force._allegiance._battleTraits.size > 0) {
-                let traitHeader = document.createElement('h3');
+                let traitHeader = document.createElement('h4');
                 allegianceAbilities.appendChild(traitHeader);
-                traitHeader.textContent = force._allegiance._name + " Allegiance Battle Traits";
+                traitHeader.textContent = "BATTLE TRAITS";
                 for (let trait of force._allegiance._battleTraits) {
                     let row = document.createElement('div');
                     let name = document.createElement('h4');
@@ -325,30 +332,31 @@ export class RendererAoS implements Renderer {
 
         let unitRoot = document.createElement('div');
         unitRoot.className = "container-fluid aos_unit";
+
+        let unitName = document.createElement('div');
+        unitName.className = "p-2 mb-2 aos_medium text-center text-uppercase text-black";
+        unitName.innerHTML = `<span class="h3">${unit._name}</span>`;
+        unitRoot.append(unitName);
+
         let unitRow = document.createElement('div');
         unitRow.className = "row";
         unitRoot.append(unitRow);
-
-        let unitStats = document.createElement('div');
-        unitStats.className = "col-3";
+        
         if (unit.isNormalUnit()) {
+            let unitStats = document.createElement('div');
+            unitStats.className = "col-6 col-md-3";
             unitStats.innerHTML = `<div class="aos_unit_stats">
                 <div class="aos_unit_move"><p class="h2">${unit._move}</p></div>
                 <div class="aos_unit_wounds"><p class="h2">${unit._wounds}</p></div>
                 <div class="aos_unit_bravery"><p class="h2">${unit._bravery}</p></div>
                 <div class="aos_unit_save"><p class="h2">${unit._save}</p></div>      
                 </div>`;
+            unitRow.append(unitStats);
         }
-        else {
-            unitStats.innerHTML = '<div></div>';
-        }
-        unitRow.append(unitStats);
-
 
         let unitInfo = document.createElement('div');
         unitInfo.className = "col";
-        unitInfo.innerHTML = `<div class="p-2 mb-2 aos_medium text-center text-uppercase text-black">
-            <span class="h3">${unit._name}</span></div>`;
+        unitRow.appendChild(unitInfo);
 
         let missileWeaponTable = document.createElement('table');
         missileWeaponTable.className = "table table-sm aos_table aos_font text-center";
@@ -408,7 +416,6 @@ export class RendererAoS implements Renderer {
         if (haveMelee) {
             unitInfo.appendChild(meleeWeaponTable);
         }
-        unitRow.append(unitInfo);
 
         if (unit._woundTracker) {
             let labels = [{ name: "Wounds Suffered", width: '25%'}, {name:"Attribute 1", width:'25%'}, {name:"Attribute 2", width:'25%'}, {name:"Attribute 3", width:'25%'}];
@@ -560,21 +567,23 @@ export class RendererAoS implements Renderer {
             row.className = "row";
             keywords.appendChild(row);
             let label = document.createElement('div');
-            label.className = "col-3 border aos_dark text-center";
+            label.className = "col-5 col-md-3 border aos_dark text-center";
             label.innerHTML = "<strong>KEYWORDS</strong>";
             row.appendChild(label);
+            let previous_separator = "";
             let all_keywords = "";
             for (let kw of unit._keywords) {
                 if (!this.internalKeyword(kw)) {
+                    all_keywords += previous_separator; 
                     all_keywords += kw;
-                    all_keywords += ", "; 
+                    previous_separator = ", ";
                 }
             }
             let values = document.createElement('div');
             values.className = "col border text-left text-uppercase";
             values.innerText = all_keywords;
             row.appendChild(values);
-            unitInfo.appendChild(keywords);
+            unitRoot.appendChild(keywords);
         }
 
         return unitRoot;
