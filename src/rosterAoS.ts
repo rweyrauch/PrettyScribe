@@ -511,7 +511,7 @@ function ParseUnit(root: Element): AoSUnit {
                 }
                 unit._prayers.push(prayer);
             }           
-            else if (profType.includes("Damage Table") || profType.includes("Wounds Suffered")) {
+            else if (profType.includes("Damage Table") || profType.includes("Wounds")) {
                 let values: string[] = [];
                 if (!unit._woundTracker) {
                     unit._woundTracker = new AoSWoundTracker();

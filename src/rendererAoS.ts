@@ -17,6 +17,11 @@
 import { AoSUnit, AoSUnitRoleToString, RosterAoS } from "./rosterAoS";
 import { Renderer } from "./renderer";
 
+type TableHeaderEntry = {
+    name: string;
+    width: string;
+};
+
 export class RendererAoS implements Renderer {
 
     private _roster: RosterAoS|null = null;
@@ -416,13 +421,12 @@ export class RendererAoS implements Renderer {
             unitInfo.appendChild(meleeWeaponTable);
         }
 
-        if (unit._woundTracker) {
-            let labels = [{ name: "Wounds Suffered", width: '25%'}, {name:"Attribute 1", width:'25%'}, {name:"Attribute 2", width:'25%'}, {name:"Attribute 3", width:'25%'}];
+        if (unit._woundTracker && unit._woundTracker._labels.length > 0) {
+            let labels: TableHeaderEntry[] = [];
 
-            //console.log("Num Labels: " + unit._woundTracker._labels.length);
-            let i = 0;
+            const columnWidth: string = ((1 / unit._woundTracker._labels.length) * 100).toString() + '%';
             for (let key of unit._woundTracker._labels) {
-                 labels[i++].name = key;
+                 labels.push({name: key, width: columnWidth});
             }
             
             const table = this.createTable(labels);
