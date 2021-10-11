@@ -146,6 +146,29 @@ export class RendererAoS implements Renderer {
                 allegianceAbilities.appendChild(table);
             }
 
+            if (force._allegiance._extraProfiles.length > 0) {
+                let prevProfName = "";
+                for (let profile of force._allegiance._extraProfiles) {
+                    if (profile._value._fields.size == 1) {
+                        if (prevProfName != profile._value._typeName) {
+                            let profHeader = document.createElement('h4');
+                            allegianceAbilities.appendChild(profHeader);
+                            profHeader.textContent = profile._value._typeName.toUpperCase();
+                            prevProfName = profile._value._typeName;
+                        }
+                        const values = profile._value._fields.values();
+
+                        let p = document.createElement('p');
+                        p.className = "aos_font";
+                        p.innerHTML = `<strong>${profile._name}:  </strong>${values.next().value}`;
+                        allegianceAbilities.appendChild(p);
+                    }
+                    else {
+                        console.log("Table profiles not implemented. " + profile._value._typeName);
+                    }
+                }
+            }
+
             if (force._grandStrategy && force._grandStrategy._name != "") {
                 let header = document.createElement('h3');
                 allegianceAbilities.appendChild(header);
@@ -560,6 +583,28 @@ export class RendererAoS implements Renderer {
                 a.className = "aos_font";
                 a.innerHTML = `<strong>${artefact[0]}:  </strong>${artefact[1]}`;
                 artefacts.appendChild(a);
+            }
+        }
+
+        let prevProfName = "";
+        for (let profile of unit._extraProfiles) {
+            if (profile._value._fields.size == 1) {
+                if (prevProfName != profile._value._typeName) {
+                    let profHeader = document.createElement('h4');
+                    unitInfo.appendChild(profHeader);
+                    profHeader.textContent = profile._value._typeName.toUpperCase();
+                    prevProfName = profile._value._typeName;
+                }
+
+                const values = profile._value._fields.values();
+
+                let p = document.createElement('p');
+                p.className = "aos_font";
+                p.innerHTML = `<strong>${profile._name}:  </strong>${values.next().value}`;
+                unitInfo.appendChild(p);
+            }
+            else {
+                console.log("Table profiles not implemented. " + profile._value._typeName);
             }
         }
 

@@ -15,6 +15,16 @@
 */
 import * as _ from "lodash";
 
+export class AoSProfileType {
+    _typeName: string = "anonymous";
+    _fields: Map<string, string> = new Map();
+}
+
+export class AoSProfile {
+    _name: string = "none";
+    _value: AoSProfileType = new AoSProfileType();
+}
+
 export class AoSWeapon {
     _name: string = "";
     _type: string = "Melee"; // or "Missile"
@@ -51,6 +61,8 @@ export class AoSAllegiance {
     _battleTraits: Map<string, string> = new Map();
     _commandAbilities: Map<string, string> = new Map();
     _spells: AoSSpell[] = [];
+
+    _extraProfiles: AoSProfile[] = [];
 }
 
 export class AoSGrandStrategy {
@@ -138,6 +150,8 @@ export class AoSUnit {
     _points: number = 0;
 
     _woundTracker: AoSWoundTracker | null = null;
+
+    _extraProfiles: AoSProfile[] = [];
 
     _selections: Set<string> = new Set();
 
@@ -511,7 +525,7 @@ function ParseUnit(root: Element): AoSUnit {
                 }
                 unit._prayers.push(prayer);
             }           
-            else if (profType.includes("Damage Table") || profType.includes("Wounds")) {
+            else if (profType.includes("Damage Table") || profType.includes("Wounds") || profType.includes("Wound Track") || profType.includes("Wound Table")) {
                 let values: string[] = [];
                 if (!unit._woundTracker) {
                     unit._woundTracker = new AoSWoundTracker();
@@ -573,7 +587,13 @@ function ParseUnit(root: Element): AoSUnit {
                 }
             }
             else {
-                console.log("Unknown unit profile type: " + profType);
+                let profile = ParseGeneralProfile(prof);
+                if (profile) {
+                    unit._extraProfiles.push(profile);
+                } 
+                else {
+                    console.log("Unknown unit profile type: " + profType);
+                }
             }
         }
     }
@@ -704,7 +724,13 @@ function ParseAllegiance(root: Element): AoSAllegiance | null {
                     allegiance?._spells.push(spell);
                 }
                 else {
-                    console.log("Unexpected allegiance profile type: " + profType);
+                    let profile = ParseGeneralProfile(prof);
+                    if (profile) {
+                        allegiance?._extraProfiles.push(profile);
+                    } 
+                    else {                    
+                        console.log("Unexpected allegiance profile type: " + profType);
+                    }
                 }
             }
         }
@@ -829,4 +855,26 @@ function ParseRealmOfBattle(root: Element): AoSRealmOfBattle | null {
         }
     }
     return realm;
+}
+
+function ParseGeneralProfile(prof: Element): AoSProfile | null {
+    if (!prof) return null;
+
+    let profName = prof.getAttributeNode("name")?.nodeValue;
+    let profType = prof.getAttributeNode("typeName")?.nodeValue;
+
+    if (!profName || !profType) return null;
+
+    let profile = new AoSProfile();
+    profile._name = profName;
+    profile._value._typeName = profType;
+
+    let chars = prof.querySelectorAll("characteristics>characteristic");
+    for (let char of chars) {
+        let charName = char.getAttributeNode("name")?.nodeValue;
+        if (charName && char.textContent) {
+            profile._value._fields.set(charName, char.textContent);
+        }
+    }
+    return profile;
 }
