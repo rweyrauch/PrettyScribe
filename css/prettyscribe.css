@@ -118,3 +118,7 @@ body {
 .warcry_light {
     background-color: #aaaaaa;
 }
+
+.wh40k_light_img {
+    filter: invert(100%);
+}

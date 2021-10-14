@@ -14,7 +14,7 @@
     OF THIS SOFTWARE.
 */
 
-import { AoSUnit, AoSUnitRoleToString, RosterAoS } from "./rosterAoS";
+import { AoSSpecialRules, AoSSpell, AoSUnit, AoSUnitRoleToString, RosterAoS } from "./rosterAoS";
 import { Renderer } from "./renderer";
 
 type TableHeaderEntry = {
@@ -24,13 +24,13 @@ type TableHeaderEntry = {
 
 export class RendererAoS implements Renderer {
 
-    private _roster: RosterAoS|null = null;
+    private _roster: RosterAoS | null = null;
 
     constructor(roster: RosterAoS) {
         this._roster = roster;
     }
 
-    render(title: HTMLElement|null, list: HTMLElement|null, forces: HTMLElement|null): void {
+    render(title: HTMLElement | null, list: HTMLElement | null, forces: HTMLElement | null): void {
         if (this._roster == null) {
             return;
         }
@@ -45,12 +45,12 @@ export class RendererAoS implements Renderer {
         for (let force of this._roster._forces) {
             const forceTitle = document.createElement('div');
             if (forceTitle) {
-              forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + '</p>';
+                forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force._name + '</p>';
             }
             if (list)
                 list.appendChild(forceTitle);
 
-            const headerInfo = [{ name: "NAME", width: '35%'}, {name:"ROLE", width:'15%'}, {name:"SELECTIONS", width:'40%'}, {name:"POINTS", width:'10%'}];
+            const headerInfo = [{ name: "NAME", width: '35%' }, { name: "ROLE", width: '15%' }, { name: "SELECTIONS", width: '40%' }, { name: "POINTS", width: '10%' }];
             const table = this.createTable(headerInfo);
             table.className = "table table-sm aos_font";
             forceTitle.appendChild(table);
@@ -59,91 +59,45 @@ export class RendererAoS implements Renderer {
             table.appendChild(body);
 
             for (let unit of force._units) {
-              let tr = document.createElement('tr');
-              let uname = document.createElement('td');
-              uname.innerHTML = `<a href="#unit_${unit._id}">${unit._name}</a>`;
-              let role = document.createElement('td');
-              role.innerHTML = AoSUnitRoleToString[unit._role];
-              let selections = document.createElement('td');
-              selections.innerHTML = "";
-              let mi = 0;
-              for (const selection of unit._selections) {
+                let tr = document.createElement('tr');
+                let uname = document.createElement('td');
+                uname.innerHTML = `<a class="text-dark" href="#unit_${unit._id}">${unit._name}</a>`;
+                let role = document.createElement('td');
+                role.innerHTML = AoSUnitRoleToString[unit._role];
+                let selections = document.createElement('td');
+                selections.innerHTML = "";
+                let mi = 0;
+                for (const selection of unit._selections) {
                     selections.innerHTML += selection + "<br>";
-              }
+                }
 
-              let pts = document.createElement('td');
-              pts.innerHTML = unit._points.toString();
-              tr.appendChild(uname);
-              tr.appendChild(role);
-              tr.appendChild(selections);
-              tr.appendChild(pts);
-              body.appendChild(tr);  
+                let pts = document.createElement('td');
+                pts.innerHTML = unit._points.toString();
+                tr.appendChild(uname);
+                tr.appendChild(role);
+                tr.appendChild(selections);
+                tr.appendChild(pts);
+                body.appendChild(tr);
             }
 
             let allegianceAbilities = document.createElement('div');
             let allegianceHeader = document.createElement('h3');
             allegianceHeader.textContent = force._allegiance._name.toUpperCase();
             allegianceAbilities.appendChild(allegianceHeader);
-            
+
             if (force._allegiance._commandAbilities.size > 0) {
-                let abilityHeader = document.createElement('h4');
-                allegianceAbilities.appendChild(abilityHeader);
-                abilityHeader.textContent = "ABILITIES";
-                for (let command of force._allegiance._commandAbilities) {
-                    let row = document.createElement('div');
-                    let name = document.createElement('h4');
-                    name.textContent = command[0];
-                    let desc = document.createElement('p');
-                    desc.textContent = command[1];
-                    row.appendChild(name);
-                    row.appendChild(desc);
-                    allegianceAbilities.appendChild(row);
-                }
+                this.renderAbilityMap(allegianceAbilities, "ABILITIES", force._allegiance._commandAbilities);
             }
 
             if (force._allegiance._battleTraits.size > 0) {
-                let traitHeader = document.createElement('h4');
-                allegianceAbilities.appendChild(traitHeader);
-                traitHeader.textContent = "BATTLE TRAITS";
-                for (let trait of force._allegiance._battleTraits) {
-                    let row = document.createElement('div');
-                    let name = document.createElement('h4');
-                    name.textContent = trait[0];
-                    let desc = document.createElement('p');
-                    desc.textContent = trait[1];
-                    row.appendChild(name);
-                    row.appendChild(desc);
-                    allegianceAbilities.appendChild(row);
-                }
+                this.renderAbilityMap(allegianceAbilities, "BATTLE TRAITS", force._allegiance._battleTraits);
             }
 
             if (force._allegiance._spells.length > 0) {
                 let title = document.createElement('h4');
                 title.innerHTML = "ALLEGIANCE SPELLS";
                 allegianceAbilities.append(title);
-
-                const headerInfo = [{ name: "NAME", width: '25%'}, {name:"CASTING VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
-                const table = this.createTable(headerInfo);
-                table.className = "table table-sm aos_font";
-                let body = document.createElement('tbody');
-                table.appendChild(body);        
-                for (let spell of force._allegiance._spells) {
-                    let tr = document.createElement('tr');
-                    let spellName = document.createElement('td');
-                    spellName.innerHTML = spell._name;
-                    let value = document.createElement('td');
-                    value.innerHTML = spell._castingValue.toString();
-                    let range = document.createElement('td');
-                    range.innerHTML = spell._range.toString();
-                    let desc = document.createElement('td');
-                    desc.innerHTML = spell._description;
-                    tr.appendChild(spellName);
-                    tr.appendChild(value);
-                    tr.appendChild(range);
-                    tr.appendChild(desc);
-                    body.appendChild(tr);                       
-                }
-                allegianceAbilities.appendChild(table);
+                this.renderSpells(allegianceAbilities, force._allegiance._spells);
             }
 
             if (force._allegiance._extraProfiles.length > 0) {
@@ -201,59 +155,28 @@ export class RendererAoS implements Renderer {
                 let header = document.createElement('h3');
                 allegianceAbilities.appendChild(header);
                 header.textContent = "REALM OF BATTLE (" + force._realmOfBattle._name + ")";
-                
+
                 if (force._realmOfBattle._spells.length > 0) {
                     let title = document.createElement('h4');
-                    title.innerHTML = "Realm Spells";
+                    title.innerHTML = "SPELLS";
                     allegianceAbilities.append(title);
-
-                    const headerInfo = [{ name: "NAME", width: '25%'}, {name:"CASTING VALUE", width:'15%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'50%'}];
-                    const table = this.createTable(headerInfo);
-                    table.className = "table table-sm aos_font";
-                    let body = document.createElement('tbody');
-                    table.appendChild(body);        
-                    for (let spell of force._realmOfBattle._spells) {
-                        let tr = document.createElement('tr');
-                        let spellName = document.createElement('td');
-                        spellName.innerHTML = spell._name;
-                        let value = document.createElement('td');
-                        value.innerHTML = spell._castingValue.toString();
-                        let range = document.createElement('td');
-                        range.innerHTML = spell._range.toString();
-                        let desc = document.createElement('td');
-                        desc.innerHTML = spell._description;
-                        tr.appendChild(spellName);
-                        tr.appendChild(value);
-                        tr.appendChild(range);
-                        tr.appendChild(desc);
-                        body.appendChild(tr);                       
-                    }
-                    allegianceAbilities.appendChild(table);
+                    this.renderSpells(allegianceAbilities, force._realmOfBattle._spells);
                 }
 
                 if (force._realmOfBattle._commandAbilities.size > 0) {
-                    let title = document.createElement('h4');
-                    title.innerHTML = "Realm Command Abilities";
-                    allegianceAbilities.append(title);
-                    for (let ability of force._realmOfBattle._commandAbilities) {    
-                        let row = document.createElement('div');
-                        let desc = document.createElement('p');
-                        desc.textContent = ability[0] + ": " + ability[1];
-                        row.appendChild(desc);
-                        allegianceAbilities.appendChild(row); 
-                    }                       
+                    this.renderAbilityMap(allegianceAbilities, "COMMAND ABILITIES", force._realmOfBattle._commandAbilities);
                 }
                 if (force._realmOfBattle._rules.length > 0) {
                     let title = document.createElement('h4');
-                    title.innerHTML = "Realm Special Rules";
+                    title.innerHTML = "SPECIAL RULES";
                     allegianceAbilities.append(title);
-                    for (let rule of force._realmOfBattle._rules) {    
+                    for (let rule of force._realmOfBattle._rules) {
                         let row = document.createElement('div');
                         let desc = document.createElement('p');
                         desc.textContent = rule._name + ": " + rule._description;
                         row.appendChild(desc);
-                        allegianceAbilities.appendChild(row); 
-                    }                       
+                        allegianceAbilities.appendChild(row);
+                    }
                 }
             }
 
@@ -268,19 +191,19 @@ export class RendererAoS implements Renderer {
                 desc.textContent = rule[1];
                 row.appendChild(name);
                 row.appendChild(desc);
-                allegianceAbilities.appendChild(row);               
+                allegianceAbilities.appendChild(row);
             }
 
             if (force._battleTactics.size > 0) {
                 let header = document.createElement('h3');
                 header.innerHTML = "BATTLE TACTICS";
                 allegianceAbilities.appendChild(header);
-    
-                const headerInfo = [{ name: "NAME", width: '20%'}, {name:"DESCRIPTION", width:'80%'}];
+
+                const headerInfo = [{ name: "NAME", width: '20%' }, { name: "DESCRIPTION", width: '80%' }];
                 const table = this.createTable(headerInfo);
                 table.className = "table table-sm aos_table aos_font";
                 let body = document.createElement('tbody');
-                table.appendChild(body);        
+                table.appendChild(body);
                 for (let tactic of force._battleTactics) {
                     let tr = document.createElement('tr');
                     let tacticName = document.createElement('td');
@@ -289,7 +212,7 @@ export class RendererAoS implements Renderer {
                     desc.innerHTML = tactic[1];
                     tr.appendChild(tacticName);
                     tr.appendChild(desc);
-                    body.appendChild(tr);                       
+                    body.appendChild(tr);
                 }
                 allegianceAbilities.appendChild(table);
             }
@@ -317,19 +240,19 @@ export class RendererAoS implements Renderer {
 
             let divider = document.createElement('hr');
             divider.className = "aos_dark";
-            forces.appendChild(divider);             
- 
-            for (let unit of force._units) {
-               forces.appendChild(this.renderUnitHtml(unit));  
+            forces.appendChild(divider);
 
-               let divider = document.createElement('hr');
-               divider.className = "aos_dark";
-               forces.appendChild(divider);             
-            }    
+            for (let unit of force._units) {
+                forces.appendChild(this.renderUnitHtml(unit));
+
+                let divider = document.createElement('hr');
+                divider.className = "aos_dark";
+                forces.appendChild(divider);
+            }
         }
     }
 
-    protected createTable(heading: {name: string, width: string}[]): HTMLTableElement {
+    protected createTable(heading: { name: string, width: string }[]): HTMLTableElement {
         const table = document.createElement('table');
         const thead = document.createElement('thead');
         table.appendChild(thead);
@@ -360,7 +283,7 @@ export class RendererAoS implements Renderer {
 
         let unitRoot = document.createElement('div');
         unitRoot.className = "container-fluid aos_unit";
-         let unitName = document.createElement('div');
+        let unitName = document.createElement('div');
         unitName.className = "p-2 mb-2 aos_medium text-center text-uppercase text-black";
         unitName.innerHTML = `<span class="h3"><a name="unit_${unit._id}">${unit._name}</a></span>`;
         unitRoot.append(unitName);
@@ -368,7 +291,7 @@ export class RendererAoS implements Renderer {
         let unitRow = document.createElement('div');
         unitRow.className = "row";
         unitRoot.append(unitRow);
-        
+
         if (unit.isNormalUnit()) {
             let unitStats = document.createElement('div');
             unitStats.className = "col-6 col-md-3";
@@ -389,7 +312,7 @@ export class RendererAoS implements Renderer {
         missileWeaponTable.className = "table table-sm aos_table aos_font text-center";
         let thead = document.createElement('thead');
         missileWeaponTable.appendChild(thead);
-        missileWeaponTable.innerHTML = 
+        missileWeaponTable.innerHTML =
             `<tr class="aos_light">
                 <th>Missile Weapons</th>
                 <th>Range</th>
@@ -406,7 +329,7 @@ export class RendererAoS implements Renderer {
         meleeWeaponTable.className = "table table-sm aos_table aos_font text-center";
         thead = document.createElement('thead');
         meleeWeaponTable.appendChild(thead);
-        meleeWeaponTable.innerHTML = 
+        meleeWeaponTable.innerHTML =
             `<tr class="aos_light">
                 <th>Melee Weapons</th>
                 <th>Range</th>
@@ -426,15 +349,15 @@ export class RendererAoS implements Renderer {
                 let row = document.createElement('tr');
                 row.innerHTML = `<td>${weapon._name}</td><td>${weapon._range}</td><td>${weapon._attacks}</td>
                                  <td>${weapon._toHit}</td><td>${weapon._toWound}</td><td>${weapon._rend}</td><td>${weapon._damage}</td>`;
-                missileWeaponBody.appendChild(row);  
-                haveMissile = true;                               
+                missileWeaponBody.appendChild(row);
+                haveMissile = true;
             }
             else if (weapon._type === "Melee") {
                 let row = document.createElement('tr');
                 row.innerHTML = `<td>${weapon._name}</td><td>${weapon._range}</td><td>${weapon._attacks}</td>
                                  <td>${weapon._toHit}</td><td>${weapon._toWound}</td><td>${weapon._rend}</td><td>${weapon._damage}</td>`;
                 meleeWeaponBody.appendChild(row);
-                haveMelee = true;                                 
+                haveMelee = true;
             }
         }
         if (haveMissile) {
@@ -449,15 +372,15 @@ export class RendererAoS implements Renderer {
 
             const columnWidth: string = ((1 / unit._woundTracker._labels.length) * 100).toString() + '%';
             for (let key of unit._woundTracker._labels) {
-                 labels.push({name: key, width: columnWidth});
+                labels.push({ name: key, width: columnWidth });
             }
-            
+
             const table = this.createTable(labels);
             table.className = "table table-sm aos_table aos_font text-center";
             unitInfo.appendChild(table);
 
             let body = document.createElement('tbody');
-            table.appendChild(body);        
+            table.appendChild(body);
 
             for (let wt of unit._woundTracker._table) {
                 let tr = document.createElement('tr');
@@ -466,95 +389,42 @@ export class RendererAoS implements Renderer {
                     v.innerHTML = value;
                     tr.appendChild(v);
                 }
-                body.appendChild(tr);                                      
+                body.appendChild(tr);
             }
         }
 
         if (unit._abilities.size > 0) {
-            let abilities = document.createElement('h4');
-            abilities.innerHTML = "ABILITIES";
-            unitInfo.appendChild(abilities);
-            for (let ability of unit._abilities) {
-                let ab = document.createElement('p');
-                ab.className = "aos_font";
-                ab.innerHTML = `<strong>${ability[0]}:  </strong>${ability[1]}`;
-                abilities.appendChild(ab);
-            }
+            this.renderAbilityMap(unitInfo, "ABILITIES", unit._abilities);
         }
 
         if (unit._commandAbilities.size > 0) {
-            let abilities = document.createElement('h4');
-            abilities.innerHTML = "COMMAND ABILITIES";
-            unitInfo.appendChild(abilities);
-            for (let ability of unit._commandAbilities) {
-                let ab = document.createElement('p');
-                ab.className = "aos_font";
-                ab.innerHTML = `<strong>${ability[0]}:  </strong>${ability[1]}`;
-                abilities.appendChild(ab);
-            }
+            this.renderAbilityMap(unitInfo, "COMMAND ABILITIES", unit._commandAbilities);
         }
 
         if (unit._commandTraits.size > 0) {
-            let traits = document.createElement('h4');
-            traits.innerHTML = "COMMAND TRAITS";
-            unitInfo.appendChild(traits);
-            for (let trait of unit._commandTraits) {
-                let t = document.createElement('p');
-                t.className = "aos_font";
-                t.innerHTML = `<strong>${trait[0]}:  </strong>${trait[1]}`;
-                traits.appendChild(t);
-            }
+            this.renderAbilityMap(unitInfo, "COMMAND TRAITS", unit._commandTraits);
         }
 
         if (unit._magic.size > 0) {
-            let magic = document.createElement('h4');
-            magic.innerHTML = "MAGIC";
-            unitInfo.appendChild(magic);
-            for (let mg of unit._magic) {
-                let a = document.createElement('p');
-                a.className = "aos_font";
-                a.innerHTML = `<strong>${mg[0]}:  </strong>${mg[1]}`;
-                magic.appendChild(a);
-            }
+            this.renderAbilityMap(unitInfo, "MAGIC", unit._magic);
         }
 
         if (unit._spells.length > 0) {
             let spells = document.createElement('h4');
             spells.innerHTML = "SPELLS";
             unitInfo.appendChild(spells);
-
-            const headerInfo = [{ name: "NAME", width: '20%'}, {name:"CASTING VALUE", width:'10%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'60%'}];
-            const table = this.createTable(headerInfo);
-            table.className = "table table-sm aos_table aos_font";
-            let body = document.createElement('tbody');
-            table.appendChild(body);        
-            for (let spell of unit._spells) {
-                let tr = document.createElement('tr');
-                let spellName = document.createElement('td');
-                spellName.innerHTML = spell._name;
-                let value = document.createElement('td');
-                value.innerHTML = spell._castingValue.toString();
-                let range = document.createElement('td');
-                range.innerHTML = spell._range.toString();
-                let desc = document.createElement('td');
-                desc.innerHTML = spell._description;
-                tr.appendChild(spellName);
-                tr.appendChild(value);
-                tr.appendChild(range);
-                tr.appendChild(desc);
-                body.appendChild(tr);                       
-            }
-            unitInfo.appendChild(table);
+            this.renderSpells(unitInfo, unit._spells);
         }
+
         if (unit._prayers.length > 0) {
             let prayers = document.createElement('h4');
             prayers.innerHTML = "PRAYERS";
             unitInfo.appendChild(prayers);
-            const headerInfo = [{ name: "NAME", width: '20%'}, {name:"ANSWER VALUE", width:'10%'}, {name:"RANGE", width:'10%'}, {name:"DESCRIPTION", width:'60%'}];
+            const headerInfo = [{ name: "NAME", width: '20%' }, { name: "ANSWER VALUE", width: '10%' }, { name: "RANGE", width: '10%' }, { name: "DESCRIPTION", width: '60%' }];
             const table = this.createTable(headerInfo);
             table.className = "table table-sm aos_table aos_font";
             let body = document.createElement('tbody');
-            table.appendChild(body);        
+            table.appendChild(body);
             for (let prayer of unit._prayers) {
                 let tr = document.createElement('tr');
                 let name = document.createElement('td');
@@ -569,21 +439,13 @@ export class RendererAoS implements Renderer {
                 tr.appendChild(value);
                 tr.appendChild(range);
                 tr.appendChild(desc);
-                body.appendChild(tr);                       
+                body.appendChild(tr);
             }
             unitInfo.appendChild(table);
         }
 
         if (unit._artefacts.size > 0) {
-            let artefacts = document.createElement('h4');
-            artefacts.innerHTML = "ARTEFACTS";
-            unitInfo.appendChild(artefacts);
-            for (let artefact of unit._artefacts) {
-                let a = document.createElement('p');
-                a.className = "aos_font";
-                a.innerHTML = `<strong>${artefact[0]}:  </strong>${artefact[1]}`;
-                artefacts.appendChild(a);
-            }
+            this.renderAbilityMap(unitInfo, "ARTEFACTS", unit._artefacts);
         }
 
         let prevProfName = "";
@@ -622,7 +484,7 @@ export class RendererAoS implements Renderer {
             let all_keywords = "";
             for (let kw of unit._keywords) {
                 if (!this.internalKeyword(kw)) {
-                    all_keywords += previous_separator; 
+                    all_keywords += previous_separator;
                     all_keywords += kw;
                     previous_separator = ", ";
                 }
@@ -635,5 +497,42 @@ export class RendererAoS implements Renderer {
         }
 
         return unitRoot;
+    }
+
+    private renderAbilityMap(root: HTMLElement, title: string, abilities: Map<string, string>): void {
+        let header = document.createElement('h4');
+        header.innerHTML = title;
+        root.appendChild(header);
+        for (let ability of abilities) {
+            let a = document.createElement('p');
+            a.className = "aos_font";
+            a.innerHTML = `<strong>${ability[0]}:  </strong>${ability[1]}`;
+            header.appendChild(a);
+        }
+    }
+
+    private renderSpells(root: HTMLElement, spells: AoSSpell[]): void {
+        const headerInfo = [{ name: "NAME", width: '25%' }, { name: "CASTING VALUE", width: '15%' }, { name: "RANGE", width: '10%' }, { name: "DESCRIPTION", width: '50%' }];
+        const table = this.createTable(headerInfo);
+        table.className = "table table-sm aos_font";
+        let body = document.createElement('tbody');
+        table.appendChild(body);
+        for (let spell of spells) {
+            let tr = document.createElement('tr');
+            let spellName = document.createElement('td');
+            spellName.innerHTML = spell._name;
+            let value = document.createElement('td');
+            value.innerHTML = spell._castingValue.toString();
+            let range = document.createElement('td');
+            range.innerHTML = spell._range.toString();
+            let desc = document.createElement('td');
+            desc.innerHTML = spell._description;
+            tr.appendChild(spellName);
+            tr.appendChild(value);
+            tr.appendChild(range);
+            tr.appendChild(desc);
+            body.appendChild(tr);
+        }
+        root.appendChild(table);
     }
 }

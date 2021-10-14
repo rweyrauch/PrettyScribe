@@ -24,6 +24,8 @@ import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
 import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
+import { RendererHtml40k } from "./rendererHtml40k";
+
 import JSZip from "jszip";
 import { reject } from "lodash";
 
@@ -56,12 +58,20 @@ function parseXML(xmldata: string) {
       const rosterList = $('#roster-lists')[0];
       const forceUnits = $('#force-units')[0];
 
-      if ((gameType == "Warhammer 40,000 8th Edition") ||
-          (gameType == "Warhammer 40,000 9th Edition")) {
+      if (gameType == "Warhammer 40,000 8th Edition") {
         let roster = Create40kRoster(doc);
         if (roster) {
           if (roster._forces.length > 0) {
             const renderer: Renderer40k = new Renderer40k(roster);
+            renderer.render(rosterTitle, rosterList, forceUnits);
+          }
+        }
+      }
+      else if (gameType == "Warhammer 40,000 9th Edition") {
+        let roster = Create40kRoster(doc);
+        if (roster) {
+          if (roster._forces.length > 0) {
+            const renderer: RendererHtml40k = new RendererHtml40k(roster);
             renderer.render(rosterTitle, rosterList, forceUnits);
           }
         }

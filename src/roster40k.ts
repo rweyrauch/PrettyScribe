@@ -244,6 +244,8 @@ export class Unit extends BaseNotes {
 
     _profileTables: Map<string, ProfileTable> = new Map();
 
+    _id: number = 0;
+    
     equal(unit: Unit | null): boolean {
         if (unit == null) return false;
 
@@ -748,7 +750,7 @@ function ParseModelProfiles(props: Element[], unit: Unit, unitName: string, appl
                     propsWithoutModel.push("Unexpected: Created a weapon without an active model.  Unit: " + unitName);
                 }
             }
-            else if (propType.includes("Wound Track") || propType.includes("Stat Damage")) {
+            else if (propType.includes("Wound Track") || propType.includes("Stat Damage") || propType.includes(" Wounds")) {
                 let tracker = new WoundTracker();
                 ExpandBaseNotes(prop, tracker);
                 let chars = prop.querySelectorAll("characteristics>characteristic");
@@ -842,7 +844,7 @@ function ParseModelProfiles(props: Element[], unit: Unit, unitName: string, appl
                 }
             }
             else {
-                 parseUnknownProfile(prop, unit);
+                parseUnknownProfile(prop, unit);
             }
         }
     }

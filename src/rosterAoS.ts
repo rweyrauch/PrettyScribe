@@ -873,8 +873,10 @@ function ParseGeneralProfile(prof: Element): AoSProfile | null {
     for (let char of chars) {
         let charName = char.getAttributeNode("name")?.nodeValue;
         if (charName && char.textContent) {
+            // TODO: Need to make sure characteristics remain sorted (replace Map with List)
             profile._value._fields.set(charName, char.textContent);
         }
     }
+ 
     return profile;
 }
