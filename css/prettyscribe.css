@@ -1,6 +1,265 @@
 body {
     /* font-family: 'Fjalla One', sans-serif; */
     font-family: 'Source Sans Pro', sans-serif;
-    font-family: 'PT Serif', serif;
-    break-after: avoid;
+    font-family: 'Crimson Pro', serif;
+}
+
+@font-face {
+    font-family: "rodchenkoctt";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../assets/fonts/rodchenkoctt.eot");
+    src: url("../assets/fonts/rodchenkoctt.eot?#iefix") format("embedded-opentype"),
+         url("../assets/fonts/rodchenkoctt.woff2") format("woff2"),
+         url("../assets/fonts/rodchenkoctt.woff") format("woff"),
+         url("../assets/fonts/rodchenkoctt.ttf") format("truetype"),
+         url("../assets/fonts/rodchenkoctt.svg#rodchenkoctt") format("svg");
+}
+
+.aos_unit {
+    break-inside: avoid;
+}
+
+.aos_font {
+    font-size: 14px;
+    font-family: 'Crimson Pro', serif;
+}
+
+.aos_unit_move {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.aos_unit_wounds {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
+
+.aos_unit_bravery {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.aos_unit_save {
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+}
+
+.aos_unit_stats {
+    background-image: url('../assets/aos_stats_min.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    margin: 0, auto;
+}
+
+.aos_unit_stats::after {
+    padding-top: 100%;
+    display: block;
+    content: '';
+}
+
+.aos_light {
+    background-color: #e8e3ca;
+}
+
+.aos_medium {
+    background-color: #d1c89a;
+}
+
+.aos_dark {
+    background-color: #8a7c32;
+}
+
+.aos_table {
+    border-top: 1px solid #8a7c32;
+    border-bottom: 1px solid #8a7c32;;
+}
+
+.warcry_unit {
+    break-inside: avoid;
+}
+
+.warcry_font {
+    font-family: "rodchenkoctt";
+    font-size: 1.5em;
+}
+
+.warcry_card {
+    width: 72px;
+    height: 72px;
+    margin-top: 3px;
+    border-color: #222222;
+}
+
+.warcry_card_img {
+    height: 32px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.warcry_card_label {
+    height: 32px;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 0;
+}
+
+.warcry_light {
+    background-color: #aaaaaa;
+}
+
+.wh40k_unit_sheet {
+    padding: 0 5px;
+    width: 1110px;
+}
+.wh40k_unit_sheet > table {
+    --borderColor: black;
+    --notchSize: 10px;
+    --borderSize: 1px;
+
+    -webkit-print-color-adjust: exact;
+    position: relative;
+    line-height: 1;
+    font: 12px sans-serif;
+    break-inside: avoid;
+    clip-path:
+        polygon(
+            0% var(--notchSize),
+            var(--notchSize) 0%,
+            calc(100% - var(--notchSize)) 0%,
+            100% var(--notchSize),
+            100% calc(100% - var(--notchSize)),
+            calc(100% - var(--notchSize)) 100%,
+            var(--notchSize) 100%,
+            0% calc(100% - var(--notchSize))
+        );
+  }
+
+.wh40k_unit_sheet > .table>thead:not(:first-child)>:last-child>* {
+    border-top-color: currentColor;
+}
+
+.wh40k_unit_sheet > .table>:not(:last-child)>:last-child>* {
+    border-bottom-color: currentColor;
+}
+
+.wh40k_unit_sheet > table > * > * > *:not(:first-child):not(:last-child) {
+    text-align: center;
+}
+
+.wh40k_unit_sheet > table > * > * > td {
+    padding: 0.1rem 0.25rem;
+}
+
+.wh40k_unit_sheet > table > * > * > *:first-child {
+    padding-left: var(--notchSize);
+}
+
+.wh40k_unit_sheet > table > thead.header_row {
+    text-transform: uppercase
+}
+
+.wh40k_unit_sheet > table > .unit_header {
+    font: bold 1.5em sans-serif;
+    text-align: center;
+    text-transform: uppercase
+}
+
+.wh40k_unit_sheet > table > .unit_header>*>td {
+    box-shadow: inset 0 0 0 9999px rgb(0 0 0);
+    color: white;
+}
+
+.wh40k_unit_sheet > table > thead.header_row th {
+    white-space: nowrap;
+}
+
+.wh40k_unit_sheet > table > thead.info_row > tr > td:first-child {
+    font: bold 1em sans-serif;
+    text-transform: uppercase;
+    vertical-align: top;
+}
+
+.wh40k_unit_sheet > table > thead.info_row > tr > td {
+    box-shadow: inset 0 0 0 9999px rgb(0 0 0 / 2%);
+}
+
+.wh40k_unit_sheet > table > thead.info_row > tr > td:not(:first-child) > div > div:not(:last-child) {
+    margin-bottom: 0.35em;
+}
+
+.wh40k_unit_sheet > table > * > * > * > div.unit_costs {
+    font: bold 0.8em serif;
+    white-space: nowrap;
+    margin-left: -1em;
+}
+
+.wh40k_unit_sheet > table > * > * > * > div.unit_costs img {
+    height: 1.4em;
+    width: 1.4em;
+}
+
+.wh40k_unit_sheet > table > * > * > * > div.unit_costs span {
+    width: 1.9em;
+    height: 1.9em;
+    padding: 2px;
+    font-size: 0.8em;
+}
+
+.wh40k_unit_sheet > table > * > * > * > div.unit_costs span:not(:first-child) {
+    margin-left: 0.5em;
+}
+
+.wh40k_unit_sheet > table > * > * > * > div.unit_costs > span {
+    --borderColor: white;
+    --notchSize: 5px;
+    --borderSize: 1px;
+    position: relative;
+    display: inline-block;
+}
+
+.wh40k_unit_sheet > table > * > * > * > div.unit_costs > span:after,
+.wh40k_unit_sheet > table:after {
+    --bothSize: calc(var(--notchSize) + var(--borderSize)/2);
+    content: '';
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background-color: var(--borderColor);
+
+    clip-path:
+        polygon(
+            0% var(--notchSize),
+            var(--notchSize) 0%,
+            calc(100% - var(--notchSize)) 0%,
+            100% var(--notchSize),
+            100% calc(100% - var(--notchSize)),
+            calc(100% - var(--notchSize)) 100%,
+            var(--notchSize) 100%,
+            0% calc(100% - var(--notchSize)),
+            0% var(--notchSize),
+
+            var(--borderSize) var(--bothSize),
+            var(--borderSize) calc(100% - var(--bothSize)),
+            var(--bothSize) calc(100% - var(--borderSize)),
+            calc(100% - var(--bothSize)) calc(100% - var(--borderSize)),
+            calc(100% - var(--borderSize)) calc(100% - var(--bothSize)),
+            calc(100% - var(--borderSize)) var(--bothSize),
+            calc(100% - var(--bothSize)) var(--borderSize),
+            var(--bothSize) var(--borderSize),
+            var(--borderSize) var(--bothSize)
+        );
 }
