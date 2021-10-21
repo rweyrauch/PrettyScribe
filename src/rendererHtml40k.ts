@@ -389,17 +389,11 @@ export class RendererHtml40k implements Renderer {
     }
 
     private renderAbilities(root: HTMLElement, unit: Unit): void {
-        let keys = [...unit._abilities.keys()];
-        keys.sort(Compare);
-
-        let rulesList = [...unit._rules.keys()];
-        rulesList.sort(Compare)
-        const rules = rulesList.join(", ").toLocaleUpperCase();
-
-        for (const key of keys) {
-            const content = key.toUpperCase() + ':';
-            const desc = unit._abilities.get(key);
-
+        if (unit._abilities.size > 0) {
+            this.renderAbilityMap(root, "ABILITIES", unit._abilities);
+        }
+        if (unit._rules.size > 0) {
+            this.renderAbilityMap(root, "RULES", unit._rules);
         }
     }
 

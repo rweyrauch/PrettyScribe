@@ -71,7 +71,7 @@ function parseXML(xmldata: string) {
         let roster = Create40kRoster(doc);
         if (roster) {
           if (roster._forces.length > 0) {
-            const renderer: RendererHtml40k = new RendererHtml40k(roster);
+            const renderer: Renderer40k = new Renderer40k(roster);
             renderer.render(rosterTitle, rosterList, forceUnits);
           }
         }
