@@ -16,6 +16,20 @@ body {
          url("../assets/fonts/rodchenkoctt.svg#rodchenkoctt") format("svg");
 }
 
+@media screen {
+  div.footer {
+    display: none;
+  }
+}
+@media print {
+  div.footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    opacity: 0.5;
+  }
+}
+
 .aos_unit {
     break-inside: avoid;
 }
@@ -130,7 +144,7 @@ body {
     -webkit-print-color-adjust: exact;
     position: relative;
     line-height: 1;
-    font: 12px sans-serif;
+    font: 14px sans-serif;
     break-inside: avoid;
     clip-path:
         polygon(
