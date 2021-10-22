@@ -71,7 +71,13 @@ export class Renderer40k implements Renderer {
         if (this._roster == null) return;
 
         if (title) {
-            title.innerHTML = '<h3>' + this._roster.name() + ' (' + this._roster._points + ' pts, ' + this._roster._powerLevel + ' PL, ' + this._roster._commandPoints + ' CP)</h3>';
+            const text = `${this._roster.name()} (${this._roster._points} pts, ${this._roster._powerLevel} PL, ${this._roster._commandPoints} CP)`;
+            title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
+
+            // Footer div is hidden, except when printing.
+            const footer = title.appendChild(document.createElement('div'));
+            footer.classList.add('footer');
+            footer.appendChild(document.createTextNode(text));
         }
 
         let catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
@@ -79,13 +85,10 @@ export class Renderer40k implements Renderer {
 
         for (let force of this._roster._forces) {
             const forceTitle = document.createElement('div');
-            if (forceTitle) {
-                if (force._faction) {
-                    forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force.name() + " (" + force._faction + ")" + '</p>';
-                }
-                else {
-                    forceTitle.innerHTML = '<p>' + force._catalog + ' ' + force.name() + '</p>';
-                }
+            if (force._faction) {
+                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force.name()} (${force._faction})`));
+            } else {
+                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force.name()}`));
             }
             if (list)
                 list.appendChild(forceTitle);
