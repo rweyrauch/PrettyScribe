@@ -176,32 +176,32 @@ export class Model extends BaseNotes {
         let name = super.name();
 
         if (this._weapons.length > 0 || this._upgrades.length > 0) {
-            let mi = 0;
-
-            name += " (";
+            const seenWeapons: string[] = [];
+            const weaponNames: string[] = [];
             for (const weapon of this._weapons) {
+                let wName = weapon.name();
+                // Dedupe "Stikka (Shooting)" and "Stikka (Melee)" into "Stikka".
+                const dedupeMatch = wName.match(/(.*) \((Shooting|Melee)\)$/);
+                if (dedupeMatch) {
+                    wName = dedupeMatch[1];
+                    if (seenWeapons.includes(wName)) {
+                        continue;
+                    } else {
+                        seenWeapons.push(wName);
+                    }
+                }
                 if (weapon._count > 1) {
-                    name += weapon._count + "x ";
+                    wName = `${weapon._count}x ${wName}`;
                 }
-                name += weapon.name();
-                mi++;
-                if (mi != this._weapons.length) {
-                    name += ",  "
-                }
+                weaponNames.push(wName);
             }
-
-            if (this._upgrades.length > 0 && !name.endsWith("(")) {
-                name += ",  ";
-            }
-            name += this._upgrades.join(", ");
-
-            name += ")";
+            name += ` (${weaponNames.join(', ')})`;
         }
         return name;
     }
 
     normalize(): void {
-        this._weapons.sort(CompareObj);
+        this._weapons.sort(CompareWeapon);
         this._upgrades.sort(Compare);
         for (let i = 0; i < (this._weapons.length - 1); i++) {
             const weapon = this._weapons[i];
@@ -245,7 +245,7 @@ export class Unit extends BaseNotes {
     _profileTables: Map<string, ProfileTable> = new Map();
 
     _id: number = 0;
-    
+
     equal(unit: Unit | null): boolean {
         if (unit == null) return false;
 
@@ -865,6 +865,12 @@ function ParseModelProfiles(props: Element[], unit: Unit, unitName: string, appl
 
 function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
     return Compare(a._name, b._name);
+}
+
+export function CompareWeapon(a: Weapon, b: Weapon): number {
+    const aType = a._type.startsWith('Grenade') ? 2 : a._type.startsWith('Melee') ? 1 : 0;
+    const bType = b._type.startsWith('Grenade') ? 2 : b._type.startsWith('Melee') ? 1 : 0;
+    return (aType - bType) || a.name().localeCompare(b.name());
 }
 
 
