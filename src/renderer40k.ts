@@ -14,7 +14,7 @@
     OF THIS SOFTWARE.
 */
 
-import {BaseNotes, Compare, Explosion, Model, PsychicPower, Psyker, Roster40k, Unit, UnitRole, UnitRoleToString, Weapon} from "./roster40k";
+import {BaseNotes, Compare, CompareWeapon, Explosion, Model, PsychicPower, Psyker, Roster40k, Unit, UnitRole, UnitRoleToString, Weapon} from "./roster40k";
 import {Justification, Renderer, RenderParagraph, RenderText, RenderTextFull, FixDPI, VertAlign} from "./renderer";
 
 export class Renderer40k implements Renderer {
@@ -294,11 +294,10 @@ export class Renderer40k implements Renderer {
         }
 
         // weapons
-        const weapons = unit._models.map(m => m._weapons).reduce((acc, val) => acc.concat(val), []).sort((a, b) => {
-            const aType = a._type.startsWith('Grenade') ? 2 : a._type.startsWith('Melee') ? 1 : 0;
-            const bType = b._type.startsWith('Grenade') ? 2 : b._type.startsWith('Melee') ? 1 : 0;
-            return (aType - bType) || a.name().localeCompare(b.name());
-        }).filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
+        const weapons = unit._models.map(m => m._weapons)
+            .reduce((acc, val) => acc.concat(val), [])
+            .sort(CompareWeapon)
+            .filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
 
         if (weapons.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
