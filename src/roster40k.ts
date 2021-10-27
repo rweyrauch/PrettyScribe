@@ -195,6 +195,7 @@ export class Model extends BaseNotes {
                 }
                 weaponNames.push(wName);
             }
+            weaponNames.push(...this._upgrades);
             name += ` (${weaponNames.join(', ')})`;
         }
         return name;
