@@ -378,13 +378,7 @@ function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void 
             if (!DuplicateForce(f, roster)) {
                 var rules = root.querySelectorAll("force>rules>rule");
                 for (let rule of rules) {
-                    if (rule.hasAttribute("name")) {
-                        let ruleName = rule.getAttributeNode("name")?.nodeValue;
-                        var desc = rule.querySelector("rule>description");
-                        if (ruleName && desc) {
-                            f._rules.set(ruleName, desc.textContent);
-                        }
-                    }
+                    ExtractRuleDescription(rule, f._rules);
                 }
             }
 
@@ -460,26 +454,39 @@ function DuplicateForce(force: Force, roster: Roster40k): boolean {
 
 function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>): void {
 
-    const props = root.querySelectorAll(":scope profiles>profile");
-    for (const prop of props) {
+    const profiles = root.querySelectorAll(":scope profiles>profile");
+    for (const profile of profiles) {
         // detachment rules
-        const propName = prop.getAttributeNode("name")?.nodeValue;
-        const propType = prop.getAttributeNode("typeName")?.nodeValue;
-        console.log("Prop name:" + propName + "  Type: " + propType);
+        const profileName = profile.getAttribute("name");
+        const profileType = profile.getAttribute("typeName");
+        console.log("Profile name:" + profileName + "  Type: " + profileType);
 
-        if (propName && propType) {
-            if (propType === "Abilities" || propType === "Dynastic Code") {
-                const chars = prop.querySelectorAll("characteristics>characteristic");
+        if (profileName && profileType) {
+            if (profileType === "Abilities" || profileType === "Dynastic Code") {
+                const chars = profile.querySelectorAll("characteristics>characteristic");
                 for (const char of chars) {
-                    const charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName && char.textContent && propName) {
+                    const charName = char.getAttribute("name");
+                    if (charName && char.textContent && profileName) {
                         if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
-                            map.set(propName, char.textContent);
+                            map.set(profileName, char.textContent);
                         }
                     }
                 }
             }
         }
+    }
+
+    const rules = root.querySelectorAll(":scope>rules>rule");
+    for (const rule of rules) {
+        ExtractRuleDescription(rule, map);
+    }
+}
+
+function ExtractRuleDescription(rule: Element, map: Map<string, string | null>): void {
+    const ruleName = rule.getAttribute("name");
+    const desc = rule.querySelector("description");
+    if (ruleName && desc?.textContent) {
+        map.set(ruleName, desc.textContent);
     }
 }
 
@@ -639,13 +646,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
 
     let rules = root.querySelectorAll(":scope rules > rule");
     for (let rule of rules) {
-        if (rule.hasAttribute("name")) {
-            let ruleName = rule.getAttributeNode("name")?.nodeValue;
-            let desc = rule.querySelector("description");
-            if (ruleName && desc && desc.textContent) {
-                unit._rules.set(ruleName, desc.textContent);
-            }
-        }
+        ExtractRuleDescription(rule, unit._rules);
     }
 
     unit.normalize();
