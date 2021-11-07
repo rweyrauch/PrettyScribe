@@ -454,7 +454,7 @@ function DuplicateForce(force: Force, roster: Roster40k): boolean {
 
 function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>): void {
 
-    const profiles = root.querySelectorAll(":scope profiles>profile");
+    const profiles = root.querySelectorAll("profiles>profile");
     for (const profile of profiles) {
         // detachment rules
         const profileName = profile.getAttribute("name");
@@ -476,7 +476,7 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
         }
     }
 
-    const rules = root.querySelectorAll(":scope>rules>rule");
+    const rules = root.querySelectorAll("rules>rule");
     for (const rule of rules) {
         ExtractRuleDescription(rule, map);
     }
@@ -566,7 +566,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
     let unit: Unit = new Unit();
     const unitName = ExpandBaseNotes(root, unit);
 
-    let categories = root.querySelectorAll(":scope categories>category");
+    let categories = root.querySelectorAll("categories>category");
     for (let cat of categories) {
         const catName = cat.getAttributeNode("name")?.nodeValue;
         if (catName) {
@@ -613,19 +613,19 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         continue;
       }
       seenSelections.push(selection);
-      let props = Array.from(selection.querySelectorAll(":scope profiles>profile") || []);
+      let props = Array.from(selection.querySelectorAll("profiles>profile") || []);
       ParseModelProfiles(props, unit, unitName);
       seenProfiles = seenProfiles.concat(props);
     }
 
     // Now, go thru any other profiles we missed. This may include weapons or
     // other upgrades, which will be applied to all models in the unit.
-    let props = Array.from(root.querySelectorAll(":scope profiles>profile"));
+    let props = Array.from(root.querySelectorAll("profiles>profile"));
     let unseenProps = props.filter((e: Element) => !seenProfiles.includes(e));
     ParseModelProfiles(unseenProps, unit, unitName, /* appliesToAllModels= */ true);
 
     // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
-    let costs = root.querySelectorAll(":scope costs>cost");
+    let costs = root.querySelectorAll("costs>cost");
     for (let cost of costs) {
         if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
             let which = cost.getAttributeNode("name")?.nodeValue;
@@ -644,7 +644,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         }
     }
 
-    let rules = root.querySelectorAll(":scope rules > rule");
+    let rules = root.querySelectorAll("rules > rule");
     for (let rule of rules) {
         ExtractRuleDescription(rule, unit._rules);
     }
