@@ -94,9 +94,7 @@ export class Renderer40k implements Renderer {
                 list.appendChild(forceTitle);
 
             const table = document.createElement('table');
-            table.classList.add('table');
-            table.classList.add('table-sm');
-            table.classList.add('table-striped');
+            table.classList.add('table', 'table-sm', 'table-striped');
             const thead = document.createElement('thead');
             table.appendChild(thead);
             thead.classList.add('thead-light');
@@ -115,36 +113,17 @@ export class Renderer40k implements Renderer {
             let body = document.createElement('tbody');
             table.appendChild(body);
             for (let unit of force._units) {
-                let tr = document.createElement('tr');
-                let uname = document.createElement('td');
-                uname.innerHTML = unit.name();
-                let role = document.createElement('td');
-                role.innerHTML = UnitRoleToString[unit._role];
-                let models = document.createElement('td');
-                models.innerHTML = "";
-                let mi = 0;
+                const tr = document.createElement('tr');
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.name()));
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(UnitRoleToString[unit._role]));
+                const models = tr.appendChild(document.createElement('td'));
                 // TODO: the list of models may not be unique, make the list unique and update counts accordingly.
-                for (const model of unit._models) {
-                    if (model._count > 1) {
-                        models.innerHTML += model._count + "x " + model.nameAndGear();
-                    }
-                    else {
-                        models.innerHTML += model.nameAndGear();
-                    }
-                    mi++;
-                    if (mi != unit._models.length) {
-                        models.innerHTML += "<br>"
-                    }
+                for (let i = 0; i < unit._modelList.length; i++) {
+                    if (i > 0) models.appendChild(document.createElement('br'));
+                    models.appendChild(document.createTextNode(unit._modelList[i]));
                 }
-                let pts = document.createElement('td');
-                pts.innerHTML = unit._points.toString();
-                let pwr = document.createElement('td');
-                pwr.innerHTML = unit._powerLevel.toString();
-                tr.appendChild(uname);
-                tr.appendChild(role);
-                tr.appendChild(models);
-                tr.appendChild(pts);
-                tr.appendChild(pwr);
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._points.toString()));
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._powerLevel.toString()));
                 body.appendChild(tr);
             }
 
@@ -294,12 +273,7 @@ export class Renderer40k implements Renderer {
         }
 
         // weapons
-        const weapons = unit._models.map(m => m._weapons)
-            .reduce((acc, val) => acc.concat(val), [])
-            .sort(CompareWeapon)
-            .filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
-
-        if (weapons.length > 0) {
+        if (unit._weapons.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
             thead.appendChild(createTableRow(Renderer40k._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
@@ -307,7 +281,7 @@ export class Renderer40k implements Renderer {
             tbody = statsTable.appendChild(document.createElement('tbody'));
             tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
 
-            for (const weapon of weapons) {
+            for (const weapon of unit._weapons) {
                 tbody.append(createTableRow([
                     weapon.name().toString(),
                     weapon._range,
@@ -319,12 +293,11 @@ export class Renderer40k implements Renderer {
                 ], this._weaponLabelWidthNormalized));
             }
         }
-        notesTableHead = createNotesHead('Weapon notes', weapons);
+        notesTableHead = createNotesHead('Weapon notes', unit._weapons);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // spells
-        const spells = unit._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []);
-        if (spells.length > 0) {
+        if (unit._spells.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
             thead.appendChild(createTableRow(Renderer40k._spellLabels, this._spellLabelWidthNormalized, /* header= */ true));
@@ -332,7 +305,7 @@ export class Renderer40k implements Renderer {
             tbody = statsTable.appendChild(document.createElement('tbody'));
             tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
 
-            for (const spell of spells) {
+            for (const spell of unit._spells) {
                 tbody.append(createTableRow([
                     spell.name(),
                     spell._manifest.toString(),
@@ -341,16 +314,15 @@ export class Renderer40k implements Renderer {
                 ], this._spellLabelWidthNormalized));
             }
         }
-        notesTableHead = createNotesHead('Spell notes', spells);
+        notesTableHead = createNotesHead('Spell notes', unit._spells);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // psyker
-        const psykers = unit._models.map(m => m._psyker).filter(p => p) as Psyker[];
-        if (psykers.length > 0) {
+        if (unit._psykers.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('info_row');
             const psykersDiv = document.createElement('div');
-            for (const psyker of psykers) {
+            for (const psyker of unit._psykers) {
                 let text = `CAST: ${psyker._cast}, DENY: ${psyker._deny}, POWERS KNOWN: ${psyker._powers}`;
                 if (psyker._other) {
                     text += `, OTHER: ${psyker._other}`;
@@ -359,7 +331,7 @@ export class Renderer40k implements Renderer {
             }
             thead.appendChild(createTableRow(['Psykers', psykersDiv], [0.10, 0.90], /* header= */ false));
         }
-        notesTableHead = createNotesHead('Psyker notes', psykers);
+        notesTableHead = createNotesHead('Psyker notes', unit._psykers);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // abilities
@@ -399,15 +371,14 @@ export class Renderer40k implements Renderer {
         thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
 
         // explosions
-        const explosions = unit._models.map(m => m._explosions).reduce((acc, val) => acc.concat(val), []);
-        if (explosions.length > 0) {
+        if (unit._explosions.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
             thead.appendChild(createTableRow(Renderer40k._explosionLabels, this._explosionLabelWidthNormalized, /* header= */ true));
 
             tbody = statsTable.appendChild(document.createElement('tbody'));
             tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-            for (const explosion of explosions) {
+            for (const explosion of unit._explosions) {
                 tbody.append(createTableRow([
                     explosion.name(),
                     explosion._diceRoll,
@@ -416,7 +387,7 @@ export class Renderer40k implements Renderer {
                 ], this._explosionLabelWidthNormalized));
             }
         }
-        notesTableHead = createNotesHead('Explosion notes', explosions);
+        notesTableHead = createNotesHead('Explosion notes', unit._explosions);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
     }
 

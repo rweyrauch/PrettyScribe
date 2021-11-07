@@ -236,6 +236,11 @@ export class Unit extends BaseNotes {
     _rules: Map<string, string> = new Map();
 
     _models: Model[] = [];
+    _modelList: string[] = [];
+    _weapons: Weapon[] = [];
+    _spells: PsychicPower[] = [];
+    _psykers: Psyker[] = [];
+    _explosions: Explosion[] = [];
 
     _points: number = 0;
     _powerLevel: number = 0;
@@ -292,6 +297,17 @@ export class Unit extends BaseNotes {
         for (let model of this._models) {
             model.normalize();
         }
+
+        this._modelList = this._models.map(model => (model._count > 1 ? `${model._count}x ` : '') + model.nameAndGear());
+        this._weapons = this._models.map(m => m._weapons)
+            .reduce((acc, val) => acc.concat(val), [])
+            .sort(CompareWeapon)
+            .filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
+
+        this._spells = this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []);
+        this._psykers = this._models.map(m => m._psyker).filter(p => p) as Psyker[];
+        this._explosions = this._models.map(m => m._explosions).reduce((acc, val) => acc.concat(val), []);
+
     }
 }
 
