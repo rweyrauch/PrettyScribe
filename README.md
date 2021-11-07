@@ -18,7 +18,7 @@ If you actually use this tool and find it useful let me know.
 
 ### Quick Start
 
-Prettyscribe is written in Typescript and uses npm for initialization, compiling and launching a 
+Prettyscribe is written in Typescript and uses npm for initialization, compiling and launching a
 test server at http://localhost:8080.
 
     $ git clone https://github.com/rweyrauch/PrettyScribe.git
@@ -40,3 +40,5 @@ To build PrettyScribe for release:
 
     $ npm run buildprod
 
+To run PrettyScribe tests:
+    $ npm test
