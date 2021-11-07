@@ -1,15 +1,9 @@
+import { readRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
-import fs from "fs";
-import {JSDOM} from 'jsdom';
-
-function readXmlFile(filename: string): Document {
-  const xmldata: string = fs.readFileSync(filename).toString();
-  return new JSDOM(xmldata, { contentType: "text/xml" }).window.document;
-}
 
 describe("roster40k Create40kRoster", function() {
   it("loads BloodAngels test", function() {
-    const doc = readXmlFile('test/BloodAngels test.ros');
+    const doc = readRosterFile('test/BloodAngels test.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
@@ -77,7 +71,7 @@ describe("roster40k Create40kRoster", function() {
   });
 
   it("loads Salamanders test", function() {
-    const doc = readXmlFile('test/Salamanders test.ros');
+    const doc = readRosterFile('test/Salamanders test.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
@@ -102,13 +96,14 @@ describe("roster40k Create40kRoster", function() {
               ]}),
             jasmine.objectContaining({
               '_name': 'Tactical Squad',
-              '_models': [
+              '_modelStats': [
                 jasmine.objectContaining({'_name': 'Space Marine'}),
                 jasmine.objectContaining({'_name': 'Space Marine Sergeant'}),
               ],
               '_modelList': [
-                'Space Marine',
-                'Space Marine Sergeant (5x Bolt pistol, 4x Boltgun, Flamer, 5x Frag grenades, 5x Krak grenades)',
+                '3x Space Marine (Bolt pistol, Boltgun, Frag grenades, Krak grenades)',
+                'Space Marine Sergeant (Bolt pistol, Boltgun, Frag grenades, Krak grenades)',
+                'Space Marine w/Special Weapon (Bolt pistol, Flamer, Frag grenades, Krak grenades)',
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': 'Bolt pistol'}),
@@ -119,13 +114,14 @@ describe("roster40k Create40kRoster", function() {
               ]}),
             jasmine.objectContaining({
               '_name': 'Tactical Squad',
-              '_models': [
+              '_modelStats': [
                 jasmine.objectContaining({'_name': 'Space Marine'}),
                 jasmine.objectContaining({'_name': 'Space Marine Sergeant'}),
               ],
               '_modelList': [
-                'Space Marine',
-                'Space Marine Sergeant (5x Bolt pistol, 5x Boltgun, 2x Flamer, 5x Frag grenades, 5x Krak grenades)',
+                '3x Space Marine (Bolt pistol, Boltgun, Frag grenades, Krak grenades)',
+                'Space Marine Sergeant (Bolt pistol, 2x Boltgun, Flamer, Frag grenades, Krak grenades)',
+                'Space Marine w/Special Weapon (Bolt pistol, Flamer, Frag grenades, Krak grenades)',
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': 'Bolt pistol'}),
@@ -136,15 +132,13 @@ describe("roster40k Create40kRoster", function() {
               ]}),
             jasmine.objectContaining({
               '_name': 'Redemptor Dreadnought',
-              '_models': [
+              '_modelStats': [
                 jasmine.objectContaining({'_name': 'Redemptor Dreadnought [1] (7+ wounds remaining)'}),
                 jasmine.objectContaining({'_name': 'Redemptor Dreadnought [2] (4-6 wounds remaining)'}),
                 jasmine.objectContaining({'_name': 'Redemptor Dreadnought [3] (1-3 wounds remaining)'}),
               ],
               '_modelList': [
-                'Redemptor Dreadnought [1] (7+ wounds remaining) (Fragstorm Grenade Launcher, Heavy flamer, Heavy Onslaught Gatling Cannon, Redemptor Fist)',
-                'Redemptor Dreadnought [2] (4-6 wounds remaining)',
-                'Redemptor Dreadnought [3] (1-3 wounds remaining)',
+                'Redemptor Dreadnought (Fragstorm Grenade Launcher, Heavy flamer, Heavy Onslaught Gatling Cannon, Redemptor Fist)',
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': 'Fragstorm Grenade Launcher'}),
