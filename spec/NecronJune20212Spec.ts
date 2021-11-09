@@ -1,9 +1,9 @@
-import { readRosterFile } from './helpers/readRosterFile';
+import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads test/Necron June 2021 2.ros", function() {
-    const doc = readRosterFile('test/Necron June 2021 2.ros');
+  it("loads test/Necron June 2021 2.ros", async function() {
+    const doc = await readZippedRosterFile('test/Necron June 2021 2.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
@@ -78,7 +78,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Cryptothrall"}),
               ],
               '_modelList': [
-                "Cryptothralls (2x Scouring Eye, 2x Scythed Limbs)"
+                "2x Cryptothrall (Scouring Eye, Scythed Limbs)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Scouring Eye"}),

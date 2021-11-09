@@ -1,9 +1,9 @@
-import { readRosterFile } from './helpers/readRosterFile';
+import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads test/Knights.ros", function() {
-    const doc = readRosterFile('test/Knights.ros');
+  it("loads test/Knights.ros", async function() {
+    const doc = await readZippedRosterFile('test/Knights.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(

@@ -279,7 +279,7 @@ export class Unit extends BaseNotes {
 
     normalize(): void {
         // Sort force units by role and name
-        this._models.sort(CompareObj);
+        this._models.sort(CompareModel);
         this._modelStats.sort(CompareObj);
 
         for (let model of this._models) {
@@ -674,9 +674,13 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
     } else {
         const immediateSelections = GetImmediateSelections(root);
         for (const selection of immediateSelections) {
-            if (selection.getAttribute('type') === 'model' || selection.querySelector('profile[typeName="Unit"]')) {
+            if (selection.getAttribute('type') === 'model' || HasImmediateProfileWithTypeName(selection, 'Unit')) {
                 modelSelections.push(selection);
             }
+        }
+        // Some units are under a root selection with type="upgrade".
+        if (modelSelections.length === 0) {
+            modelSelections.push(...Array.from(root.querySelectorAll('selection[type="model"]')));
         }
         // Some single-model units have type="unit" or type="upgrade".
         if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, 'Unit')) {
@@ -954,6 +958,10 @@ function ParsePsykerProfile(profile: Element): Psyker {
 
 function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
     return Compare(a._name, b._name);
+}
+
+function CompareModel(a: Model, b: Model): number {
+    return Compare(a._name, b._name) || Compare(a.nameAndGear(), b.nameAndGear());
 }
 
 export function CompareWeapon(a: Weapon, b: Weapon): number {

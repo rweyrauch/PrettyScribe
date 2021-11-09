@@ -1,20 +1,20 @@
-import { readRosterFile } from './readRosterFile';
+import { readZippedRosterFile } from './readRosterFile';
 import { BaseNotes, Create40kRoster, Force, Unit } from "../../src/roster40k";
 
-export function getRosterExpectation(filename: string): string {
-  const doc = readRosterFile(filename);
+export async function getRosterExpectation(filename: string): Promise<string> {
+  const doc = await readZippedRosterFile(filename);
   const roster = Create40kRoster(doc);
 
   if (!roster) {
     throw new Error(`ERROR: Roster '${filename}' did not parse.`);
   }
 
-  return `import { readRosterFile } from './helpers/readRosterFile';
+  return `import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads ${filename}", function() {
-    const doc = readRosterFile('${filename}');
+  it("loads ${filename}", async function() {
+    const doc = await readZippedRosterFile('${filename}');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(

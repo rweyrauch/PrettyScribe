@@ -1,9 +1,9 @@
-import { readRosterFile } from './helpers/readRosterFile';
+import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads test/Salamanders test.ros", function() {
-    const doc = readRosterFile('test/Salamanders test.ros');
+  it("loads test/Salamanders test.ros", async function() {
+    const doc = await readZippedRosterFile('test/Salamanders test.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
@@ -89,10 +89,8 @@ describe("Create40kRoster", function() {
               ],
               '_modelList': [
                 "Devastator Marine Sergeant (Bolt pistol, Boltgun, Frag & Krak grenades)",
-                "Devastator Marine w/Heavy Weapon (Bolt pistol, Heavy bolter, Frag & Krak grenades)",
-                "Devastator Marine w/Heavy Weapon (Bolt pistol, Multi-melta, Frag & Krak grenades)",
-                "Devastator Marine w/Heavy Weapon (Bolt pistol, Heavy bolter, Frag & Krak grenades)",
-                "Devastator Marine w/Heavy Weapon (Bolt pistol, Multi-melta, Frag & Krak grenades)"
+                "2x Devastator Marine w/Heavy Weapon (Bolt pistol, Heavy bolter, Frag & Krak grenades)",
+                "2x Devastator Marine w/Heavy Weapon (Bolt pistol, Multi-melta, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
