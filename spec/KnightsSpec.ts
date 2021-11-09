@@ -39,7 +39,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Armiger Warglaive"}),
               ],
               '_modelList': [
-                "Armiger Warglaive (Meltagun, Thermal Spear, Reaper Chain-Cleaver (Strike), Reaper Chain-Cleaver (Sweep))"
+                "Armiger Warglaive (Meltagun, Thermal Spear, Reaper Chain-Cleaver)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Meltagun"}),
@@ -61,7 +61,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Knight Castellan"}),
               ],
               '_modelList': [
-                "Knight Castellan (Plasma Decimator (Standard), Plasma Decimator (Supercharge), 2x Shieldbreaker Missile, 2x Twin Meltagun, 2x Twin Siegebreaker Cannon, Volcano Lance, Titanic Feet, Armour of the Sainted Ion, Fearsome Reputation)"
+                "Knight Castellan (Plasma Decimator, 2x Shieldbreaker Missile, 2x Twin Meltagun, 2x Twin Siegebreaker Cannon, Volcano Lance, Titanic Feet, Armour of the Sainted Ion, Fearsome Reputation)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Plasma Decimator (Standard)"}),
@@ -109,7 +109,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Knight Gallant"}),
               ],
               '_modelList': [
-                "Knight Gallant (Heavy stubber, Stormspear Rocket Pod, Reaper Chainsword, Thunderstrike gauntlet, Titanic Feet)"
+                "Knight Gallant (Heavy Stubber, Stormspear Rocket Pod, Reaper Chainsword, Thunderstrike gauntlet, Titanic Feet)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy stubber"}),

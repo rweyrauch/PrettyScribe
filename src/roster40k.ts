@@ -39,6 +39,8 @@ export class BaseNotes {
 }
 
 export class Weapon extends BaseNotes {
+    _selectionName: string = "";
+
     _count: number = 0;
     _range: string = "Melee";
     _type: string = "Melee";
@@ -179,20 +181,11 @@ export class Model extends BaseNotes {
             const seenWeapons: string[] = [];
             const weaponNames: string[] = [];
             for (const weapon of this._weapons) {
-                let wName = weapon.name();
-                // Dedupe "Stikka (Shooting)" and "Stikka (Melee)" into "Stikka".
-                const dedupeMatch = wName.match(/(.*) \((Shooting|Melee)\)$/);
-                if (dedupeMatch) {
-                    wName = dedupeMatch[1];
-                    if (seenWeapons.includes(wName)) {
-                        continue;
-                    } else {
-                        seenWeapons.push(wName);
-                    }
-                }
+                let wName = weapon._selectionName || weapon.name();
                 if (weapon._count > 1) {
                     wName = `${weapon._count}x ${wName}`;
                 }
+                if (weaponNames.includes(wName)) continue;
                 weaponNames.push(wName);
             }
             weaponNames.push(...this._upgrades);
@@ -305,6 +298,15 @@ export class Unit extends BaseNotes {
 
         for (let model of this._models) {
             model.normalize();
+        }
+
+        for (let i = 0; i < (this._modelStats.length - 1); i++) {
+            const model = this._modelStats[i];
+
+            if (model.equal(this._modelStats[i+1])) {
+                this._modelStats.splice(i+1, 1);
+                i--;
+            }
         }
 
         this._modelList = this._models.map(model => (model._count > 1 ? `${model._count}x ` : '') + model.nameAndGear());
@@ -855,6 +857,13 @@ function ParseWeaponProfile(profile: Element): Weapon {
                 }
             }
         }
+    }
+    // Keep track of the weapon's parent selection for its name, unless the
+    // weapon is directly under the unit's profile.
+    const selection = profile.parentElement?.parentElement;
+    const selectionName = selection?.getAttribute('name');
+    if (selection?.getAttribute('type') === 'upgrade' && selectionName) {
+        weapon._selectionName = selectionName;
     }
     return weapon;
 }

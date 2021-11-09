@@ -20,7 +20,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Grot Oiler"}),
               ],
               '_modelList': [
-                "Grot Oiler (Slugga, Choppa, Stikkbomb)"
+                "Grot Oiler (Slugga, Choppa, Stikkbombs)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Slugga"}),
@@ -51,7 +51,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Ork Boy"}),
               ],
               '_modelList': [
-                "10x Ork Boy W/ Slugga & Choppa (Slugga, Choppa, Stikkbomb)"
+                "10x Ork Boy W/ Slugga & Choppa (Slugga, Choppa, Stikkbombs)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Slugga"}),
@@ -63,12 +63,11 @@ describe("Create40kRoster", function() {
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Boss Nob"}),
                 jasmine.objectContaining({'_name': "Ork Boy"}),
-                jasmine.objectContaining({'_name': "Ork Boy"}),
               ],
               '_modelList': [
-                "Boss Nob (Slugga, Choppa, Stikkbomb)",
-                "2x Ork Boy W/ Shoota (Shoota, Stikkbomb)",
-                "8x Ork Boy W/ Slugga & Choppa (Slugga, Choppa, Stikkbomb)"
+                "Boss Nob (Slugga, Choppa, Stikkbombs)",
+                "2x Ork Boy W/ Shoota (Shoota, Stikkbombs)",
+                "8x Ork Boy W/ Slugga & Choppa (Slugga, Choppa, Stikkbombs)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Shoota"}),
@@ -83,8 +82,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Ork Boy"}),
               ],
               '_modelList': [
-                "Boss Nob (Slugga, Choppa, Stikkbomb)",
-                "10x Ork Boy W/ Slugga & Choppa (Slugga, Choppa, Stikkbomb)"
+                "Boss Nob (Slugga, Choppa, Stikkbombs)",
+                "10x Ork Boy W/ Slugga & Choppa (Slugga, Choppa, Stikkbombs)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Slugga"}),

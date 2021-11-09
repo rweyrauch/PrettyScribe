@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Captain"}),
               ],
               '_modelList': [
-                "Captain (Bolt pistol, Boltgun, Meltagun, Relic blade, Frag grenades, Krak grenades, Forge Master, Obsidian Aquila)"
+                "Captain (Bolt pistol, Combi-melta, Relic blade, Frag & Krak grenades, Forge Master, Obsidian Aquila)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -36,9 +36,9 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Space Marine Sergeant"}),
               ],
               '_modelList': [
-                "3x Space Marine (Bolt pistol, Boltgun, Frag grenades, Krak grenades)",
-                "Space Marine Sergeant (Bolt pistol, Boltgun, Frag grenades, Krak grenades)",
-                "Space Marine w/Special Weapon (Bolt pistol, Flamer, Frag grenades, Krak grenades)"
+                "3x Space Marine (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                "Space Marine Sergeant (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                "Space Marine w/Special Weapon (Bolt pistol, Flamer, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -54,9 +54,9 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Space Marine Sergeant"}),
               ],
               '_modelList': [
-                "3x Space Marine (Bolt pistol, Boltgun, Frag grenades, Krak grenades)",
-                "Space Marine Sergeant (Bolt pistol, 2x Boltgun, Flamer, Frag grenades, Krak grenades)",
-                "Space Marine w/Special Weapon (Bolt pistol, Flamer, Frag grenades, Krak grenades)"
+                "3x Space Marine (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                "Space Marine Sergeant (Bolt pistol, 2x Boltgun, Combi-flamer, Frag & Krak grenades)",
+                "Space Marine w/Special Weapon (Bolt pistol, Flamer, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -73,7 +73,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Redemptor Dreadnought [3] (1-3 wounds remaining)"}),
               ],
               '_modelList': [
-                "Redemptor Dreadnought (Fragstorm Grenade Launcher, Heavy flamer, Heavy Onslaught Gatling Cannon, Redemptor Fist)"
+                "Redemptor Dreadnought (2x Fragstorm Grenade Launchers, Heavy flamer, Heavy Onslaught Gatling Cannon, Redemptor Fist)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Fragstorm Grenade Launcher"}),

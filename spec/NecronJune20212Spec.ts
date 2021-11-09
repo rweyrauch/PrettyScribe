@@ -39,7 +39,6 @@ describe("Create40kRoster", function() {
               '_name': "Skorpekh Destroyers",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Skorpekh Destroyer"}),
-                jasmine.objectContaining({'_name': "Skorpekh Destroyer"}),
               ],
               '_modelList': [
                 "Skorpekh Destroyer (Reap-Blade) (Hyperphase Reap-Blade)",

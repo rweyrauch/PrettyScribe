@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Abominant"}),
               ],
               '_modelList': [
-                "Abominant (Familiar Claws, Power Sledgehammer, Rending Claw(s))"
+                "Abominant (Familiar Claws, Power Sledgehammer, Rending Claw)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Familiar Claws"}),
@@ -50,13 +50,12 @@ describe("Create40kRoster", function() {
               '_name': "Acolyte Hybrids",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Acolyte Hybrid"}),
-                jasmine.objectContaining({'_name': "Acolyte Hybrid"}),
                 jasmine.objectContaining({'_name': "Acolyte Leader"}),
               ],
               '_modelList': [
-                "4x Acolyte Hybrid (Autopistol, Cultist Knife, Rending Claw(s), Blasting Charge)",
-                "Acolyte Hybrid (Heavy Weapon) (Autopistol, Heavy Rock Saw, Blasting Charge)",
-                "Acolyte Leader (Autopistol, Cultist Knife, Rending Claw(s), Blasting Charge)"
+                "4x Acolyte Hybrid (Autopistol, Cultist Knife, Rending Claw, Blasting Charges)",
+                "Acolyte Hybrid (Heavy Weapon) (Autopistol, Heavy Rock Saw, Blasting Charges)",
+                "Acolyte Leader (Autopistol, Cultist Knife, Rending Claw, Blasting Charges)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Autopistol"}),
@@ -69,19 +68,16 @@ describe("Create40kRoster", function() {
               '_name': "Brood Brothers Infantry Squad",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Brood Brother"}),
-                jasmine.objectContaining({'_name': "Brood Brother"}),
-                jasmine.objectContaining({'_name': "Brood Brother"}),
-                jasmine.objectContaining({'_name': "Brood Brother"}),
                 jasmine.objectContaining({'_name': "Brood Brothers Leader"}),
                 jasmine.objectContaining({'_name': "Brood Brothers Weapons Team"}),
               ],
               '_modelList': [
-                "9x Brood Brother (Lasgun, Frag Grenade)",
-                "Brood Brother (Flamer) (Flamer, Frag Grenade)",
-                "Brood Brother (Grenade) (Grenade Launcher (Frag), Grenade Launcher (Krak), Frag Grenade)",
-                "Brood Brother (Vox-caster) (Lasgun, Frag Grenade, Cult Vox-caster)",
-                "Brood Brothers Leader (Laspistol, Chainsword, Frag Grenade)",
-                "Brood Brothers Weapons Team (Lascannon, Lasgun, Frag Grenade)"
+                "9x Brood Brother (Lasgun, Frag Grenades)",
+                "Brood Brother (Flamer) (Flamer, Frag Grenades)",
+                "Brood Brother (Grenade) (Grenade Launcher, Frag Grenades)",
+                "Brood Brother (Vox-caster) (Lasgun, Frag Grenades, Cult Vox-caster)",
+                "Brood Brothers Leader (Laspistol, Chainsword, Frag Grenades)",
+                "Brood Brothers Weapons Team (Lascannon, Lasgun, Frag Grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Flamer"}),
@@ -97,19 +93,15 @@ describe("Create40kRoster", function() {
               '_name': "Neophyte Hybrids",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Neophyte Hybrid"}),
-                jasmine.objectContaining({'_name': "Neophyte Hybrid"}),
-                jasmine.objectContaining({'_name': "Neophyte Hybrid"}),
-                jasmine.objectContaining({'_name': "Neophyte Hybrid"}),
-                jasmine.objectContaining({'_name': "Neophyte Hybrid"}),
                 jasmine.objectContaining({'_name': "Neophyte Leader"}),
               ],
               '_modelList': [
-                "9x Neophyte Hybrid (Autogun, Autopistol, Blasting Charge)",
-                "Neophyte Hybrid (Flamer) (Autopistol, Flamer, Blasting Charge)",
-                "Neophyte Hybrid (Lasgun) (Autopistol, Lasgun, Blasting Charge)",
-                "Neophyte Hybrid (Mining) (Autopistol, Mining Laser, Blasting Charge)",
-                "Neophyte Hybrid (Shotgun) (Autopistol, Shotgun, Blasting Charge)",
-                "Neophyte Leader (Autogun, Autopistol, Blasting Charge)"
+                "9x Neophyte Hybrid (Autogun, Autopistol, Blasting Charges)",
+                "Neophyte Hybrid (Flamer) (Autopistol, Flamer, Blasting Charges)",
+                "Neophyte Hybrid (Lasgun) (Autopistol, Lasgun, Blasting Charges)",
+                "Neophyte Hybrid (Mining) (Autopistol, Mining Laser, Blasting Charges)",
+                "Neophyte Hybrid (Shotgun) (Autopistol, Shotgun, Blasting Charges)",
+                "Neophyte Leader (Autogun, Autopistol, Blasting Charges)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Autogun"}),
@@ -124,13 +116,11 @@ describe("Create40kRoster", function() {
               '_name': "Atalan Jackals",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Atalan Jackal"}),
-                jasmine.objectContaining({'_name': "Atalan Jackal"}),
-                jasmine.objectContaining({'_name': "Atalan Jackal"}),
                 jasmine.objectContaining({'_name': "Atalan Leader"}),
               ],
               '_modelList': [
-                "3x Atalan Jackal (Autopistol, Blasting Charge)",
-                "Atalan Leader (Autopistol, Power Pick, Blasting Charge, Demolition Charge)"
+                "3x Atalan Jackal (Autopistol, Blasting Charges)",
+                "Atalan Leader (Autopistol, Power Pick, Blasting Charges, Demolition Charge)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Autopistol"}),
@@ -144,7 +134,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Cult Leman Russ"}),
               ],
               '_modelList': [
-                "Cult Leman Russ (Battle Cannon, Heavy bolter, Heavy flamer, Heavy stubber, Hunter-killer missile)"
+                "Cult Leman Russ (Battle Cannon, Heavy Bolter, 2x Heavy Flamer, Heavy Stubber, Hunter-killer Missile)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Battle Cannon"}),
@@ -164,7 +154,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Goliath Rockgrinder"}),
               ],
               '_modelList': [
-                "Goliath Rockgrinder (Cache of Demolition Charges, Heavy Mining Laser, Heavy stubber, Drilldozer Blade)"
+                "Goliath Rockgrinder (Cache of Demolition Charges, Heavy Mining Laser, Heavy Stubber, Drilldozer Blade)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Cache of Demolition Charges"}),
@@ -203,7 +193,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Hive Tyrant"}),
               ],
               '_modelList': [
-                "Hive Tyrant (Monstrous Scything Talons, Prehensile Pincer Tail)"
+                "Hive Tyrant (2x Monstrous Scything Talons, Prehensile Pincer Tail)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Monstrous Scything Talons"}),
@@ -243,10 +233,6 @@ describe("Create40kRoster", function() {
               '_name': "Tyranid Warriors",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Tyranid Warrior"}),
-                jasmine.objectContaining({'_name': "Tyranid Warrior"}),
-                jasmine.objectContaining({'_name': "Tyranid Warrior"}),
-                jasmine.objectContaining({'_name': "Tyranid Warrior"}),
-                jasmine.objectContaining({'_name': "Tyranid Warrior"}),
               ],
               '_modelList': [
                 "Tyranid Warrior (Devourer, Boneswords)",
@@ -267,7 +253,6 @@ describe("Create40kRoster", function() {
               '_name': "Hive Guard",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Hive Guard"}),
-                jasmine.objectContaining({'_name': "Hive Guard"}),
               ],
               '_modelList': [
                 "3x Hive Guard (Impaler) (Impaler Cannon)",
@@ -283,7 +268,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Carnifex"}),
               ],
               '_modelList': [
-                "Carnifex (Monstrous Scything Talons)"
+                "Carnifex (2x Monstrous Scything Talons)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Monstrous Scything Talons"}),
@@ -311,7 +296,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Toxicrene"}),
               ],
               '_modelList': [
-                "Toxicrene (Choking Spores, Massive Toxic Lashes)"
+                "Toxicrene (Chocking Spores, Massive Toxic Lashes)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Choking Spores"}),

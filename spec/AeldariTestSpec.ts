@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Farseer"}),
               ],
               '_modelList': [
-                "Farseer (Shuriken pistol, Witchblade, Ghosthelm, Rune Armour, Runes of the Farseer)"
+                "Farseer (Shuriken Pistol, Witchblade, Ghosthelm, Rune Armour, Runes of the Farseer)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Shuriken pistol"}),
@@ -49,7 +49,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Dire Avenger"}),
               ],
               '_modelList': [
-                "5x Dire Avenger (Avenger Shuriken Catapult, Plasma Grenade)"
+                "5x Dire Avenger (Avenger Shuriken Catapult, Plasma Grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Avenger Shuriken Catapult"}),
@@ -61,7 +61,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Ranger"}),
               ],
               '_modelList': [
-                "5x Ranger (Ranger Long Rifle, Shuriken pistol)"
+                "5x Ranger (Ranger Long Rifle, Shuriken Pistol)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Ranger Long Rifle"}),
@@ -73,7 +73,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Storm Guardian"}),
               ],
               '_modelList': [
-                "8x Storm Guardian - Aeldari Blade (Shuriken pistol, Aeldari Blade, Plasma Grenade)"
+                "8x Storm Guardian - Aeldari Blade (Shuriken Pistol, Aeldari Blade, Plasma Grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Shuriken pistol"}),
@@ -120,7 +120,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Crimson Hunter Exarch"}),
               ],
               '_modelList': [
-                "Crimson Hunter Exarch (Bright Lance, Pulse Laser, Airborne, Crash and Burn, Hard To Hit, Skyhunters, Wings of Khaine)"
+                "Crimson Hunter Exarch (Two Bright Lances, Pulse Laser, Airborne, Crash and Burn, Hard To Hit, Skyhunters, Wings of Khaine)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bright Lance"}),
@@ -139,7 +139,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Succubus"}),
               ],
               '_modelList': [
-                "Succubus (Splinter pistol, Archite glaive)"
+                "Succubus (Splinter pistol, Archite Glaive)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Splinter pistol"}),
@@ -165,8 +165,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Sybarite"}),
               ],
               '_modelList': [
-                "4x Kabalite Warrior (Splinter rifle)",
-                "Sybarite (Splinter rifle)"
+                "4x Kabalite Warrior (Splinter Rifle)",
+                "Sybarite (Splinter Rifle)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Splinter rifle"}),
@@ -179,7 +179,7 @@ describe("Create40kRoster", function() {
               ],
               '_modelList': [
                 "Acothyst (Haemonculus tools)",
-                "4x Wracks (Haemonculus tools)"
+                "4x Wracks (Haemonculus Tools)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Haemonculus tools"}),
@@ -192,7 +192,7 @@ describe("Create40kRoster", function() {
               ],
               '_modelList': [
                 "Hekatrix (Splinter pistol, Hekatarii blade, Plasma Grenade)",
-                "4x Wych (Splinter pistol, Hekatarii blade, Plasma Grenade)"
+                "4x Wych (Splinter Pistol, Hekatarii blade, Plasma Grenade)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Splinter pistol"}),
@@ -250,7 +250,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Reaper"}),
               ],
               '_modelList': [
-                "Reaper (Storm Vortex Projector - Beam, Storm Vortex Projector - Blast, Scythevanes, Sharpened prow blade, Night Shield, Storm Vortex Projector)"
+                "Reaper (Storm Vortex Projector, Scythevanes, Sharpened prow blade, Night Shield, Storm Vortex Projector)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Storm Vortex Projector - Beam"}),

@@ -33,7 +33,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Knight Commander Pask"}),
               ],
               '_modelList': [
-                "Knight Commander Pask (Battle Cannon, Heavy bolter)"
+                "Knight Commander Pask (Battle Cannon, Heavy Bolter)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Battle Cannon"}),
@@ -50,7 +50,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Sly Marbo"}),
               ],
               '_modelList': [
-                "Sly Marbo (Ripper Pistol, Envenomed Blade, Frag grenade)"
+                "Sly Marbo (Ripper Pistol, Envenomed Blade, Frag Grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Ripper Pistol"}),
@@ -134,14 +134,12 @@ describe("Create40kRoster", function() {
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Tempestor"}),
                 jasmine.objectContaining({'_name': "Tempestus Scion"}),
-                jasmine.objectContaining({'_name': "Tempestus Scion"}),
-                jasmine.objectContaining({'_name': "Tempestus Scion"}),
               ],
               '_modelList': [
-                "4x Scion (Hot-shot Lasgun, Frag grenade, Krak grenade)",
-                "Scion w/ Special Weapon (Grenade Launcher (Frag), Grenade Launcher (Krak), Frag grenade, Krak grenade)",
-                "Scion w/ Vox-caster (Hot-shot Lasgun, Hot-shot Laspistol, Vox-caster)",
-                "Tempestor (Hot-shot Laspistol, Power fist, Frag grenade, Krak grenade)"
+                "4x Scion (Hot-shot Lasgun, Frag & Krak grenades)",
+                "Scion w/ Special Weapon (Grenade Launcher, Frag & Krak grenades)",
+                "Scion w/ Vox-caster (Hot-Shot Lasgun, Hot-shot Laspistol, Vox-caster)",
+                "Tempestor (Hot-shot Laspistol, Power fist, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Grenade Launcher (Frag)"}),
@@ -155,7 +153,6 @@ describe("Create40kRoster", function() {
             jasmine.objectContaining({
               '_name': "Bullgryns",
               '_modelStats': [
-                jasmine.objectContaining({'_name': "Bullgryn"}),
                 jasmine.objectContaining({'_name': "Bullgryn"}),
                 jasmine.objectContaining({'_name': "Bullgryn Bone 'ead"}),
               ],
@@ -176,8 +173,8 @@ describe("Create40kRoster", function() {
               ],
               '_modelList': [
                 "Hades Breaching Drill (Melta Cutter Drill)",
-                "Veteran Sergeant (Laspistol, Chainsword, Frag grenade)",
-                "9x Veteran w/ Shotgun (Shotgun, Frag grenade)"
+                "Veteran Sergeant (Laspistol, Chainsword, Frag Grenades)",
+                "9x Veteran w/ Shotgun (Shotgun, Frag Grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Laspistol"}),
@@ -190,13 +187,10 @@ describe("Create40kRoster", function() {
               '_name': "Special Weapons Squad",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Guardsman"}),
-                jasmine.objectContaining({'_name': "Guardsman"}),
-                jasmine.objectContaining({'_name': "Guardsman"}),
-                jasmine.objectContaining({'_name': "Guardsman"}),
               ],
               '_modelList': [
                 "3x Guardsman (Lasgun, Frag grenade)",
-                "Guardsman W/ Special Weapon (Grenade Launcher (Frag), Grenade Launcher (Krak), Frag grenade)",
+                "Guardsman W/ Special Weapon (Grenade Launcher, Frag grenade)",
                 "Guardsman W/ Special Weapon (Meltagun, Frag grenade)",
                 "Guardsman W/ Special Weapon (Sniper rifle, Frag grenade)"
               ],
@@ -212,13 +206,11 @@ describe("Create40kRoster", function() {
               '_name': "Hellhounds",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Hellhound"}),
-                jasmine.objectContaining({'_name': "Hellhound"}),
-                jasmine.objectContaining({'_name': "Hellhound"}),
               ],
               '_modelList': [
-                "Bane Wolf (Chem Cannon, Heavy bolter)",
-                "Devil Dog (Heavy bolter, Melta Cannon)",
-                "Hellhound (Heavy bolter, Inferno Cannon)"
+                "Bane Wolf (Turret-mounted Chem Cannon, Heavy Bolter)",
+                "Devil Dog (Heavy Bolter, Turret-mounted Melta Cannon)",
+                "Hellhound (Heavy Bolter, Turret-mounted Inferno Cannon)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Chem Cannon"}),
@@ -265,7 +257,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Hydra"}),
               ],
               '_modelList': [
-                "Hydra (Heavy bolter, Hydra Quad Autocannon)"
+                "Hydra (Heavy Bolter, Hydra Quad Autocannon)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy bolter"}),
@@ -283,7 +275,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Rapier"}),
               ],
               '_modelList': [
-                "2x Guardsmen Crew (Lasgun, Frag grenade)",
+                "2x Guardsmen Crew (Lasgun, Frag Grenades)",
                 "Rapier (Laser Destroyer)"
               ],
               '_weapons': [
@@ -297,7 +289,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Wyvern"}),
               ],
               '_modelList': [
-                "Wyvern (Heavy bolter, Wyvern Quad Stormshard Mortar)"
+                "Wyvern (Heavy Bolter, Wyven Quad Stormshard Mortar)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy bolter"}),

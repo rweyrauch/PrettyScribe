@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Ahriman"}),
               ],
               '_modelList': [
-                "Ahriman (Inferno Bolt Pistol, Black Staff of Ahriman, Frag grenade, Krak grenade)"
+                "Ahriman (Inferno Bolt Pistol, Black Staff of Ahriman, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Inferno Bolt Pistol"}),
@@ -39,7 +39,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Exalted Sorcerer"}),
               ],
               '_modelList': [
-                "Exalted Sorcerer (Inferno Bolt Pistol, Force stave, Frag grenade, Krak grenade)"
+                "Exalted Sorcerer (Inferno Bolt Pistol, Force stave, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Inferno Bolt Pistol"}),
@@ -122,7 +122,7 @@ describe("Create40kRoster", function() {
               ],
               '_modelList': [
                 "Scarab Occult Sorcerer (Inferno Combi-bolter, Force stave)",
-                "4x Terminator (Inferno Combi-bolter, Power sword)"
+                "4x Terminator (Inferno Combi-bolter, Powersword)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Inferno Combi-bolter"}),
@@ -142,7 +142,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Heldrake"}),
               ],
               '_modelList': [
-                "Heldrake (Hades autocannon, Heldrake claws)"
+                "Heldrake (Hades Autocannon, Heldrake claws)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Hades autocannon"}),
