@@ -8,11 +8,24 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 25,
-        '_points': 500,
+        '_powerLevel': 31,
+        '_points': 620,
         '_commandPoints': 3,
         '_forces': [
           jasmine.objectContaining({'_units': [
+            jasmine.objectContaining({
+              '_name': "Chronomancer",
+              '_modelStats': [
+                jasmine.objectContaining({'_name': "Chronomancer"}),
+              ],
+              '_modelList': [
+                "Chronomancer (Aeonstave, Chronotendrils)"
+              ],
+              '_weapons': [
+                jasmine.objectContaining({'_name': "Aeonstave (Shooting)"}),
+                jasmine.objectContaining({'_name': "Aeonstave (Melee)"}),
+                jasmine.objectContaining({'_name': "Chronotendrils"}),
+              ]}),
             jasmine.objectContaining({
               '_name': "Royal Warden",
               '_modelStats': [
@@ -58,6 +71,18 @@ describe("Create40kRoster", function() {
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Feeder Mandibles"}),
+              ]}),
+            jasmine.objectContaining({
+              '_name': "Bound Creation",
+              '_modelStats': [
+                jasmine.objectContaining({'_name': "Cryptothrall"}),
+              ],
+              '_modelList': [
+                "Cryptothralls (2x Scouring Eye, 2x Scythed Limbs)"
+              ],
+              '_weapons': [
+                jasmine.objectContaining({'_name': "Scouring Eye"}),
+                jasmine.objectContaining({'_name': "Scythed Limbs"}),
               ]}),
           ]}),
         ]}));

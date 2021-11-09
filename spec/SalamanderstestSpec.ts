@@ -8,8 +8,8 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 24,
-        '_points': 475,
+        '_powerLevel': 32,
+        '_points': 625,
         '_commandPoints': 6,
         '_forces': [
           jasmine.objectContaining({'_units': [
@@ -80,6 +80,27 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Heavy flamer"}),
                 jasmine.objectContaining({'_name': "Heavy Onslaught Gatling Cannon"}),
                 jasmine.objectContaining({'_name': "Redemptor Fist"}),
+              ]}),
+            jasmine.objectContaining({
+              '_name': "Devastator Squad",
+              '_modelStats': [
+                jasmine.objectContaining({'_name': "Devastator Marine"}),
+                jasmine.objectContaining({'_name': "Devastator Marine Sergeant"}),
+              ],
+              '_modelList': [
+                "Devastator Marine Sergeant (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                "Devastator Marine w/Heavy Weapon (Bolt pistol, Heavy bolter, Frag & Krak grenades)",
+                "Devastator Marine w/Heavy Weapon (Bolt pistol, Multi-melta, Frag & Krak grenades)",
+                "Devastator Marine w/Heavy Weapon (Bolt pistol, Heavy bolter, Frag & Krak grenades)",
+                "Devastator Marine w/Heavy Weapon (Bolt pistol, Multi-melta, Frag & Krak grenades)"
+              ],
+              '_weapons': [
+                jasmine.objectContaining({'_name': "Bolt pistol"}),
+                jasmine.objectContaining({'_name': "Boltgun"}),
+                jasmine.objectContaining({'_name': "Heavy bolter"}),
+                jasmine.objectContaining({'_name': "Multi-melta"}),
+                jasmine.objectContaining({'_name': "Frag grenades"}),
+                jasmine.objectContaining({'_name': "Krak grenades"}),
               ]}),
           ]}),
         ]}));
