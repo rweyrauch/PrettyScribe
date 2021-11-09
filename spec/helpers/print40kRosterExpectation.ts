@@ -15,9 +15,7 @@ function main(args: string[]) {
     return;
   }
 
-  for (const filename of args.slice(2)) {
-    console.log(getRosterExpectation(filename));
-  }
+  Promise.all(args.slice(2).map(getRosterExpectation));
 }
 
 main(process.argv);

@@ -8,7 +8,7 @@
 import fs from "fs";
 import { getRosterExpectation } from "./40kRosterExpectation";
 
-function writeRosterExpectations(filename: string) {
+async function writeRosterExpectations(filename: string) {
   const filenameMatch = filename.match('([^/]+)\.rosz?$');
   if (!filenameMatch) {
     console.error(`ERROR: Unexpected input filename doesn't match regex: ${filename}`);
@@ -16,7 +16,7 @@ function writeRosterExpectations(filename: string) {
   }
   const outputFilename = `spec/${filenameMatch[1].replace(/\s/g, '')}Spec.ts`;
 
-  const output = getRosterExpectation(filename);
+  const output = await getRosterExpectation(filename);
 
   fs.writeFile(outputFilename, output, function (err) {
     if (err) return console.log(err);
@@ -30,9 +30,7 @@ function main(args: string[]) {
     return;
   }
 
-  for (const filename of args.slice(2)) {
-    writeRosterExpectations(filename);
-  }
+  Promise.all(args.slice(2).map(writeRosterExpectations));
 }
 
 main(process.argv);

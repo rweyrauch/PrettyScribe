@@ -1,9 +1,9 @@
-import { readRosterFile } from './helpers/readRosterFile';
+import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads test/Black Templar 2000.ros", function() {
-    const doc = readRosterFile('test/Black Templar 2000.ros');
+  it("loads test/Black Templar 2000.ros", async function() {
+    const doc = await readZippedRosterFile('test/Black Templar 2000.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Captain in Phobos Armour"}),
               ],
               '_modelList': [
-                "Captain in Phobos Armour (Bolt pistol, Master-crafted instigator bolt carbine, Combat knife, Frag grenade, Krak grenade, Camo cloak, Champion of Humanity)"
+                "Captain in Phobos Armour (Bolt pistol, Master-crafted instigator bolt carbine, Combat knife, Frag & Krak grenades, Camo cloak, Champion of Humanity)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -34,7 +34,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Lieutenant in Phobos Armour"}),
               ],
               '_modelList': [
-                "Lieutenant in Phobos Armour (Bolt pistol, Master-crafted occulus bolt rifle, Paired Combat Blades, Frag grenade, Krak grenade, The Armour Indomitus)"
+                "Lieutenant in Phobos Armour (Bolt pistol, Master-crafted occulus bolt rifle, Paired Combat Blades, Frag & Krak grenades, The Armour Indomitus)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -49,7 +49,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Emperor's Champion"}),
               ],
               '_modelList': [
-                "The Emperor's Champion (Bolt pistol, Black Sword, Frag grenade, Krak grenade)"
+                "The Emperor's Champion (Bolt pistol, Black Sword, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -64,8 +64,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Sword Brother"}),
               ],
               '_modelList': [
-                "4x Initiate (Bolt pistol, Boltgun, Frag grenade, Krak grenade)",
-                "Sword Brother (Boltgun, Power fist, Frag grenade, Krak grenade)"
+                "4x Initiate (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                "Sword Brother (Boltgun, Power fist, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -81,8 +81,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Infiltrator Sergeant"}),
               ],
               '_modelList': [
-                "4x Infilltrator (Bolt pistol, Marksman bolt carbine, Frag grenade, Krak grenade)",
-                "Infiltrator Sergeant (Bolt pistol, Marksman bolt carbine, Frag grenade, Krak grenade)"
+                "4x Infilltrator (Bolt pistol, Marksman bolt carbine, Frag & Krak grenades)",
+                "Infiltrator Sergeant (Bolt pistol, Marksman bolt carbine, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -97,8 +97,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Intercessor Sergeant"}),
               ],
               '_modelList': [
-                "4x Intercessor (Auto Bolt Rifle, Bolt pistol, Frag grenade, Krak grenade)",
-                "Intercessor Sergeant (Auto Bolt Rifle, Bolt pistol, Thunder hammer, Frag grenade, Krak grenade)"
+                "4x Intercessor (Auto Bolt Rifle, Bolt pistol, Frag & Krak grenades)",
+                "Intercessor Sergeant (Auto Bolt Rifle, Bolt pistol, Thunder hammer, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Auto Bolt Rifle"}),
@@ -114,8 +114,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Intercessor Sergeant (Veteran Intercessors)"}),
               ],
               '_modelList': [
-                "4x Intercessor (Auto Bolt Rifle, Bolt pistol, Frag grenade, Krak grenade)",
-                "Intercessor Sergeant (Auto Bolt Rifle, Bolt pistol, Thunder hammer, Frag grenade, Krak grenade)"
+                "4x Intercessor (Auto Bolt Rifle, Bolt pistol, Frag & Krak grenades)",
+                "Intercessor Sergeant (Auto Bolt Rifle, Bolt pistol, Thunder hammer, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Auto Bolt Rifle"}),
@@ -131,7 +131,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Scout Sergeant"}),
               ],
               '_modelList': [
-                "Scout Squad (2x Bolt pistol, 2x Boltgun, 2x Frag grenade, 2x Krak grenade)"
+                "Scout Squad (2x Bolt pistol, 2x Boltgun, 2x Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -146,8 +146,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Space Marine Sergeant"}),
               ],
               '_modelList': [
-                "4x Space Marine (Bolt pistol, Boltgun, Frag grenade, Krak grenade)",
-                "Space Marine Sergeant (Bolt pistol, Boltgun, Frag grenade, Krak grenade)"
+                "4x Space Marine (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                "Space Marine Sergeant (Bolt pistol, Boltgun, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -187,7 +187,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Redemptor Dreadnought"}),
               ],
               '_modelList': [
-                "Redemptor Dreadnought (Fragstorm Grenade Launcher, Heavy flamer, Heavy Onslaught Gatling Cannon, Redemptor Fist)"
+                "Redemptor Dreadnought (2x Fragstorm Grenade Launchers, Heavy flamer, Heavy Onslaught Gatling Cannon, Redemptor Fist)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Fragstorm Grenade Launcher"}),
@@ -207,7 +207,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Space Marine Sergeant (Jump Pack)"}),
               ],
               '_modelList': [
-                "Assault Squad (2x Bolt pistol, 2x Chainsword, 2x Frag grenade, 2x Krak grenade)"
+                "Assault Squad (2x Bolt pistol/Chainsword, 2x Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -222,7 +222,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Space Marine Sergeant (Jump Pack)"}),
               ],
               '_modelList': [
-                "Assault Squad (2x Bolt pistol, 2x Chainsword, 2x Frag grenade, 2x Krak grenade)"
+                "Assault Squad (2x Bolt pistol/Chainsword, 2x Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -237,8 +237,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Suppressor Sergeant"}),
               ],
               '_modelList': [
-                "2x Suppressor (Accelerator autocannon, Bolt pistol, Frag grenade, Krak grenade, Grav-chute)",
-                "Suppressor Sergeant (Accelerator autocannon, Bolt pistol, Frag grenade, Krak grenade, Grav-chute)"
+                "2x Suppressor (Accelerator autocannon, Bolt pistol, Frag & Krak grenades, Grav-chute)",
+                "Suppressor Sergeant (Accelerator autocannon, Bolt pistol, Frag & Krak grenades, Grav-chute)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Accelerator autocannon"}),
@@ -253,8 +253,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Eliminator Sergeant"}),
               ],
               '_modelList': [
-                "Eliminator Sergeant (Bolt pistol, Bolt sniper rifle, Bolt sniper rifle - Executioner round, Bolt sniper rifle - Hyperfrag round, Bolt sniper rifle - Mortis round, Frag grenade, Krak grenade)",
-                "2x Eliminator with Bolt Sniper (Bolt pistol, Bolt sniper rifle, Bolt sniper rifle - Executioner round, Bolt sniper rifle - Hyperfrag round, Bolt sniper rifle - Mortis round, Frag grenade, Krak grenade)"
+                "Eliminator Sergeant (Bolt pistol, Bolt sniper rifle, Frag & Krak grenades)",
+                "2x Eliminator with Bolt Sniper (Bolt pistol, Bolt sniper rifle, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -271,7 +271,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Predator"}),
               ],
               '_modelList': [
-                "Predator (Heavy bolter, Storm bolter, Twin lascannon)"
+                "Predator (Two Heavy Bolters, Storm bolter, Twin lascannon)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy bolter"}),
@@ -289,7 +289,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Repulsor Executioner"}),
               ],
               '_modelList': [
-                "Repulsor Executioner (2x Fragstorm Grenade Launcher, Heavy Onslaught Gatling Cannon, Macro Plasma Incinerator, Standard, Macro Plasma Incinerator, Supercharged, 2x Storm bolter, Twin Heavy Bolter, Twin Icarus Ironhail Heavy Stubber)"
+                "Repulsor Executioner (2x Fragstorm Grenade Launcher, Heavy Onslaught Gatling Cannon, Macro Plasma Incinerator, 2x Storm bolter, Twin Heavy Bolter, Twin Icarus Ironhail Heavy Stubber)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Fragstorm Grenade Launcher"}),
@@ -322,7 +322,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Impulsor"}),
               ],
               '_modelList': [
-                "Impulsor (Ironhail Heavy Stubber, Storm bolter, Shield Dome)"
+                "Impulsor (Ironhail Heavy Stubber, 2x Storm Bolters, Shield Dome)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Ironhail Heavy Stubber"}),

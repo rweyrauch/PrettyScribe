@@ -1,9 +1,9 @@
-import { readRosterFile } from './helpers/readRosterFile';
+import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads test/BloodAngels test.ros", function() {
-    const doc = readRosterFile('test/BloodAngels test.ros');
+  it("loads test/BloodAngels test.ros", async function() {
+    const doc = await readZippedRosterFile('test/BloodAngels test.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
@@ -20,8 +20,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Primaris Lieutenant"}),
               ],
               '_modelList': [
-                "Lieutenant in Phobos Armour (Bolt pistol, Master-crafted occulus bolt rifle, Paired Combat Blades, Frag grenades, Krak grenades)",
-                "Primaris Lieutenant (Bolt pistol, Neo-volkite pistol, Master-crafted power sword, Frag grenades, Krak grenades)"
+                "Lieutenant in Phobos Armour (Bolt pistol, Master-crafted occulus bolt carbine, Paired Combat Blades, Frag & Krak grenades)",
+                "Primaris Lieutenant (Bolt pistol, Neo-volkite pistol, Master-crafted power sword, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -39,8 +39,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Assault Intercessor Sgt"}),
               ],
               '_modelList': [
-                "4x Assault Intercessor (Heavy Bolt Pistol, Astartes Chainsword, Frag grenades, Krak grenades)",
-                "Assault Intercessor Sgt (Heavy Bolt Pistol, Astartes Chainsword, Frag grenades, Krak grenades)"
+                "4x Assault Intercessor (Heavy Bolt Pistol, Astartes Chainsword, Frag & Krak grenades)",
+                "Assault Intercessor Sgt (Heavy Bolt Pistol, Astartes Chainsword, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy Bolt Pistol"}),
@@ -55,8 +55,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Bladeguard Veteran Sergeant"}),
               ],
               '_modelList': [
-                "2x Bladeguard Veteran (Heavy Bolt Pistol, Master-crafted power sword, Frag grenades, Krak grenades, Storm shield)",
-                "Bladeguard Veteran Sergeant (Heavy Bolt Pistol, Master-crafted power sword, Frag grenades, Krak grenades, Storm shield)"
+                "2x Bladeguard Veteran (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)",
+                "Bladeguard Veteran Sergeant (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy Bolt Pistol"}),
@@ -71,8 +71,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Bladeguard Veteran Sergeant"}),
               ],
               '_modelList': [
-                "2x Bladeguard Veteran (Heavy Bolt Pistol, Master-crafted power sword, Frag grenades, Krak grenades, Storm shield)",
-                "Bladeguard Veteran Sergeant (Heavy Bolt Pistol, Master-crafted power sword, Frag grenades, Krak grenades, Storm shield)"
+                "2x Bladeguard Veteran (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)",
+                "Bladeguard Veteran Sergeant (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy Bolt Pistol"}),
@@ -87,8 +87,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Outrider Sgt"}),
               ],
               '_modelList': [
-                "2x Outrider (Heavy Bolt Pistol, Twin Bolt rifle, Astartes Chainsword, Frag grenades, Krak grenades)",
-                "Outrider Sgt (Heavy Bolt Pistol, Twin Bolt rifle, Astartes Chainsword, Frag grenades, Krak grenades)"
+                "2x Outrider (Heavy Bolt Pistol, Twin Bolt rifle, Astartes Chainsword, Frag & Krak grenades)",
+                "Outrider Sgt (Heavy Bolt Pistol, Twin Bolt rifle, Astartes Chainsword, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy Bolt Pistol"}),

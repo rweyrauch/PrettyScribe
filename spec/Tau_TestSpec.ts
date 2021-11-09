@@ -1,9 +1,9 @@
-import { readRosterFile } from './helpers/readRosterFile';
+import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads test/Tau_Test.ros", function() {
-    const doc = readRosterFile('test/Tau_Test.ros');
+  it("loads test/Tau_Test.ros", async function() {
+    const doc = await readZippedRosterFile('test/Tau_Test.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
@@ -54,7 +54,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Fire Warrior"}),
               ],
               '_modelList': [
-                "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenade)"
+                "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Pulse rifle"}),
@@ -66,7 +66,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Fire Warrior"}),
               ],
               '_modelList': [
-                "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenade)"
+                "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Pulse rifle"}),
@@ -78,7 +78,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Fire Warrior"}),
               ],
               '_modelList': [
-                "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenade)"
+                "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Pulse rifle"}),
@@ -90,7 +90,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Kroot Shaper"}),
               ],
               '_modelList': [
-                "Kroot Shaper (Kroot rifle (shooting), Kroot rifle (melee), Ritual blade)"
+                "Kroot Shaper (Kroot rifle, Ritual blade)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Kroot rifle (shooting)"}),
@@ -104,7 +104,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "XV95 Ghostkeel Shas'vre"}),
               ],
               '_modelList': [
-                "XV95 Ghostkeel Battlesuit (Flamer, Fusion collider)"
+                "XV95 Ghostkeel Battlesuit (2x Flamer, Fusion collider)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Flamer"}),
@@ -121,7 +121,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "AX3 Razorshark Strike Fighter"}),
               ],
               '_modelList': [
-                "AX3 Razorshark Strike Fighter (Burst cannon, Quad ion turret (Overcharge), Quad ion turret (Standard), 2x Seeker missile)"
+                "AX3 Razorshark Strike Fighter (Burst cannon, Quad ion turret, 2x Seeker missile)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -183,7 +183,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Darkstrider"}),
               ],
               '_modelList': [
-                "Darkstrider (Markerlight, Pulse carbine, Photon grenade)"
+                "Darkstrider (Markerlight, Pulse carbine, Photon grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Markerlight"}),
@@ -196,7 +196,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Fire Warrior"}),
               ],
               '_modelList': [
-                "5x Fire Warrior (Pulse blaster (1 Close range), Pulse blaster (2 Medium range), Pulse blaster (3 Long range), Photon grenade)"
+                "5x Fire Warrior (Pulse blaster, Photon grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Pulse blaster (1 Close range)"}),
@@ -210,7 +210,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Kroot"}),
               ],
               '_modelList': [
-                "10x Kroot (Kroot rifle (shooting), Kroot rifle (melee))"
+                "10x Kroot (Kroot rifle)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Kroot rifle (shooting)"}),
@@ -222,7 +222,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Fire Warrior"}),
               ],
               '_modelList': [
-                "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenade)"
+                "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Pulse rifle"}),
@@ -256,7 +256,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Dahyak Grekh"}),
               ],
               '_modelList': [
-                "Dahyak Grekh (Kroot pistol, Kroot rifle (shooting), Kroot rifle (melee))"
+                "Dahyak Grekh (Kroot pistol, Kroot rifle)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Kroot pistol"}),
@@ -269,7 +269,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
               ],
               '_modelList': [
-                "XV104 Riptide Battlesuit (Heavy burst cannon, Smart missile system)"
+                "XV104 Riptide Battlesuit (Heavy burst cannon, 2x Smart missile system)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy burst cannon"}),
@@ -286,7 +286,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
               ],
               '_modelList': [
-                "XV104 Riptide Battlesuit (Heavy burst cannon, Smart missile system)"
+                "XV104 Riptide Battlesuit (Heavy burst cannon, 2x Smart missile system)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy burst cannon"}),
@@ -303,7 +303,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
               ],
               '_modelList': [
-                "XV104 Riptide Battlesuit (Heavy burst cannon, Smart missile system)"
+                "XV104 Riptide Battlesuit (Heavy burst cannon, 2x Smart missile system)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy burst cannon"}),

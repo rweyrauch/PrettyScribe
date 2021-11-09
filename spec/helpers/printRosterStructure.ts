@@ -5,7 +5,7 @@
  *   $ ts-node spec/helpers/printRosterStructure.ts 'path/to/file'
  */
 
-import { readRosterFile } from './readRosterFile';
+import { readZippedRosterFile } from './readRosterFile';
 
 /**
  * Visits an Element node and its children, outputting useful bits to console.
@@ -41,15 +41,14 @@ function visit(el: Element, indent = 0): void {
 
 }
 
-function main(args: string[]) {
+async function main(args: string[]) {
   if (args.length !== 3) {
     console.error(`ERROR: Expected one CLI argument; got ${args.length}: ${args.join(' ')}`);
     return;
   }
   const filename = args[2];
-  const doc = readRosterFile(filename);
+  const doc = await readZippedRosterFile(filename);
   visit(doc.documentElement);
-
 }
 
 main(process.argv);

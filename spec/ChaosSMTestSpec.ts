@@ -1,9 +1,9 @@
-import { readRosterFile } from './helpers/readRosterFile';
+import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads test/Chaos SM Test.ros", function() {
-    const doc = readRosterFile('test/Chaos SM Test.ros');
+  it("loads test/Chaos SM Test.ros", async function() {
+    const doc = await readZippedRosterFile('test/Chaos SM Test.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
@@ -31,7 +31,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Lord Discordant on Helstalker"}),
               ],
               '_modelList': [
-                "Lord Discordant on Helstalker (Autocannon, Bolt pistol, Bladed limbs and tail, Impaler chainglaive, Mechatendrils, Techno-virus injector, Frag grenade, Krak grenade)"
+                "Lord Discordant on Helstalker (Autocannon, Bolt pistol, Bladed limbs and tail, Impaler chainglaive, Mechatendrils, Techno-virus injector, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Autocannon"}),
@@ -55,7 +55,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Sorcerer"}),
               ],
               '_modelList': [
-                "Sorcerer (Bolt pistol, Force sword, Frag grenade, Krak grenade)"
+                "Sorcerer (Bolt pistol, Force sword, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -89,8 +89,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Chaos Space Marine"}),
               ],
               '_modelList': [
-                "Aspiring Champion (Bolt pistol, Boltgun, Frag grenade, Krak grenade)",
-                "4x Marine w/ Boltgun (Bolt pistol, Boltgun, Frag grenade, Krak grenade)"
+                "Aspiring Champion (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                "4x Marine w/ Boltgun (Bolt pistol, Boltgun, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -105,8 +105,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Chaos Space Marine"}),
               ],
               '_modelList': [
-                "Aspiring Champion (Bolt pistol, Boltgun, Frag grenade, Krak grenade)",
-                "4x Marine w/ Boltgun (Bolt pistol, Boltgun, Frag grenade, Krak grenade)"
+                "Aspiring Champion (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                "4x Marine w/ Boltgun (Bolt pistol, Boltgun, Frag & Krak grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -146,8 +146,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Plague Marine"}),
               ],
               '_modelList': [
-                "Plague Champion (Boltgun, Plague knife, Blight Grenades, Krak grenade)",
-                "4x Plague Marine w/ boltgun (Boltgun, Plague knife, Blight Grenades, Krak grenade)"
+                "Plague Champion (Boltgun, Plague knife, Blight Grenades, Krak grenades)",
+                "4x Plague Marine w/ boltgun (Boltgun, Plague knife, Blight Grenades, Krak Grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Boltgun"}),
@@ -195,7 +195,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Heldrake"}),
               ],
               '_modelList': [
-                "Heldrake (Hades autocannon, Heldrake claws)"
+                "Heldrake (Hades Autocannon, Heldrake claws)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Hades autocannon"}),
@@ -332,7 +332,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Exalted Flamer"}),
               ],
               '_modelList': [
-                "Exalted Flamer (Fire of Tzeentch (Blue), Fire of Tzeentch (Pink), Tongues of flame)"
+                "Exalted Flamer (Fire of Tzeentch, Tongues of flame)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Fire of Tzeentch (Blue)"}),

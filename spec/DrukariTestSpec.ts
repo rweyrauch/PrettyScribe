@@ -1,9 +1,9 @@
-import { readRosterFile } from './helpers/readRosterFile';
+import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads test/Drukari Test.ros", function() {
-    const doc = readRosterFile('test/Drukari Test.ros');
+  it("loads test/Drukari Test.ros", async function() {
+    const doc = await readZippedRosterFile('test/Drukari Test.ros');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
@@ -44,8 +44,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Sybarite"}),
               ],
               '_modelList': [
-                "4x Kabalite Warrior (Splinter rifle)",
-                "Sybarite (Splinter rifle)"
+                "4x Kabalite Warrior (Splinter Rifle)",
+                "Sybarite (Splinter Rifle)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Splinter rifle"}),
@@ -58,7 +58,7 @@ describe("Create40kRoster", function() {
               ],
               '_modelList': [
                 "Acothyst (Haemonculus tools)",
-                "4x Wracks (Haemonculus tools)"
+                "4x Wracks (Haemonculus Tools)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Haemonculus tools"}),
@@ -71,7 +71,7 @@ describe("Create40kRoster", function() {
               ],
               '_modelList': [
                 "Hekatrix (Splinter pistol, Hekatarii blade, Plasma Grenade)",
-                "4x Wych (Splinter pistol, Hekatarii blade, Plasma Grenade)"
+                "4x Wych (Splinter Pistol, Hekatarii blade, Plasma Grenade)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Splinter pistol"}),
@@ -82,11 +82,9 @@ describe("Create40kRoster", function() {
               '_name': "Grotesques",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Grotesque"}),
-                jasmine.objectContaining({'_name': "Grotesque"}),
-                jasmine.objectContaining({'_name': "Grotesque"}),
               ],
               '_modelList': [
-                "3x Grotesque with Monstrous Cleaver (Flesh Gauntlet, Monstrous cleaver)"
+                "3x Grotesque with Monstrous Cleaver (Flesh gauntlet, Monstrous cleaver)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Flesh Gauntlet"}),
@@ -159,7 +157,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Reaper"}),
               ],
               '_modelList': [
-                "Reaper (Storm Vortex Projector - Beam, Storm Vortex Projector - Blast, Scythevanes, Sharpened prow blade, Night Shield, Storm Vortex Projector)"
+                "Reaper (Storm Vortex Projector, Scythevanes, Sharpened prow blade, Night Shield, Storm Vortex Projector)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Storm Vortex Projector - Beam"}),
@@ -179,7 +177,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Voidraven"}),
               ],
               '_modelList': [
-                "Voidraven (Void lance)"
+                "Voidraven (Two void lances)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Void lance"}),
@@ -280,13 +278,9 @@ describe("Create40kRoster", function() {
               '_name': "Troupe",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
               ],
               '_modelList': [
-                "5x Player (Shuriken Pistol, Harlequin's Blade, Plasma Grenade)"
+                "5x Player (Shuriken Pistol, Harlequin's Blade, Plasma Grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Shuriken Pistol"}),
@@ -297,13 +291,9 @@ describe("Create40kRoster", function() {
               '_name': "Troupe",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
               ],
               '_modelList': [
-                "5x Player (Shuriken Pistol, Harlequin's Blade, Plasma Grenade)"
+                "5x Player (Shuriken Pistol, Harlequin's Blade, Plasma Grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Shuriken Pistol"}),
@@ -314,13 +304,9 @@ describe("Create40kRoster", function() {
               '_name': "Troupe",
               '_modelStats': [
                 jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
-                jasmine.objectContaining({'_name': "Player"}),
               ],
               '_modelList': [
-                "5x Player (Shuriken Pistol, Harlequin's Blade, Plasma Grenade)"
+                "5x Player (Shuriken Pistol, Harlequin's Blade, Plasma Grenades)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Shuriken Pistol"}),
@@ -333,7 +319,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Death Jester"}),
               ],
               '_modelList': [
-                "Death Jester (Shrieker Cannon (Shrieker), Shrieker Cannon (Shuriken))"
+                "Death Jester (Shrieker Cannon)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Shrieker Cannon (Shrieker)"}),
@@ -342,7 +328,6 @@ describe("Create40kRoster", function() {
             jasmine.objectContaining({
               '_name': "Skyweavers",
               '_modelStats': [
-                jasmine.objectContaining({'_name': "Skyweaver"}),
                 jasmine.objectContaining({'_name': "Skyweaver"}),
               ],
               '_modelList': [
