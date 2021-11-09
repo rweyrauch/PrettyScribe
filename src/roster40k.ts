@@ -603,6 +603,21 @@ function GetImmediateSelections(root: Element): Element[] {
     return selections;
 }
 
+function HasImmediateProfileWithTypeName(root: Element, typeName: string): boolean {
+    // querySelectorAll(':scope > tagname') doesn't work with jsdom, so we hack
+    // around it: https://github.com/jsdom/jsdom/issues/2998
+    for (const child of root.children) {
+        if (child.tagName === 'profiles') {
+            for (const subChild of child.children) {
+                if (subChild.tagName === 'profile' && subChild.getAttribute('typeName') === typeName) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 function ParseUnit(root: Element, is40k: boolean): Unit | null {
     let unit: Unit = new Unit();
     const unitName = ExpandBaseNotes(root, unit);
@@ -661,6 +676,10 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
                 modelSelections.push(selection);
             }
         }
+        // Some single-model units have type="unit" or type="upgrade".
+        if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, 'Unit')) {
+            modelSelections.push(root);
+        }
     }
     for (const modelSelection of modelSelections) {
         const profiles = Array.from(modelSelection.querySelectorAll("profiles>profile"));
@@ -682,11 +701,17 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
     let unseenProfiles = profiles.filter((e: Element) => !seenProfiles.includes(e));
     seenProfiles.push(...unseenProfiles);
     if (unseenProfiles.length > 0) {
-        const model = new Model();
-        model._name = 'Unit Upgrades';
-        ParseModelProfiles(unseenProfiles, model, unit);
-        if (model._weapons.length > 0 || model._upgrades.length > 0 || model._psychicPowers.length > 0 || model._psyker || model._explosions.length > 0) {
-            unit._models.push(model);
+        const unitUpgradesModel = new Model();
+        unitUpgradesModel._name = 'Unit Upgrades';
+        ParseModelProfiles(unseenProfiles, unitUpgradesModel, unit);
+        if (unitUpgradesModel._weapons.length > 0 && unit._models.length > 0) {
+            for (const model of unit._models) {
+                model._weapons.push(...unitUpgradesModel._weapons);
+            }
+            unitUpgradesModel._weapons.length = 0;  // Clear the array.
+        }
+        if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0 || unitUpgradesModel._psychicPowers.length > 0 || unitUpgradesModel._psyker || unitUpgradesModel._explosions.length > 0) {
+            unit._models.push(unitUpgradesModel);
         }
     }
 
