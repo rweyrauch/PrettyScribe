@@ -227,7 +227,7 @@ export class Renderer40k implements Renderer {
 
         let tbody = statsTable.appendChild(document.createElement('tbody'));
         tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-        for (const model of unit._models) {
+        for (const model of unit._modelStats) {
             tbody.append(createTableRow([
                 model.name().toString(),
                 model._move,
@@ -242,7 +242,7 @@ export class Renderer40k implements Renderer {
             ], this._unitLabelWidthsNormalized));
         }
 
-        notesTableHead = createNotesHead('Model notes', unit._models);
+        notesTableHead = createNotesHead('Model notes', unit._modelStats);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // Wound Tracker
@@ -364,8 +364,7 @@ export class Renderer40k implements Renderer {
         thead = statsTable.appendChild(document.createElement('thead'));
         thead.classList.add('info_row');
         const modelListDiv = document.createElement('div');
-        for (const model of unit._models) {
-            const modelName = (model._count > 1 ? `${model._count}x ` : '') + model.nameAndGear();
+        for (const modelName of unit._modelList) {
             const mDiv = modelListDiv.appendChild(document.createElement('div')).appendChild(document.createTextNode(modelName));
         }
         thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));

@@ -236,6 +236,7 @@ export class Unit extends BaseNotes {
     _rules: Map<string, string> = new Map();
 
     _models: Model[] = [];
+    _modelStats: Model[] = [];
     _modelList: string[] = [];
     _weapons: Weapon[] = [];
     _spells: PsychicPower[] = [];
@@ -256,10 +257,17 @@ export class Unit extends BaseNotes {
         if (unit == null) return false;
 
         if ((unit._name === this._name) && (unit._role === this._role) &&
-            (unit._models.length === this._models.length)) {
+            (unit._models.length === this._models.length) &&
+            (unit._modelStats.length === this._modelStats.length)) {
 
             for (let mi = 0; mi < this._models.length; mi++) {
                 if (!this._models[mi].equal(unit._models[mi])) {
+                    return false;
+                }
+            }
+
+            for (let mi = 0; mi < this._modelStats.length; mi++) {
+                if (!this._modelStats[mi].equal(unit._modelStats[mi])) {
                     return false;
                 }
             }
@@ -279,6 +287,7 @@ export class Unit extends BaseNotes {
     normalize(): void {
         // Sort force units by role and name
         this._models.sort(CompareObj);
+        this._modelStats.sort(CompareObj);
 
         for (let model of this._models) {
             model.normalize();
@@ -414,7 +423,7 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
         if (!selectionName) continue;
 
         if (selectionName.includes("Detachment Command Cost")) {
-            console.log("Found Detachment Command Cost");
+            // console.log("Found Detachment Command Cost");
         }
         else {
             let unit = ParseUnit(selection, is40k);
@@ -578,6 +587,37 @@ function ExtractNumberFromParent(root: Element): number {
     return 0;
 }
 
+function GetImmediateSelections(root: Element): Element[] {
+    // querySelectorAll(':scope > tagname') doesn't work with jsdom, so we hack
+    // around it: https://github.com/jsdom/jsdom/issues/2998
+    const selections = [];
+    for (const child of root.children) {
+        if (child.tagName === 'selections') {
+            for (const subChild of child.children) {
+                if (subChild.tagName === 'selection') {
+                    selections.push(subChild);
+                }
+            }
+        }
+    }
+    return selections;
+}
+
+function HasImmediateProfileWithTypeName(root: Element, typeName: string): boolean {
+    // querySelectorAll(':scope > tagname') doesn't work with jsdom, so we hack
+    // around it: https://github.com/jsdom/jsdom/issues/2998
+    for (const child of root.children) {
+        if (child.tagName === 'profiles') {
+            for (const subChild of child.children) {
+                if (subChild.tagName === 'profile' && subChild.getAttribute('typeName') === typeName) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 function ParseUnit(root: Element, is40k: boolean): Unit | null {
     let unit: Unit = new Unit();
     const unitName = ExpandBaseNotes(root, unit);
@@ -617,28 +657,63 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         }
     }
 
-    // First, look for individual models within the selection. The selection's
-    // type attribute can vary, but it should have a profile with typeName=Unit.
-    let seenProfiles: Element[] = [];
-    let seenSelections: Element[] = [];
-    for (let profile of root.querySelectorAll('profile[typeName="Unit"]')) {
-      let selection = profile.parentElement?.parentElement;
-      if (!selection || seenSelections.includes(selection)) {
-        // Some units (eg TSK) have separate Unit entries for Wounds brackets,
-        // so make sure we don't count each of those Units as a separate model.
-        continue;
-      }
-      seenSelections.push(selection);
-      let props = Array.from(selection.querySelectorAll("profiles>profile") || []);
-      ParseModelProfiles(props, unit, unitName);
-      seenProfiles = seenProfiles.concat(props);
+    const seenProfiles: Element[] = [];
+
+    // First, find model stats. These have typeName=Unit.
+    const modelStatsProfiles = Array.from(root.querySelectorAll('profile[typeName="Unit"],profile[typeName="Model"]'));
+    ParseModelStatsProfiles(modelStatsProfiles, unit, unitName);
+    seenProfiles.push(...modelStatsProfiles);
+
+    // Next, look for selections with models. These usually have type="model",
+    // but may have type="upgrade" containing a profile of type="Unit".
+    const modelSelections = [];
+    if (root.getAttribute('type') === 'model') {
+        modelSelections.push(root);  // Single-model unit.
+    } else {
+        const immediateSelections = GetImmediateSelections(root);
+        for (const selection of immediateSelections) {
+            if (selection.getAttribute('type') === 'model' || selection.querySelector('profile[typeName="Unit"]')) {
+                modelSelections.push(selection);
+            }
+        }
+        // Some single-model units have type="unit" or type="upgrade".
+        if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, 'Unit')) {
+            modelSelections.push(root);
+        }
+    }
+    for (const modelSelection of modelSelections) {
+        const profiles = Array.from(modelSelection.querySelectorAll("profiles>profile"));
+        const unseenProfiles = profiles.filter((e: Element) => !seenProfiles.includes(e));
+        seenProfiles.push(...unseenProfiles);
+
+        const model = new Model();
+        model._name = modelSelection.getAttribute('name') || 'Unknown Model';
+        model._count = Number(modelSelection.getAttribute("number") || 1);
+        unit._models.push(model);
+        ParseModelProfiles(profiles, model, unit);
     }
 
-    // Now, go thru any other profiles we missed. This may include weapons or
-    // other upgrades, which will be applied to all models in the unit.
-    let props = Array.from(root.querySelectorAll("profiles>profile"));
-    let unseenProps = props.filter((e: Element) => !seenProfiles.includes(e));
-    ParseModelProfiles(unseenProps, unit, unitName, /* appliesToAllModels= */ true);
+    // Finally, look for profiles that are not under models. They may apply to
+    //    a) model loadouts, if it's selection with a Weapon (eg Immortals)
+    //    b) unit loadout, if it's a selection with an Ability (eg Bomb Squigs)
+    //    c) abilities for the unit, if it's not under a child selection
+    let profiles = Array.from(root.querySelectorAll("profiles>profile"));
+    let unseenProfiles = profiles.filter((e: Element) => !seenProfiles.includes(e));
+    seenProfiles.push(...unseenProfiles);
+    if (unseenProfiles.length > 0) {
+        const unitUpgradesModel = new Model();
+        unitUpgradesModel._name = 'Unit Upgrades';
+        ParseModelProfiles(unseenProfiles, unitUpgradesModel, unit);
+        if (unitUpgradesModel._weapons.length > 0 && unit._models.length > 0) {
+            for (const model of unit._models) {
+                model._weapons.push(...unitUpgradesModel._weapons);
+            }
+            unitUpgradesModel._weapons.length = 0;  // Clear the array.
+        }
+        if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0 || unitUpgradesModel._psychicPowers.length > 0 || unitUpgradesModel._psyker || unitUpgradesModel._explosions.length > 0) {
+            unit._models.push(unitUpgradesModel);
+        }
+    }
 
     // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
     let costs = root.querySelectorAll("costs>cost");
@@ -669,216 +744,203 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
     return unit;
 }
 
-function ParseModelProfiles(props: Element[], unit: Unit, unitName: string, appliesToAllModels = false) {
-    let model = new Model();
-    let propsWithoutModel: string[] = [];
-    for (let prop of props) {
-        // What kind of prop is this
-        const propName = prop.getAttributeNode("name")?.nodeValue;
-        const propType = prop.getAttributeNode("typeName")?.nodeValue;
-        if (propName && propType) {
-            if ((propType === "Unit") || (propType === "Model")) {
-                if (model._name) {
-                  // Older versions of BattleScript expect Model to be before
-                  // model descriptions, but newer ones might have Model after
-                  // the descriptions.
-                  model = new Model();
-                } else {
-                  propsWithoutModel = [];
-                }
-                unit._models.push(model);
+function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: string) {
+    for (const profile of profiles) {
+        const profileName = profile.getAttribute("name");
+        const profileType = profile.getAttribute("typeName");
+        if (!profileName || !profileType) return;
 
-                ExpandBaseNotes(prop, model);
+        const model = new Model();
+        model._name = profileName;
+        unit._modelStats.push(model);
 
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'M': model._move = char.textContent; break;
-                                case 'WS': model._ws = char.textContent; break;
-                                case 'BS': model._bs = char.textContent; break;
-                                case 'S': model._str = +char.textContent; break;
-                                case 'T': model._toughness = +char.textContent; break;
-                                case 'W': model._wounds = +char.textContent; break;
-                                case 'A': model._attacks = char.textContent; break;
-                                case 'Ld': model._leadership = +char.textContent; break;
-                                case 'Save': model._save = char.textContent; break;
-                            }
-                        }
-                    }
+        ExpandBaseNotes(profile, model);
 
-                    model._count = ExtractNumberFromParent(prop);
-                }
-            }
-            else if ((propType === "upgrade")) {
-                model._upgrades.push(propName);
-            }
-            else if ((propType === "Abilities") || (propType === "Wargear") || (propType === "Ability") ||
-                (propType === "Household Tradition") || (propType === "Warlord Trait") || (propType === "Astra Militarum Orders") ||
-                (propType === "Tank Orders") || (propType == "Lethal Ambush")) {
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName && char.textContent && propName) {
-                        if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
-                            unit._abilities.set(propName, char.textContent);
-                        }
-                    }
-                }
-                if (prop.parentElement && prop.parentElement.parentElement) {
-                    const parentSelection = prop.parentElement.parentElement;
-                    let typeValue = parentSelection.getAttributeNode("type")?.nodeValue;
-                    if (typeValue === "upgrade") {
-                        // are we at the correct level?
-                        if (parentSelection.parentElement && parentSelection.parentElement.parentElement) {
-                            const superParentSelection = parentSelection.parentElement.parentElement;
-                            let typeValue = superParentSelection.getAttributeNode("type")?.nodeValue;
-                            if (typeValue === "model") {
-                                model._upgrades.push(propName);
-                            }
-                        }
-                    }
-                }
-            }
-            else if (propType === "Weapon") {
-                let weapon = new Weapon();
-                ExpandBaseNotes(prop,  weapon);
-                weapon._count = ExtractNumberFromParent(prop);
+        const chars = profile.querySelectorAll("characteristics>characteristic");
+        for (const char of chars) {
+            const charName = char.getAttribute("name");
+            if (!charName) continue;
 
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'Range': weapon._range = char.textContent; break;
-                                case 'Type': weapon._type = char.textContent; break;
-                                case 'S': weapon._str = char.textContent; break;
-                                case 'AP': weapon._ap = char.textContent; break;
-                                case 'D': weapon._damage = char.textContent; break;
-                                case 'Abilities': weapon._abilities = char.textContent; break;
-                            }
-                        }
-                    }
+            if (char.textContent) {
+                switch (charName) {
+                    case 'M': model._move = char.textContent; break;
+                    case 'WS': model._ws = char.textContent; break;
+                    case 'BS': model._bs = char.textContent; break;
+                    case 'S': model._str = +char.textContent; break;
+                    case 'T': model._toughness = +char.textContent; break;
+                    case 'W': model._wounds = +char.textContent; break;
+                    case 'A': model._attacks = char.textContent; break;
+                    case 'Ld': model._leadership = +char.textContent; break;
+                    case 'Save': model._save = char.textContent; break;
                 }
-                model._weapons.push(weapon);
-                if (!model._name) {
-                    propsWithoutModel.push("Unexpected: Created a weapon without an active model.  Unit: " + unitName);
-                }
-            }
-            else if (propType.includes("Wound Track") || propType.includes("Stat Damage") || propType.includes(" Wounds")) {
-                let tracker = new WoundTracker();
-                ExpandBaseNotes(prop, tracker);
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName && propName) {
-                        if (char.textContent) {
-                            tracker._table.set(charName, char.textContent);
-                        }
-                        else {
-                            tracker._table.set(charName, "-");
-                        }
-                    }
-                }
-                unit._woundTracker.push(tracker);
-            }
-            else if (propType == "Transport") {
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName && char.textContent && propName) {
-                        if (charName === "Capacity") {
-                            unit._abilities.set(propName, char.textContent);
-                        }
-                    }
-                }
-            }
-            else if (propType == "Psychic Power") {
-                let power: PsychicPower = new PsychicPower();
-                ExpandBaseNotes(prop, power);
-
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'Range': power._range = char.textContent; break;
-                                case 'Warp Charge': power._manifest = +char.textContent; break;
-                                case 'Details': power._details = char.textContent; break;
-                            }
-                        }
-                    }
-                }
-                model._psychicPowers.push(power);
-                if (!model._name) {
-                    propsWithoutModel.push("Unexpected: Created a psychic without an active model.  Unit: " + unitName);
-                }
-            }
-            else if (propType.includes("Explosion")) {
-                let explosion: Explosion = new Explosion();
-                ExpandBaseNotes(prop, explosion);
-
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'Dice Roll': explosion._diceRoll = char.textContent; break;
-                                case 'Distance': explosion._distance = char.textContent; break;
-                                case 'Mortal Wounds': explosion._mortalWounds = char.textContent; break;
-                            }
-                        }
-                    }
-                }
-                model._explosions.push(explosion);
-                if (!model._name) {
-                    propsWithoutModel.push("Unexpected: Created a explosion without an active model.  Unit: " + unitName);
-                }
-            }
-            else if (propType == "Psyker") {
-                let psyker: Psyker = new Psyker();
-                ExpandBaseNotes(prop, psyker);
-
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName && char.textContent) {
-                        switch (charName) {
-                            case 'Cast': psyker._cast = char.textContent; break;
-                            case 'Deny': psyker._deny = char.textContent; break;
-                            case 'Powers Known': psyker._powers = char.textContent; break;
-                            case 'Other': psyker._other = char.textContent; break;
-                        }
-                    }
-                }
-                model._psyker = psyker;
-                if (!model._name) {
-                    propsWithoutModel.push("Unexpected: Created a psyker without an active model.  Unit: " + unitName);
-                }
-            }
-            else {
-                parseUnknownProfile(prop, unit);
             }
         }
     }
-    if (appliesToAllModels && propsWithoutModel) {
-        for (let unitModel of unit._models) {
-          unitModel._weapons.push(...model._weapons);
-          unitModel._psychicPowers.push(...model._psychicPowers);
-          unitModel._explosions.push(...model._explosions);
-          model._explosions.splice(0);  // Only add explosions to the first model.
-          if (model._psyker && !unitModel._psyker) {
-            unitModel._psyker = model._psyker;
-          }
+}
+
+function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
+    for (const profile of profiles) {
+        const profileName = profile.getAttribute("name");
+        const typeName = profile.getAttribute("typeName");
+        if (!profileName || !typeName) continue;
+
+        if ((typeName === "Unit") || (typeName === "Model") || (profile.getAttribute("type") === "model")) {
+            // Do nothing; these were already handled.
+        } else if ((typeName === "upgrade")) {
+            model._upgrades.push(profileName);
+        } else if ((typeName === "Abilities") || (typeName === "Wargear") || (typeName === "Ability") ||
+            (typeName === "Household Tradition") || (typeName === "Warlord Trait") || (typeName === "Astra Militarum Orders") ||
+            (typeName === "Tank Orders") || (typeName == "Lethal Ambush")) {
+                ParseAbilityProfile(profile, profileName, unit, model);
+        } else if (typeName === "Weapon") {
+            const weapon = ParseWeaponProfile(profile);
+            model._weapons.push(weapon);
+        } else if (typeName.includes("Wound Track") || typeName.includes("Stat Damage") || typeName.includes(" Wounds")) {
+            const tracker = ParseWoundTrackerProfile(profile);
+            unit._woundTracker.push(tracker);
+        } else if (typeName == "Transport") {
+            ParseTransportProfile(profile, unit);
+        } else if (typeName == "Psychic Power") {
+            const power = ParsePsychicPowerProfile(profile);
+            model._psychicPowers.push(power);
+        } else if (typeName.includes("Explosion")) {
+            const explosion = ParseExplosionProfile(profile);
+            model._explosions.push(explosion);
+        } else if (typeName == "Psyker") {
+            const psyker = ParsePsykerProfile(profile);
+            model._psyker = psyker;
+        } else {
+            parseUnknownProfile(profile, unit);
         }
-    } else {
-        propsWithoutModel.forEach(e => console.log(e));
     }
+}
+
+function ParseAbilityProfile(profile: Element, profileName: string, unit: Unit, model: Model) {
+    const chars = profile.querySelectorAll("characteristics>characteristic");
+    for (const char of chars) {
+        const charName = char.getAttribute("name");
+        if (charName && char.textContent) {
+            if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
+                unit._abilities.set(profileName, char.textContent);
+            }
+        }
+    }
+    const parentSelection = profile.parentElement?.parentElement;
+    if (parentSelection && parentSelection.getAttribute("type") === "upgrade") {
+        // are we at the correct level?
+        const superParentSelection = parentSelection.parentElement?.parentElement;
+        if (superParentSelection && superParentSelection.getAttribute("type") === "model") {
+            model._upgrades.push(profileName);
+        }
+    }
+}
+
+function ParseWeaponProfile(profile: Element): Weapon {
+    const weapon = new Weapon();
+    ExpandBaseNotes(profile,  weapon);
+    weapon._count = ExtractNumberFromParent(profile);
+
+    let chars = profile.querySelectorAll("characteristics>characteristic");
+    for (let char of chars) {
+        let charName = char.getAttribute("name");
+        if (charName) {
+            if (char.textContent) {
+                switch (charName) {
+                    case 'Range': weapon._range = char.textContent; break;
+                    case 'Type': weapon._type = char.textContent; break;
+                    case 'S': weapon._str = char.textContent; break;
+                    case 'AP': weapon._ap = char.textContent; break;
+                    case 'D': weapon._damage = char.textContent; break;
+                    case 'Abilities': weapon._abilities = char.textContent; break;
+                }
+            }
+        }
+    }
+    return weapon;
+}
+
+function ParseWoundTrackerProfile(profile: Element): WoundTracker {
+    let tracker = new WoundTracker();
+    ExpandBaseNotes(profile, tracker);
+    let chars = profile.querySelectorAll("characteristics>characteristic");
+    for (let char of chars) {
+        const charName = char.getAttribute("name");
+        if (charName) {
+            if (char.textContent) {
+                tracker._table.set(charName, char.textContent);
+            } else {
+                tracker._table.set(charName, "-");
+            }
+        }
+    }
+    return tracker;
+}
+
+function ParseTransportProfile(profile: Element, unit: Unit) {
+    let chars = profile.querySelectorAll("characteristics>characteristic");
+    for (let char of chars) {
+        let charName = char.getAttribute("name");
+        if (charName && char.textContent) {
+            if (charName === "Capacity") {
+                unit._abilities.set('Transport', char.textContent);
+            }
+        }
+    }
+}
+
+function ParsePsychicPowerProfile(profile: Element): PsychicPower {
+    const power: PsychicPower = new PsychicPower();
+    ExpandBaseNotes(profile, power);
+
+    const chars = profile.querySelectorAll("characteristics>characteristic");
+    for (let char of chars) {
+        const charName = char.getAttribute("name");
+        if (charName && char.textContent) {
+            switch (charName) {
+                case 'Range': power._range = char.textContent; break;
+                case 'Warp Charge': power._manifest = +char.textContent; break;
+                case 'Details': power._details = char.textContent; break;
+            }
+        }
+    }
+    return power;
+}
+
+function ParseExplosionProfile(profile: Element) {
+    const explosion: Explosion = new Explosion();
+    ExpandBaseNotes(profile, explosion);
+
+    const chars = profile.querySelectorAll("characteristics>characteristic");
+    for (const char of chars) {
+        const charName = char.getAttribute("name");
+        if (charName && char.textContent) {
+            switch (charName) {
+                case 'Dice Roll': explosion._diceRoll = char.textContent; break;
+                case 'Distance': explosion._distance = char.textContent; break;
+                case 'Mortal Wounds': explosion._mortalWounds = char.textContent; break;
+            }
+        }
+    }
+    return explosion;
+}
+
+function ParsePsykerProfile(profile: Element): Psyker {
+    const psyker: Psyker = new Psyker();
+    ExpandBaseNotes(profile, psyker);
+
+    const chars = profile.querySelectorAll("characteristics>characteristic");
+    for (const char of chars) {
+        const charName = char.getAttribute("name");
+        if (charName && char.textContent) {
+            switch (charName) {
+                case 'Cast': psyker._cast = char.textContent; break;
+                case 'Deny': psyker._deny = char.textContent; break;
+                case 'Powers Known': psyker._powers = char.textContent; break;
+                case 'Other': psyker._other = char.textContent; break;
+            }
+        }
+    }
+    return psyker;
 }
 
 function CompareObj(a: { _name: string; }, b: { _name: string; }): number {

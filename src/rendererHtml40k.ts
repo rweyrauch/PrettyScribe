@@ -221,13 +221,13 @@ export class RendererHtml40k implements Renderer {
                 uniqueModels.push(m);
             }
         }
-        
+
         this.renderNotes(unitRoot, "Unit notes", unit);
 
         this.renderModels(unitRoot, uniqueModels);
-        
+
         this.renderNotesArray(unitRoot, "Model notes", models);
-  
+
         // Unique list of weapons
         const uniqueWeapons: Weapon[] = [];
         const scratchMap: Map<string, Weapon> = new Map();
@@ -237,7 +237,7 @@ export class RendererHtml40k implements Renderer {
                 uniqueWeapons.push(w);
             }
         }
-      
+
         if (uniqueWeapons.length > 0) {
              this.renderWeapons(unitRoot, uniqueWeapons);
         }
@@ -332,9 +332,9 @@ export class RendererHtml40k implements Renderer {
     private renderSpells(root: HTMLElement, spells: PsychicPower[]): void {
         const spellLabels = [{name: "PSYCHIC POWER", width: "25%"}, {name: "MANIFEST", width: "5%"}, {name: "RANGE", width: "10%"}, {name: "DETAILS", width: "60%"}];
         const spellTable = this.createTable(spellLabels);
-        spellTable.className = "table table-sm aos_table aos_font";        
+        spellTable.className = "table table-sm aos_table aos_font";
         root.appendChild(spellTable);
-        for (let spell of spells) {         
+        for (let spell of spells) {
             let row = document.createElement('tr');
             row.innerHTML = `<td>${spell._name}</td><td>${spell._manifest}</td><td>${spell._range}</td><td>${spell._details}</td>`;
             spellTable.appendChild(row);
@@ -344,22 +344,22 @@ export class RendererHtml40k implements Renderer {
     private renderExplosion(root: HTMLElement, explosions: Explosion[]): void {
         const explosionLabels = [{name: "EXPLOSION", width: "20%"}, {name: "DICE ROLL", width: "10%"}, {name: "DISTANCE", width: "10%"}, {name: "MORTAL WOUNDS", width: "10%"}];
         const table = this.createTable(explosionLabels);
-        table.className = "table table-sm aos_table aos_font";        
+        table.className = "table table-sm aos_table aos_font";
         root.appendChild(table);
-        for (let explosion of explosions) {         
+        for (let explosion of explosions) {
             let row = document.createElement('tr');
             row.innerHTML = `<td>${explosion._name}</td><td>${explosion._diceRoll}</td><td>${explosion._distance}</td><td>${explosion._mortalWounds}</td>`;
             table.appendChild(row);
-        }    
+        }
     }
 
     private renderWeapons(root: HTMLElement, weapons: Weapon[]): void {
-        const weaponLabels = [{name: "WEAPON", width: "25%"}, {name: "RANGE", width: "5%"}, {name: "TYPE", width: "10%"}, {name: "S", width: "5%"}, 
+        const weaponLabels = [{name: "WEAPON", width: "25%"}, {name: "RANGE", width: "5%"}, {name: "TYPE", width: "10%"}, {name: "S", width: "5%"},
             {name: "AP", width: "5%"}, {name: "D", width: "5%"}, {name: "ABILITIES", width: "45%"}];
         const weaponTable = this.createTable(weaponLabels);
-        weaponTable.className = "table table-sm aos_table aos_font";        
+        weaponTable.className = "table table-sm aos_table aos_font";
         root.appendChild(weaponTable);
-        for (let weapon of weapons) {         
+        for (let weapon of weapons) {
             let row = document.createElement('tr');
             row.innerHTML = `<td>${weapon._name}</td><td>${weapon._range}</td><td>${weapon._type}</td><td>${weapon._str}</td>
                          <td>${weapon._ap}</td><td>${weapon._damage}</td><td>${weapon._abilities}</td>`;
@@ -368,13 +368,13 @@ export class RendererHtml40k implements Renderer {
     }
 
     private renderModels(root: HTMLElement, models: Model[]): void {
-        const labels: TableHeaderEntry[] = [{name: "No.", width: "3%"}, {name: "Name", width: "22%"}, {name: "M", width: "5%"}, {name: "WS", width: "5%"}, 
-                            {name: "BS", width: "5%"}, {name: "S", width: "5%"}, {name: "T", width: "5%"}, 
-                            {name: "W", width: "5%"}, {name: "A", width: "5%"}, {name: "Ld", width: "5%"}, 
+        const labels: TableHeaderEntry[] = [{name: "No.", width: "3%"}, {name: "Name", width: "22%"}, {name: "M", width: "5%"}, {name: "WS", width: "5%"},
+                            {name: "BS", width: "5%"}, {name: "S", width: "5%"}, {name: "T", width: "5%"},
+                            {name: "W", width: "5%"}, {name: "A", width: "5%"}, {name: "Ld", width: "5%"},
                             {name: "Sv", width: "5%"}];
         const table = this.createTable(labels);
         table.className = "table table-sm aos_table aos_font";
-                   
+
         root.appendChild(table);
         for (var model of models) {
             let row = document.createElement('tr');
@@ -436,5 +436,5 @@ export class RendererHtml40k implements Renderer {
             a.innerHTML = `<strong>${ability[0]}:  </strong>${ability[1]}`;
             header.appendChild(a);
         }
-    }    
+    }
 }

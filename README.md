@@ -41,4 +41,6 @@ To build PrettyScribe for release:
     $ npm run buildprod
 
 To run PrettyScribe tests:
+
     $ npm test
+
