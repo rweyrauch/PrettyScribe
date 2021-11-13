@@ -31,7 +31,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Lord Discordant on Helstalker"}),
               ],
               '_modelList': [
-                "Lord Discordant on Helstalker (Autocannon, Bolt pistol, Bladed limbs and tail, Impaler chainglaive, Mechatendrils, Techno-virus injector, Frag & Krak grenades)"
+                "Lord Discordant on Helstalker (Autocannon, Bolt pistol, Bladed limbs and tail, Impaler chainglaive, Mechatendrils, Techno-virus injector, Frag & Krak grenades, 4. Hatred Incarnate, Intoxicating Elixir, Mark of Slaanesh, Warlord)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Autocannon"}),
@@ -55,7 +55,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Sorcerer"}),
               ],
               '_modelList': [
-                "Sorcerer (Bolt pistol, Force sword, Frag & Krak grenades)"
+                "Sorcerer (Bolt pistol, Force sword, Frag & Krak grenades, No Chaos Mark, Smite)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -195,7 +195,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Heldrake"}),
               ],
               '_modelList': [
-                "Heldrake (Hades Autocannon, Heldrake claws)"
+                "Heldrake (Hades Autocannon, Heldrake claws, No Chaos Mark)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Hades autocannon"}),
@@ -248,7 +248,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Fateskimmer"}),
               ],
               '_modelList': [
-                "Fateskimmer (Lamprey bite, Ritual dagger)"
+                "Fateskimmer (Lamprey bite, Ritual dagger, Smite)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Lamprey bite"}),
@@ -266,7 +266,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Kairos Fateweaver"}),
               ],
               '_modelList': [
-                "Kairos Fateweaver (Staff of Tomorrow)"
+                "Kairos Fateweaver (Staff of Tomorrow, Bolt of Change, Boon of Change, Flickering Flames, Gaze of Fate, Infernal Gateway, Smite, Treason of Tzeentch)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Staff of Tomorrow"}),

@@ -111,7 +111,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Reaver"}),
               ],
               '_modelList': [
-                "Arena Champion (Splinter pistol, Bladevanes)",
+                "Arena Champion (Splinter pistol, Bladevanes, Splinter Rifle)",
                 "2x Reaver (Splinter pistol, Splinter rifle, Bladevanes)"
               ],
               '_weapons': [
@@ -157,7 +157,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Reaper"}),
               ],
               '_modelList': [
-                "Reaper (Storm Vortex Projector, Scythevanes, Sharpened prow blade, Night Shield, Storm Vortex Projector)"
+                "Reaper (Storm Vortex Projector, Scythevanes, Sharpened prow blade, Night Shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Storm Vortex Projector - Beam"}),
@@ -177,7 +177,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Voidraven"}),
               ],
               '_modelList': [
-                "Voidraven (Two void lances)"
+                "Voidraven (Two void lances, Night Shield, Void Mine)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Void lance"}),
@@ -194,7 +194,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Raider"}),
               ],
               '_modelList': [
-                "Raider (Dark Lance, Bladevanes)"
+                "Raider (Dark Lance, Bladevanes, Night Shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Dark Lance"}),
@@ -212,7 +212,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Venom"}),
               ],
               '_modelList': [
-                "Venom (Splinter Cannon, Twin splinter rifle, Bladevanes)"
+                "Venom (Splinter Cannon, Twin splinter rifle, Bladevanes, Flickerfield, Night Shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Splinter Cannon"}),
@@ -227,7 +227,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Shadowseer"}),
               ],
               '_modelList': [
-                "Shadowseer (Hallucinogen Grenade Launcher, Shuriken Pistol, Miststave)"
+                "Shadowseer (Hallucinogen Grenade Launcher, Shuriken Pistol, Miststave, Smite)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Hallucinogen Grenade Launcher"}),

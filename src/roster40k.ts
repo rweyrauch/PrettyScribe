@@ -178,17 +178,18 @@ export class Model extends BaseNotes {
         let name = super.name();
 
         if (this._weapons.length > 0 || this._upgrades.length > 0) {
-            const seenWeapons: string[] = [];
+            const weaponNamesWithoutCount: string[] = [];
             const weaponNames: string[] = [];
             for (const weapon of this._weapons) {
                 let wName = weapon._selectionName || weapon.name();
+                weaponNamesWithoutCount.push(wName);
                 if (weapon._count > 1) {
                     wName = `${weapon._count}x ${wName}`;
                 }
                 if (weaponNames.includes(wName)) continue;
                 weaponNames.push(wName);
             }
-            weaponNames.push(...this._upgrades);
+            weaponNames.push(...this._upgrades.filter(e => !weaponNamesWithoutCount.includes(e)));
             name += ` (${weaponNames.join(', ')})`;
         }
         return name;
@@ -697,6 +698,19 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         model._count = Number(modelSelection.getAttribute("number") || 1);
         unit._models.push(model);
         ParseModelProfiles(profiles, model, unit);
+
+        // Find all upgrades on the model. This may include weapons that were
+        // parsed from profiles (above), so dedupe those in nameAndGear().
+        for (const upgradeSelection of modelSelection.querySelectorAll('selections>selection[type="upgrade"]')) {
+            // Ignore this selection if it has sub-selection upgrades within it,
+            // since those will be picked up individually.
+            if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')) continue;
+
+            const upgradeName = upgradeSelection.getAttribute('name');
+            if (upgradeName) {
+                model._upgrades.push(upgradeName);
+            }
+        }
     }
 
     // Finally, look for profiles that are not under models. They may apply to
@@ -829,14 +843,6 @@ function ParseAbilityProfile(profile: Element, profileName: string, unit: Unit, 
             if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
                 unit._abilities.set(profileName, char.textContent);
             }
-        }
-    }
-    const parentSelection = profile.parentElement?.parentElement;
-    if (parentSelection && parentSelection.getAttribute("type") === "upgrade") {
-        // are we at the correct level?
-        const superParentSelection = parentSelection.parentElement?.parentElement;
-        if (superParentSelection && superParentSelection.getAttribute("type") === "model") {
-            model._upgrades.push(profileName);
         }
     }
 }

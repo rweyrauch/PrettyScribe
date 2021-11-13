@@ -21,7 +21,7 @@ describe("Create40kRoster", function() {
               ],
               '_modelList': [
                 "Lieutenant in Phobos Armour (Bolt pistol, Master-crafted occulus bolt carbine, Paired Combat Blades, Frag & Krak grenades)",
-                "Primaris Lieutenant (Bolt pistol, Neo-volkite pistol, Master-crafted power sword, Frag & Krak grenades)"
+                "Primaris Lieutenant (Bolt pistol, Neo-volkite pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -55,8 +55,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Bladeguard Veteran Sergeant"}),
               ],
               '_modelList': [
-                "2x Bladeguard Veteran (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)",
-                "Bladeguard Veteran Sergeant (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)"
+                "2x Bladeguard Veteran (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm Shield)",
+                "Bladeguard Veteran Sergeant (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm Shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy Bolt Pistol"}),
@@ -71,8 +71,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Bladeguard Veteran Sergeant"}),
               ],
               '_modelList': [
-                "2x Bladeguard Veteran (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)",
-                "Bladeguard Veteran Sergeant (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)"
+                "2x Bladeguard Veteran (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm Shield)",
+                "Bladeguard Veteran Sergeant (Heavy Bolt Pistol, Master-crafted power sword, Frag & Krak grenades, Storm Shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy Bolt Pistol"}),

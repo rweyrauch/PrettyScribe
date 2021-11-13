@@ -32,7 +32,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Royal Warden"}),
               ],
               '_modelList': [
-                "Royal Warden (Relic Gauss Blaster, Enduring Will, Veil of Darkness)"
+                "Royal Warden (Relic Gauss Blaster, Relic: Veil of Darkness, Warlord, Warlord Trait (Codex 1): Enduring Will)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Relic Gauss Blaster"}),

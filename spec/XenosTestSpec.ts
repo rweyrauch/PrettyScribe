@@ -33,7 +33,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Weirdboy"}),
               ],
               '_modelList': [
-                "Weirdboy (Weirdboy Staff)"
+                "Weirdboy (Weirdboy Staff, 3. Da Jump)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Weirdboy Staff"}),
@@ -96,7 +96,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Painboy on Warbike"}),
               ],
               '_modelList': [
-                "Painboy on Warbike [Legends] (2x Dakkagun, 'Urty Syringe, Killsaw)"
+                "Painboy on Warbike [Legends] (2x Dakkagun, 'Urty Syringe, Killsaw, Super Cybork Body)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Dakkagun"}),
@@ -133,7 +133,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Blitza-bommer"}),
               ],
               '_modelList': [
-                "Blitza-bommer (Big Shoota, 2x Supa Shoota)"
+                "Blitza-bommer (Big Shoota, 2x Supa Shoota, Boom Bomb)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Big Shoota"}),

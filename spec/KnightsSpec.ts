@@ -61,7 +61,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Knight Castellan"}),
               ],
               '_modelList': [
-                "Knight Castellan (Plasma Decimator, 2x Shieldbreaker Missile, 2x Twin Meltagun, 2x Twin Siegebreaker Cannon, Volcano Lance, Titanic Feet, Armour of the Sainted Ion, Fearsome Reputation)"
+                "Knight Castellan (Plasma Decimator, 2x Shieldbreaker Missile, 2x Twin Meltagun, 2x Twin Siegebreaker Cannon, Volcano Lance, Titanic Feet, Character (Knight Lance), Heirloom: Armour of the Sainted Ion, Warlord, Warlord Trait: Fearsome Reputation)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Plasma Decimator (Standard)"}),
