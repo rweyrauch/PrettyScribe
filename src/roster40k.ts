@@ -327,6 +327,7 @@ export class Force extends BaseNotes {
     _catalog: string = "";
     _faction: string = "Unknown";
     _factionRules: Map<string, string | null> = new Map();
+    _battleSize: string = "";
     _rules: Map<string, string | null> = new Map();
     _units: Unit[] = [];
 }
@@ -427,8 +428,10 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
 
         if (selectionName.includes("Detachment Command Cost")) {
             // console.log("Found Detachment Command Cost");
-        }
-        else {
+        } else if (selectionName === 'Battle Size') {
+            const battleSizeSelection = GetImmediateSelections(selection)[0];
+            force._battleSize = `Battle Size: ${battleSizeSelection?.getAttribute('name')} [${GetSelectionCp(battleSizeSelection)} CP]`;
+        } else {
             let unit = ParseUnit(selection, is40k);
             if (unit && unit._role != UnitRole.NONE) {
                 force._units.push(unit);

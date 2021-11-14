@@ -54,9 +54,12 @@ function visitCosts(el: Element, indent: number) {
 
 function visitPrintableElement(el: Element, indent: number) {
   const attrs = [];
-  for (const attr of ['name', 'type', 'typeName', 'number', 'value']) {
-    const value = el.getAttribute(attr);
-    if (value) attrs.push(`${attr}="${value}"`);
+  for (const attr of el.attributes) {
+    if (['id', 'publicationId', 'entryId', 'catalogueId', 'catalogueRevision',
+         'entryGroupId', 'typeId', 'page', 'hidden'].includes(attr.name)) {
+        continue
+    };
+    attrs.push(`${attr.name}="${attr.value}"`);
   }
 
   printLine(el, indent, attrs.join(' '));
