@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Chapter Master in Phobos Armor (Stratagem: Chapter Master)"}),
               ],
               '_modelList': [
-                "Chapter Master in Phobos Armor (Bolt pistol, Master-crafted instigator bolt carbine, Combat knife, Frag & Krak grenades, Camo cloak, Frontline Commander, Stratagem: Chapter Master, Stratagem: Hero of the Chapter)"
+                "Chapter Master in Phobos Armor (Bolt pistol, Master-crafted instigator bolt carbine, Combat knife, Frag & Krak grenades, Camo cloak, Frontline Commander, Stratagem: Chapter Master [-2 CP], Stratagem: Hero of the Chapter [-1 CP])"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),

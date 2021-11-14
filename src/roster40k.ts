@@ -621,6 +621,23 @@ function HasImmediateProfileWithTypeName(root: Element, typeName: string): boole
     return false;
 }
 
+function GetSelectionCp(selection: Element): number {
+    // querySelectorAll(':scope > tagname') doesn't work with jsdom, so we hack
+    // around it: https://github.com/jsdom/jsdom/issues/2998
+    for (const child of selection.children) {
+        if (child.tagName === 'costs') {
+            for (const subChild of child.children) {
+                const name = subChild.getAttribute('name');
+                const value = Number(subChild.getAttribute('value'));
+                if (name === 'CP' && value && value !== 0) {
+                    return value;
+                }
+            }
+        }
+    }
+    return 0;
+}
+
 function ParseUnit(root: Element, is40k: boolean): Unit | null {
     let unit: Unit = new Unit();
     const unitName = ExpandBaseNotes(root, unit);
@@ -706,8 +723,12 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
             // since those will be picked up individually.
             if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')) continue;
 
-            const upgradeName = upgradeSelection.getAttribute('name');
+            let upgradeName = upgradeSelection.getAttribute('name');
             if (upgradeName) {
+                const cpCost = GetSelectionCp(upgradeSelection);
+                if (cpCost !== 0) {
+                    upgradeName += ` [${cpCost} CP]`;
+                }
                 model._upgrades.push(upgradeName);
             }
         }
