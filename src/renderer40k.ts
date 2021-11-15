@@ -90,6 +90,11 @@ export class Renderer40k implements Renderer {
             } else {
                 forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force.name()}`));
             }
+            if (force._battleSize) {
+                forceTitle.appendChild(document.createElement('div'))
+                    .appendChild(document.createElement('i'))
+                    .appendChild(document.createTextNode(force._battleSize));
+            }
             if (list)
                 list.appendChild(forceTitle);
 

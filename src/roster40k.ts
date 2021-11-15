@@ -178,17 +178,18 @@ export class Model extends BaseNotes {
         let name = super.name();
 
         if (this._weapons.length > 0 || this._upgrades.length > 0) {
-            const seenWeapons: string[] = [];
+            const weaponNamesWithoutCount: string[] = [];
             const weaponNames: string[] = [];
             for (const weapon of this._weapons) {
                 let wName = weapon._selectionName || weapon.name();
+                weaponNamesWithoutCount.push(wName);
                 if (weapon._count > 1) {
                     wName = `${weapon._count}x ${wName}`;
                 }
                 if (weaponNames.includes(wName)) continue;
                 weaponNames.push(wName);
             }
-            weaponNames.push(...this._upgrades);
+            weaponNames.push(...this._upgrades.filter(e => !weaponNamesWithoutCount.includes(e)));
             name += ` (${weaponNames.join(', ')})`;
         }
         return name;
@@ -326,6 +327,7 @@ export class Force extends BaseNotes {
     _catalog: string = "";
     _faction: string = "Unknown";
     _factionRules: Map<string, string | null> = new Map();
+    _battleSize: string = "";
     _rules: Map<string, string | null> = new Map();
     _units: Unit[] = [];
 }
@@ -426,8 +428,10 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
 
         if (selectionName.includes("Detachment Command Cost")) {
             // console.log("Found Detachment Command Cost");
-        }
-        else {
+        } else if (selectionName === 'Battle Size') {
+            const battleSizeSelection = GetImmediateSelections(selection)[0];
+            force._battleSize = `Battle Size: ${battleSizeSelection?.getAttribute('name')} [${GetSelectionCp(battleSizeSelection)} CP]`;
+        } else {
             let unit = ParseUnit(selection, is40k);
             if (unit && unit._role != UnitRole.NONE) {
                 force._units.push(unit);
@@ -620,6 +624,23 @@ function HasImmediateProfileWithTypeName(root: Element, typeName: string): boole
     return false;
 }
 
+function GetSelectionCp(selection: Element): number {
+    // querySelectorAll(':scope > tagname') doesn't work with jsdom, so we hack
+    // around it: https://github.com/jsdom/jsdom/issues/2998
+    for (const child of selection.children) {
+        if (child.tagName === 'costs') {
+            for (const subChild of child.children) {
+                const name = subChild.getAttribute('name');
+                const value = Number(subChild.getAttribute('value'));
+                if (name === 'CP' && value && value !== 0) {
+                    return value;
+                }
+            }
+        }
+    }
+    return 0;
+}
+
 function ParseUnit(root: Element, is40k: boolean): Unit | null {
     let unit: Unit = new Unit();
     const unitName = ExpandBaseNotes(root, unit);
@@ -697,6 +718,23 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         model._count = Number(modelSelection.getAttribute("number") || 1);
         unit._models.push(model);
         ParseModelProfiles(profiles, model, unit);
+
+        // Find all upgrades on the model. This may include weapons that were
+        // parsed from profiles (above), so dedupe those in nameAndGear().
+        for (const upgradeSelection of modelSelection.querySelectorAll('selections>selection[type="upgrade"]')) {
+            // Ignore this selection if it has sub-selection upgrades within it,
+            // since those will be picked up individually.
+            if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')) continue;
+
+            let upgradeName = upgradeSelection.getAttribute('name');
+            if (upgradeName) {
+                const cpCost = GetSelectionCp(upgradeSelection);
+                if (cpCost !== 0) {
+                    upgradeName += ` [${cpCost} CP]`;
+                }
+                model._upgrades.push(upgradeName);
+            }
+        }
     }
 
     // Finally, look for profiles that are not under models. They may apply to
@@ -829,14 +867,6 @@ function ParseAbilityProfile(profile: Element, profileName: string, unit: Unit, 
             if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
                 unit._abilities.set(profileName, char.textContent);
             }
-        }
-    }
-    const parentSelection = profile.parentElement?.parentElement;
-    if (parentSelection && parentSelection.getAttribute("type") === "upgrade") {
-        // are we at the correct level?
-        const superParentSelection = parentSelection.parentElement?.parentElement;
-        if (superParentSelection && superParentSelection.getAttribute("type") === "model") {
-            model._upgrades.push(profileName);
         }
     }
 }

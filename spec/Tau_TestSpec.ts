@@ -171,7 +171,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Commander Farsight"}),
               ],
               '_modelList': [
-                "Commander Farsight (High-intensity plasma rifle, Dawn blade)"
+                "Commander Farsight (High-intensity plasma rifle, Dawn blade, Warlord)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "High-intensity plasma rifle"}),

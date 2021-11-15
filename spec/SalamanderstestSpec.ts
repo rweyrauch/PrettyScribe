@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Captain"}),
               ],
               '_modelList': [
-                "Captain (Bolt pistol, Combi-melta, Relic blade, Frag & Krak grenades, Forge Master, Obsidian Aquila)"
+                "Captain (Bolt pistol, Combi-melta, Relic blade, Frag & Krak grenades, Forge Master, Obsidian Aquila, Warlord)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),

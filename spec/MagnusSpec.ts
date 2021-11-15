@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Ahriman"}),
               ],
               '_modelList': [
-                "Ahriman (Inferno Bolt Pistol, Black Staff of Ahriman, Frag & Krak grenades)"
+                "Ahriman (Inferno Bolt Pistol, Black Staff of Ahriman, Frag & Krak grenades, Smite)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Inferno Bolt Pistol"}),
@@ -39,7 +39,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Exalted Sorcerer"}),
               ],
               '_modelList': [
-                "Exalted Sorcerer (Inferno Bolt Pistol, Force stave, Frag & Krak grenades)"
+                "Exalted Sorcerer (Inferno Bolt Pistol, Force stave, Frag & Krak grenades, Smite)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Inferno Bolt Pistol"}),
@@ -74,7 +74,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Rubric Marine"}),
               ],
               '_modelList': [
-                "Aspiring Sorcerer (Inferno Bolt Pistol, Force stave)",
+                "Aspiring Sorcerer (Inferno Bolt Pistol, Force stave, Smite)",
                 "4x Rubric Marine w/ Inferno Boltgun (Inferno boltgun)"
               ],
               '_weapons': [
@@ -121,7 +121,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Scarab Occult Terminator"}),
               ],
               '_modelList': [
-                "Scarab Occult Sorcerer (Inferno Combi-bolter, Force stave)",
+                "Scarab Occult Sorcerer (Inferno Combi-bolter, Force stave, Smite)",
                 "4x Terminator (Inferno Combi-bolter, Powersword)"
               ],
               '_weapons': [
@@ -162,7 +162,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Magnus the Red"}),
               ],
               '_modelList': [
-                "Magnus the Red (The Blade of Magnus)"
+                "Magnus the Red (The Blade of Magnus, Smite, Warlord)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "The Blade of Magnus"}),

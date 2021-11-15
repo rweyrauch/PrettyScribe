@@ -33,7 +33,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Magus"}),
               ],
               '_modelList': [
-                "Magus (Autopistol, Cultist Knife, Force stave)"
+                "Magus (Autopistol, Cultist Knife, Force stave, Power: Psychic Stimulus)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Autopistol"}),
@@ -175,7 +175,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Broodlord"}),
               ],
               '_modelList': [
-                "Broodlord (Monstrous Rending Claws, Instinctive Killer, Resonance Barb)"
+                "Broodlord (Monstrous Rending Claws, Adrenal Webs, Power: Catalyst, Power: Smite, Resonance Barb, Warlord, Warlord Trait: Instinctive Killer)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Monstrous Rending Claws"}),

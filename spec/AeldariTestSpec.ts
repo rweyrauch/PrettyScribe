@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Farseer"}),
               ],
               '_modelList': [
-                "Farseer (Shuriken Pistol, Witchblade, Ghosthelm, Rune Armour, Runes of the Farseer)"
+                "Farseer (Shuriken Pistol, Witchblade, 0. Smite, Ghosthelm, Psyker (Farseer), Rune Armour, Runes of the Farseer, Warlord)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Shuriken pistol"}),
@@ -103,7 +103,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Crimson Hunter"}),
               ],
               '_modelList': [
-                "Crimson Hunter (2x Bright Lance, Pulse Laser, Airborne, Crash and Burn, Hard To Hit, Skyhunters, Wings of Khaine)"
+                "Crimson Hunter (2x Bright Lance, Pulse Laser, Airborne, Crash and Burn, Hard to Hit, Skyhunters, Wings of Khaine)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bright Lance"}),
@@ -120,7 +120,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Crimson Hunter Exarch"}),
               ],
               '_modelList': [
-                "Crimson Hunter Exarch (Two Bright Lances, Pulse Laser, Airborne, Crash and Burn, Hard To Hit, Skyhunters, Wings of Khaine)"
+                "Crimson Hunter Exarch (Two Bright Lances, Pulse Laser, Airborne, Crash and Burn, Hard to Hit, Marksman's Eye, Skyhunters, Wings of Khaine)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bright Lance"}),
@@ -207,7 +207,7 @@ describe("Create40kRoster", function() {
               ],
               '_modelList': [
                 "4x Incubi (Klaive)",
-                "Klaivex"
+                "Klaivex (Klaive)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Klaive"}),
@@ -250,7 +250,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Reaper"}),
               ],
               '_modelList': [
-                "Reaper (Storm Vortex Projector, Scythevanes, Sharpened prow blade, Night Shield, Storm Vortex Projector)"
+                "Reaper (Storm Vortex Projector, Scythevanes, Sharpened prow blade, Night Shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Storm Vortex Projector - Beam"}),
@@ -282,7 +282,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Venom"}),
               ],
               '_modelList': [
-                "Venom (Splinter Cannon, Twin splinter rifle, Bladevanes)"
+                "Venom (Splinter Cannon, Twin splinter rifle, Bladevanes, Flickerfield, Night Shield)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Splinter Cannon"}),

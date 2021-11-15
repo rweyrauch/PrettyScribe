@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Commissar Yarrick"}),
               ],
               '_modelList': [
-                "Commissar Yarrick (Bale Eye, Bolt pistol, Storm bolter, Power Klaw, Master of Command)"
+                "Commissar Yarrick (Bale Eye, Bolt pistol, Storm bolter, Power Klaw, Master of Command, Warlord)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bale Eye"}),
@@ -33,7 +33,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Knight Commander Pask"}),
               ],
               '_modelList': [
-                "Knight Commander Pask (Battle Cannon, Heavy Bolter)"
+                "Knight Commander Pask (Battle Cannon, Heavy Bolter, Stat Damage (Pask))"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Battle Cannon"}),
@@ -208,9 +208,9 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Hellhound"}),
               ],
               '_modelList': [
-                "Bane Wolf (Turret-mounted Chem Cannon, Heavy Bolter)",
-                "Devil Dog (Heavy Bolter, Turret-mounted Melta Cannon)",
-                "Hellhound (Heavy Bolter, Turret-mounted Inferno Cannon)"
+                "Bane Wolf (Turret-mounted Chem Cannon, Heavy Bolter, Stat Damage (HS))",
+                "Devil Dog (Heavy Bolter, Turret-mounted Melta Cannon, Stat Damage (HS))",
+                "Hellhound (Heavy Bolter, Turret-mounted Inferno Cannon, Stat Damage (HS))"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Chem Cannon"}),
@@ -257,7 +257,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Hydra"}),
               ],
               '_modelList': [
-                "Hydra (Heavy Bolter, Hydra Quad Autocannon)"
+                "Hydra (Heavy Bolter, Hydra Quad Autocannon, Stat Damage (HS))"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy bolter"}),

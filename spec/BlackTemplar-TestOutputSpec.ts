@@ -19,7 +19,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Chapter Master in Phobos Armor (Stratagem: Chapter Master)"}),
               ],
               '_modelList': [
-                "Chapter Master in Phobos Armor (Bolt pistol, Master-crafted instigator bolt carbine, Combat knife, Frag & Krak grenades, Camo cloak, Frontline Commander)"
+                "Chapter Master in Phobos Armor (Bolt pistol, Master-crafted instigator bolt carbine, Combat knife, Frag & Krak grenades, Camo cloak, Frontline Commander, Stratagem: Chapter Master [-2 CP], Stratagem: Hero of the Chapter [-1 CP])"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -110,7 +110,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Chaplain Grimaldus"}),
               ],
               '_modelList': [
-                "Chaplain Grimaldus (Plasma pistol, Artificer Crozius, Frag & Krak grenades)"
+                "Chaplain Grimaldus (Plasma pistol, Artificer Crozius, Frag & Krak grenades, 1. Litany of Divine Protection, 3. Vow of Retribution, Litany of Hate)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Plasma pistol, Standard"}),
@@ -220,7 +220,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Lieutenant in Phobos Armour"}),
               ],
               '_modelList': [
-                "Lieutenant in Phobos Armour (Bolt pistol, Master-crafted occulus bolt rifle, Paired Combat Blades, Frag & Krak grenades)"
+                "Lieutenant in Phobos Armour (Bolt pistol, Master-crafted occulus bolt rifle, Paired Combat Blades, Frag & Krak grenades, Grav-chute)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -268,8 +268,8 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Eliminator Sergeant"}),
               ],
               '_modelList': [
-                "Eliminator Sergeant (Bolt pistol, Bolt sniper rifle, Frag & Krak grenades)",
-                "2x Eliminator with Bolt Sniper (Bolt pistol, Bolt sniper rifle, Frag & Krak grenades)"
+                "Eliminator Sergeant (Bolt pistol, Bolt sniper rifle, Frag & Krak grenades, Camo cloak)",
+                "2x Eliminator with Bolt Sniper (Bolt pistol, Bolt sniper rifle, Frag & Krak grenades, Camo cloak)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -286,7 +286,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Repulsor Executioner"}),
               ],
               '_modelList': [
-                "Repulsor Executioner (2x Fragstorm Grenade Launcher, Heavy Onslaught Gatling Cannon, Icarus Rocket Pod, Ironhail Heavy Stubber, Macro Plasma Incinerator, 2x Storm bolter, Twin Heavy Bolter, Twin Icarus Ironhail Heavy Stubber)"
+                "Repulsor Executioner (2x Fragstorm Grenade Launcher, Heavy Onslaught Gatling Cannon, Icarus Rocket Pod, Ironhail Heavy Stubber, Macro Plasma Incinerator, 2x Storm bolter, Twin Heavy Bolter, Twin Icarus Ironhail Heavy Stubber, Auto Launchers)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Fragstorm Grenade Launcher"}),
@@ -321,7 +321,7 @@ describe("Create40kRoster", function() {
                 jasmine.objectContaining({'_name': "Repulsor"}),
               ],
               '_modelList': [
-                "Repulsor (Heavy Onslaught Gatling Cannon, Icarus Ironhail Heavy Stubber, 2x Ironhail Heavy Stubber, 2x Krakstorm Grenade Launcher, 2x Storm Bolters, Twin heavy bolter)"
+                "Repulsor (Heavy Onslaught Gatling Cannon, Icarus Ironhail Heavy Stubber, 2x Ironhail Heavy Stubber, 2x Krakstorm Grenade Launcher, 2x Storm Bolters, Twin heavy bolter, Auto Launchers)"
               ],
               '_weapons': [
                 jasmine.objectContaining({'_name': "Heavy Onslaught Gatling Cannon"}),
