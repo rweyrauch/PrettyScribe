@@ -294,7 +294,7 @@ export class RendererAoS implements Renderer {
 
         if (unit.isNormalUnit()) {
             let unitStats = document.createElement('div');
-            unitStats.className = "col-6 col-md-3";
+            unitStats.className = "col-6 col-sm-3";
             unitStats.innerHTML = `<div class="aos_unit_stats">
                 <div class="aos_unit_move"><p class="h2">${unit._move}</p></div>
                 <div class="aos_unit_wounds"><p class="h2">${unit._wounds}</p></div>
@@ -472,12 +472,12 @@ export class RendererAoS implements Renderer {
 
         if (unit._keywords.size > 0) {
             let keywords = document.createElement('div');
-            keywords.className = "container";
+            keywords.className = "container-fluid";
             let row = document.createElement('div');
             row.className = "row";
             keywords.appendChild(row);
             let label = document.createElement('div');
-            label.className = "col-5 col-md-3 border aos_dark text-center";
+            label.className = "col-5 border aos_dark text-center";
             label.innerHTML = "<strong>KEYWORDS</strong>";
             row.appendChild(label);
             let previous_separator = "";
