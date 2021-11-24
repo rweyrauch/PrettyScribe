@@ -14,7 +14,7 @@
     OF THIS SOFTWARE.
 */
 
-import { AoSSpecialRules, AoSSpell, AoSUnit, AoSUnitRoleToString, RosterAoS } from "./rosterAoS";
+import { AoSSpell, AoSUnit, AoSUnitRoleToString, RosterAoS } from "./rosterAoS";
 import { Renderer } from "./renderer";
 
 type TableHeaderEntry = {
@@ -52,7 +52,7 @@ export class RendererAoS implements Renderer {
 
             const headerInfo = [{ name: "NAME", width: '35%' }, { name: "ROLE", width: '15%' }, { name: "SELECTIONS", width: '40%' }, { name: "POINTS", width: '10%' }];
             const table = this.createTable(headerInfo);
-            table.className = "table table-sm aos_font";
+            table.classList.add("table", "table-sm", "aos_font");
             forceTitle.appendChild(table);
 
             let body = document.createElement('tbody');
@@ -72,7 +72,7 @@ export class RendererAoS implements Renderer {
                 }
 
                 let pts = document.createElement('td');
-                pts.innerHTML = unit._points.toString();
+                pts.textContent = unit._points.toString();
                 tr.appendChild(uname);
                 tr.appendChild(role);
                 tr.appendChild(selections);
@@ -95,7 +95,7 @@ export class RendererAoS implements Renderer {
 
             if (force._allegiance._spells.length > 0) {
                 let title = document.createElement('h4');
-                title.innerHTML = "ALLEGIANCE SPELLS";
+                title.textContent = "ALLEGIANCE SPELLS";
                 allegianceAbilities.append(title);
                 this.renderSpells(allegianceAbilities, force._allegiance._spells);
             }
@@ -113,7 +113,7 @@ export class RendererAoS implements Renderer {
                         const values = profile._value._fields.values();
 
                         let p = document.createElement('p');
-                        p.className = "aos_font";
+                        p.classList.add("aos_font");
                         p.innerHTML = `<strong>${profile._name}:  </strong>${values.next().value}`;
                         allegianceAbilities.appendChild(p);
                     }
@@ -158,7 +158,7 @@ export class RendererAoS implements Renderer {
 
                 if (force._realmOfBattle._spells.length > 0) {
                     let title = document.createElement('h4');
-                    title.innerHTML = "SPELLS";
+                    title.textContent = "SPELLS";
                     allegianceAbilities.append(title);
                     this.renderSpells(allegianceAbilities, force._realmOfBattle._spells);
                 }
@@ -168,7 +168,7 @@ export class RendererAoS implements Renderer {
                 }
                 if (force._realmOfBattle._rules.length > 0) {
                     let title = document.createElement('h4');
-                    title.innerHTML = "SPECIAL RULES";
+                    title.textContent = "SPECIAL RULES";
                     allegianceAbilities.append(title);
                     for (let rule of force._realmOfBattle._rules) {
                         let row = document.createElement('div');
@@ -196,20 +196,20 @@ export class RendererAoS implements Renderer {
 
             if (force._battleTactics.size > 0) {
                 let header = document.createElement('h3');
-                header.innerHTML = "BATTLE TACTICS";
+                header.textContent = "BATTLE TACTICS";
                 allegianceAbilities.appendChild(header);
 
                 const headerInfo = [{ name: "NAME", width: '20%' }, { name: "DESCRIPTION", width: '80%' }];
                 const table = this.createTable(headerInfo);
-                table.className = "table table-sm aos_table aos_font";
+                table.classList.add("table", "table-sm", "aos_table", "aos_font");
                 let body = document.createElement('tbody');
                 table.appendChild(body);
                 for (let tactic of force._battleTactics) {
                     let tr = document.createElement('tr');
                     let tacticName = document.createElement('td');
-                    tacticName.innerHTML = tactic[0];
+                    tacticName.textContent = tactic[0];
                     let desc = document.createElement('td');
-                    desc.innerHTML = tactic[1];
+                    desc.textContent = tactic[1];
                     tr.appendChild(tacticName);
                     tr.appendChild(desc);
                     body.appendChild(tr);
@@ -239,14 +239,14 @@ export class RendererAoS implements Renderer {
                 continue;
 
             let divider = document.createElement('hr');
-            divider.className = "aos_dark";
+            divider.classList.add("aos_dark");
             forces.appendChild(divider);
 
             for (let unit of force._units) {
                 forces.appendChild(this.renderUnitHtml(unit));
 
                 let divider = document.createElement('hr');
-                divider.className = "aos_dark";
+                divider.classList.add("aos_dark");
                 forces.appendChild(divider);
             }
         }
@@ -262,7 +262,7 @@ export class RendererAoS implements Renderer {
         heading.forEach(element => {
             let th = document.createElement('th');
             th.scope = "col";
-            th.innerHTML = element.name;
+            th.textContent = element.name;
             th.style.width = element.width;
             tr.appendChild(th);
         });
@@ -282,19 +282,20 @@ export class RendererAoS implements Renderer {
     protected renderUnitHtml(unit: AoSUnit): HTMLDivElement {
 
         let unitRoot = document.createElement('div');
-        unitRoot.className = "container-fluid aos_unit";
+        unitRoot.classList.add("container-fluid", "aos_unit");
+
         let unitName = document.createElement('div');
-        unitName.className = "p-2 mb-2 aos_medium text-center text-uppercase text-black";
+        unitName.classList.add("p-2", "mb-2", "aos_medium", "text-center", "text-uppercase", "text-black");
         unitName.innerHTML = `<span class="h3"><a name="unit_${unit._id}">${unit._name}</a></span>`;
         unitRoot.append(unitName);
 
         let unitRow = document.createElement('div');
-        unitRow.className = "row";
+        unitRow.classList.add("row");
         unitRoot.append(unitRow);
 
         if (unit.isNormalUnit()) {
             let unitStats = document.createElement('div');
-            unitStats.className = "col-6 col-sm-3";
+            unitStats.classList.add("col-6", "col-sm-3");
             unitStats.innerHTML = `<div class="aos_unit_stats">
                 <div class="aos_unit_move"><p class="h2">${unit._move}</p></div>
                 <div class="aos_unit_wounds"><p class="h2">${unit._wounds}</p></div>
@@ -305,11 +306,11 @@ export class RendererAoS implements Renderer {
         }
 
         let unitInfo = document.createElement('div');
-        unitInfo.className = "col";
+        unitInfo.classList.add("col");
         unitRow.appendChild(unitInfo);
 
         let missileWeaponTable = document.createElement('table');
-        missileWeaponTable.className = "table table-sm aos_table aos_font text-center";
+        missileWeaponTable.classList.add("table", "table-sm", "aos_table", "aos_font", "text-center");
         let thead = document.createElement('thead');
         missileWeaponTable.appendChild(thead);
         missileWeaponTable.innerHTML =
@@ -326,7 +327,7 @@ export class RendererAoS implements Renderer {
         missileWeaponTable.appendChild(missileWeaponBody);
 
         let meleeWeaponTable = document.createElement('table');
-        meleeWeaponTable.className = "table table-sm aos_table aos_font text-center";
+        meleeWeaponTable.classList.add("table", "table-sm", "aos_table", "aos_font", "text-center");
         thead = document.createElement('thead');
         meleeWeaponTable.appendChild(thead);
         meleeWeaponTable.innerHTML =
@@ -376,7 +377,7 @@ export class RendererAoS implements Renderer {
             }
 
             const table = this.createTable(labels);
-            table.className = "table table-sm aos_table aos_font text-center";
+            table.classList.add("table", "table-sm", "aos_table", "aos_font", "text-center");
             unitInfo.appendChild(table);
 
             let body = document.createElement('tbody');
@@ -386,7 +387,7 @@ export class RendererAoS implements Renderer {
                 let tr = document.createElement('tr');
                 for (let value of wt) {
                     let v = document.createElement('td');
-                    v.innerHTML = value;
+                    v.textContent = value;
                     tr.appendChild(v);
                 }
                 body.appendChild(tr);
@@ -411,30 +412,30 @@ export class RendererAoS implements Renderer {
 
         if (unit._spells.length > 0) {
             let spells = document.createElement('h4');
-            spells.innerHTML = "SPELLS";
+            spells.textContent = "SPELLS";
             unitInfo.appendChild(spells);
             this.renderSpells(unitInfo, unit._spells);
         }
 
         if (unit._prayers.length > 0) {
             let prayers = document.createElement('h4');
-            prayers.innerHTML = "PRAYERS";
+            prayers.textContent = "PRAYERS";
             unitInfo.appendChild(prayers);
             const headerInfo = [{ name: "NAME", width: '20%' }, { name: "ANSWER VALUE", width: '10%' }, { name: "RANGE", width: '10%' }, { name: "DESCRIPTION", width: '60%' }];
             const table = this.createTable(headerInfo);
-            table.className = "table table-sm aos_table aos_font";
+            table.classList.add("table", "table-sm", "aos_table", "aos_font");
             let body = document.createElement('tbody');
             table.appendChild(body);
             for (let prayer of unit._prayers) {
                 let tr = document.createElement('tr');
                 let name = document.createElement('td');
-                name.innerHTML = prayer._name;
+                name.textContent = prayer._name;
                 let value = document.createElement('td');
-                value.innerHTML = prayer._answerValue.toString();
+                value.textContent = prayer._answerValue.toString();
                 let range = document.createElement('td');
-                range.innerHTML = prayer._range.toString();
+                range.textContent = prayer._range.toString();
                 let desc = document.createElement('td');
-                desc.innerHTML = prayer._description;
+                desc.textContent = prayer._description;
                 tr.appendChild(name);
                 tr.appendChild(value);
                 tr.appendChild(range);
@@ -461,7 +462,7 @@ export class RendererAoS implements Renderer {
                 const values = profile._value._fields.values();
 
                 let p = document.createElement('p');
-                p.className = "aos_font";
+                p.classList.add("aos_font");
                 p.innerHTML = `<strong>${profile._name}:  </strong>${values.next().value}`;
                 unitInfo.appendChild(p);
             }
@@ -472,12 +473,12 @@ export class RendererAoS implements Renderer {
 
         if (unit._keywords.size > 0) {
             let keywords = document.createElement('div');
-            keywords.className = "container-fluid";
+            keywords.classList.add("container-fluid");
             let row = document.createElement('div');
-            row.className = "row";
+            row.classList.add("row");
             keywords.appendChild(row);
             let label = document.createElement('div');
-            label.className = "col-5 border aos_dark text-center";
+            label.classList.add("col-5", "border", "aos_dark", "text-center");
             label.innerHTML = "<strong>KEYWORDS</strong>";
             row.appendChild(label);
             let previous_separator = "";
@@ -490,7 +491,7 @@ export class RendererAoS implements Renderer {
                 }
             }
             let values = document.createElement('div');
-            values.className = "col border text-left text-uppercase";
+            values.classList.add("col", "border", "text-left", "text-uppercase");
             values.innerText = all_keywords;
             row.appendChild(values);
             unitRoot.appendChild(keywords);
@@ -501,11 +502,11 @@ export class RendererAoS implements Renderer {
 
     private renderAbilityMap(root: HTMLElement, title: string, abilities: Map<string, string>): void {
         let header = document.createElement('h4');
-        header.innerHTML = title;
+        header.textContent = title;
         root.appendChild(header);
         for (let ability of abilities) {
             let a = document.createElement('p');
-            a.className = "aos_font";
+            a.classList.add("aos_font");
             a.innerHTML = `<strong>${ability[0]}:  </strong>${ability[1]}`;
             header.appendChild(a);
         }
@@ -514,19 +515,19 @@ export class RendererAoS implements Renderer {
     private renderSpells(root: HTMLElement, spells: AoSSpell[]): void {
         const headerInfo = [{ name: "NAME", width: '25%' }, { name: "CASTING VALUE", width: '15%' }, { name: "RANGE", width: '10%' }, { name: "DESCRIPTION", width: '50%' }];
         const table = this.createTable(headerInfo);
-        table.className = "table table-sm aos_font";
+        table.classList.add("table", "table-sm", "aos_font");
         let body = document.createElement('tbody');
         table.appendChild(body);
         for (let spell of spells) {
             let tr = document.createElement('tr');
             let spellName = document.createElement('td');
-            spellName.innerHTML = spell._name;
+            spellName.textContent = spell._name;
             let value = document.createElement('td');
-            value.innerHTML = spell._castingValue.toString();
+            value.textContent = spell._castingValue.toString();
             let range = document.createElement('td');
-            range.innerHTML = spell._range.toString();
+            range.textContent = spell._range.toString();
             let desc = document.createElement('td');
-            desc.innerHTML = spell._description;
+            desc.textContent = spell._description;
             tr.appendChild(spellName);
             tr.appendChild(value);
             tr.appendChild(range);

@@ -33,7 +33,6 @@ export class Renderer30k implements Renderer {
     private _currentX: number = 0;
     private _currentY: number = 0;
     private _maxWidth: number = 0;
-    private _maxHeight: number = 0;
 
     private _octagon: HTMLImageElement | null = null;
 
@@ -731,7 +730,6 @@ export class Renderer30k implements Renderer {
         this._currentX = xOffset + Renderer30k._margin;
         this._currentY = yOffset + Renderer30k._margin;
         this._maxWidth = canvas.width - this._currentX;
-        this._maxHeight = Math.max(0, canvas.height - this._currentY);
 
         this.renderHeader(unit, ctx);
 

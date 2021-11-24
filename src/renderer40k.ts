@@ -14,46 +14,21 @@
     OF THIS SOFTWARE.
 */
 
-import {BaseNotes, Compare, CompareWeapon, Explosion, Model, PsychicPower, Psyker, Roster40k, Unit, UnitRole, UnitRoleToString, Weapon} from "./roster40k";
-import {Justification, Renderer, RenderParagraph, RenderText, RenderTextFull, FixDPI, VertAlign} from "./renderer";
+import {BaseNotes, Compare, Roster40k, Unit, UnitRole, UnitRoleToString} from "./roster40k";
+import {Renderer} from "./renderer";
 
 export class Renderer40k implements Renderer {
 
     public static readonly _res: number = 144; // original is 144
     public static readonly _margin: number = 0;
 
-    private static readonly _bevelSize = 15;
-    private readonly _descriptionStartX = 140;
-    private _descriptionWidth: number = 600;
-
-    private _showWoundBoxes: boolean = false;
-
     private _roster: Roster40k | null = null;
 
-    private _currentX: number = 0;
-    private _currentY: number = 0;
-    private _maxWidth: number = 0;
-    private _maxHeight: number = 0;
-
-    private _octagon: HTMLImageElement | null = null;
-
     private _roles: Map<UnitRole, HTMLImageElement | null> = new Map();
-
-    private static readonly _blackColor = '#1d272a';
-    private static readonly _grey1 = '#b3bbb5';
-    private static readonly _greyLight = '#dde1df';
-    private static readonly _fillColor = '#f6f6f6';
-    private static readonly _offset: number = 20;
-
-    private static readonly _titleFont = 'bold 14px sans-serif';
-    private static readonly _headerFont = 'bold 14px sans-serif';
-    private static readonly _font = '14px sans-serif';
-    private static readonly _boldFont = 'bold 14px sans-serif';
 
     constructor(roster: Roster40k) {
 
         this._roster = roster;
-        this._octagon = document.getElementById('octagon') as HTMLImageElement;
 
         this._roles.set(UnitRole.HQ, document.getElementById('role_hq') as HTMLImageElement);
         this._roles.set(UnitRole.TR, document.getElementById('role_tr') as HTMLImageElement);

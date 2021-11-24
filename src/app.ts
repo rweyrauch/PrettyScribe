@@ -24,7 +24,7 @@ import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
 import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
-import { RendererHtml40k } from "./rendererHtml40k";
+//import { RendererHtml40k } from "./rendererHtml40k";
 
 import JSZip from "jszip";
 import { reject } from "lodash";
