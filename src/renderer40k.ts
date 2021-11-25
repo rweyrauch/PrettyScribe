@@ -46,6 +46,8 @@ export class Renderer40k implements Renderer {
         if (this._roster == null) return;
 
         if (title) {
+            this.renderOptionsDiv(title);
+
             const text = `${this._roster.name()} (${this._roster._points} pts, ${this._roster._powerLevel} PL, ${this._roster._commandPoints} CP)`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
 
@@ -55,10 +57,21 @@ export class Renderer40k implements Renderer {
             footer.appendChild(document.createTextNode(text));
         }
 
-        let catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
-        let subFactionRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
+        if (list) {
+            this.renderRosterSummary(list);
+            this.renderAbilitiesByPhase(list);
+        }
 
-        for (let force of this._roster._forces) {
+        if (forces) {
+            this.renderRosterDetails(forces);
+        }
+    }
+
+    private renderRosterSummary(list: HTMLElement) {
+        if (!this._roster) return;
+
+        for (const force of this._roster._forces) {
+
             const forceTitle = document.createElement('div');
             if (force._faction) {
                 forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force.name()} (${force._faction})`));
@@ -70,8 +83,7 @@ export class Renderer40k implements Renderer {
                     .appendChild(document.createElement('i'))
                     .appendChild(document.createTextNode(force._battleSize));
             }
-            if (list)
-                list.appendChild(forceTitle);
+            list.appendChild(forceTitle);
 
             const table = document.createElement('table');
             table.classList.add('table', 'table-sm', 'table-striped');
@@ -84,7 +96,7 @@ export class Renderer40k implements Renderer {
             headerInfo.forEach(element => {
                 let th = document.createElement('th');
                 th.scope = "col";
-                th.innerHTML = element.name;
+                th.appendChild(document.createTextNode(element.name));
                 th.style.width = element.w;
                 tr.appendChild(th);
             });
@@ -106,24 +118,118 @@ export class Renderer40k implements Renderer {
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._powerLevel.toString()));
                 body.appendChild(tr);
             }
+        }
+    }
 
-
-            if (forces) {
-                const forceTitle = document.createElement('div');
-                forceTitle.style.pageBreakBefore = "always";
-                if (forceTitle) {
-                    const p = document.createElement("p");
-                    p.appendChild(document.createTextNode(force._catalog));
-                    if (force._faction) {
-                        p.appendChild(document.createTextNode(" (" + force._faction + ")"));
-                    }
-                    forceTitle.appendChild(p);
-                }
-
-                let h3 = document.createElement('h3');
-                h3.appendChild(forceTitle)
-                forces.appendChild(h3);
+    private renderOptionsDiv(title: HTMLElement) {
+        const optionsDiv = title.appendChild(document.createElement('div'));
+        optionsDiv.classList.add('wh40k_options_div', 'd-print-none');
+        optionsDiv.appendChild(document.createTextNode('Options: '));
+        const input = optionsDiv.appendChild(document.createElement('input'));
+        input.setAttribute('type', 'checkbox');
+        input.setAttribute('name', 'showPhaseAbilities');
+        input.setAttribute('id', 'showPhaseAbilities');
+        input.addEventListener('input', (e) => {
+            const abilities = document.getElementById('wh40k_abilities_list');
+            if (!abilities)
+                return;
+            if ((e.target as any).checked) {
+                abilities.classList.remove('d-none');
+            } else {
+                abilities.classList.add('d-none');
             }
+        });
+        const label = optionsDiv.appendChild(document.createElement('label'));
+        label.setAttribute('for', 'showPhaseAbilities');
+        label.appendChild(document.createTextNode(' Show abilities by phase'));
+    }
+
+    private renderAbilitiesByPhase(list: HTMLElement) {
+        if (!this._roster) return;
+
+        const allPhaseAbilities: {[key: string]: Element[]} = {};
+        for (const force of this._roster._forces) {
+            for (const unit of force._units) {
+                for (const [ability, description] of unit._abilities.entries()) {
+                    const matches = [...description.matchAll(/(?:Command|Movement|Psychic|Shooting|Charge|Fight|Morale) phase/ig)];
+                    if (matches.length === 0) continue;
+
+                    // Create a div with the ability, to highlight the phase in
+                    // the ability's rule.
+                    const abilityDiv = document.createElement('div');
+                    abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(unit.name()));
+                    abilityDiv.appendChild(document.createTextNode(' - '));
+                    abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(ability));
+                    abilityDiv.appendChild(document.createTextNode(' - '));
+
+                    let text = description;
+                    for (const match of matches) {
+                    if (!match.index) continue;  // Should not happen.
+
+                    const textIndex = match.index - (description.length - text.length);
+                    if (textIndex > 0) {
+                        abilityDiv.appendChild(document.createTextNode(text.substring(0, textIndex)));
+                    }
+                    const phase = match[0].toLocaleLowerCase();  // Normalize phase in case cases differ by ability.
+                    const phaseAbilities = allPhaseAbilities[phase] = allPhaseAbilities[phase] || [];
+                    if (!phaseAbilities.includes(abilityDiv)) {
+                        phaseAbilities.push(abilityDiv);
+                    }
+
+                    abilityDiv.appendChild(document.createElement('u')).appendChild(document.createTextNode(match[0]));
+
+                    const newOffset = textIndex + phase.length;
+                    text = text.substring(newOffset);
+                    }
+                    if (text.length > 0) {
+                    abilityDiv.appendChild(document.createTextNode(text));
+                    }
+                }
+            }
+        }
+
+        const sectionDiv = list.appendChild(document.createElement('div'));
+        sectionDiv.setAttribute('id', 'wh40k_abilities_list');
+        sectionDiv.classList.add('d-none');  // Options will allow user to toggle this on.
+        sectionDiv.appendChild(document.createElement('h3')).appendChild(document.createTextNode('Abilities by Phase'));
+
+        const sortedPhases = ['command phase', 'movement phase', 'psychic phase', 'shooting phase', 'charge phase', 'fight phase', 'morale phase']
+            .filter(phase => !!allPhaseAbilities[phase]);
+        if (sortedPhases.length === 0) {
+            sectionDiv.appendChild(document.createTextNode('No phase-specific abilities in roster'));
+        } else {
+            for (const phase of sortedPhases) {
+                sectionDiv.appendChild(document.createElement('h4')).appendChild(document.createTextNode(phase));
+                for (const abilitiesDiv of allPhaseAbilities[phase]) {
+                    // If an ability applies to multiple phases, the first time
+                    // we render its div, it will not have a parent; subsequent
+                    // times, clone the div as elements can only have one parent.
+                    sectionDiv.appendChild(abilitiesDiv.parentElement ? abilitiesDiv.cloneNode(true) : abilitiesDiv);
+                }
+            }
+        }
+    }
+
+    private renderRosterDetails(forces: HTMLElement) {
+        if (!this._roster) return;
+
+        const catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
+        const subFactionRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
+        for (const force of this._roster._forces) {
+            const forceTitle = document.createElement('div');
+            forceTitle.style.pageBreakBefore = "always";
+            if (forceTitle) {
+                const p = document.createElement("p");
+                p.appendChild(document.createTextNode(force._catalog));
+                if (force._faction) {
+                    p.appendChild(document.createTextNode(" (" + force._faction + ")"));
+                }
+                forceTitle.appendChild(p);
+            }
+
+            let h3 = document.createElement('h3');
+            h3.appendChild(forceTitle)
+            forces.appendChild(h3);
 
             let prevUnit: Unit | null = null;
             for (let unit of force._units) {
@@ -132,9 +238,7 @@ export class Renderer40k implements Renderer {
                 }
                 prevUnit = unit;
 
-                if (forces) {
-                    this.renderUnitHtml(forces, unit);
-                }
+                this.renderUnitHtml(forces, unit);
             }
 
             if (force._rules.size > 0) {
@@ -157,8 +261,7 @@ export class Renderer40k implements Renderer {
         rules.style.pageBreakBefore = "always";
         this.printRules(catalogueRules, rules);
         this.printRules(subFactionRules, rules);
-        if (forces)
-            forces.appendChild(rules);
+        forces.appendChild(rules);
     }
 
     private renderUnitHtml(forces: HTMLElement, unit: Unit) {
@@ -371,28 +474,27 @@ export class Renderer40k implements Renderer {
     }
 
     private printRules(root: Map<string, Map<string, string | null>>, section: HTMLElement | null) {
-        if (root.size > 0) {
-            for (let [subFaction, rules] of root.entries()) {
-                let allegianceRules = document.createElement('div');
-                let rulesHeader = document.createElement('h3');
-                allegianceRules.appendChild(rulesHeader);
-                rulesHeader.textContent = subFaction;
+        if (root.size === 0 || !section) return;
 
-                for (let rule of rules) {
-                    let row = document.createElement('div');
-                    let name = document.createElement('b');
-                    name.textContent = rule[0];
-                    let desc = document.createElement('p');
-                    desc.setAttribute("style", "white-space: pre-wrap;");
-                    desc.appendChild(document.createTextNode(rule[1] || ''));
-                    row.appendChild(name);
-                    row.appendChild(desc);
-                    allegianceRules.appendChild(row);
-                }
+        for (let [subFaction, rules] of root.entries()) {
+            let allegianceRules = document.createElement('div');
+            allegianceRules.classList.add('wh40k_rules');
+            let rulesHeader = document.createElement('h3');
+            allegianceRules.appendChild(rulesHeader);
+            rulesHeader.appendChild(document.createTextNode(subFaction));
 
-                if (section)
-                    section.appendChild(allegianceRules);
+            for (let rule of rules) {
+                let row = document.createElement('div');
+                let name = document.createElement('b');
+                name.appendChild(document.createTextNode(rule[0]));
+                let desc = document.createElement('p');
+                desc.appendChild(document.createTextNode(rule[1] || ''));
+                row.appendChild(name);
+                row.appendChild(desc);
+                allegianceRules.appendChild(row);
             }
+
+            section.appendChild(allegianceRules);
         }
     }
 
