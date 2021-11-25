@@ -4,6 +4,10 @@ body {
     font-family: 'Crimson Pro', serif;
 }
 
+label {
+  cursor: pointer;
+}
+
 @font-face {
     font-family: "rodchenkoctt";
     font-style: normal;
@@ -132,10 +136,32 @@ body {
 .warcry_light {
     background-color: #aaaaaa;
 }
+
+#wh40k_abilities_list {
+  break-inside: avoid;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+#wh40k_abilities_list > h4 {
+  text-transform: capitalize;
+}
+
+#wh40k_abilities_list > div {
+  margin-bottom: 0.35em;
+}
+
+.wh40k_options_div {
+  font-style: italic;
+  border: 1px dashed grey;
+  margin-bottom:0.5em;
+}
+
 .wh40k_unit_sheet {
     padding: 0 10px 0 5px;
     width: 1110px;
 }
+
 .wh40k_unit_sheet > table {
     --borderColor: black;
     --notchSize: 0.8em;
@@ -278,4 +304,9 @@ body {
             var(--bothSize) var(--borderSize),
             var(--borderSize) var(--bothSize)
         );
+}
+
+.wh40k_rules > div > p {
+  white-space: pre-wrap;
+  line-height: 1;
 }
