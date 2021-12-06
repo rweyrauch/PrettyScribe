@@ -483,7 +483,7 @@ function ParseOperative(root: Element): Operative | null {
             let which = cost.getAttributeNode("name")?.nodeValue;
             let value = cost.getAttributeNode("value")?.nodeValue;
             if (which == " EP" && value && +value > 0) {
-                operative._costs = operative.costs() + value;
+                operative._costs = (operative.costs() + parseInt(value)).toString();
             }
         }
     }
