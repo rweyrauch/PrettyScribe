@@ -312,7 +312,7 @@ export class Renderer40k implements Renderer {
         tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
         for (const model of unit._modelStats) {
             tbody.append(createTableRow([
-                model.name().toString(),
+                model._name,
                 model._move,
                 model._ws,
                 model._bs,
