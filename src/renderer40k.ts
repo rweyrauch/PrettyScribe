@@ -78,10 +78,13 @@ export class Renderer40k implements Renderer {
             } else {
                 forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force.name()}`));
             }
-            if (force._battleSize) {
-                forceTitle.appendChild(document.createElement('div'))
-                    .appendChild(document.createElement('i'))
-                    .appendChild(document.createTextNode(force._battleSize));
+            if (force._configurations.length > 0) {
+                const list = forceTitle.appendChild(document.createElement('ul'));
+                for (const configuration of force._configurations) {
+                    list.appendChild(document.createElement('li'))
+                        .appendChild(document.createElement('i'))
+                        .appendChild(document.createTextNode(configuration));
+                }
             }
             list.appendChild(forceTitle);
 

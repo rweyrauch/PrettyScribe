@@ -327,7 +327,7 @@ export class Force extends BaseNotes {
     _catalog: string = "";
     _faction: string = "Unknown";
     _factionRules: Map<string, string | null> = new Map();
-    _battleSize: string = "";
+    _configurations: string[] = [];
     _rules: Map<string, string | null> = new Map();
     _units: Unit[] = [];
 }
@@ -427,10 +427,9 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
         if (!selectionName) continue;
 
         if (selectionName.includes("Detachment Command Cost")) {
-            // console.log("Found Detachment Command Cost");
+            // Ignore Detachment Command cost
         } else if (selectionName === 'Battle Size') {
-            const battleSizeSelection = GetImmediateSelections(selection)[0];
-            force._battleSize = `Battle Size: ${battleSizeSelection?.getAttribute('name')} [${GetSelectionCp(battleSizeSelection)} CP]`;
+            ParseConfiguration(selection, force);
         } else {
             let unit = ParseUnit(selection, is40k);
             if (unit && unit._role != UnitRole.NONE) {
@@ -441,6 +440,7 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
             }
             else if (selection.getAttribute("type") === "upgrade") {
               ExtractRuleFromSelection(selection, force._rules);
+              ParseConfiguration(selection, force);
               const props = selection.querySelectorAll("selections>selection");
               for (let prop of props) {
                   // sub-faction
@@ -472,6 +472,25 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
         }
         return -1;
     });
+}
+
+function ParseConfiguration(selection: Element, force: Force) {
+    let configuration = selection.getAttribute("name");
+    if (!configuration || !selection.querySelector("category[name='Configuration']")) {
+        return;
+    }
+    const subSelections = selection.querySelectorAll('selections>selection');
+    const details = [];
+    let cpCost = 0;
+    for (const sel of subSelections) {
+        details.push(sel.getAttribute("name"));
+        cpCost += GetSelectionCp(sel);
+    }
+
+    if (details.length > 0) configuration += `: ${details.join(", ")}`;
+    if (cpCost > 0) configuration += ` [${cpCost} CP]`;
+
+    force._configurations.push(configuration);
 }
 
 function DuplicateForce(force: Force, roster: Roster40k): boolean {
