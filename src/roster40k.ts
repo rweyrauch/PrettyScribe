@@ -475,10 +475,11 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
 }
 
 function ParseConfiguration(selection: Element, force: Force) {
-    let configuration = selection.getAttribute("name");
-    if (!configuration || !selection.querySelector("category[name='Configuration']")) {
+    const name = selection.getAttribute("name");
+    if (!name) {
         return;
     }
+    const category = selection.querySelector("category")?.getAttribute('name');
     const subSelections = selection.querySelectorAll('selections>selection');
     const details = [];
     let cpCost = 0;
@@ -487,8 +488,10 @@ function ParseConfiguration(selection: Element, force: Force) {
         cpCost += GetSelectionCp(sel);
     }
 
+    let configuration = (!category || category === 'Configuration')
+        ? name : `${category} - ${name}`;
     if (details.length > 0) configuration += `: ${details.join(", ")}`;
-    if (cpCost > 0) configuration += ` [${cpCost} CP]`;
+    if (cpCost !== 0) configuration += ` [${cpCost} CP]`;
 
     force._configurations.push(configuration);
 }
