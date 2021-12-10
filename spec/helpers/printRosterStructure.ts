@@ -7,13 +7,15 @@
 
 import { readZippedRosterFile } from './readRosterFile';
 
+let verbose = false;
+
 /**
  * Visits an Element node and its children, outputting useful bits to console.
  * @param el element to process
  * @param indent level to indent (increments by 1)
  */
 function visit(el: Element, indent = 0): void {
-  if (['categories', 'characteristics', 'publications'].includes(el.tagName)) {
+  if (!verbose && ['categories', 'characteristics', 'publications'].includes(el.tagName)) {
     return;
   } else if (el.children.length === 0 && el.attributes.length === 0) {
     return;
@@ -55,7 +57,7 @@ function visitCosts(el: Element, indent: number) {
 function visitPrintableElement(el: Element, indent: number) {
   const attrs = [];
   for (const attr of el.attributes) {
-    if (['id', 'publicationId', 'entryId', 'catalogueId', 'catalogueRevision',
+    if (!verbose && ['id', 'publicationId', 'entryId', 'catalogueId', 'catalogueRevision',
          'entryGroupId', 'typeId', 'page', 'hidden'].includes(attr.name)) {
         continue
     };
@@ -70,6 +72,12 @@ function printLine(el: Element, indent: number, details: string) {
 }
 
 async function main(args: string[]) {
+  const verboseFlagIndex = args.indexOf('-v');
+  if (verboseFlagIndex !== -1) {
+    args.splice(verboseFlagIndex, 1);
+    verbose = true;
+  }
+
   if (args.length !== 3) {
     console.error(`ERROR: Expected one CLI argument; got ${args.length}: ${args.join(' ')}`);
     return;

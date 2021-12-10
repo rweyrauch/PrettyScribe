@@ -3,6 +3,10 @@
  *
  * Run with:
  *   $ ts-node spec/helpers/write40kRosterExpectation.ts 'path/to/file'
+ *
+ * To update all 40k files, on a Mac:
+ *   $ smardan$ grep -l test/*.ros -E -e "Warhammer 40,000.*Edition" | tr \\n \\0 | xargs -0 ts-node spec/helpers/write40kRosterExpectation.ts
+ * (see https://stackoverflow.com/questions/16758525/make-xargs-handle-filenames-that-contain-spaces)
  */
 
 import fs from "fs";
