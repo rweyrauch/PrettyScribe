@@ -931,7 +931,7 @@ function ParseAbilityProfile(profile: Element, profileName: string, unit: Unit) 
     for (const char of chars) {
         const charName = char.getAttribute("name");
         if (charName && char.textContent) {
-            if ((charName === "Description") || (charName === "Ability") || (charName == "Effect") || (charName == "Bonus")) {
+            if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus")) {
                 unit._abilities.set(profileName, char.textContent);
             }
         }
