@@ -339,6 +339,22 @@ export class Roster40k extends BaseNotes {
     _forces: Force[] = [];
 }
 
+export class Costs {
+    _powerLevel: number = 0;
+    _commandPoints: number = 0;
+    _points: number = 0;
+
+    hasValues() {
+        return this._powerLevel !== 0 || this._commandPoints !== 0 || this._points !== 0;
+    }
+
+    add(other: Costs) {
+        this._powerLevel += other._powerLevel;
+        this._commandPoints += other._commandPoints;
+        this._points += other._points;
+    }
+}
+
 export function Create40kRoster(doc: Document, is40k: boolean = true): Roster40k | null {
     if (doc) {
         // Determine roster type (game system).
@@ -482,16 +498,16 @@ function ParseConfiguration(selection: Element, force: Force) {
     const category = selection.querySelector("category")?.getAttribute('name');
     const subSelections = selection.querySelectorAll('selections>selection');
     const details = [];
-    let cpCost = 0;
+    let costs = new Costs();
     for (const sel of subSelections) {
         details.push(sel.getAttribute("name"));
-        cpCost += GetSelectionCp(sel);
+        costs.add(GetSelectionCosts(sel));
     }
 
     let configuration = (!category || category === 'Configuration')
         ? name : `${category} - ${name}`;
     if (details.length > 0) configuration += `: ${details.join(", ")}`;
-    if (cpCost !== 0) configuration += ` [${cpCost} CP]`;
+    if (costs._commandPoints !== 0) configuration += ` [${costs._commandPoints} CP]`;
 
     force._configurations.push(configuration);
 }
@@ -646,21 +662,33 @@ function HasImmediateProfileWithTypeName(root: Element, typeName: string): boole
     return false;
 }
 
-function GetSelectionCp(selection: Element): number {
+function GetSelectionCosts(selection: Element): Costs {
     // querySelectorAll(':scope > tagname') doesn't work with jsdom, so we hack
     // around it: https://github.com/jsdom/jsdom/issues/2998
+
+    const costs = new Costs()
     for (const child of selection.children) {
         if (child.tagName === 'costs') {
             for (const subChild of child.children) {
                 const name = subChild.getAttribute('name');
                 const value = Number(subChild.getAttribute('value'));
-                if (name === 'CP' && value && value !== 0) {
-                    return value;
+                if (value && value !== 0) {
+                    switch (name) {
+                        case 'CP':
+                            costs._commandPoints += +value;
+                            break;
+                        case ' PL':
+                            costs._powerLevel += +value;
+                            break;
+                        case 'pts':
+                            costs._points += +value;
+                            break;
+                    }
                 }
             }
         }
     }
-    return 0;
+    return costs;
 }
 
 function ParseUnit(root: Element, is40k: boolean): Unit | null {
@@ -750,11 +778,25 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
 
             let upgradeName = upgradeSelection.getAttribute('name');
             if (upgradeName) {
-                const cpCost = GetSelectionCp(upgradeSelection);
-                if (cpCost !== 0) {
-                    upgradeName += ` [${cpCost} CP]`;
+                const costs = GetSelectionCosts(upgradeSelection);
+                if (costs._commandPoints !== 0) {
+                    upgradeName += ` [${costs._commandPoints} CP]`;
                 }
                 model._upgrades.push(upgradeName);
+            }
+        }
+    }
+
+    // Next, look for upgrades on the unit itself which don't have a profile with costs
+    const immediateSelections = GetImmediateSelections(root);
+    for (const selection of immediateSelections) {
+        if (selection.getAttribute('type') === 'upgrade' || HasImmediateProfileWithTypeName(selection, 'Abilities')) {
+            let upgradeCosts = GetSelectionCosts(selection)
+            if (upgradeCosts.hasValues())
+            {
+                unit._points += upgradeCosts._points;
+                unit._commandPoints += upgradeCosts._commandPoints;
+                unit._powerLevel += upgradeCosts._powerLevel;
             }
         }
     }
