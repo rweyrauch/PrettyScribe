@@ -151,10 +151,11 @@ export class Renderer40k implements Renderer {
         if (!this._roster) return;
 
         const allPhaseAbilities: {[key: string]: Element[]} = {};
+        const allPhaseAbilityNames: {[key: string]: string[]} = {};
         for (const force of this._roster._forces) {
             for (const unit of force._units) {
                 for (const [ability, description] of unit._abilities.entries()) {
-                    const matches = [...description.matchAll(/(?:Command|Movement|Psychic|Shooting|Charge|Fight|Morale) phase/ig)];
+                    const matches = [...description.matchAll(/(?:before the first turn begins|set up|Reinforcements|(?:Command|Movement|Psychic|Shooting|Charge|Fight|Morale) phase)/ig)];
                     if (matches.length === 0) continue;
 
                     // Create a div with the ability, to highlight the phase in
@@ -167,25 +168,60 @@ export class Renderer40k implements Renderer {
 
                     let text = description;
                     for (const match of matches) {
-                    if (!match.index) continue;  // Should not happen.
+                        if (!match.index) continue;  // Should not happen.
 
-                    const textIndex = match.index - (description.length - text.length);
-                    if (textIndex > 0) {
-                        abilityDiv.appendChild(document.createTextNode(text.substring(0, textIndex)));
-                    }
-                    const phase = match[0].toLocaleLowerCase();  // Normalize phase in case cases differ by ability.
-                    const phaseAbilities = allPhaseAbilities[phase] = allPhaseAbilities[phase] || [];
-                    if (!phaseAbilities.includes(abilityDiv)) {
-                        phaseAbilities.push(abilityDiv);
-                    }
+                        const phaseMatch = match[0].toLocaleLowerCase();  // Normalize phase in case cases differ by ability.
 
-                    abilityDiv.appendChild(document.createElement('u')).appendChild(document.createTextNode(match[0]));
+                        // map special cases to the correct phase
+                        // examples:
+                        // - At the start of the first battle round but before the first turn begins, you can move this unit up to 9". It cannot end this move within 9" of any enemy models.
 
-                    const newOffset = textIndex + phase.length;
-                    text = text.substring(newOffset);
+                        // - In your Shooting phase, after this model shoots, it can make a Normal Move or Fall Back as if it were your Movement phase, even if it arrived as Reinforcements this turn.
+
+                        // - If this unit is set up in ambush, when revealing ambush markers, you can do one of the following:
+                        // -- Remove one ambush marker from the battlefield and set up this unit underground instead.
+                        // -- After setting up this unit from an ambush marker, this unit can make a Normal Move as if it were your Movement phase, but must end that move more than 9" away from enemy models.
+
+                        let phase = phaseMatch; // map special cases to the correct phase
+                        switch (phaseMatch) {
+                            case 'before the first turn begins':
+                                phase = 'pre-game phase';
+                                break;
+                            case 'set up':
+                                if(!description.includes('reinforcements')) {
+                                    phase = 'pre-game phase';
+                                }
+                                break;
+                            case 'reinforcements':
+                                phase = 'movement phase';
+                                break;
+                        }
+
+                        // ignore other phase mentions
+                        if (description.toLocaleLowerCase().includes('as if it were your ' + phase)) {
+                            continue;
+                        }
+
+                        const textIndex = match.index - (description.length - text.length);
+                        if (textIndex > 0) {
+                            abilityDiv.appendChild(document.createTextNode(text.substring(0, textIndex)));
+                        }
+
+                        const phaseAbilities = allPhaseAbilities[phase] = allPhaseAbilities[phase] || [];
+                        const phaseAbilityNames = allPhaseAbilityNames[phase] = allPhaseAbilityNames[phase] || [];
+                        // I don't know why duplicates are not removed if we check phaseAbilities directly
+                        if (!phaseAbilityNames.includes(ability)) {
+                            phaseAbilityNames.push(ability)
+                            phaseAbilities.push(abilityDiv);
+                        }
+
+                        abilityDiv.appendChild(document.createElement('u')).appendChild(document.createTextNode(match[0]));
+
+                        const newOffset = textIndex + phaseMatch.length;
+                        text = text.substring(newOffset);
                     }
                     if (text.length > 0) {
-                    abilityDiv.appendChild(document.createTextNode(text));
+                        abilityDiv.appendChild(document.createTextNode(text));
                     }
                 }
             }
@@ -196,7 +232,7 @@ export class Renderer40k implements Renderer {
         sectionDiv.classList.add('d-none');  // Options will allow user to toggle this on.
         sectionDiv.appendChild(document.createElement('h3')).appendChild(document.createTextNode('Abilities by Phase'));
 
-        const sortedPhases = ['command phase', 'movement phase', 'psychic phase', 'shooting phase', 'charge phase', 'fight phase', 'morale phase']
+        const sortedPhases = ['pre-game phase', 'command phase', 'movement phase', 'psychic phase', 'shooting phase', 'charge phase', 'fight phase', 'morale phase']
             .filter(phase => !!allPhaseAbilities[phase]);
         if (sortedPhases.length === 0) {
             sectionDiv.appendChild(document.createTextNode('No phase-specific abilities in roster'));
