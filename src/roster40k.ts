@@ -591,8 +591,13 @@ function parseUnknownProfile(prop: Element, unit: Unit): void {
 
     let propName = prop.getAttributeNode("name")?.nodeValue;
     let propType = prop.getAttributeNode("typeName")?.nodeValue;
+    let grandfather = prop.parentElement?.parentElement;
 
     console.log("Unknown profile type: " + propType + " with name: " + propName + ".  Found in unit: " + unit._name);
+    console.log("Unknown profile is grandchild of typeName: " + grandfather?.getAttributeNode("typeName") +
+        " with the type: " + grandfather?.getAttributeNode("type") +
+        " with the name: " + grandfather?.getAttributeNode("name"));
+
 
     // TODO: make a table out of the unknown profile.
     //
