@@ -270,6 +270,15 @@ label {
     align-items: center;
 }
 
+.wh40k_unit_sheet > table > thead.unit_header > tr > td > div.unit_costs > span > span {
+  font-size: 0.6em;
+}
+
+.wh40k_unit_sheet > table > thead.unit_header > tr > td > div.unit_cp_costs {
+  flex-direction: row-reverse;
+  padding-right: calc(var(--notchSize) - 0.25rem) /* Offset td's 0.25rem padding-right. */
+}
+
 /* Render an octogonal border around certain elements. */
 .wh40k_unit_sheet > table > * > * > * > div.unit_costs > span:after,
 .wh40k_unit_sheet > table:after {

@@ -8,9 +8,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 31,
-        '_points': 620,
-        '_commandPoints': 3,
+        '_cost': jasmine.objectContaining({_powerLevel: 31, _points: 620, _commandPoints: 3}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
@@ -20,6 +18,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Chronomancer",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 80, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Chronomancer"}),
                 ],
@@ -33,6 +32,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Royal Warden",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 75, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Royal Warden"}),
                 ],
@@ -44,6 +44,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Necron Warriors",
+                '_cost': jasmine.objectContaining({_powerLevel: 12, _points: 260, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Necron Warrior"}),
                 ],
@@ -55,6 +56,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Skorpekh Destroyers",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 105, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Skorpekh Destroyer"}),
                 ],
@@ -68,6 +70,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Canoptek Scarab Swarms",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Canoptek Scarab Swarm"}),
                 ],
@@ -79,6 +82,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Bound Creation",
+                '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 40, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Cryptothrall"}),
                 ],
