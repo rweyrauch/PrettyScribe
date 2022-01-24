@@ -30,12 +30,7 @@ jobs:
       env:
         CI: true
         
-    - name: GitHub Pages Overwriter
+    - name: GitHub Pages action
       # You may pin to the exact commit or the version.
-      # uses: rayluo/github-pages-overwriter@b680c94786ac08c0e865b1b8a79a562231e582e4
-      uses: rayluo/github-pages-overwriter@v1.2
-      with:
-        # The name of the source directory that you wish it to become the wwwroot of your website
-        source-directory: .
-        # The name of the branch that would be OVERWRITTEN by current workdir, you will then configure your Github Pages to serve this branch.
-        target-branch: gh-pages
+      # uses: peaceiris/actions-gh-pages@bbdfb200618d235585ad98e965f4aafc39b4c501
+      uses: peaceiris/actions-gh-pages@v3.7.3
