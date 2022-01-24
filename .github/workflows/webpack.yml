@@ -34,3 +34,9 @@ jobs:
       # You may pin to the exact commit or the version.
       # uses: peaceiris/actions-gh-pages@bbdfb200618d235585ad98e965f4aafc39b4c501
       uses: peaceiris/actions-gh-pages@v3.7.3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        enable_jekyll: false
+
+
