@@ -8,9 +8,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 32,
-        '_points': 625,
-        '_commandPoints': 6,
+        '_cost': jasmine.objectContaining({_powerLevel: 32, _points: 625, _commandPoints: 6}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
@@ -21,6 +19,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Captain",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 100, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Captain"}),
                 ],
@@ -37,6 +36,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Tactical Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 95, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Space Marine"}),
                   jasmine.objectContaining({'_name': "Space Marine Sergeant"}),
@@ -55,6 +55,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Tactical Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 105, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Space Marine"}),
                   jasmine.objectContaining({'_name': "Space Marine Sergeant"}),
@@ -73,6 +74,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Redemptor Dreadnought",
+                '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 175, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Redemptor Dreadnought [1] (7+ wounds remaining)"}),
                   jasmine.objectContaining({'_name': "Redemptor Dreadnought [2] (4-6 wounds remaining)"}),
@@ -89,6 +91,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Devastator Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 150, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Devastator Marine"}),
                   jasmine.objectContaining({'_name': "Devastator Marine Sergeant"}),

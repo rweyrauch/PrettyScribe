@@ -1,15 +1,14 @@
 /*
- * Utility script to write Jasminen spec file for a roster.
+ * Utility script to write Jasminen spec file for rosters. By default, writes
+ * test specs for all 40k rosters. Pass in one or more filenames to limit to
+ * just those files.
  *
  * Run with:
- *   $ ts-node spec/helpers/write40kRosterExpectation.ts 'path/to/file'
- *
- * To update all 40k files, on a Mac:
- *   $ smardan$ grep -l test/*.ros -E -e "Warhammer 40,000.*Edition" | tr \\n \\0 | xargs -0 ts-node spec/helpers/write40kRosterExpectation.ts
- * (see https://stackoverflow.com/questions/16758525/make-xargs-handle-filenames-that-contain-spaces)
+ *   $ ts-node spec/helpers/write40kRosterExpectation.ts [optional/path/to/file another/file ...]
  */
 
 import fs from "fs";
+import path from "path";
 import { getRosterExpectation } from "./40kRosterExpectation";
 
 async function writeRosterExpectations(filename: string) {
@@ -29,12 +28,18 @@ async function writeRosterExpectations(filename: string) {
 }
 
 function main(args: string[]) {
-  if (args.length < 3) {
-    console.error(`ERROR: Expected at least one CLI argument; got ${args.length}: ${args.join(' ')}`);
-    return;
+  if (args.length >= 3) {
+    Promise.all(args.slice(2).map(writeRosterExpectations));
+  } else {
+    const dir = 'test';
+    const filenames = fs.readdirSync(dir)
+        .filter(name => name.endsWith('.ros') || name.endsWith('.rosz'))
+        .map(name => path.join(dir, name));
+    Promise.all(
+      // Catch errors to handle non-40k roster files.
+      filenames.map(name => writeRosterExpectations(`${name}`)
+          .catch(e => console.warn(`Unable to process file '${name}': ${e}`))));
   }
-
-  Promise.all(args.slice(2).map(writeRosterExpectations));
 }
 
 main(process.argv);
