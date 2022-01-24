@@ -8,15 +8,14 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 50,
-        '_points': 785,
-        '_commandPoints': 0,
+        '_cost': jasmine.objectContaining({_powerLevel: 50, _points: 785, _commandPoints: 0}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Cryptek",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 80, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Cryptek"}),
                 ],
@@ -29,6 +28,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Overlord",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 80, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Overlord"}),
                 ],
@@ -41,6 +41,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Immortals",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 75, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Immortal"}),
                 ],
@@ -52,6 +53,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Necron Warriors",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 110, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Necron Warrior"}),
                 ],
@@ -63,6 +65,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Necron Warriors",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 110, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Necron Warrior"}),
                 ],
@@ -74,6 +77,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "C'tan Shard of the Deceiver",
+                '_cost': jasmine.objectContaining({_powerLevel: 12, _points: 180, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "C'tan Shard of the Deceiver"}),
                 ],
@@ -88,6 +92,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Doom Scythe",
+                '_cost': jasmine.objectContaining({_powerLevel: 11, _points: 150, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Doom Scythe"}),
                 ],
@@ -108,6 +113,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Dynasty Choice",
+                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
                 '_modelStats': [
                   
                 ],

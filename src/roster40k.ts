@@ -223,27 +223,23 @@ export class ProfileTable {
 export class Unit extends BaseNotes {
 
     _role: UnitRole = UnitRole.NONE;
-    _factions: Set<string> = new Set();
-    _keywords: Set<string> = new Set();
+    readonly _factions: Set<string> = new Set();
+    readonly _keywords: Set<string> = new Set();
 
-    _abilities: Map<string, string> = new Map();
-    _rules: Map<string, string> = new Map();
+    readonly _abilities: Map<string, string> = new Map();
+    readonly _rules: Map<string, string> = new Map();
 
-    _models: Model[] = [];
-    _modelStats: Model[] = [];
+    readonly _models: Model[] = [];
+    readonly _modelStats: Model[] = [];
     _modelList: string[] = [];
     _weapons: Weapon[] = [];
-    _spells: PsychicPower[] = [];
-    _psykers: Psyker[] = [];
-    _explosions: Explosion[] = [];
+    readonly _spells: PsychicPower[] = [];
+    readonly _psykers: Psyker[] = [];
+    readonly _explosions: Explosion[] = [];
 
-    _points: number = 0;
-    _powerLevel: number = 0;
-    _commandPoints: number = 0;
+    readonly _cost = new Costs();
 
-    _woundTracker: WoundTracker[] = [];
-
-    _profileTables: Map<string, ProfileTable> = new Map();
+    readonly _woundTracker: WoundTracker[] = [];
 
     _id: number = 0;
 
@@ -316,9 +312,9 @@ export class Unit extends BaseNotes {
             .sort(CompareWeapon)
             .filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
 
-        this._spells = this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []);
-        this._psykers = this._models.map(m => m._psyker).filter(p => p) as Psyker[];
-        this._explosions = this._models.map(m => m._explosions).reduce((acc, val) => acc.concat(val), []);
+        this._spells.push(...this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []));
+        this._psykers.push(...this._models.map(m => m._psyker).filter(p => p) as Psyker[]);
+        this._explosions.push(...this._models.map(m => m._explosions).reduce((acc, val) => acc.concat(val), []));
 
     }
 }
@@ -333,9 +329,7 @@ export class Force extends BaseNotes {
 }
 
 export class Roster40k extends BaseNotes {
-    _powerLevel: number = 0;
-    _commandPoints: number = 0;
-    _points: number = 0;
+    _cost = new Costs();
     _forces: Force[] = [];
 }
 
@@ -382,21 +376,7 @@ export function Create40kRoster(doc: Document, is40k: boolean = true): Roster40k
 function ParseRosterPoints(doc: XMLDocument, roster: Roster40k): void {
     let costs = doc.querySelectorAll("roster>costs>cost");
     for (let cost of costs) {
-        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
-            let which = cost.getAttributeNode("name")?.nodeValue;
-            let value = cost.getAttributeNode("value")?.nodeValue;
-            if (value) {
-                if (which == " PL") {
-                    roster._powerLevel = +value;
-                }
-                else if (which === "pts") {
-                    roster._points = +value;
-                }
-                else if (which === "CP") {
-                    roster._commandPoints = +value;
-                }
-            }
-        }
+        roster._cost.add(ParseCost(cost));
     }
 }
 
@@ -670,22 +650,24 @@ function GetSelectionCosts(selection: Element): Costs {
     for (const child of selection.children) {
         if (child.tagName === 'costs') {
             for (const subChild of child.children) {
-                const name = subChild.getAttribute('name');
-                const value = Number(subChild.getAttribute('value'));
-                if (value && value !== 0) {
-                    switch (name) {
-                        case 'CP':
-                            costs._commandPoints += +value;
-                            break;
-                        case ' PL':
-                            costs._powerLevel += +value;
-                            break;
-                        case 'pts':
-                            costs._points += +value;
-                            break;
-                    }
-                }
+                costs.add(ParseCost(subChild));
             }
+        }
+    }
+    return costs;
+}
+
+function ParseCost(cost: Element): Costs {
+    const costs = new Costs();
+    const which = cost.getAttribute("name");
+    const value = cost.getAttribute("value");
+    if (which && value) {
+        if (which === " PL") {
+            costs._powerLevel += +value;
+        } else if (which === "pts") {
+            costs._points += +value;
+        } else if (which === "CP") {
+            costs._commandPoints += +value;
         }
     }
     return costs;
@@ -787,20 +769,6 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         }
     }
 
-    // Next, look for upgrades on the unit itself which don't have a profile with costs
-    const immediateSelections = GetImmediateSelections(root);
-    for (const selection of immediateSelections) {
-        if (selection.getAttribute('type') === 'upgrade' || HasImmediateProfileWithTypeName(selection, 'Abilities')) {
-            let upgradeCosts = GetSelectionCosts(selection)
-            if (upgradeCosts.hasValues())
-            {
-                unit._points += upgradeCosts._points;
-                unit._commandPoints += upgradeCosts._commandPoints;
-                unit._powerLevel += upgradeCosts._powerLevel;
-            }
-        }
-    }
-
     // Finally, look for profiles that are not under models. They may apply to
     //    a) model loadouts, if it's selection with a Weapon (eg Immortals)
     //    b) unit loadout, if it's a selection with an Ability (eg Bomb Squigs)
@@ -818,7 +786,20 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
             }
             unitUpgradesModel._weapons.length = 0;  // Clear the array.
         }
-        if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0 || unitUpgradesModel._psychicPowers.length > 0 || unitUpgradesModel._psyker || unitUpgradesModel._explosions.length > 0) {
+        if (unitUpgradesModel._psychicPowers.length > 0) {
+            unit._spells.push(...unitUpgradesModel._psychicPowers);
+            unitUpgradesModel._psychicPowers.length = 0;
+        }
+        if (unitUpgradesModel._psyker) {
+            unit._psykers.push(unitUpgradesModel._psyker);
+            unitUpgradesModel._psyker = null;
+        }
+        if (unitUpgradesModel._explosions.length > 0) {
+            unit._explosions.push(...unitUpgradesModel._explosions);
+            unitUpgradesModel._explosions.length = 0;
+        }
+
+        if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0) {
             unit._models.push(unitUpgradesModel);
         }
     }
@@ -826,21 +807,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
     // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
     let costs = root.querySelectorAll("costs>cost");
     for (let cost of costs) {
-        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
-            let which = cost.getAttributeNode("name")?.nodeValue;
-            let value = cost.getAttributeNode("value")?.nodeValue;
-            if (value) {
-                if (which == " PL") {
-                    unit._powerLevel += +value;
-                }
-                else if (which == "pts") {
-                    unit._points += +value;
-                }
-                else if (which == "CP") {
-                    unit._commandPoints += +value;
-                }
-            }
-        }
+        unit._cost.add(ParseCost(cost));
     }
 
     let rules = root.querySelectorAll("rules > rule");

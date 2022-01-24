@@ -2,29 +2,29 @@ import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
 describe("Create40kRoster", function() {
-  it("loads test/Magnus.ros", async function() {
-    const doc = await readZippedRosterFile('test/Magnus.ros');
+  it("loads test/Magnus_9th.rosz", async function() {
+    const doc = await readZippedRosterFile('test/Magnus_9th.rosz');
     const roster = Create40kRoster(doc);
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_cost': jasmine.objectContaining({_powerLevel: 79, _points: 1315, _commandPoints: 8}),
+        '_cost': jasmine.objectContaining({_powerLevel: 76, _points: 1410, _commandPoints: 6}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
-              "Battle-forged CP",
-              "Detachment CP",
+              "Battle Size: 3. Strike Force (101-200 Total PL / 1001-2000 Points)  [12 CP]",
               "Cults of the Legion: Cult of Scheming",
+              "Detachment CP",
             ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Ahriman",
-                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 131, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 150, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Ahriman"}),
                 ],
                 '_modelList': [
-                  "Ahriman (Inferno Bolt Pistol, Black Staff of Ahriman, Frag & Krak grenades, Smite)"
+                  "Ahriman (Inferno Bolt Pistol, Black Staff of Ahriman, Frag & Krak grenades, Prescience, Smite, Weaver of Fates)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Inferno Bolt Pistol"}),
@@ -34,18 +34,20 @@ describe("Create40kRoster", function() {
                 ],
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
+                  jasmine.objectContaining({'_name': "Prescience"}),
+                  jasmine.objectContaining({'_name': "Weaver of Fates"}),
                 ],
                 '_psykers': [
                   jasmine.objectContaining({'_name': "Ahriman"}),
                 ]}),
               jasmine.objectContaining({
                 '_name': "Exalted Sorcerer",
-                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 120, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 100, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Exalted Sorcerer"}),
                 ],
                 '_modelList': [
-                  "Exalted Sorcerer (Inferno Bolt Pistol, Force stave, Frag & Krak grenades, Smite)"
+                  "Exalted Sorcerer (Inferno Bolt Pistol, Force stave, Frag & Krak grenades, Athenaean Scrolls, Gift of Chaos, Smite)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Inferno Bolt Pistol"}),
@@ -56,13 +58,14 @@ describe("Create40kRoster", function() {
                 '_spells': [
                   jasmine.objectContaining({'_name': "Seeded Strategy"}),
                   jasmine.objectContaining({'_name': "Smite"}),
+                  jasmine.objectContaining({'_name': "Gift of Chaos"}),
                 ],
                 '_psykers': [
                   jasmine.objectContaining({'_name': "Exalted Sorcerer"}),
                 ]}),
               jasmine.objectContaining({
                 '_name': "Chaos Cultists",
-                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Chaos Cultist"}),
                   jasmine.objectContaining({'_name': "Cultist Champion"}),
@@ -73,10 +76,11 @@ describe("Create40kRoster", function() {
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Autogun"}),
+                  jasmine.objectContaining({'_name': "Autogun"}),
                 ]}),
               jasmine.objectContaining({
                 '_name': "Rubric Marines",
-                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 88, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 90, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Aspiring Sorcerer"}),
                   jasmine.objectContaining({'_name': "Rubric Marine"}),
@@ -99,21 +103,21 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Tzaangors",
-                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 80, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 90, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Twistbray"}),
                   jasmine.objectContaining({'_name': "Tzaangors"}),
                 ],
                 '_modelList': [
                   "Twistbray (Tzaangor blades)",
-                  "9x Tzaangor w/ Tzaangor Blades (Tzaangor blades)"
+                  "9x Tzaangor w/ Tzaangor blades (Tzaangor blades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Tzaangor blades"}),
                 ]}),
               jasmine.objectContaining({
                 '_name': "Helbrute",
-                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 102, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 115, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Helbrute"}),
                 ],
@@ -126,14 +130,14 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Scarab Occult Terminators",
-                '_cost': jasmine.objectContaining({_powerLevel: 11, _points: 169, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 10, _points: 185, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Scarab Occult Sorcerer"}),
                   jasmine.objectContaining({'_name': "Scarab Occult Terminator"}),
                 ],
                 '_modelList': [
                   "Scarab Occult Sorcerer (Inferno Combi-bolter, Force stave, Smite)",
-                  "4x Terminator (Inferno Combi-bolter, Powersword)"
+                  "4x Terminator (Inferno Combi-bolter, Power sword)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Inferno Combi-bolter"}),
@@ -149,12 +153,12 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Heldrake",
-                '_cost': jasmine.objectContaining({_powerLevel: 10, _points: 140, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 155, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Heldrake"}),
                 ],
                 '_modelList': [
-                  "Heldrake (Hades Autocannon, Heldrake claws)"
+                  "Heldrake (Hades autocannon, Heldrake claws)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Hades autocannon"}),
@@ -171,11 +175,12 @@ describe("Create40kRoster", function() {
           jasmine.objectContaining({
             '_configurations': [
               "Cults of the Legion: Cult of Prophecy",
+              "Detachment CP",
             ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Magnus the Red",
-                '_cost': jasmine.objectContaining({_powerLevel: 23, _points: 445, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 24, _points: 465, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Magnus the Red"}),
                 ],

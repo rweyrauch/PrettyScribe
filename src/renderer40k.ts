@@ -48,7 +48,7 @@ export class Renderer40k implements Renderer {
         if (title) {
             this.renderOptionsDiv(title);
 
-            const text = `${this._roster.name()} (${this._roster._points} pts, ${this._roster._powerLevel} PL, ${this._roster._commandPoints} CP)`;
+            const text = `${this._roster.name()} (${this._roster._cost._points} pts, ${this._roster._cost._powerLevel} PL, ${this._roster._cost._commandPoints} CP)`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
 
             // Footer div is hidden, except when printing.
@@ -117,8 +117,8 @@ export class Renderer40k implements Renderer {
                     if (i > 0) models.appendChild(document.createElement('br'));
                     models.appendChild(document.createTextNode(unit._modelList[i]));
                 }
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._points.toString()));
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._powerLevel.toString()));
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
                 body.appendChild(tr);
             }
         }
@@ -317,17 +317,18 @@ export class Renderer40k implements Renderer {
         unitCostDiv.classList.add('unit_costs');
         const roleImg = this._roles.get(unit._role);
         unitCostDiv.appendChild(document.createElement('span')).appendChild(roleImg?.cloneNode() || document.createTextNode('-'));
-        unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._powerLevel.toString()));
-        unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._points.toString()));
+        unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
+        unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._points.toString()));
 
-        // TODO add command point costs. Requires plumbing thru roster40k.ts.
-        // let cpCostDiv: Element|null = null;
-        // if (unit._commandPoints > 0) {
-        //     cpCostDiv = document.createElement('div');
-        //     cpCostDiv.classList.add('unit_costs');
-        //     cpCostDiv.appendChild(document.createElement('span').appendChild(document.createTextNode(`${unit._commandPoints} CP`)));
-        // }
-        thead.appendChild(createTableRow([unitCostDiv, unit.name(), ''], [0.1, 0.8, 0.1]));
+        let cpCostDiv: Element|string = '';
+        if (unit._cost._commandPoints !== 0) {
+            cpCostDiv = document.createElement('div');
+            cpCostDiv.classList.add('unit_costs', 'unit_cp_costs');
+            const span = cpCostDiv.appendChild(document.createElement('span'));
+            span.appendChild(document.createTextNode(unit._cost._commandPoints.toString()));
+            span.appendChild(document.createElement('span')).appendChild(document.createTextNode('CP'));
+        }
+        thead.appendChild(createTableRow([unitCostDiv, unit.name(), cpCostDiv], [0.1, 0.8, 0.1]));
 
         // Add an invisible row of 20, 5% columns. This ensures correct
         // spacing for the first few columns of visible rows.
