@@ -223,27 +223,25 @@ export class ProfileTable {
 export class Unit extends BaseNotes {
 
     _role: UnitRole = UnitRole.NONE;
-    _factions: Set<string> = new Set();
-    _keywords: Set<string> = new Set();
+    readonly _factions: Set<string> = new Set();
+    readonly _keywords: Set<string> = new Set();
 
-    _abilities: Map<string, string> = new Map();
-    _rules: Map<string, string> = new Map();
+    readonly _abilities: Map<string, string> = new Map();
+    readonly _rules: Map<string, string> = new Map();
 
-    _models: Model[] = [];
-    _modelStats: Model[] = [];
+    readonly _models: Model[] = [];
+    readonly _modelStats: Model[] = [];
     _modelList: string[] = [];
     _weapons: Weapon[] = [];
-    _spells: PsychicPower[] = [];
-    _psykers: Psyker[] = [];
-    _explosions: Explosion[] = [];
+    readonly _spells: PsychicPower[] = [];
+    readonly _psykers: Psyker[] = [];
+    readonly _explosions: Explosion[] = [];
 
     _points: number = 0;
     _powerLevel: number = 0;
     _commandPoints: number = 0;
 
-    _woundTracker: WoundTracker[] = [];
-
-    _profileTables: Map<string, ProfileTable> = new Map();
+    readonly _woundTracker: WoundTracker[] = [];
 
     _id: number = 0;
 
@@ -316,9 +314,9 @@ export class Unit extends BaseNotes {
             .sort(CompareWeapon)
             .filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
 
-        this._spells = this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []);
-        this._psykers = this._models.map(m => m._psyker).filter(p => p) as Psyker[];
-        this._explosions = this._models.map(m => m._explosions).reduce((acc, val) => acc.concat(val), []);
+        this._spells.push(...this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []));
+        this._psykers.push(...this._models.map(m => m._psyker).filter(p => p) as Psyker[]);
+        this._explosions.push(...this._models.map(m => m._explosions).reduce((acc, val) => acc.concat(val), []));
 
     }
 }
@@ -818,7 +816,20 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
             }
             unitUpgradesModel._weapons.length = 0;  // Clear the array.
         }
-        if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0 || unitUpgradesModel._psychicPowers.length > 0 || unitUpgradesModel._psyker || unitUpgradesModel._explosions.length > 0) {
+        if (unitUpgradesModel._psychicPowers.length > 0) {
+            unit._spells.push(...unitUpgradesModel._psychicPowers);
+            unitUpgradesModel._psychicPowers.length = 0;
+        }
+        if (unitUpgradesModel._psyker) {
+            unit._psykers.push(unitUpgradesModel._psyker);
+            unitUpgradesModel._psyker = null;
+        }
+        if (unitUpgradesModel._explosions.length > 0) {
+            unit._explosions.push(...unitUpgradesModel._explosions);
+            unitUpgradesModel._explosions.length = 0;
+        }
+
+        if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0) {
             unit._models.push(unitUpgradesModel);
         }
     }

@@ -93,8 +93,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "4x Grey Knight (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Grey Knight Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Unit Upgrades"
+                  "Grey Knight Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -117,8 +116,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "4x Grey Knight (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Grey Knight Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Unit Upgrades"
+                  "Grey Knight Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -141,8 +139,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Grey Knight Terminator Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "4x Terminator (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Unit Upgrades"
+                  "4x Terminator (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -166,8 +163,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "2x Paladin (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Paragon (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Unit Upgrades"
+                  "Paragon (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -191,8 +187,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "2x Paladin (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Paragon (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Unit Upgrades"
+                  "Paragon (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -216,8 +211,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Knight of the Flame (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "4x Purifier (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Unit Upgrades"
+                  "4x Purifier (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -241,8 +235,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "4x Purgator (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Purgator Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Unit Upgrades"
+                  "Purgator Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
