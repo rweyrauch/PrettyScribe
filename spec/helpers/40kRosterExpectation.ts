@@ -27,9 +27,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': ${roster._powerLevel},
-        '_points': ${roster._points},
-        '_commandPoints': ${roster._commandPoints},
+        '_cost': jasmine.objectContaining({_powerLevel: ${roster._cost._powerLevel}, _points: ${roster._cost._points}, _commandPoints: ${roster._cost._commandPoints}}),
         '_forces': [${processForces(roster._forces)}
         ]}));
   });
@@ -58,6 +56,7 @@ function processUnits(units: Unit[]): string {
   return units.map(unit => `
               jasmine.objectContaining({
                 '_name': ${JSON.stringify(unit._name)},
+                '_cost': jasmine.objectContaining({_powerLevel: ${unit._cost._powerLevel}, _points: ${unit._cost._points}, _commandPoints: ${unit._cost._commandPoints}}),
                 '_modelStats': [
                   ${processBaseNotes(unit._modelStats)}
                 ],

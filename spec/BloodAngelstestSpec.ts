@@ -8,9 +8,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 30,
-        '_points': 625,
-        '_commandPoints': 1,
+        '_cost': jasmine.objectContaining({_powerLevel: 30, _points: 625, _commandPoints: 1}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
@@ -21,6 +19,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Lieutenants",
+                '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 170, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Lieutenant in Phobos Armour"}),
                   jasmine.objectContaining({'_name': "Primaris Lieutenant"}),
@@ -40,6 +39,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Assault Intercessor Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 95, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Assault Intercessor"}),
                   jasmine.objectContaining({'_name': "Assault Intercessor Sgt"}),
@@ -56,6 +56,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Bladeguard Veteran Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 105, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Bladeguard Veteran"}),
                   jasmine.objectContaining({'_name': "Bladeguard Veteran Sergeant"}),
@@ -72,6 +73,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Bladeguard Veteran Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 105, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Bladeguard Veteran"}),
                   jasmine.objectContaining({'_name': "Bladeguard Veteran Sergeant"}),
@@ -88,6 +90,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Outrider Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 150, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Outrider"}),
                   jasmine.objectContaining({'_name': "Outrider Sgt"}),

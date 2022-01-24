@@ -8,15 +8,14 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 101,
-        '_points': 1625,
-        '_commandPoints': 0,
+        '_cost': jasmine.objectContaining({_powerLevel: 101, _points: 1625, _commandPoints: 0}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Commissar Yarrick",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 100, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Commissar Yarrick"}),
                 ],
@@ -31,6 +30,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Knight Commander Pask",
+                '_cost': jasmine.objectContaining({_powerLevel: 13, _points: 207, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Knight Commander Pask"}),
                 ],
@@ -48,6 +48,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Sly Marbo",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 55, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Sly Marbo"}),
                 ],
@@ -61,6 +62,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Conscripts",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 80, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Conscript"}),
                 ],
@@ -73,6 +75,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Infantry Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Guardsman"}),
                   jasmine.objectContaining({'_name': "Sergeant"}),
@@ -88,6 +91,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Infantry Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Guardsman"}),
                   jasmine.objectContaining({'_name': "Sergeant"}),
@@ -103,6 +107,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Infantry Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Guardsman"}),
                   jasmine.objectContaining({'_name': "Sergeant"}),
@@ -118,6 +123,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Infantry Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Guardsman"}),
                   jasmine.objectContaining({'_name': "Sergeant"}),
@@ -133,6 +139,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Militarum Tempestus Scions",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 65, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Tempestor"}),
                   jasmine.objectContaining({'_name': "Tempestus Scion"}),
@@ -154,6 +161,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Bullgryns",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 120, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Bullgryn"}),
                   jasmine.objectContaining({'_name': "Bullgryn Bone 'ead"}),
@@ -168,6 +176,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Hades Breaching Drill Squadron",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 116, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Hades Breaching Drill"}),
                   jasmine.objectContaining({'_name': "Veteran"}),
@@ -187,6 +196,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Special Weapons Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 39, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Guardsman"}),
                 ],
@@ -206,6 +216,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Hellhounds",
+                '_cost': jasmine.objectContaining({_powerLevel: 18, _points: 290, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Hellhound"}),
                 ],
@@ -233,6 +244,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Scout Sentinels",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 35, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Scout Sentinel"}),
                 ],
@@ -244,6 +256,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Tauros Venator",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 64, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Tauros"}),
                 ],
@@ -255,6 +268,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Hydras",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 93, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Hydra"}),
                 ],
@@ -272,6 +286,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Rapier Laser Destroyer",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 88, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Guardsmen Crew"}),
                   jasmine.objectContaining({'_name': "Rapier"}),
@@ -287,6 +302,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Wyverns",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 113, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Wyvern"}),
                 ],
@@ -304,6 +320,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Regimental Doctrine",
+                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
                 '_modelStats': [
                   
                 ],

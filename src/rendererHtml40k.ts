@@ -33,7 +33,7 @@ export class RendererHtml40k implements Renderer {
         if (this._roster == null) return;
 
         if (title) {
-            title.innerHTML = '<h3>' + this._roster.name().toUpperCase() + ' (' + this._roster._points + ' pts, ' + this._roster._powerLevel + ' PL, ' + this._roster._commandPoints + ' CP)</h3>';
+            title.innerHTML = '<h3>' + this._roster.name().toUpperCase() + ' (' + this._roster._cost._points + ' pts, ' + this._roster._cost._powerLevel + ' PL, ' + this._roster._cost._commandPoints + ' CP)</h3>';
             let roster = document.createElement('h3');
             roster.textContent = "ROSTER";
             title.appendChild(roster);
@@ -86,9 +86,9 @@ export class RendererHtml40k implements Renderer {
                     }
                 }
                 let pts = document.createElement('td');
-                pts.innerHTML = unit._points.toString();
+                pts.innerHTML = unit._cost._points.toString();
                 let pwr = document.createElement('td');
-                pwr.innerHTML = unit._powerLevel.toString();
+                pwr.innerHTML = unit._cost._powerLevel.toString();
                 tr.appendChild(uname);
                 tr.appendChild(role);
                 tr.appendChild(models);
@@ -187,7 +187,7 @@ export class RendererHtml40k implements Renderer {
         header.appendChild(unitName);
         let unitCost = document.createElement('div');
         unitCost.className = "col";
-        unitCost.innerHTML = `<p><span>${unit._points}</span> / <span>${unit._powerLevel}</span></p>`;
+        unitCost.innerHTML = `<p><span>${unit._cost._points}</span> / <span>${unit._cost._powerLevel}</span></p>`;
         header.appendChild(unitCost);
 
         let weapons: Weapon[] = [];

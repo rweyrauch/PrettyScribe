@@ -8,9 +8,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 98,
-        '_points': 1669,
-        '_commandPoints': 9,
+        '_cost': jasmine.objectContaining({_powerLevel: 98, _points: 1669, _commandPoints: 9}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
@@ -21,6 +19,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Farseer",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 110, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Farseer"}),
                 ],
@@ -39,6 +38,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Jain Zar",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 115, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Jain Zar"}),
                 ],
@@ -51,6 +51,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Dire Avengers",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 55, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Dire Avenger"}),
                 ],
@@ -63,6 +64,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Rangers",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Ranger"}),
                 ],
@@ -75,6 +77,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Storm Guardians",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 48, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Storm Guardian"}),
                 ],
@@ -88,6 +91,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Wraithlord",
+                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 80, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Wraithlord"}),
                 ],
@@ -105,6 +109,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Crimson Hunter",
+                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 168, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Crimson Hunter"}),
                 ],
@@ -122,6 +127,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Crimson Hunter Exarch",
+                '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 190, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Crimson Hunter Exarch"}),
                 ],
@@ -147,6 +153,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Succubus",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 50, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Succubus"}),
                 ],
@@ -159,6 +166,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Urien Rakarth",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 90, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Urien Rakarth"}),
                 ],
@@ -172,6 +180,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Kabalite Warriors",
+                '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 30, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Kabalite Warrior"}),
                   jasmine.objectContaining({'_name': "Sybarite"}),
@@ -185,6 +194,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Wracks",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 45, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Acothyst"}),
                   jasmine.objectContaining({'_name': "Wracks"}),
@@ -198,6 +208,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Wyches",
+                '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 40, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Hekatrix"}),
                   jasmine.objectContaining({'_name': "Wych"}),
@@ -213,6 +224,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Incubi",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 70, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Incubi"}),
                   jasmine.objectContaining({'_name': "Klaivex"}),
@@ -226,6 +238,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Scourges",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Scourge"}),
                   jasmine.objectContaining({'_name': "Solarite"}),
@@ -240,6 +253,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Ravager",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 140, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Ravager"}),
                 ],
@@ -258,6 +272,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Reaper",
+                '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 150, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Reaper"}),
                 ],
@@ -278,6 +293,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Talos",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 103, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Talos"}),
                 ],
@@ -290,6 +306,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Venom",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 65, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Venom"}),
                 ],

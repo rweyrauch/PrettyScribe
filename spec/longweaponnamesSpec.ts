@@ -8,9 +8,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 8,
-        '_points': 170,
-        '_commandPoints': -3,
+        '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 170, _commandPoints: -3}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
@@ -19,6 +17,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Chaos Contemptor Dreadnought",
+                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 170, _commandPoints: -1}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Chaos Contemptor Dreadnought"}),
                 ],

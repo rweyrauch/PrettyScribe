@@ -8,9 +8,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 122,
-        '_points': 1942,
-        '_commandPoints': 13,
+        '_cost': jasmine.objectContaining({_powerLevel: 122, _points: 1942, _commandPoints: 13}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
@@ -19,6 +17,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Arjac Rockfist",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 110, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Arjac Rockfist"}),
                 ],
@@ -31,6 +30,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Njal Stormcaller",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 115, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Njal Stormcaller"}),
                 ],
@@ -53,6 +53,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Blood Claws",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Blood Claw"}),
                   jasmine.objectContaining({'_name': "Blood Claw Pack Leader"}),
@@ -69,6 +70,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Grey Hunters",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Grey Hunter"}),
                   jasmine.objectContaining({'_name': "Grey Hunter  Pack Leader"}),
@@ -85,6 +87,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Grey Hunters",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Grey Hunter"}),
                   jasmine.objectContaining({'_name': "Grey Hunter  Pack Leader"}),
@@ -101,6 +104,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Hellblaster Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 165, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Hellblaster"}),
                   jasmine.objectContaining({'_name': "Hellblaster Pack Leader"}),
@@ -118,6 +122,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Stormfang Gunship",
+                '_cost': jasmine.objectContaining({_powerLevel: 15, _points: 251, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Stormfang Gunship"}),
                 ],
@@ -137,6 +142,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Lucius Pattern Dreadnought Drop Pod",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 80, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Lucius Drop Pod"}),
                 ],
@@ -157,6 +163,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Bjorn the Fell-handed",
+                '_cost': jasmine.objectContaining({_powerLevel: 12, _points: 186, _commandPoints: 1}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Bjorn the Fell-handed"}),
                 ],
@@ -170,6 +177,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Primaris Battle Leader",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 70, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Primaris Battle Leader"}),
                 ],
@@ -185,6 +193,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Blood Claws",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Blood Claw"}),
                   jasmine.objectContaining({'_name': "Blood Claw Pack Leader"}),
@@ -201,6 +210,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Grey Hunters",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Grey Hunter"}),
                   jasmine.objectContaining({'_name': "Grey Hunter  Pack Leader"}),
@@ -217,6 +227,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Incursor Squad",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 95, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Incursor"}),
                   jasmine.objectContaining({'_name': "Incursor Sergeant"}),
@@ -234,6 +245,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Lone Wolf [Index]",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 80, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Lone Wolf"}),
                 ],
@@ -248,6 +260,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Lone Wolf in Terminator Armour [Index]",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 121, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Lone Wolf"}),
                 ],
@@ -260,6 +273,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Lukas the Trickster",
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 80, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Lukas The Trickster"}),
                 ],
@@ -275,6 +289,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Murderfang",
+                '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 125, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Murderfang"}),
                 ],
@@ -288,6 +303,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Wulfen",
+                '_cost': jasmine.objectContaining({_powerLevel: 11, _points: 164, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Wulfen"}),
                   jasmine.objectContaining({'_name': "Wulfen Pack Leader"}),

@@ -8,9 +8,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 79,
-        '_points': 1315,
-        '_commandPoints': 8,
+        '_cost': jasmine.objectContaining({_powerLevel: 79, _points: 1315, _commandPoints: 8}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
@@ -21,6 +19,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Ahriman",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 131, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Ahriman"}),
                 ],
@@ -41,6 +40,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Exalted Sorcerer",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 120, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Exalted Sorcerer"}),
                 ],
@@ -62,6 +62,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Chaos Cultists",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Chaos Cultist"}),
                   jasmine.objectContaining({'_name': "Cultist Champion"}),
@@ -75,6 +76,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Rubric Marines",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 88, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Aspiring Sorcerer"}),
                   jasmine.objectContaining({'_name': "Rubric Marine"}),
@@ -97,6 +99,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Tzaangors",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 80, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Twistbray"}),
                   jasmine.objectContaining({'_name': "Tzaangors"}),
@@ -110,6 +113,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Helbrute",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 102, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Helbrute"}),
                 ],
@@ -122,6 +126,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Scarab Occult Terminators",
+                '_cost': jasmine.objectContaining({_powerLevel: 11, _points: 169, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Scarab Occult Sorcerer"}),
                   jasmine.objectContaining({'_name': "Scarab Occult Terminator"}),
@@ -144,6 +149,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Heldrake",
+                '_cost': jasmine.objectContaining({_powerLevel: 10, _points: 140, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Heldrake"}),
                 ],
@@ -169,6 +175,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Magnus the Red",
+                '_cost': jasmine.objectContaining({_powerLevel: 23, _points: 445, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Magnus the Red"}),
                 ],

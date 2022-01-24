@@ -8,15 +8,14 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_powerLevel': 126,
-        '_points': 2029,
-        '_commandPoints': 15,
+        '_cost': jasmine.objectContaining({_powerLevel: 126, _points: 2029, _commandPoints: 15}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Aun'Shi",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 50, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Aun'Shi"}),
                 ],
@@ -28,6 +27,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Aun'Va",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 85, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Aun'va"}),
                   jasmine.objectContaining({'_name': "Ethereal Guard"}),
@@ -41,6 +41,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Commander Farsight",
+                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 110, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Commander Farsight"}),
                 ],
@@ -53,6 +54,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Breacher Team",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 93, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "DS8 Tactical Support Turret"}),
                   jasmine.objectContaining({'_name': "Fire Warrior"}),
@@ -76,6 +78,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Breacher Team",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 70, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Fire Warrior"}),
                   jasmine.objectContaining({'_name': "Fire Warrior Shas'ui"}),
@@ -97,6 +100,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Kroot Carnivores",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Kroot"}),
                 ],
@@ -109,6 +113,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Kroot Carnivores",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 56, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Kroot"}),
                 ],
@@ -121,6 +126,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Strike Team",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 90, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "DS8 Tactical Support Turret"}),
                   jasmine.objectContaining({'_name': "Fire Warrior"}),
@@ -146,6 +152,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Strike Team",
+                '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 100, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "DS8 Tactical Support Turret"}),
                   jasmine.objectContaining({'_name': "Fire Warrior"}),
@@ -170,6 +177,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "DX-4 Technical Drones",
+                '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 32, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "DX-4 Technical Drone"}),
                 ],
@@ -181,6 +189,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "DX-4 Technical Drones",
+                '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 32, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "DX-4 Technical Drone"}),
                 ],
@@ -192,6 +201,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Dahyak Grekh",
+                '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 20, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Dahyak Grekh"}),
                 ],
@@ -205,6 +215,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Firesight Marksman",
+                '_cost': jasmine.objectContaining({_powerLevel: 1, _points: 25, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Firesight Marksman"}),
                 ],
@@ -217,6 +228,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Kroot Shaper",
+                '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 20, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Kroot Shaper"}),
                 ],
@@ -229,6 +241,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "XV104 Riptide Battlesuit",
+                '_cost': jasmine.objectContaining({_powerLevel: 16, _points: 271, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "MV84 Shielded Missile Drone"}),
                   jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
@@ -248,6 +261,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "XV25 Stealth Battlesuits",
+                '_cost': jasmine.objectContaining({_powerLevel: 12, _points: 140, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "MV4 Shield Drone"}),
                   jasmine.objectContaining({'_name': "Stealth Shas'ui"}),
@@ -263,6 +277,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "TX4 Piranhas",
+                '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 52, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "MV1 Gun Drone"}),
                   jasmine.objectContaining({'_name': "TX4 Piranha"}),
@@ -276,6 +291,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Tactical Drones",
+                '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 60, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "MV1 Gun Drone"}),
                   jasmine.objectContaining({'_name': "MV4 Shield Drone"}),
@@ -292,6 +308,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "XV109 Y'vahra Battlesuit",
+                '_cost': jasmine.objectContaining({_powerLevel: 20, _points: 395, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "XV109 Y'vahra Battlesuit"}),
                 ],
@@ -313,6 +330,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "MV71 Sniper Drones",
+                '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 48, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "MV71 Sniper Drone"}),
                 ],
@@ -324,6 +342,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "TX7 Hammerhead Gunship",
+                '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 150, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "MV1 Gun Drone"}),
                   jasmine.objectContaining({'_name': "TX7 Hammerhead Gunship"}),
@@ -343,6 +362,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "XV88 Broadside Battlesuits",
+                '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 90, _commandPoints: 0}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Broadside Shas'ui"}),
                 ],
@@ -355,6 +375,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Battle-forged CP",
+                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 3}),
                 '_modelStats': [
                   
                 ],
@@ -366,6 +387,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Detachment CP",
+                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 12}),
                 '_modelStats': [
                   
                 ],
