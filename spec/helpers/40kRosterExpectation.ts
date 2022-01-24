@@ -3,6 +3,14 @@ import { BaseNotes, Create40kRoster, Force, Unit } from "../../src/roster40k";
 
 export async function getRosterExpectation(filename: string): Promise<string> {
   const doc = await readZippedRosterFile(filename);
+
+
+  const gameType = doc.querySelector("roster")?.getAttribute("gameSystemName");
+  if (gameType !== "Warhammer 40,000 9th Edition" &&
+      gameType !== "Warhammer 40,000 8th Edition") {
+    throw new Error(`ERROR: '${filename}' has unsupported game type '${gameType}'.`);
+  }
+
   const roster = Create40kRoster(doc);
 
   if (!roster) {
