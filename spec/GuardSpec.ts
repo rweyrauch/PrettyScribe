@@ -307,6 +307,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Wyvern"}),
                 ],
                 '_modelList': [
+                  "Unit Upgrades (Stat Damage (HS))",
                   "Wyvern (Heavy Bolter, Wyven Quad Stormshard Mortar)"
                 ],
                 '_weapons': [

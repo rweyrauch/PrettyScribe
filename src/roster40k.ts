@@ -342,6 +342,14 @@ export class Costs {
         return this._powerLevel !== 0 || this._commandPoints !== 0 || this._points !== 0;
     }
 
+    toString() {
+        const values = [];
+        if (this._points !== 0) values.push(`${this._points} pts`);
+        if (this._powerLevel !== 0) values.push(`${this._powerLevel} PL`);
+        if (this._commandPoints !== 0) values.push(`${this._commandPoints} CP`);
+        return `[${values.join(' / ')}]`;
+    }
+
     add(other: Costs) {
         this._powerLevel += other._powerLevel;
         this._commandPoints += other._commandPoints;
@@ -487,7 +495,7 @@ function ParseConfiguration(selection: Element, force: Force) {
     let configuration = (!category || category === 'Configuration')
         ? name : `${category} - ${name}`;
     if (details.length > 0) configuration += `: ${details.join(", ")}`;
-    if (costs._commandPoints !== 0) configuration += ` [${costs._commandPoints} CP]`;
+    if (costs.hasValues()) configuration += ` ${costs.toString()}`;
 
     force._configurations.push(configuration);
 }
@@ -797,6 +805,29 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         if (unitUpgradesModel._explosions.length > 0) {
             unit._explosions.push(...unitUpgradesModel._explosions);
             unitUpgradesModel._explosions.length = 0;
+        }
+
+        // Look for any unit-level upgrade selections that we didn't catch
+        // previously, and stuff them in the "Unit Upgrades" model.
+        for (const selection of GetImmediateSelections(root)) {
+            // Ignore model selections (which were already processed), or
+            // Unit Upgrades that were added to Weapons or Spells.
+            if (modelSelections.includes(selection))  continue;
+            if (selection.getAttribute('type') !== 'upgrade') continue;
+            if (selection.querySelector('profiles>profile[typeName="Weapon"]')) continue;
+            if (selection.querySelector('profiles>profile[typeName="Psychic Power"]')) continue;
+
+            let name = selection.getAttribute('name');
+            if (!name) continue;
+
+            const costs = GetSelectionCosts(selection);
+            if (costs.hasValues()) name += ` ${costs.toString()}`;
+            const count = Number(selection.getAttribute('number'));
+            if (count > 1) name = `${count}x ${name}`;
+
+            if (count > 0) {
+                unitUpgradesModel._upgrades.push(name);
+            }
         }
 
         if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0) {

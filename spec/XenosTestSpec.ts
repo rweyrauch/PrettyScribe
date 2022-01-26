@@ -23,7 +23,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Grot Oiler"}),
                 ],
                 '_modelList': [
-                  "Grot Oiler (Slugga, Choppa, Stikkbombs)"
+                  "Grot Oiler (Slugga, Choppa, Stikkbombs)",
+                  "Unit Upgrades (Ard as Nails, Warlord)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Slugga"}),
@@ -90,7 +91,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Boss Nob (Slugga, Choppa, Stikkbombs)",
-                  "10x Ork Boy W/ Slugga & Choppa (Slugga, Choppa, Stikkbombs)"
+                  "10x Ork Boy W/ Slugga & Choppa (Slugga, Choppa, Stikkbombs)",
+                  "Unit Upgrades ('Ard Boyz [-2 CP])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Slugga"}),

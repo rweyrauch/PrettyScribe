@@ -70,6 +70,10 @@ export class Renderer40k implements Renderer {
     private renderRosterSummary(list: HTMLElement) {
         if (!this._roster) return;
 
+        // Only add units' CP costs if at least one unit has CP values. This
+        // saves horizontal space for rosters that don't spend CP on units.
+        const unitsHaveCpCost = this._roster._forces.some(f => f._units.some(u => u._cost._commandPoints !== 0));
+
         for (const force of this._roster._forces) {
 
             const forceTitle = document.createElement('div');
@@ -96,6 +100,9 @@ export class Renderer40k implements Renderer {
             const tr = document.createElement('tr');
             thead.appendChild(tr);
             const headerInfo = [{ name: "NAME", w: '20%' }, { name: "ROLE", w: '15%' }, { name: "MODELS", w: '55%' }, { name: "POINTS", w: '5%' }, { name: "POWER", w: '5%' }];
+            if (unitsHaveCpCost) {
+                headerInfo.push({name: "CP", w: '5%'});
+            }
             headerInfo.forEach(element => {
                 let th = document.createElement('th');
                 th.scope = "col";
@@ -119,6 +126,10 @@ export class Renderer40k implements Renderer {
                 }
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
+                if (unitsHaveCpCost) {
+                    const commandPointsString = (unit._cost._commandPoints || '') + '';
+                    tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(commandPointsString));
+                }
                 body.appendChild(tr);
             }
         }
