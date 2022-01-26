@@ -81,7 +81,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "9x Chaos Cultist w/ Autogun (Autogun)",
-                  "Cultist Champion (Autogun)"
+                  "Cultist Champion (Autogun)",
+                  "Unit Upgrades (No Chaos Mark)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Autogun"}),
@@ -95,7 +96,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Aspiring Champion (Bolt pistol, Boltgun, Frag & Krak grenades)",
-                  "4x Marine w/ Boltgun (Bolt pistol, Boltgun, Frag & Krak grenades)"
+                  "4x Marine w/ Boltgun (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                  "Unit Upgrades (No Chaos Mark)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -112,7 +114,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Aspiring Champion (Bolt pistol, Boltgun, Frag & Krak grenades)",
-                  "4x Marine w/ Boltgun (Bolt pistol, Boltgun, Frag & Krak grenades)"
+                  "4x Marine w/ Boltgun (Bolt pistol, Boltgun, Frag & Krak grenades)",
+                  "Unit Upgrades (No Chaos Mark)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -129,7 +132,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Chaos Terminator Champion (Combi-bolter, Chainaxe)",
-                  "4x Terminator (Combi-bolter, Chainaxe)"
+                  "4x Terminator (Combi-bolter, Chainaxe)",
+                  "Unit Upgrades (Icon of Vengeance [5 pts], No Chaos Mark)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Combi-bolter"}),
@@ -142,7 +146,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Mutilator"}),
                 ],
                 '_modelList': [
-                  "3x Mutilator (Fleshmetal weapons)"
+                  "3x Mutilator (Fleshmetal weapons)",
+                  "Unit Upgrades (No Chaos Mark)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Fleshmetal weapons"}),
@@ -171,7 +176,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Possessed"}),
                 ],
                 '_modelList': [
-                  "5x Possessed (Horrifying Mutations)"
+                  "5x Possessed (Horrifying Mutations)",
+                  "Unit Upgrades (No Chaos Mark)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Horrifying Mutations"}),
@@ -183,7 +189,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Chaos Spawn"}),
                 ],
                 '_modelList': [
-                  "Chaos Spawn (Hideous mutations)"
+                  "Chaos Spawn (Hideous mutations)",
+                  "Unit Upgrades (No Chaos Mark)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Hideous mutations"}),
@@ -195,7 +202,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Obliterator"}),
                 ],
                 '_modelList': [
-                  "Obliterator (Fleshmetal guns, Crushing fists)"
+                  "Obliterator (Fleshmetal guns, Crushing fists)",
+                  "Unit Upgrades (No Chaos Mark)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Fleshmetal guns"}),
@@ -251,7 +259,7 @@ describe("Create40kRoster", function() {
                   
                 ],
                 '_modelList': [
-                  
+                  "Unit Upgrades (Renegade Chapters)"
                 ],
                 '_weapons': [
                   

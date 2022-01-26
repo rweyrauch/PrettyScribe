@@ -56,7 +56,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Dire Avenger"}),
                 ],
                 '_modelList': [
-                  "5x Dire Avenger (Avenger Shuriken Catapult, Plasma Grenades)"
+                  "5x Dire Avenger (Avenger Shuriken Catapult, Plasma Grenades)",
+                  "Unit Upgrades (Defence Tactics)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Avenger Shuriken Catapult"}),
@@ -69,7 +70,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Ranger"}),
                 ],
                 '_modelList': [
-                  "5x Ranger (Ranger Long Rifle, Shuriken Pistol)"
+                  "5x Ranger (Ranger Long Rifle, Shuriken Pistol)",
+                  "Unit Upgrades (Appear Unbidden, Cameleoline Cloaks)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Ranger Long Rifle"}),

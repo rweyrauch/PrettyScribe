@@ -273,7 +273,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "3x Hive Guard (Impaler) (Impaler Cannon)",
-                  "Hive Guard (Shock) (Shockcannon)"
+                  "Hive Guard (Shock) (Shockcannon)",
+                  "Unit Upgrades (Adrenal Glands [4 pts], Toxin Sacs [4 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Impaler Cannon"}),
@@ -359,7 +360,7 @@ describe("Create40kRoster", function() {
                   
                 ],
                 '_modelList': [
-                  
+                  "Unit Upgrades (Hydra)"
                 ],
                 '_weapons': [
                   
@@ -371,7 +372,7 @@ describe("Create40kRoster", function() {
                   
                 ],
                 '_modelList': [
-                  
+                  "Unit Upgrades (1 Extra Bio-artefact [-1 CP])"
                 ],
                 '_weapons': [
                   

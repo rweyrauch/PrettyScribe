@@ -138,7 +138,7 @@ describe("Create40kRoster", function() {
                   
                 ],
                 '_modelList': [
-                  
+                  "Unit Upgrades (House Griffith, Questor Imperialis)"
                 ],
                 '_weapons': [
                   

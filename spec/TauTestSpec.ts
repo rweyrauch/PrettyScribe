@@ -270,7 +270,8 @@ describe("Create40kRoster", function() {
                 '_modelList': [
                   "MV4 Shield Drone (Shield generator)",
                   "4x Stealth Shas'ui w/ Burst Cannon (Burst cannon)",
-                  "Stealth Shas'vre (Burst cannon)"
+                  "Stealth Shas'vre (Burst cannon)",
+                  "Unit Upgrades (Homing beacon [20 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),

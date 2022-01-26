@@ -87,7 +87,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "4x Infilltrator (Bolt pistol, Marksman bolt carbine, Frag & Krak grenades)",
-                  "Infiltrator Sergeant (Bolt pistol, Marksman bolt carbine, Frag & Krak grenades)"
+                  "Infiltrator Sergeant (Bolt pistol, Marksman bolt carbine, Frag & Krak grenades)",
+                  "Unit Upgrades (Infiltrator Comms Array [10 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -104,7 +105,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "4x Intercessor (Auto Bolt Rifle, Bolt pistol, Frag & Krak grenades)",
-                  "Intercessor Sergeant (Auto Bolt Rifle, Bolt pistol, Thunder hammer, Frag & Krak grenades)"
+                  "Intercessor Sergeant (Auto Bolt Rifle, Bolt pistol, Thunder hammer, Frag & Krak grenades)",
+                  "Unit Upgrades (Auxiliary Grenade Launcher [1 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Auto Bolt Rifle"}),
@@ -122,7 +124,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "4x Intercessor (Auto Bolt Rifle, Bolt pistol, Frag & Krak grenades)",
-                  "Intercessor Sergeant (Auto Bolt Rifle, Bolt pistol, Thunder hammer, Frag & Krak grenades)"
+                  "Intercessor Sergeant (Auto Bolt Rifle, Bolt pistol, Thunder hammer, Frag & Krak grenades)",
+                  "Unit Upgrades (Auxiliary Grenade Launcher [1 pts], Veteran Intercessors [-1 CP])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Auto Bolt Rifle"}),

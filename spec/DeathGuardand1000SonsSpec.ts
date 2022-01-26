@@ -136,7 +136,8 @@ describe("Create40kRoster", function() {
                   "Aspiring Sorcerer (Plasma pistol, Force sword, Glamour of Tzeentch, Smite)",
                   "8x Rubric Marine w/ Inferno Boltgun (Inferno boltgun)",
                   "Rubric Marine w/ Soulreaper cannon (Soulreaper cannon)",
-                  "Rubric Marine w/ Warpflamer (Warpflamer)"
+                  "Rubric Marine w/ Warpflamer (Warpflamer)",
+                  "Unit Upgrades (Icon of Flame [5 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Inferno boltgun"}),
@@ -182,7 +183,8 @@ describe("Create40kRoster", function() {
                 '_modelList': [
                   "Twistbray (Tzaangor blades)",
                   "8x Tzaangor w/ Tzaangor Blades (Tzaangor blades)",
-                  "Tzaangor w/ autopistol and chainsword (Autopistol, Chainsword)"
+                  "Tzaangor w/ autopistol and chainsword (Autopistol, Chainsword)",
+                  "Unit Upgrades (Brayhorn [10 pts], Icon of Flame [5 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Autopistol"}),
