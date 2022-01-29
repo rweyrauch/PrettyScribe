@@ -38,10 +38,27 @@ export class BaseNotes {
     }
 }
 
-export class Weapon extends BaseNotes {
+/** A `selection` attached to a unit or model. */
+export class Upgrade extends BaseNotes {
+    _cost: Costs = new Costs();
+    _count: number = 1;
+
+    selectionName() {
+        return this.name();
+    }
+
+    toString() {
+        let string = this.selectionName();
+        if (this._count > 1) string = `${this._count}x ${string}`;
+        if (this._cost.hasValues()) string += ` ${this._cost.toString()}`
+        return string;
+    }
+}
+
+/** A weapon `profile` that is under a `selection`. */
+export class Weapon extends Upgrade {
     _selectionName: string = "";
 
-    _count: number = 0;
     _range: string = "Melee";
     _type: string = "Melee";
     _str: WeaponStrength = "user";
@@ -49,6 +66,14 @@ export class Weapon extends BaseNotes {
     _damage: string = "";
 
     _abilities: string = "";
+
+    /**
+     * Name of this weapon's `selection`. This is different from name() because
+     * name() is used for sorting and deduping weapon profiles.
+     */
+    selectionName() {
+        return this._selectionName || this.name();
+    }
 }
 
 export class WoundTracker extends BaseNotes {
@@ -141,7 +166,7 @@ export class Model extends BaseNotes {
     _save: string = "";
 
     _weapons: Weapon[] = [];
-    _upgrades: string[] = [];
+    _upgrades: Upgrade[] = [];
     // TODO model upgrades (i.e. tau support systems)
     _psyker: Psyker | null = null;
     _psychicPowers: PsychicPower[] = [];
@@ -161,7 +186,7 @@ export class Model extends BaseNotes {
                 }
             }
             for (let wi = 0; wi < this._upgrades.length; wi++) {
-                if (this._upgrades[wi] != model._upgrades[wi]) {
+                if (!this._upgrades[wi].equal(model._upgrades[wi])) {
                     return false;
                 }
             }
@@ -178,38 +203,41 @@ export class Model extends BaseNotes {
         let name = super.name();
 
         if (this._weapons.length > 0 || this._upgrades.length > 0) {
-            const weaponNamesWithoutCount: string[] = [];
-            const weaponNames: string[] = [];
-            for (const weapon of this._weapons) {
-                let wName = weapon._selectionName || weapon.name();
-                weaponNamesWithoutCount.push(wName);
-                if (weapon._count > 1) {
-                    wName = `${weapon._count}x ${wName}`;
-                }
-                if (weaponNames.includes(wName)) continue;
-                weaponNames.push(wName);
+            const selectionNames: string[] = [];
+            const gear: string[] = [];
+            for (const upgrade of [...this._weapons, ...this._upgrades]) {
+                const name = upgrade.selectionName();
+                if (selectionNames.includes(name)) continue;
+                selectionNames.push(name);
+                gear.push(upgrade.toString());
             }
-            weaponNames.push(...this._upgrades.filter(e => !weaponNamesWithoutCount.includes(e)));
-            name += ` (${weaponNames.join(', ')})`;
+            name += ` (${gear.join(', ')})`;
         }
         return name;
     }
 
     normalize(): void {
         this._weapons.sort(CompareWeapon);
-        this._upgrades.sort(Compare);
-        for (let i = 0; i < (this._weapons.length - 1); i++) {
-            const weapon = this._weapons[i];
-            if (weapon._name === this._weapons[i+1]._name) {
-                weapon._count++;
-                this._weapons.splice(i+1, 1);
+        this._upgrades.sort(CompareObj);
+
+        this.normalizeUpgrades(this._weapons);
+        this.normalizeUpgrades(this._upgrades);
+    }
+
+    normalizeUpgrades(upgrades: Upgrade[]) {
+        for (let i = 0; i < (upgrades.length - 1); i++) {
+            const upgrade = upgrades[i];
+            if (upgrade._name === upgrades[i+1]._name) {
+                upgrade._count += upgrades[i+1]._count;
+                upgrade._cost.add(upgrades[i+1]._cost);
+                upgrades.splice(i+1, 1);
                 i--;
             }
         }
-
-        for (let weapon of this._weapons) {
-            if (weapon._count % this._count == 0) {
-                weapon._count /= this._count;
+        for (let upgrade of upgrades) {
+            if (upgrade._count % this._count == 0) {
+                upgrade._count /= this._count;
+                upgrade._cost._points /= this._count;
             }
         }
     }
@@ -763,11 +791,14 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
 
             let upgradeName = upgradeSelection.getAttribute('name');
             if (upgradeName) {
-                const costs = GetSelectionCosts(upgradeSelection);
-                if (costs._commandPoints !== 0) {
-                    upgradeName += ` [${costs._commandPoints} CP]`;
-                }
-                model._upgrades.push(upgradeName);
+                const upgrade = new Upgrade();
+                upgrade._name = upgradeName;
+                upgrade._cost = GetSelectionCosts(upgradeSelection);
+                // TODO display pts + PL cost once UI can toggle them on/off; we
+                // keep track of CP to make this change backward-compatible.
+                upgrade._cost._points = upgrade._cost._powerLevel = 0;
+                upgrade._count = Number(upgradeSelection.getAttribute('number'));
+                model._upgrades.push(upgrade);
             }
         }
     }
@@ -815,14 +846,11 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
             let name = selection.getAttribute('name');
             if (!name) continue;
 
-            const costs = GetSelectionCosts(selection);
-            if (costs.hasValues()) name += ` ${costs.toString()}`;
-            const count = Number(selection.getAttribute('number'));
-            if (count > 1) name = `${count}x ${name}`;
-
-            if (count > 0) {
-                unitUpgradesModel._upgrades.push(name);
-            }
+            const upgrade = new Upgrade();
+            upgrade._name = name;
+            upgrade._cost = GetSelectionCosts(selection);
+            upgrade._count = Number(selection.getAttribute('number'));
+            unitUpgradesModel._upgrades.push(upgrade);
         }
 
         if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0) {
@@ -888,7 +916,10 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
         if ((typeName === "Unit") || (typeName === "Model") || (profile.getAttribute("type") === "model")) {
             // Do nothing; these were already handled.
         } else if ((typeName === "upgrade")) {
-            model._upgrades.push(profileName);
+            // TODO Check if this is still relevant, and delete if not.
+            const upgrade = new Upgrade();
+            upgrade._name = profileName;
+            model._upgrades.push(upgrade);
         } else if ((typeName === "Abilities") || (typeName === "Wargear") || (typeName === "Ability") ||
             (typeName === "Household Tradition") || (typeName === "Warlord Trait") || (typeName === "Astra Militarum Orders") ||
             (typeName === "Tank Orders") || (typeName == "Lethal Ambush")) {
@@ -958,6 +989,8 @@ function ParseWeaponProfile(profile: Element): Weapon {
     const selectionName = selection?.getAttribute('name');
     if (selection?.getAttribute('type') === 'upgrade' && selectionName) {
         weapon._selectionName = selectionName;
+        // TODO Track weapon costs, as well as an option to toggle on/off.
+        // weapon._cost = GetSelectionCosts(selection);
     }
     return weapon;
 }

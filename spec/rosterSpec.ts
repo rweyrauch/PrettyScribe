@@ -127,7 +127,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Veteran Sergeant (Jump Pack)"}),
                 ],
                 '_modelList': [
-                  "Vanguard Veteran Squad (Grav-pistol, Relic blade, 4x Thunder hammer, 5x Frag & Krak grenades, Jump Pack, Storm shield, Storm shield, Storm shield, Storm shield)"
+                  "Vanguard Veteran Squad (Grav-pistol, Relic blade, 4x Thunder hammer, 5x Frag & Krak grenades, Jump Pack, 4x Storm shield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Grav-pistol"}),
@@ -144,7 +144,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Space Marine Sergeant (Jump Pack)"}),
                 ],
                 '_modelList': [
-                  "Assault Squad (2x Bolt pistol, 3x Plasma pistol, 4x Chainsword, 4x Frag & Krak grenades, Jump Pack)"
+                  "Assault Squad (2x Bolt pistol, 3x Plasma pistol, 5x Chainsword, 5x Frag & Krak grenades, Jump Pack)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),

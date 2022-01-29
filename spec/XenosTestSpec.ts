@@ -146,7 +146,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Blitza-bommer"}),
                 ],
                 '_modelList': [
-                  "Blitza-bommer (Big Shoota, 2x Supa Shoota, Boom Bomb)"
+                  "Blitza-bommer (Big Shoota, 2x Supa Shoota, 2x Boom Bomb)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Big Shoota"}),

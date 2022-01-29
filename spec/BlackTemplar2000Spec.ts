@@ -146,7 +146,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scout Sergeant"}),
                 ],
                 '_modelList': [
-                  "Scout Squad (2x Bolt pistol, 2x Boltgun, 2x Frag & Krak grenades)"
+                  "Scout Squad (5x Bolt pistol, 5x Boltgun, 5x Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -227,7 +227,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Space Marine Sergeant (Jump Pack)"}),
                 ],
                 '_modelList': [
-                  "Assault Squad (2x Bolt pistol/Chainsword, 2x Frag & Krak grenades, Bolt pistol, Chainsword, Jump Pack)"
+                  "Assault Squad (5x Bolt pistol/Chainsword, 5x Frag & Krak grenades, 4x Bolt pistol, 4x Chainsword, Jump Pack)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -243,7 +243,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Space Marine Sergeant (Jump Pack)"}),
                 ],
                 '_modelList': [
-                  "Assault Squad (2x Bolt pistol/Chainsword, 2x Frag & Krak grenades, Bolt pistol, Chainsword, Jump Pack)"
+                  "Assault Squad (5x Bolt pistol/Chainsword, 5x Frag & Krak grenades, 4x Bolt pistol, 4x Chainsword, Jump Pack)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),

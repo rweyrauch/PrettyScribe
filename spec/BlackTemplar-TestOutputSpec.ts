@@ -54,7 +54,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scout Sergeant"}),
                 ],
                 '_modelList': [
-                  "Scout Squad (2x Bolt pistol, 2x Boltgun, 2x Frag & Krak grenades)"
+                  "Scout Squad (5x Bolt pistol, 5x Boltgun, 5x Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
