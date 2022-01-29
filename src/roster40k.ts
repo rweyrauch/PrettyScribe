@@ -203,17 +203,20 @@ export class Model extends BaseNotes {
         let name = super.name();
 
         if (this._weapons.length > 0 || this._upgrades.length > 0) {
-            const selectionNames: string[] = [];
-            const gear: string[] = [];
-            for (const upgrade of [...this._weapons, ...this._upgrades]) {
-                const name = upgrade.selectionName();
-                if (selectionNames.includes(name)) continue;
-                selectionNames.push(name);
-                gear.push(upgrade.toString());
-            }
-            name += ` (${gear.join(', ')})`;
+            const gear = this.getDedupedWeaponsAndUpgrades();
+            name += ` (${gear.map(u => u.toString()).join(', ')})`;
         }
         return name;
+    }
+
+    getDedupedWeaponsAndUpgrades(): Upgrade[] {
+        const deduped: Upgrade[] = [];
+        for (const upgrade of [...this._weapons, ...this._upgrades]) {
+            if (!deduped.some(e => upgrade.selectionName() === e.selectionName())) {
+                deduped.push(upgrade);
+            }
+        }
+        return deduped;
     }
 
     normalize(): void {
