@@ -110,7 +110,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Crusader 2"}),
                   jasmine.objectContaining({'_name': "Knight Crusader 3"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Knight Lance", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [
@@ -194,7 +198,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Laspistol"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Defenders of Humanity", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [
@@ -293,7 +301,13 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Grenadier Gauntlet"}),
                   jasmine.objectContaining({'_name': "Frag Bombs"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Avalanche of Muscle", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Brutal Strength", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

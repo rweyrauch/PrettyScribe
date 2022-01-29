@@ -170,7 +170,15 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake2"}),
                   jasmine.objectContaining({'_name': "Heldrake3"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Daemonic Ritual", jasmine.any(String)],
+              ["Brotherhood of Sorcerors", jasmine.any(String)],
+              ["Hateful Assault", jasmine.any(String)],
+              ["Malicious Volleys", jasmine.any(String)],
+              ["Disciples of Tzeentch", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [
@@ -202,7 +210,12 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Magnus the Red2"}),
                   jasmine.objectContaining({'_name': "Magnus the Red3"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Hateful Assault", jasmine.any(String)],
+              ["Malicious Volleys", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

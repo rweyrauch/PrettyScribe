@@ -145,7 +145,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Crimson Hunter Exarch 2."}),
                   jasmine.objectContaining({'_name': "Crimson Hunter Exarch 3."}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map(),
+            '_factionRules': new Map([
+              ["Alaitoc: Fieldcraft", jasmine.any(String)],
+            ]),
           }),
           jasmine.objectContaining({
             '_configurations': [
@@ -320,7 +324,14 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Twin splinter rifle"}),
                   jasmine.objectContaining({'_name': "Bladevanes"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Poisoned Weapon", jasmine.any(String)],
+              ["Power from Pain", jasmine.any(String)],
+              ["Vanguard of the Dark City", jasmine.any(String)],
+              ["Combat Drugs", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

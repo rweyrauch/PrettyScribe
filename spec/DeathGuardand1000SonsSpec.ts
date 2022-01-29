@@ -391,7 +391,19 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Plague Weapon", jasmine.any(String)],
+              ["Inexorable Advance", jasmine.any(String)],
+              ["Plague Host", jasmine.any(String)],
+              ["Bolter Discipline", jasmine.any(String)],
+              ["Daemonic Ritual", jasmine.any(String)],
+              ["Hateful Assault", jasmine.any(String)],
+              ["Brotherhood of Sorcerors", jasmine.any(String)],
+              ["Malicious Volleys", jasmine.any(String)],
+              ["Disciples of Tzeentch", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

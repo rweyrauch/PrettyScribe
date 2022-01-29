@@ -331,7 +331,12 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Defenders of Humanity", jasmine.any(String)],
+              ["Avalanche of Muscle", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

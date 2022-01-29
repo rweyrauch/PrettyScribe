@@ -392,7 +392,17 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Bolter Discipline", jasmine.any(String)],
+              ["Angels of Death", jasmine.any(String)],
+              ["Shock Assault", jasmine.any(String)],
+              ["Righteous Zeal", jasmine.any(String)],
+              ["Explodes (6\"/D6)", jasmine.any(String)],
+              ["Explodes (6\"/D3)", jasmine.any(String)],
+              ["Smoke Launchers", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

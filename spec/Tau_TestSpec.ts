@@ -174,7 +174,23 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["For the Greater Good", jasmine.any(String)],
+              ["Manta Strike", jasmine.any(String)],
+              ["Airborne", jasmine.any(String)],
+              ["Crash and Burn", jasmine.any(String)],
+              ["Hard to Hit", jasmine.any(String)],
+              ["Supersonic", jasmine.any(String)],
+              ["Hover Tank", jasmine.any(String)],
+              ["Explodes", jasmine.any(String)],
+              ["Attached Drones (TY7 Devilfish)", jasmine.any(String)],
+              ["Saviour Protocols", jasmine.any(String)],
+              ["Detach", jasmine.any(String)],
+              ["Drone Support", jasmine.any(String)],
+              ["Infiltrator", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [],
@@ -435,7 +451,16 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["For the Greater Good", jasmine.any(String)],
+              ["Drone Support", jasmine.any(String)],
+              ["Manta Strike", jasmine.any(String)],
+              ["Pulse blaster", jasmine.any(String)],
+              ["Markerlights", jasmine.any(String)],
+              ["Saviour Protocols", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

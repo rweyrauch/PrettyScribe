@@ -175,7 +175,12 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Goliath Rockgrinder (2)"}),
                   jasmine.objectContaining({'_name': "Goliath Rockgrinder (3)"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Cult Ambush", jasmine.any(String)],
+              ["Unquestioning Loyalty", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [],
@@ -389,7 +394,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map(),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

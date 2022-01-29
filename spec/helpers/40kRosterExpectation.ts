@@ -39,7 +39,9 @@ function processForces(forces: Force[]): string {
           jasmine.objectContaining({
             '_configurations': [${processConfigurations(force._configurations)}],
             '_units': [${processUnits(force._units)}
-            ]
+            ],
+            '_rules': new Map(${processRulesMap(force._rules)}),
+            '_factionRules': new Map(${processRulesMap(force._factionRules)}),
           }),`).join('');
 }
 
@@ -102,3 +104,11 @@ function processOptionalUnitStats(unit: Unit) {
   }
   return output;
 }
+
+function processRulesMap(_rules: Map<string, string | null>): string {
+  if (_rules.size === 0) return '';
+  return '[\n' +
+    Array.from(_rules.keys()).map(key => `              [${JSON.stringify(key)}, jasmine.any(String)],\n`).join('') +
+  '            ]';
+}
+

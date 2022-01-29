@@ -108,7 +108,14 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Bolter Discipline", jasmine.any(String)],
+              ["Angels of Death", jasmine.any(String)],
+              ["Shock Assault", jasmine.any(String)],
+              ["Righteous Zeal", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [],
@@ -227,7 +234,12 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Righteous Zeal", jasmine.any(String)],
+              ["Angels of Death", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [],
@@ -373,7 +385,13 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Righteous Zeal", jasmine.any(String)],
+              ["Angels of Death", jasmine.any(String)],
+              ["Explodes (6\"/D6)", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

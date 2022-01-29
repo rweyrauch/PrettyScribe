@@ -174,7 +174,20 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Dakkajet2"}),
                   jasmine.objectContaining({'_name': "Dakkajet3"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Dis Is Ours! Zog Off!", jasmine.any(String)],
+              ["'Ere We Go!", jasmine.any(String)],
+              ["Mob Rule", jasmine.any(String)],
+              ["Dakka Dakka Dakka", jasmine.any(String)],
+              ["Grots", jasmine.any(String)],
+              ["Airborne", jasmine.any(String)],
+              ["Hard to Hit", jasmine.any(String)],
+              ["Crash and Burn", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Bad Moons", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

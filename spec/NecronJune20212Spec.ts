@@ -93,7 +93,19 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scouring Eye"}),
                   jasmine.objectContaining({'_name': "Scythed Limbs"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Dynastic Agents and Star Gods", jasmine.any(String)],
+              ["The Royal Court", jasmine.any(String)],
+              ["Command Protocols", jasmine.any(String)],
+              ["Living Metal", jasmine.any(String)],
+              ["Reanimation Protocols", jasmine.any(String)],
+              ["Objective Secured", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Unyielding", jasmine.any(String)],
+              ["Healthy Paranoia", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

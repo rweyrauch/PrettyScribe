@@ -258,7 +258,29 @@ describe("Create40kRoster", function() {
                 '_psykers': [
                   jasmine.objectContaining({'_name': "Psyker (Sanctic 1 Squad)"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Psychic Locus", jasmine.any(String)],
+              ["And They Shall Know No Fear", jasmine.any(String)],
+              ["Daemon Hunters", jasmine.any(String)],
+              ["Teleport Strike", jasmine.any(String)],
+              ["Rites of Banishment", jasmine.any(String)],
+              ["Bolter Discipline", jasmine.any(String)],
+              ["Shock Assault", jasmine.any(String)],
+              ["Masters of the Warp", jasmine.any(String)],
+              ["Iron Halo", jasmine.any(String)],
+              ["Domina Liber Demonica", jasmine.any(String)],
+              ["Rosarius", jasmine.any(String)],
+              ["Spiritual Leaders", jasmine.any(String)],
+              ["Combat Squads", jasmine.any(String)],
+              ["Crux Terminatus", jasmine.any(String)],
+              ["Rites of Battle", jasmine.any(String)],
+              ["Purifying Flame", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Brotherhood of Psykers", jasmine.any(String)],
+              ["Knights of Titan", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

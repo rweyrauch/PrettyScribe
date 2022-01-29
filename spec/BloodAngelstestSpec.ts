@@ -106,7 +106,18 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Frag grenades"}),
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Bolter Discipline", jasmine.any(String)],
+              ["Angels of Death", jasmine.any(String)],
+              ["Shock Assault", jasmine.any(String)],
+              ["Savage Echoes", jasmine.any(String)],
+              ["Death from Above", jasmine.any(String)],
+              ["Combat Squads", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["The Red Thirst", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

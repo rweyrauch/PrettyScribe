@@ -152,7 +152,16 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Shock Assault", jasmine.any(String)],
+              ["Bolter Discipline", jasmine.any(String)],
+              ["And They Shall Know No Fear", jasmine.any(String)],
+              ["Hunters Unleashed", jasmine.any(String)],
+              ["Defenders of Humanity", jasmine.any(String)],
+              ["Angels of Death", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [
@@ -318,7 +327,15 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Thunder hammer"}),
                   jasmine.objectContaining({'_name': "Wulfen claws"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["And They Shall Know No Fear", jasmine.any(String)],
+              ["Hunters Unleashed", jasmine.any(String)],
+              ["Defenders of Humanity", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Stalker Pack", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

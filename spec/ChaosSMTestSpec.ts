@@ -264,7 +264,14 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Despoilers of the Galaxy (Renegade Chapters)", jasmine.any(String)],
+              ["Daemonic Ritual", jasmine.any(String)],
+              ["Hateful Assault", jasmine.any(String)],
+              ["Hateful Volleys", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [],
@@ -425,7 +432,11 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Daemonic Ritual", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

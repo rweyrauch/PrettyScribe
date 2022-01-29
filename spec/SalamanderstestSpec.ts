@@ -109,7 +109,20 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Frag grenades"}),
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Combat Doctrines", jasmine.any(String)],
+              ["And They Shall Know No Fear", jasmine.any(String)],
+              ["Bolter Discipline", jasmine.any(String)],
+              ["Angels of Death", jasmine.any(String)],
+              ["Shock Assault", jasmine.any(String)],
+              ["Combi Weapon", jasmine.any(String)],
+              ["Combat Squads", jasmine.any(String)],
+              ["Explodes (6\"/D3)", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Forged in Battle", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

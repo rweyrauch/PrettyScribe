@@ -35,7 +35,14 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellforged heavy plasma cannon - Standard"}),
                   jasmine.objectContaining({'_name': "Hellforged heavy plasma cannon - Supercharge"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Daemonic Ritual", jasmine.any(String)],
+              ["Hateful Assault", jasmine.any(String)],
+              ["Martial Legacy", jasmine.any(String)],
+              ["Malicious Volleys", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

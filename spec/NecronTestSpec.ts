@@ -123,7 +123,13 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Living Metal", jasmine.any(String)],
+              ["Reanimation Protocols", jasmine.any(String)],
+              ["Their Number is Legion, Their Name is Death", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });
