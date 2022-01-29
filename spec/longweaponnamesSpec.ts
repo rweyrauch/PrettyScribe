@@ -22,7 +22,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Chaos Contemptor Dreadnought"}),
                 ],
                 '_modelList': [
-                  "Chaos Contemptor Dreadnought (Conversion beam cannon, Hellforged cyclone missile launcher, Hellforged heavy plasma cannon)"
+                  "Chaos Contemptor Dreadnought (Conversion beam cannon [5 pts], Hellforged cyclone missile launcher [25 pts], Hellforged heavy plasma cannon)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Conversion beam cannon 1 - Short range"}),
@@ -35,7 +35,14 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellforged heavy plasma cannon - Standard"}),
                   jasmine.objectContaining({'_name': "Hellforged heavy plasma cannon - Supercharge"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Daemonic Ritual", jasmine.any(String)],
+              ["Hateful Assault", jasmine.any(String)],
+              ["Martial Legacy", jasmine.any(String)],
+              ["Malicious Volleys", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

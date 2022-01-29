@@ -119,11 +119,7 @@ export class Renderer40k implements Renderer {
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.name()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
-                // TODO: the list of models may not be unique, make the list unique and update counts accordingly.
-                for (let i = 0; i < unit._modelList.length; i++) {
-                    if (i > 0) models.appendChild(document.createElement('br'));
-                    models.appendChild(document.createTextNode(unit._modelList[i]));
-                }
+                this.renderModelList(models, unit);
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
                 if (unitsHaveCpCost) {
@@ -138,24 +134,48 @@ export class Renderer40k implements Renderer {
     private renderOptionsDiv(title: HTMLElement) {
         const optionsDiv = title.appendChild(document.createElement('div'));
         optionsDiv.classList.add('wh40k_options_div', 'd-print-none');
-        optionsDiv.appendChild(document.createTextNode('Options: '));
-        const input = optionsDiv.appendChild(document.createElement('input'));
-        input.setAttribute('type', 'checkbox');
-        input.setAttribute('name', 'showPhaseAbilities');
-        input.setAttribute('id', 'showPhaseAbilities');
-        input.addEventListener('input', (e) => {
-            const abilities = document.getElementById('wh40k_abilities_list');
-            if (!abilities)
-                return;
-            if ((e.target as any).checked) {
-                abilities.classList.remove('d-none');
-            } else {
-                abilities.classList.add('d-none');
-            }
-        });
-        const label = optionsDiv.appendChild(document.createElement('label'));
-        label.setAttribute('for', 'showPhaseAbilities');
-        label.appendChild(document.createTextNode(' Show abilities by phase'));
+        optionsDiv.appendChild(document.createTextNode('Options:'));
+        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        {
+            const input = optionsDiv.appendChild(document.createElement('input'));
+            input.setAttribute('type', 'checkbox');
+            input.setAttribute('name', 'showPhaseAbilities');
+            input.setAttribute('id', 'showPhaseAbilities');
+            input.addEventListener('input', (e) => {
+                const abilities = document.getElementById('wh40k_abilities_list');
+                if (!abilities) return;
+
+                if ((e.target as any).checked) {
+                    abilities.classList.remove('d-none');
+                } else {
+                    abilities.classList.add('d-none');
+                }
+            });
+            const label = optionsDiv.appendChild(document.createElement('label'));
+            label.setAttribute('for', 'showPhaseAbilities');
+            label.appendChild(document.createTextNode(' Show abilities by phase'));
+        }
+        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        {
+            const input = optionsDiv.appendChild(document.createElement('input'));
+            input.setAttribute('type', 'checkbox');
+            input.setAttribute('name', 'showUpgradeCosts');
+            input.setAttribute('id', 'showUpgradeCosts');
+            const eventListener = (e: Event) => {
+                const costSpans = document.getElementsByClassName('wh40k_upgrade_cost');
+                for (const span of costSpans) {
+                    if ((e.target as any).checked) {
+                        span.classList.remove('d-none')
+                    } else {
+                        span.classList.add('d-none')
+                    }
+                }
+            };
+            input.addEventListener('input', eventListener);
+            const label = optionsDiv.appendChild(document.createElement('label'));
+            label.setAttribute('for', 'showUpgradeCosts');
+            label.appendChild(document.createTextNode(' Show upgrade costs'));
+        }
     }
 
     private renderAbilitiesByPhase(list: HTMLElement) {
@@ -498,9 +518,7 @@ export class Renderer40k implements Renderer {
         thead = statsTable.appendChild(document.createElement('thead'));
         thead.classList.add('info_row');
         const modelListDiv = document.createElement('div');
-        for (const modelName of unit._modelList) {
-            const mDiv = modelListDiv.appendChild(document.createElement('div')).appendChild(document.createTextNode(modelName));
-        }
+        this.renderModelList(modelListDiv, unit);
         thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
 
         // explosions
@@ -522,6 +540,29 @@ export class Renderer40k implements Renderer {
         }
         notesTableHead = createNotesHead('Explosion notes', unit._explosions);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
+    }
+
+    private renderModelList(container: HTMLElement, unit: Unit) {
+        for (const model of unit._models) {
+            const div = container.appendChild(document.createElement('div'));
+
+            div.appendChild(document.createTextNode((model._count > 1 ? `${model._count}x ` : '') + model.name()));
+
+            const modelGear = model.getDedupedWeaponsAndUpgrades();
+            if (modelGear.length === 0) continue;
+
+            div.appendChild(document.createTextNode(' ('));
+            for (const gear of modelGear) {
+                if (gear !== modelGear[0]) div.appendChild(document.createTextNode(', '));
+                div.appendChild(document.createTextNode((gear._count > 1 ? `${gear._count}x ` : '') + gear.selectionName()));
+                if (gear._cost.hasValues()) {
+                    const costSpan = div.appendChild(document.createElement('span'));
+                    costSpan.classList.add('wh40k_upgrade_cost', 'd-none');
+                    costSpan.appendChild(document.createTextNode(` ${gear._cost.toString()}`));
+                }
+            }
+            div.appendChild(document.createTextNode(')'));
+        }
     }
 
     private printRules(root: Map<string, Map<string, string | null>>, section: HTMLElement | null) {

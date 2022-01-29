@@ -106,7 +106,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Painboy on Warbike"}),
                 ],
                 '_modelList': [
-                  "Painboy on Warbike [Legends] (2x Dakkagun, 'Urty Syringe, Killsaw, Super Cybork Body)"
+                  "Painboy on Warbike [Legends] (2x Dakkagun, 'Urty Syringe, Killsaw [15 pts], Super Cybork Body)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Dakkagun"}),
@@ -120,7 +120,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Deff Dread"}),
                 ],
                 '_modelList': [
-                  "Deff Dread (2x Big Shoota, 2x Dread Klaw)"
+                  "Deff Dread (2x Big Shoota [10 pts], 2x Dread Klaw [30 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Big Shoota"}),
@@ -133,7 +133,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Killa Kan"}),
                 ],
                 '_modelList': [
-                  "Killa Kan (Big Shoota, Kan Klaw)"
+                  "Killa Kan (Big Shoota [5 pts], Kan Klaw)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Big Shoota"}),
@@ -146,7 +146,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Blitza-bommer"}),
                 ],
                 '_modelList': [
-                  "Blitza-bommer (Big Shoota, 2x Supa Shoota, Boom Bomb)"
+                  "Blitza-bommer (Big Shoota [5 pts], 2x Supa Shoota [20 pts], 2x Boom Bomb)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Big Shoota"}),
@@ -164,7 +164,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Dakkajet"}),
                 ],
                 '_modelList': [
-                  "Dakkajet (4x Supa Shoota)"
+                  "Dakkajet (4x Supa Shoota [40 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Supa Shoota"}),
@@ -174,7 +174,20 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Dakkajet2"}),
                   jasmine.objectContaining({'_name': "Dakkajet3"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Dis Is Ours! Zog Off!", jasmine.any(String)],
+              ["'Ere We Go!", jasmine.any(String)],
+              ["Mob Rule", jasmine.any(String)],
+              ["Dakka Dakka Dakka", jasmine.any(String)],
+              ["Grots", jasmine.any(String)],
+              ["Airborne", jasmine.any(String)],
+              ["Hard to Hit", jasmine.any(String)],
+              ["Crash and Burn", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Bad Moons", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

@@ -13,8 +13,8 @@ describe("Create40kRoster", function() {
           jasmine.objectContaining({
             '_configurations': [
               "Faction: <Craftworld> - Craftworld Attribute: Alaitoc: Fieldcraft",
-              "Battle-forged CP",
-              "Detachment CP",
+              "Battle-forged CP [3 CP]",
+              "Detachment CP [5 CP]",
             ],
             '_units': [
               jasmine.objectContaining({
@@ -56,7 +56,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Dire Avenger"}),
                 ],
                 '_modelList': [
-                  "5x Dire Avenger (Avenger Shuriken Catapult, Plasma Grenades)",
+                  "5x Dire Avenger (Avenger Shuriken Catapult [3 pts], Plasma Grenades)",
                   "Unit Upgrades (Defence Tactics)"
                 ],
                 '_weapons': [
@@ -116,7 +116,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Crimson Hunter"}),
                 ],
                 '_modelList': [
-                  "Crimson Hunter (2x Bright Lance, Pulse Laser, Airborne, Crash and Burn, Hard to Hit, Skyhunters, Wings of Khaine)"
+                  "Crimson Hunter (2x Bright Lance [40 pts], Pulse Laser, Airborne, Crash and Burn, Hard to Hit, Skyhunters, Wings of Khaine)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bright Lance"}),
@@ -134,7 +134,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Crimson Hunter Exarch"}),
                 ],
                 '_modelList': [
-                  "Crimson Hunter Exarch (Two Bright Lances, Pulse Laser, Airborne, Crash and Burn, Hard to Hit, Marksman's Eye, Skyhunters, Wings of Khaine)"
+                  "Crimson Hunter Exarch (Two Bright Lances [40 pts], Pulse Laser, Airborne, Crash and Burn, Hard to Hit, Marksman's Eye, Skyhunters, Wings of Khaine)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bright Lance"}),
@@ -145,12 +145,16 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Crimson Hunter Exarch 2."}),
                   jasmine.objectContaining({'_name': "Crimson Hunter Exarch 3."}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map(),
+            '_factionRules': new Map([
+              ["Alaitoc: Fieldcraft", jasmine.any(String)],
+            ]),
           }),
           jasmine.objectContaining({
             '_configurations': [
               "Detachment Type: Mixed Detachment",
-              "Detachment CP",
+              "Detachment CP [1 CP]",
             ],
             '_units': [
               jasmine.objectContaining({
@@ -260,7 +264,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Ravager"}),
                 ],
                 '_modelList': [
-                  "Ravager (3x Dark Lance, Bladevanes, Night Shield)"
+                  "Ravager (3x Dark Lance [45 pts], Bladevanes, Night Shield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Dark Lance"}),
@@ -300,7 +304,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Talos"}),
                 ],
                 '_modelList': [
-                  "Talos (2x Splinter Cannon, 2x Macro-Scalpel)"
+                  "Talos (2x Splinter Cannon [20 pts], 2x Macro-Scalpel [8 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Splinter Cannon"}),
@@ -313,14 +317,21 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Venom"}),
                 ],
                 '_modelList': [
-                  "Venom (Splinter Cannon, Twin splinter rifle, Bladevanes, Flickerfield, Night Shield)"
+                  "Venom (Splinter Cannon [10 pts], Twin splinter rifle, Bladevanes, Flickerfield, Night Shield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Splinter Cannon"}),
                   jasmine.objectContaining({'_name': "Twin splinter rifle"}),
                   jasmine.objectContaining({'_name': "Bladevanes"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Poisoned Weapon", jasmine.any(String)],
+              ["Power from Pain", jasmine.any(String)],
+              ["Vanguard of the Dark City", jasmine.any(String)],
+              ["Combat Drugs", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

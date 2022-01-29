@@ -11,7 +11,10 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 126, _points: 2029, _commandPoints: 15}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Battle-forged CP [3 CP]",
+              "No Force Org Slot - Detachment CP [12 CP]",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Aun'Shi",
@@ -62,10 +65,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "MV4 Shield Drone"}),
                 ],
                 '_modelList': [
-                  "DS8 Tactical Support Turret w/ SMS (Smart missile system)",
+                  "DS8 Tactical Support Turret w/ SMS (Smart missile system [15 pts])",
                   "5x Fire Warrior (Pulse blaster, Photon grenades)",
                   "Fire Warrior Shas'ui (Pulse blaster, Photon grenades)",
-                  "2x Fire Warrior w/ Pulse Pistol (Pulse blaster, Pulse pistol, Photon grenades)",
+                  "2x Fire Warrior w/ Pulse Pistol (Pulse blaster, Pulse pistol [1 pts], Photon grenades)",
                   "2x MV4 Shield Drone (Shield generator)"
                 ],
                 '_weapons': [
@@ -87,7 +90,7 @@ describe("Create40kRoster", function() {
                 '_modelList': [
                   "5x Fire Warrior (Pulse blaster, Photon grenades)",
                   "Fire Warrior Shas'ui (Pulse blaster, Photon grenades)",
-                  "Fire Warrior w/ Pulse Pistol (Pulse blaster, Pulse pistol, Photon grenades)",
+                  "Fire Warrior w/ Pulse Pistol (Pulse blaster, Pulse pistol [1 pts], Photon grenades)",
                   "2x MV1 Gun Drone (Pulse carbine)"
                 ],
                 '_weapons': [
@@ -135,10 +138,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "MV4 Shield Drone"}),
                 ],
                 '_modelList': [
-                  "DS8 Tactical Support Turret w/ SMS (Smart missile system)",
+                  "DS8 Tactical Support Turret w/ SMS (Smart missile system [15 pts])",
                   "Fire Warrior Shas'ui (Pulse rifle, Photon grenades)",
                   "Fire Warrior w/ Pulse Carbine (Pulse carbine, Photon grenades)",
-                  "Fire Warrior w/ Pulse Pistol + Pulse Rifle (Pulse pistol, Pulse rifle, Photon grenades)",
+                  "Fire Warrior w/ Pulse Pistol + Pulse Rifle (Pulse pistol [1 pts], Pulse rifle, Photon grenades)",
                   "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenades)",
                   "MV36 Guardian Drone",
                   "MV4 Shield Drone (Shield generator)"
@@ -160,11 +163,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "MV4 Shield Drone"}),
                 ],
                 '_modelList': [
-                  "DS8 Tactical Support Turret w/ Missile pod (Missile pod)",
+                  "DS8 Tactical Support Turret w/ Missile pod (Missile pod [15 pts])",
                   "Fire Warrior Shas'ui (Pulse rifle, Photon grenades)",
                   "Fire Warrior w/ Pulse Carbine (Pulse carbine, Photon grenades)",
-                  "Fire Warrior w/ Pulse Pistol + Pulse Carbine (Pulse carbine, Pulse pistol, Photon grenades)",
-                  "Fire Warrior w/ Pulse Pistol + Pulse Rifle (Pulse pistol, Pulse rifle, Photon grenades)",
+                  "Fire Warrior w/ Pulse Pistol + Pulse Carbine (Pulse carbine, Pulse pistol [1 pts], Photon grenades)",
+                  "Fire Warrior w/ Pulse Pistol + Pulse Rifle (Pulse pistol [1 pts], Pulse rifle, Photon grenades)",
                   "5x Fire Warrior w/ Pulse Rifle (Pulse rifle, Photon grenades)",
                   "2x MV4 Shield Drone (Shield generator)"
                 ],
@@ -220,7 +223,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Firesight Marksman"}),
                 ],
                 '_modelList': [
-                  "Firesight Marksman (Markerlight, Pulse pistol, Multi-sensory discouragement array)"
+                  "Firesight Marksman (Markerlight [3 pts], Pulse pistol [1 pts], Multi-sensory discouragement array)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Markerlight"}),
@@ -247,7 +250,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
                 ],
                 '_modelList': [
-                  "XV104 Riptide Battlesuit (Heavy burst cannon, Missile pod, 2x Plasma rifle, Early warning override, Shield generator)"
+                  "XV104 Riptide Battlesuit (Heavy burst cannon [35 pts], Missile pod, 2x Plasma rifle [16 pts], Early warning override [10 pts], Shield generator)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy burst cannon"}),
@@ -269,8 +272,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "MV4 Shield Drone (Shield generator)",
-                  "4x Stealth Shas'ui w/ Burst Cannon (Burst cannon)",
-                  "Stealth Shas'vre (Burst cannon)",
+                  "4x Stealth Shas'ui w/ Burst Cannon (Burst cannon [8 pts])",
+                  "Stealth Shas'vre (Burst cannon [8 pts])",
                   "Unit Upgrades (Homing beacon [20 pts])"
                 ],
                 '_weapons': [
@@ -284,7 +287,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "TX4 Piranha"}),
                 ],
                 '_modelList': [
-                  "TX4 Piranha (Burst cannon, 4x Pulse carbine)"
+                  "TX4 Piranha (Burst cannon [8 pts], 4x Pulse carbine)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -349,7 +352,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "TX7 Hammerhead Gunship"}),
                 ],
                 '_modelList': [
-                  "TX7 Hammerhead Gunship (4x Pulse carbine, Railgun)"
+                  "TX7 Hammerhead Gunship (4x Pulse carbine, Railgun [30 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Pulse carbine"}),
@@ -368,37 +371,28 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Broadside Shas'ui"}),
                 ],
                 '_modelList': [
-                  "Broadside Shas'ui (Heavy rail rifle, 2x Smart missile system)"
+                  "Broadside Shas'ui (Heavy rail rifle [25 pts], 2x Smart missile system [30 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy rail rifle"}),
                   jasmine.objectContaining({'_name': "Smart missile system"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "Battle-forged CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 3}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 12}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["For the Greater Good", jasmine.any(String)],
+              ["Pulse blaster", jasmine.any(String)],
+              ["Saviour Protocols", jasmine.any(String)],
+              ["Drone Support", jasmine.any(String)],
+              ["Manta Strike", jasmine.any(String)],
+              ["Hover Tank", jasmine.any(String)],
+              ["Explodes", jasmine.any(String)],
+              ["Attached Drones", jasmine.any(String)],
+              ["Detach", jasmine.any(String)],
+              ["Markerlights", jasmine.any(String)],
+              ["Explodes (Piranha)", jasmine.any(String)],
+              ["Infiltrator", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

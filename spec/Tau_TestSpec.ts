@@ -11,7 +11,9 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 138, _points: 1981, _commandPoints: 13}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Detachment CP [5 CP]",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Aun'Shi",
@@ -32,7 +34,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Commander in XV8 Crisis Battlesuit"}),
                 ],
                 '_modelList': [
-                  "Commander in XV8 Crisis Battlesuit (Burst cannon, Missile pod)"
+                  "Commander in XV8 Crisis Battlesuit (Burst cannon [8 pts], Missile pod [15 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -45,7 +47,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Commander in XV85 Enforcer Battlesuit"}),
                 ],
                 '_modelList': [
-                  "Commander in XV85 Enforcer Battlesuit (Burst cannon, Missile pod)"
+                  "Commander in XV85 Enforcer Battlesuit (Burst cannon [8 pts], Missile pod [15 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -112,7 +114,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "XV95 Ghostkeel Shas'vre"}),
                 ],
                 '_modelList': [
-                  "XV95 Ghostkeel Battlesuit (2x Flamer, Fusion collider)"
+                  "XV95 Ghostkeel Battlesuit (2x Flamer [12 pts], Fusion collider [25 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Flamer"}),
@@ -130,7 +132,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "AX3 Razorshark Strike Fighter"}),
                 ],
                 '_modelList': [
-                  "AX3 Razorshark Strike Fighter (Burst cannon, Quad ion turret, 2x Seeker missile)"
+                  "AX3 Razorshark Strike Fighter (Burst cannon [8 pts], Quad ion turret [30 pts], 2x Seeker missile [10 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -151,7 +153,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "TY7 Devilfish"}),
                 ],
                 '_modelList': [
-                  "TY7 Devilfish (Burst cannon, 4x Pulse carbine)"
+                  "TY7 Devilfish (Burst cannon [8 pts], 4x Pulse carbine)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -162,22 +164,29 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "TY7 Devilfish 2"}),
                   jasmine.objectContaining({'_name': "TY7 Devilfish 3"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 5}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["For the Greater Good", jasmine.any(String)],
+              ["Manta Strike", jasmine.any(String)],
+              ["Airborne", jasmine.any(String)],
+              ["Crash and Burn", jasmine.any(String)],
+              ["Hard to Hit", jasmine.any(String)],
+              ["Supersonic", jasmine.any(String)],
+              ["Hover Tank", jasmine.any(String)],
+              ["Explodes", jasmine.any(String)],
+              ["Attached Drones (TY7 Devilfish)", jasmine.any(String)],
+              ["Saviour Protocols", jasmine.any(String)],
+              ["Detach", jasmine.any(String)],
+              ["Drone Support", jasmine.any(String)],
+              ["Infiltrator", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Battle-forged CP [3 CP]",
+              "No Force Org Slot - Detachment CP [5 CP]",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Commander Farsight",
@@ -292,7 +301,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
                 ],
                 '_modelList': [
-                  "XV104 Riptide Battlesuit (Heavy burst cannon, 2x Smart missile system)"
+                  "XV104 Riptide Battlesuit (Heavy burst cannon [35 pts], 2x Smart missile system [30 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy burst cannon"}),
@@ -310,7 +319,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
                 ],
                 '_modelList': [
-                  "XV104 Riptide Battlesuit (Heavy burst cannon, 2x Smart missile system)"
+                  "XV104 Riptide Battlesuit (Heavy burst cannon [35 pts], 2x Smart missile system [30 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy burst cannon"}),
@@ -328,7 +337,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
                 ],
                 '_modelList': [
-                  "XV104 Riptide Battlesuit (Heavy burst cannon, 2x Smart missile system)"
+                  "XV104 Riptide Battlesuit (Heavy burst cannon [35 pts], 2x Smart missile system [30 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy burst cannon"}),
@@ -406,36 +415,21 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heavy Gun Drone"}),
                 ],
                 '_modelList': [
-                  "2x Heavy Gun Drone w/ 2x BC (Burst cannon)"
+                  "2x Heavy Gun Drone w/ 2x BC (Burst cannon [8 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "Battle-forged CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 3}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 5}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["For the Greater Good", jasmine.any(String)],
+              ["Drone Support", jasmine.any(String)],
+              ["Manta Strike", jasmine.any(String)],
+              ["Pulse blaster", jasmine.any(String)],
+              ["Markerlights", jasmine.any(String)],
+              ["Saviour Protocols", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

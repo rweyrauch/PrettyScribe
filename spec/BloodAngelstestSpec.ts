@@ -26,7 +26,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Lieutenant in Phobos Armour (Bolt pistol, Master-crafted occulus bolt carbine, Paired Combat Blades, Frag & Krak grenades)",
-                  "Primaris Lieutenant (Bolt pistol, Neo-volkite pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)"
+                  "Primaris Lieutenant (Bolt pistol, Neo-volkite pistol [15 pts], Master-crafted power sword, Frag & Krak grenades, Storm shield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -106,7 +106,18 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Frag grenades"}),
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Bolter Discipline", jasmine.any(String)],
+              ["Angels of Death", jasmine.any(String)],
+              ["Shock Assault", jasmine.any(String)],
+              ["Savage Echoes", jasmine.any(String)],
+              ["Death from Above", jasmine.any(String)],
+              ["Combat Squads", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["The Red Thirst", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

@@ -14,7 +14,8 @@ describe("Create40kRoster", function() {
             '_configurations': [
               "Battle Size: 3. Strike Force (101-200 Total PL / 1001-2000 Points)  [12 CP]",
               "Cults of the Legion: Cult of Scheming",
-              "Detachment CP",
+              "Gametype: Matched",
+              "Detachment CP [-3 CP]",
             ],
             '_units': [
               jasmine.objectContaining({
@@ -122,7 +123,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Helbrute"}),
                 ],
                 '_modelList': [
-                  "Helbrute (Multi-melta, Helbrute fist)"
+                  "Helbrute (Multi-melta [25 pts], Helbrute fist [20 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Multi-melta"}),
@@ -136,8 +137,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scarab Occult Terminator"}),
                 ],
                 '_modelList': [
-                  "Scarab Occult Sorcerer (Inferno Combi-bolter, Force stave, Smite)",
-                  "4x Terminator (Inferno Combi-bolter, Power sword)"
+                  "Scarab Occult Sorcerer (Inferno Combi-bolter [3 pts], Force stave, Smite)",
+                  "4x Terminator (Inferno Combi-bolter [3 pts], Power sword [5 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Inferno Combi-bolter"}),
@@ -158,7 +159,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake"}),
                 ],
                 '_modelList': [
-                  "Heldrake (Hades autocannon, Heldrake claws)"
+                  "Heldrake (Hades autocannon [25 pts], Heldrake claws)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Hades autocannon"}),
@@ -170,12 +171,20 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake2"}),
                   jasmine.objectContaining({'_name': "Heldrake3"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Daemonic Ritual", jasmine.any(String)],
+              ["Brotherhood of Sorcerors", jasmine.any(String)],
+              ["Hateful Assault", jasmine.any(String)],
+              ["Malicious Volleys", jasmine.any(String)],
+              ["Disciples of Tzeentch", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [
               "Cults of the Legion: Cult of Prophecy",
-              "Detachment CP",
+              "Detachment CP [-3 CP]",
             ],
             '_units': [
               jasmine.objectContaining({
@@ -202,7 +211,12 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Magnus the Red2"}),
                   jasmine.objectContaining({'_name': "Magnus the Red3"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Hateful Assault", jasmine.any(String)],
+              ["Malicious Volleys", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

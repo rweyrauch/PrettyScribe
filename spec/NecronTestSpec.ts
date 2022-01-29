@@ -11,7 +11,9 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 50, _points: 785, _commandPoints: 0}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Dynasty Choice",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Cryptek",
@@ -20,7 +22,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Cryptek"}),
                 ],
                 '_modelList': [
-                  "Cryptek (Staff of Light)"
+                  "Cryptek (Staff of Light [10 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Staff of Light (Shooting)"}),
@@ -33,7 +35,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Overlord"}),
                 ],
                 '_modelList': [
-                  "Overlord (Staff of Light)"
+                  "Overlord (Staff of Light [10 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Staff of Light (Shooting)"}),
@@ -46,7 +48,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Immortal"}),
                 ],
                 '_modelList': [
-                  "5x Immortal (Gauss Blaster)"
+                  "5x Immortal (Gauss Blaster [35 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Gauss Blaster"}),
@@ -111,19 +113,13 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Doom Scythe Track 2"}),
                   jasmine.objectContaining({'_name': "Doom Scythe Track 3"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "Dynasty Choice",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Living Metal", jasmine.any(String)],
+              ["Reanimation Protocols", jasmine.any(String)],
+              ["Their Number is Legion, Their Name is Death", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

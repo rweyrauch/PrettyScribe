@@ -12,8 +12,8 @@ describe("Create40kRoster", function() {
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
-              "Battle-forged CP",
-              "Detachment CP",
+              "Battle-forged CP [3 CP]",
+              "Detachment CP [5 CP]",
               "Cults of the Legion: Cult of Scheming",
             ],
             '_units': [
@@ -45,7 +45,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Exalted Sorcerer"}),
                 ],
                 '_modelList': [
-                  "Exalted Sorcerer (Inferno Bolt Pistol, Force stave, Frag & Krak grenades, Smite)"
+                  "Exalted Sorcerer (Inferno Bolt Pistol, Force stave [8 pts], Frag & Krak grenades, Smite)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Inferno Bolt Pistol"}),
@@ -82,7 +82,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Rubric Marine"}),
                 ],
                 '_modelList': [
-                  "Aspiring Sorcerer (Inferno Bolt Pistol, Force stave, Smite)",
+                  "Aspiring Sorcerer (Inferno Bolt Pistol, Force stave [8 pts], Smite)",
                   "4x Rubric Marine w/ Inferno Boltgun (Inferno boltgun)"
                 ],
                 '_weapons': [
@@ -118,7 +118,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Helbrute"}),
                 ],
                 '_modelList': [
-                  "Helbrute (Multi-melta, Helbrute fist)"
+                  "Helbrute (Multi-melta [22 pts], Helbrute fist [20 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Multi-melta"}),
@@ -132,8 +132,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scarab Occult Terminator"}),
                 ],
                 '_modelList': [
-                  "Scarab Occult Sorcerer (Inferno Combi-bolter, Force stave, Smite)",
-                  "4x Terminator (Inferno Combi-bolter, Powersword)"
+                  "Scarab Occult Sorcerer (Inferno Combi-bolter [3 pts], Force stave [8 pts], Smite)",
+                  "4x Terminator (Inferno Combi-bolter [3 pts], Powersword [4 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Inferno Combi-bolter"}),
@@ -154,7 +154,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake"}),
                 ],
                 '_modelList': [
-                  "Heldrake (Hades Autocannon, Heldrake claws)"
+                  "Heldrake (Hades Autocannon [20 pts], Heldrake claws)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Hades autocannon"}),
@@ -166,7 +166,15 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake2"}),
                   jasmine.objectContaining({'_name': "Heldrake3"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Daemonic Ritual", jasmine.any(String)],
+              ["Brotherhood of Sorcerors", jasmine.any(String)],
+              ["Hateful Assault", jasmine.any(String)],
+              ["Malicious Volleys", jasmine.any(String)],
+              ["Disciples of Tzeentch", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [
@@ -197,7 +205,12 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Magnus the Red2"}),
                   jasmine.objectContaining({'_name': "Magnus the Red3"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Hateful Assault", jasmine.any(String)],
+              ["Malicious Volleys", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });

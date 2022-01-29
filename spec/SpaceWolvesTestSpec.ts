@@ -12,7 +12,7 @@ describe("Create40kRoster", function() {
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
-              "Detachment CP",
+              "Detachment CP [5 CP]",
             ],
             '_units': [
               jasmine.objectContaining({
@@ -110,8 +110,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellblaster Pack Leader"}),
                 ],
                 '_modelList': [
-                  "4x Hellblaster (Bolt pistol, Plasma Incinerator, Frag & Krak grenades)",
-                  "Hellblaster Pack Leader (Bolt pistol, Plasma Incinerator, Frag & Krak grenades)"
+                  "4x Hellblaster (Bolt pistol, Plasma Incinerator [75 pts], Frag & Krak grenades)",
+                  "Hellblaster Pack Leader (Bolt pistol, Plasma Incinerator [75 pts], Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -127,7 +127,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Stormfang Gunship"}),
                 ],
                 '_modelList': [
-                  "Stormfang Gunship (Helfrost destructor, 2x Stormstrike missile launcher, 2x Twin heavy bolter)"
+                  "Stormfang Gunship (Helfrost destructor, 2x Stormstrike missile launcher [42 pts], 2x Twin heavy bolter [34 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Helfrost destructor - Dispersed beam"}),
@@ -152,12 +152,21 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Shock Assault", jasmine.any(String)],
+              ["Bolter Discipline", jasmine.any(String)],
+              ["And They Shall Know No Fear", jasmine.any(String)],
+              ["Hunters Unleashed", jasmine.any(String)],
+              ["Defenders of Humanity", jasmine.any(String)],
+              ["Angels of Death", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
             '_configurations': [
-              "Battle-forged CP",
-              "Detachment CP",
+              "Battle-forged CP [3 CP]",
+              "Detachment CP [5 CP]",
               "Stratagems - Specialist Detachment: Stalker Pack [-1 CP]",
             ],
             '_units': [
@@ -168,7 +177,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bjorn the Fell-handed"}),
                 ],
                 '_modelList': [
-                  "Bjorn the Fell-handed (Assault cannon, Heavy flamer, Trueclaw, Warlord)"
+                  "Bjorn the Fell-handed (Assault cannon [22 pts], Heavy flamer [14 pts], Trueclaw, Warlord)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Assault cannon"}),
@@ -182,7 +191,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Primaris Battle Leader"}),
                 ],
                 '_modelList': [
-                  "Primaris Battle Leader (Bolt carbine, Bolt pistol, Power axe, Frag & Krak grenades, Helm of Durfast)"
+                  "Primaris Battle Leader (Bolt carbine, Bolt pistol, Power axe [5 pts], Frag & Krak grenades, Helm of Durfast)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt Carbine"}),
@@ -250,7 +259,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Lone Wolf"}),
                 ],
                 '_modelList': [
-                  "Lone Wolf [Index] (Chainsword, Power axe, Frag & Krak grenades)"
+                  "Lone Wolf [Index] (Chainsword, Power axe [5 pts], Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Chainsword"}),
@@ -265,7 +274,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Lone Wolf"}),
                 ],
                 '_modelList': [
-                  "Lone Wolf in Terminator Armour [Index] (Storm bolter, Power sword)"
+                  "Lone Wolf in Terminator Armour [Index] (Storm bolter [2 pts], Power sword [4 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -309,8 +318,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Wulfen Pack Leader"}),
                 ],
                 '_modelList': [
-                  "4x Wulfen (Frost claws, Great frost axe, Thunder Hammer, Wulfen claws)",
-                  "Wulfen Pack Leader (2x Frost claws, Great frost axe, Thunder Hammer, Wulfen claws)"
+                  "4x Wulfen (Frost claws [11 pts], Great frost axe [9 pts], Thunder Hammer [16 pts], Wulfen claws)",
+                  "Wulfen Pack Leader (2x Frost claws [22 pts], Great frost axe [9 pts], Thunder Hammer [16 pts], Wulfen claws)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Frost claws"}),
@@ -318,7 +327,15 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Thunder hammer"}),
                   jasmine.objectContaining({'_name': "Wulfen claws"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["And They Shall Know No Fear", jasmine.any(String)],
+              ["Hunters Unleashed", jasmine.any(String)],
+              ["Defenders of Humanity", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Stalker Pack", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });
