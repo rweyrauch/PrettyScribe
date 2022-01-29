@@ -11,7 +11,9 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 124, _points: 2087, _commandPoints: -3}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - **Chapter Selection**: Black Templars",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Chapter Master in Phobos Armor",
@@ -96,29 +98,20 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Frag grenade"}),
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "**Chapter Selection**",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
             ],
             '_rules': new Map([
               ["Bolter Discipline", jasmine.any(String)],
               ["Angels of Death", jasmine.any(String)],
               ["Shock Assault", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
               ["Righteous Zeal", jasmine.any(String)],
             ]),
-            '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - **Chapter Selection**: Black Templars",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Chaplain Grimaldus",
@@ -222,27 +215,18 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Frag grenade"}),
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "**Chapter Selection**",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
             ],
             '_rules': new Map([
-              ["Righteous Zeal", jasmine.any(String)],
               ["Angels of Death", jasmine.any(String)],
             ]),
-            '_factionRules': new Map(),
+            '_factionRules': new Map([
+              ["Righteous Zeal", jasmine.any(String)],
+            ]),
           }),
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - **Chapter Selection**: Black Templars",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Lieutenants in Phobos Armor",
@@ -373,25 +357,14 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Repulsor 2"}),
                   jasmine.objectContaining({'_name': "Repulsor 3"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "**Chapter Selection**",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
             ],
             '_rules': new Map([
-              ["Righteous Zeal", jasmine.any(String)],
               ["Angels of Death", jasmine.any(String)],
               ["Explodes (6\"/D6)", jasmine.any(String)],
             ]),
-            '_factionRules': new Map(),
+            '_factionRules': new Map([
+              ["Righteous Zeal", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

@@ -183,7 +183,13 @@ describe("Create40kRoster", function() {
             '_factionRules': new Map(),
           }),
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Battle-forged CP [3 CP]",
+              "No Force Org Slot - Detachment CP [5 CP]",
+              "No Force Org Slot - Hive Fleet: Hydra",
+              "No Force Org Slot - Stratagem: Bounty of the Hive Fleet: 1 Extra Bio-artefact [-1 CP]",
+              "No Force Org Slot - Stratagem: Progeny of the Hive [-1 CP]",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Broodlord",
@@ -334,69 +340,15 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Toxicrene (2)"}),
                   jasmine.objectContaining({'_name': "Toxicrene (3)"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "Battle-forged CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 3}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 5}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Hive Fleet",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  "Unit Upgrades (Hydra)"
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Stratagem: Bounty of the Hive Fleet",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: -1}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  "Unit Upgrades (1 Extra Bio-artefact [-1 CP])"
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Stratagem: Progeny of the Hive",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: -1}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
             ],
-            '_rules': new Map(),
-            '_factionRules': new Map(),
+            '_rules': new Map([
+              ["Hive Fleet Adaptations", jasmine.any(String)],
+              ["Bounty of the Hive Fleet", jasmine.any(String)],
+              ["Stratagem: Progeny of the Hive", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Swarming Insects", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

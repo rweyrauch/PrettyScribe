@@ -11,7 +11,12 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 129, _points: 2044, _commandPoints: 7}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Detachment CP [5 CP]",
+              "No Force Org Slot - Cults of the Legion: *No Cult*",
+              "No Force Org Slot - Battle-forged CP [3 CP]",
+              "No Force Org Slot - Detachment CP",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Ahriman",
@@ -342,54 +347,6 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Chaos Xiphon Interceptor1"}),
                   jasmine.objectContaining({'_name': "Chaos Xiphon Interceptor2"}),
                   jasmine.objectContaining({'_name': "Chaos Xiphon Interceptor3"}),
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Battle-forged CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 3}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Cults of the Legion",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 5}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
                 ]}),
             ],
             '_rules': new Map([

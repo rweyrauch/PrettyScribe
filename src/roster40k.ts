@@ -215,11 +215,6 @@ export class Model extends BaseNotes {
     }
 }
 
-export class ProfileTable {
-    _name: string = "";
-    _table: Map<string, string>[] = [];
-}
-
 export class Unit extends BaseNotes {
 
     _role: UnitRole = UnitRole.NONE;
@@ -432,32 +427,31 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
 
         if (selectionName.includes("Detachment Command Cost")) {
             // Ignore Detachment Command cost
-        } else if (selectionName === 'Battle Size') {
+        } else if (selectionName === 'Battle Size' || selectionName === 'Gametype') {
             ParseConfiguration(selection, force);
-        } else {
-            let unit = ParseUnit(selection, is40k);
-            if (unit && unit._role != UnitRole.NONE) {
-                force._units.push(unit);
-                for (const entry of unit._rules.entries()) {
-                    force._rules.set(entry[0], entry[1]);
+        } else if (selection.querySelector('profile[typeName="Unit"]')) {
+            const unit = ParseUnit(selection, is40k);
+            force._units.push(unit);
+            for (const entry of unit._rules.entries()) {
+                force._rules.set(entry[0], entry[1]);
+            }
+        } else if (selection.getAttribute("type") === "upgrade") {
+            ExtractRuleFromSelection(selection, force._rules);
+            ParseConfiguration(selection, force);
+            const props = selection.querySelectorAll("selections>selection");
+            for (let prop of props) {
+                // sub-faction
+                const name = prop.getAttribute("name");
+                if (name && prop.getAttribute("type") === "upgrade") {
+                    if (force._faction === "Unknown") {
+                        // pick the first upgrade we see
+                        force._faction = name;
+                    }
+                    ExtractRuleFromSelection(prop, force._factionRules);
                 }
             }
-            else if (selection.getAttribute("type") === "upgrade") {
-              ExtractRuleFromSelection(selection, force._rules);
-              ParseConfiguration(selection, force);
-              const props = selection.querySelectorAll("selections>selection");
-              for (let prop of props) {
-                  // sub-faction
-                  const name = prop.getAttribute("name");
-                  if (name && prop.getAttribute("type") === "upgrade") {
-                      if (force._faction === "Unknown") {
-                          // pick the first upgrade we see
-                          force._faction = name;
-                      }
-                      ExtractRuleFromSelection(prop, force._factionRules);
-                    }
-                  }
-            }
+        } else {
+            console.log('** UNEXPECTED SELECTION **', selectionName, selection);
         }
     }
 
@@ -486,7 +480,7 @@ function ParseConfiguration(selection: Element, force: Force) {
     const category = selection.querySelector("category")?.getAttribute('name');
     const subSelections = selection.querySelectorAll('selections>selection');
     const details = [];
-    let costs = new Costs();
+    let costs = GetSelectionCosts(selection);
     for (const sel of subSelections) {
         details.push(sel.getAttribute("name"));
         costs.add(GetSelectionCosts(sel));
@@ -519,7 +513,8 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
         console.log("Profile name:" + profileName + "  Type: " + profileType);
 
         if (profileName && profileType) {
-            if (profileType === "Abilities" || profileType === "Dynastic Code") {
+            if (profileType === "Abilities" || profileType === "Dynastic Code" ||
+                    profileType === "Household Tradition") {
                 const chars = profile.querySelectorAll("characteristics>characteristic");
                 for (const char of chars) {
                     const charName = char.getAttribute("name");
@@ -681,7 +676,7 @@ function ParseCost(cost: Element): Costs {
     return costs;
 }
 
-function ParseUnit(root: Element, is40k: boolean): Unit | null {
+function ParseUnit(root: Element, is40k: boolean): Unit {
     let unit: Unit = new Unit();
     const unitName = ExpandBaseNotes(root, unit);
 

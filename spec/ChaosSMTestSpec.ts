@@ -11,7 +11,11 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 130, _points: 1973, _commandPoints: 13}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Legion: Renegade Chapters",
+              "No Force Org Slot - Battle-forged CP [3 CP]",
+              "No Force Org Slot - Detachment CP [5 CP]",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Daemon Prince",
@@ -228,42 +232,6 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake2"}),
                   jasmine.objectContaining({'_name': "Heldrake3"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "Battle-forged CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 3}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 5}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Legion",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  "Unit Upgrades (Renegade Chapters)"
-                ],
-                '_weapons': [
-                  
-                ]}),
             ],
             '_rules': new Map([
               ["Despoilers of the Galaxy (Renegade Chapters)", jasmine.any(String)],
@@ -271,10 +239,15 @@ describe("Create40kRoster", function() {
               ["Hateful Assault", jasmine.any(String)],
               ["Hateful Volleys", jasmine.any(String)],
             ]),
-            '_factionRules': new Map(),
+            '_factionRules': new Map([
+              ["Dark Raiders", jasmine.any(String)],
+            ]),
           }),
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Chaos Allegiance: Chaos Undivided",
+              "No Force Org Slot - Detachment CP [5 CP]",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Fateskimmer",
@@ -407,30 +380,6 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Lashes of Torment"}),
                   jasmine.objectContaining({'_name': "Lashing tongues"}),
                   jasmine.objectContaining({'_name': "Piercing claws"}),
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Chaos Allegiance",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 5}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
                 ]}),
             ],
             '_rules': new Map([

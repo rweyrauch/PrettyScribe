@@ -11,7 +11,9 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 101, _points: 1625, _commandPoints: 0}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Regimental Doctrine: Astra Millitarum",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Commissar Yarrick",
@@ -318,18 +320,6 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 1"}),
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 2"}),
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 3"}),
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Regimental Doctrine",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
                 ]}),
             ],
             '_rules': new Map([

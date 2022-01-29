@@ -13,7 +13,7 @@ describe("Create40kRoster", function() {
           jasmine.objectContaining({
             '_configurations': [
               "Household Choice: Questor Imperialis, House Griffith, Household Tradition: Glory of the Charge",
-              "Detachment CP",
+              "Detachment CP [3 CP]",
             ],
             '_units': [
               jasmine.objectContaining({
@@ -114,11 +114,13 @@ describe("Create40kRoster", function() {
             '_rules': new Map([
               ["Knight Lance", jasmine.any(String)],
             ]),
-            '_factionRules': new Map(),
+            '_factionRules': new Map([
+              ["Glory of the Charge", jasmine.any(String)],
+            ]),
           }),
           jasmine.objectContaining({
             '_configurations': [
-              "Detachment CP",
+              "Detachment CP [5 CP]",
               "Regimental Doctrine: Astra Millitarum",
             ],
             '_units': [
@@ -206,7 +208,7 @@ describe("Create40kRoster", function() {
           }),
           jasmine.objectContaining({
             '_configurations': [
-              "Detachment CP",
+              "Detachment CP [5 CP]",
               "Regimental Doctrine: Regiment: Catachan",
             ],
             '_units': [

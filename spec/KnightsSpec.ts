@@ -11,7 +11,9 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 90, _points: 1904, _commandPoints: 0}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Household Choice: Questor Imperialis, House Griffith, Household Tradition: Glory of the Charge",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Armiger Helverins",
@@ -131,23 +133,13 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Gallant 2"}),
                   jasmine.objectContaining({'_name': "Knight Gallant 3"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "Household Choice",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  "Unit Upgrades (House Griffith, Questor Imperialis)"
-                ],
-                '_weapons': [
-                  
-                ]}),
             ],
             '_rules': new Map([
               ["Knight Lance", jasmine.any(String)],
             ]),
-            '_factionRules': new Map(),
+            '_factionRules': new Map([
+              ["Glory of the Charge", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

@@ -12,7 +12,7 @@ describe("Create40kRoster", function() {
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
-              "Detachment CP",
+              "Detachment CP [5 CP]",
             ],
             '_units': [
               jasmine.objectContaining({
@@ -165,8 +165,8 @@ describe("Create40kRoster", function() {
           }),
           jasmine.objectContaining({
             '_configurations': [
-              "Battle-forged CP",
-              "Detachment CP",
+              "Battle-forged CP [3 CP]",
+              "Detachment CP [5 CP]",
               "Stratagems - Specialist Detachment: Stalker Pack [-1 CP]",
             ],
             '_units': [

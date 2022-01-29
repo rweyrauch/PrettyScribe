@@ -11,7 +11,10 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 126, _points: 2029, _commandPoints: 15}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Battle-forged CP [3 CP]",
+              "No Force Org Slot - Detachment CP [12 CP]",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Aun'Shi",
@@ -373,30 +376,6 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy rail rifle"}),
                   jasmine.objectContaining({'_name': "Smart missile system"}),
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Battle-forged CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 3}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 12}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
                 ]}),
             ],
             '_rules': new Map([

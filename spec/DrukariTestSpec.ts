@@ -13,7 +13,7 @@ describe("Create40kRoster", function() {
           jasmine.objectContaining({
             '_configurations': [
               "Detachment Type: Mixed Detachment",
-              "Detachment CP",
+              "Detachment CP [5 CP]",
             ],
             '_units': [
               jasmine.objectContaining({
@@ -248,8 +248,8 @@ describe("Create40kRoster", function() {
           jasmine.objectContaining({
             '_configurations': [
               "Masque Form: The Silent Shroud: Dance of Nightmares Made Flesh",
-              "Battle-forged CP",
-              "Detachment CP",
+              "Battle-forged CP [3 CP]",
+              "Detachment CP [5 CP]",
             ],
             '_units': [
               jasmine.objectContaining({

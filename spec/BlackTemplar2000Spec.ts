@@ -11,7 +11,11 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 104, _points: 1994, _commandPoints: 14}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - **Chapter Selection**: Imperial Fists Successor, Black Templars",
+              "No Force Org Slot - Battle-forged CP [3 CP]",
+              "No Force Org Slot - Detachment CP [12 CP]",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Captain in Phobos Armour",
@@ -356,53 +360,18 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Impulsor Wound Track 2"}),
                   jasmine.objectContaining({'_name': "Impulsor Wound Track 3"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "**Chapter Selection**",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Battle-forged CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 3}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Detachment CP",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 12}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
             ],
             '_rules': new Map([
               ["Bolter Discipline", jasmine.any(String)],
               ["Angels of Death", jasmine.any(String)],
               ["Shock Assault", jasmine.any(String)],
-              ["Righteous Zeal", jasmine.any(String)],
               ["Explodes (6\"/D6)", jasmine.any(String)],
               ["Explodes (6\"/D3)", jasmine.any(String)],
               ["Smoke Launchers", jasmine.any(String)],
             ]),
-            '_factionRules': new Map(),
+            '_factionRules': new Map([
+              ["Righteous Zeal", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

@@ -14,7 +14,8 @@ describe("Create40kRoster", function() {
             '_configurations': [
               "Battle Size: 3. Strike Force (101-200 Total PL / 1001-2000 Points)  [12 CP]",
               "Cults of the Legion: Cult of Scheming",
-              "Detachment CP",
+              "Gametype: Matched",
+              "Detachment CP [-3 CP]",
             ],
             '_units': [
               jasmine.objectContaining({
@@ -183,7 +184,7 @@ describe("Create40kRoster", function() {
           jasmine.objectContaining({
             '_configurations': [
               "Cults of the Legion: Cult of Prophecy",
-              "Detachment CP",
+              "Detachment CP [-3 CP]",
             ],
             '_units': [
               jasmine.objectContaining({

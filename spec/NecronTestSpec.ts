@@ -11,7 +11,9 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 50, _points: 785, _commandPoints: 0}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Dynasty Choice",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Cryptek",
@@ -110,18 +112,6 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Doom Scythe Track 1"}),
                   jasmine.objectContaining({'_name': "Doom Scythe Track 2"}),
                   jasmine.objectContaining({'_name': "Doom Scythe Track 3"}),
-                ]}),
-              jasmine.objectContaining({
-                '_name': "Dynasty Choice",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
                 ]}),
             ],
             '_rules': new Map([

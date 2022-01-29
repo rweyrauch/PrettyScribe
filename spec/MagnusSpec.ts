@@ -12,8 +12,8 @@ describe("Create40kRoster", function() {
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
-              "Battle-forged CP",
-              "Detachment CP",
+              "Battle-forged CP [3 CP]",
+              "Detachment CP [5 CP]",
               "Cults of the Legion: Cult of Scheming",
             ],
             '_units': [
