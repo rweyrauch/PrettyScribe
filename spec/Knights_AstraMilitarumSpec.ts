@@ -23,7 +23,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Armiger Helverin"}),
                 ],
                 '_modelList': [
-                  "Armiger Helverin (2x Armiger Autocannon, Meltagun)"
+                  "Armiger Helverin (2x Armiger Autocannon, Meltagun [14 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Armiger Autocannon"}),
@@ -44,7 +44,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Armiger Warglaive"}),
                 ],
                 '_modelList': [
-                  "Armiger Warglaive (Meltagun, Thermal Spear, Reaper Chain-Cleaver)"
+                  "Armiger Warglaive (Meltagun [14 pts], Thermal Spear, Reaper Chain-Cleaver)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Meltagun"}),
@@ -67,7 +67,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Castellan"}),
                 ],
                 '_modelList': [
-                  "Knight Castellan (Plasma Decimator, 2x Shieldbreaker Missile, 2x Twin Meltagun, 2x Twin Siegebreaker Cannon, Volcano Lance, Titanic Feet, Character (Knight Lance), Heirloom: Armour of the Sainted Ion, Warlord, Warlord Trait: Fearsome Reputation)"
+                  "Knight Castellan (Plasma Decimator [40 pts], 2x Shieldbreaker Missile [24 pts], 2x Twin Meltagun, 2x Twin Siegebreaker Cannon [70 pts], Volcano Lance [60 pts], Titanic Feet, Character (Knight Lance), Heirloom: Armour of the Sainted Ion, Warlord, Warlord Trait: Fearsome Reputation)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Plasma Decimator (Standard)"}),
@@ -93,7 +93,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Crusader"}),
                 ],
                 '_modelList': [
-                  "Knight Crusader (Avenger Gatling Cannon, Heavy Flamer, Heavy Stubber, Thermal Cannon, Titanic Feet)"
+                  "Knight Crusader (Avenger Gatling Cannon [75 pts], Heavy Flamer [14 pts], Heavy Stubber [2 pts], Thermal Cannon [76 pts], Titanic Feet)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Avenger Gatling Cannon"}),
@@ -296,8 +296,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bullgryn Bone 'ead"}),
                 ],
                 '_modelList': [
-                  "2x Bullgryn (Grenadier Gauntlet, Frag Bombs, Slabshield)",
-                  "Bullgryn Bone 'ead (Grenadier Gauntlet, Frag Bombs, Slabshield)"
+                  "2x Bullgryn (Grenadier Gauntlet [5 pts], Frag Bombs, Slabshield)",
+                  "Bullgryn Bone 'ead (Grenadier Gauntlet [5 pts], Frag Bombs, Slabshield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Grenadier Gauntlet"}),

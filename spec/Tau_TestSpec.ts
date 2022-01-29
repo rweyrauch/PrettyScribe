@@ -34,7 +34,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Commander in XV8 Crisis Battlesuit"}),
                 ],
                 '_modelList': [
-                  "Commander in XV8 Crisis Battlesuit (Burst cannon, Missile pod)"
+                  "Commander in XV8 Crisis Battlesuit (Burst cannon [8 pts], Missile pod [15 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -47,7 +47,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Commander in XV85 Enforcer Battlesuit"}),
                 ],
                 '_modelList': [
-                  "Commander in XV85 Enforcer Battlesuit (Burst cannon, Missile pod)"
+                  "Commander in XV85 Enforcer Battlesuit (Burst cannon [8 pts], Missile pod [15 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -114,7 +114,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "XV95 Ghostkeel Shas'vre"}),
                 ],
                 '_modelList': [
-                  "XV95 Ghostkeel Battlesuit (2x Flamer, Fusion collider)"
+                  "XV95 Ghostkeel Battlesuit (2x Flamer [12 pts], Fusion collider [25 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Flamer"}),
@@ -132,7 +132,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "AX3 Razorshark Strike Fighter"}),
                 ],
                 '_modelList': [
-                  "AX3 Razorshark Strike Fighter (Burst cannon, Quad ion turret, 2x Seeker missile)"
+                  "AX3 Razorshark Strike Fighter (Burst cannon [8 pts], Quad ion turret [30 pts], 2x Seeker missile [10 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -153,7 +153,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "TY7 Devilfish"}),
                 ],
                 '_modelList': [
-                  "TY7 Devilfish (Burst cannon, 4x Pulse carbine)"
+                  "TY7 Devilfish (Burst cannon [8 pts], 4x Pulse carbine)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),
@@ -301,7 +301,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
                 ],
                 '_modelList': [
-                  "XV104 Riptide Battlesuit (Heavy burst cannon, 2x Smart missile system)"
+                  "XV104 Riptide Battlesuit (Heavy burst cannon [35 pts], 2x Smart missile system [30 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy burst cannon"}),
@@ -319,7 +319,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
                 ],
                 '_modelList': [
-                  "XV104 Riptide Battlesuit (Heavy burst cannon, 2x Smart missile system)"
+                  "XV104 Riptide Battlesuit (Heavy burst cannon [35 pts], 2x Smart missile system [30 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy burst cannon"}),
@@ -337,7 +337,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "XV104 Riptide Battlesuit"}),
                 ],
                 '_modelList': [
-                  "XV104 Riptide Battlesuit (Heavy burst cannon, 2x Smart missile system)"
+                  "XV104 Riptide Battlesuit (Heavy burst cannon [35 pts], 2x Smart missile system [30 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy burst cannon"}),
@@ -415,7 +415,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heavy Gun Drone"}),
                 ],
                 '_modelList': [
-                  "2x Heavy Gun Drone w/ 2x BC (Burst cannon)"
+                  "2x Heavy Gun Drone w/ 2x BC (Burst cannon [8 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),

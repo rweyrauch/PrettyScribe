@@ -23,7 +23,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Archon"}),
                 ],
                 '_modelList': [
-                  "Archon (Splinter pistol, Huskblade, Shadowfield)"
+                  "Archon (Splinter pistol, Huskblade [6 pts], Shadowfield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Splinter pistol"}),
@@ -36,7 +36,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Haemonculus"}),
                 ],
                 '_modelList': [
-                  "Haemonculus (Splinter pistol, Agoniser)"
+                  "Haemonculus (Splinter pistol, Agoniser [4 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Splinter pistol"}),
@@ -93,7 +93,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Grotesque"}),
                 ],
                 '_modelList': [
-                  "3x Grotesque with Monstrous Cleaver (Flesh gauntlet, Monstrous cleaver)"
+                  "3x Grotesque with Monstrous Cleaver (Flesh gauntlet [3 pts], Monstrous cleaver)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Flesh Gauntlet"}),
@@ -152,7 +152,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Ravager"}),
                 ],
                 '_modelList': [
-                  "Ravager (3x Dark Lance, Bladevanes, Night Shield)"
+                  "Ravager (3x Dark Lance [45 pts], Bladevanes, Night Shield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Dark Lance"}),
@@ -210,7 +210,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Raider"}),
                 ],
                 '_modelList': [
-                  "Raider (Dark Lance, Bladevanes, Night Shield)"
+                  "Raider (Dark Lance [15 pts], Bladevanes, Night Shield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Dark Lance"}),
@@ -229,7 +229,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Venom"}),
                 ],
                 '_modelList': [
-                  "Venom (Splinter Cannon, Twin splinter rifle, Bladevanes, Flickerfield, Night Shield)"
+                  "Venom (Splinter Cannon [10 pts], Twin splinter rifle, Bladevanes, Flickerfield, Night Shield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Splinter Cannon"}),
@@ -370,7 +370,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Skyweaver"}),
                 ],
                 '_modelList': [
-                  "2x Skyweaver (Shuriken Cannon, Star Bolas)"
+                  "2x Skyweaver (Shuriken Cannon [10 pts], Star Bolas)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Shuriken Cannon"}),
@@ -383,7 +383,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Voidweaver"}),
                 ],
                 '_modelList': [
-                  "Voidweaver (Haywire Cannon, 2x Shuriken Cannon)"
+                  "Voidweaver (Haywire Cannon [15 pts], 2x Shuriken Cannon [20 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Haywire Cannon"}),
@@ -396,7 +396,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Starweaver"}),
                 ],
                 '_modelList': [
-                  "Starweaver (2x Shuriken Cannon)"
+                  "Starweaver (2x Shuriken Cannon [20 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Shuriken Cannon"}),

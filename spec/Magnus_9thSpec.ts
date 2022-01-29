@@ -123,7 +123,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Helbrute"}),
                 ],
                 '_modelList': [
-                  "Helbrute (Multi-melta, Helbrute fist)"
+                  "Helbrute (Multi-melta [25 pts], Helbrute fist [20 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Multi-melta"}),
@@ -137,8 +137,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scarab Occult Terminator"}),
                 ],
                 '_modelList': [
-                  "Scarab Occult Sorcerer (Inferno Combi-bolter, Force stave, Smite)",
-                  "4x Terminator (Inferno Combi-bolter, Power sword)"
+                  "Scarab Occult Sorcerer (Inferno Combi-bolter [3 pts], Force stave, Smite)",
+                  "4x Terminator (Inferno Combi-bolter [3 pts], Power sword [5 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Inferno Combi-bolter"}),
@@ -159,7 +159,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake"}),
                 ],
                 '_modelList': [
-                  "Heldrake (Hades autocannon, Heldrake claws)"
+                  "Heldrake (Hades autocannon [25 pts], Heldrake claws)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Hades autocannon"}),

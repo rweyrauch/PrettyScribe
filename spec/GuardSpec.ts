@@ -37,7 +37,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Commander Pask"}),
                 ],
                 '_modelList': [
-                  "Knight Commander Pask (Battle Cannon, Heavy Bolter, Stat Damage (Pask))"
+                  "Knight Commander Pask (Battle Cannon [22 pts], Heavy Bolter [8 pts], Stat Damage (Pask))"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Battle Cannon"}),
@@ -148,9 +148,9 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "4x Scion (Hot-shot Lasgun, Frag & Krak grenades)",
-                  "Scion w/ Special Weapon (Grenade Launcher, Frag & Krak grenades)",
-                  "Scion w/ Vox-caster (Hot-Shot Lasgun, Hot-shot Laspistol, Vox-caster)",
-                  "Tempestor (Hot-shot Laspistol, Power fist, Frag & Krak grenades)"
+                  "Scion w/ Special Weapon (Grenade Launcher [3 pts], Frag & Krak grenades)",
+                  "Scion w/ Vox-caster (Hot-Shot Lasgun, Hot-shot Laspistol, Vox-caster [5 pts])",
+                  "Tempestor (Hot-shot Laspistol, Power fist [8 pts], Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Grenade Launcher (Frag)"}),
@@ -169,8 +169,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bullgryn Bone 'ead"}),
                 ],
                 '_modelList': [
-                  "2x Bullgryn (Grenadier Gauntlet, Frag Bombs, Slabshield)",
-                  "Bullgryn Bone 'ead (Grenadier Gauntlet, Frag Bombs, Slabshield)"
+                  "2x Bullgryn (Grenadier Gauntlet [5 pts], Frag Bombs, Slabshield)",
+                  "Bullgryn Bone 'ead (Grenadier Gauntlet [5 pts], Frag Bombs, Slabshield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Grenadier Gauntlet"}),
@@ -204,9 +204,9 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "3x Guardsman (Lasgun, Frag grenade)",
-                  "Guardsman W/ Special Weapon (Grenade Launcher, Frag grenade)",
-                  "Guardsman W/ Special Weapon (Meltagun, Frag grenade)",
-                  "Guardsman W/ Special Weapon (Sniper rifle, Frag grenade)"
+                  "Guardsman W/ Special Weapon (Grenade Launcher [3 pts], Frag grenade)",
+                  "Guardsman W/ Special Weapon (Meltagun [10 pts], Frag grenade)",
+                  "Guardsman W/ Special Weapon (Sniper rifle [2 pts], Frag grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Grenade Launcher (Frag)"}),
@@ -223,9 +223,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellhound"}),
                 ],
                 '_modelList': [
-                  "Bane Wolf (Turret-mounted Chem Cannon, Heavy Bolter, Stat Damage (HS))",
-                  "Devil Dog (Heavy Bolter, Turret-mounted Melta Cannon, Stat Damage (HS))",
-                  "Hellhound (Heavy Bolter, Turret-mounted Inferno Cannon, Stat Damage (HS))"
+                  "Bane Wolf (Turret-mounted Chem Cannon [7 pts], Heavy Bolter [8 pts], Stat Damage (HS))",
+                  "Devil Dog (Heavy Bolter [8 pts], Turret-mounted Melta Cannon [20 pts], Stat Damage (HS))",
+                  "Hellhound (Heavy Bolter [8 pts], Turret-mounted Inferno Cannon [20 pts], Stat Damage (HS))"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Chem Cannon"}),
@@ -251,7 +251,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scout Sentinel"}),
                 ],
                 '_modelList': [
-                  "Scout Sentinel (Multi-laser)"
+                  "Scout Sentinel (Multi-laser [5 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Multi-laser"}),
@@ -263,7 +263,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Tauros"}),
                 ],
                 '_modelList': [
-                  "Tauros (Twin Multi-Laser)"
+                  "Tauros (Twin Multi-Laser [18 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Twin Multi-Laser"}),
@@ -275,7 +275,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hydra"}),
                 ],
                 '_modelList': [
-                  "Hydra (Heavy Bolter, Hydra Quad Autocannon, Stat Damage (HS))"
+                  "Hydra (Heavy Bolter [8 pts], Hydra Quad Autocannon, Stat Damage (HS))"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy bolter"}),
@@ -310,7 +310,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Unit Upgrades (Stat Damage (HS))",
-                  "Wyvern (Heavy Bolter, Wyven Quad Stormshard Mortar)"
+                  "Wyvern (Heavy Bolter [8 pts], Wyven Quad Stormshard Mortar)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy bolter"}),

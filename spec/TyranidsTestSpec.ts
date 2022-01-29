@@ -57,7 +57,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "4x Acolyte Hybrid (Autopistol, Cultist Knife, Rending Claw, Blasting Charges)",
-                  "Acolyte Hybrid (Heavy Weapon) (Autopistol, Heavy Rock Saw, Blasting Charges)",
+                  "Acolyte Hybrid (Heavy Weapon) (Autopistol, Heavy Rock Saw [10 pts], Blasting Charges)",
                   "Acolyte Leader (Autopistol, Cultist Knife, Rending Claw, Blasting Charges)"
                 ],
                 '_weapons': [
@@ -77,11 +77,11 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "9x Brood Brother (Lasgun, Frag Grenades)",
-                  "Brood Brother (Flamer) (Flamer, Frag Grenades)",
-                  "Brood Brother (Grenade) (Grenade Launcher, Frag Grenades)",
-                  "Brood Brother (Vox-caster) (Lasgun, Frag Grenades, Cult Vox-caster)",
+                  "Brood Brother (Flamer) (Flamer [6 pts], Frag Grenades)",
+                  "Brood Brother (Grenade) (Grenade Launcher [3 pts], Frag Grenades)",
+                  "Brood Brother (Vox-caster) (Lasgun, Frag Grenades, Cult Vox-caster [5 pts])",
                   "Brood Brothers Leader (Laspistol, Chainsword, Frag Grenades)",
-                  "Brood Brothers Weapons Team (Lascannon, Lasgun, Frag Grenades)"
+                  "Brood Brothers Weapons Team (Lascannon [20 pts], Lasgun, Frag Grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Flamer"}),
@@ -102,9 +102,9 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "9x Neophyte Hybrid (Autogun, Autopistol, Blasting Charges)",
-                  "Neophyte Hybrid (Flamer) (Autopistol, Flamer, Blasting Charges)",
+                  "Neophyte Hybrid (Flamer) (Autopistol, Flamer [6 pts], Blasting Charges)",
                   "Neophyte Hybrid (Lasgun) (Autopistol, Lasgun, Blasting Charges)",
-                  "Neophyte Hybrid (Mining) (Autopistol, Mining Laser, Blasting Charges)",
+                  "Neophyte Hybrid (Mining) (Autopistol, Mining Laser [12 pts], Blasting Charges)",
                   "Neophyte Hybrid (Shotgun) (Autopistol, Shotgun, Blasting Charges)",
                   "Neophyte Leader (Autogun, Autopistol, Blasting Charges)"
                 ],
@@ -126,7 +126,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "3x Atalan Jackal (Autopistol, Blasting Charges)",
-                  "Atalan Leader (Autopistol, Power Pick, Blasting Charges, Demolition Charge)"
+                  "Atalan Leader (Autopistol, Power Pick [9 pts], Blasting Charges, Demolition Charge [10 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Autopistol"}),
@@ -141,7 +141,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Cult Leman Russ"}),
                 ],
                 '_modelList': [
-                  "Cult Leman Russ (Battle Cannon, Heavy Bolter, 2x Heavy Flamer, Heavy Stubber, Hunter-killer Missile)"
+                  "Cult Leman Russ (Battle Cannon [22 pts], Heavy Bolter [8 pts], 2x Heavy Flamer [28 pts], Heavy Stubber [2 pts], Hunter-killer Missile [6 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Battle Cannon"}),
@@ -162,7 +162,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Goliath Rockgrinder"}),
                 ],
                 '_modelList': [
-                  "Goliath Rockgrinder (Cache of Demolition Charges, Heavy Mining Laser, Heavy Stubber, Drilldozer Blade)"
+                  "Goliath Rockgrinder (Cache of Demolition Charges [10 pts], Heavy Mining Laser [15 pts], Heavy Stubber [2 pts], Drilldozer Blade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Cache of Demolition Charges"}),
@@ -217,7 +217,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hive Tyrant"}),
                 ],
                 '_modelList': [
-                  "Hive Tyrant (2x Monstrous Scything Talons, Prehensile Pincer Tail)"
+                  "Hive Tyrant (2x Monstrous Scything Talons [20 pts], Prehensile Pincer Tail)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Monstrous Scything Talons"}),
@@ -262,11 +262,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Tyranid Warrior"}),
                 ],
                 '_modelList': [
-                  "Tyranid Warrior (Devourer, Boneswords)",
-                  "Tyranid Warrior (Devourer, Lash Whip and Bonesword)",
-                  "Tyranid Warrior (Devourer, Rending Claws)",
-                  "Tyranid Warrior (Devourer, Scything Talons)",
-                  "Tyranid Warrior (Bio-cannon) (Venom Cannon, Scything Talons)"
+                  "Tyranid Warrior (Devourer [4 pts], Boneswords [2 pts])",
+                  "Tyranid Warrior (Devourer [4 pts], Lash Whip and Bonesword [2 pts])",
+                  "Tyranid Warrior (Devourer [4 pts], Rending Claws [2 pts])",
+                  "Tyranid Warrior (Devourer [4 pts], Scything Talons)",
+                  "Tyranid Warrior (Bio-cannon) (Venom Cannon [12 pts], Scything Talons)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Devourer"}),
@@ -283,8 +283,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hive Guard"}),
                 ],
                 '_modelList': [
-                  "3x Hive Guard (Impaler) (Impaler Cannon)",
-                  "Hive Guard (Shock) (Shockcannon)",
+                  "3x Hive Guard (Impaler) (Impaler Cannon [25 pts])",
+                  "Hive Guard (Shock) (Shockcannon [21 pts])",
                   "Unit Upgrades (Adrenal Glands [4 pts], Toxin Sacs [4 pts])"
                 ],
                 '_weapons': [
@@ -298,7 +298,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Carnifex"}),
                 ],
                 '_modelList': [
-                  "Carnifex (2x Monstrous Scything Talons)"
+                  "Carnifex (2x Monstrous Scything Talons [15 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Monstrous Scything Talons"}),

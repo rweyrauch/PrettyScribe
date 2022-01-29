@@ -22,7 +22,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Cryptek"}),
                 ],
                 '_modelList': [
-                  "Cryptek (Staff of Light)"
+                  "Cryptek (Staff of Light [10 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Staff of Light (Shooting)"}),
@@ -35,7 +35,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Overlord"}),
                 ],
                 '_modelList': [
-                  "Overlord (Staff of Light)"
+                  "Overlord (Staff of Light [10 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Staff of Light (Shooting)"}),
@@ -48,7 +48,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Immortal"}),
                 ],
                 '_modelList': [
-                  "5x Immortal (Gauss Blaster)"
+                  "5x Immortal (Gauss Blaster [35 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Gauss Blaster"}),

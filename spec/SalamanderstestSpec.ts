@@ -24,7 +24,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Captain"}),
                 ],
                 '_modelList': [
-                  "Captain (Bolt pistol, Combi-melta, Relic blade, Frag & Krak grenades, Forge Master, Obsidian Aquila, Warlord)"
+                  "Captain (Bolt pistol, Combi-melta [5 pts], Relic blade [10 pts], Frag & Krak grenades, Forge Master, Obsidian Aquila, Warlord)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -44,7 +44,7 @@ describe("Create40kRoster", function() {
                 '_modelList': [
                   "3x Space Marine (Bolt pistol, Boltgun, Frag & Krak grenades)",
                   "Space Marine Sergeant (Bolt pistol, Boltgun, Frag & Krak grenades)",
-                  "Space Marine w/Special Weapon (Bolt pistol, Flamer, Frag & Krak grenades)"
+                  "Space Marine w/Special Weapon (Bolt pistol, Flamer [5 pts], Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -62,8 +62,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "3x Space Marine (Bolt pistol, Boltgun, Frag & Krak grenades)",
-                  "Space Marine Sergeant (Bolt pistol, 2x Boltgun, Combi-flamer, Frag & Krak grenades)",
-                  "Space Marine w/Special Weapon (Bolt pistol, Flamer, Frag & Krak grenades)"
+                  "Space Marine Sergeant (Bolt pistol, 2x Boltgun [10 pts], Combi-flamer [10 pts], Frag & Krak grenades)",
+                  "Space Marine w/Special Weapon (Bolt pistol, Flamer [5 pts], Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -98,8 +98,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Devastator Marine Sergeant (Bolt pistol, Boltgun, Frag & Krak grenades)",
-                  "2x Devastator Marine w/Heavy Weapon (Bolt pistol, Heavy bolter, Frag & Krak grenades)",
-                  "2x Devastator Marine w/Heavy Weapon (Bolt pistol, Multi-melta, Frag & Krak grenades)"
+                  "2x Devastator Marine w/Heavy Weapon (Bolt pistol, Heavy bolter [10 pts], Frag & Krak grenades)",
+                  "2x Devastator Marine w/Heavy Weapon (Bolt pistol, Multi-melta [20 pts], Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),

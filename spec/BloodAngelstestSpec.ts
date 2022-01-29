@@ -26,7 +26,7 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Lieutenant in Phobos Armour (Bolt pistol, Master-crafted occulus bolt carbine, Paired Combat Blades, Frag & Krak grenades)",
-                  "Primaris Lieutenant (Bolt pistol, Neo-volkite pistol, Master-crafted power sword, Frag & Krak grenades, Storm shield)"
+                  "Primaris Lieutenant (Bolt pistol, Neo-volkite pistol [15 pts], Master-crafted power sword, Frag & Krak grenades, Storm shield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),

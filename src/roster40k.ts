@@ -797,9 +797,6 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
                 const upgrade = new Upgrade();
                 upgrade._name = upgradeName;
                 upgrade._cost = GetSelectionCosts(upgradeSelection);
-                // TODO display pts + PL cost once UI can toggle them on/off; we
-                // keep track of CP to make this change backward-compatible.
-                upgrade._cost._points = upgrade._cost._powerLevel = 0;
                 upgrade._count = Number(upgradeSelection.getAttribute('number'));
                 model._upgrades.push(upgrade);
             }
@@ -992,8 +989,7 @@ function ParseWeaponProfile(profile: Element): Weapon {
     const selectionName = selection?.getAttribute('name');
     if (selection?.getAttribute('type') === 'upgrade' && selectionName) {
         weapon._selectionName = selectionName;
-        // TODO Track weapon costs, as well as an option to toggle on/off.
-        // weapon._cost = GetSelectionCosts(selection);
+        weapon._cost = GetSelectionCosts(selection);
     }
     return weapon;
 }

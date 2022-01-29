@@ -24,7 +24,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Daemon Prince"}),
                 ],
                 '_modelList': [
-                  "Daemon Prince (Hellforged sword, Malefic talon)"
+                  "Daemon Prince (Hellforged sword [10 pts], Malefic talon)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Hellforged sword"}),
@@ -37,7 +37,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Lord Discordant on Helstalker"}),
                 ],
                 '_modelList': [
-                  "Lord Discordant on Helstalker (Autocannon, Bolt pistol, Bladed limbs and tail, Impaler chainglaive, Mechatendrils, Techno-virus injector, Frag & Krak grenades, 4. Hatred Incarnate, Intoxicating Elixir, Mark of Slaanesh, Warlord)"
+                  "Lord Discordant on Helstalker (Autocannon [10 pts], Bolt pistol, Bladed limbs and tail, Impaler chainglaive, Mechatendrils, Techno-virus injector, Frag & Krak grenades, 4. Hatred Incarnate, Intoxicating Elixir, Mark of Slaanesh, Warlord)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Autocannon"}),
@@ -62,7 +62,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Sorcerer"}),
                 ],
                 '_modelList': [
-                  "Sorcerer (Bolt pistol, Force sword, Frag & Krak grenades, No Chaos Mark, Smite)"
+                  "Sorcerer (Bolt pistol, Force sword [8 pts], Frag & Krak grenades, No Chaos Mark, Smite)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -135,8 +135,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Chaos Terminator Champion"}),
                 ],
                 '_modelList': [
-                  "Chaos Terminator Champion (Combi-bolter, Chainaxe)",
-                  "4x Terminator (Combi-bolter, Chainaxe)",
+                  "Chaos Terminator Champion (Combi-bolter [2 pts], Chainaxe [1 pts])",
+                  "4x Terminator (Combi-bolter [2 pts], Chainaxe [1 pts])",
                   "Unit Upgrades (Icon of Vengeance [5 pts], No Chaos Mark)"
                 ],
                 '_weapons': [
@@ -220,7 +220,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake"}),
                 ],
                 '_modelList': [
-                  "Heldrake (Hades Autocannon, Heldrake claws, No Chaos Mark)"
+                  "Heldrake (Hades Autocannon [20 pts], Heldrake claws, No Chaos Mark)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Hades autocannon"}),

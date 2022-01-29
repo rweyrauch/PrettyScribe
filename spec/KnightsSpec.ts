@@ -22,7 +22,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Armiger Helverin"}),
                 ],
                 '_modelList': [
-                  "Armiger Helverin (2x Armiger Autocannon, Meltagun)"
+                  "Armiger Helverin (2x Armiger Autocannon, Meltagun [14 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Armiger Autocannon"}),
@@ -43,7 +43,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Armiger Warglaive"}),
                 ],
                 '_modelList': [
-                  "Armiger Warglaive (Meltagun, Thermal Spear, Reaper Chain-Cleaver)"
+                  "Armiger Warglaive (Meltagun [14 pts], Thermal Spear, Reaper Chain-Cleaver)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Meltagun"}),
@@ -66,7 +66,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Castellan"}),
                 ],
                 '_modelList': [
-                  "Knight Castellan (Plasma Decimator, 2x Shieldbreaker Missile, 2x Twin Meltagun, 2x Twin Siegebreaker Cannon, Volcano Lance, Titanic Feet, Character (Knight Lance), Heirloom: Armour of the Sainted Ion, Warlord, Warlord Trait: Fearsome Reputation)"
+                  "Knight Castellan (Plasma Decimator [40 pts], 2x Shieldbreaker Missile [24 pts], 2x Twin Meltagun, 2x Twin Siegebreaker Cannon [70 pts], Volcano Lance [60 pts], Titanic Feet, Character (Knight Lance), Heirloom: Armour of the Sainted Ion, Warlord, Warlord Trait: Fearsome Reputation)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Plasma Decimator (Standard)"}),
@@ -92,7 +92,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Errant"}),
                 ],
                 '_modelList': [
-                  "Knight Errant (Meltagun, Stormspear Rocket Pod, Thermal Cannon, Thunderstrike gauntlet, Titanic Feet)"
+                  "Knight Errant (Meltagun [14 pts], Stormspear Rocket Pod [45 pts], Thermal Cannon [76 pts], Thunderstrike gauntlet [35 pts], Titanic Feet)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Meltagun"}),
@@ -116,7 +116,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Gallant"}),
                 ],
                 '_modelList': [
-                  "Knight Gallant (Heavy Stubber, Stormspear Rocket Pod, Reaper Chainsword, Thunderstrike gauntlet, Titanic Feet)"
+                  "Knight Gallant (Heavy Stubber [2 pts], Stormspear Rocket Pod [45 pts], Reaper Chainsword [30 pts], Thunderstrike gauntlet [35 pts], Titanic Feet)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy stubber"}),

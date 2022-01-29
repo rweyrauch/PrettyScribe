@@ -110,8 +110,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellblaster Pack Leader"}),
                 ],
                 '_modelList': [
-                  "4x Hellblaster (Bolt pistol, Plasma Incinerator, Frag & Krak grenades)",
-                  "Hellblaster Pack Leader (Bolt pistol, Plasma Incinerator, Frag & Krak grenades)"
+                  "4x Hellblaster (Bolt pistol, Plasma Incinerator [75 pts], Frag & Krak grenades)",
+                  "Hellblaster Pack Leader (Bolt pistol, Plasma Incinerator [75 pts], Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
@@ -127,7 +127,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Stormfang Gunship"}),
                 ],
                 '_modelList': [
-                  "Stormfang Gunship (Helfrost destructor, 2x Stormstrike missile launcher, 2x Twin heavy bolter)"
+                  "Stormfang Gunship (Helfrost destructor, 2x Stormstrike missile launcher [42 pts], 2x Twin heavy bolter [34 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Helfrost destructor - Dispersed beam"}),
@@ -177,7 +177,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bjorn the Fell-handed"}),
                 ],
                 '_modelList': [
-                  "Bjorn the Fell-handed (Assault cannon, Heavy flamer, Trueclaw, Warlord)"
+                  "Bjorn the Fell-handed (Assault cannon [22 pts], Heavy flamer [14 pts], Trueclaw, Warlord)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Assault cannon"}),
@@ -191,7 +191,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Primaris Battle Leader"}),
                 ],
                 '_modelList': [
-                  "Primaris Battle Leader (Bolt carbine, Bolt pistol, Power axe, Frag & Krak grenades, Helm of Durfast)"
+                  "Primaris Battle Leader (Bolt carbine, Bolt pistol, Power axe [5 pts], Frag & Krak grenades, Helm of Durfast)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Bolt Carbine"}),
@@ -259,7 +259,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Lone Wolf"}),
                 ],
                 '_modelList': [
-                  "Lone Wolf [Index] (Chainsword, Power axe, Frag & Krak grenades)"
+                  "Lone Wolf [Index] (Chainsword, Power axe [5 pts], Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Chainsword"}),
@@ -274,7 +274,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Lone Wolf"}),
                 ],
                 '_modelList': [
-                  "Lone Wolf in Terminator Armour [Index] (Storm bolter, Power sword)"
+                  "Lone Wolf in Terminator Armour [Index] (Storm bolter [2 pts], Power sword [4 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -318,8 +318,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Wulfen Pack Leader"}),
                 ],
                 '_modelList': [
-                  "4x Wulfen (Frost claws, Great frost axe, Thunder Hammer, Wulfen claws)",
-                  "Wulfen Pack Leader (2x Frost claws, Great frost axe, Thunder Hammer, Wulfen claws)"
+                  "4x Wulfen (Frost claws [11 pts], Great frost axe [9 pts], Thunder Hammer [16 pts], Wulfen claws)",
+                  "Wulfen Pack Leader (2x Frost claws [22 pts], Great frost axe [9 pts], Thunder Hammer [16 pts], Wulfen claws)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Frost claws"}),
