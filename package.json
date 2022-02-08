@@ -16,9 +16,8 @@
     "@types/jsdom": "^16.2.14",
     "@types/jszip": "^3.4.1",
     "clean-webpack-plugin": "^4.0.0",
-    "jasmine": "^3.99.0",
+    "jasmine": "^4.0.2",
     "jasmine-spec-reporter": "^7.0.0",
-    "jasmine-ts": "^0.4.0",
     "jsdom": "^19.0.0",
     "lite-server": "^2.6.1",
     "ts-loader": "^9.2.6",
@@ -29,7 +28,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "scripts": {
-    "test": "jasmine-ts --config jasmine.json",
+    "test": "jasmine --config=jasmine.json",
     "start": "webpack-dev-server",
     "buildprod": "webpack --config webpack.config.prod.js",
     "build": "webpack"
