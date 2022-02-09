@@ -91,7 +91,7 @@ describe("Create40kRoster", function() {
                   "5x Fire Warrior (Pulse blaster, Photon grenades)",
                   "Fire Warrior Shas'ui (Pulse blaster, Photon grenades)",
                   "Fire Warrior w/ Pulse Pistol (Pulse blaster, Pulse pistol [1 pts], Photon grenades)",
-                  "2x MV1 Gun Drone (Pulse carbine)"
+                  "2x MV1 Gun Drone (2x Pulse carbine)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Pulse blaster (1 Close range)"}),
