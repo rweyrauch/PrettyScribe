@@ -415,7 +415,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heavy Gun Drone"}),
                 ],
                 '_modelList': [
-                  "2x Heavy Gun Drone w/ 2x BC (Burst cannon [8 pts])"
+                  "2x Heavy Gun Drone w/ 2x BC (2x Burst cannon [16 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Burst cannon"}),

@@ -319,10 +319,6 @@ export class Unit extends BaseNotes {
             }
         }
 
-        for (let model of this._models) {
-            model.normalize();
-        }
-
         for (let i = 0; i < (this._modelStats.length - 1); i++) {
             const model = this._modelStats[i];
 
