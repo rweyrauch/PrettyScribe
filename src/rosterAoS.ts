@@ -532,7 +532,7 @@ function ParseUnit(root: Element): AoSUnit {
                     unit._woundTracker._title = profType;
                     // Construct labels (the first profile in the group)
                     let chars = prof.querySelectorAll("characteristics>characteristic");
-                    if (chars.length == 3) {
+                    if (chars.length <= 3) {
                         unit._woundTracker._labels.push("Wounds Suffered");
                         values.push(profName);
                         for (let char of chars) {
@@ -562,7 +562,7 @@ function ParseUnit(root: Element): AoSUnit {
                 }
                 else {
                     let chars = prof.querySelectorAll("characteristics>characteristic");
-                    if (chars.length == 3) {
+                    if (chars.length <= 3) {
                         let label = profName;
                         if (label)
                             values.push(label);
