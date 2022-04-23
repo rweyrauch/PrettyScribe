@@ -54,7 +54,8 @@ export class Renderer40k implements Renderer {
             // Footer div is hidden, except when printing.
             const footer = title.appendChild(document.createElement('div'));
             footer.classList.add('footer');
-            footer.appendChild(document.createTextNode(text));
+            footer.appendChild(document.createElement('div')).appendChild(document.createTextNode('PrettyScribe'));
+            footer.appendChild(document.createElement('div')).appendChild(document.createTextNode(text));
         }
 
         if (list) {
@@ -176,6 +177,28 @@ export class Renderer40k implements Renderer {
             label.setAttribute('for', 'showUpgradeCosts');
             label.appendChild(document.createTextNode(' Show upgrade costs'));
         }
+        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        {
+            const input = optionsDiv.appendChild(document.createElement('input'));
+            input.setAttribute('type', 'checkbox');
+            input.setAttribute('name', 'printBigger');
+            input.setAttribute('id', 'printBigger');
+            const eventListener = (e: Event) => {
+                const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
+                for (const div of unitSheetDiv) {
+                    if ((e.target as any).checked) {
+                        div.classList.add('bigger')
+                    } else {
+                        div.classList.remove('bigger')
+                    }
+                }
+            };
+            input.addEventListener('input', eventListener);
+            const label = optionsDiv.appendChild(document.createElement('label'));
+            label.setAttribute('for', 'printBigger');
+            label.appendChild(document.createTextNode(' Print Larger Text'));
+        }
+
     }
 
     private renderAbilitiesByPhase(list: HTMLElement) {
