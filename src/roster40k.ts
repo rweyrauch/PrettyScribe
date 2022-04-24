@@ -770,6 +770,8 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
             modelSelections.push(root);
         }
     }
+
+    // Now, parse the model -- profiles for stats, and selections for upgrades.
     for (const modelSelection of modelSelections) {
         const profiles = Array.from(modelSelection.querySelectorAll("profiles>profile"));
         const unseenProfiles = profiles.filter((e: Element) => !seenProfiles.includes(e));
@@ -779,14 +781,17 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
         model._name = modelSelection.getAttribute('name') || 'Unknown Model';
         model._count = Number(modelSelection.getAttribute("number") || 1);
         unit._models.push(model);
+
+        // Find stats for all profiles (weapons, powers, abilities, etc).
         ParseModelProfiles(profiles, model, unit);
 
         // Find all upgrades on the model. This may include weapons that were
         // parsed from profiles (above), so dedupe those in nameAndGear().
         for (const upgradeSelection of modelSelection.querySelectorAll('selections>selection[type="upgrade"]')) {
-            // Ignore this selection if it has sub-selection upgrades within it,
-            // since those will be picked up individually.
-            if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')) continue;
+            // Ignore selections without abilities but with sub-selection upgrades,
+            // since those sub-selections will be picked up individually.
+            if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')
+                && !HasImmediateProfileWithTypeName(upgradeSelection, 'Abilities')) continue;
 
             let upgradeName = upgradeSelection.getAttribute('name');
             if (upgradeName) {
