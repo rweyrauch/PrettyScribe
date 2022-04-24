@@ -23,7 +23,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Neurothrope"}),
                 ],
                 '_modelList': [
-                  "Neurothrope (Power: Catalyst, Power: Neuroparasite, Power: Onslaught, Warlord, Warlord Trait: Alien Cunning)"
+                  "Neurothrope (Power: Catalyst, Power: Neuroparasite, Power: Onslaught, Relic: Resonance Barb, Warlord, Warlord Trait: Alien Cunning)"
                 ],
                 '_weapons': [
                   
