@@ -22,7 +22,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Zoanthrope"}),
                 ],
                 '_modelList': [
-                  "3x Zoanthrope"
+                  "3x Zoanthrope",
+                  "Unit Upgrades (Power: Catalyst)"
                 ],
                 '_weapons': [
                   
@@ -40,7 +41,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Zoanthrope"}),
                 ],
                 '_modelList': [
-                  "3x Zoanthrope"
+                  "3x Zoanthrope",
+                  "Unit Upgrades (Power: Onslaught)"
                 ],
                 '_weapons': [
                   
@@ -58,7 +60,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Zoanthrope"}),
                 ],
                 '_modelList': [
-                  "3x Zoanthrope"
+                  "3x Zoanthrope",
+                  "Unit Upgrades (Power: Psychic Scream)"
                 ],
                 '_weapons': [
                   

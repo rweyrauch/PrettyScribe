@@ -143,7 +143,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Grey Knight Terminator Justicar (Storm bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
-                  "4x Terminator (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)"
+                  "4x Terminator (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Unit Upgrades (Astral Aim)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -168,7 +169,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "2x Paladin (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
-                  "Paragon (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)"
+                  "Paragon (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Unit Upgrades (Sanctuary)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -193,7 +195,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "2x Paladin (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
-                  "Paragon (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)"
+                  "Paragon (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Unit Upgrades (Astral Aim)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -218,7 +221,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "Knight of the Flame (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
-                  "4x Purifier (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)"
+                  "4x Purifier (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Unit Upgrades (Hammerhand)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),

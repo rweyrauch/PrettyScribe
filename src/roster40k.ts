@@ -816,12 +816,15 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
         unitUpgradesModel._name = 'Unit Upgrades';
         ParseModelProfiles(unseenProfiles, unitUpgradesModel, unit);
         if (unitUpgradesModel._weapons.length > 0 && unit._models.length > 0) {
+            // Apply weapons at the unit level to all models in the unit.
             for (const model of unit._models) {
                 model._weapons.push(...unitUpgradesModel._weapons);
             }
             unitUpgradesModel._weapons.length = 0;  // Clear the array.
         }
         if (unitUpgradesModel._psychicPowers.length > 0) {
+            // Add spells to the unit's spell list. However, we'll still need
+            // to add spell upgrade selections to the upgrade list, below.
             unit._spells.push(...unitUpgradesModel._psychicPowers);
             unitUpgradesModel._psychicPowers.length = 0;
         }
@@ -837,12 +840,11 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
         // Look for any unit-level upgrade selections that we didn't catch
         // previously, and stuff them in the "Unit Upgrades" model.
         for (const selection of GetImmediateSelections(root)) {
-            // Ignore model selections (which were already processed), or
-            // Unit Upgrades that were added to Weapons or Spells.
-            if (modelSelections.includes(selection))  continue;
             if (selection.getAttribute('type') !== 'upgrade') continue;
+            // Ignore model selections (which were already processed).
+            if (modelSelections.includes(selection))  continue;
+            // Ignore unit-level weapon selections; these were handled above.
             if (selection.querySelector('profiles>profile[typeName="Weapon"]')) continue;
-            if (selection.querySelector('profiles>profile[typeName="Psychic Power"]')) continue;
 
             let name = selection.getAttribute('name');
             if (!name) continue;
@@ -1084,7 +1086,17 @@ function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
 }
 
 function CompareModel(a: Model, b: Model): number {
-    return Compare(a._name, b._name) || Compare(a.nameAndGear(), b.nameAndGear());
+    if (a._name === b._name) {
+        return Compare(a.nameAndGear(), b.nameAndGear());
+    } else if (a._name === 'Unit Upgrades') {
+        // "Unit Upgrades", a special model name, is always sorted last.
+        return 1;
+    } else if (b._name === 'Unit Upgrades') {
+        // "Unit Upgrades", a special model name, is always sorted last.
+        return -1;
+    } else {
+        return Compare(a._name, b._name);
+    }
 }
 
 export function CompareWeapon(a: Weapon, b: Weapon): number {
