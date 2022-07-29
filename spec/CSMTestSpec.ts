@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/CSMTest.rosz", async function() {
     const doc = await readZippedRosterFile('test/CSMTest.rosz');
@@ -34,7 +38,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Close combat weapon"}),
                   jasmine.objectContaining({'_name': "Frag grenades"}),
                   jasmine.objectContaining({'_name': "Krak grenades"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Let the Galaxy Burn"]),
+                '_abilities': mapWithKeys(["Dark Disciples", "Dark Zealotry (Aura)", "Demagogue (Aura)", "Icons of Destruction", "Priest", "Soultearer Portent"])}),
               jasmine.objectContaining({
                 '_name': "Legionaries",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 90, _commandPoints: 0}),
@@ -51,7 +57,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Boltgun"}),
                   jasmine.objectContaining({'_name': "Frag grenades"}),
                   jasmine.objectContaining({'_name': "Krak grenades"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Let the Galaxy Burn", "Malicious Volleys"])}),
             ],
             '_rules': new Map([
               ["Armour of Contempt", jasmine.any(String)],

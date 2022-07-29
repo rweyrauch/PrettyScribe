@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/Knights_AstraMilitarum.rosz", async function() {
     const doc = await readZippedRosterFile('test/Knights_AstraMilitarum.rosz');
@@ -29,6 +33,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Armiger Autocannon"}),
                   jasmine.objectContaining({'_name': "Meltagun"}),
                 ],
+                '_abilities': mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes (Armiger)"}),
                 ],
@@ -52,6 +57,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Reaper Chain-Cleaver (Strike)"}),
                   jasmine.objectContaining({'_name': "Reaper Chain-Cleaver (Sweep)"}),
                 ],
+                '_abilities': mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes (Armiger)"}),
                 ],
@@ -78,6 +84,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Volcano Lance"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
+                '_abilities': mapWithKeys(["Armour of the Sainted Ion", "Fearsome Reputation", "Ion Shield", "Super-Heavy Walker"]),
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Dual Plasma Core Explosion"}),
                 ],
@@ -102,6 +109,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Thermal Cannon"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
+                '_abilities': mapWithKeys(["Ion Shield", "Super-Heavy Walker"]),
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes"}),
                 ],
@@ -137,7 +145,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Laspistol"}),
                   jasmine.objectContaining({'_name': "Chainsword"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
-                ]}),
+                ],
+                '_abilities': mapWithKeys(["Bring it Down!", "First Rank, Fire! Second Rank, Fire!", "Fix Bayonets!", "Forwards, for the Emperor!", "Get back in the Fight!", "Move! Move! Move!", "Refractor Field", "Senior Officer", "Take Aim!", "Voice of Command"])}),
               jasmine.objectContaining({
                 '_name': "Company Commander",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 30, _commandPoints: 0}),
@@ -151,7 +160,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Laspistol"}),
                   jasmine.objectContaining({'_name': "Chainsword"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
-                ]}),
+                ],
+                '_abilities': mapWithKeys(["Bring it Down!", "First Rank, Fire! Second Rank, Fire!", "Fix Bayonets!", "Forwards, for the Emperor!", "Get back in the Fight!", "Move! Move! Move!", "Refractor Field", "Senior Officer", "Take Aim!", "Voice of Command"])}),
               jasmine.objectContaining({
                 '_name': "Infantry Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
@@ -225,7 +235,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Laspistol"}),
                   jasmine.objectContaining({'_name': "Chainsword"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
-                ]}),
+                ],
+                '_abilities': mapWithKeys(["Refractor Field", "Senior Officer", "Voice of Command"])}),
               jasmine.objectContaining({
                 '_name': "Company Commander",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 30, _commandPoints: 0}),
@@ -239,7 +250,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Laspistol"}),
                   jasmine.objectContaining({'_name': "Chainsword"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
-                ]}),
+                ],
+                '_abilities': mapWithKeys(["Refractor Field", "Senior Officer", "Voice of Command"])}),
               jasmine.objectContaining({
                 '_name': "Infantry Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
@@ -302,7 +314,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Grenadier Gauntlet"}),
                   jasmine.objectContaining({'_name': "Frag Bombs"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Avalanche of Muscle"]),
+                '_abilities': mapWithKeys(["Slabshield"])}),
             ],
             '_rules': new Map([
               ["Avalanche of Muscle", jasmine.any(String)],

@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/resonance barb bug.rosz", async function() {
     const doc = await readZippedRosterFile('test/resonance barb bug.rosz');
@@ -28,6 +32,8 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ],
+                '_rules': mapWithKeys(["Objective Secured"]),
+                '_abilities': mapWithKeys(["Alien Cunning", "Neurothrope", "Resonance Barb", "Shadow in the Warp (Aura)", "Spirit Leech", "Synapse", "Warp Field (Neurothrope)", "Warp Siphon"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Catalyst"}),
                   jasmine.objectContaining({'_name': "Neuroparasite"}),
@@ -47,7 +53,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Fleshborer"}),
-                ]}),
+                ],
+                '_abilities': mapWithKeys(["Swarming Masses"])}),
             ],
             '_rules': new Map([
               ["Hive Fleet Adaptations", jasmine.any(String)],

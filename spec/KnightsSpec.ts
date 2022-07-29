@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/Knights.ros", async function() {
     const doc = await readZippedRosterFile('test/Knights.ros');
@@ -28,6 +32,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Armiger Autocannon"}),
                   jasmine.objectContaining({'_name': "Meltagun"}),
                 ],
+                '_abilities': mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes (Armiger)"}),
                 ],
@@ -51,6 +56,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Reaper Chain-Cleaver (Strike)"}),
                   jasmine.objectContaining({'_name': "Reaper Chain-Cleaver (Sweep)"}),
                 ],
+                '_abilities': mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes (Armiger)"}),
                 ],
@@ -77,6 +83,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Volcano Lance"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
+                '_abilities': mapWithKeys(["Armour of the Sainted Ion", "Fearsome Reputation", "Ion Shield", "Super-Heavy Walker"]),
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Dual Plasma Core Explosion"}),
                 ],
@@ -101,6 +108,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Thunderstrike gauntlet"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
+                '_abilities': mapWithKeys(["Ion Shield", "Super-Heavy Walker"]),
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes"}),
                 ],
@@ -125,6 +133,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Thunderstrike gauntlet"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
+                '_abilities': mapWithKeys(["Ion Shield", "Super-Heavy Walker"]),
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes"}),
                 ],
