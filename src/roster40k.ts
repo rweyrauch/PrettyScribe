@@ -536,22 +536,12 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
     for (const profile of profiles) {
         // detachment rules
         const profileName = profile.getAttribute("name");
-        const profileType = profile.getAttribute("typeName");
-        console.log("Profile name:" + profileName + "  Type: " + profileType);
+        if (!profileName) continue;
 
-        if (profileName && profileType) {
-            if (profileType === "Abilities" || profileType === "Dynastic Code" ||
-                    profileType === "Household Tradition") {
-                const chars = profile.querySelectorAll("characteristics>characteristic");
-                for (const char of chars) {
-                    const charName = char.getAttribute("name");
-                    if (charName && char.textContent && profileName) {
-                        if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
-                            map.set(profileName, char.textContent);
-                        }
-                    }
-                }
-            }
+        const profileType = profile.getAttribute("typeName");
+        if (profileType === "Abilities" || profileType === "Dynastic Code" ||
+                profileType === "Household Tradition") {
+            ParseProfileCharacteristics(profile, profileName, map);
         }
     }
 
@@ -925,8 +915,8 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
             model._upgrades.push(upgrade);
         } else if ((typeName === "Abilities") || (typeName === "Wargear") || (typeName === "Ability") ||
             (typeName === "Household Tradition") || (typeName === "Warlord Trait") || (typeName === "Astra Militarum Orders") ||
-            (typeName === "Tank Orders") || (typeName == "Lethal Ambush")) {
-                ParseAbilityProfile(profile, profileName, unit);
+            (typeName === "Tank Orders") || (typeName === "Lethal Ambush") || (typeName === "Prayers")) {
+                ParseProfileCharacteristics(profile, profileName, unit._abilities);
         } else if (typeName === "Weapon") {
             const weapon = ParseWeaponProfile(profile);
             model._weapons.push(weapon);
@@ -946,21 +936,21 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
             model._psyker = psyker;
         } else if (profile.parentElement?.parentElement
             && profile.parentElement?.parentElement.getAttribute("type") === 'upgrade') {
-            ParseAbilityProfile(profile, profileName, unit);
+            ParseProfileCharacteristics(profile, profileName, unit._abilities);
         } else {
             parseUnknownProfile(profile, unit);
         }
     }
 }
 
-function ParseAbilityProfile(profile: Element, profileName: string, unit: Unit) {
+function ParseProfileCharacteristics(profile: Element, profileName: string, map: Map<string, string | null>) {
     const chars = profile.querySelectorAll("characteristics>characteristic");
     for (const char of chars) {
+        if (!char.textContent) continue;
+
         const charName = char.getAttribute("name");
-        if (charName && char.textContent) {
-            if ((charName === "Description") || (charName === "Ability") || (charName == "Effect") || (charName == "Bonus")) {
-                unit._abilities.set(profileName, char.textContent);
-            }
+        if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus")) {
+            map.set(profileName, char.textContent);
         }
     }
 }
