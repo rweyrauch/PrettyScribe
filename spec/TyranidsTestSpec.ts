@@ -32,7 +32,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Rending Claw(s)"}),
                 ],
                 '_rules': mapWithKeys(["Cult Ambush", "Unquestioning Loyalty"]),
-                '_abilities': mapWithKeys(["Bestial Vigour", "Mindwyrm Familiar", "Regenerative Flesh", "The Chosen One"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bestial Vigour", "Mindwyrm Familiar", "Regenerative Flesh", "The Chosen One"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Magus",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 92, _commandPoints: 0}),
@@ -49,7 +51,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Force stave"}),
                 ],
                 '_rules': mapWithKeys(["Cult Ambush", "Unquestioning Loyalty"]),
-                '_abilities': mapWithKeys(["Familiars", "Spiritual Leader"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Familiars", "Spiritual Leader"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Psychic Stimulus"}),
                 ],
@@ -103,7 +107,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Frag Grenade"}),
                 ],
                 '_rules': mapWithKeys(["Cult Ambush", "Unquestioning Loyalty"]),
-                '_abilities': mapWithKeys(["Cult Vox-caster"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Cult Vox-caster"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Neophyte Hybrids",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 88, _commandPoints: 0}),
@@ -147,7 +153,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Demolition Charge"}),
                 ],
                 '_rules': mapWithKeys(["Cult Ambush", "Unquestioning Loyalty"]),
-                '_abilities': mapWithKeys(["Skilled Outriders"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Skilled Outriders"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Cult Leman Russ",
                 '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 173, _commandPoints: 0}),
@@ -165,7 +173,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hunter-killer missile"}),
                 ],
                 '_rules': mapWithKeys(["Cult Ambush"]),
-                '_abilities': mapWithKeys(["Emergency Plasma Vents", "Explodes (6+/6\"/D3)", "Grinding Advance", "Smoke Launchers"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Emergency Plasma Vents", "Explodes (6+/6\"/D3)", "Grinding Advance", "Smoke Launchers"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Cult Leman Russ (1)"}),
                   jasmine.objectContaining({'_name': "Cult Leman Russ (2)"}),
@@ -187,7 +197,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Drilldozer Blade"}),
                 ],
                 '_rules': mapWithKeys(["Cult Ambush"]),
-                '_abilities': mapWithKeys(["Explodes (6+/6\"/D3)", "Rugged Construction", "Transport"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes (6+/6\"/D3)", "Rugged Construction"]),
+                  "Transport": mapWithKeys(["Goliath Rockgrinder"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Goliath Rockgrinder (1)"}),
                   jasmine.objectContaining({'_name': "Goliath Rockgrinder (2)"}),
@@ -221,7 +234,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Monstrous Rending Claws"}),
                 ],
-                '_abilities': mapWithKeys(["Adrenal Webs", "Brood Telepathy", "Instinctive Killer", "Lightning Reflexes", "Resonance Barb", "Shadow in the Warp", "Swift and Deadly", "Synapse"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Adrenal Webs", "Brood Telepathy", "Instinctive Killer", "Lightning Reflexes", "Resonance Barb", "Shadow in the Warp", "Swift and Deadly", "Synapse"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                   jasmine.objectContaining({'_name': "Catalyst"}),
@@ -242,7 +257,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Monstrous Scything Talons"}),
                   jasmine.objectContaining({'_name': "Prehensile Pincer Tail"}),
                 ],
-                '_abilities': mapWithKeys(["Death Throes", "Psychic Barrier", "Shadow in the Warp", "Synapse", "The Will of the Hive Mind"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Death Throes", "Psychic Barrier", "Shadow in the Warp", "Synapse", "The Will of the Hive Mind"]),
+                },
                 '_psykers': [
                   jasmine.objectContaining({'_name': "Hive Tyrant"}),
                 ],
@@ -263,7 +280,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Scything Talons"}),
                 ],
-                '_abilities': mapWithKeys(["Bounding Leap", "Hungering Swarm", "Instinctive Behaviour"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bounding Leap", "Hungering Swarm", "Instinctive Behaviour"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Termagants",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
@@ -276,7 +295,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Fleshborer"}),
                 ],
-                '_abilities': mapWithKeys(["Hail of Living Ammunition", "Instinctive Behaviour"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Hail of Living Ammunition", "Instinctive Behaviour"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Tyranid Warriors",
                 '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 124, _commandPoints: 0}),
@@ -298,7 +319,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Rending Claws"}),
                   jasmine.objectContaining({'_name': "Scything Talons"}),
                 ],
-                '_abilities': mapWithKeys(["Shadow in the Warp", "Synapse"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Shadow in the Warp", "Synapse"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Hive Guard",
                 '_cost': jasmine.objectContaining({_powerLevel: 13, _points: 176, _commandPoints: 0}),
@@ -314,7 +337,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Impaler Cannon"}),
                   jasmine.objectContaining({'_name': "Shockcannon"}),
                 ],
-                '_abilities': mapWithKeys(["Adrenal Glands", "Instinctive Behaviour", "Toxin Sacs"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Adrenal Glands", "Instinctive Behaviour", "Toxin Sacs"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Carnifexes",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 82, _commandPoints: 0}),
@@ -327,7 +352,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Monstrous Scything Talons"}),
                 ],
-                '_abilities': mapWithKeys(["Instinctive Behaviour", "Living Battering Ram", "Monstrous Brood"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Instinctive Behaviour", "Living Battering Ram", "Monstrous Brood"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Exocrine",
                 '_cost': jasmine.objectContaining({_powerLevel: 11, _points: 155, _commandPoints: 0}),
@@ -341,7 +368,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bio-plasmic Cannon"}),
                   jasmine.objectContaining({'_name': "Powerful Limbs"}),
                 ],
-                '_abilities': mapWithKeys(["Death Throes", "Instinctive Behaviour", "Symbiotic Targeting", "Weapon Beast"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Death Throes", "Instinctive Behaviour", "Symbiotic Targeting", "Weapon Beast"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Exocrine (1)"}),
                   jasmine.objectContaining({'_name': "Exocrine (2)"}),
@@ -361,7 +390,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Massive Toxic Lashes (Shooting)"}),
                   jasmine.objectContaining({'_name': "Massive Toxic Lashes (Melee)"}),
                 ],
-                '_abilities': mapWithKeys(["Acid Blood", "Frenzied Death Throes", "Hypertoxic Miasma", "Instinctive Behaviour"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Acid Blood", "Frenzied Death Throes", "Hypertoxic Miasma", "Instinctive Behaviour"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Toxicrene (1)"}),
                   jasmine.objectContaining({'_name': "Toxicrene (2)"}),

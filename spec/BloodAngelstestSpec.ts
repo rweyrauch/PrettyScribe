@@ -42,7 +42,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death", "Death from Above", "Savage Echoes", "The Red Thirst"]),
-                '_abilities': mapWithKeys(["Company Heroes", "Storm shield", "Tactical Precision"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Company Heroes", "Storm shield", "Tactical Precision"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Assault Intercessor Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 95, _commandPoints: 0}),
@@ -79,7 +81,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death", "Combat Squads", "Savage Echoes", "The Red Thirst"]),
-                '_abilities': mapWithKeys(["Storm shield"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Storm shield"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Bladeguard Veteran Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 105, _commandPoints: 0}),
@@ -98,7 +102,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death", "Combat Squads", "Savage Echoes", "The Red Thirst"]),
-                '_abilities': mapWithKeys(["Storm shield"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Storm shield"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Outrider Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 150, _commandPoints: 0}),
@@ -118,7 +124,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death", "Savage Echoes", "The Red Thirst"]),
-                '_abilities': mapWithKeys(["Devastating Charge", "Turbo-boost"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Devastating Charge", "Turbo-boost"]),
+                }}),
             ],
             '_rules': new Map([
               ["Bolter Discipline", jasmine.any(String)],

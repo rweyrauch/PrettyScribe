@@ -33,7 +33,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Staff of Light (Melee)"}),
                 ],
                 '_rules': mapWithKeys(["Living Metal"]),
-                '_abilities': mapWithKeys(["Technomancer"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Technomancer"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Overlord",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 80, _commandPoints: 0}),
@@ -48,7 +50,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Staff of Light (Melee)"}),
                 ],
                 '_rules': mapWithKeys(["Living Metal"]),
-                '_abilities': mapWithKeys(["My Will Be Done", "Phase Shifter"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["My Will Be Done", "Phase Shifter"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Immortals",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 75, _commandPoints: 0}),
@@ -100,7 +104,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Star-God Fists"}),
                 ],
-                '_abilities': mapWithKeys(["Dread", "Enslaved Star God", "Grand Illusion", "Necrodermis", "Powers of the C'tan"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Dread", "Enslaved Star God", "Grand Illusion", "Necrodermis", "Powers of the C'tan"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Reality Unravels"}),
                 ]}),
@@ -118,7 +124,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Tesla Destructor"}),
                 ],
                 '_rules': mapWithKeys(["Living Metal"]),
-                '_abilities': mapWithKeys(["Airborne", "Hard to Hit", "Supersonic"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Airborne", "Hard to Hit", "Supersonic"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Crash and Burn"}),
                 ],

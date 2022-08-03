@@ -34,7 +34,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Huskblade"}),
                 ],
                 '_rules': mapWithKeys(["Power from Pain"]),
-                '_abilities': mapWithKeys(["Overlord", "Shadowfield"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Overlord", "Shadowfield"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Haemonculus",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 74, _commandPoints: 0}),
@@ -49,7 +51,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Agoniser"}),
                 ],
                 '_rules': mapWithKeys(["Power from Pain"]),
-                '_abilities': mapWithKeys(["Insensible to Pain", "Master of Pain"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Insensible to Pain", "Master of Pain"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Kabalite Warriors",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 30, _commandPoints: 0}),
@@ -80,7 +84,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Haemonculus tools"}),
                 ],
                 '_rules': mapWithKeys(["Power from Pain", "Vanguard of the Dark City"]),
-                '_abilities': mapWithKeys(["Insensible to Pain"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Insensible to Pain"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Wyches",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 40, _commandPoints: 0}),
@@ -98,7 +104,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Plasma Grenade"}),
                 ],
                 '_rules': mapWithKeys(["Combat Drugs", "Power from Pain", "Vanguard of the Dark City"]),
-                '_abilities': mapWithKeys(["Dodge", "No Escape"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Dodge", "No Escape"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Grotesques",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 105, _commandPoints: 0}),
@@ -113,7 +121,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Monstrous cleaver"}),
                 ],
                 '_rules': mapWithKeys(["Power from Pain"]),
-                '_abilities': mapWithKeys(["Insensible to Pain"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Insensible to Pain"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Hellions",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 60, _commandPoints: 0}),
@@ -130,7 +140,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellglaive"}),
                 ],
                 '_rules': mapWithKeys(["Combat Drugs", "Power from Pain"]),
-                '_abilities': mapWithKeys(["Hit and Run"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Hit and Run"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Reavers",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 48, _commandPoints: 0}),
@@ -148,7 +160,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bladevanes"}),
                 ],
                 '_rules': mapWithKeys(["Combat Drugs", "Power from Pain"]),
-                '_abilities': mapWithKeys(["Matchless Swiftness"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Matchless Swiftness"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Scourges",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 60, _commandPoints: 0}),
@@ -165,7 +179,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Plasma Grenade"}),
                 ],
                 '_rules': mapWithKeys(["Power from Pain"]),
-                '_abilities': mapWithKeys(["Ghostplate Armour", "Winged Strike"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ghostplate Armour", "Winged Strike"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Ravager",
                 '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 140, _commandPoints: 0}),
@@ -179,7 +195,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Dark Lance"}),
                   jasmine.objectContaining({'_name': "Bladevanes"}),
                 ],
-                '_abilities': mapWithKeys(["Explodes", "Hovering", "Night Shield"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes", "Hovering", "Night Shield"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Ravager"}),
                   jasmine.objectContaining({'_name': "Ravager 1"}),
@@ -201,7 +219,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scythevanes"}),
                   jasmine.objectContaining({'_name': "Sharpened prow blade"}),
                 ],
-                '_abilities': mapWithKeys(["Explodes", "Hovering", "Night Shield", "Storm Vortex Projector"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes", "Hovering", "Night Shield", "Storm Vortex Projector"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Reaper"}),
                   jasmine.objectContaining({'_name': "Reaper 1"}),
@@ -220,7 +240,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Void lance"}),
                 ],
-                '_abilities': mapWithKeys(["Airborne", "Crash and Burn", "Hard to Hit", "Night Shield", "Supersonic", "Void Mine"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Airborne", "Crash and Burn", "Hard to Hit", "Night Shield", "Supersonic", "Void Mine"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Voidraven 1"}),
                   jasmine.objectContaining({'_name': "Voidraven"}),
@@ -240,7 +262,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Dark Lance"}),
                   jasmine.objectContaining({'_name': "Bladevanes"}),
                 ],
-                '_abilities': mapWithKeys(["Explodes", "Hovering", "Night Shield", "Open-topped", "Transport"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes", "Hovering", "Night Shield", "Open-topped"]),
+                  "Transport": mapWithKeys(["Raider"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Raider 3"}),
                   jasmine.objectContaining({'_name': "Raider 2"}),
@@ -261,7 +286,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Twin splinter rifle"}),
                   jasmine.objectContaining({'_name': "Bladevanes"}),
                 ],
-                '_abilities': mapWithKeys(["Explodes", "Flickerfield", "Night Shield", "Open-topped", "Transport"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes", "Flickerfield", "Night Shield", "Open-topped"]),
+                  "Transport": mapWithKeys(["Venom"]),
+                }}),
             ],
             '_rules': new Map([
               ["Poisoned Weapon", jasmine.any(String)],
@@ -292,7 +320,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Shuriken Pistol"}),
                   jasmine.objectContaining({'_name': "Miststave"}),
                 ],
-                '_abilities': mapWithKeys(["Flip Belt", "Holo-suit", "Rising Crescendo", "Shield from Harm"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Flip Belt", "Holo-suit", "Rising Crescendo", "Shield from Harm"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                 ],
@@ -312,7 +342,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Vilith-zhar, the Sword of Souls"}),
                 ],
                 '_rules': mapWithKeys(["Strength from Death"]),
-                '_abilities': mapWithKeys(["Avatar of Ynnead", "Daemonic Avatar", "Inevitable Death", "Summoned by Death", "Ynnead Stirs"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Avatar of Ynnead", "Daemonic Avatar", "Inevitable Death", "Summoned by Death", "Ynnead Stirs"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                 ],
@@ -332,7 +364,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Kha-vir, the Sword of Sorrows."}),
                 ],
                 '_rules': mapWithKeys(["Strength from Death"]),
-                '_abilities': mapWithKeys(["Favoured of Ynnead", "Grinx Familiar", "Herald of Ynnead", "Revered Figurehead", "Runesuit"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Favoured of Ynnead", "Grinx Familiar", "Herald of Ynnead", "Revered Figurehead", "Runesuit"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                 ],
@@ -353,7 +387,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Harlequin's Blade"}),
                   jasmine.objectContaining({'_name': "Plasma Grenade"}),
                 ],
-                '_abilities': mapWithKeys(["Flip Belt", "Holo-suit", "Rising Crescendo"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Flip Belt", "Holo-suit", "Rising Crescendo"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Troupe",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 55, _commandPoints: 0}),
@@ -368,7 +404,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Harlequin's Blade"}),
                   jasmine.objectContaining({'_name': "Plasma Grenade"}),
                 ],
-                '_abilities': mapWithKeys(["Flip Belt", "Holo-suit", "Rising Crescendo"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Flip Belt", "Holo-suit", "Rising Crescendo"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Troupe",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 55, _commandPoints: 0}),
@@ -383,7 +421,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Harlequin's Blade"}),
                   jasmine.objectContaining({'_name': "Plasma Grenade"}),
                 ],
-                '_abilities': mapWithKeys(["Flip Belt", "Holo-suit", "Rising Crescendo"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Flip Belt", "Holo-suit", "Rising Crescendo"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Death Jester",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 45, _commandPoints: 0}),
@@ -397,7 +437,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Shrieker Cannon (Shrieker)"}),
                   jasmine.objectContaining({'_name': "Shrieker Cannon (Shuriken)"}),
                 ],
-                '_abilities': mapWithKeys(["Deadly Hunter", "Death is Not Enough", "Flip Belt", "Holo-suit", "Rising Crescendo"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Deadly Hunter", "Death is Not Enough", "Flip Belt", "Holo-suit", "Rising Crescendo"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Skyweavers",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 70, _commandPoints: 0}),
@@ -411,7 +453,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Shuriken Cannon"}),
                   jasmine.objectContaining({'_name': "Star Bolas"}),
                 ],
-                '_abilities': mapWithKeys(["Blur of Colour", "Holo-suit", "Mirage Launchers", "Rising Crescendo"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Blur of Colour", "Holo-suit", "Mirage Launchers", "Rising Crescendo"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Voidweaver",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 90, _commandPoints: 0}),
@@ -425,7 +469,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Haywire Cannon"}),
                   jasmine.objectContaining({'_name': "Shuriken Cannon"}),
                 ],
-                '_abilities': mapWithKeys(["Blur of Colour", "Explodes", "Holo-fields", "Mirage Launchers"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Blur of Colour", "Explodes", "Holo-fields", "Mirage Launchers"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Starweaver",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 80, _commandPoints: 0}),
@@ -438,7 +484,10 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Shuriken Cannon"}),
                 ],
-                '_abilities': mapWithKeys(["Blur of Colour", "Explodes", "Holo-fields", "Mirage Launchers", "Open-topped", "Transport"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Blur of Colour", "Explodes", "Holo-fields", "Mirage Launchers", "Open-topped"]),
+                  "Transport": mapWithKeys(["Starweaver - Transport"]),
+                }}),
             ],
             '_rules': new Map([
               ["Strength from Death", jasmine.any(String)],

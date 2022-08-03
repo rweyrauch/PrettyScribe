@@ -33,7 +33,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Foehammer (melee)"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Champion of the Kingsguard", "Teleport Strike", "Thane to the High King", "The Anvil Sheild"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Champion of the Kingsguard", "Teleport Strike", "Thane to the High King", "The Anvil Sheild"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Njal Stormcaller",
                 '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 115, _commandPoints: 0}),
@@ -52,7 +54,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Lord of Tempests", "Psychic hood", "Runic Armour"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Lord of Tempests", "Psychic hood", "Runic Armour"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Fury of the Wolf Spirits"}),
                 ],
@@ -77,7 +81,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Defenders of Humanity", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Beserk Charge", "Headstrong", "Mixed Unit"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Beserk Charge", "Headstrong", "Mixed Unit"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Grey Hunters",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
@@ -96,7 +102,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Defenders of Humanity", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Mixed Unit"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Mixed Unit"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Grey Hunters",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
@@ -115,7 +123,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Defenders of Humanity", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Mixed Unit"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Mixed Unit"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Hellblaster Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 165, _commandPoints: 0}),
@@ -135,7 +145,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Combat Squads"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Combat Squads"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Stormfang Gunship",
                 '_cost': jasmine.objectContaining({_powerLevel: 15, _points: 251, _commandPoints: 0}),
@@ -151,7 +163,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Stormstrike missile launcher"}),
                   jasmine.objectContaining({'_name': "Twin heavy bolter"}),
                 ],
-                '_abilities': mapWithKeys(["Airborne", "Crash and Burn", "Hard to Hit", "Hover Jet", "Power of the Machine Spirit", "Supersonic", "Transport"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Airborne", "Crash and Burn", "Hard to Hit", "Hover Jet", "Power of the Machine Spirit", "Supersonic"]),
+                  "Transport": mapWithKeys(["Transport"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Stormfang Gunship (1)"}),
                   jasmine.objectContaining({'_name': "Stormfang Gunship (2)"}),
@@ -170,7 +185,10 @@ describe("Create40kRoster", function() {
                   
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Angels of Death"]),
-                '_abilities': mapWithKeys(["Drop Pod Assault", "Immobile (Drop Pods)", "Transport"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Drop Pod Assault", "Immobile (Drop Pods)"]),
+                  "Transport": mapWithKeys(["Transport"]),
+                }}),
             ],
             '_rules': new Map([
               ["Shock Assault", jasmine.any(String)],
@@ -204,7 +222,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Trueclaw"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Ancient Tactician", "Explodes (Dreadnought)", "Last of the Company of Russ", "Legendary Tenacity", "Saga of Majesty", "Smoke Launchers"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ancient Tactician", "Explodes (Dreadnought)", "Last of the Company of Russ", "Legendary Tenacity", "Saga of Majesty", "Smoke Launchers"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Primaris Battle Leader",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 70, _commandPoints: 0}),
@@ -222,7 +242,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Helm of Durfast", "Huskarl to the Jarl"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Helm of Durfast", "Huskarl to the Jarl"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Blood Claws",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
@@ -241,7 +263,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Defenders of Humanity", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Beserk Charge", "Headstrong", "Mixed Unit"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Beserk Charge", "Headstrong", "Mixed Unit"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Grey Hunters",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
@@ -260,7 +284,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Defenders of Humanity", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Mixed Unit"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Mixed Unit"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Incursor Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 95, _commandPoints: 0}),
@@ -279,7 +305,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Frag grenade"}),
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
-                '_abilities': mapWithKeys(["Combat Squads", "Concealed Positions", "Multi-spectrum array", "Smoke Grenades"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Combat Squads", "Concealed Positions", "Multi-spectrum array", "Smoke Grenades"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Lone Wolf [Index]",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 80, _commandPoints: 0}),
@@ -296,7 +324,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["...Worthy of a Saga", "A Glorious Death...", "An Army of One"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["...Worthy of a Saga", "A Glorious Death...", "An Army of One"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Lone Wolf in Terminator Armour [Index]",
                 '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 121, _commandPoints: 0}),
@@ -311,7 +341,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Power sword"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["...Worthy of a Saga", "A Glorious Death...", "An Army of One", "Crux Terminatus", "Teleport Strike"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["...Worthy of a Saga", "A Glorious Death...", "An Army of One", "Crux Terminatus", "Teleport Strike"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Lukas the Trickster",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 80, _commandPoints: 0}),
@@ -329,7 +361,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Blood Claw Hero", "Master of Mischief", "Pelt of the Doppegangrel", "The Last Laugh"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Blood Claw Hero", "Master of Mischief", "Pelt of the Doppegangrel", "The Last Laugh"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Murderfang",
                 '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 125, _commandPoints: 0}),
@@ -345,7 +379,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "The Murderclaws"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Explodes (Dreadnought)", "Force of Untamed Destruction", "Murderlust"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes (Dreadnought)", "Force of Untamed Destruction", "Murderlust"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Wulfen",
                 '_cost': jasmine.objectContaining({_powerLevel: 11, _points: 164, _commandPoints: 0}),
@@ -364,7 +400,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Wulfen claws"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Hunters Unleashed"]),
-                '_abilities': mapWithKeys(["Bounding Lope", "Curse of the Wulfen (Hunt)", "Curse of the Wulfen (Kill)", "Death Frenzy", "Storm Shield"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bounding Lope", "Curse of the Wulfen (Hunt)", "Curse of the Wulfen (Kill)", "Death Frenzy", "Storm Shield"]),
+                }}),
             ],
             '_rules': new Map([
               ["And They Shall Know No Fear", jasmine.any(String)],

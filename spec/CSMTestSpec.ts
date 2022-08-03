@@ -40,7 +40,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ],
                 '_rules': mapWithKeys(["Let the Galaxy Burn"]),
-                '_abilities': mapWithKeys(["Dark Disciples", "Dark Zealotry (Aura)", "Demagogue (Aura)", "Icons of Destruction", "Priest", "Soultearer Portent"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Dark Disciples", "Demagogue (Aura)", "Icons of Destruction", "Priest"]),
+                  "Prayers": mapWithKeys(["Dark Zealotry (Aura)", "Soultearer Portent"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Legionaries",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 90, _commandPoints: 0}),

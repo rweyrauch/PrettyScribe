@@ -40,7 +40,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellforged heavy plasma cannon - Supercharge"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Malicious Volleys", "Martial Legacy"]),
-                '_abilities': mapWithKeys(["Atomantic Shielding", "Explodes", "Relentless Hatred"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Atomantic Shielding", "Explodes", "Relentless Hatred"]),
+                }}),
             ],
             '_rules': new Map([
               ["Daemonic Ritual", jasmine.any(String)],

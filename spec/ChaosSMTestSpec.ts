@@ -35,7 +35,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Malefic talon"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Daemonic", "Death to the False Emperor"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Death to the False Emperor"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Lord Discordant on Helstalker",
                 '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 160, _commandPoints: 0}),
@@ -56,7 +58,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Aura of Discord", "Daemonic", "Death to the False Emperor", "Hatred Incarnate", "Infernal Regeneration", "Intoxicating Elixir", "Spirit Thief"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Aura of Discord", "Daemonic", "Death to the False Emperor", "Hatred Incarnate", "Infernal Regeneration", "Intoxicating Elixir", "Spirit Thief"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Lord Discordant"}),
                   jasmine.objectContaining({'_name': "Lord Discordant1"}),
@@ -79,7 +83,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Death to the False Emperor"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Death to the False Emperor"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                 ],
@@ -101,7 +107,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Autogun"}),
                 ],
-                '_abilities': mapWithKeys(["Mere Mortals"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Mere Mortals"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Chaos Space Marines",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 55, _commandPoints: 0}),
@@ -121,7 +129,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Death to the False Emperor"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Death to the False Emperor"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Chaos Space Marines",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 55, _commandPoints: 0}),
@@ -141,7 +151,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Death to the False Emperor"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Death to the False Emperor"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Chaos Terminators",
                 '_cost': jasmine.objectContaining({_powerLevel: 10, _points: 135, _commandPoints: 0}),
@@ -159,7 +171,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Chainaxe"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Death to the False Emperor", "Icon of Vengeance", "Teleport Strike", "Terminator Armour"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Death to the False Emperor", "Icon of Vengeance", "Teleport Strike", "Terminator Armour"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Mutilators",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 105, _commandPoints: 0}),
@@ -174,7 +188,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Fleshmetal weapons"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Daemonic", "Death to the False Emperor", "Fleshmetal Weapons", "Teleport Strike"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Death to the False Emperor", "Fleshmetal Weapons", "Teleport Strike"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Plague Marines",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 80, _commandPoints: 0}),
@@ -193,7 +209,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Death to the False Emperor", "Disgustingly Resilient", "Vectors of Death and Disease"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Death to the False Emperor", "Disgustingly Resilient", "Vectors of Death and Disease"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Possessed",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 85, _commandPoints: 0}),
@@ -208,7 +226,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Horrifying Mutations"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Daemonic", "Death to the False Emperor", "Writhing Tentacles"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Death to the False Emperor", "Writhing Tentacles"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Chaos Spawn",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 20, _commandPoints: 0}),
@@ -223,7 +243,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hideous mutations"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Fearsome", "Mutated Beyond Reason"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Fearsome", "Mutated Beyond Reason"]),
+                  "Mutated Beyond Reason": mapWithKeys(["1 - Razor Claws", "2 - Grasping Pseudopods", "3 - Toxic Haemorrhage"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Obliterators",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 95, _commandPoints: 0}),
@@ -239,7 +262,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Crushing fists"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Daemonic", "Death to the False Emperor", "Fleshmetal Guns", "Teleport Strike"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Death to the False Emperor", "Fleshmetal Guns", "Teleport Strike"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Heldrake",
                 '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 140, _commandPoints: 0}),
@@ -254,7 +279,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake claws"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Hateful Volleys"]),
-                '_abilities': mapWithKeys(["Crash and Burn", "Daemonic", "Infernal Regeneration"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Crash and Burn", "Daemonic", "Infernal Regeneration"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Heldrake"}),
                   jasmine.objectContaining({'_name': "Heldrake1"}),
@@ -292,7 +319,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Ritual dagger"}),
                 ],
                 '_rules': mapWithKeys(["Daemonic Ritual"]),
-                '_abilities': mapWithKeys(["Daemonic", "Ephemeral Form", "Locus of Tzeentch"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Ephemeral Form", "Locus of Tzeentch"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                 ],
@@ -312,7 +341,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Staff of Tomorrow"}),
                 ],
                 '_rules': mapWithKeys(["Daemonic Ritual"]),
-                '_abilities': mapWithKeys(["1 - Extra Limb", "2 - Mystic Strength", "3 - Iron Skin", "Daemonic", "Ephemeral Form", "Foretell", "Greater Daemon"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Ephemeral Form", "Foretell", "Greater Daemon"]),
+                  "Boon of Change - D3 Roll": mapWithKeys(["1 - Extra Limb", "2 - Mystic Strength", "3 - Iron Skin"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                   jasmine.objectContaining({'_name': "Bolt of Change"}),
@@ -346,7 +378,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellblade"}),
                 ],
                 '_rules': mapWithKeys(["Daemonic Ritual"]),
-                '_abilities': mapWithKeys(["Daemonic", "Murderous Tide", "Unstoppable Ferocity"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Murderous Tide", "Unstoppable Ferocity"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Daemonettes",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
@@ -362,7 +396,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Piercing claws"}),
                 ],
                 '_rules': mapWithKeys(["Daemonic Ritual"]),
-                '_abilities': mapWithKeys(["Daemonic", "Graceful Killers", "Quicksilver Swiftness"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Graceful Killers", "Quicksilver Swiftness"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Nurglings",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 54, _commandPoints: 0}),
@@ -376,7 +412,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Diseased claws and teeth"}),
                 ],
                 '_rules': mapWithKeys(["Daemonic Ritual"]),
-                '_abilities': mapWithKeys(["Daemonic", "Disgustingly Resilient", "Mischief Makers", "Squishable"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Disgustingly Resilient", "Mischief Makers", "Squishable"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Exalted Flamer",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 50, _commandPoints: 0}),
@@ -392,7 +430,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Tongues of flame"}),
                 ],
                 '_rules': mapWithKeys(["Daemonic Ritual"]),
-                '_abilities': mapWithKeys(["Daemonic", "Ephemeral Form"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Ephemeral Form"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Seekers",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 75, _commandPoints: 0}),
@@ -409,7 +449,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Piercing claws"}),
                 ],
                 '_rules': mapWithKeys(["Daemonic Ritual"]),
-                '_abilities': mapWithKeys(["Daemonic", "Quicksilver Swiftness", "Unholy Speed"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Quicksilver Swiftness", "Unholy Speed"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Seeker Chariot",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 50, _commandPoints: 0}),
@@ -425,7 +467,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Piercing claws"}),
                 ],
                 '_rules': mapWithKeys(["Daemonic Ritual"]),
-                '_abilities': mapWithKeys(["Daemonic", "Quicksilver Swiftness", "Scything Impact"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Daemonic", "Quicksilver Swiftness", "Scything Impact"]),
+                }}),
             ],
             '_rules': new Map([
               ["Daemonic Ritual", jasmine.any(String)],

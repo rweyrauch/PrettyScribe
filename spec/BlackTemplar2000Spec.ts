@@ -38,7 +38,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Camo cloak", "Champion of Humanity", "Concealed Position", "Iron Halo", "Omni-scrambler", "Rites of Battle"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Camo cloak", "Champion of Humanity", "Concealed Position", "Iron Halo", "Omni-scrambler", "Rites of Battle"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Lieutenants in Phobos Armor",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 81, _commandPoints: 0}),
@@ -56,7 +58,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Company Heroes", "Grav-chute", "Tactical Precision", "Terror Troops", "The Armour Indomitus"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Company Heroes", "Grav-chute", "Tactical Precision", "Terror Troops", "The Armour Indomitus"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "The Emperor's Champion",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 75, _commandPoints: 0}),
@@ -73,7 +77,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Armour of Faith", "Sigismund's Honour", "Skilful Parry", "Slayer of Champions"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Armour of Faith", "Sigismund's Honour", "Skilful Parry", "Slayer of Champions"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Crusader Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 74, _commandPoints: 0}),
@@ -93,7 +99,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Paired Combatants"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Paired Combatants"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Infiltrator Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 120, _commandPoints: 0}),
@@ -113,7 +121,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Combat Squads", "Concealed Positions", "Infiltrator Comms Array", "Omni-scramblers", "Smoke Grenades"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Combat Squads", "Concealed Positions", "Infiltrator Comms Array", "Omni-scramblers", "Smoke Grenades"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Intercessor Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 107, _commandPoints: 0}),
@@ -134,7 +144,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Auxiliary Grenade Launcher", "Combat Squads"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Auxiliary Grenade Launcher", "Combat Squads"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Intercessor Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 107, _commandPoints: -1}),
@@ -155,7 +167,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Auxiliary Grenade Launcher", "Combat Squads"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Auxiliary Grenade Launcher", "Combat Squads"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Scout Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 55, _commandPoints: 0}),
@@ -173,7 +187,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Combat Squads", "Concealed Positions"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Combat Squads", "Concealed Positions"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Tactical Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
@@ -192,7 +208,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Combat Squads"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Combat Squads"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Aggressor Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 111, _commandPoints: 0}),
@@ -210,7 +228,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Auto Boltstorm Gauntlets (Melee)"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Combat Squads", "Fire Storm", "Relentless Advance"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Combat Squads", "Fire Storm", "Relentless Advance"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Cenobyte Servitors",
                 '_cost': jasmine.objectContaining({_powerLevel: 1, _points: 6, _commandPoints: 0}),
@@ -223,7 +243,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Close Combat Weapon"}),
                 ],
-                '_abilities': mapWithKeys(["Chaplain's Retinue", "Mindwiped", "Relic of Helsreach"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Chaplain's Retinue", "Mindwiped", "Relic of Helsreach"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Redemptor Dreadnought",
                 '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 157, _commandPoints: 0}),
@@ -262,7 +284,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Combat Squads", "Jump Pack Assault"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Combat Squads", "Jump Pack Assault"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Assault Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 75, _commandPoints: 0}),
@@ -280,7 +304,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Combat Squads", "Jump Pack Assault"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Combat Squads", "Jump Pack Assault"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Suppressor Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 90, _commandPoints: 0}),
@@ -299,7 +325,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Grav-chute", "Smoke Launcher", "Suppressing Fire"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Grav-chute", "Smoke Launcher", "Suppressing Fire"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Eliminator Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 72, _commandPoints: 0}),
@@ -321,7 +349,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Camo cloaks", "Concealed Positions", "Covering Fire", "Guided Aim"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Camo cloaks", "Concealed Positions", "Covering Fire", "Guided Aim"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Predator",
                 '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 147, _commandPoints: 0}),
@@ -361,7 +391,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Twin Icarus Ironhail Heavy Stubber"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death", "Explodes (6\"/D6)"]),
-                '_abilities': mapWithKeys(["Aquilon Optics", "Auto Launchers", "Hover Tank", "Power of the Machine Spirit", "Repulsor Field", "Transport"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Aquilon Optics", "Auto Launchers", "Hover Tank", "Power of the Machine Spirit", "Repulsor Field"]),
+                  "Transport": mapWithKeys(["Transport"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Repulsor Executioner 1"}),
                   jasmine.objectContaining({'_name': "Repulsor Executioner 2"}),
@@ -380,7 +413,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Storm bolter"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death"]),
-                '_abilities': mapWithKeys(["Drop Pod Assault", "Immobile", "Transport"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Drop Pod Assault", "Immobile"]),
+                  "Transport": mapWithKeys(["Transport"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Impulsor",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 103, _commandPoints: 0}),
@@ -395,7 +431,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Storm bolter"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death", "Explodes (6\"/D3)"]),
-                '_abilities': mapWithKeys(["Assault Vehicle", "Hover Tank", "Repulsor Field", "Shield Dome", "Transport"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Assault Vehicle", "Hover Tank", "Repulsor Field", "Shield Dome"]),
+                  "Transport": mapWithKeys(["Impulsor"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Impulsor Wound Track 1"}),
                   jasmine.objectContaining({'_name': "Impulsor Wound Track 2"}),

@@ -62,7 +62,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
                 '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Rosarius", "Shock Assault", "Spiritual Leaders", "Teleport Strike"]),
-                '_abilities': mapWithKeys(["Litany of Hate", "Rosarius"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Litany of Hate", "Rosarius"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Sanctuary"}),

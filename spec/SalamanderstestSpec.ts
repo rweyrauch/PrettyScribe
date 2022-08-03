@@ -39,7 +39,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death", "Combi Weapon"]),
-                '_abilities': mapWithKeys(["Forge Master", "Iron Halo", "Obsidian Aquila", "Rites of Battle"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Forge Master", "Iron Halo", "Obsidian Aquila", "Rites of Battle"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Tactical Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 95, _commandPoints: 0}),
@@ -98,7 +100,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Redemptor Fist"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death", "Explodes (6\"/D3)"]),
-                '_abilities': mapWithKeys(["Duty Eternal"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Duty Eternal"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Devastator Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 150, _commandPoints: 0}),
@@ -120,7 +124,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenades"}),
                 ],
                 '_rules': mapWithKeys(["Angels of Death", "Combat Squads"]),
-                '_abilities': mapWithKeys(["Signum"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Signum"]),
+                }}),
             ],
             '_rules': new Map([
               ["Combat Doctrines", jasmine.any(String)],

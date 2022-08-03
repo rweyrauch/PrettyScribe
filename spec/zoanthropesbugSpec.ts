@@ -32,7 +32,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ],
-                '_abilities': mapWithKeys(["Psybrood Coterie", "Shadow in the Warp (Aura)", "Synapse", "Warp Blast", "Warp Field (Zoanthropes)"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Psybrood Coterie", "Shadow in the Warp (Aura)", "Synapse", "Warp Blast", "Warp Field (Zoanthropes)"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Catalyst"}),
                 ],
@@ -52,7 +54,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ],
-                '_abilities': mapWithKeys(["Psybrood Coterie", "Shadow in the Warp (Aura)", "Synapse", "Warp Blast", "Warp Field (Zoanthropes)"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Psybrood Coterie", "Shadow in the Warp (Aura)", "Synapse", "Warp Blast", "Warp Field (Zoanthropes)"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Onslaught"}),
                 ],
@@ -72,7 +76,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ],
-                '_abilities': mapWithKeys(["Psybrood Coterie", "Shadow in the Warp (Aura)", "Synapse", "Warp Blast", "Warp Field (Zoanthropes)"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Psybrood Coterie", "Shadow in the Warp (Aura)", "Synapse", "Warp Blast", "Warp Field (Zoanthropes)"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Psychic Scream"}),
                 ],

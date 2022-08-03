@@ -32,7 +32,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Honour blade"}),
                 ],
-                '_abilities': mapWithKeys(["Academy Luminary (Vior'la Sept)", "Blademaster", "Failure Is Not An Option", "Invocation of the Elements", "Shield generator"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Academy Luminary (Vior'la Sept)", "Blademaster", "Failure Is Not An Option", "Invocation of the Elements", "Shield generator"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Aun'Va",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 85, _commandPoints: 0}),
@@ -47,7 +49,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Honour blade"}),
                 ],
-                '_abilities': mapWithKeys(["Failure Is Not An Option", "Grand Invocation of the Elements", "Paradox of Duality", "Supreme Loyalty"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Failure Is Not An Option", "Grand Invocation of the Elements", "Paradox of Duality", "Supreme Loyalty"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Commander Farsight",
                 '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 110, _commandPoints: 0}),
@@ -62,7 +66,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Dawn blade"}),
                 ],
                 '_rules': mapWithKeys(["For the Greater Good", "Manta Strike"]),
-                '_abilities': mapWithKeys(["Genius of Mont'ka", "Master of War", "Shield generator", "Way of the Short Blade"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Genius of Mont'ka", "Master of War", "Shield generator", "Way of the Short Blade"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Breacher Team",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 93, _commandPoints: 0}),
@@ -88,7 +94,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Photon grenade"}),
                 ],
                 '_rules': mapWithKeys(["Drone Support", "For the Greater Good", "Pulse blaster", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Bonding Knife Ritual", "DS8 Tactical Support Turret", "Shield generator (Drone)"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bonding Knife Ritual", "DS8 Tactical Support Turret", "Shield generator (Drone)"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Breacher Team",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 70, _commandPoints: 0}),
@@ -112,7 +120,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Photon grenade"}),
                 ],
                 '_rules': mapWithKeys(["Drone Support", "For the Greater Good", "Pulse blaster", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Bonding Knife Ritual", "Threat Identification Protocols"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bonding Knife Ritual", "Threat Identification Protocols"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Kroot Carnivores",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
@@ -126,7 +136,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Kroot rifle (shooting)"}),
                   jasmine.objectContaining({'_name': "Kroot rifle (melee)"}),
                 ],
-                '_abilities': mapWithKeys(["Stealthy Hunters"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Stealthy Hunters"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Kroot Carnivores",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 56, _commandPoints: 0}),
@@ -140,7 +152,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Kroot rifle (shooting)"}),
                   jasmine.objectContaining({'_name': "Kroot rifle (melee)"}),
                 ],
-                '_abilities': mapWithKeys(["Stealthy Hunters"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Stealthy Hunters"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Strike Team",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 90, _commandPoints: 0}),
@@ -168,7 +182,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Photon grenade"}),
                 ],
                 '_rules': mapWithKeys(["Drone Support", "For the Greater Good", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Bonding Knife Ritual", "DS8 Tactical Support Turret", "Guardian Field", "Shield generator (Drone)"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bonding Knife Ritual", "DS8 Tactical Support Turret", "Guardian Field", "Shield generator (Drone)"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Strike Team",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 100, _commandPoints: 0}),
@@ -195,7 +211,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Photon grenade"}),
                 ],
                 '_rules': mapWithKeys(["Drone Support", "For the Greater Good", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Bonding Knife Ritual", "DS8 Tactical Support Turret", "Shield generator (Drone)"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bonding Knife Ritual", "DS8 Tactical Support Turret", "Shield generator (Drone)"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "DX-4 Technical Drones",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 32, _commandPoints: 0}),
@@ -209,7 +227,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Defensive charge"}),
                 ],
                 '_rules': mapWithKeys(["For the Greater Good", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Multi-function Surveyor"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Multi-function Surveyor"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "DX-4 Technical Drones",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 32, _commandPoints: 0}),
@@ -223,7 +243,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Defensive charge"}),
                 ],
                 '_rules': mapWithKeys(["For the Greater Good", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Multi-function Surveyor"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Multi-function Surveyor"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Dahyak Grekh",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 20, _commandPoints: 0}),
@@ -238,7 +260,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Kroot rifle (shooting)"}),
                   jasmine.objectContaining({'_name': "Kroot rifle (melee)"}),
                 ],
-                '_abilities': mapWithKeys(["Concealed Booby Traps", "Fieldcraft", "Quarry Can't Hide", "Tracker"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Concealed Booby Traps", "Fieldcraft", "Quarry Can't Hide", "Tracker"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Firesight Marksman",
                 '_cost': jasmine.objectContaining({_powerLevel: 1, _points: 25, _commandPoints: 0}),
@@ -253,7 +277,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Pulse pistol"}),
                 ],
                 '_rules': mapWithKeys(["For the Greater Good", "Markerlights"]),
-                '_abilities': mapWithKeys(["Drone Uplink", "Marksman Stealth Field", "Multi-sensory discouragement array"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Drone Uplink", "Marksman Stealth Field", "Multi-sensory discouragement array"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Kroot Shaper",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 20, _commandPoints: 0}),
@@ -267,7 +293,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Pulse carbine"}),
                   jasmine.objectContaining({'_name': "Ritual blade"}),
                 ],
-                '_abilities': mapWithKeys(["The Shaper Commands", "Wisest of Their Kind"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["The Shaper Commands", "Wisest of Their Kind"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "XV104 Riptide Battlesuit",
                 '_cost': jasmine.objectContaining({_powerLevel: 16, _points: 271, _commandPoints: 0}),
@@ -284,7 +312,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Plasma rifle"}),
                 ],
                 '_rules': mapWithKeys(["Drone Support", "For the Greater Good", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Early warning override", "Nova Reactor", "Riptide Shield Generator", "Shield generator (Drone)"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Early warning override", "Nova Reactor", "Riptide Shield Generator", "Shield generator (Drone)"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "XV104 Riptide Shas'vre 1"}),
                   jasmine.objectContaining({'_name': "XV104 Riptide Shas'vre 2"}),
@@ -308,7 +338,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Burst cannon"}),
                 ],
                 '_rules': mapWithKeys(["Drone Support", "For the Greater Good", "Infiltrator", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Bonding Knife Ritual", "Camouflage Fields", "Homing beacon", "Shield generator (Drone)"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bonding Knife Ritual", "Camouflage Fields", "Homing beacon", "Shield generator (Drone)"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "TX4 Piranhas",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 52, _commandPoints: 0}),
@@ -324,7 +356,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Pulse carbine"}),
                 ],
                 '_rules': mapWithKeys(["Attached Drones", "Detach", "Explodes (Piranha)", "For the Greater Good", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Threat Identification Protocols"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Threat Identification Protocols"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Tactical Drones",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 60, _commandPoints: 0}),
@@ -343,7 +377,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Pulse carbine"}),
                 ],
                 '_rules': mapWithKeys(["Drone Support", "For the Greater Good", "Manta Strike", "Markerlights", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Shield generator (Drone)", "Stable Platform", "Threat Identification Protocols"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Shield generator (Drone)", "Stable Platform", "Threat Identification Protocols"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "XV109 Y'vahra Battlesuit",
                 '_cost': jasmine.objectContaining({_powerLevel: 20, _points: 395, _commandPoints: 0}),
@@ -362,7 +398,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Fletchette pod (melee)"}),
                 ],
                 '_rules': mapWithKeys(["For the Greater Good"]),
-                '_abilities': mapWithKeys(["Nova Reactor (Y'vahra class)", "XV109 Y'vahra Battlesuit"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Nova Reactor (Y'vahra class)", "XV109 Y'vahra Battlesuit"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "XV109 Y'vahra Battlesuit 1"}),
                   jasmine.objectContaining({'_name': "XV109 Y'vahra Battlesuit 2"}),
@@ -381,7 +419,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Longshot pulse rifle"}),
                 ],
                 '_rules': mapWithKeys(["For the Greater Good", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Sniper Drone Stealth Field"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Sniper Drone Stealth Field"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "TX7 Hammerhead Gunship",
                 '_cost': jasmine.objectContaining({_powerLevel: 9, _points: 150, _commandPoints: 0}),
@@ -398,7 +438,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Railgun (Submunitions)"}),
                 ],
                 '_rules': mapWithKeys(["Attached Drones", "Detach", "Explodes", "For the Greater Good", "Hover Tank", "Saviour Protocols"]),
-                '_abilities': mapWithKeys(["Threat Identification Protocols"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Threat Identification Protocols"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "TX7 Hammerhead Gunship 1"}),
                   jasmine.objectContaining({'_name': "TX7 Hammerhead Gunship 2"}),
@@ -418,7 +460,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Smart missile system"}),
                 ],
                 '_rules': mapWithKeys(["For the Greater Good"]),
-                '_abilities': mapWithKeys(["Bonding Knife Ritual"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bonding Knife Ritual"]),
+                }}),
             ],
             '_rules': new Map([
               ["For the Greater Good", jasmine.any(String)],

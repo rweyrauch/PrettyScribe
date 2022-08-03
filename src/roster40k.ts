@@ -252,7 +252,8 @@ export class Unit extends BaseNotes {
     readonly _factions: Set<string> = new Set();
     readonly _keywords: Set<string> = new Set();
 
-    readonly _abilities: Map<string, string> = new Map();
+    readonly _abilitiesOld: Map<string, string> = new Map();
+    readonly _abilities: {[key: string]: Map<string, string>} = {};
     readonly _rules: Map<string, string> = new Map();
 
     readonly _models: Model[] = [];
@@ -916,7 +917,9 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
         } else if ((typeName === "Abilities") || (typeName === "Wargear") || (typeName === "Ability") ||
             (typeName === "Household Tradition") || (typeName === "Warlord Trait") || (typeName === "Astra Militarum Orders") ||
             (typeName === "Tank Orders") || (typeName === "Lethal Ambush") || (typeName === "Prayers")) {
-                ParseProfileCharacteristics(profile, profileName, unit._abilities);
+                ParseProfileCharacteristics(profile, profileName, unit._abilitiesOld);
+                if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
+                ParseProfileCharacteristics(profile, profileName, unit._abilities[typeName]);
         } else if (typeName === "Weapon") {
             const weapon = ParseWeaponProfile(profile);
             model._weapons.push(weapon);
@@ -925,6 +928,8 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
             unit._woundTracker.push(tracker);
         } else if (typeName == "Transport") {
             ParseTransportProfile(profile, unit);
+            if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
+            ParseProfileCharacteristics(profile, profileName, unit._abilities[typeName]);
         } else if (typeName == "Psychic Power") {
             const power = ParsePsychicPowerProfile(profile);
             model._psychicPowers.push(power);
@@ -936,10 +941,15 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
             model._psyker = psyker;
         } else if (profile.parentElement?.parentElement
             && profile.parentElement?.parentElement.getAttribute("type") === 'upgrade') {
-            ParseProfileCharacteristics(profile, profileName, unit._abilities);
-        } else {
-            parseUnknownProfile(profile, unit);
-        }
+            ParseProfileCharacteristics(profile, profileName, unit._abilitiesOld);
+            if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
+            ParseProfileCharacteristics(profile, profileName, unit._abilities[typeName]);
+    } else {
+            // ParseProfileCharacteristics(profile, profileName, unit._abilities);
+            // parseUnknownProfile(profile, unit);
+            if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
+            ParseProfileCharacteristics(profile, profileName, unit._abilities[typeName]);
+    }
     }
 }
 
@@ -949,7 +959,7 @@ function ParseProfileCharacteristics(profile: Element, profileName: string, map:
         if (!char.textContent) continue;
 
         const charName = char.getAttribute("name");
-        if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus")) {
+        if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus") || (charName === 'Capacity')) {
             map.set(profileName, char.textContent);
         }
     }
@@ -1010,7 +1020,7 @@ function ParseTransportProfile(profile: Element, unit: Unit) {
         let charName = char.getAttribute("name");
         if (charName && char.textContent) {
             if (charName === "Capacity") {
-                unit._abilities.set('Transport', char.textContent);
+                unit._abilitiesOld.set('Transport', char.textContent);
             }
         }
     }

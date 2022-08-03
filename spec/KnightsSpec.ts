@@ -32,7 +32,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Armiger Autocannon"}),
                   jasmine.objectContaining({'_name': "Meltagun"}),
                 ],
-                '_abilities': mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes (Armiger)"}),
                 ],
@@ -56,7 +58,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Reaper Chain-Cleaver (Strike)"}),
                   jasmine.objectContaining({'_name': "Reaper Chain-Cleaver (Sweep)"}),
                 ],
-                '_abilities': mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes (Armiger)"}),
                 ],
@@ -83,7 +87,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Volcano Lance"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
-                '_abilities': mapWithKeys(["Armour of the Sainted Ion", "Fearsome Reputation", "Ion Shield", "Super-Heavy Walker"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Armour of the Sainted Ion", "Ion Shield", "Super-Heavy Walker"]),
+                  "Warlord Trait": mapWithKeys(["Fearsome Reputation"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Dual Plasma Core Explosion"}),
                 ],
@@ -108,7 +115,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Thunderstrike gauntlet"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
-                '_abilities': mapWithKeys(["Ion Shield", "Super-Heavy Walker"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ion Shield", "Super-Heavy Walker"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes"}),
                 ],
@@ -133,7 +142,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Thunderstrike gauntlet"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
-                '_abilities': mapWithKeys(["Ion Shield", "Super-Heavy Walker"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ion Shield", "Super-Heavy Walker"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes"}),
                 ],

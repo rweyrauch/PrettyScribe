@@ -37,7 +37,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Brotherhood of Sorcerors", "Hateful Assault", "Malicious Volleys"]),
-                '_abilities': mapWithKeys(["Arch-Sorceror of Tzeentch", "Death to the False Emperor", "Lord of the Thousand Sons", "Sigil of Corruption"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Arch-Sorceror of Tzeentch", "Death to the False Emperor", "Lord of the Thousand Sons", "Sigil of Corruption"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                 ],
@@ -60,7 +62,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
                 '_rules': mapWithKeys(["Brotherhood of Sorcerors", "Hateful Assault", "Malicious Volleys"]),
-                '_abilities': mapWithKeys(["Death to the False Emperor", "Favour of Tzeentch", "Lord of the Thousand Sons"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Death to the False Emperor", "Favour of Tzeentch", "Lord of the Thousand Sons"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Seeded Strategy"}),
                   jasmine.objectContaining({'_name': "Smite"}),
@@ -100,7 +104,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Force stave"}),
                 ],
                 '_rules': mapWithKeys(["Brotherhood of Sorcerors", "Disciples of Tzeentch", "Hateful Assault", "Malicious Volleys"]),
-                '_abilities': mapWithKeys(["All is Dust", "Death to the False Emperor", "Favoured of Tzeentch"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["All is Dust", "Death to the False Emperor", "Favoured of Tzeentch"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Seeded Strategy"}),
                   jasmine.objectContaining({'_name': "Smite"}),
@@ -123,7 +129,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Tzaangor blades"}),
                 ],
                 '_rules': mapWithKeys(["Disciples of Tzeentch"]),
-                '_abilities': mapWithKeys(["Aura of Dark Glory", "Relic Hunters"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Aura of Dark Glory", "Relic Hunters"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Helbrute",
                 '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 102, _commandPoints: 0}),
@@ -138,7 +146,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Helbrute fist"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Malicious Volleys"]),
-                '_abilities': mapWithKeys(["Crazed", "Explodes"])}),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Crazed", "Explodes"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Scarab Occult Terminators",
                 '_cost': jasmine.objectContaining({_powerLevel: 11, _points: 169, _commandPoints: 0}),
@@ -156,7 +166,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Power sword"}),
                 ],
                 '_rules': mapWithKeys(["Brotherhood of Sorcerors", "Hateful Assault", "Malicious Volleys"]),
-                '_abilities': mapWithKeys(["All is Dust", "Death to the False Emperor", "Teleport Strike", "Terminator Armour"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["All is Dust", "Death to the False Emperor", "Teleport Strike", "Terminator Armour"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Seeded Strategy"}),
                   jasmine.objectContaining({'_name': "Smite"}),
@@ -178,7 +190,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Heldrake claws"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Malicious Volleys"]),
-                '_abilities': mapWithKeys(["Crash and Burn", "Daemonic", "Infernal Regeneration"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Crash and Burn", "Daemonic", "Infernal Regeneration"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Heldrake"}),
                   jasmine.objectContaining({'_name': "Heldrake1"}),
@@ -213,7 +227,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "The Blade of Magnus"}),
                 ],
                 '_rules': mapWithKeys(["Hateful Assault", "Malicious Volleys"]),
-                '_abilities': mapWithKeys(["Crown of the Crimson King", "Death to the False Emperor", "Gaze of Magnus", "Lord of Forbidden Lore", "Primarch of the Thousand Sons", "Unearthly Power"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Crown of the Crimson King", "Death to the False Emperor", "Gaze of Magnus", "Lord of Forbidden Lore", "Primarch of the Thousand Sons", "Unearthly Power"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                 ],
