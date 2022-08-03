@@ -337,15 +337,15 @@ export class Renderer40k implements Renderer {
             }
 
             if (force._rules.size > 0) {
-                let rules = new Map<string, string|null>();
-                catalogueRules.set(force._catalog, rules);
+                if (!catalogueRules.has(force._catalog)) catalogueRules.set(force._catalog, new Map<string, string|null>());
+                const rules = catalogueRules.get(force._catalog)!;
                 for (let rule of force._rules) {
                     rules.set(rule[0], rule[1]);
                 }
             }
             if (force._factionRules.size > 0) {
-                let rules = new Map<string, string|null>();
-                subFactionRules.set(force._faction, rules);
+                if (!subFactionRules.has(force._faction)) subFactionRules.set(force._faction, new Map<string, string|null>());
+                const rules = subFactionRules.get(force._faction)!;
                 for (let rule of force._factionRules) {
                     rules.set(rule[0], rule[1]);
                 }
