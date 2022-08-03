@@ -252,7 +252,7 @@ export class Unit extends BaseNotes {
     readonly _factions: Set<string> = new Set();
     readonly _keywords: Set<string> = new Set();
 
-    readonly _abilities: Map<string, string> = new Map();
+    readonly _abilities: {[key: string]: Map<string, string>} = {};
     readonly _rules: Map<string, string> = new Map();
 
     readonly _models: Model[] = [];
@@ -587,21 +587,6 @@ function LookupRoleKillTeam(roleText: string): UnitRole {
     return UnitRole.NONE;
 }
 
-function parseUnknownProfile(prop: Element, unit: Unit): void {
-
-    let propName = prop.getAttributeNode("name")?.nodeValue;
-    let propType = prop.getAttributeNode("typeName")?.nodeValue;
-
-    console.log("Unknown profile type: " + propType + " with name: " + propName + ".  Found in unit: " + unit._name);
-
-    // TODO: make a table out of the unknown profile.
-    //
-    // <typeName>      Name           <characteristic1.name>    <characteristic2.name> ...
-    //               <profileName>    <characteristic1.text>    <characteristic2.text> ...
-    //
-
-}
-
 function ExpandBaseNotes(root: Element, obj: BaseNotes): string {
     obj._name = <string>root.getAttributeNode("name")?.nodeValue;
 
@@ -908,23 +893,12 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
 
         if ((typeName === "Unit") || (typeName === "Model") || (profile.getAttribute("type") === "model")) {
             // Do nothing; these were already handled.
-        } else if ((typeName === "upgrade")) {
-            // TODO Check if this is still relevant, and delete if not.
-            const upgrade = new Upgrade();
-            upgrade._name = profileName;
-            model._upgrades.push(upgrade);
-        } else if ((typeName === "Abilities") || (typeName === "Wargear") || (typeName === "Ability") ||
-            (typeName === "Household Tradition") || (typeName === "Warlord Trait") || (typeName === "Astra Militarum Orders") ||
-            (typeName === "Tank Orders") || (typeName === "Lethal Ambush") || (typeName === "Prayers")) {
-                ParseProfileCharacteristics(profile, profileName, unit._abilities);
         } else if (typeName === "Weapon") {
             const weapon = ParseWeaponProfile(profile);
             model._weapons.push(weapon);
         } else if (typeName.includes("Wound Track") || typeName.includes("Stat Damage") || typeName.includes(" Wounds")) {
             const tracker = ParseWoundTrackerProfile(profile);
             unit._woundTracker.push(tracker);
-        } else if (typeName == "Transport") {
-            ParseTransportProfile(profile, unit);
         } else if (typeName == "Psychic Power") {
             const power = ParsePsychicPowerProfile(profile);
             model._psychicPowers.push(power);
@@ -934,11 +908,10 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
         } else if (typeName == "Psyker") {
             const psyker = ParsePsykerProfile(profile);
             model._psyker = psyker;
-        } else if (profile.parentElement?.parentElement
-            && profile.parentElement?.parentElement.getAttribute("type") === 'upgrade') {
-            ParseProfileCharacteristics(profile, profileName, unit._abilities);
         } else {
-            parseUnknownProfile(profile, unit);
+            // Everything else, like Prayers and Warlord Traits. 
+            if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
+            ParseProfileCharacteristics(profile, profileName, unit._abilities[typeName]);
         }
     }
 }
@@ -949,7 +922,7 @@ function ParseProfileCharacteristics(profile: Element, profileName: string, map:
         if (!char.textContent) continue;
 
         const charName = char.getAttribute("name");
-        if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus")) {
+        if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus") || (charName === 'Capacity')) {
             map.set(profileName, char.textContent);
         }
     }
@@ -1002,18 +975,6 @@ function ParseWoundTrackerProfile(profile: Element): WoundTracker {
         }
     }
     return tracker;
-}
-
-function ParseTransportProfile(profile: Element, unit: Unit) {
-    let chars = profile.querySelectorAll("characteristics>characteristic");
-    for (let char of chars) {
-        let charName = char.getAttribute("name");
-        if (charName && char.textContent) {
-            if (charName === "Capacity") {
-                unit._abilities.set('Transport', char.textContent);
-            }
-        }
-    }
 }
 
 function ParsePsychicPowerProfile(profile: Element): PsychicPower {

@@ -20,6 +20,10 @@ export async function getRosterExpectation(filename: string): Promise<string> {
   return `import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads ${filename}", async function() {
     const doc = await readZippedRosterFile('${filename}');
@@ -40,8 +44,8 @@ function processForces(forces: Force[]): string {
             '_configurations': [${processConfigurations(force._configurations)}],
             '_units': [${processUnits(force._units)}
             ],
-            '_rules': new Map(${processRulesMap(force._rules)}),
-            '_factionRules': new Map(${processRulesMap(force._factionRules)}),
+            '_rules': ${processRulesMap(force._rules)},
+            '_factionRules': ${processRulesMap(force._factionRules)},
           }),`).join('');
 }
 
@@ -78,6 +82,15 @@ function processBaseNotes(notes: BaseNotes[]) {
 
 function processOptionalUnitStats(unit: Unit) {
   let output = '';
+  if (unit._rules.size > 0) {
+    output += `,
+                '_rules': ${processMap(unit._rules)}`
+  }
+  if (Object.keys(unit._abilities).length > 0) {
+    output += `,
+                '_abilities': {${processAbilities2(unit._abilities)}
+                }`
+  }
   if (unit._spells.length > 0) {
     output += `,
                 '_spells': [
@@ -105,10 +118,22 @@ function processOptionalUnitStats(unit: Unit) {
   return output;
 }
 
+function processMap(map: Map<string, string | null>): string {
+  if (map.size === 0) return 'new Map()';
+
+  return 'mapWithKeys([' + Array.from(map.keys()).sort().map(key => JSON.stringify(key)).join(', ') + '])';
+}
+
+function processAbilities2(_abilities2: {[key: string]: Map<string, string | null>}): string {
+  return Object.keys(_abilities2).sort().map(key => `\n                  ${JSON.stringify(key)}: ${processMap(_abilities2[key])},`).join('');
+}
+
 function processRulesMap(_rules: Map<string, string | null>): string {
-  if (_rules.size === 0) return '';
-  return '[\n' +
+  if (_rules.size === 0) return 'new Map()';
+
+  return 'new Map([\n' +
     Array.from(_rules.keys()).map(key => `              [${JSON.stringify(key)}, jasmine.any(String)],\n`).join('') +
-  '            ]';
+  '            ])';
+
 }
 

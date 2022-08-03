@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/longweaponnames.rosz", async function() {
     const doc = await readZippedRosterFile('test/longweaponnames.rosz');
@@ -34,7 +38,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellforged heavy plasma cannon"}),
                   jasmine.objectContaining({'_name': "Hellforged heavy plasma cannon - Standard"}),
                   jasmine.objectContaining({'_name': "Hellforged heavy plasma cannon - Supercharge"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Hateful Assault", "Malicious Volleys", "Martial Legacy"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Atomantic Shielding", "Explodes", "Relentless Hatred"]),
+                }}),
             ],
             '_rules': new Map([
               ["Daemonic Ritual", jasmine.any(String)],

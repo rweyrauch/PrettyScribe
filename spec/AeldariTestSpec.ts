@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/Aeldari Test.ros", async function() {
     const doc = await readZippedRosterFile('test/Aeldari Test.ros');
@@ -30,6 +34,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Shuriken pistol"}),
                   jasmine.objectContaining({'_name': "Witchblade"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ancient Doom", "Battle Focus", "Ghosthelm", "Rune Armour", "Runes of the Farseer"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                 ],
@@ -48,7 +55,10 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Silent Death"}),
                   jasmine.objectContaining({'_name': "Blade of Destruction"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Acrobatic", "Ancient Doom", "Banshee Mask", "Battle Focus", "Cry of War Unending", "The Storm of Silence", "War Shout"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Dire Avengers",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 55, _commandPoints: 0}),
@@ -62,7 +72,10 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Avenger Shuriken Catapult"}),
                   jasmine.objectContaining({'_name': "Plasma Grenade"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ancient Doom", "Battle Focus", "Defence Tactics"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Rangers",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 60, _commandPoints: 0}),
@@ -76,7 +89,10 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Ranger Long Rifle"}),
                   jasmine.objectContaining({'_name': "Shuriken pistol"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ancient Doom", "Appear Unbidden", "Battle Focus", "Cameleoline Cloaks"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Storm Guardians",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 48, _commandPoints: 0}),
@@ -90,7 +106,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Shuriken pistol"}),
                   jasmine.objectContaining({'_name': "Aeldari Blade"}),
                   jasmine.objectContaining({'_name': "Plasma Grenade"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ancient Doom", "Battle Focus"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Wraithlord",
                 '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 80, _commandPoints: 0}),
@@ -104,6 +123,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Shuriken Catapult"}),
                   jasmine.objectContaining({'_name': "Wraithbone Fists"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ancient Doom"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Wraithlord 1."}),
                   jasmine.objectContaining({'_name': "Wraithlord 2."}),
@@ -122,6 +144,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bright Lance"}),
                   jasmine.objectContaining({'_name': "Pulse Laser"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Airborne", "Crash and Burn", "Hard To Hit", "Skyhunters", "Wings of Khaine"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Crimson Hunter 1."}),
                   jasmine.objectContaining({'_name': "Crimson Hunter 2."}),
@@ -140,6 +165,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bright Lance"}),
                   jasmine.objectContaining({'_name': "Pulse Laser"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Airborne", "Crash and Burn", "Hard To Hit", "Marksman's Eye", "Skyhunters", "Wings of Khaine"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Crimson Hunter Exarch 1."}),
                   jasmine.objectContaining({'_name': "Crimson Hunter Exarch 2."}),
@@ -169,7 +197,11 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Splinter pistol"}),
                   jasmine.objectContaining({'_name': "Archite glaive"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Combat Drugs", "Power from Pain"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Brides of Death", "Lightning Dodge", "No Escape"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Urien Rakarth",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 90, _commandPoints: 0}),
@@ -183,7 +215,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Casket of Flensing"}),
                   jasmine.objectContaining({'_name': "Haemonculus tools"}),
                   jasmine.objectContaining({'_name': "Ichor Injector"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Power from Pain"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Clone Field", "Contempt for Death", "Haemovores", "Master of Pain", "Sculptor of Torments"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Kabalite Warriors",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 30, _commandPoints: 0}),
@@ -197,7 +233,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Splinter rifle"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Power from Pain", "Vanguard of the Dark City"])}),
               jasmine.objectContaining({
                 '_name': "Wracks",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 45, _commandPoints: 0}),
@@ -211,7 +248,11 @@ describe("Create40kRoster", function() {
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Haemonculus tools"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Power from Pain", "Vanguard of the Dark City"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Insensible to Pain"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Wyches",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 40, _commandPoints: 0}),
@@ -227,7 +268,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Splinter pistol"}),
                   jasmine.objectContaining({'_name': "Hekatarii blade"}),
                   jasmine.objectContaining({'_name': "Plasma Grenade"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Combat Drugs", "Power from Pain", "Vanguard of the Dark City"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Dodge", "No Escape"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Incubi",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 70, _commandPoints: 0}),
@@ -241,7 +286,11 @@ describe("Create40kRoster", function() {
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Klaive"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Power from Pain"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Lethal Precision", "Tormentors"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Scourges",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 60, _commandPoints: 0}),
@@ -256,7 +305,11 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Shardcarbine"}),
                   jasmine.objectContaining({'_name': "Plasma Grenade"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Power from Pain"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ghostplate Armour", "Winged Strike"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Ravager",
                 '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 140, _commandPoints: 0}),
@@ -270,6 +323,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Dark Lance"}),
                   jasmine.objectContaining({'_name': "Bladevanes"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes", "Hovering", "Night Shield"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Ravager"}),
                   jasmine.objectContaining({'_name': "Ravager 1"}),
@@ -291,6 +347,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scythevanes"}),
                   jasmine.objectContaining({'_name': "Sharpened prow blade"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes", "Hovering", "Night Shield", "Storm Vortex Projector"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Reaper"}),
                   jasmine.objectContaining({'_name': "Reaper 1"}),
@@ -309,7 +368,11 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Splinter Cannon"}),
                   jasmine.objectContaining({'_name': "Macro-Scalpel"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Power from Pain"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes", "Insensible to Pain"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Venom",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 65, _commandPoints: 0}),
@@ -323,7 +386,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Splinter Cannon"}),
                   jasmine.objectContaining({'_name': "Twin splinter rifle"}),
                   jasmine.objectContaining({'_name': "Bladevanes"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes", "Flickerfield", "Night Shield", "Open-topped"]),
+                  "Transport": mapWithKeys(["Venom"]),
+                }}),
             ],
             '_rules': new Map([
               ["Poisoned Weapon", jasmine.any(String)],

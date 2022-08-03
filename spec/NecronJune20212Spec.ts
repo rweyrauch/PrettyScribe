@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/Necron June 2021 2.ros", async function() {
     const doc = await readZippedRosterFile('test/Necron June 2021 2.ros');
@@ -29,7 +33,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Aeonstave (Shooting)"}),
                   jasmine.objectContaining({'_name': "Aeonstave (Melee)"}),
                   jasmine.objectContaining({'_name': "Chronotendrils"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Command Protocols", "Living Metal"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Chronometron", "Dynastic Advisors", "Timesplinter Mantle"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Royal Warden",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 75, _commandPoints: 0}),
@@ -41,7 +49,12 @@ describe("Create40kRoster", function() {
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Relic Gauss Blaster"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Command Protocols", "Living Metal"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Adaptive Strategy", "Relentless March (Aura)", "Veil of Darkness"]),
+                  "Warlord Trait": mapWithKeys(["Enduring Will"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Necron Warriors",
                 '_cost': jasmine.objectContaining({_powerLevel: 12, _points: 260, _commandPoints: 0}),
@@ -53,7 +66,11 @@ describe("Create40kRoster", function() {
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Gauss Reaper"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Command Protocols", "Objective Secured", "Reanimation Protocols"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Their Number Is Legion"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Skorpekh Destroyers",
                 '_cost': jasmine.objectContaining({_powerLevel: 5, _points: 105, _commandPoints: 0}),
@@ -67,7 +84,11 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Hyperphase Reap-Blade"}),
                   jasmine.objectContaining({'_name': "Hyperphase Threshers"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Command Protocols", "Living Metal", "Reanimation Protocols"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Hardwired for Destruction"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Canoptek Scarab Swarms",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 60, _commandPoints: 0}),
@@ -79,7 +100,8 @@ describe("Create40kRoster", function() {
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Feeder Mandibles"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Command Protocols", "Living Metal", "Reanimation Protocols"])}),
               jasmine.objectContaining({
                 '_name': "Bound Creation",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 40, _commandPoints: 0}),
@@ -92,7 +114,11 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Scouring Eye"}),
                   jasmine.objectContaining({'_name': "Scythed Limbs"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Command Protocols", "Living Metal", "Reanimation Protocols"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Bound Creation", "Protectors (Aura)", "Systematic Vigour"]),
+                }}),
             ],
             '_rules': new Map([
               ["Dynastic Agents and Star Gods", jasmine.any(String)],

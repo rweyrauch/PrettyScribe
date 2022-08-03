@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/Grey Knights.rosz", async function() {
     const doc = await readZippedRosterFile('test/Grey Knights.rosz');
@@ -34,6 +38,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Daemon Hunters", "Domina Liber Demonica", "Iron Halo", "Masters of the Warp", "Psychic Locus", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                 ],
@@ -56,6 +61,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Rosarius", "Shock Assault", "Spiritual Leaders", "Teleport Strike"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Litany of Hate", "Rosarius"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Sanctuary"}),
@@ -79,6 +88,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Daemon Hunters", "Iron Halo", "Masters of the Warp", "Rites of Banishment", "Rites of Battle", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Inner Fire"}),
@@ -104,6 +114,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                 ],
@@ -128,6 +139,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                 ],
@@ -153,6 +165,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Crux Terminatus", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Astral Aim"}),
@@ -179,6 +192,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Crux Terminatus", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Sanctuary"}),
@@ -205,6 +219,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Crux Terminatus", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Astral Aim"}),
@@ -231,6 +246,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Daemon Hunters", "Masters of the Warp", "Purifying Flame", "Shock Assault"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Purifying Flame)"}),
                   jasmine.objectContaining({'_name': "Hammerhand"}),
@@ -256,6 +272,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                 ],

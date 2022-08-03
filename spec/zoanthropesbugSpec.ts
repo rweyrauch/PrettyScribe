@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/zoanthropes bug.rosz", async function() {
     const doc = await readZippedRosterFile('test/zoanthropes bug.rosz');
@@ -28,6 +32,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Psybrood Coterie", "Shadow in the Warp (Aura)", "Synapse", "Warp Blast", "Warp Field (Zoanthropes)"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Catalyst"}),
                 ],
@@ -47,6 +54,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Psybrood Coterie", "Shadow in the Warp (Aura)", "Synapse", "Warp Blast", "Warp Field (Zoanthropes)"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Onslaught"}),
                 ],
@@ -66,6 +76,9 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Psybrood Coterie", "Shadow in the Warp (Aura)", "Synapse", "Warp Blast", "Warp Field (Zoanthropes)"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Psychic Scream"}),
                 ],

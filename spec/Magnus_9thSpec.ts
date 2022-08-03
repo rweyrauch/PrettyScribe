@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/Magnus_9th.rosz", async function() {
     const doc = await readZippedRosterFile('test/Magnus_9th.rosz');
@@ -33,6 +37,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Frag grenade"}),
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
+                '_rules': mapWithKeys(["Brotherhood of Sorcerors", "Hateful Assault", "Malicious Volleys"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Arch-Sorceror of Tzeentch", "Death to the False Emperor", "Lord of the Thousand Sons", "Sigil of Corruption"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                   jasmine.objectContaining({'_name': "Prescience"}),
@@ -56,6 +64,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Frag grenade"}),
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                 ],
+                '_rules': mapWithKeys(["Brotherhood of Sorcerors", "Hateful Assault", "Malicious Volleys"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Athenaean Scrolls", "Death to the False Emperor", "Favour of Tzeentch", "Lord of the Thousand Sons"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Seeded Strategy"}),
                   jasmine.objectContaining({'_name': "Smite"}),
@@ -78,7 +90,8 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Autogun"}),
                   jasmine.objectContaining({'_name': "Autogun"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Disciples of Tzeentch"])}),
               jasmine.objectContaining({
                 '_name': "Rubric Marines",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 90, _commandPoints: 0}),
@@ -95,6 +108,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Inferno boltgun"}),
                   jasmine.objectContaining({'_name': "Force stave"}),
                 ],
+                '_rules': mapWithKeys(["Brotherhood of Sorcerors", "Disciples of Tzeentch", "Hateful Assault", "Malicious Volleys"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["All is Dust", "Death to the False Emperor", "Favoured of Tzeentch"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Seeded Strategy"}),
                   jasmine.objectContaining({'_name': "Smite"}),
@@ -115,7 +132,11 @@ describe("Create40kRoster", function() {
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Tzaangor blades"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Disciples of Tzeentch"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Aura of Dark Glory", "Relic Hunters"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Helbrute",
                 '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 115, _commandPoints: 0}),
@@ -128,7 +149,11 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Multi-melta"}),
                   jasmine.objectContaining({'_name': "Helbrute fist"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Hateful Assault", "Malicious Volleys"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Crazed", "Explodes"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Scarab Occult Terminators",
                 '_cost': jasmine.objectContaining({_powerLevel: 10, _points: 185, _commandPoints: 0}),
@@ -145,6 +170,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Force stave"}),
                   jasmine.objectContaining({'_name': "Power sword"}),
                 ],
+                '_rules': mapWithKeys(["Brotherhood of Sorcerors", "Hateful Assault", "Malicious Volleys"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["All is Dust", "Death to the False Emperor", "Teleport Strike", "Terminator Armour"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Seeded Strategy"}),
                   jasmine.objectContaining({'_name': "Smite"}),
@@ -165,6 +194,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hades autocannon"}),
                   jasmine.objectContaining({'_name': "Heldrake claws"}),
                 ],
+                '_rules': mapWithKeys(["Hateful Assault", "Malicious Volleys"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Crash and Burn", "Daemonic", "Infernal Regeneration"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Heldrake"}),
                   jasmine.objectContaining({'_name': "Heldrake1"}),
@@ -199,6 +232,10 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "The Blade of Magnus"}),
                 ],
+                '_rules': mapWithKeys(["Hateful Assault", "Malicious Volleys"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Crown of the Crimson King", "Death to the False Emperor", "Gaze of Magnus", "Lord of Forbidden Lore", "Primarch of the Thousand Sons", "Unearthly Power"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite"}),
                 ],
