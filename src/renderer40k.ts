@@ -326,14 +326,17 @@ export class Renderer40k implements Renderer {
             h3.appendChild(forceTitle)
             forces.appendChild(h3);
 
-            let prevUnit: Unit | null = null;
-            for (let unit of force._units) {
-                if (unit.equal(prevUnit)) {
+            let numIdenticalUnits = 0;
+            for (let i = 0; i < force._units.length; i++) {
+                numIdenticalUnits++;
+                const unit = force._units[i];
+                const nextUnit = force._units[i + 1];
+                if (unit.equal(nextUnit)) {
                     continue;
                 }
-                prevUnit = unit;
 
-                this.renderUnitHtml(forces, unit);
+                this.renderUnitHtml(forces, unit, numIdenticalUnits);
+                numIdenticalUnits = 0
             }
 
             if (force._rules.size > 0) {
@@ -359,7 +362,7 @@ export class Renderer40k implements Renderer {
         forces.appendChild(rules);
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Unit) {
+    private renderUnitHtml(forces: HTMLElement, unit: Unit, unitCount: number) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
         const statsTable = document.createElement('table');
@@ -384,7 +387,7 @@ export class Renderer40k implements Renderer {
             span.appendChild(document.createTextNode(unit._cost._commandPoints.toString()));
             span.appendChild(document.createElement('span')).appendChild(document.createTextNode('CP'));
         }
-        thead.appendChild(createTableRow([unitCostDiv, unit.name(), cpCostDiv], [0.1, 0.8, 0.1]));
+        thead.appendChild(createTableRow([unitCostDiv, unit.name() + (unitCount > 1 ? ` (${unitCount})` : ''), cpCostDiv], [0.1, 0.8, 0.1]));
 
         // Add an invisible row of 20, 5% columns. This ensures correct
         // spacing for the first few columns of visible rows.
