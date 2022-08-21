@@ -19,9 +19,6 @@ import {Renderer} from "./renderer";
 
 export class Renderer40k implements Renderer {
 
-    public static readonly _res: number = 144; // original is 144
-    public static readonly _margin: number = 0;
-
     private _roster: Roster40k | null = null;
 
     private _roles: Map<UnitRole, HTMLImageElement | null> = new Map();
@@ -137,12 +134,8 @@ export class Renderer40k implements Renderer {
         optionsDiv.classList.add('wh40k_options_div', 'd-print-none');
         optionsDiv.appendChild(document.createTextNode('Options:'));
         optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
-        {
-            const input = optionsDiv.appendChild(document.createElement('input'));
-            input.setAttribute('type', 'checkbox');
-            input.setAttribute('name', 'showPhaseAbilities');
-            input.setAttribute('id', 'showPhaseAbilities');
-            input.addEventListener('input', (e) => {
+        this.renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase', 
+            (e) => {
                 const abilities = document.getElementById('wh40k_abilities_list');
                 if (!abilities) return;
 
@@ -152,17 +145,9 @@ export class Renderer40k implements Renderer {
                     abilities.classList.add('d-none');
                 }
             });
-            const label = optionsDiv.appendChild(document.createElement('label'));
-            label.setAttribute('for', 'showPhaseAbilities');
-            label.appendChild(document.createTextNode(' Show abilities by phase'));
-        }
         optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
-        {
-            const input = optionsDiv.appendChild(document.createElement('input'));
-            input.setAttribute('type', 'checkbox');
-            input.setAttribute('name', 'showUpgradeCosts');
-            input.setAttribute('id', 'showUpgradeCosts');
-            const eventListener = (e: Event) => {
+        this.renderCheckboxOption(optionsDiv, 'showUpgradeCosts', 'Show upgrade costs',
+            (e: Event) => {
                 const costSpans = document.getElementsByClassName('wh40k_upgrade_cost');
                 for (const span of costSpans) {
                     if ((e.target as any).checked) {
@@ -171,19 +156,10 @@ export class Renderer40k implements Renderer {
                         span.classList.add('d-none')
                     }
                 }
-            };
-            input.addEventListener('input', eventListener);
-            const label = optionsDiv.appendChild(document.createElement('label'));
-            label.setAttribute('for', 'showUpgradeCosts');
-            label.appendChild(document.createTextNode(' Show upgrade costs'));
-        }
+            });
         optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
-        {
-            const input = optionsDiv.appendChild(document.createElement('input'));
-            input.setAttribute('type', 'checkbox');
-            input.setAttribute('name', 'printBigger');
-            input.setAttribute('id', 'printBigger');
-            const eventListener = (e: Event) => {
+        this.renderCheckboxOption(optionsDiv, 'printBigger', 'Print Larger Text',
+            (e: Event) => {
                 const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
                 for (const div of unitSheetDiv) {
                     if ((e.target as any).checked) {
@@ -192,13 +168,33 @@ export class Renderer40k implements Renderer {
                         div.classList.remove('bigger')
                     }
                 }
-            };
-            input.addEventListener('input', eventListener);
-            const label = optionsDiv.appendChild(document.createElement('label'));
-            label.setAttribute('for', 'printBigger');
-            label.appendChild(document.createTextNode(' Print Larger Text'));
-        }
+            });
+        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        this.renderCheckboxOption(optionsDiv, 'collateDatasheets', 'Collate Detachment Datasheets',
+            (e: Event) => {
+                const collatedSheets = document.getElementById('collated_sheets');
+                const detachmentSheets = document.getElementById('detachment_sheets');
+                if (!collatedSheets || !detachmentSheets) return;
 
+                if ((e.target as any).checked) {
+                    collatedSheets.classList.remove('d-none')
+                    detachmentSheets.classList.add('d-none')
+                } else {
+                    collatedSheets.classList.add('d-none')
+                    detachmentSheets.classList.remove('d-none')
+                }
+            });
+    }
+
+    private renderCheckboxOption(optionsDiv: HTMLElement, idAndName: string, text: string, eventHandler: EventListenerOrEventListenerObject) {
+        const input = optionsDiv.appendChild(document.createElement('input'));
+        input.setAttribute('type', 'checkbox');
+        input.setAttribute('name', idAndName);
+        input.setAttribute('id', idAndName);
+        input.addEventListener('input', eventHandler);
+        const label = optionsDiv.appendChild(document.createElement('label'));
+        label.setAttribute('for', idAndName);
+        label.appendChild(document.createTextNode(` ${text}`));
     }
 
     private renderAbilitiesByPhase(list: HTMLElement) {
@@ -310,6 +306,14 @@ export class Renderer40k implements Renderer {
 
         const catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
         const subFactionRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
+        const detachmentSheets = forces.appendChild(document.createElement('div'));
+        detachmentSheets.id = 'detachment_sheets';
+        const collatedSheets = forces.appendChild(document.createElement('div'));
+        collatedSheets.id = 'collated_sheets';
+        collatedSheets.style.pageBreakBefore = "always";
+        collatedSheets.classList.add('d-none');
+        const collatedUnits: Unit[] = [];
+
         for (const force of this._roster._forces) {
             const forceTitle = document.createElement('div');
             forceTitle.style.pageBreakBefore = "always";
@@ -324,42 +328,41 @@ export class Renderer40k implements Renderer {
 
             let h3 = document.createElement('h3');
             h3.appendChild(forceTitle)
-            forces.appendChild(h3);
+            detachmentSheets.appendChild(h3);
 
-            let numIdenticalUnits = 0;
-            for (let i = 0; i < force._units.length; i++) {
-                numIdenticalUnits++;
-                const unit = force._units[i];
-                const nextUnit = force._units[i + 1];
-                if (unit.equal(nextUnit)) {
-                    continue;
-                }
+            this.renderDatasheets(detachmentSheets, force._units);
 
-                this.renderUnitHtml(forces, unit, numIdenticalUnits);
-                numIdenticalUnits = 0
-            }
+            collatedUnits.push(...force._units);
 
-            if (force._rules.size > 0) {
-                if (!catalogueRules.has(force._catalog)) catalogueRules.set(force._catalog, new Map<string, string|null>());
-                const rules = catalogueRules.get(force._catalog)!;
-                for (let rule of force._rules) {
-                    rules.set(rule[0], rule[1]);
-                }
-            }
-            if (force._factionRules.size > 0) {
-                if (!subFactionRules.has(force._faction)) subFactionRules.set(force._faction, new Map<string, string|null>());
-                const rules = subFactionRules.get(force._faction)!;
-                for (let rule of force._factionRules) {
-                    rules.set(rule[0], rule[1]);
-                }
-            }
+            mergeRules(catalogueRules, force._catalog, force._rules);
+            mergeRules(subFactionRules, force._faction, force._factionRules);
         }
+
+        collatedUnits.sort((lhs: Unit, rhs: Unit) => {
+            if (lhs._role != rhs._role) return lhs._role - rhs._role;
+            if (lhs._name != rhs._name) return Compare(lhs._name, rhs._name);
+            return lhs._cost._points - rhs._cost._points;  // Simple heuristic, could do better.
+        });
+        this.renderDatasheets(collatedSheets, collatedUnits);
 
         let rules = document.createElement("div");
         rules.style.pageBreakBefore = "always";
         this.printRules(catalogueRules, rules);
         this.printRules(subFactionRules, rules);
         forces.appendChild(rules);
+    }
+
+    private renderDatasheets(forces: HTMLElement, units: Unit[]) {
+        let numIdenticalUnits = 0;
+        for (let i = 0; i < units.length; i++) {
+            numIdenticalUnits++;
+            const unit = units[i];
+            const nextUnit = units[i + 1];
+            if (unit.equal(nextUnit)) continue;
+
+            this.renderUnitHtml(forces, unit, numIdenticalUnits);
+            numIdenticalUnits = 0
+        }
     }
 
     private renderUnitHtml(forces: HTMLElement, unit: Unit, unitCount: number) {
@@ -518,24 +521,13 @@ export class Renderer40k implements Renderer {
 
         // unit abilities and rules; rules are shared across units, with their
         // descriptions printed in bulk later, but show up with unit 'Abilities'
-        if (!unit._abilities['Abilities'] && unit._rules.size > 0) unit._abilities['Abilities'] = new Map();  // So the loop below renders rules.
+        if (!unit._abilities['Abilities'] && unit._rules.size > 0) {
+            this.renderUnitAbilitiesAndRules(statsTable, 'Abilities', new Map(), unit._rules);
+        }
         for (const abilitiesGroup of Object.keys(unit._abilities).sort()) {
             const abilitiesMap = unit._abilities[abilitiesGroup];
-            thead = statsTable.appendChild(document.createElement('thead'));
-            thead.classList.add('info_row');
-            const abilitiesDiv = document.createElement('div');
-            // Only show rules in the 'Abilities' group.
-            if (abilitiesGroup === 'Abilities' && unit._rules.size > 0) {
-                const rules = Array.from(unit._rules.keys()).sort(Compare).join(', ');
-                abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
-            }
-            const abilities = Array.from(abilitiesMap.keys()).sort(Compare);
-            for (const ability of abilities) {
-                const abilityDiv = abilitiesDiv.appendChild(document.createElement('div'));
-                abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
-                abilityDiv.appendChild(document.createTextNode(abilitiesMap.get(ability) || '??'));
-            }
-            thead.appendChild(createTableRow([abilitiesGroup, abilitiesDiv], [0.10, 0.90], /* header= */ false));
+            const rules = abilitiesGroup === 'Abilities' ? unit._rules : undefined;
+            this.renderUnitAbilitiesAndRules(statsTable, abilitiesGroup, abilitiesMap, rules);
         }
 
         // factions
@@ -576,6 +568,24 @@ export class Renderer40k implements Renderer {
         }
         notesTableHead = createNotesHead('Explosion notes', unit._explosions);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
+    }
+
+    private renderUnitAbilitiesAndRules(container: HTMLElement, abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
+        const thead = container.appendChild(document.createElement('thead'));
+        thead.classList.add('info_row');
+        const abilitiesDiv = document.createElement('div');
+        if (rulesMap && rulesMap.size > 0) {
+            const rules = Array.from(rulesMap.keys()).sort(Compare).join(', ');
+            abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
+        }
+        const abilities = Array.from(abilitiesMap.keys()).sort(Compare);
+        for (const ability of abilities) {
+            const abilityDiv = abilitiesDiv.appendChild(document.createElement('div'));
+            abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
+            abilityDiv.appendChild(document.createTextNode(abilitiesMap.get(ability) || '??'));
+        }
+        thead.appendChild(createTableRow([abilitiesGroup, abilitiesDiv], [0.10, 0.90], /* header= */ false));
+
     }
 
     private renderModelList(container: HTMLElement, unit: Unit) {
@@ -635,13 +645,16 @@ export class Renderer40k implements Renderer {
     private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
 
     private static _explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];
-    private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.10];
+    private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.15];
 
     private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
     private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
 };
 
-
+function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {
+    if (rulesToAdd.size === 0) return;
+    ruleGroups.set(groupName, new Map([...ruleGroups.get(groupName) || [], ...rulesToAdd]));
+}
 
 function createTableRow(labels: (string|Element)[], widths: number[], header = false) {
     const row = document.createElement('tr');
