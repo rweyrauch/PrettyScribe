@@ -1,5 +1,5 @@
 import { readZippedRosterFile } from './readRosterFile';
-import { BaseNotes, Create40kRoster, Force, Unit } from "../../src/roster40k";
+import { BaseNotes, Costs, Create40kRoster, Force, Unit } from "../../src/roster40k";
 
 export async function getRosterExpectation(filename: string): Promise<string> {
   const doc = await readZippedRosterFile(filename);
@@ -31,7 +31,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_cost': jasmine.objectContaining({_powerLevel: ${roster._cost._powerLevel}, _points: ${roster._cost._points}, _commandPoints: ${roster._cost._commandPoints}}),
+        '_cost': ${processCost(roster._cost)},
         '_forces': [${processForces(roster._forces)}
         ]}));
   });
@@ -62,7 +62,7 @@ function processUnits(units: Unit[]): string {
   return units.map(unit => `
               jasmine.objectContaining({
                 '_name': ${JSON.stringify(unit._name)},
-                '_cost': jasmine.objectContaining({_powerLevel: ${unit._cost._powerLevel}, _points: ${unit._cost._points}, _commandPoints: ${unit._cost._commandPoints}}),
+                '_cost': ${processCost(unit._cost)},
                 '_modelStats': [
                   ${processBaseNotes(unit._modelStats)}
                 ],
@@ -72,6 +72,11 @@ function processUnits(units: Unit[]): string {
                 '_weapons': [
                   ${processBaseNotes(unit._weapons)}
                 ]${processOptionalUnitStats(unit)}}),`).join('');
+}
+
+function processCost(cost: Costs) {
+  const freeformValues = cost._freeformValues ? `, _freeformValues: ${JSON.stringify(cost._freeformValues)}` : '';
+  return `jasmine.objectContaining({_powerLevel: ${cost._powerLevel}, _points: ${cost._points}, _commandPoints: ${cost._commandPoints}${freeformValues}})`;
 }
 
 function processBaseNotes(notes: BaseNotes[]) {

@@ -45,7 +45,11 @@ export class Renderer40k implements Renderer {
         if (title) {
             this.renderOptionsDiv(title);
 
-            const text = `${this._roster.name()} (${this._roster._cost._points} pts, ${this._roster._cost._powerLevel} PL, ${this._roster._cost._commandPoints} CP)`;
+            const costs = [`${this._roster._cost._points} pts`, `${this._roster._cost._powerLevel} PL`, `${this._roster._cost._commandPoints} CP`];
+            for (const costName in this._roster._cost._freeformValues) {
+                costs.push(`${this._roster._cost._freeformValues[costName]}${costName}`);
+            }
+            const text = `${this._roster.name()} (${costs.join(', ')})`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
 
             // Footer div is hidden, except when printing.
@@ -114,7 +118,11 @@ export class Renderer40k implements Renderer {
             table.appendChild(body);
             for (let unit of force._units) {
                 const tr = document.createElement('tr');
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.name()));
+                const extraCosts = [];  // Track extra costs like cabal points.
+                for (const freeformCostType in unit._cost._freeformValues) {
+                    extraCosts.push(`${unit._cost._freeformValues[freeformCostType]}${freeformCostType}`);
+                }
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.name() + (extraCosts.length ? ` [${extraCosts.join(', ')}]` : '')));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
                 this.renderModelList(models, unit);

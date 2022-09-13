@@ -12,7 +12,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_cost': jasmine.objectContaining({_powerLevel: 14, _points: 265, _commandPoints: 12}),
+        '_cost': jasmine.objectContaining({_powerLevel: 14, _points: 265, _commandPoints: 12, _freeformValues: {" Cabal Points":4}}),
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
@@ -23,7 +23,7 @@ describe("Create40kRoster", function() {
             '_units': [
               jasmine.objectContaining({
                 '_name': "Ahriman",
-                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 160, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 8, _points: 160, _commandPoints: 0, _freeformValues: {" Cabal Points":3}}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Ahriman"}),
                 ],
@@ -48,7 +48,7 @@ describe("Create40kRoster", function() {
                 ]}),
               jasmine.objectContaining({
                 '_name': "Rubric Marines",
-                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 105, _commandPoints: 0}),
+                '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 105, _commandPoints: 0, _freeformValues: {" Cabal Points":1}}),
                 '_modelStats': [
                   jasmine.objectContaining({'_name': "Aspiring Sorcerer"}),
                   jasmine.objectContaining({'_name': "Rubric Marine"}),
