@@ -359,6 +359,7 @@ export class Costs {
     _powerLevel: number = 0;
     _commandPoints: number = 0;
     _points: number = 0;
+    _freeformValues: {[key: string]: number}|undefined;
 
     hasValues() {
         return this._powerLevel !== 0 || this._commandPoints !== 0 || this._points !== 0;
@@ -376,6 +377,15 @@ export class Costs {
         this._powerLevel += other._powerLevel;
         this._commandPoints += other._commandPoints;
         this._points += other._points;
+        for (const name in other._freeformValues) {
+            this.addFreeformValue(name, other._freeformValues[name]);
+        }
+    }
+
+    addFreeformValue(name: string, value: number) {
+        if (!this._freeformValues) this._freeformValues = {};
+        const oldValue = this._freeformValues[name] || 0;
+        this._freeformValues[name] = oldValue + value;
     }
 }
 
@@ -673,6 +683,8 @@ function ParseCost(cost: Element): Costs {
             costs._points += +value;
         } else if (which === "CP") {
             costs._commandPoints += +value;
+        } else {
+            costs.addFreeformValue(which, +value);
         }
     }
     return costs;
