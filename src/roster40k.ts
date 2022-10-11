@@ -937,6 +937,9 @@ function ParseProfileCharacteristics(profile: Element, profileName: string, map:
         if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus") || (charName === 'Capacity')) {
             map.set(profileName, char.textContent);
         }
+        if ((charName === 'Standard') || (charName === 'Favoured')) {
+            map.set([profileName, charName.toString()].join(' - '), char.textContent);
+        }
     }
 }
 
