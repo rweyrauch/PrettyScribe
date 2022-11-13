@@ -120,6 +120,7 @@ export class Renderer40k implements Renderer {
                 const tr = document.createElement('tr');
                 const extraCosts = [];  // Track extra costs like cabal points.
                 for (const freeformCostType in unit._cost._freeformValues) {
+                    if (unit._cost._freeformValues[freeformCostType] === 0) continue;
                     extraCosts.push(`${unit._cost._freeformValues[freeformCostType]}${freeformCostType}`);
                 }
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.name() + (extraCosts.length ? ` [${extraCosts.join(', ')}]` : '')));
