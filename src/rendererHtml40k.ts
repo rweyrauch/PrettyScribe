@@ -254,7 +254,7 @@ export class RendererHtml40k implements Renderer {
 
         this.renderNotesArray(unitRoot, "Psyker notes", psykers);
 
-        if (unit._abilities.size > 0 || unit._rules.size > 0) {
+        if (Object.keys(unit._abilities).length > 0 || unit._rules.size > 0) {
             this.renderAbilities(unitRoot, unit);
         }
 
@@ -389,8 +389,11 @@ export class RendererHtml40k implements Renderer {
     }
 
     private renderAbilities(root: HTMLElement, unit: Unit): void {
-        if (unit._abilities.size > 0) {
-            this.renderAbilityMap(root, "ABILITIES", unit._abilities);
+        for (const abilitiesGroup of Object.keys(unit._abilities).sort()) {
+            const abilities = unit._abilities[abilitiesGroup];
+            if (abilities.size > 0) {
+                this.renderAbilityMap(root, abilitiesGroup, abilities);
+            }
         }
         if (unit._rules.size > 0) {
             this.renderAbilityMap(root, "RULES", unit._rules);

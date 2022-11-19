@@ -29,8 +29,11 @@ label {
   div.footer {
     position: fixed;
     bottom: 0;
+    left: 0;
     right: 0;
     opacity: 0.5;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -159,6 +162,13 @@ label {
 
 .wh40k_unit_sheet {
     padding: 0 10px 0 5px;
+}
+
+.wh40k_unit_sheet.bigger {
+    width: 800px;
+}
+
+.wh40k_unit_sheet:not(.bigger) {
     width: 1110px;
 }
 

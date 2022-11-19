@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/Grey Knights.rosz", async function() {
     const doc = await readZippedRosterFile('test/Grey Knights.rosz');
@@ -12,8 +16,8 @@ describe("Create40kRoster", function() {
         '_forces': [
           jasmine.objectContaining({
             '_configurations': [
-              "Battle-forged CP",
-              "Detachment CP",
+              "Battle-forged CP [3 CP]",
+              "Detachment CP [5 CP]",
               "Detachment Bonuses: Show Bonuses",
               "Stratagems - Armoury of Titan",
             ],
@@ -25,7 +29,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Brother Captain"}),
                 ],
                 '_modelList': [
-                  "Brother-Captain (Storm Bolter, Nemesis Force Halberd, Frag & Krak grenades, Psyk-out Grenade, Domina Liber Demonica, Iron Halo, Warlord)"
+                  "Brother-Captain (Storm Bolter [2 pts], Nemesis Force Halberd [1 pts], Frag & Krak grenades, Psyk-out Grenade, Domina Liber Demonica, Iron Halo, Warlord)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -34,6 +38,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Daemon Hunters", "Domina Liber Demonica", "Iron Halo", "Masters of the Warp", "Psychic Locus", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                 ],
@@ -47,7 +52,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Grey Knight Chaplain"}),
                 ],
                 '_modelList': [
-                  "Chaplain (Storm bolter, Crozius Arcanum, Frag & Krak grenades, Psyk-out Grenade, Sanctuary)"
+                  "Chaplain (Storm bolter [2 pts], Crozius Arcanum, Frag & Krak grenades, Psyk-out Grenade, Sanctuary)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -56,6 +61,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Rosarius", "Shock Assault", "Spiritual Leaders", "Teleport Strike"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Litany of Hate", "Rosarius"]),
+                },
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Sanctuary"}),
@@ -70,7 +79,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Grand Master"}),
                 ],
                 '_modelList': [
-                  "Grand Master (Storm Bolter, Nemesis Force Halberd, Frag & Krak grenades, Psyk-out Grenade, Inner Fire, Iron Halo)"
+                  "Grand Master (Storm Bolter [2 pts], Nemesis Force Halberd [1 pts], Frag & Krak grenades, Psyk-out Grenade, Inner Fire, Iron Halo)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -79,6 +88,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Daemon Hunters", "Iron Halo", "Masters of the Warp", "Rites of Banishment", "Rites of Battle", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Inner Fire"}),
@@ -94,8 +104,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Grey Knight Justicar"}),
                 ],
                 '_modelList': [
-                  "4x Grey Knight (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Grey Knight Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
+                  "4x Grey Knight (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Grey Knight Justicar (Storm bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -104,6 +114,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                 ],
@@ -118,8 +129,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Grey Knight Justicar"}),
                 ],
                 '_modelList': [
-                  "4x Grey Knight (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Grey Knight Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
+                  "4x Grey Knight (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Grey Knight Justicar (Storm bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -128,6 +139,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                 ],
@@ -142,8 +154,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Grey Knight Terminator Justicar"}),
                 ],
                 '_modelList': [
-                  "Grey Knight Terminator Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "4x Terminator (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
+                  "Grey Knight Terminator Justicar (Storm bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "4x Terminator (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Unit Upgrades (Astral Aim)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -152,6 +165,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Crux Terminatus", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Astral Aim"}),
@@ -167,8 +181,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Paragon"}),
                 ],
                 '_modelList': [
-                  "2x Paladin (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Paragon (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
+                  "2x Paladin (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Paragon (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Unit Upgrades (Sanctuary)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -177,6 +192,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Crux Terminatus", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Sanctuary"}),
@@ -192,8 +208,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Paragon"}),
                 ],
                 '_modelList': [
-                  "2x Paladin (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Paragon (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
+                  "2x Paladin (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Paragon (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Unit Upgrades (Astral Aim)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -202,6 +219,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Crux Terminatus", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault", "Teleport Strike"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                   jasmine.objectContaining({'_name': "Astral Aim"}),
@@ -217,8 +235,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Purifier"}),
                 ],
                 '_modelList': [
-                  "Knight of the Flame (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "4x Purifier (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
+                  "Knight of the Flame (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "4x Purifier (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Unit Upgrades (Hammerhand)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -227,6 +246,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Daemon Hunters", "Masters of the Warp", "Purifying Flame", "Shock Assault"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Purifying Flame)"}),
                   jasmine.objectContaining({'_name': "Hammerhand"}),
@@ -242,8 +262,8 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Purgator Justicar"}),
                 ],
                 '_modelList': [
-                  "4x Purgator (Sword) (Storm Bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)",
-                  "Purgator Justicar (Storm bolter, Nemesis Force Sword, Frag & Krak grenades, Psyk-out Grenade)"
+                  "4x Purgator (Sword) (Storm Bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)",
+                  "Purgator Justicar (Storm bolter [2 pts], Nemesis Force Sword [1 pts], Frag & Krak grenades, Psyk-out Grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Storm bolter"}),
@@ -252,13 +272,36 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Krak grenade"}),
                   jasmine.objectContaining({'_name': "Psyk-out Grenade"}),
                 ],
+                '_rules': mapWithKeys(["And They Shall Know No Fear", "Bolter Discipline", "Combat Squads", "Daemon Hunters", "Masters of the Warp", "Rites of Banishment", "Shock Assault"]),
                 '_spells': [
                   jasmine.objectContaining({'_name': "Smite (Rites of Banishment)"}),
                 ],
                 '_psykers': [
                   jasmine.objectContaining({'_name': "Psyker (Sanctic 1 Squad)"}),
                 ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Psychic Locus", jasmine.any(String)],
+              ["And They Shall Know No Fear", jasmine.any(String)],
+              ["Daemon Hunters", jasmine.any(String)],
+              ["Teleport Strike", jasmine.any(String)],
+              ["Rites of Banishment", jasmine.any(String)],
+              ["Bolter Discipline", jasmine.any(String)],
+              ["Shock Assault", jasmine.any(String)],
+              ["Masters of the Warp", jasmine.any(String)],
+              ["Iron Halo", jasmine.any(String)],
+              ["Domina Liber Demonica", jasmine.any(String)],
+              ["Rosarius", jasmine.any(String)],
+              ["Spiritual Leaders", jasmine.any(String)],
+              ["Combat Squads", jasmine.any(String)],
+              ["Crux Terminatus", jasmine.any(String)],
+              ["Rites of Battle", jasmine.any(String)],
+              ["Purifying Flame", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Brotherhood of Psykers", jasmine.any(String)],
+              ["Knights of Titan", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

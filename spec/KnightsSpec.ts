@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/Knights.ros", async function() {
     const doc = await readZippedRosterFile('test/Knights.ros');
@@ -11,7 +15,9 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 90, _points: 1904, _commandPoints: 0}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Household Choice: Questor Imperialis, House Griffith, Household Tradition: Glory of the Charge",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Armiger Helverins",
@@ -20,12 +26,15 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Armiger Helverin"}),
                 ],
                 '_modelList': [
-                  "Armiger Helverin (2x Armiger Autocannon, Meltagun)"
+                  "Armiger Helverin (2x Armiger Autocannon, Meltagun [14 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Armiger Autocannon"}),
                   jasmine.objectContaining({'_name': "Meltagun"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes (Armiger)"}),
                 ],
@@ -41,7 +50,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Armiger Warglaive"}),
                 ],
                 '_modelList': [
-                  "Armiger Warglaive (Meltagun, Thermal Spear, Reaper Chain-Cleaver)"
+                  "Armiger Warglaive (Meltagun [14 pts], Thermal Spear, Reaper Chain-Cleaver)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Meltagun"}),
@@ -49,6 +58,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Reaper Chain-Cleaver (Strike)"}),
                   jasmine.objectContaining({'_name': "Reaper Chain-Cleaver (Sweep)"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ion Shield", "Vehicle Squadron"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes (Armiger)"}),
                 ],
@@ -64,7 +76,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Castellan"}),
                 ],
                 '_modelList': [
-                  "Knight Castellan (Plasma Decimator, 2x Shieldbreaker Missile, 2x Twin Meltagun, 2x Twin Siegebreaker Cannon, Volcano Lance, Titanic Feet, Character (Knight Lance), Heirloom: Armour of the Sainted Ion, Warlord, Warlord Trait: Fearsome Reputation)"
+                  "Knight Castellan (Plasma Decimator [40 pts], 2x Shieldbreaker Missile [24 pts], 2x Twin Meltagun, 2x Twin Siegebreaker Cannon [70 pts], Volcano Lance [60 pts], Titanic Feet, Character (Knight Lance), Heirloom: Armour of the Sainted Ion, Warlord, Warlord Trait: Fearsome Reputation)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Plasma Decimator (Standard)"}),
@@ -75,6 +87,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Volcano Lance"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Armour of the Sainted Ion", "Ion Shield", "Super-Heavy Walker"]),
+                  "Warlord Trait": mapWithKeys(["Fearsome Reputation"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Dual Plasma Core Explosion"}),
                 ],
@@ -90,7 +106,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Errant"}),
                 ],
                 '_modelList': [
-                  "Knight Errant (Meltagun, Stormspear Rocket Pod, Thermal Cannon, Thunderstrike gauntlet, Titanic Feet)"
+                  "Knight Errant (Meltagun [14 pts], Stormspear Rocket Pod [45 pts], Thermal Cannon [76 pts], Thunderstrike gauntlet [35 pts], Titanic Feet)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Meltagun"}),
@@ -99,6 +115,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Thunderstrike gauntlet"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ion Shield", "Super-Heavy Walker"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes"}),
                 ],
@@ -114,7 +133,7 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Gallant"}),
                 ],
                 '_modelList': [
-                  "Knight Gallant (Heavy Stubber, Stormspear Rocket Pod, Reaper Chainsword, Thunderstrike gauntlet, Titanic Feet)"
+                  "Knight Gallant (Heavy Stubber [2 pts], Stormspear Rocket Pod [45 pts], Reaper Chainsword [30 pts], Thunderstrike gauntlet [35 pts], Titanic Feet)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy stubber"}),
@@ -123,6 +142,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Thunderstrike gauntlet"}),
                   jasmine.objectContaining({'_name': "Titanic Feet"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Ion Shield", "Super-Heavy Walker"]),
+                },
                 '_explosions': [
                   jasmine.objectContaining({'_name': "Explodes"}),
                 ],
@@ -131,19 +153,13 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Gallant 2"}),
                   jasmine.objectContaining({'_name': "Knight Gallant 3"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "Household Choice",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Knight Lance", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map([
+              ["Glory of the Charge", jasmine.any(String)],
+            ]),
           }),
         ]}));
   });

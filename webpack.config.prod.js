@@ -19,6 +19,7 @@ module.exports = {
     output: {
         filename: 'prettyscribe.js',
         path: path.resolve(__dirname, 'dist'),
+        clean: true,
     },
     resolve: {
         extensions: [
