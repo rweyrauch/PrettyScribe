@@ -4,7 +4,7 @@
  * just those files.
  *
  * Run with:
- *   $ ts-node spec/helpers/write40kRosterExpectation.ts [optional/path/to/file another/file ...]
+ *   $ npx ts-node spec/helpers/write40kRosterExpectation.ts [optional/path/to/file another/file ...]
  */
 
 import fs from "fs";

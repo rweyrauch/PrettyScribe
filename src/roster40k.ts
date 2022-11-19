@@ -38,10 +38,27 @@ export class BaseNotes {
     }
 }
 
-export class Weapon extends BaseNotes {
+/** A `selection` attached to a unit or model. */
+export class Upgrade extends BaseNotes {
+    _cost: Costs = new Costs();
+    _count: number = 1;
+
+    selectionName() {
+        return this.name();
+    }
+
+    toString() {
+        let string = this.selectionName();
+        if (this._count > 1) string = `${this._count}x ${string}`;
+        if (this._cost.hasValues()) string += ` ${this._cost.toString()}`
+        return string;
+    }
+}
+
+/** A weapon `profile` that is under a `selection`. */
+export class Weapon extends Upgrade {
     _selectionName: string = "";
 
-    _count: number = 0;
     _range: string = "Melee";
     _type: string = "Melee";
     _str: WeaponStrength = "user";
@@ -49,6 +66,14 @@ export class Weapon extends BaseNotes {
     _damage: string = "";
 
     _abilities: string = "";
+
+    /**
+     * Name of this weapon's `selection`. This is different from name() because
+     * name() is used for sorting and deduping weapon profiles.
+     */
+    selectionName() {
+        return this._selectionName || this.name();
+    }
 }
 
 export class WoundTracker extends BaseNotes {
@@ -141,7 +166,7 @@ export class Model extends BaseNotes {
     _save: string = "";
 
     _weapons: Weapon[] = [];
-    _upgrades: string[] = [];
+    _upgrades: Upgrade[] = [];
     // TODO model upgrades (i.e. tau support systems)
     _psyker: Psyker | null = null;
     _psychicPowers: PsychicPower[] = [];
@@ -161,7 +186,7 @@ export class Model extends BaseNotes {
                 }
             }
             for (let wi = 0; wi < this._upgrades.length; wi++) {
-                if (this._upgrades[wi] != model._upgrades[wi]) {
+                if (!this._upgrades[wi].equal(model._upgrades[wi])) {
                     return false;
                 }
             }
@@ -178,46 +203,47 @@ export class Model extends BaseNotes {
         let name = super.name();
 
         if (this._weapons.length > 0 || this._upgrades.length > 0) {
-            const weaponNamesWithoutCount: string[] = [];
-            const weaponNames: string[] = [];
-            for (const weapon of this._weapons) {
-                let wName = weapon._selectionName || weapon.name();
-                weaponNamesWithoutCount.push(wName);
-                if (weapon._count > 1) {
-                    wName = `${weapon._count}x ${wName}`;
-                }
-                if (weaponNames.includes(wName)) continue;
-                weaponNames.push(wName);
-            }
-            weaponNames.push(...this._upgrades.filter(e => !weaponNamesWithoutCount.includes(e)));
-            name += ` (${weaponNames.join(', ')})`;
+            const gear = this.getDedupedWeaponsAndUpgrades();
+            name += ` (${gear.map(u => u.toString()).join(', ')})`;
         }
         return name;
     }
 
+    getDedupedWeaponsAndUpgrades(): Upgrade[] {
+        const deduped: Upgrade[] = [];
+        for (const upgrade of [...this._weapons, ...this._upgrades]) {
+            if (!deduped.some(e => upgrade.selectionName() === e.selectionName())) {
+                deduped.push(upgrade);
+            }
+        }
+        return deduped;
+    }
+
     normalize(): void {
         this._weapons.sort(CompareWeapon);
-        this._upgrades.sort(Compare);
-        for (let i = 0; i < (this._weapons.length - 1); i++) {
-            const weapon = this._weapons[i];
-            if (weapon._name === this._weapons[i+1]._name) {
-                weapon._count++;
-                this._weapons.splice(i+1, 1);
+        this._upgrades.sort(CompareObj);
+
+        this.normalizeUpgrades(this._weapons);
+        this.normalizeUpgrades(this._upgrades);
+    }
+
+    normalizeUpgrades(upgrades: Upgrade[]) {
+        for (let i = 0; i < (upgrades.length - 1); i++) {
+            const upgrade = upgrades[i];
+            if (upgrade._name === upgrades[i+1]._name) {
+                upgrade._count += upgrades[i+1]._count;
+                upgrade._cost.add(upgrades[i+1]._cost);
+                upgrades.splice(i+1, 1);
                 i--;
             }
         }
-
-        for (let weapon of this._weapons) {
-            if (weapon._count % this._count == 0) {
-                weapon._count /= this._count;
+        for (let upgrade of upgrades) {
+            if (upgrade._count % this._count == 0) {
+                upgrade._count /= this._count;
+                upgrade._cost._points /= this._count;
             }
         }
     }
-}
-
-export class ProfileTable {
-    _name: string = "";
-    _table: Map<string, string>[] = [];
 }
 
 export class Unit extends BaseNotes {
@@ -226,7 +252,7 @@ export class Unit extends BaseNotes {
     readonly _factions: Set<string> = new Set();
     readonly _keywords: Set<string> = new Set();
 
-    readonly _abilities: Map<string, string> = new Map();
+    readonly _abilities: {[key: string]: Map<string, string>} = {};
     readonly _rules: Map<string, string> = new Map();
 
     readonly _models: Model[] = [];
@@ -293,10 +319,6 @@ export class Unit extends BaseNotes {
             }
         }
 
-        for (let model of this._models) {
-            model.normalize();
-        }
-
         for (let i = 0; i < (this._modelStats.length - 1); i++) {
             const model = this._modelStats[i];
 
@@ -337,15 +359,33 @@ export class Costs {
     _powerLevel: number = 0;
     _commandPoints: number = 0;
     _points: number = 0;
+    _freeformValues: {[key: string]: number}|undefined;
 
     hasValues() {
         return this._powerLevel !== 0 || this._commandPoints !== 0 || this._points !== 0;
+    }
+
+    toString() {
+        const values = [];
+        if (this._points !== 0) values.push(`${this._points} pts`);
+        if (this._powerLevel !== 0) values.push(`${this._powerLevel} PL`);
+        if (this._commandPoints !== 0) values.push(`${this._commandPoints} CP`);
+        return `[${values.join(' / ')}]`;
     }
 
     add(other: Costs) {
         this._powerLevel += other._powerLevel;
         this._commandPoints += other._commandPoints;
         this._points += other._points;
+        for (const name in other._freeformValues) {
+            this.addFreeformValue(name, other._freeformValues[name]);
+        }
+    }
+
+    addFreeformValue(name: string, value: number) {
+        if (!this._freeformValues) this._freeformValues = {};
+        const oldValue = this._freeformValues[name] || 0;
+        this._freeformValues[name] = oldValue + value;
     }
 }
 
@@ -424,32 +464,31 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
 
         if (selectionName.includes("Detachment Command Cost")) {
             // Ignore Detachment Command cost
-        } else if (selectionName === 'Battle Size') {
+        } else if (selectionName === 'Battle Size' || selectionName === 'Gametype') {
             ParseConfiguration(selection, force);
-        } else {
-            let unit = ParseUnit(selection, is40k);
-            if (unit && unit._role != UnitRole.NONE) {
-                force._units.push(unit);
-                for (const entry of unit._rules.entries()) {
-                    force._rules.set(entry[0], entry[1]);
+        } else if (selection.querySelector('profile[typeName="Unit"]')) {
+            const unit = ParseUnit(selection, is40k);
+            force._units.push(unit);
+            for (const entry of unit._rules.entries()) {
+                force._rules.set(entry[0], entry[1]);
+            }
+        } else if (selection.getAttribute("type") === "upgrade") {
+            ExtractRuleFromSelection(selection, force._rules);
+            ParseConfiguration(selection, force);
+            const props = selection.querySelectorAll("selections>selection");
+            for (let prop of props) {
+                // sub-faction
+                const name = prop.getAttribute("name");
+                if (name && prop.getAttribute("type") === "upgrade") {
+                    if (force._faction === "Unknown") {
+                        // pick the first upgrade we see
+                        force._faction = name;
+                    }
+                    ExtractRuleFromSelection(prop, force._factionRules);
                 }
             }
-            else if (selection.getAttribute("type") === "upgrade") {
-              ExtractRuleFromSelection(selection, force._rules);
-              ParseConfiguration(selection, force);
-              const props = selection.querySelectorAll("selections>selection");
-              for (let prop of props) {
-                  // sub-faction
-                  const name = prop.getAttribute("name");
-                  if (name && prop.getAttribute("type") === "upgrade") {
-                      if (force._faction === "Unknown") {
-                          // pick the first upgrade we see
-                          force._faction = name;
-                      }
-                      ExtractRuleFromSelection(prop, force._factionRules);
-                    }
-                  }
-            }
+        } else {
+            console.log('** UNEXPECTED SELECTION **', selectionName, selection);
         }
     }
 
@@ -478,7 +517,7 @@ function ParseConfiguration(selection: Element, force: Force) {
     const category = selection.querySelector("category")?.getAttribute('name');
     const subSelections = selection.querySelectorAll('selections>selection');
     const details = [];
-    let costs = new Costs();
+    let costs = GetSelectionCosts(selection);
     for (const sel of subSelections) {
         details.push(sel.getAttribute("name"));
         costs.add(GetSelectionCosts(sel));
@@ -487,7 +526,7 @@ function ParseConfiguration(selection: Element, force: Force) {
     let configuration = (!category || category === 'Configuration')
         ? name : `${category} - ${name}`;
     if (details.length > 0) configuration += `: ${details.join(", ")}`;
-    if (costs._commandPoints !== 0) configuration += ` [${costs._commandPoints} CP]`;
+    if (costs.hasValues()) configuration += ` ${costs.toString()}`;
 
     force._configurations.push(configuration);
 }
@@ -507,21 +546,12 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
     for (const profile of profiles) {
         // detachment rules
         const profileName = profile.getAttribute("name");
-        const profileType = profile.getAttribute("typeName");
-        console.log("Profile name:" + profileName + "  Type: " + profileType);
+        if (!profileName) continue;
 
-        if (profileName && profileType) {
-            if (profileType === "Abilities" || profileType === "Dynastic Code") {
-                const chars = profile.querySelectorAll("characteristics>characteristic");
-                for (const char of chars) {
-                    const charName = char.getAttribute("name");
-                    if (charName && char.textContent && profileName) {
-                        if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
-                            map.set(profileName, char.textContent);
-                        }
-                    }
-                }
-            }
+        const profileType = profile.getAttribute("typeName");
+        if (profileType === "Abilities" || profileType === "Dynastic Code" ||
+                profileType === "Household Tradition") {
+            ParseProfileCharacteristics(profile, profileName, map);
         }
     }
 
@@ -565,26 +595,6 @@ function LookupRoleKillTeam(roleText: string): UnitRole {
         case 'Non-specialist': return UnitRole.NON_SPECIALIST;
     }
     return UnitRole.NONE;
-}
-
-function parseUnknownProfile(prop: Element, unit: Unit): void {
-
-    let propName = prop.getAttributeNode("name")?.nodeValue;
-    let propType = prop.getAttributeNode("typeName")?.nodeValue;
-    let grandfather = prop.parentElement?.parentElement;
-
-    console.log("Unknown profile type: " + propType + " with name: " + propName + ".  Found in unit: " + unit._name);
-    console.log("Unknown profile is grandchild of typeName: " + grandfather?.getAttributeNode("typeName") +
-        " with the type: " + grandfather?.getAttributeNode("type") +
-        " with the name: " + grandfather?.getAttributeNode("name"));
-
-
-    // TODO: make a table out of the unknown profile.
-    //
-    // <typeName>      Name           <characteristic1.name>    <characteristic2.name> ...
-    //               <profileName>    <characteristic1.text>    <characteristic2.text> ...
-    //
-
 }
 
 function ExpandBaseNotes(root: Element, obj: BaseNotes): string {
@@ -673,12 +683,14 @@ function ParseCost(cost: Element): Costs {
             costs._points += +value;
         } else if (which === "CP") {
             costs._commandPoints += +value;
+        } else {
+            costs.addFreeformValue(which, +value);
         }
     }
     return costs;
 }
 
-function ParseUnit(root: Element, is40k: boolean): Unit | null {
+function ParseUnit(root: Element, is40k: boolean): Unit {
     let unit: Unit = new Unit();
     const unitName = ExpandBaseNotes(root, unit);
 
@@ -745,6 +757,8 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
             modelSelections.push(root);
         }
     }
+
+    // Now, parse the model -- profiles for stats, and selections for upgrades.
     for (const modelSelection of modelSelections) {
         const profiles = Array.from(modelSelection.querySelectorAll("profiles>profile"));
         const unseenProfiles = profiles.filter((e: Element) => !seenProfiles.includes(e));
@@ -754,22 +768,25 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         model._name = modelSelection.getAttribute('name') || 'Unknown Model';
         model._count = Number(modelSelection.getAttribute("number") || 1);
         unit._models.push(model);
+
+        // Find stats for all profiles (weapons, powers, abilities, etc).
         ParseModelProfiles(profiles, model, unit);
 
         // Find all upgrades on the model. This may include weapons that were
         // parsed from profiles (above), so dedupe those in nameAndGear().
         for (const upgradeSelection of modelSelection.querySelectorAll('selections>selection[type="upgrade"]')) {
-            // Ignore this selection if it has sub-selection upgrades within it,
-            // since those will be picked up individually.
-            if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')) continue;
+            // Ignore selections without abilities but with sub-selection upgrades,
+            // since those sub-selections will be picked up individually.
+            if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')
+                && !HasImmediateProfileWithTypeName(upgradeSelection, 'Abilities')) continue;
 
             let upgradeName = upgradeSelection.getAttribute('name');
             if (upgradeName) {
-                const costs = GetSelectionCosts(upgradeSelection);
-                if (costs._commandPoints !== 0) {
-                    upgradeName += ` [${costs._commandPoints} CP]`;
-                }
-                model._upgrades.push(upgradeName);
+                const upgrade = new Upgrade();
+                upgrade._name = upgradeName;
+                upgrade._cost = GetSelectionCosts(upgradeSelection);
+                upgrade._count = Number(upgradeSelection.getAttribute('number'));
+                model._upgrades.push(upgrade);
             }
         }
     }
@@ -786,12 +803,15 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         unitUpgradesModel._name = 'Unit Upgrades';
         ParseModelProfiles(unseenProfiles, unitUpgradesModel, unit);
         if (unitUpgradesModel._weapons.length > 0 && unit._models.length > 0) {
+            // Apply weapons at the unit level to all models in the unit.
             for (const model of unit._models) {
                 model._weapons.push(...unitUpgradesModel._weapons);
             }
             unitUpgradesModel._weapons.length = 0;  // Clear the array.
         }
         if (unitUpgradesModel._psychicPowers.length > 0) {
+            // Add spells to the unit's spell list. However, we'll still need
+            // to add spell upgrade selections to the upgrade list, below.
             unit._spells.push(...unitUpgradesModel._psychicPowers);
             unitUpgradesModel._psychicPowers.length = 0;
         }
@@ -802,6 +822,25 @@ function ParseUnit(root: Element, is40k: boolean): Unit | null {
         if (unitUpgradesModel._explosions.length > 0) {
             unit._explosions.push(...unitUpgradesModel._explosions);
             unitUpgradesModel._explosions.length = 0;
+        }
+
+        // Look for any unit-level upgrade selections that we didn't catch
+        // previously, and stuff them in the "Unit Upgrades" model.
+        for (const selection of GetImmediateSelections(root)) {
+            if (selection.getAttribute('type') !== 'upgrade') continue;
+            // Ignore model selections (which were already processed).
+            if (modelSelections.includes(selection))  continue;
+            // Ignore unit-level weapon selections; these were handled above.
+            if (selection.querySelector('profiles>profile[typeName="Weapon"]')) continue;
+
+            let name = selection.getAttribute('name');
+            if (!name) continue;
+
+            const upgrade = new Upgrade();
+            upgrade._name = name;
+            upgrade._cost = GetSelectionCosts(selection);
+            upgrade._count = Number(selection.getAttribute('number'));
+            unitUpgradesModel._upgrades.push(upgrade);
         }
 
         if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0) {
@@ -866,20 +905,12 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
 
         if ((typeName === "Unit") || (typeName === "Model") || (profile.getAttribute("type") === "model")) {
             // Do nothing; these were already handled.
-        } else if ((typeName === "upgrade")) {
-            model._upgrades.push(profileName);
-        } else if ((typeName === "Abilities") || (typeName === "Wargear") || (typeName === "Ability") ||
-            (typeName === "Household Tradition") || (typeName === "Warlord Trait") || (typeName === "Astra Militarum Orders") ||
-            (typeName === "Tank Orders") || (typeName == "Lethal Ambush")) {
-                ParseAbilityProfile(profile, profileName, unit);
         } else if (typeName === "Weapon") {
             const weapon = ParseWeaponProfile(profile);
             model._weapons.push(weapon);
         } else if (typeName.includes("Wound Track") || typeName.includes("Stat Damage") || typeName.includes(" Wounds")) {
             const tracker = ParseWoundTrackerProfile(profile);
             unit._woundTracker.push(tracker);
-        } else if (typeName == "Transport") {
-            ParseTransportProfile(profile, unit);
         } else if (typeName == "Psychic Power") {
             const power = ParsePsychicPowerProfile(profile);
             model._psychicPowers.push(power);
@@ -889,23 +920,25 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
         } else if (typeName == "Psyker") {
             const psyker = ParsePsykerProfile(profile);
             model._psyker = psyker;
-        } else if (profile.parentElement?.parentElement
-            && profile.parentElement?.parentElement.getAttribute("type") === 'upgrade') {
-            ParseAbilityProfile(profile, profileName, unit);
         } else {
-            parseUnknownProfile(profile, unit);
+            // Everything else, like Prayers and Warlord Traits. 
+            if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
+            ParseProfileCharacteristics(profile, profileName, unit._abilities[typeName]);
         }
     }
 }
 
-function ParseAbilityProfile(profile: Element, profileName: string, unit: Unit) {
+function ParseProfileCharacteristics(profile: Element, profileName: string, map: Map<string, string | null>) {
     const chars = profile.querySelectorAll("characteristics>characteristic");
     for (const char of chars) {
+        if (!char.textContent) continue;
+
         const charName = char.getAttribute("name");
-        if (charName && char.textContent) {
-            if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus")) {
-                unit._abilities.set(profileName, char.textContent);
-            }
+        if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus") || (charName === 'Capacity')) {
+            map.set(profileName, char.textContent);
+        }
+        if ((charName === 'Standard') || (charName === 'Favoured')) {
+            map.set([profileName, charName.toString()].join(' - '), char.textContent);
         }
     }
 }
@@ -937,6 +970,7 @@ function ParseWeaponProfile(profile: Element): Weapon {
     const selectionName = selection?.getAttribute('name');
     if (selection?.getAttribute('type') === 'upgrade' && selectionName) {
         weapon._selectionName = selectionName;
+        weapon._cost = GetSelectionCosts(selection);
     }
     return weapon;
 }
@@ -956,18 +990,6 @@ function ParseWoundTrackerProfile(profile: Element): WoundTracker {
         }
     }
     return tracker;
-}
-
-function ParseTransportProfile(profile: Element, unit: Unit) {
-    let chars = profile.querySelectorAll("characteristics>characteristic");
-    for (let char of chars) {
-        let charName = char.getAttribute("name");
-        if (charName && char.textContent) {
-            if (charName === "Capacity") {
-                unit._abilities.set('Transport', char.textContent);
-            }
-        }
-    }
 }
 
 function ParsePsychicPowerProfile(profile: Element): PsychicPower {
@@ -1030,7 +1052,17 @@ function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
 }
 
 function CompareModel(a: Model, b: Model): number {
-    return Compare(a._name, b._name) || Compare(a.nameAndGear(), b.nameAndGear());
+    if (a._name === b._name) {
+        return Compare(a.nameAndGear(), b.nameAndGear());
+    } else if (a._name === 'Unit Upgrades') {
+        // "Unit Upgrades", a special model name, is always sorted last.
+        return 1;
+    } else if (b._name === 'Unit Upgrades') {
+        // "Unit Upgrades", a special model name, is always sorted last.
+        return -1;
+    } else {
+        return Compare(a._name, b._name);
+    }
 }
 
 export function CompareWeapon(a: Weapon, b: Weapon): number {

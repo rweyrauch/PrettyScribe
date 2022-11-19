@@ -19,9 +19,6 @@ import {Renderer} from "./renderer";
 
 export class Renderer40k implements Renderer {
 
-    public static readonly _res: number = 144; // original is 144
-    public static readonly _margin: number = 0;
-
     private _roster: Roster40k | null = null;
 
     private _roles: Map<UnitRole, HTMLImageElement | null> = new Map();
@@ -48,13 +45,18 @@ export class Renderer40k implements Renderer {
         if (title) {
             this.renderOptionsDiv(title);
 
-            const text = `${this._roster.name()} (${this._roster._cost._points} pts, ${this._roster._cost._powerLevel} PL, ${this._roster._cost._commandPoints} CP)`;
+            const costs = [`${this._roster._cost._points} pts`, `${this._roster._cost._powerLevel} PL`, `${this._roster._cost._commandPoints} CP`];
+            for (const costName in this._roster._cost._freeformValues) {
+                costs.push(`${this._roster._cost._freeformValues[costName]}${costName}`);
+            }
+            const text = `${this._roster.name()} (${costs.join(', ')})`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
 
             // Footer div is hidden, except when printing.
             const footer = title.appendChild(document.createElement('div'));
             footer.classList.add('footer');
-            footer.appendChild(document.createTextNode(text));
+            footer.appendChild(document.createElement('div')).appendChild(document.createTextNode('PrettyScribe'));
+            footer.appendChild(document.createElement('div')).appendChild(document.createTextNode(text));
         }
 
         if (list) {
@@ -69,6 +71,10 @@ export class Renderer40k implements Renderer {
 
     private renderRosterSummary(list: HTMLElement) {
         if (!this._roster) return;
+
+        // Only add units' CP costs if at least one unit has CP values. This
+        // saves horizontal space for rosters that don't spend CP on units.
+        const unitsHaveCpCost = this._roster._forces.some(f => f._units.some(u => u._cost._commandPoints !== 0));
 
         for (const force of this._roster._forces) {
 
@@ -96,6 +102,9 @@ export class Renderer40k implements Renderer {
             const tr = document.createElement('tr');
             thead.appendChild(tr);
             const headerInfo = [{ name: "NAME", w: '20%' }, { name: "ROLE", w: '15%' }, { name: "MODELS", w: '55%' }, { name: "POINTS", w: '5%' }, { name: "POWER", w: '5%' }];
+            if (unitsHaveCpCost) {
+                headerInfo.push({name: "CP", w: '5%'});
+            }
             headerInfo.forEach(element => {
                 let th = document.createElement('th');
                 th.scope = "col";
@@ -109,16 +118,21 @@ export class Renderer40k implements Renderer {
             table.appendChild(body);
             for (let unit of force._units) {
                 const tr = document.createElement('tr');
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.name()));
+                const extraCosts = [];  // Track extra costs like cabal points.
+                for (const freeformCostType in unit._cost._freeformValues) {
+                    if (unit._cost._freeformValues[freeformCostType] === 0) continue;
+                    extraCosts.push(`${unit._cost._freeformValues[freeformCostType]}${freeformCostType}`);
+                }
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.name() + (extraCosts.length ? ` [${extraCosts.join(', ')}]` : '')));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
-                // TODO: the list of models may not be unique, make the list unique and update counts accordingly.
-                for (let i = 0; i < unit._modelList.length; i++) {
-                    if (i > 0) models.appendChild(document.createElement('br'));
-                    models.appendChild(document.createTextNode(unit._modelList[i]));
-                }
+                this.renderModelList(models, unit);
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
+                if (unitsHaveCpCost) {
+                    const commandPointsString = (unit._cost._commandPoints || '') + '';
+                    tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(commandPointsString));
+                }
                 body.appendChild(tr);
             }
         }
@@ -127,24 +141,69 @@ export class Renderer40k implements Renderer {
     private renderOptionsDiv(title: HTMLElement) {
         const optionsDiv = title.appendChild(document.createElement('div'));
         optionsDiv.classList.add('wh40k_options_div', 'd-print-none');
-        optionsDiv.appendChild(document.createTextNode('Options: '));
+        optionsDiv.appendChild(document.createTextNode('Options:'));
+        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        this.renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase', 
+            (e) => {
+                const abilities = document.getElementById('wh40k_abilities_list');
+                if (!abilities) return;
+
+                if ((e.target as any).checked) {
+                    abilities.classList.remove('d-none');
+                } else {
+                    abilities.classList.add('d-none');
+                }
+            });
+        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        this.renderCheckboxOption(optionsDiv, 'showUpgradeCosts', 'Show upgrade costs',
+            (e: Event) => {
+                const costSpans = document.getElementsByClassName('wh40k_upgrade_cost');
+                for (const span of costSpans) {
+                    if ((e.target as any).checked) {
+                        span.classList.remove('d-none')
+                    } else {
+                        span.classList.add('d-none')
+                    }
+                }
+            });
+        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        this.renderCheckboxOption(optionsDiv, 'printBigger', 'Print Larger Text',
+            (e: Event) => {
+                const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
+                for (const div of unitSheetDiv) {
+                    if ((e.target as any).checked) {
+                        div.classList.add('bigger')
+                    } else {
+                        div.classList.remove('bigger')
+                    }
+                }
+            });
+        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        this.renderCheckboxOption(optionsDiv, 'collateDatasheets', 'Collate Detachment Datasheets',
+            (e: Event) => {
+                const collatedSheets = document.getElementById('collated_sheets');
+                const detachmentSheets = document.getElementById('detachment_sheets');
+                if (!collatedSheets || !detachmentSheets) return;
+
+                if ((e.target as any).checked) {
+                    collatedSheets.classList.remove('d-none')
+                    detachmentSheets.classList.add('d-none')
+                } else {
+                    collatedSheets.classList.add('d-none')
+                    detachmentSheets.classList.remove('d-none')
+                }
+            });
+    }
+
+    private renderCheckboxOption(optionsDiv: HTMLElement, idAndName: string, text: string, eventHandler: EventListenerOrEventListenerObject) {
         const input = optionsDiv.appendChild(document.createElement('input'));
         input.setAttribute('type', 'checkbox');
-        input.setAttribute('name', 'showPhaseAbilities');
-        input.setAttribute('id', 'showPhaseAbilities');
-        input.addEventListener('input', (e) => {
-            const abilities = document.getElementById('wh40k_abilities_list');
-            if (!abilities)
-                return;
-            if ((e.target as any).checked) {
-                abilities.classList.remove('d-none');
-            } else {
-                abilities.classList.add('d-none');
-            }
-        });
+        input.setAttribute('name', idAndName);
+        input.setAttribute('id', idAndName);
+        input.addEventListener('input', eventHandler);
         const label = optionsDiv.appendChild(document.createElement('label'));
-        label.setAttribute('for', 'showPhaseAbilities');
-        label.appendChild(document.createTextNode(' Show abilities by phase'));
+        label.setAttribute('for', idAndName);
+        label.appendChild(document.createTextNode(` ${text}`));
     }
 
     private renderAbilitiesByPhase(list: HTMLElement) {
@@ -154,74 +213,76 @@ export class Renderer40k implements Renderer {
         const allPhaseAbilityNames: {[key: string]: string[]} = {};
         for (const force of this._roster._forces) {
             for (const unit of force._units) {
-                for (const [ability, description] of unit._abilities.entries()) {
-                    const matches = [...description.matchAll(/(?:before the first turn begins|set up|Reinforcements|(?:Command|Movement|Psychic|Shooting|Charge|Fight|Morale) phase)/ig)];
-                    if (matches.length === 0) continue;
+                for (const abilities of Object.values(unit._abilities)) {
+                    for (const [ability, description] of abilities.entries()) {
+                        const matches = [...description.matchAll(/(?:before the first turn begins|set up|Reinforcements|(?:Command|Movement|Psychic|Shooting|Charge|Fight|Morale) phase)/ig)];
+                        if (matches.length === 0) continue;
 
-                    // Create a div with the ability, to highlight the phase in
-                    // the ability's rule.
-                    const abilityDiv = document.createElement('div');
-                    abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(unit.name()));
-                    abilityDiv.appendChild(document.createTextNode(' - '));
-                    abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(ability));
-                    abilityDiv.appendChild(document.createTextNode(' - '));
+                        // Create a div with the ability, to highlight the phase in
+                        // the ability's rule.
+                        const abilityDiv = document.createElement('div');
+                        abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(unit.name()));
+                        abilityDiv.appendChild(document.createTextNode(' - '));
+                        abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(ability));
+                        abilityDiv.appendChild(document.createTextNode(' - '));
 
-                    let text = description;
-                    for (const match of matches) {
-                        if (!match.index) continue;  // Should not happen.
+                        let text = description;
+                        for (const match of matches) {
+                            if (!match.index) continue;  // Should not happen.
 
-                        const phaseMatch = match[0].toLocaleLowerCase();  // Normalize phase in case cases differ by ability.
+                            const phaseMatch = match[0].toLocaleLowerCase();  // Normalize phase in case cases differ by ability.
 
-                        // map special cases to the correct phase
-                        // examples:
-                        // - At the start of the first battle round but before the first turn begins, you can move this unit up to 9". It cannot end this move within 9" of any enemy models.
+                            // map special cases to the correct phase
+                            // examples:
+                            // - At the start of the first battle round but before the first turn begins, you can move this unit up to 9". It cannot end this move within 9" of any enemy models.
 
-                        // - In your Shooting phase, after this model shoots, it can make a Normal Move or Fall Back as if it were your Movement phase, even if it arrived as Reinforcements this turn.
+                            // - In your Shooting phase, after this model shoots, it can make a Normal Move or Fall Back as if it were your Movement phase, even if it arrived as Reinforcements this turn.
 
-                        // - If this unit is set up in ambush, when revealing ambush markers, you can do one of the following:
-                        // -- Remove one ambush marker from the battlefield and set up this unit underground instead.
-                        // -- After setting up this unit from an ambush marker, this unit can make a Normal Move as if it were your Movement phase, but must end that move more than 9" away from enemy models.
+                            // - If this unit is set up in ambush, when revealing ambush markers, you can do one of the following:
+                            // -- Remove one ambush marker from the battlefield and set up this unit underground instead.
+                            // -- After setting up this unit from an ambush marker, this unit can make a Normal Move as if it were your Movement phase, but must end that move more than 9" away from enemy models.
 
-                        let phase = phaseMatch; // map special cases to the correct phase
-                        switch (phaseMatch) {
-                            case 'before the first turn begins':
-                                phase = 'pre-game phase';
-                                break;
-                            case 'set up':
-                                if(!description.includes('reinforcements')) {
+                            let phase = phaseMatch; // map special cases to the correct phase
+                            switch (phaseMatch) {
+                                case 'before the first turn begins':
                                     phase = 'pre-game phase';
-                                }
-                                break;
-                            case 'reinforcements':
-                                phase = 'movement phase';
-                                break;
+                                    break;
+                                case 'set up':
+                                    if(!description.includes('reinforcements')) {
+                                        phase = 'pre-game phase';
+                                    }
+                                    break;
+                                case 'reinforcements':
+                                    phase = 'movement phase';
+                                    break;
+                            }
+
+                            // ignore other phase mentions
+                            if (description.toLocaleLowerCase().includes('as if it were your ' + phase)) {
+                                continue;
+                            }
+
+                            const textIndex = match.index - (description.length - text.length);
+                            if (textIndex > 0) {
+                                abilityDiv.appendChild(document.createTextNode(text.substring(0, textIndex)));
+                            }
+
+                            const phaseAbilities = allPhaseAbilities[phase] = allPhaseAbilities[phase] || [];
+                            const phaseAbilityNames = allPhaseAbilityNames[phase] = allPhaseAbilityNames[phase] || [];
+                            // I don't know why duplicates are not removed if we check phaseAbilities directly
+                            if (!phaseAbilityNames.includes(ability)) {
+                                phaseAbilityNames.push(ability)
+                                phaseAbilities.push(abilityDiv);
+                            }
+
+                            abilityDiv.appendChild(document.createElement('u')).appendChild(document.createTextNode(match[0]));
+
+                            const newOffset = textIndex + phaseMatch.length;
+                            text = text.substring(newOffset);
                         }
-
-                        // ignore other phase mentions
-                        if (description.toLocaleLowerCase().includes('as if it were your ' + phase)) {
-                            continue;
+                        if (text.length > 0) {
+                            abilityDiv.appendChild(document.createTextNode(text));
                         }
-
-                        const textIndex = match.index - (description.length - text.length);
-                        if (textIndex > 0) {
-                            abilityDiv.appendChild(document.createTextNode(text.substring(0, textIndex)));
-                        }
-
-                        const phaseAbilities = allPhaseAbilities[phase] = allPhaseAbilities[phase] || [];
-                        const phaseAbilityNames = allPhaseAbilityNames[phase] = allPhaseAbilityNames[phase] || [];
-                        // I don't know why duplicates are not removed if we check phaseAbilities directly
-                        if (!phaseAbilityNames.includes(ability)) {
-                            phaseAbilityNames.push(ability)
-                            phaseAbilities.push(abilityDiv);
-                        }
-
-                        abilityDiv.appendChild(document.createElement('u')).appendChild(document.createTextNode(match[0]));
-
-                        const newOffset = textIndex + phaseMatch.length;
-                        text = text.substring(newOffset);
-                    }
-                    if (text.length > 0) {
-                        abilityDiv.appendChild(document.createTextNode(text));
                     }
                 }
             }
@@ -254,6 +315,14 @@ export class Renderer40k implements Renderer {
 
         const catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
         const subFactionRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
+        const detachmentSheets = forces.appendChild(document.createElement('div'));
+        detachmentSheets.id = 'detachment_sheets';
+        const collatedSheets = forces.appendChild(document.createElement('div'));
+        collatedSheets.id = 'collated_sheets';
+        collatedSheets.style.pageBreakBefore = "always";
+        collatedSheets.classList.add('d-none');
+        const collatedUnits: Unit[] = [];
+
         for (const force of this._roster._forces) {
             const forceTitle = document.createElement('div');
             forceTitle.style.pageBreakBefore = "always";
@@ -268,33 +337,22 @@ export class Renderer40k implements Renderer {
 
             let h3 = document.createElement('h3');
             h3.appendChild(forceTitle)
-            forces.appendChild(h3);
+            detachmentSheets.appendChild(h3);
 
-            let prevUnit: Unit | null = null;
-            for (let unit of force._units) {
-                if (unit.equal(prevUnit)) {
-                    continue;
-                }
-                prevUnit = unit;
+            this.renderDatasheets(detachmentSheets, force._units);
 
-                this.renderUnitHtml(forces, unit);
-            }
+            collatedUnits.push(...force._units);
 
-            if (force._rules.size > 0) {
-                let rules = new Map<string, string|null>();
-                catalogueRules.set(force._catalog, rules);
-                for (let rule of force._rules) {
-                    rules.set(rule[0], rule[1]);
-                }
-            }
-            if (force._factionRules.size > 0) {
-                let rules = new Map<string, string|null>();
-                subFactionRules.set(force._faction, rules);
-                for (let rule of force._factionRules) {
-                    rules.set(rule[0], rule[1]);
-                }
-            }
+            mergeRules(catalogueRules, force._catalog, force._rules);
+            mergeRules(subFactionRules, force._faction, force._factionRules);
         }
+
+        collatedUnits.sort((lhs: Unit, rhs: Unit) => {
+            if (lhs._role != rhs._role) return lhs._role - rhs._role;
+            if (lhs._name != rhs._name) return Compare(lhs._name, rhs._name);
+            return lhs._cost._points - rhs._cost._points;  // Simple heuristic, could do better.
+        });
+        this.renderDatasheets(collatedSheets, collatedUnits);
 
         let rules = document.createElement("div");
         rules.style.pageBreakBefore = "always";
@@ -303,7 +361,20 @@ export class Renderer40k implements Renderer {
         forces.appendChild(rules);
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Unit) {
+    private renderDatasheets(forces: HTMLElement, units: Unit[]) {
+        let numIdenticalUnits = 0;
+        for (let i = 0; i < units.length; i++) {
+            numIdenticalUnits++;
+            const unit = units[i];
+            const nextUnit = units[i + 1];
+            if (unit.equal(nextUnit)) continue;
+
+            this.renderUnitHtml(forces, unit, numIdenticalUnits);
+            numIdenticalUnits = 0
+        }
+    }
+
+    private renderUnitHtml(forces: HTMLElement, unit: Unit, unitCount: number) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
         const statsTable = document.createElement('table');
@@ -328,7 +399,7 @@ export class Renderer40k implements Renderer {
             span.appendChild(document.createTextNode(unit._cost._commandPoints.toString()));
             span.appendChild(document.createElement('span')).appendChild(document.createTextNode('CP'));
         }
-        thead.appendChild(createTableRow([unitCostDiv, unit.name(), cpCostDiv], [0.1, 0.8, 0.1]));
+        thead.appendChild(createTableRow([unitCostDiv, unit.name() + (unitCount > 1 ? ` (${unitCount})` : ''), cpCostDiv], [0.1, 0.8, 0.1]));
 
         // Add an invisible row of 20, 5% columns. This ensures correct
         // spacing for the first few columns of visible rows.
@@ -457,19 +528,16 @@ export class Renderer40k implements Renderer {
         notesTableHead = createNotesHead('Psyker notes', unit._psykers);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
-        // abilities
-        thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row');
-        const abilitiesDiv = document.createElement('div');
-        const rules = Array.from(unit._rules.keys()).sort(Compare).join(', ');
-        abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
-        const abilities = Array.from(unit._abilities.keys()).sort(Compare);
-        for (const ability of abilities) {
-            const abilityDiv = abilitiesDiv.appendChild(document.createElement('div'));
-            abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
-            abilityDiv.appendChild(document.createTextNode(unit._abilities.get(ability) || '??'));
+        // unit abilities and rules; rules are shared across units, with their
+        // descriptions printed in bulk later, but show up with unit 'Abilities'
+        if (!unit._abilities['Abilities'] && unit._rules.size > 0) {
+            this.renderUnitAbilitiesAndRules(statsTable, 'Abilities', new Map(), unit._rules);
         }
-        thead.appendChild(createTableRow(['Abilities', abilitiesDiv], [0.10, 0.90], /* header= */ false));
+        for (const abilitiesGroup of Object.keys(unit._abilities).sort()) {
+            const abilitiesMap = unit._abilities[abilitiesGroup];
+            const rules = abilitiesGroup === 'Abilities' ? unit._rules : undefined;
+            this.renderUnitAbilitiesAndRules(statsTable, abilitiesGroup, abilitiesMap, rules);
+        }
 
         // factions
         thead = statsTable.appendChild(document.createElement('thead'));
@@ -487,9 +555,7 @@ export class Renderer40k implements Renderer {
         thead = statsTable.appendChild(document.createElement('thead'));
         thead.classList.add('info_row');
         const modelListDiv = document.createElement('div');
-        for (const modelName of unit._modelList) {
-            const mDiv = modelListDiv.appendChild(document.createElement('div')).appendChild(document.createTextNode(modelName));
-        }
+        this.renderModelList(modelListDiv, unit);
         thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
 
         // explosions
@@ -511,6 +577,47 @@ export class Renderer40k implements Renderer {
         }
         notesTableHead = createNotesHead('Explosion notes', unit._explosions);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
+    }
+
+    private renderUnitAbilitiesAndRules(container: HTMLElement, abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
+        const thead = container.appendChild(document.createElement('thead'));
+        thead.classList.add('info_row');
+        const abilitiesDiv = document.createElement('div');
+        if (rulesMap && rulesMap.size > 0) {
+            const rules = Array.from(rulesMap.keys()).sort(Compare).join(', ');
+            abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
+        }
+        const abilities = Array.from(abilitiesMap.keys()).sort(Compare);
+        for (const ability of abilities) {
+            const abilityDiv = abilitiesDiv.appendChild(document.createElement('div'));
+            abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
+            abilityDiv.appendChild(document.createTextNode(abilitiesMap.get(ability) || '??'));
+        }
+        thead.appendChild(createTableRow([abilitiesGroup, abilitiesDiv], [0.10, 0.90], /* header= */ false));
+
+    }
+
+    private renderModelList(container: HTMLElement, unit: Unit) {
+        for (const model of unit._models) {
+            const div = container.appendChild(document.createElement('div'));
+
+            div.appendChild(document.createTextNode((model._count > 1 ? `${model._count}x ` : '') + model.name()));
+
+            const modelGear = model.getDedupedWeaponsAndUpgrades();
+            if (modelGear.length === 0) continue;
+
+            div.appendChild(document.createTextNode(' ('));
+            for (const gear of modelGear) {
+                if (gear !== modelGear[0]) div.appendChild(document.createTextNode(', '));
+                div.appendChild(document.createTextNode((gear._count > 1 ? `${gear._count}x ` : '') + gear.selectionName()));
+                if (gear._cost.hasValues()) {
+                    const costSpan = div.appendChild(document.createElement('span'));
+                    costSpan.classList.add('wh40k_upgrade_cost', 'd-none');
+                    costSpan.appendChild(document.createTextNode(` ${gear._cost.toString()}`));
+                }
+            }
+            div.appendChild(document.createTextNode(')'));
+        }
     }
 
     private printRules(root: Map<string, Map<string, string | null>>, section: HTMLElement | null) {
@@ -547,13 +654,16 @@ export class Renderer40k implements Renderer {
     private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
 
     private static _explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];
-    private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.10];
+    private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.15];
 
     private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
     private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
 };
 
-
+function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {
+    if (rulesToAdd.size === 0) return;
+    ruleGroups.set(groupName, new Map([...ruleGroups.get(groupName) || [], ...rulesToAdd]));
+}
 
 function createTableRow(labels: (string|Element)[], widths: number[], header = false) {
     const row = document.createElement('tr');

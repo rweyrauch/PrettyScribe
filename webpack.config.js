@@ -6,9 +6,15 @@ module.exports = {
     output: {
         filename: 'prettyscribe.js',
         path: path.resolve(__dirname, 'dist'),
-        publicPath: 'dist',
+        clean: true,
     },
     devtool: 'inline-source-map',
+    devServer: {
+        static: __dirname,
+        devMiddleware: {
+            writeToDisk: true,
+        },
+    },
     module: {
         rules: [
             {

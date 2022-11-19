@@ -1,6 +1,10 @@
 import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads test/Guard.ros", async function() {
     const doc = await readZippedRosterFile('test/Guard.ros');
@@ -11,7 +15,9 @@ describe("Create40kRoster", function() {
         '_cost': jasmine.objectContaining({_powerLevel: 101, _points: 1625, _commandPoints: 0}),
         '_forces': [
           jasmine.objectContaining({
-            '_configurations': [],
+            '_configurations': [
+              "No Force Org Slot - Regimental Doctrine: Astra Millitarum",
+            ],
             '_units': [
               jasmine.objectContaining({
                 '_name': "Commissar Yarrick",
@@ -27,7 +33,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bolt pistol"}),
                   jasmine.objectContaining({'_name': "Storm bolter"}),
                   jasmine.objectContaining({'_name': "Power Klaw"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Aura of Discipline", "Hero of Hades Hive", "Iron Will", "Master of Command", "Power Field", "Summary Execution", "Voice of Command"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Knight Commander Pask",
                 '_cost': jasmine.objectContaining({_powerLevel: 13, _points: 207, _commandPoints: 0}),
@@ -35,12 +44,16 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Knight Commander Pask"}),
                 ],
                 '_modelList': [
-                  "Knight Commander Pask (Battle Cannon, Heavy Bolter, Stat Damage (Pask))"
+                  "Knight Commander Pask (Battle Cannon [22 pts], Heavy Bolter [8 pts], Stat Damage (Pask))"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Battle Cannon"}),
                   jasmine.objectContaining({'_name': "Heavy bolter"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Emergency Plasma Vents", "Explodes (6+/6\"/D3)", "Grinding Advance", "Knight Commander", "Smoke Launchers"]),
+                  "Tank Orders": mapWithKeys(["Tank Orders (Pask)"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Pask Russ 1"}),
                   jasmine.objectContaining({'_name': "Pask Russ 2"}),
@@ -59,7 +72,11 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Ripper Pistol"}),
                   jasmine.objectContaining({'_name': "Envenomed Blade"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Lethal Ambush", "Like Fighting a Shadow", "Loner", "One With His Surroundings"]),
+                  "Lethal Ambush": mapWithKeys(["Detonate Concealed Explosives", "Snipe with the Pistol", "Stalk with the Blade"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Conscripts",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 80, _commandPoints: 0}),
@@ -72,7 +89,10 @@ describe("Create40kRoster", function() {
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Lasgun"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Raw Recruits"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Infantry Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 3, _points: 40, _commandPoints: 0}),
@@ -146,9 +166,9 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "4x Scion (Hot-shot Lasgun, Frag & Krak grenades)",
-                  "Scion w/ Special Weapon (Grenade Launcher, Frag & Krak grenades)",
-                  "Scion w/ Vox-caster (Hot-Shot Lasgun, Hot-shot Laspistol, Vox-caster)",
-                  "Tempestor (Hot-shot Laspistol, Power fist, Frag & Krak grenades)"
+                  "Scion w/ Special Weapon (Grenade Launcher [3 pts], Frag & Krak grenades)",
+                  "Scion w/ Vox-caster (Hot-Shot Lasgun, Hot-shot Laspistol, Vox-caster [5 pts])",
+                  "Tempestor (Hot-shot Laspistol, Power fist [8 pts], Frag & Krak grenades)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Grenade Launcher (Frag)"}),
@@ -158,7 +178,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Power fist"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
                   jasmine.objectContaining({'_name': "Krak grenade"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Aerial Drop", "Vox-caster"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Bullgryns",
                 '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 120, _commandPoints: 0}),
@@ -167,13 +190,17 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Bullgryn Bone 'ead"}),
                 ],
                 '_modelList': [
-                  "2x Bullgryn (Grenadier Gauntlet, Frag Bombs, Slabshield)",
-                  "Bullgryn Bone 'ead (Grenadier Gauntlet, Frag Bombs, Slabshield)"
+                  "2x Bullgryn (Grenadier Gauntlet [5 pts], Frag Bombs, Slabshield)",
+                  "Bullgryn Bone 'ead (Grenadier Gauntlet [5 pts], Frag Bombs, Slabshield)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Grenadier Gauntlet"}),
                   jasmine.objectContaining({'_name': "Frag Bombs"}),
-                ]}),
+                ],
+                '_rules': mapWithKeys(["Avalanche of Muscle"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Slabshield"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Hades Breaching Drill Squadron",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 116, _commandPoints: 0}),
@@ -193,7 +220,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Chainsword"}),
                   jasmine.objectContaining({'_name': "Melta Cutter Drill"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Fortification Breacher", "Seperate Orders", "Subterranean Assault", "Whirling Blades"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Special Weapons Squad",
                 '_cost': jasmine.objectContaining({_powerLevel: 2, _points: 39, _commandPoints: 0}),
@@ -202,9 +232,9 @@ describe("Create40kRoster", function() {
                 ],
                 '_modelList': [
                   "3x Guardsman (Lasgun, Frag grenade)",
-                  "Guardsman W/ Special Weapon (Grenade Launcher, Frag grenade)",
-                  "Guardsman W/ Special Weapon (Meltagun, Frag grenade)",
-                  "Guardsman W/ Special Weapon (Sniper rifle, Frag grenade)"
+                  "Guardsman W/ Special Weapon (Grenade Launcher [3 pts], Frag grenade)",
+                  "Guardsman W/ Special Weapon (Meltagun [10 pts], Frag grenade)",
+                  "Guardsman W/ Special Weapon (Sniper rifle [2 pts], Frag grenade)"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Grenade Launcher (Frag)"}),
@@ -221,9 +251,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hellhound"}),
                 ],
                 '_modelList': [
-                  "Bane Wolf (Turret-mounted Chem Cannon, Heavy Bolter, Stat Damage (HS))",
-                  "Devil Dog (Heavy Bolter, Turret-mounted Melta Cannon, Stat Damage (HS))",
-                  "Hellhound (Heavy Bolter, Turret-mounted Inferno Cannon, Stat Damage (HS))"
+                  "Bane Wolf (Turret-mounted Chem Cannon [7 pts], Heavy Bolter [8 pts], Stat Damage (HS))",
+                  "Devil Dog (Heavy Bolter [8 pts], Turret-mounted Melta Cannon [20 pts], Stat Damage (HS))",
+                  "Hellhound (Heavy Bolter [8 pts], Turret-mounted Inferno Cannon [20 pts], Stat Damage (HS))"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Chem Cannon"}),
@@ -231,6 +261,9 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Inferno Cannon"}),
                   jasmine.objectContaining({'_name': "Melta Cannon"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes (4+/6\"/D3)", "Explodes (6+/6\"/D3)", "Smoke Launchers", "Vehicle Squadron"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 1"}),
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 2"}),
@@ -249,11 +282,14 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Scout Sentinel"}),
                 ],
                 '_modelList': [
-                  "Scout Sentinel (Multi-laser)"
+                  "Scout Sentinel (Multi-laser [5 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Multi-laser"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes (6+/3\"/1)", "Scout Vehicle", "Smoke Launchers"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Tauros Venator",
                 '_cost': jasmine.objectContaining({_powerLevel: 4, _points: 64, _commandPoints: 0}),
@@ -261,11 +297,14 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Tauros"}),
                 ],
                 '_modelList': [
-                  "Tauros (Twin Multi-Laser)"
+                  "Tauros (Twin Multi-Laser [18 pts])"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Twin Multi-Laser"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes", "Galvanic Motor", "Venator Targeting Array"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Hydras",
                 '_cost': jasmine.objectContaining({_powerLevel: 7, _points: 93, _commandPoints: 0}),
@@ -273,12 +312,15 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Hydra"}),
                 ],
                 '_modelList': [
-                  "Hydra (Heavy Bolter, Hydra Quad Autocannon, Stat Damage (HS))"
+                  "Hydra (Heavy Bolter [8 pts], Hydra Quad Autocannon, Stat Damage (HS))"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy bolter"}),
                   jasmine.objectContaining({'_name': "Hydra Quad Autocannon"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes (6+/6\"/D3)", "Smoke Launchers", "Vehicle Squadron"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 1"}),
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 2"}),
@@ -299,7 +341,10 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Laser Destroyer"}),
                   jasmine.objectContaining({'_name': "Lasgun"}),
                   jasmine.objectContaining({'_name': "Frag grenade"}),
-                ]}),
+                ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Artillery", "Explodes (6+/6\"/D3)", "Guardsmen Crew"]),
+                }}),
               jasmine.objectContaining({
                 '_name': "Wyverns",
                 '_cost': jasmine.objectContaining({_powerLevel: 6, _points: 113, _commandPoints: 0}),
@@ -307,30 +352,27 @@ describe("Create40kRoster", function() {
                   jasmine.objectContaining({'_name': "Wyvern"}),
                 ],
                 '_modelList': [
-                  "Wyvern (Heavy Bolter, Wyven Quad Stormshard Mortar)"
+                  "Wyvern (Heavy Bolter [8 pts], Wyven Quad Stormshard Mortar)",
+                  "Unit Upgrades (Stat Damage (HS))"
                 ],
                 '_weapons': [
                   jasmine.objectContaining({'_name': "Heavy bolter"}),
                   jasmine.objectContaining({'_name': "Wyvern Quad Stormshard Mortar"}),
                 ],
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Explodes (6+/6\"/D3)", "Smoke Launchers", "Vehicle Squadron"]),
+                },
                 '_woundTracker': [
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 1"}),
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 2"}),
                   jasmine.objectContaining({'_name': "Stat Damage (HS) 3"}),
                 ]}),
-              jasmine.objectContaining({
-                '_name': "Regimental Doctrine",
-                '_cost': jasmine.objectContaining({_powerLevel: 0, _points: 0, _commandPoints: 0}),
-                '_modelStats': [
-                  
-                ],
-                '_modelList': [
-                  
-                ],
-                '_weapons': [
-                  
-                ]}),
-            ]
+            ],
+            '_rules': new Map([
+              ["Defenders of Humanity", jasmine.any(String)],
+              ["Avalanche of Muscle", jasmine.any(String)],
+            ]),
+            '_factionRules': new Map(),
           }),
         ]}));
   });
