@@ -1,5 +1,5 @@
 import { readZippedRosterFile } from './readRosterFile';
-import { BaseNotes, Create40kRoster, Force, Unit } from "../../src/roster40k";
+import { BaseNotes, Costs, Create40kRoster, Force, Unit } from "../../src/roster40k";
 
 export async function getRosterExpectation(filename: string): Promise<string> {
   const doc = await readZippedRosterFile(filename);
@@ -20,6 +20,10 @@ export async function getRosterExpectation(filename: string): Promise<string> {
   return `import { readZippedRosterFile } from './helpers/readRosterFile';
 import { Create40kRoster } from "../src/roster40k";
 
+function mapWithKeys(keys: string[]) {
+  return new Map(keys.map(e => [e, jasmine.any(String)]));
+}
+
 describe("Create40kRoster", function() {
   it("loads ${filename}", async function() {
     const doc = await readZippedRosterFile('${filename}');
@@ -27,7 +31,7 @@ describe("Create40kRoster", function() {
 
     expect(roster).toEqual(
       jasmine.objectContaining({
-        '_cost': jasmine.objectContaining({_powerLevel: ${roster._cost._powerLevel}, _points: ${roster._cost._points}, _commandPoints: ${roster._cost._commandPoints}}),
+        '_cost': ${processCost(roster._cost)},
         '_forces': [${processForces(roster._forces)}
         ]}));
   });
@@ -39,7 +43,9 @@ function processForces(forces: Force[]): string {
           jasmine.objectContaining({
             '_configurations': [${processConfigurations(force._configurations)}],
             '_units': [${processUnits(force._units)}
-            ]
+            ],
+            '_rules': ${processRulesMap(force._rules)},
+            '_factionRules': ${processRulesMap(force._factionRules)},
           }),`).join('');
 }
 
@@ -56,7 +62,7 @@ function processUnits(units: Unit[]): string {
   return units.map(unit => `
               jasmine.objectContaining({
                 '_name': ${JSON.stringify(unit._name)},
-                '_cost': jasmine.objectContaining({_powerLevel: ${unit._cost._powerLevel}, _points: ${unit._cost._points}, _commandPoints: ${unit._cost._commandPoints}}),
+                '_cost': ${processCost(unit._cost)},
                 '_modelStats': [
                   ${processBaseNotes(unit._modelStats)}
                 ],
@@ -68,6 +74,11 @@ function processUnits(units: Unit[]): string {
                 ]${processOptionalUnitStats(unit)}}),`).join('');
 }
 
+function processCost(cost: Costs) {
+  const freeformValues = cost._freeformValues ? `, _freeformValues: ${JSON.stringify(cost._freeformValues)}` : '';
+  return `jasmine.objectContaining({_powerLevel: ${cost._powerLevel}, _points: ${cost._points}, _commandPoints: ${cost._commandPoints}${freeformValues}})`;
+}
+
 function processBaseNotes(notes: BaseNotes[]) {
   return notes.map(note =>
     `jasmine.objectContaining({'_name': ${JSON.stringify(note._name)}}),`)
@@ -76,6 +87,15 @@ function processBaseNotes(notes: BaseNotes[]) {
 
 function processOptionalUnitStats(unit: Unit) {
   let output = '';
+  if (unit._rules.size > 0) {
+    output += `,
+                '_rules': ${processMap(unit._rules)}`
+  }
+  if (Object.keys(unit._abilities).length > 0) {
+    output += `,
+                '_abilities': {${processAbilities2(unit._abilities)}
+                }`
+  }
   if (unit._spells.length > 0) {
     output += `,
                 '_spells': [
@@ -102,3 +122,23 @@ function processOptionalUnitStats(unit: Unit) {
   }
   return output;
 }
+
+function processMap(map: Map<string, string | null>): string {
+  if (map.size === 0) return 'new Map()';
+
+  return 'mapWithKeys([' + Array.from(map.keys()).sort().map(key => JSON.stringify(key)).join(', ') + '])';
+}
+
+function processAbilities2(_abilities2: {[key: string]: Map<string, string | null>}): string {
+  return Object.keys(_abilities2).sort().map(key => `\n                  ${JSON.stringify(key)}: ${processMap(_abilities2[key])},`).join('');
+}
+
+function processRulesMap(_rules: Map<string, string | null>): string {
+  if (_rules.size === 0) return 'new Map()';
+
+  return 'new Map([\n' +
+    Array.from(_rules.keys()).map(key => `              [${JSON.stringify(key)}, jasmine.any(String)],\n`).join('') +
+  '            ])';
+
+}
+
