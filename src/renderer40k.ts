@@ -658,7 +658,7 @@ export class Renderer40k implements Renderer {
 
     private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
     private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
-};
+}
 
 function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {
     if (rulesToAdd.size === 0) return;
@@ -668,7 +668,7 @@ function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupNa
 function createTableRow(labels: (string|Element)[], widths: number[], header = false) {
     const row = document.createElement('tr');
     if (header) row.classList.add('header_row');
-    for (var i = 0, colCount = 0; i < labels.length && i < widths.length || colCount < 20; i++) {
+    for (let i = 0, colCount = 0; i < labels.length && i < widths.length || colCount < 20; i++) {
         const cell = document.createElement(header ? 'th' : 'td');
         cell.scope = 'col';
         if (i < labels.length && i < widths.length) {
@@ -695,7 +695,7 @@ function createTableRow(labels: (string|Element)[], widths: number[], header = f
 }
 
 function createNoteHead(title: string, note: BaseNotes) {
-    if (!note._customNotes) return null;
+    if (!note.notes()) return null;
 
     const thead = document.createElement('thead');
     thead.classList.add('info_row');
@@ -711,7 +711,7 @@ function createNotesHead(title: string, notes: BaseNotes[]) {
     thead.classList.add('info_row');
     const notesDiv = document.createElement('div');
     for (const note of notes) {
-        if (!note._customNotes) continue;
+        if (!note.notes()) continue;
 
         const noteDiv = notesDiv.appendChild(document.createElement('div'));
         noteDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${note.name()}: `));
