@@ -52,7 +52,7 @@ export class Renderer40k implements Renderer {
             const text = `${this._roster.name()} (${costs.join(', ')})`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
 
-            // Footer div is hidden, except when printing.
+            // Footer div is hideEnabled, except when printing.
             const footer = title.appendChild(document.createElement('div'));
             footer.classList.add('footer');
             footer.appendChild(document.createElement('div')).appendChild(document.createTextNode('PrettyScribe'));
@@ -200,28 +200,13 @@ export class Renderer40k implements Renderer {
         optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
         this.renderCheckboxOption(optionsDiv, 'hideElements', 'Hide Elements from Printing',
             (e: Event) => {
+                const body = document.body;
                 if ((e.target as any).checked) {
-                    const customize = document.createElement('style');
-                    customize.id = 'customize'
-                    customize.textContent =
-                        `.hide_able:hover {
-    background-color: rgba(128, 128, 128, .4);
-    top: 0;
-}
-.hidden {
-    text-decoration: line-through;
-}
-@media print {
-    .hidden {
-        display: none;
-    }
-}`
-                    document.head.appendChild(customize)
-                    document.addEventListener('click', toggleHidden)
+                    body.classList.add('hide_enabled')
+                    body.addEventListener('click', toggleHidden)
                 } else {
-                    const customize = document.getElementById('customize');
-                    if (customize) document.head.removeChild(customize);
-                    document.removeEventListener('click', toggleHidden)
+                    body.classList.remove('hide_enabled')
+                    body.removeEventListener('click', toggleHidden)
                 }
             });
     }
@@ -759,15 +744,13 @@ function addHideAble<T extends Element>(e: T): T {
 }
 
 function toggleHidden(e: Event) {
-    let element = e.target as HTMLElement;
+    let element = e.target as Element;
+    if (element) element = element.closest('.hide_able') as Element;
     if (!element) return;
-    if (element.tagName === 'TD' && element.parentElement) element = element.parentElement as HTMLElement;
-    if (element && element.classList.contains('hide_able')) {
-        if (element.classList.contains('hidden')) {
-            element.classList.remove('hidden')
-        } else {
-            element.classList.add('hidden')
-        }
+    if (element.classList.contains('hidden')) {
+        element.classList.remove('hidden')
+    } else {
+        element.classList.add('hidden')
     }
 }
 

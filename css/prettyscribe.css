@@ -5,7 +5,7 @@ body {
 }
 
 label {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 @font-face {
@@ -14,27 +14,28 @@ label {
     font-weight: normal;
     src: url("../assets/fonts/rodchenkoctt.eot");
     src: url("../assets/fonts/rodchenkoctt.eot?#iefix") format("embedded-opentype"),
-         url("../assets/fonts/rodchenkoctt.woff2") format("woff2"),
-         url("../assets/fonts/rodchenkoctt.woff") format("woff"),
-         url("../assets/fonts/rodchenkoctt.ttf") format("truetype"),
-         url("../assets/fonts/rodchenkoctt.svg#rodchenkoctt") format("svg");
+    url("../assets/fonts/rodchenkoctt.woff2") format("woff2"),
+    url("../assets/fonts/rodchenkoctt.woff") format("woff"),
+    url("../assets/fonts/rodchenkoctt.ttf") format("truetype"),
+    url("../assets/fonts/rodchenkoctt.svg#rodchenkoctt") format("svg");
 }
 
 @media screen {
-  div.footer {
-    display: none;
-  }
+    div.footer {
+        display: none;
+    }
 }
+
 @media print {
-  div.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    opacity: 0.5;
-    display: flex;
-    justify-content: space-between;
-  }
+    div.footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0.5;
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .aos_unit {
@@ -141,23 +142,23 @@ label {
 }
 
 #wh40k_abilities_list {
-  break-inside: avoid;
-  line-height: 1;
-  margin-bottom: 1rem;
+    break-inside: avoid;
+    line-height: 1;
+    margin-bottom: 1rem;
 }
 
 #wh40k_abilities_list > h4 {
-  text-transform: capitalize;
+    text-transform: capitalize;
 }
 
 #wh40k_abilities_list > div {
-  margin-bottom: 0.35em;
+    margin-bottom: 0.35em;
 }
 
 .wh40k_options_div {
-  font-style: italic;
-  border: 1px dashed grey;
-  margin-bottom:0.5em;
+    font-style: italic;
+    border: 1px dashed grey;
+    margin-bottom: 0.5em;
 }
 
 .wh40k_unit_sheet {
@@ -182,8 +183,7 @@ label {
     line-height: 1;
     font: 14px sans-serif;
     break-inside: avoid;
-    clip-path:
-        polygon(
+    clip-path: polygon(
             0% var(--notchSize),
             var(--notchSize) 0%,
             calc(100% - var(--notchSize)) 0%,
@@ -192,14 +192,14 @@ label {
             calc(100% - var(--notchSize)) 100%,
             var(--notchSize) 100%,
             0% calc(100% - var(--notchSize))
-        );
+    );
 }
 
-.wh40k_unit_sheet > .table>thead:not(:first-child)>:last-child>* {
+.wh40k_unit_sheet > .table > thead:not(:first-child) > :last-child > * {
     border-top-color: currentColor;
 }
 
-.wh40k_unit_sheet > .table>:not(:last-child)>:last-child>* {
+.wh40k_unit_sheet > .table > :not(:last-child) > :last-child > * {
     border-bottom-color: currentColor;
 }
 
@@ -281,28 +281,27 @@ label {
 }
 
 .wh40k_unit_sheet > table > thead.unit_header > tr > td > div.unit_costs > span > span {
-  font-size: 0.6em;
+    font-size: 0.6em;
 }
 
 .wh40k_unit_sheet > table > thead.unit_header > tr > td > div.unit_cp_costs {
-  flex-direction: row-reverse;
-  padding-right: calc(var(--notchSize) - 0.25rem) /* Offset td's 0.25rem padding-right. */
+    flex-direction: row-reverse;
+    padding-right: calc(var(--notchSize) - 0.25rem) /* Offset td's 0.25rem padding-right. */
 }
 
 /* Render an octogonal border around certain elements. */
 .wh40k_unit_sheet > table > * > * > * > div.unit_costs > span:after,
 .wh40k_unit_sheet > table:after {
-    --bothSize: calc(var(--notchSize) + var(--borderSize)/2);
+    --bothSize: calc(var(--notchSize) + var(--borderSize) / 2);
     content: '';
     position: absolute;
-    top:0;
-    left:0;
-    bottom:0;
-    right:0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     background-color: var(--borderColor);
 
-    clip-path:
-        polygon(
+    clip-path: polygon(
             0% var(--notchSize),
             var(--notchSize) 0%,
             calc(100% - var(--notchSize)) 0%,
@@ -312,7 +311,6 @@ label {
             var(--notchSize) 100%,
             0% calc(100% - var(--notchSize)),
             0% var(--notchSize),
-
             var(--borderSize) var(--bothSize),
             var(--borderSize) calc(100% - var(--bothSize)),
             var(--bothSize) calc(100% - var(--borderSize)),
@@ -322,10 +320,26 @@ label {
             calc(100% - var(--bothSize)) var(--borderSize),
             var(--bothSize) var(--borderSize),
             var(--borderSize) var(--bothSize)
-        );
+    );
 }
 
 .wh40k_rules > div > p {
-  white-space: pre-wrap;
-  line-height: 1;
+    white-space: pre-wrap;
+    line-height: 1;
+}
+
+.hide_enabled .hide_able:hover {
+    background-color: rgba(128, 128, 128, .4);
+    cursor: pointer;
+    top: 0;
+}
+
+.hide_enabled .hidden {
+    text-decoration: line-through;
+}
+
+@media print {
+    .hide_enabled .hidden {
+        display: none;
+    }
 }
