@@ -106,6 +106,7 @@ export enum UnitRole {
     NONE,
 
     // 40k
+    SCD,
     HQ,
     TR,
     EL,
@@ -117,7 +118,6 @@ export enum UnitRole {
     LW,
     AGENTS,
     NF,
-    SCD,
 
     // Kill Team
     COMMANDER,
@@ -130,6 +130,7 @@ export const UnitRoleToString: string[] = [
     'None',
 
     // 40k
+    'Supreme Command Detachment',
     'HQ',
     'Troops',
     'Elites',
@@ -141,7 +142,6 @@ export const UnitRoleToString: string[] = [
     'Lord of War',
     'Agent of the Imperium',
     'No Force Org Slot',
-    'Supreme Command Detachment',
 
     // Kill Team
     'Commander',
