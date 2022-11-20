@@ -81,7 +81,7 @@ label {
     display: inline-block;
     position: relative;
     width: 100%;
-    margin: 0, auto;
+    margin: 0 auto;
 }
 
 .aos_unit_stats::after {
