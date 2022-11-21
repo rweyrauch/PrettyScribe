@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<g>
+<circle cx="128.5" cy="129" r="116" fill="#f9f9f9" stroke="#d1c89a" stroke-width="10"/>
+<path d="m124.73 11h11.547l-5.7735-10z" fill="#d1c89a"/>
+<path d="m124.7 246h11.547l-5.7735 10z" fill="#d1c89a"/>
+<path d="m246.58 125.73v7l10-3.5z" fill="#d1c89a"/>
+<path d="m10 125.62v7l-10-3.5z" fill="#d1c89a"/>
+<path d="m131.59 124.24-7.0711 7.0711 88.388 81.317z" fill="#d1c89a"/>
+<path d="m124.47 131.7 7.0711-7.0711-88.388-81.317z" fill="#d1c89a"/>
+<path d="m130.13 132.94-7.0711-7.0711-81.317 88.388z" fill="#d1c89a"/>
+<path d="m124.3 124.91 7.0711 7.0711 81.317-88.388z" fill="#d1c89a"/>
+<path d="m234.1 184.54-3.5 6.0622 10.41 1.9689z" fill="#d1c89a"/>
+<path d="m192.13 228.79-6.0622 3.5 8.0311 6.9103z" fill="#d1c89a"/>
+<path d="m22.556 76.585 3.5-6.0622-10.41-1.9689z" fill="#d1c89a"/>
+<path d="m67.268 28.747 6.0622-3.5-8.0311-6.9103z" fill="#d1c89a"/>
+<path d="m229.23 67.141 3.5 6.0622 6.9103-8.0311z" fill="#d1c89a"/>
+<path d="m67.375 228.79 6.0622 3.5-8.0311 6.9103z" fill="#d1c89a"/>
+<path d="m24.84 184.82 3.5 6.0622-10.41 1.9689z" fill="#d1c89a"/>
+<path d="m190.66 29.28-6.0622-3.5 8.0311-6.9103z" fill="#d1c89a"/>
+<path id="d" d="m98.412 38.687a93.587 93.587 0 0 1 117.46 60.997 93.587 93.587 0 0 1-60.997 117.46 93.587 93.587 0 0 1-117.46-60.997 93.587 93.587 0 0 1 60.997-117.46z" fill="none"/>
+<text fill="#000000" font-family="sans-serif" font-size="18.667px" letter-spacing="0px" stroke-width="1px" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:125%" xml:space="preserve"><textPath xlink:href="#d"><tspan>MOVE</tspan></textPath></text>
+<text fill="#000000" font-family="sans-serif" font-size="18.667px" letter-spacing="0px" stroke-width="1px" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:125%" xml:space="preserve"><textPath xlink:href="#a"><tspan>BRAVERY</tspan></textPath></text>
+<text fill="#000000" font-family="sans-serif" font-size="18.667px" letter-spacing="0px" stroke-width="1px" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:125%" xml:space="preserve"><textPath xlink:href="#b"><tspan>WOUNDS</tspan></textPath></text>
+<text fill="#000000" font-family="sans-serif" font-size="18.667px" letter-spacing="0px" stroke-width="1px" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:125%" xml:space="preserve"><textPath xlink:href="#c"><tspan>SAVE</tspan></textPath></text>
+<path id="c" d="m218.99 109.56a94.291 90.628 0 0 1-69.467 109.4 94.291 90.628 0 0 1-113.82-66.769 94.291 90.628 0 0 1 69.467-109.4 94.291 90.628 0 0 1 113.82 66.769z" display="none" fill="none"/>
+<path id="b" d="m43.8 171.45a93.587 93.587 0 0 1 39.304-126.38 93.587 93.587 0 0 1 126.38 39.304 93.587 93.587 0 0 1-39.304 126.38 93.587 93.587 0 0 1-126.38-39.304z" display="none" fill="none"/>
+<path id="a" d="m87.44 230.52a109.33 109.32 3.6554 0 0 142.09-60.958 109.33 109.32 3.6554 0 0-60.959-142.08 109.33 109.32 3.6554 0 0-142.09 60.958 109.33 109.32 3.6554 0 0 60.959 142.08z" fill="none"/>
+</g>
+</svg>

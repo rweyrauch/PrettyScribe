@@ -1,0 +1,1569 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<roster id="1b56-c11c-78a5-2e41" name="Dark Angel 30k Test" battleScribeVersion="2.03" gameSystemId="ca571888-56a9-c58e-ddaf-54f4713538bc" gameSystemName="Warhammer 30,000 - The Horus Heresy" gameSystemRevision="114" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+  <costs>
+    <cost name="pts" typeId="points" value="840.0"/>
+  </costs>
+  <forces>
+    <force id="2387-7da2-86d9-a468" name="Allied Detachment" entryId="657a-bc81-4ae3-8a5b" catalogueId="839b6f2a-4041-398b-fc2d-dc6a31d5f75e" catalogueRevision="556" catalogueName="Legiones Astartes: Age of Darkness Army List">
+      <selections>
+        <selection id="ee90-28b9-2f9b-efe3" name="Assault Squad, Legion , Compulsory" entryId="c58e-369b-f1fe-ba24::e2bbc832-2c59-80ad-5a6f-6c8daeda79e2" publicationId="ca571888--pubN82424" page="41" number="1" type="unit">
+          <rules>
+            <rule id="233f-c6be-8436-2b12::dc0c-5010-4942-c8c1" name="Mastery of the Blade" hidden="false">
+              <description>When fighting in an assault with one of the following weapons: combat blade, chainsword, heavy chainsword, power sword, Terranic greatsword, Calibanite war blade and paragon blades modelled as swords, and when fighting a model with an equal WS, a model with this special rule strikes on a 3.</description>
+            </rule>
+            <rule id="92b5-4489-981e-bd64::23a4-a37f-e8e8-c756" name="Legiones Astartes" publicationId="ca571888--pubN106502" page="168" hidden="false">
+              <description>Units with this special rule may always attempt to Regroup at their normal Leadership value, regardless of casualties.
+
+In addition to these benefits, units  will also have a number of additional special rules and abilities specific to their ‘named’ Legion, all of which will be defined in the Legiones Astartes Army List and other future Forge World publications.
+
+If an army represents a Legion which does not yet have its own unique Legiones Astartes rule, the controlling player may instead add either the Stubborn or Furious Charge special rule to the standard provisions of this rule in the interim.</description>
+            </rule>
+            <rule id="4b68-9262-23c6-fb72::38d5-b6eb-bda8-2497" name="Bulky" publicationId="ca571888--pubN106502" page="161" hidden="false">
+              <description>Bulky models count as two models for the purposes of Transport Capacity.</description>
+            </rule>
+            <rule id="c6cc-f441-0873-0951::d219-2314-4834-c054" name="Deep Strike" publicationId="ca571888--pubN106502" page="162" hidden="false">
+              <description>In order for a unit to be able to Deep Strike, all models in the unit must have the Deep Strike special rule and the unit must start the game in Reserve. When placing the unit in Reserve, you must tell your opponent that it will be arriving by Deep Strike (sometimes called Deep Strike Reserve). Some units must arrive by Deep Strike. They always begin the game in Reserve and always arrive by Deep Strike.
+
+Arriving by Deep Strike
+Roll for the arrival of all Deep Striking units as specified in the rules for Reserves and then deploy them as follows:
+• First, place one model from the unit anywhere on the table, in the position where you would like it to arrive, and roll for scatter to determine the model’s final position. If a vehicle scatters when arriving via Deep Strike, do not change its facing – it must continue to face the same direction as it did before you rolled for scatter.
+• Next, the unit’s remaining models are arranged around the first one. Models must be placed in base contact with the first model and begin to form a circle around it. When the first circle is complete, a further concentric circle must be placed with each model touching the circle inside it. Each circle must include as many models as will fit.
+• Models deploying via Deep Strike treat all difficult terrain as dangerous terrain.
+In the Movement phase during which they arrive, Deep Striking units may not move any further, other than to disembark from a Deep Striking Transport vehicle if they are in one.
+Units Deep Striking into ruins are placed on the ground floor. Deep Striking units count non-ruined buildings (except for their battlements) as impassable terrain.
+In that turn’s Shooting phase, these units can fire (or Run, Turbo-boost or move Flat Out) as normal, and count as having moved in the previous Movement phase. Vehicles, except for Walkers, count as having moved at Combat Speed (even Immobilised vehicles). This can affect the number of weapons they can fire with their full Ballistic Skill.
+In that turn’s Assault phase, however, these units cannot charge. This also applies to units that have disembarked from Transports that arrived by Deep Strike that turn.
+
+Deep Strike and Transports
+Units do not confer the Deep Strike special rule onto a Transport vehicle they are embarked inside. A Transport vehicle with Deep Strike may Deep Strike regardless of whether its passengers have Deep Strike or not.
+
+Deep Strike Mishaps
+Deep Striking onto a crowded battlefield can be dangerous, as one may miss the intended objective or even materialise inside solid rock! If any of the models in a Deep Striking unit cannot be deployed, because at least one model would land partially or fully off the table, in impassable terrain, on top of a friendly model, or on top of or within 1&quot; of an enemy model, something has gone wrong. The controlling player must roll on the Deep Strike Mishap table and apply the results. If the unfortunate unit is also a Transport, the Deep Strike Mishap result applies to both the unit and anything embarked within it.
+
+
+Deep Strike Mishap Table
+D6 - Effect
+1 - Terrible Accident! Teleporting units are lost in the Warp, deep striking jump units are shot down, or some other suitably dramatic event occurs.
+The entire unit is destroyed!
+
+2-3 - Misplaced. The coordinates were inaccurate or the enemy has jammed your instruments.
+Your opponent may deploy the unit anywhere on the table (excluding impassable terrain, but including difficult terrain, which of course counts as dangerous for Deep Striking units), in a valid Deep Strike formation, but without rolling for scatter. Units embarked on a misplaced Transport can disembark during their Movement phase as normal.
+
+4-6 - Delayed. Because of mechanical failure or enemy action, the reinforcements are delayed.
+The unit is placed in Ongoing Reserves.</description>
+            </rule>
+            <rule id="e849-4c08-7138-0f21::8cb0-ff25-22a2-d480" name="Jump Unit" publicationId="ca571888--pubN105292" hidden="false">
+              <description>Jump units can use their jump packs once each turn to move more swiftly in either the Movement phase or the Assault phase – they cannot use their jump packs in both phases in the same turn. If not using its jump pack, a model moves as a normal model of its type. Indeed, a Jump unit can always choose to move as a normal model of their type if they wish. Note that the entire unit must always use the same form of movement. Units that are described as ‘moving like’ Jump units follow all of the rules for Jump units, and use the same special rules.
+
+SKYBORNE
+When using its jump pack (whether moving, charging or Falling Back, as we’ll discuss in a moment) a model can move over all other models and all terrain freely. However, if the model begins or ends its move in difficult terrain, it must take a Dangerous Terrain test.
+Jump models cannot end their move on top of other models and can only end their move on top of impassable terrain if it is actually possible to place the models on top of it. If they do this, however, they treat the impassable terrain as dangerous terrain.
+
+MOVEMENT PHASE
+If a Jump model uses its jump pack (or equivalent) in the Movement phase, it can move up to 12&quot;.
+
+ASSAULT PHASE
+If a Jump model uses its jump pack to charge into assault, it can re-roll its charge distance.
+Furthermore, to represent the crushing impact of such a charge, a model that uses its jump pack to charge gains the Hammer of Wrath special rule for the remainder of the turn.
+
+FALL BACK MOVES
+Jump units always use their jump packs when Falling Back, and their Fall Back moves are 3D6&quot;, even if they already used their jump pack to move that turn.
+
+SPECIAL RULES
+Jump units have the Bulky and Deep Strike special rules.</description>
+            </rule>
+            <rule id="d7b0-bbf5-6788-67a5::adbd-7129-14fe-19bc" name="Compulsory" publicationId="839b6f2a--pubN69231" page="132" hidden="false">
+              <description>One box on a Force Organisation chart allows you to make one selection from that part of your army list. Dark boxes indicate compulsory selections, which must be included as part of the army, while the lighter boxes indicate optional choices, which are only included as part of the army if the player in question chooses to do so. If constructing an army using the Crusade Force Organisation chart, this would mean that an army would be required to take at least one HQ choice and two Troops choices. These compulsory choices are intended to ensure that the core of each army is illustrative of the force represented by the Army List in use, and that all armies are capable of properly participating in the varied missions available to players in the Age of Darkness.</description>
+            </rule>
+          </rules>
+          <selections>
+            <selection id="f663-0db7-35f8-b0ef" name="Assault Sergeant, Legion" entryId="c58e-369b-f1fe-ba24::9d2d80ae-f46e-4db8-9fea-87f6731bf855" page="0" number="1" type="model">
+              <profiles>
+                <profile id="c58e-369b-f1fe-ba24::9a98f6f6-dc80-09f5-891f-34677affdcd8" name="Legion Assault Sergeant" publicationId="ca571888--pubN82424" page="31" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+                  <characteristics>
+                    <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Jump Infantry (Character)</characteristic>
+                    <characteristic name="WS" typeId="575323232344415441232323">4</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                    <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                    <characteristic name="W" typeId="5723232344415441232323">1</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">2</characteristic>
+                    <characteristic name="LD" typeId="4c4423232344415441232323">9</characteristic>
+                    <characteristic name="Save" typeId="5361766523232344415441232323">3+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="2008-f324-7d78-409f" name="Bolt Pistol" entryId="c58e-369b-f1fe-ba24::fbe9-39fe-f359-440c::c3db-f1a4-194f-835e" entryGroupId="c58e-369b-f1fe-ba24::e1205de7-71a4-4001-2e4b-25ba2e6ee3a9" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="c58e-369b-f1fe-ba24::fbe9-39fe-f359-440c::2d4a-b117-e83b-b52a::ec83-0776-ef74-9cc2" name="Bolt Pistol" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">12&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Pistol</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="79e0-b7ad-8c51-26e1" name="Chainsword or Combat Blade" entryId="c58e-369b-f1fe-ba24::e36e-af94-2e36-77bd::10e739aa-3153-9348-3458-738dd5938617" entryGroupId="c58e-369b-f1fe-ba24::19e3f286-12e3-a4b3-c7b7-79b181ff0328" page="0" number="1" type="upgrade">
+                  <selections>
+                    <selection id="f7b8-e4bf-aa5d-7a90" name="Chainswords/Combat Blades" entryId="c58e-369b-f1fe-ba24::e36e-af94-2e36-77bd::2b69-d5c2-a344-1e61::1087-66c1-c342-9cdc" entryGroupId="c58e-369b-f1fe-ba24::e36e-af94-2e36-77bd::b11f-c58a-edd8-e10b" number="1" type="upgrade">
+                      <profiles>
+                        <profile id="c58e-369b-f1fe-ba24::e36e-af94-2e36-77bd::2b69-d5c2-a344-1e61::e8ff-7994-f83f-1431::730c-b70b-1e8f-f2e9" name="Chainsword/Combat Blade" publicationId="ca571888--pubN106502" page="180" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                          <characteristics>
+                            <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                            <characteristic name="Strength" typeId="537472656e67746823232344415441232323">User</characteristic>
+                            <characteristic name="AP" typeId="415023232344415441232323">-</characteristic>
+                            <characteristic name="Type" typeId="5479706523232344415441232323">Melee</characteristic>
+                          </characteristics>
+                        </profile>
+                      </profiles>
+                      <costs>
+                        <cost name="pts" typeId="points" value="0.0"/>
+                      </costs>
+                    </selection>
+                  </selections>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="4102-e89e-73a3-1b59" name="Character" entryId="eb92-48f9-9a1a-7bd1" primary="false"/>
+              </categories>
+            </selection>
+            <selection id="b225-99c5-d654-af5b" name="Assault Space Marines, Legion" entryId="c58e-369b-f1fe-ba24::2da1da8f-d005-c9d5-fafd-cf4912a1e3a5" page="0" number="9" type="model">
+              <profiles>
+                <profile id="c58e-369b-f1fe-ba24::6d40b088-22f2-dc50-bff9-3ba2e437424f" name="Legion Assault Space Marine" publicationId="ca571888--pubN82424" page="31" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+                  <characteristics>
+                    <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Jump Infantry</characteristic>
+                    <characteristic name="WS" typeId="575323232344415441232323">4</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                    <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                    <characteristic name="W" typeId="5723232344415441232323">1</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">1</characteristic>
+                    <characteristic name="LD" typeId="4c4423232344415441232323">8</characteristic>
+                    <characteristic name="Save" typeId="5361766523232344415441232323">3+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="117.0"/>
+              </costs>
+            </selection>
+            <selection id="d6b8-1e9f-9d94-49be" name="Standard Wargear" entryId="c58e-369b-f1fe-ba24::cc15-3a3f-dbab-6e13" number="1" type="upgrade">
+              <selections>
+                <selection id="b53c-91fe-2b52-6c0d" name="Bolt Pistols" entryId="c58e-369b-f1fe-ba24::27ae-9af9-a077-08c8::fe8d-1baa-d58d-00bc" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="c58e-369b-f1fe-ba24::27ae-9af9-a077-08c8::007f-9e7f-2a8f-8258::ec83-0776-ef74-9cc2" name="Bolt Pistol" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">12&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Pistol</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="b8d8-3ccb-4525-6eb2" name="Frag and Krak Grenades" entryId="c58e-369b-f1fe-ba24::60a8-4399-da43-fcdf::0a53-b471-df87-7b83" number="1" type="upgrade">
+                  <rules>
+                    <rule id="c58e-369b-f1fe-ba24::60a8-4399-da43-fcdf::a7b7-4101-28f0-fc1a::9430-a4d5-6f01-57e2" name="Assault Grenades" publicationId="ca571888--pubN106502" hidden="false">
+                      <description>Shooting: When a unit equiped with Assualt Greandes makes a shooting attack, one model can choose to throw a Grenade, rather than using another shooting weapon.e
+
+Assualt: Models equipped with assault grenades don’t suffer the penalty to their Initiative for charging enemies through difficult terrain, but fight at their normal Initiative in the ensuing combat.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="c58e-369b-f1fe-ba24::60a8-4399-da43-fcdf::dd55-88e3-9351-e96e::d890-1b84-bbd9-12d3" name="Frag Grenades" publicationId="ca571888--pubN106502" page="182" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">8&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">3</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">-</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Assault 1, Blast</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="c58e-369b-f1fe-ba24::60a8-4399-da43-fcdf::2907-df2d-6744-816c::d9f7-775b-1047-f335" name="Krak Grenade (Shooting)" publicationId="ca571888--pubN106502" page="183" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">8&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">6</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">4</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Assault 1</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="c58e-369b-f1fe-ba24::60a8-4399-da43-fcdf::5f62-6dea-35f7-c9bb::ba14-6731-7c9d-ef15" name="Krak Grenade (Assault)" publicationId="ca571888--pubN106502" page="183" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">6</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">4</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">-</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="cc68-6651-eb35-f2f8" name="Power Armour" entryId="c58e-369b-f1fe-ba24::f211-a4ac-6d30-eca9::0a96-04b6-7340-91a4" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="c58e-369b-f1fe-ba24::f211-a4ac-6d30-eca9::0680-4dd1-54b3-1ed8" name="Power Armour" publicationId="ca571888--pubN99753" page="133" hidden="false" typeId="57617267656172204974656d23232344415441232323" typeName="Wargear Item">
+                      <characteristics>
+                        <characteristic name="Description" typeId="4465736372697074696f6e23232344415441232323">Power armour provides a 3+ Armour save.</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="cae3-3586-656c-6600" name="Jump Packs" entryId="c58e-369b-f1fe-ba24::b0f1-059b-a60d-3ab7::bdb7-38c9-5aeb-fc05" number="1" type="upgrade">
+                  <rules>
+                    <rule id="c58e-369b-f1fe-ba24::b0f1-059b-a60d-3ab7::0f09-84c7-e224-4a86::d219-2314-4834-c054" name="Deep Strike" publicationId="ca571888--pubN106502" page="162" hidden="false">
+                      <description>In order for a unit to be able to Deep Strike, all models in the unit must have the Deep Strike special rule and the unit must start the game in Reserve. When placing the unit in Reserve, you must tell your opponent that it will be arriving by Deep Strike (sometimes called Deep Strike Reserve). Some units must arrive by Deep Strike. They always begin the game in Reserve and always arrive by Deep Strike.
+
+Arriving by Deep Strike
+Roll for the arrival of all Deep Striking units as specified in the rules for Reserves and then deploy them as follows:
+• First, place one model from the unit anywhere on the table, in the position where you would like it to arrive, and roll for scatter to determine the model’s final position. If a vehicle scatters when arriving via Deep Strike, do not change its facing – it must continue to face the same direction as it did before you rolled for scatter.
+• Next, the unit’s remaining models are arranged around the first one. Models must be placed in base contact with the first model and begin to form a circle around it. When the first circle is complete, a further concentric circle must be placed with each model touching the circle inside it. Each circle must include as many models as will fit.
+• Models deploying via Deep Strike treat all difficult terrain as dangerous terrain.
+In the Movement phase during which they arrive, Deep Striking units may not move any further, other than to disembark from a Deep Striking Transport vehicle if they are in one.
+Units Deep Striking into ruins are placed on the ground floor. Deep Striking units count non-ruined buildings (except for their battlements) as impassable terrain.
+In that turn’s Shooting phase, these units can fire (or Run, Turbo-boost or move Flat Out) as normal, and count as having moved in the previous Movement phase. Vehicles, except for Walkers, count as having moved at Combat Speed (even Immobilised vehicles). This can affect the number of weapons they can fire with their full Ballistic Skill.
+In that turn’s Assault phase, however, these units cannot charge. This also applies to units that have disembarked from Transports that arrived by Deep Strike that turn.
+
+Deep Strike and Transports
+Units do not confer the Deep Strike special rule onto a Transport vehicle they are embarked inside. A Transport vehicle with Deep Strike may Deep Strike regardless of whether its passengers have Deep Strike or not.
+
+Deep Strike Mishaps
+Deep Striking onto a crowded battlefield can be dangerous, as one may miss the intended objective or even materialise inside solid rock! If any of the models in a Deep Striking unit cannot be deployed, because at least one model would land partially or fully off the table, in impassable terrain, on top of a friendly model, or on top of or within 1&quot; of an enemy model, something has gone wrong. The controlling player must roll on the Deep Strike Mishap table and apply the results. If the unfortunate unit is also a Transport, the Deep Strike Mishap result applies to both the unit and anything embarked within it.
+
+
+Deep Strike Mishap Table
+D6 - Effect
+1 - Terrible Accident! Teleporting units are lost in the Warp, deep striking jump units are shot down, or some other suitably dramatic event occurs.
+The entire unit is destroyed!
+
+2-3 - Misplaced. The coordinates were inaccurate or the enemy has jammed your instruments.
+Your opponent may deploy the unit anywhere on the table (excluding impassable terrain, but including difficult terrain, which of course counts as dangerous for Deep Striking units), in a valid Deep Strike formation, but without rolling for scatter. Units embarked on a misplaced Transport can disembark during their Movement phase as normal.
+
+4-6 - Delayed. Because of mechanical failure or enemy action, the reinforcements are delayed.
+The unit is placed in Ongoing Reserves.</description>
+                    </rule>
+                    <rule id="c58e-369b-f1fe-ba24::b0f1-059b-a60d-3ab7::35e9-6bd8-f762-4692::38d5-b6eb-bda8-2497" name="Bulky" publicationId="ca571888--pubN106502" page="161" hidden="false">
+                      <description>Bulky models count as two models for the purposes of Transport Capacity.</description>
+                    </rule>
+                    <rule id="c58e-369b-f1fe-ba24::b0f1-059b-a60d-3ab7::d52b-0af7-fe19-1ff0::8cb0-ff25-22a2-d480" name="Jump Unit" publicationId="ca571888--pubN105292" hidden="false">
+                      <description>Jump units can use their jump packs once each turn to move more swiftly in either the Movement phase or the Assault phase – they cannot use their jump packs in both phases in the same turn. If not using its jump pack, a model moves as a normal model of its type. Indeed, a Jump unit can always choose to move as a normal model of their type if they wish. Note that the entire unit must always use the same form of movement. Units that are described as ‘moving like’ Jump units follow all of the rules for Jump units, and use the same special rules.
+
+SKYBORNE
+When using its jump pack (whether moving, charging or Falling Back, as we’ll discuss in a moment) a model can move over all other models and all terrain freely. However, if the model begins or ends its move in difficult terrain, it must take a Dangerous Terrain test.
+Jump models cannot end their move on top of other models and can only end their move on top of impassable terrain if it is actually possible to place the models on top of it. If they do this, however, they treat the impassable terrain as dangerous terrain.
+
+MOVEMENT PHASE
+If a Jump model uses its jump pack (or equivalent) in the Movement phase, it can move up to 12&quot;.
+
+ASSAULT PHASE
+If a Jump model uses its jump pack to charge into assault, it can re-roll its charge distance.
+Furthermore, to represent the crushing impact of such a charge, a model that uses its jump pack to charge gains the Hammer of Wrath special rule for the remainder of the turn.
+
+FALL BACK MOVES
+Jump units always use their jump packs when Falling Back, and their Fall Back moves are 3D6&quot;, even if they already used their jump pack to move that turn.
+
+SPECIAL RULES
+Jump units have the Bulky and Deep Strike special rules.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="c58e-369b-f1fe-ba24::b0f1-059b-a60d-3ab7::07d7-4dd2-1484-2f06::f095-0842-a6b1-5404" name="Jump Pack" publicationId="ca571888--pubN105292" hidden="false" typeId="57617267656172204974656d23232344415441232323" typeName="Wargear Item">
+                      <characteristics>
+                        <characteristic name="Description" typeId="4465736372697074696f6e23232344415441232323">Confers Jump Unit rules.  </characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="6669-9926-469c-780b" name="Chainsword or Combat Blade" entryId="c58e-369b-f1fe-ba24::0861-a33c-f434-621a::10e739aa-3153-9348-3458-738dd5938617" page="0" number="1" type="upgrade">
+                  <selections>
+                    <selection id="22ec-b60f-b3b2-8fd8" name="Chainswords/Combat Blades" entryId="c58e-369b-f1fe-ba24::0861-a33c-f434-621a::2b69-d5c2-a344-1e61::1087-66c1-c342-9cdc" entryGroupId="c58e-369b-f1fe-ba24::0861-a33c-f434-621a::b11f-c58a-edd8-e10b" number="1" type="upgrade">
+                      <profiles>
+                        <profile id="c58e-369b-f1fe-ba24::0861-a33c-f434-621a::2b69-d5c2-a344-1e61::e8ff-7994-f83f-1431::730c-b70b-1e8f-f2e9" name="Chainsword/Combat Blade" publicationId="ca571888--pubN106502" page="180" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                          <characteristics>
+                            <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                            <characteristic name="Strength" typeId="537472656e67746823232344415441232323">User</characteristic>
+                            <characteristic name="AP" typeId="415023232344415441232323">-</characteristic>
+                            <characteristic name="Type" typeId="5479706523232344415441232323">Melee</characteristic>
+                          </characteristics>
+                        </profile>
+                      </profiles>
+                      <costs>
+                        <cost name="pts" typeId="points" value="0.0"/>
+                      </costs>
+                    </selection>
+                  </selections>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="2084-c87d-c712-3c43" name="Additional Wargear" entryId="c58e-369b-f1fe-ba24::caf1-64f4-7c75-bdab" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="0579-3c63-9887-6c69" name="Legiones Astartes" entryId="c58e-369b-f1fe-ba24::402f-7035-c5c3-6413::4014-7d86-22e9-5d96" number="1" type="upgrade">
+              <rules>
+                <rule id="c58e-369b-f1fe-ba24::402f-7035-c5c3-6413::31b1-4bb2-e8c5-8fe8" name="Legiones Astartes" page="" hidden="false">
+                  <description>- Units with this special rules may always attempt to regroup regardless of casualties.</description>
+                </rule>
+              </rules>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="58.0"/>
+          </costs>
+          <categories>
+            <category id="62e3-e81e-20b7-6ecb" name="Deep Strike" entryId="2d6f-e613-ab10-e55a" primary="false"/>
+            <category id="34b0-cafd-90e3-0b25" name="Legiones Astartes" entryId="0c56-27b8-a737-c9fd" primary="false"/>
+            <category id="54af-11be-1014-9f51" name="Jump Units" entryId="47cf-71bb-d59d-f9de" primary="false"/>
+            <category id="19b4-7172-3e49-ff79" name="Compulsory Troops" entryId="219d-aefa-dfa5-44db" primary="false"/>
+            <category id="3ff7-f095-47c8-a705" name="Troops" entryId="54726f6f707323232344415441232323" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="4d22-d71f-443e-db56" name="Use Playtest Rules" entryId="7d9f-d54b-09db-e954::5a90-c53e-42ca-b4ca" number="1" type="upgrade">
+          <selections>
+            <selection id="85ee-7a21-2f7b-11cb" name="Playtest Rules Off" entryId="7d9f-d54b-09db-e954::0343-7621-54c5-6f8a" entryGroupId="7d9f-d54b-09db-e954::07c4-d0fe-fd44-2d95" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="3eb1-eeef-e2ac-0c27" name="Use Playtest Rules" entryId="fdf4-0683-3e84-5a4b" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="4812-272a-b7a4-91d3" name="Legion and Allegiance" entryId="408f-dd4f-1acf-1465::5642-ef2d-98ff-3d87" number="1" type="upgrade">
+          <selections>
+            <selection id="0a4b-ab61-c49e-ba89" name="   I: Dark Angels" entryId="408f-dd4f-1acf-1465::cdd1-9aff-3222-cff2::e6fb-0e54-0be1-9ed1" entryGroupId="408f-dd4f-1acf-1465::cdd1-9aff-3222-cff2::4101-9822-0bde-f32e" number="1" type="upgrade">
+              <rules>
+                <rule id="408f-dd4f-1acf-1465::cdd1-9aff-3222-cff2::d33a-5740-8436-d1d6" name="The Dark Angels" publicationId="ca571888--pubN89821" page="266" hidden="false">
+                  <description>• Covenant of Death: For the 1st Legion, no victory is complete unless a foe is slain outright or utterly brought to ruin. If at the end of the game, the opposing force has an equal or greater number of units in play than an army which has Dark Angels as its Primary Detachment (including any allied units in the total) the opposing force gains an additional D3 Victory points. Fleeing units do not count towards working out this total.</description>
+                </rule>
+                <rule id="408f-dd4f-1acf-1465::cdd1-9aff-3222-cff2::2dba-b0e2-20f6-a474::23a4-a37f-e8e8-c756" name="Legiones Astartes" publicationId="ca571888--pubN106502" page="168" hidden="false">
+                  <description>Units with this special rule may always attempt to Regroup at their normal Leadership value, regardless of casualties.
+
+In addition to these benefits, units  will also have a number of additional special rules and abilities specific to their ‘named’ Legion, all of which will be defined in the Legiones Astartes Army List and other future Forge World publications.
+
+If an army represents a Legion which does not yet have its own unique Legiones Astartes rule, the controlling player may instead add either the Stubborn or Furious Charge special rule to the standard provisions of this rule in the interim.</description>
+                </rule>
+              </rules>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="a49e-0210-99ee-7cce" name="Traitor" entryId="408f-dd4f-1acf-1465::5445-9132-bcf7-05fa::08ff-9734-7fbc-cb73" entryGroupId="408f-dd4f-1acf-1465::5445-9132-bcf7-05fa::a430-baa8-af3b-698a" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="a7ef-3b4a-ab02-4483" name="Allegiance" entryId="5297-7e0f-fa0b-3537" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="5278-0142-f555-bde3" name="Rite of War" entryId="b7cc-2c26-f295-0f33::52b0-74b3-6b9b-eac0" number="1" type="upgrade">
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="2ece-b178-eaf0-28e6" name="Allegiance" entryId="5297-7e0f-fa0b-3537" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="0690-a7b9-4e7e-5841" name="Centurion" entryId="9c81-84cc-d3ee-d028::7c08f7c0-32a3-8221-052f-48ea9e5c82d4" publicationId="ca571888--pubN82424" page="18" number="1" type="unit">
+          <rules>
+            <rule id="233f-c6be-8436-2b12::dc0c-5010-4942-c8c1" name="Mastery of the Blade" hidden="false">
+              <description>When fighting in an assault with one of the following weapons: combat blade, chainsword, heavy chainsword, power sword, Terranic greatsword, Calibanite war blade and paragon blades modelled as swords, and when fighting a model with an equal WS, a model with this special rule strikes on a 3.</description>
+            </rule>
+            <rule id="92b5-4489-981e-bd64::23a4-a37f-e8e8-c756" name="Legiones Astartes" publicationId="ca571888--pubN106502" page="168" hidden="false">
+              <description>Units with this special rule may always attempt to Regroup at their normal Leadership value, regardless of casualties.
+
+In addition to these benefits, units  will also have a number of additional special rules and abilities specific to their ‘named’ Legion, all of which will be defined in the Legiones Astartes Army List and other future Forge World publications.
+
+If an army represents a Legion which does not yet have its own unique Legiones Astartes rule, the controlling player may instead add either the Stubborn or Furious Charge special rule to the standard provisions of this rule in the interim.</description>
+            </rule>
+            <rule id="d842-6ef4-2c0f-7be3::3ad4-1c37-d60b-1a4e" name="Independent Character" publicationId="ca571888--pubN106502" page="165" hidden="false">
+              <description>Independent characters can join other units.  They cannot, however, join units that contain vehicles or Monstrous Creatures.  They can join other Independent Characters, though, to form a powerful multi-character unit!  Independent Characters pass Look Out, Sir rolls on a 2+. A unit that contains one or more Independent Characters does not need a double 1 to Regroup if reduced to below 25% of its starting numbres, but instead tests as if it had at least 25% remaining.
+
+Full details in BRB. Rule too long to copy verbatim.</description>
+            </rule>
+            <rule id="233f-c6be-8436-2b12::dc0c-5010-4942-c8c1" name="Mastery of the Blade" hidden="false">
+              <description>When fighting in an assault with one of the following weapons: combat blade, chainsword, heavy chainsword, power sword, Terranic greatsword, Calibanite war blade and paragon blades modelled as swords, and when fighting a model with an equal WS, a model with this special rule strikes on a 3.</description>
+            </rule>
+            <rule id="92b5-4489-981e-bd64::23a4-a37f-e8e8-c756" name="Legiones Astartes" publicationId="ca571888--pubN106502" page="168" hidden="false">
+              <description>Units with this special rule may always attempt to Regroup at their normal Leadership value, regardless of casualties.
+
+In addition to these benefits, units  will also have a number of additional special rules and abilities specific to their ‘named’ Legion, all of which will be defined in the Legiones Astartes Army List and other future Forge World publications.
+
+If an army represents a Legion which does not yet have its own unique Legiones Astartes rule, the controlling player may instead add either the Stubborn or Furious Charge special rule to the standard provisions of this rule in the interim.</description>
+            </rule>
+          </rules>
+          <profiles>
+            <profile id="9c81-84cc-d3ee-d028::d2228182-9ac6-9b56-b5b1-f56b2200cd5d" name="Legion Centurion" publicationId="ca571888--pubN82424" page="18" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+              <characteristics>
+                <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Infantry (Character)</characteristic>
+                <characteristic name="WS" typeId="575323232344415441232323">5</characteristic>
+                <characteristic name="BS" typeId="425323232344415441232323">5</characteristic>
+                <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                <characteristic name="W" typeId="5723232344415441232323">2</characteristic>
+                <characteristic name="I" typeId="4923232344415441232323">5</characteristic>
+                <characteristic name="A" typeId="4123232344415441232323">3</characteristic>
+                <characteristic name="LD" typeId="4c4423232344415441232323">9</characteristic>
+                <characteristic name="Save" typeId="5361766523232344415441232323">3+</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="a9d5-9ad0-cba6-e586" name="Consul" entryId="9c81-84cc-d3ee-d028::157f4400-4cdf-c5f0-6588-4395102f502e" number="1" type="upgrade">
+              <selections>
+                <selection id="dc65-9cd4-d420-d5e7" name="Centurion, Legion" entryId="9c81-84cc-d3ee-d028::41f0-0907-a4ff-39df" entryGroupId="9c81-84cc-d3ee-d028::2d82e7cf-e26e-95a5-86c3-d9c06479fe8f" number="1" type="upgrade">
+                  <rules>
+                    <rule id="ef1f-346e-1241-3f16::adbd-7129-14fe-19bc" name="Compulsory" publicationId="839b6f2a--pubN69231" page="132" hidden="false">
+                      <description>One box on a Force Organisation chart allows you to make one selection from that part of your army list. Dark boxes indicate compulsory selections, which must be included as part of the army, while the lighter boxes indicate optional choices, which are only included as part of the army if the player in question chooses to do so. If constructing an army using the Crusade Force Organisation chart, this would mean that an army would be required to take at least one HQ choice and two Troops choices. These compulsory choices are intended to ensure that the core of each army is illustrative of the force represented by the Army List in use, and that all armies are capable of properly participating in the varied missions available to players in the Age of Darkness.</description>
+                    </rule>
+                  </rules>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                  <categories>
+                    <category id="f77d-3399-4bea-ee5f" name="Compulsory HQ" entryId="becd-7a6d-e80f-878e" primary="false"/>
+                    <category id="012f-e668-a899-9201" name="Centurion" entryId="3074-4910-e458-27ad" primary="false"/>
+                  </categories>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="1f67-8d0f-78d8-58cc" name="Bolt Pistol" entryId="9c81-84cc-d3ee-d028::14f6-952b-9add-1924" entryGroupId="9c81-84cc-d3ee-d028::a428a174-8c07-ce84-5a5d-5b5c5a4f19b7" number="1" type="upgrade">
+              <profiles>
+                <profile id="9c81-84cc-d3ee-d028::da84-7b4f-ae32-2320::ec83-0776-ef74-9cc2" name="Bolt Pistol" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Range" typeId="52616e676523232344415441232323">12&quot;</characteristic>
+                    <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                    <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                    <characteristic name="Type" typeId="5479706523232344415441232323">Pistol</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="caf4-454e-7b99-e2fb" name="Chainsword or Combat Blade" entryId="9c81-84cc-d3ee-d028::ea97-7a5f-95b1-092a::10e739aa-3153-9348-3458-738dd5938617" entryGroupId="9c81-84cc-d3ee-d028::f3b50a56-1cab-c5dc-dab0-818ddb125d94" page="0" number="1" type="upgrade">
+              <selections>
+                <selection id="9c7d-26e3-7c35-f2b0" name="Chainswords/Combat Blades" entryId="9c81-84cc-d3ee-d028::ea97-7a5f-95b1-092a::2b69-d5c2-a344-1e61::1087-66c1-c342-9cdc" entryGroupId="9c81-84cc-d3ee-d028::ea97-7a5f-95b1-092a::b11f-c58a-edd8-e10b" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="9c81-84cc-d3ee-d028::ea97-7a5f-95b1-092a::2b69-d5c2-a344-1e61::e8ff-7994-f83f-1431::730c-b70b-1e8f-f2e9" name="Chainsword/Combat Blade" publicationId="ca571888--pubN106502" page="180" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">User</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">-</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Melee</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e5ea-818d-6e83-379c" name="On Foot" entryId="9c81-84cc-d3ee-d028::a5c1-1ff8-7809-8537::5d76-222c-4ea1-12af::35bc-06e4-1762-1600" entryGroupId="9c81-84cc-d3ee-d028::a5c1-1ff8-7809-8537::1b5d-a32e-f045-da1a" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="2c5b-1ec8-b68a-2362" name="Infantry" entryId="f74d-4679-75a6-1252" primary="false"/>
+              </categories>
+            </selection>
+            <selection id="07e7-5f9f-64a9-5c0c" name="Artificer Armour" entryId="9c81-84cc-d3ee-d028::7da1-7ed2-8d78-0dc6::93f9-8aba-be48-907a" entryGroupId="9c81-84cc-d3ee-d028::caed-6d3f-f3fc-deb1" number="1" type="upgrade">
+              <profiles>
+                <profile id="9c81-84cc-d3ee-d028::7da1-7ed2-8d78-0dc6::c04d-8c3b-01d0-7679::4b6b-08cb-a956-0eb3" name="Artificer Armour" publicationId="ca571888--pubN99753" page="131" hidden="false" typeId="57617267656172204974656d23232344415441232323" typeName="Wargear Item">
+                  <characteristics>
+                    <characteristic name="Description" typeId="4465736372697074696f6e23232344415441232323">Artificer Armour confers a 2+ Armour save.  </characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="10.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="50.0"/>
+          </costs>
+          <categories>
+            <category id="3fe3-487d-58f6-08b6" name="Legiones Astartes" entryId="0c56-27b8-a737-c9fd" primary="false"/>
+            <category id="2a99-e058-e1a4-c1e5" name="Character" entryId="eb92-48f9-9a1a-7bd1" primary="false"/>
+            <category id="3700-83a0-9fb1-abb1" name="Independent Character" entryId="f371-30b5-0610-e37a" primary="false"/>
+            <category id="dec2-a319-cd76-c927" name="Centurion" entryId="3074-4910-e458-27ad" primary="false"/>
+            <category id="0db5-5e53-cb43-f688" name="Legiones Astartes" entryId="0c56-27b8-a737-c9fd" primary="false"/>
+            <category id="2072-e6fc-aee6-f868" name="HQ" entryId="485123232344415441232323" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="9583-e04f-9685-f865" name="Terminator Squad, Legion" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::3bd8064e-91eb-24e0-b07f-555fceb5f674" publicationId="ca571888--pubN82424" page="22" number="1" type="unit">
+          <rules>
+            <rule id="233f-c6be-8436-2b12::dc0c-5010-4942-c8c1" name="Mastery of the Blade" hidden="false">
+              <description>When fighting in an assault with one of the following weapons: combat blade, chainsword, heavy chainsword, power sword, Terranic greatsword, Calibanite war blade and paragon blades modelled as swords, and when fighting a model with an equal WS, a model with this special rule strikes on a 3.</description>
+            </rule>
+            <rule id="92b5-4489-981e-bd64::23a4-a37f-e8e8-c756" name="Legiones Astartes" publicationId="ca571888--pubN106502" page="168" hidden="false">
+              <description>Units with this special rule may always attempt to Regroup at their normal Leadership value, regardless of casualties.
+
+In addition to these benefits, units  will also have a number of additional special rules and abilities specific to their ‘named’ Legion, all of which will be defined in the Legiones Astartes Army List and other future Forge World publications.
+
+If an army represents a Legion which does not yet have its own unique Legiones Astartes rule, the controlling player may instead add either the Stubborn or Furious Charge special rule to the standard provisions of this rule in the interim.</description>
+            </rule>
+            <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::20f5fdbf-0550-e81f-06b0-075137739092::5ecb-551d-0f68-3a79" name="Implacable Advance" publicationId="ca571888--pubN106389" page="3" hidden="false">
+              <description>Units with this special rule are always counted as scoring units in any mission where Troops are also counted as scoring units.</description>
+            </rule>
+          </rules>
+          <selections>
+            <selection id="6d3c-c6ce-296e-6225" name="Terminators, Legion" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::91e33f36-7917-a2d4-7a87-c83355bbb592" page="0" number="1" type="model">
+              <profiles>
+                <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::6acaa630-a964-7422-7fd0-9bb7514bf479" name="Legion Terminator" publicationId="ca571888--pubN82424" page="22" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+                  <characteristics>
+                    <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Infantry</characteristic>
+                    <characteristic name="WS" typeId="575323232344415441232323">4</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                    <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                    <characteristic name="W" typeId="5723232344415441232323">1</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">2</characteristic>
+                    <characteristic name="LD" typeId="4c4423232344415441232323">8</characteristic>
+                    <characteristic name="Save" typeId="5361766523232344415441232323">2+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="12da-6308-7d5f-5041" name="Power Weapon" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::6851-e073-5e4f-167f" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::6d5d-99c3-761d-8951" number="1" type="upgrade">
+                  <selections>
+                    <selection id="9427-3796-b9d0-fa17" name="Power Sword" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::98bb-edb9-27a1-8a52" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::a999-381c-5aad-d614" number="1" type="upgrade">
+                      <profiles>
+                        <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::e377-3e72-ca20-60f4::038e-23ec-4886-8b00" name="Power Sword" publicationId="ca571888--pubN106502" page="181" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                          <characteristics>
+                            <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                            <characteristic name="Strength" typeId="537472656e67746823232344415441232323">User</characteristic>
+                            <characteristic name="AP" typeId="415023232344415441232323">3</characteristic>
+                            <characteristic name="Type" typeId="5479706523232344415441232323">Melee</characteristic>
+                          </characteristics>
+                        </profile>
+                      </profiles>
+                      <costs>
+                        <cost name="pts" typeId="points" value="0.0"/>
+                      </costs>
+                    </selection>
+                  </selections>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="7f3e-4b5d-a036-39f9" name="Combi-Bolter" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8d5e-f789-3533-9f81" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::fce2-0128-0ef4-3432" page="0" number="1" type="upgrade">
+                  <rules>
+                    <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::572e-5772-152b-1602::10a8-8d89-0bec-3e21" name="Twin-linked" publicationId="ca571888--pubN106502" page="175" hidden="false">
+                      <description>Twin-linked weapons don’t get more shots than normal ones, but they give you a better chance of hitting with them. If a shooting weapon has the twin-linked special rule, or is described in a model’s wargear entry as twin-linked, it re-rolls all failed To Hit rolls.
+
+Twin-linked Blast Weapons
+If the scatter dice does not roll a hit, you can choose to re-roll the dice with a Twin-linked Blast weapon. If you choose to do so, you must re-roll both the 2D6 and the scatter dice.
+
+Twin-linked Template Weapons
+Twin-linked Template weapons are fired just like a single weapon, but must re-roll failed To Wound rolls and armour penetration rolls.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::b1a0-e1c5-5d57-a05d::09fd-8af1-a6b1-51f7" name="Boltgun" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">24&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Rapid Fire</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="30.0"/>
+              </costs>
+            </selection>
+            <selection id="605b-0b58-506f-8948" name="Terminators, Legion" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::91e33f36-7917-a2d4-7a87-c83355bbb592" page="0" number="1" type="model">
+              <profiles>
+                <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::6acaa630-a964-7422-7fd0-9bb7514bf479" name="Legion Terminator" publicationId="ca571888--pubN82424" page="22" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+                  <characteristics>
+                    <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Infantry</characteristic>
+                    <characteristic name="WS" typeId="575323232344415441232323">4</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                    <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                    <characteristic name="W" typeId="5723232344415441232323">1</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">2</characteristic>
+                    <characteristic name="LD" typeId="4c4423232344415441232323">8</characteristic>
+                    <characteristic name="Save" typeId="5361766523232344415441232323">2+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="e8af-2bbd-5dbb-2aa2" name="Power Weapon" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::6851-e073-5e4f-167f" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::6d5d-99c3-761d-8951" number="1" type="upgrade">
+                  <selections>
+                    <selection id="e7d6-f85e-4853-42b9" name="Power Sword" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::98bb-edb9-27a1-8a52" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::a999-381c-5aad-d614" number="1" type="upgrade">
+                      <profiles>
+                        <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::e377-3e72-ca20-60f4::038e-23ec-4886-8b00" name="Power Sword" publicationId="ca571888--pubN106502" page="181" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                          <characteristics>
+                            <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                            <characteristic name="Strength" typeId="537472656e67746823232344415441232323">User</characteristic>
+                            <characteristic name="AP" typeId="415023232344415441232323">3</characteristic>
+                            <characteristic name="Type" typeId="5479706523232344415441232323">Melee</characteristic>
+                          </characteristics>
+                        </profile>
+                      </profiles>
+                      <costs>
+                        <cost name="pts" typeId="points" value="0.0"/>
+                      </costs>
+                    </selection>
+                  </selections>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="e9c5-95a2-04af-dc2e" name="Combi-Bolter" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8d5e-f789-3533-9f81" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::fce2-0128-0ef4-3432" page="0" number="1" type="upgrade">
+                  <rules>
+                    <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::572e-5772-152b-1602::10a8-8d89-0bec-3e21" name="Twin-linked" publicationId="ca571888--pubN106502" page="175" hidden="false">
+                      <description>Twin-linked weapons don’t get more shots than normal ones, but they give you a better chance of hitting with them. If a shooting weapon has the twin-linked special rule, or is described in a model’s wargear entry as twin-linked, it re-rolls all failed To Hit rolls.
+
+Twin-linked Blast Weapons
+If the scatter dice does not roll a hit, you can choose to re-roll the dice with a Twin-linked Blast weapon. If you choose to do so, you must re-roll both the 2D6 and the scatter dice.
+
+Twin-linked Template Weapons
+Twin-linked Template weapons are fired just like a single weapon, but must re-roll failed To Wound rolls and armour penetration rolls.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::b1a0-e1c5-5d57-a05d::09fd-8af1-a6b1-51f7" name="Boltgun" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">24&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Rapid Fire</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="30.0"/>
+              </costs>
+            </selection>
+            <selection id="a237-44b6-266b-59b6" name="Terminators, Legion" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::91e33f36-7917-a2d4-7a87-c83355bbb592" page="0" number="1" type="model">
+              <profiles>
+                <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::6acaa630-a964-7422-7fd0-9bb7514bf479" name="Legion Terminator" publicationId="ca571888--pubN82424" page="22" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+                  <characteristics>
+                    <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Infantry</characteristic>
+                    <characteristic name="WS" typeId="575323232344415441232323">4</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                    <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                    <characteristic name="W" typeId="5723232344415441232323">1</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">2</characteristic>
+                    <characteristic name="LD" typeId="4c4423232344415441232323">8</characteristic>
+                    <characteristic name="Save" typeId="5361766523232344415441232323">2+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="0f0c-1e55-360c-0d35" name="Power Weapon" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::6851-e073-5e4f-167f" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::6d5d-99c3-761d-8951" number="1" type="upgrade">
+                  <selections>
+                    <selection id="70ec-3abf-baf1-2f05" name="Power Sword" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::98bb-edb9-27a1-8a52" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::a999-381c-5aad-d614" number="1" type="upgrade">
+                      <profiles>
+                        <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::e377-3e72-ca20-60f4::038e-23ec-4886-8b00" name="Power Sword" publicationId="ca571888--pubN106502" page="181" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                          <characteristics>
+                            <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                            <characteristic name="Strength" typeId="537472656e67746823232344415441232323">User</characteristic>
+                            <characteristic name="AP" typeId="415023232344415441232323">3</characteristic>
+                            <characteristic name="Type" typeId="5479706523232344415441232323">Melee</characteristic>
+                          </characteristics>
+                        </profile>
+                      </profiles>
+                      <costs>
+                        <cost name="pts" typeId="points" value="0.0"/>
+                      </costs>
+                    </selection>
+                  </selections>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="56ec-e8dc-69e6-fd42" name="Combi-Bolter" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8d5e-f789-3533-9f81" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::fce2-0128-0ef4-3432" page="0" number="1" type="upgrade">
+                  <rules>
+                    <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::572e-5772-152b-1602::10a8-8d89-0bec-3e21" name="Twin-linked" publicationId="ca571888--pubN106502" page="175" hidden="false">
+                      <description>Twin-linked weapons don’t get more shots than normal ones, but they give you a better chance of hitting with them. If a shooting weapon has the twin-linked special rule, or is described in a model’s wargear entry as twin-linked, it re-rolls all failed To Hit rolls.
+
+Twin-linked Blast Weapons
+If the scatter dice does not roll a hit, you can choose to re-roll the dice with a Twin-linked Blast weapon. If you choose to do so, you must re-roll both the 2D6 and the scatter dice.
+
+Twin-linked Template Weapons
+Twin-linked Template weapons are fired just like a single weapon, but must re-roll failed To Wound rolls and armour penetration rolls.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::b1a0-e1c5-5d57-a05d::09fd-8af1-a6b1-51f7" name="Boltgun" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">24&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Rapid Fire</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="30.0"/>
+              </costs>
+            </selection>
+            <selection id="77ac-28b0-7968-8ae1" name="Terminators, Legion" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::91e33f36-7917-a2d4-7a87-c83355bbb592" page="0" number="1" type="model">
+              <profiles>
+                <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::6acaa630-a964-7422-7fd0-9bb7514bf479" name="Legion Terminator" publicationId="ca571888--pubN82424" page="22" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+                  <characteristics>
+                    <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Infantry</characteristic>
+                    <characteristic name="WS" typeId="575323232344415441232323">4</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                    <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                    <characteristic name="W" typeId="5723232344415441232323">1</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">2</characteristic>
+                    <characteristic name="LD" typeId="4c4423232344415441232323">8</characteristic>
+                    <characteristic name="Save" typeId="5361766523232344415441232323">2+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="ac4f-e17d-fca6-0d11" name="Power Weapon" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::6851-e073-5e4f-167f" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::6d5d-99c3-761d-8951" number="1" type="upgrade">
+                  <selections>
+                    <selection id="22da-6e43-8849-7cfd" name="Power Sword" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::98bb-edb9-27a1-8a52" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::a999-381c-5aad-d614" number="1" type="upgrade">
+                      <profiles>
+                        <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::0910-c10a-0a59-5cdc::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::e377-3e72-ca20-60f4::038e-23ec-4886-8b00" name="Power Sword" publicationId="ca571888--pubN106502" page="181" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                          <characteristics>
+                            <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                            <characteristic name="Strength" typeId="537472656e67746823232344415441232323">User</characteristic>
+                            <characteristic name="AP" typeId="415023232344415441232323">3</characteristic>
+                            <characteristic name="Type" typeId="5479706523232344415441232323">Melee</characteristic>
+                          </characteristics>
+                        </profile>
+                      </profiles>
+                      <costs>
+                        <cost name="pts" typeId="points" value="0.0"/>
+                      </costs>
+                    </selection>
+                  </selections>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="bea5-21b7-ce1f-ea85" name="Combi-Bolter" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8d5e-f789-3533-9f81" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::fce2-0128-0ef4-3432" page="0" number="1" type="upgrade">
+                  <rules>
+                    <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::572e-5772-152b-1602::10a8-8d89-0bec-3e21" name="Twin-linked" publicationId="ca571888--pubN106502" page="175" hidden="false">
+                      <description>Twin-linked weapons don’t get more shots than normal ones, but they give you a better chance of hitting with them. If a shooting weapon has the twin-linked special rule, or is described in a model’s wargear entry as twin-linked, it re-rolls all failed To Hit rolls.
+
+Twin-linked Blast Weapons
+If the scatter dice does not roll a hit, you can choose to re-roll the dice with a Twin-linked Blast weapon. If you choose to do so, you must re-roll both the 2D6 and the scatter dice.
+
+Twin-linked Template Weapons
+Twin-linked Template weapons are fired just like a single weapon, but must re-roll failed To Wound rolls and armour penetration rolls.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::b1a0-e1c5-5d57-a05d::09fd-8af1-a6b1-51f7" name="Boltgun" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">24&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Rapid Fire</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="30.0"/>
+              </costs>
+            </selection>
+            <selection id="5d2c-c7be-ac46-bf2a" name="Terminator Sergeant, Legion" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8692acf2-b313-b039-9956-f2b46f364b6f" page="0" number="1" type="model">
+              <profiles>
+                <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::86fb17e8-2a94-07ce-a648-fdd9e4787902" name="Legion Terminator Sergeant" publicationId="ca571888--pubN82424" page="22" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+                  <characteristics>
+                    <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Infantry (Character)</characteristic>
+                    <characteristic name="WS" typeId="575323232344415441232323">4</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                    <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                    <characteristic name="W" typeId="5723232344415441232323">1</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">2</characteristic>
+                    <characteristic name="LD" typeId="4c4423232344415441232323">9</characteristic>
+                    <characteristic name="Save" typeId="5361766523232344415441232323">2+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="503d-c341-a0a8-7416" name="Combi-Bolter" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::3618-86f1-9cab-11ce" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::cbd2-4da6-2965-b5c5" page="0" number="1" type="upgrade">
+                  <rules>
+                    <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::3c65-d67d-ad2f-4727::10a8-8d89-0bec-3e21" name="Twin-linked" publicationId="ca571888--pubN106502" page="175" hidden="false">
+                      <description>Twin-linked weapons don’t get more shots than normal ones, but they give you a better chance of hitting with them. If a shooting weapon has the twin-linked special rule, or is described in a model’s wargear entry as twin-linked, it re-rolls all failed To Hit rolls.
+
+Twin-linked Blast Weapons
+If the scatter dice does not roll a hit, you can choose to re-roll the dice with a Twin-linked Blast weapon. If you choose to do so, you must re-roll both the 2D6 and the scatter dice.
+
+Twin-linked Template Weapons
+Twin-linked Template weapons are fired just like a single weapon, but must re-roll failed To Wound rolls and armour penetration rolls.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::09a6-67ed-1668-72c3::09fd-8af1-a6b1-51f7" name="Boltgun" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">24&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Rapid Fire</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="0f0d-496f-dab2-e840" name="Power Weapon" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::e206-ec6a-2a5c-1151::6851-e073-5e4f-167f" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::7720-deef-7d5e-f5fd" number="1" type="upgrade">
+                  <selections>
+                    <selection id="80e6-d082-0918-3021" name="Power Sword" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::e206-ec6a-2a5c-1151::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::98bb-edb9-27a1-8a52" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::e206-ec6a-2a5c-1151::7a24-8a5c-c361-1c96::a999-381c-5aad-d614" number="1" type="upgrade">
+                      <profiles>
+                        <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::e206-ec6a-2a5c-1151::7a24-8a5c-c361-1c96::401d-f1a1-3330-deca::e377-3e72-ca20-60f4::038e-23ec-4886-8b00" name="Power Sword" publicationId="ca571888--pubN106502" page="181" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                          <characteristics>
+                            <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                            <characteristic name="Strength" typeId="537472656e67746823232344415441232323">User</characteristic>
+                            <characteristic name="AP" typeId="415023232344415441232323">3</characteristic>
+                            <characteristic name="Type" typeId="5479706523232344415441232323">Melee</characteristic>
+                          </characteristics>
+                        </profile>
+                      </profiles>
+                      <costs>
+                        <cost name="pts" typeId="points" value="0.0"/>
+                      </costs>
+                    </selection>
+                  </selections>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="948d-f3a6-6ae0-f180" name="Character" entryId="eb92-48f9-9a1a-7bd1" primary="false"/>
+              </categories>
+            </selection>
+            <selection id="5ba2-3f1a-de47-0c9b" name="Legiones Astartes" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::1dd9-59b7-5cdf-f108::4014-7d86-22e9-5d96" number="1" type="upgrade">
+              <rules>
+                <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::1dd9-59b7-5cdf-f108::31b1-4bb2-e8c5-8fe8" name="Legiones Astartes" page="" hidden="false">
+                  <description>- Units with this special rules may always attempt to regroup regardless of casualties.</description>
+                </rule>
+              </rules>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="c682-299f-3b19-6de3" name="Cataphractii Pattern Terminator Armour" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8a7c-51d5-7b89-fe88::8cbe-2c98-30a2-a305::8e48-47c8-48c4-6162" entryGroupId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8a7c-51d5-7b89-fe88::eaa3-f4b5-1d31-4547" page="0" number="1" type="upgrade">
+              <profiles>
+                <profile id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8a7c-51d5-7b89-fe88::8cbe-2c98-30a2-a305::cfb0-8e1f-4f25-4096::59304e4a-18c6-1283-455b-f79c559b207f" name="Cataphractii Terminator Armour" publicationId="ca571888--pubN82424" page="133" hidden="false" typeId="57617267656172204974656d23232344415441232323" typeName="Wargear Item">
+                  <characteristics>
+                    <characteristic name="Description" typeId="4465736372697074696f6e23232344415441232323">Cataphractii Terminator armour affords a +2 armour save and a 4+ Invulnerable save. No Run moves, Overwatch attacks, or Sweeping Advance. </characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="5d26-5ee2-3b16-9d20" name="Terminator Armour" entryId="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8a7c-51d5-7b89-fe88::8cbe-2c98-30a2-a305::e99c-dc6c-c3c0-3b0a::fea8-8a3a-65d6-59bd" number="1" type="upgrade">
+                  <rules>
+                    <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8a7c-51d5-7b89-fe88::8cbe-2c98-30a2-a305::e99c-dc6c-c3c0-3b0a::dc9f-7622-8b15-4bc3::de32-475c-caab-bf31" name="Terminator Armour" publicationId="ca571888--pubN82424" page="133" hidden="false">
+                      <description>If a unit has the option of taking Terminator armour but does not specify a particular pattern, such as the Legion Terminator Squad entry, its pattern is that represented on the physical models used, and only a single type of Terminator armour may be chosen for the unit when included in your army.</description>
+                    </rule>
+                    <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8a7c-51d5-7b89-fe88::8cbe-2c98-30a2-a305::e99c-dc6c-c3c0-3b0a::b724-410c-3986-abf3::38d5-b6eb-bda8-2497" name="Bulky" publicationId="ca571888--pubN106502" page="161" hidden="false">
+                      <description>Bulky models count as two models for the purposes of Transport Capacity.</description>
+                    </rule>
+                    <rule id="1e32c59e-9fa6-68b0-8aae-f5ad86989520::8a7c-51d5-7b89-fe88::8cbe-2c98-30a2-a305::e99c-dc6c-c3c0-3b0a::8f61-8e5b-3cfe-ceb1::3c7d-a1fa-c68b-caad" name="Relentless" publicationId="ca571888--pubN106502" page="170" hidden="false">
+                      <description>Relentless models can shoot with Heavy, Salvo or Ordnance weapons, counting as stationary, even if they moved in the previous Movement phase. They are also allowed to charge in the same turn they fire Heavy, Ordnance, Rapid Fire or Salvo weapons.</description>
+                    </rule>
+                  </rules>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="d3f4-2718-f449-f67d" name="Infantry" entryId="f74d-4679-75a6-1252" primary="false"/>
+                <category id="7995-038b-bf0d-6b51" name="Terminators" entryId="37dc-7aa6-8150-41b0" primary="false"/>
+                <category id="0da4-1ebf-528c-6d93" name="Terminators" entryId="37dc-7aa6-8150-41b0" primary="false"/>
+              </categories>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="55.0"/>
+          </costs>
+          <categories>
+            <category id="bc42-e74d-37ff-ab3e" name="Elites" entryId="456c6974657323232344415441232323" primary="true"/>
+            <category id="05c0-3839-3851-ac0b" name="Legiones Astartes" entryId="0c56-27b8-a737-c9fd" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="e4f8-58e3-e629-6bfe" name="Leviathan Siege Dreadnought Talon" entryId="3c85-e70e-8a08-955a::cb46-ed69-d353-eb45" publicationId="839b6f2a--pubN92056" page="Downloads" number="1" type="unit">
+          <rules>
+            <rule id="3c85-e70e-8a08-955a::c631-d625-05d3-d2c5::a993-0e91-2841-9326" name="Dreadnought Talon" publicationId="839b6f2a--pubN125229" page="4" hidden="false">
+              <description>When first deployed on the battlefield (either at the start of the game or when arriving via Reserves later on), the Dreadnoughts must be placed within 6&quot; of each other, but afterwards operate independently and are not treated as a vehicle squadron but operate independently as individual units for the purposes of taking any actions, as well for determining Victory points in missions which make use of Victory points for destroying units.</description>
+            </rule>
+          </rules>
+          <selections>
+            <selection id="6dd8-a62c-eb0a-92ac" name="Leviathan Siege Dreadnought" entryId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::62ea-3ce6-cdb4-5705" number="1" type="model">
+              <rules>
+                <rule id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::bd88-2d0d-47da-e381" name="Reinforced Atomantic Shielding" hidden="false">
+                  <description>A Leviathan Dreadnought has a 4+ Invulnerable save. In addition, if the Leviathan suffers a Vehicle Explodes damage result, add D3 Str and D3&quot; to the radius of the blast.</description>
+                </rule>
+                <rule id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::57b2-6a8a-402e-bc21" name="Crushing Charge" hidden="false">
+                  <description>When charging, the model inflicts 2 Hammer of Wrath attacks and gains 1 Initiative in the Assault phase of any turn in which it has charged.</description>
+                </rule>
+                <rule id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::ebac-6d11-056a-43a6::6d06-5ea0-9a17-ca97" name="Move Through Cover" publicationId="ca571888--pubN106502" page="168" hidden="false">
+                  <description>A unit that contains at least one model with this special rule rolls an extra D6 when rolling to move through difficult terrain and is not slowed by charging through difficult terrain. In most circumstances, this will mean that, when moving, the unit rolls 3D6 and picks the highest roll. Furthermore, a model with the Move Through Cover special rule automatically passes Dangerous Terrain tests.</description>
+                </rule>
+              </rules>
+              <profiles>
+                <profile id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::d19d-34cc-544b-94d6" name="Leviathan Siege Dreadnought" publicationId="ca571888--pubN89821" page="236" hidden="false" typeId="57616c6b657223232344415441232323" typeName="Walker">
+                  <characteristics>
+                    <characteristic name="WS" typeId="575323232344415441232323">5</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">5</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">8</characteristic>
+                    <characteristic name="Front" typeId="46726f6e7423232344415441232323">13</characteristic>
+                    <characteristic name="Side" typeId="5369646523232344415441232323">13</characteristic>
+                    <characteristic name="Rear" typeId="5265617223232344415441232323">12</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">4</characteristic>
+                    <characteristic name="HP" typeId="485023232344415441232323">4</characteristic>
+                    <characteristic name="Type" typeId="5479706523232344415441232323">Vehicle (Walker)</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::8f54-160c-7b8f-7505::79c7-90f6-b453-e799" name="Extra Armour" publicationId="ca571888--pubN105292" hidden="false" typeId="57617267656172204974656d23232344415441232323" typeName="Wargear Item">
+                  <characteristics>
+                    <characteristic name="Description" typeId="4465736372697074696f6e23232344415441232323">Vehicles equipped with extra armour count Crew Stunned results from the Vehicle Damage table as Crew Shaken results instead.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="a5a6-c2c1-1d0a-6020" name="Heavy Flamer" entryId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::4999-e6a4-5e3e-0994::9fef-d14e-0e9f-1cc8" entryGroupId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::dc80-3733-1bc8-3596" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::4999-e6a4-5e3e-0994::4777-4d1b-57a7-5e04::c554-a05e-607c-5831" name="Heavy Flamer" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">Template</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">5</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">4</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Assault 1</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="27ee-3ea5-cbd9-3549" name="Heavy Flamer" entryId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::e550-d372-bac9-0b00::9fef-d14e-0e9f-1cc8" entryGroupId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::913f-14da-094a-0514" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::e550-d372-bac9-0b00::4777-4d1b-57a7-5e04::c554-a05e-607c-5831" name="Heavy Flamer" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">Template</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">5</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">4</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Assault 1</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="4e51-d727-4843-f266" name="Leviathan Siege Claw" entryId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::bd08-1211-db8d-e0b7" entryGroupId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::ddab-d338-8b7e-f12a" number="1" type="upgrade">
+                  <rules>
+                    <rule id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::b22a-c9db-eab3-a656" name="Severing Cut" publicationId="ca571888--pubN89821" page="236" hidden="false">
+                      <description>Each time a non-vehicle model suffers an unsaved wound from this weapon, roll a D6. On a 4, the model suffers an extra D3 wounds which must be saved separately using the weapon’s profile (note that these wounds do not themselves generate more additional wounds).</description>
+                    </rule>
+                    <rule id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::8415-8e26-1140-a0d1::fe2f-3220-3fef-b177" name="Wrecker" publicationId="ca571888--pubN106502" page="175" hidden="false">
+                      <description>Attacks with this special rule may re-roll failed armour penetration rolls against fortifications and immobile structures and add +1 to any result rolled on the Building Damage chart.  If this attack damages a bulkhead or wall section of terrain and destroys it, remove that section of terrain from play if possible.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::d3a0-f5c7-3955-e91e" name="Leviathan Siege Claw" publicationId="ca571888--pubN89821" page="236" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">X2</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">2</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Melee, Wrecker, Severing Cut</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <selections>
+                    <selection id="0320-c42a-44e6-53d9" name="In-built Meltagun" entryId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::d15e-536e-b493-8fa3::a22d-ceac-5063-54e1" number="1" type="upgrade">
+                      <rules>
+                        <rule id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::d15e-536e-b493-8fa3::4bcf-2c64-17b9-05e6::21c0-62ff-3ed2-17a7" name="Melta" publicationId="ca571888--pubN106502" page="168" hidden="false">
+                          <description>Ranged weapons with this special rule roll an additional D6 when rolling to penetrate a vehicle’s armour at half range or less. If the weapon is more than half its maximum range away, it rolls to penetrate as normal.
+If a weapon has both the Melta and Blast special rules, measure the distance to the centre of the blast marker after it has scattered. If this is half the weapon’s range or less, all hits caused by the blast marker roll an addition D6 when rolling to penetrate a vehicle’s armour. If the centre of the blast marker is more than half the weapon’s maximum range away after scatter, roll to penetrate as normal.</description>
+                        </rule>
+                      </rules>
+                      <profiles>
+                        <profile id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::d15e-536e-b493-8fa3::cb3c-2c17-d31f-44cd::8ae4-74e5-7700-3804" name="Meltagun" publicationId="ca571888--pubN106502" page="178" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                          <characteristics>
+                            <characteristic name="Range" typeId="52616e676523232344415441232323">12&quot;</characteristic>
+                            <characteristic name="Strength" typeId="537472656e67746823232344415441232323">8</characteristic>
+                            <characteristic name="AP" typeId="415023232344415441232323">1</characteristic>
+                            <characteristic name="Type" typeId="5479706523232344415441232323">Assault 1, Melta</characteristic>
+                          </characteristics>
+                        </profile>
+                      </profiles>
+                      <costs>
+                        <cost name="pts" typeId="points" value="0.0"/>
+                      </costs>
+                    </selection>
+                  </selections>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="479e-04d4-63af-dee7" name="Leviathan Siege Claw" entryId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::1eac-8d13-c114-4a25" entryGroupId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::8da9-4717-77a3-a082" number="1" type="upgrade">
+                  <rules>
+                    <rule id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::4148-faf0-f70a-53bd" name="Severing Cut" publicationId="ca571888--pubN89821" page="236" hidden="false">
+                      <description>Each time a non-vehicle model suffers an unsaved wound from this weapon, roll a D6. On a 4, the model suffers an extra D3 wounds which must be saved separately using the weapon’s profile (note that these wounds do not themselves generate more additional wounds).</description>
+                    </rule>
+                    <rule id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::2fbc-d75a-992a-2686::fe2f-3220-3fef-b177" name="Wrecker" publicationId="ca571888--pubN106502" page="175" hidden="false">
+                      <description>Attacks with this special rule may re-roll failed armour penetration rolls against fortifications and immobile structures and add +1 to any result rolled on the Building Damage chart.  If this attack damages a bulkhead or wall section of terrain and destroys it, remove that section of terrain from play if possible.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::897c-8f60-159a-6f90" name="Leviathan Siege Claw" publicationId="ca571888--pubN89821" page="236" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">X2</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">2</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Melee, Wrecker, Severing Cut</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <selections>
+                    <selection id="69ff-78c1-1e80-4574" name="In-built Meltagun" entryId="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::05d1-0ced-ad80-8a01::a22d-ceac-5063-54e1" number="1" type="upgrade">
+                      <rules>
+                        <rule id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::05d1-0ced-ad80-8a01::4bcf-2c64-17b9-05e6::21c0-62ff-3ed2-17a7" name="Melta" publicationId="ca571888--pubN106502" page="168" hidden="false">
+                          <description>Ranged weapons with this special rule roll an additional D6 when rolling to penetrate a vehicle’s armour at half range or less. If the weapon is more than half its maximum range away, it rolls to penetrate as normal.
+If a weapon has both the Melta and Blast special rules, measure the distance to the centre of the blast marker after it has scattered. If this is half the weapon’s range or less, all hits caused by the blast marker roll an addition D6 when rolling to penetrate a vehicle’s armour. If the centre of the blast marker is more than half the weapon’s maximum range away after scatter, roll to penetrate as normal.</description>
+                        </rule>
+                      </rules>
+                      <profiles>
+                        <profile id="3c85-e70e-8a08-955a::54b0-fe0f-1182-c1de::05d1-0ced-ad80-8a01::cb3c-2c17-d31f-44cd::8ae4-74e5-7700-3804" name="Meltagun" publicationId="ca571888--pubN106502" page="178" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                          <characteristics>
+                            <characteristic name="Range" typeId="52616e676523232344415441232323">12&quot;</characteristic>
+                            <characteristic name="Strength" typeId="537472656e67746823232344415441232323">8</characteristic>
+                            <characteristic name="AP" typeId="415023232344415441232323">1</characteristic>
+                            <characteristic name="Type" typeId="5479706523232344415441232323">Assault 1, Melta</characteristic>
+                          </characteristics>
+                        </profile>
+                      </profiles>
+                      <costs>
+                        <cost name="pts" typeId="points" value="0.0"/>
+                      </costs>
+                    </selection>
+                  </selections>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="270.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="2864-1ce4-5dab-faed" name="Walker" entryId="264d-166e-36c0-77b7" primary="false"/>
+            <category id="cdea-d9f8-582c-3c37" name="Vehicle" entryId="53bd-99e7-aba0-e79f" primary="false"/>
+            <category id="ea52-0e24-4600-ab5e" name="Heavy Support" entryId="486561767920537570706f727423232344415441232323" primary="true"/>
+            <category id="24e7-ddb5-5c50-d13a" name="Walker" entryId="264d-166e-36c0-77b7" primary="false"/>
+            <category id="6165-24b1-e2f9-2598" name="Vehicle" entryId="53bd-99e7-aba0-e79f" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="ab59-c1aa-e427-5ef2" name="Tactical Squad, Legion , Compulsory" entryId="16aa-3762-4269-e00b::da40e015-a22c-ecc4-c9b8-0add9ff5d50f" publicationId="ca571888--pubN82424" page="30" number="1" type="unit">
+          <rules>
+            <rule id="233f-c6be-8436-2b12::dc0c-5010-4942-c8c1" name="Mastery of the Blade" hidden="false">
+              <description>When fighting in an assault with one of the following weapons: combat blade, chainsword, heavy chainsword, power sword, Terranic greatsword, Calibanite war blade and paragon blades modelled as swords, and when fighting a model with an equal WS, a model with this special rule strikes on a 3.</description>
+            </rule>
+            <rule id="92b5-4489-981e-bd64::23a4-a37f-e8e8-c756" name="Legiones Astartes" publicationId="ca571888--pubN106502" page="168" hidden="false">
+              <description>Units with this special rule may always attempt to Regroup at their normal Leadership value, regardless of casualties.
+
+In addition to these benefits, units  will also have a number of additional special rules and abilities specific to their ‘named’ Legion, all of which will be defined in the Legiones Astartes Army List and other future Forge World publications.
+
+If an army represents a Legion which does not yet have its own unique Legiones Astartes rule, the controlling player may instead add either the Stubborn or Furious Charge special rule to the standard provisions of this rule in the interim.</description>
+            </rule>
+            <rule id="d7b0-bbf5-6788-67a5::adbd-7129-14fe-19bc" name="Compulsory" publicationId="839b6f2a--pubN69231" page="132" hidden="false">
+              <description>One box on a Force Organisation chart allows you to make one selection from that part of your army list. Dark boxes indicate compulsory selections, which must be included as part of the army, while the lighter boxes indicate optional choices, which are only included as part of the army if the player in question chooses to do so. If constructing an army using the Crusade Force Organisation chart, this would mean that an army would be required to take at least one HQ choice and two Troops choices. These compulsory choices are intended to ensure that the core of each army is illustrative of the force represented by the Army List in use, and that all armies are capable of properly participating in the varied missions available to players in the Age of Darkness.</description>
+            </rule>
+            <rule id="233f-c6be-8436-2b12::dc0c-5010-4942-c8c1" name="Mastery of the Blade" hidden="false">
+              <description>When fighting in an assault with one of the following weapons: combat blade, chainsword, heavy chainsword, power sword, Terranic greatsword, Calibanite war blade and paragon blades modelled as swords, and when fighting a model with an equal WS, a model with this special rule strikes on a 3.</description>
+            </rule>
+            <rule id="92b5-4489-981e-bd64::23a4-a37f-e8e8-c756" name="Legiones Astartes" publicationId="ca571888--pubN106502" page="168" hidden="false">
+              <description>Units with this special rule may always attempt to Regroup at their normal Leadership value, regardless of casualties.
+
+In addition to these benefits, units  will also have a number of additional special rules and abilities specific to their ‘named’ Legion, all of which will be defined in the Legiones Astartes Army List and other future Forge World publications.
+
+If an army represents a Legion which does not yet have its own unique Legiones Astartes rule, the controlling player may instead add either the Stubborn or Furious Charge special rule to the standard provisions of this rule in the interim.</description>
+            </rule>
+            <rule id="16aa-3762-4269-e00b::7ec6b7a3-f2c7-2dae-92da-eeb275814911" name="Fury of the Legion" publicationId="ca571888--pubN82424" page="40" hidden="false">
+              <description>While at least five models remain in the unit armed with bolters or bolt pistols, the squad can elect to make a Fury of the Legion attack in the Shooting phase so long as they did not move, arrive via Deep Strike or disembark a vehicle earlier in that player turn. Models making a Fury of the Legion attack may fire twice with their bolters or bolt pistols against a single target (note that in the case of a combi-weapon, only the bolter part may fire twice).
+
+                  Owing to the massive expenditure of ammunition involved, once a squad has made a Fury of the Legion attack it may not use Overwatch fire later that turn or fire in the Shooting phase of their next player turn, but may otherwise move, fight in assault, run, etc, normally (place a counter or note next to the unit to represent this). Fury of the Legion attacks may not be used for Snap Shots, and models joining the unit do not benefit from this rule and must fire normally, as does any non-bolter weapon used by the squad at the same time as the Fury of the Legion attack is made</description>
+            </rule>
+          </rules>
+          <selections>
+            <selection id="3e29-9ad3-3eec-508a" name="Tactical Space Marines, Legion" entryId="16aa-3762-4269-e00b::cdc44304-100a-25d6-01d5-4be1eb3b32b7" page="0" number="9" type="model">
+              <profiles>
+                <profile id="16aa-3762-4269-e00b::8579-d590-49fc-4dc6" name="Legion Tactical Space Marine" publicationId="ca571888--pubN82424" page="40" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+                  <characteristics>
+                    <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Infantry</characteristic>
+                    <characteristic name="WS" typeId="575323232344415441232323">4</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                    <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                    <characteristic name="W" typeId="5723232344415441232323">1</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">1</characteristic>
+                    <characteristic name="LD" typeId="4c4423232344415441232323">8</characteristic>
+                    <characteristic name="Save" typeId="5361766523232344415441232323">3+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="90.0"/>
+              </costs>
+            </selection>
+            <selection id="1040-e91d-3006-b917" name="Tactical Sergeant, Legion" entryId="16aa-3762-4269-e00b::76b160c7-d7da-b446-947a-ade196020616" page="0" number="1" type="model">
+              <profiles>
+                <profile id="16aa-3762-4269-e00b::54ca-3833-470c-ce87" name="Legion Tactical Sergeant" publicationId="ca571888--pubN82424" page="40" hidden="false" typeId="556e697423232344415441232323" typeName="Unit">
+                  <characteristics>
+                    <characteristic name="Unit Type" typeId="556e6974205479706523232344415441232323">Infanty (Character)</characteristic>
+                    <characteristic name="WS" typeId="575323232344415441232323">4</characteristic>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="S" typeId="5323232344415441232323">4</characteristic>
+                    <characteristic name="T" typeId="5423232344415441232323">4</characteristic>
+                    <characteristic name="W" typeId="5723232344415441232323">1</characteristic>
+                    <characteristic name="I" typeId="4923232344415441232323">4</characteristic>
+                    <characteristic name="A" typeId="4123232344415441232323">2</characteristic>
+                    <characteristic name="LD" typeId="4c4423232344415441232323">9</characteristic>
+                    <characteristic name="Save" typeId="5361766523232344415441232323">3+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="ca4f-71b3-c877-c634" name="Bolter" entryId="16aa-3762-4269-e00b::ef75-c0c1-0f09-a697::d6f9-09fd-83af-070d" entryGroupId="16aa-3762-4269-e00b::a8b03166-dd5e-29fa-a642-bd1b7d0bcae2" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="16aa-3762-4269-e00b::ef75-c0c1-0f09-a697::767e-240c-1006-1740::09fd-8af1-a6b1-51f7" name="Boltgun" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">24&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Rapid Fire</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="98fe-4824-f1d9-d743" name="Character" entryId="eb92-48f9-9a1a-7bd1" primary="false"/>
+              </categories>
+            </selection>
+            <selection id="713e-ad60-0c2c-bdb0" name="Standard Wargear" entryId="16aa-3762-4269-e00b::d7a2-becf-6863-9b02" number="1" type="upgrade">
+              <selections>
+                <selection id="fb10-9300-ce07-6fa6" name="Bolt Pistols" entryId="16aa-3762-4269-e00b::1f6a-2fbf-91e7-4dac::fe8d-1baa-d58d-00bc" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="16aa-3762-4269-e00b::1f6a-2fbf-91e7-4dac::007f-9e7f-2a8f-8258::ec83-0776-ef74-9cc2" name="Bolt Pistol" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">12&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Pistol</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="acce-0c5a-8193-4ead" name="Power Armour" entryId="16aa-3762-4269-e00b::e7bd-562b-c05c-a747::0a96-04b6-7340-91a4" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="16aa-3762-4269-e00b::e7bd-562b-c05c-a747::0680-4dd1-54b3-1ed8" name="Power Armour" publicationId="ca571888--pubN99753" page="133" hidden="false" typeId="57617267656172204974656d23232344415441232323" typeName="Wargear Item">
+                      <characteristics>
+                        <characteristic name="Description" typeId="4465736372697074696f6e23232344415441232323">Power armour provides a 3+ Armour save.</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+                <selection id="1239-597f-0f11-4ac4" name="Frag and Krak Grenades" entryId="16aa-3762-4269-e00b::5501-2a6e-0746-13da::0a53-b471-df87-7b83" number="1" type="upgrade">
+                  <rules>
+                    <rule id="16aa-3762-4269-e00b::5501-2a6e-0746-13da::a7b7-4101-28f0-fc1a::9430-a4d5-6f01-57e2" name="Assault Grenades" publicationId="ca571888--pubN106502" hidden="false">
+                      <description>Shooting: When a unit equiped with Assualt Greandes makes a shooting attack, one model can choose to throw a Grenade, rather than using another shooting weapon.e
+
+Assualt: Models equipped with assault grenades don’t suffer the penalty to their Initiative for charging enemies through difficult terrain, but fight at their normal Initiative in the ensuing combat.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="16aa-3762-4269-e00b::5501-2a6e-0746-13da::dd55-88e3-9351-e96e::d890-1b84-bbd9-12d3" name="Frag Grenades" publicationId="ca571888--pubN106502" page="182" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">8&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">3</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">-</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Assault 1, Blast</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="16aa-3762-4269-e00b::5501-2a6e-0746-13da::2907-df2d-6744-816c::d9f7-775b-1047-f335" name="Krak Grenade (Shooting)" publicationId="ca571888--pubN106502" page="183" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">8&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">6</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">4</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Assault 1</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="16aa-3762-4269-e00b::5501-2a6e-0746-13da::5f62-6dea-35f7-c9bb::ba14-6731-7c9d-ef15" name="Krak Grenade (Assault)" publicationId="ca571888--pubN106502" page="183" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">6</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">4</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">-</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="c95b-fb73-032b-769f" name="Additional Wargear" entryId="16aa-3762-4269-e00b::eef5-90e0-0bff-0b48" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="acc2-d713-91b8-ae39" name="Legiones Astartes" entryId="16aa-3762-4269-e00b::0f07-62a0-18ef-092a::4014-7d86-22e9-5d96" number="1" type="upgrade">
+              <rules>
+                <rule id="16aa-3762-4269-e00b::0f07-62a0-18ef-092a::31b1-4bb2-e8c5-8fe8" name="Legiones Astartes" page="" hidden="false">
+                  <description>- Units with this special rules may always attempt to regroup regardless of casualties.</description>
+                </rule>
+              </rules>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="1f30-5e64-8acd-1b1a" name="Rhino Armoured Carrier, Legion" entryId="16aa-3762-4269-e00b::cff78fb7-162a-b4fb-2feb-e320e72f47ed::3215e60a-5c78-9efe-e6d4-ba87f3e74a21" entryGroupId="16aa-3762-4269-e00b::cda6c5c1-c988-0cb3-a02a-6cade997f240" publicationId="ca571888--pubN82424" page="45" number="1" type="upgrade">
+              <rules>
+                <rule id="5cfc-efd6-9009-24d3" name="Unshakeable Nerve" publicationId="839b6f2a--pubN65653" page="77" hidden="false">
+                  <description>Units embarked upon transports have the Fearless special rule while they are embarked.</description>
+                </rule>
+                <rule id="16aa-3762-4269-e00b::cff78fb7-162a-b4fb-2feb-e320e72f47ed::1e6e81d2-9601-f129-8824-9b913e08aea5" name="Repair" publicationId="ca571888--pubN82424" page="35" hidden="false">
+                  <description>In the Shooting phase instead of firing a weapon, the Rhino may attempt to repair an Immobilised result on a D6 roll of a 6.</description>
+                </rule>
+              </rules>
+              <profiles>
+                <profile id="16aa-3762-4269-e00b::cff78fb7-162a-b4fb-2feb-e320e72f47ed::ffe93085-806c-773f-f403-2c7d4e8edce2" name="Legion Rhino" publicationId="ca571888--pubN82424" page="35" hidden="false" typeId="56656869636c6523232344415441232323" typeName="Vehicle">
+                  <characteristics>
+                    <characteristic name="BS" typeId="425323232344415441232323">4</characteristic>
+                    <characteristic name="Front" typeId="46726f6e7423232344415441232323">11</characteristic>
+                    <characteristic name="Side" typeId="5369646523232344415441232323">11</characteristic>
+                    <characteristic name="Rear" typeId="5265617223232344415441232323">10</characteristic>
+                    <characteristic name="HP" typeId="485023232344415441232323">3</characteristic>
+                    <characteristic name="Type" typeId="5479706523232344415441232323">Tank, Transport</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="16aa-3762-4269-e00b::cff78fb7-162a-b4fb-2feb-e320e72f47ed::dbec-0d7a-553e-bf50" name="Legion Rhino (Transport)" hidden="false" typeId="307d-047f-ca13-706b" typeName="Transport">
+                  <characteristics>
+                    <characteristic name="Capacity" typeId="8285-4205-b6cd-8473">10</characteristic>
+                    <characteristic name="Fire Points" typeId="b270-a7f9-22b2-3702">Two - Top Hatch</characteristic>
+                    <characteristic name="Access Points" typeId="d17b-0342-b1dc-b8e7">Three. One on each side of the Hull and one at the rear.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="3d41-6a45-44ba-0788" name="Twin-linked Bolter" entryId="16aa-3762-4269-e00b::cff78fb7-162a-b4fb-2feb-e320e72f47ed::d45f-11bb-04d2-9ff5::30c2c848-c1d3-e61f-6632-a91bcee1fdc4" page="0" number="1" type="upgrade">
+                  <rules>
+                    <rule id="16aa-3762-4269-e00b::cff78fb7-162a-b4fb-2feb-e320e72f47ed::d45f-11bb-04d2-9ff5::1123-9a4a-f82a-928b::10a8-8d89-0bec-3e21" name="Twin-linked" publicationId="ca571888--pubN106502" page="175" hidden="false">
+                      <description>Twin-linked weapons don’t get more shots than normal ones, but they give you a better chance of hitting with them. If a shooting weapon has the twin-linked special rule, or is described in a model’s wargear entry as twin-linked, it re-rolls all failed To Hit rolls.
+
+Twin-linked Blast Weapons
+If the scatter dice does not roll a hit, you can choose to re-roll the dice with a Twin-linked Blast weapon. If you choose to do so, you must re-roll both the 2D6 and the scatter dice.
+
+Twin-linked Template Weapons
+Twin-linked Template weapons are fired just like a single weapon, but must re-roll failed To Wound rolls and armour penetration rolls.</description>
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile id="16aa-3762-4269-e00b::cff78fb7-162a-b4fb-2feb-e320e72f47ed::d45f-11bb-04d2-9ff5::af07-3a13-8c01-1fe7::37fc-8473-3879-14a4" name="Twin-Linked Boltgun" publicationId="ca571888--pubN106502" page="177" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">24&quot;</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">4</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">5</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Rapid Fire, Twin-Linked</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="35.0"/>
+              </costs>
+              <categories>
+                <category id="5a06-05ed-7f87-485a" name="Dedicated Transport" entryId="c407-80ff-568e-3394" primary="false"/>
+                <category id="2370-bd17-2907-7298" name="Transport" entryId="e4e0-c5d1-3430-f101" primary="false"/>
+                <category id="efbc-5504-b986-ca00" name="Tank" entryId="e59c-462e-9d9c-66dd" primary="false"/>
+                <category id="0f15-8e33-bf5a-37b1" name="Vehicle" entryId="53bd-99e7-aba0-e79f" primary="false"/>
+              </categories>
+            </selection>
+            <selection id="e067-c926-b309-cbf6" name="Chainswords or Combat Blades" entryId="16aa-3762-4269-e00b::b029-49ed-0344-3c8d::10e739aa-3153-9348-3458-738dd5938617" entryGroupId="16aa-3762-4269-e00b::dbff-e550-2af3-010f" page="0" number="1" type="upgrade">
+              <selections>
+                <selection id="5bc1-76d5-bc0c-7ab4" name="Chainswords/Combat Blades" entryId="16aa-3762-4269-e00b::b029-49ed-0344-3c8d::2b69-d5c2-a344-1e61::1087-66c1-c342-9cdc" entryGroupId="16aa-3762-4269-e00b::b029-49ed-0344-3c8d::b11f-c58a-edd8-e10b" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="16aa-3762-4269-e00b::b029-49ed-0344-3c8d::2b69-d5c2-a344-1e61::e8ff-7994-f83f-1431::730c-b70b-1e8f-f2e9" name="Chainsword/Combat Blade" publicationId="ca571888--pubN106502" page="180" hidden="false" typeId="576561706f6e23232344415441232323" typeName="Weapon">
+                      <characteristics>
+                        <characteristic name="Range" typeId="52616e676523232344415441232323">-</characteristic>
+                        <characteristic name="Strength" typeId="537472656e67746823232344415441232323">User</characteristic>
+                        <characteristic name="AP" typeId="415023232344415441232323">-</characteristic>
+                        <characteristic name="Type" typeId="5479706523232344415441232323">Melee</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="35.0"/>
+          </costs>
+          <categories>
+            <category id="c88b-d459-fcaa-6a35" name="Infantry" entryId="f74d-4679-75a6-1252" primary="false"/>
+            <category id="52b1-b921-9da8-39bc" name="Legiones Astartes" entryId="0c56-27b8-a737-c9fd" primary="false"/>
+            <category id="4638-27a0-b6f2-e04a" name="Compulsory Troops" entryId="219d-aefa-dfa5-44db" primary="false"/>
+            <category id="9ba9-a857-7f25-e619" name="Legiones Astartes" entryId="0c56-27b8-a737-c9fd" primary="false"/>
+            <category id="894c-48a8-1f58-bfdf" name="Infantry" entryId="f74d-4679-75a6-1252" primary="false"/>
+            <category id="dec6-ed1a-9850-e8c1" name="Troops" entryId="54726f6f707323232344415441232323" primary="true"/>
+          </categories>
+        </selection>
+      </selections>
+      <publications>
+        <publication id="839b6f2a--pubN288389" name="Taghmata Army List"/>
+        <publication id="839b6f2a--pubN435343" name="HH:MTAL"/>
+        <publication id="ca571888--pubN92115" name="HH7: Infeno"/>
+        <publication id="839b6f2a--pubN350337" name="HH:LACIL"/>
+        <publication id="ca571888--pubN66500" name="HH1: Betrayal"/>
+        <publication id="ca571888--pubN69050" name="HH:MTAL"/>
+        <publication id="839b6f2a--pubN130038" name="Forgeworld.co.uk - Downloads"/>
+        <publication id="ca571888--pubN66580" name="HH: MT"/>
+        <publication id="ca571888--pubN107368" name="FAQ 2018"/>
+        <publication id="ca571888--pubN82424" name="HH:AODAL"/>
+        <publication id="839b6f2a--pubN87233" name="Escalation"/>
+        <publication id="839b6f2a--pubN81928" name="Imperial Armour Apocalypse 2013"/>
+        <publication id="839b6f2a--pubN96579" name="Codex: Cadia"/>
+        <publication id="839b6f2a--pubN77395" name="HH4: Conquest"/>
+        <publication id="839b6f2a--pubN301164" name="Corbax_Utterblight.pdf"/>
+        <publication id="839b6f2a--pubN93103" name="Stronghold Assault"/>
+        <publication id="839b6f2a--pubN163526" name="Horus-Heresy-Drop-Pods-Errata-v1.0.pdf"/>
+        <publication id="ca571888--pubN108209" name="Death from the Skies"/>
+        <publication id="839b6f2a--pubN331700" name="Experimental Rules"/>
+        <publication id="ca571888--pubN106705" name="Forgeworld.co.uk"/>
+        <publication id="839b6f2a--pubN432126" name="HH: LACAL"/>
+        <publication id="839b6f2a--pubN162274" name="HH:LAAoDAL"/>
+        <publication id="ca571888--pubN106780" name="LA:AoDLA"/>
+        <publication id="ca571888--pubN106389" name="HH:GEAFAQV1.0"/>
+        <publication id="ca571888--pubN103311" name="HH8: Malevolence"/>
+        <publication id="839b6f2a--pubN84194" name="HH:MT"/>
+        <publication id="ca571888--pubN82437" name="AODAL"/>
+        <publication id="ca571888--pubN105292" name="BRB 7th"/>
+        <publication id="839b6f2a--pubN77384" name="Cadia - A Codex: Astra Militarum Supplement"/>
+        <publication id="839b6f2a--pubN78595" name="IA Apoc 2013"/>
+        <publication id="839b6f2a--pubN365687" name="HH3: Extermination"/>
+        <publication id="839b6f2a--pubN384589" name="HH8: Malevolance"/>
+        <publication id="ca571888--pubN91142" name="CI:AL"/>
+        <publication id="ca571888--pubN95649" name="Playtest Rules Errata V1.0 Warhammer Community Download"/>
+        <publication id="839b6f2a--pubN127042" name="BRB 7th"/>
+        <publication id="ca571888--pubN67536" name="LA:CAL"/>
+        <publication id="ca571888--pubN106650" name="White Dwarf"/>
+        <publication id="839b6f2a--pubN84574" name="HH1:Betrayal"/>
+        <publication id="839b6f2a--pubN65653" name="HH: Rulebook"/>
+        <publication id="839b6f2a--pubN418980" name="Age of Darkness Legions"/>
+        <publication id="ca571888--pubN107062" name="AL:AoDAL"/>
+        <publication id="839b6f2a--pubN65537" name="Forgeworld Horus Heresy Series"/>
+        <publication id="839b6f2a--pubN409916" name="AODOL"/>
+        <publication id="839b6f2a--pubN196340" name="AL"/>
+        <publication id="ca571888--pubN80309" name="Datasheet: Munitorium Armoured Container Cache"/>
+        <publication id="839b6f2a--pubN86506" name="Cadia - A Codex: Astra Militarum Supplement "/>
+        <publication id="839b6f2a--pubN132867" name="HH4"/>
+        <publication id="839b6f2a--pubN69231" name="AoDRB"/>
+        <publication id="839b6f2a--pubN427395" name="Utility"/>
+        <publication id="ca571888--pubN73904" name="Warhammer 40k rulebook"/>
+        <publication id="ca571888--pubN67636" name="Forgeworld.co.uk - Downloads"/>
+        <publication id="839b6f2a--pubN290621" name="HH:Retribution + FAQ"/>
+        <publication id="839b6f2a--pubN164529" name="HHV: Tempest"/>
+        <publication id="839b6f2a--pubN246823" name="HH:LAICL / Apocalypse"/>
+        <publication id="839b6f2a--pubN288064" name="Master-Craft one weapon"/>
+        <publication id="839b6f2a--pubN330249" name="HH:LACA"/>
+        <publication id="ca571888--pubN89821" name="HH6: Retribution"/>
+        <publication id="839b6f2a--pubN357446" name="HH: AoD Rulebook"/>
+        <publication id="ca571888--pubN87368" name="C:IK"/>
+        <publication id="839b6f2a--pubN84310" name="HH1: Betrayal"/>
+        <publication id="ca571888--pubN68042" name="HH5: Tempest"/>
+        <publication id="839b6f2a--pubN85495" name="Imperial Armour Apocalypse Second Edition"/>
+        <publication id="839b6f2a--pubN163561" name="BRB"/>
+        <publication id="ca571888--pubN99753" name="LA:AODAL"/>
+        <publication id="839b6f2a--pubN92056" name="Forgeworld.co.uk"/>
+        <publication id="839b6f2a--pubN129008" name="LA:ADL"/>
+        <publication id="ca571888--pubN112761" name="LA:AoDAL"/>
+        <publication id="839b6f2a--pubN94234" name="HH:LAICL"/>
+        <publication id="ca571888--pubN106502" name="HH: Core Rule Book"/>
+        <publication id="ca571888--pubN67227" name="HH:LACAL"/>
+        <publication id="839b6f2a--pubN79637" name="IA1,2e"/>
+        <publication id="839b6f2a--pubN269310" name="Package"/>
+        <publication id="839b6f2a--pubN129192" name="Horus_Heresy_7th_Edition.pdf FAQ"/>
+        <publication id="ca571888--pubN113187" name="LA:AoDL"/>
+        <publication id="ca571888--pubN84656" name="FAQ"/>
+        <publication id="ca571888--pubN73893" name="Planetary Onslaught"/>
+        <publication id="839b6f2a--pubN409929" name="LA:CAL"/>
+        <publication id="ca571888--pubN94574" name="HH-Questoris-Knight-Dominus Download"/>
+        <publication id="839b6f2a--pubN79488" name="IA2 Second Edition"/>
+        <publication id="ca571888--pubN67459" name="LA:ADL"/>
+        <publication id="839b6f2a--pubN378925" name="HH:Malevolence"/>
+        <publication id="ca571888--pubN95721" name="https://www.forgeworld.co.uk/resources/fw_site/fw_pdfs/Horus_Heresy/HH-Legio-Titanicus-Warbringer-Nemesis-Titan.pdf?fbclid=IwAR3LyUx_Bhf7-hxpR0uCkbOmVMu5pzHpAqjgwmb_4SStSrjeTILm49XO__c"/>
+        <publication id="ca571888--pubN66489" name="HH:MT"/>
+        <publication id="839b6f2a--pubN355686" name="HH:AoDAL|HH:GEAFAQV1.0"/>
+        <publication id="ca571888--pubN107025" name="Web"/>
+        <publication id="839b6f2a--pubN87888" name="Crusade Imperialus"/>
+        <publication id="839b6f2a--pubN130779" name="HH8: Malevolence"/>
+        <publication id="839b6f2a--pubN301624" name="Samus_Daemon_Prince_of_the_Ruinstorm.pdf"/>
+        <publication id="839b6f2a--pubN125229" name="HH:GEAFAQV1.0"/>
+        <publication id="839b6f2a--pubN427509" name="FAQ Playtest 1.0"/>
+        <publication id="839b6f2a--pubN419199" name="LA:ADL + FAQ"/>
+        <publication id="839b6f2a--pubN120976" name="FAQ"/>
+        <publication id="839b6f2a--pubN251366" name="HH: LAICL"/>
+        <publication id="839b6f2a--pubN79477" name="IA1 2nd Ed"/>
+        <publication id="839b6f2a--pubN246873" name="Apocalypse"/>
+        <publication id="839b6f2a--pubN142570" name="HH5: Tempest"/>
+        <publication id="839b6f2a--pubN394718" name="HH8"/>
+        <publication id="ca571888--pubN85920" name="HH3: Extermination"/>
+        <publication id="ca571888--pubN84158" name="HH4: Conquest"/>
+        <publication id="ca571888--pubN65537" name="Forgeworld Horus Heresy Series"/>
+        <publication id="ca571888--pubN74520" name="Stronghold Assault"/>
+        <publication id="ca571888--pubN80998" name="HH: AoDAL"/>
+      </publications>
+      <categories>
+        <category id="6dae-c6c6-a163-af4c" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="34f4-c0cc-7c28-5d19" name="Troops" entryId="54726f6f707323232344415441232323" primary="false"/>
+        <category id="68a7-849d-3a76-2ffe" name="HQ" entryId="485123232344415441232323" primary="false"/>
+        <category id="83a4-8958-38e0-624a" name="Elites" entryId="456c6974657323232344415441232323" primary="false"/>
+        <category id="ade1-c2b1-51c0-d147" name="Fast Attack" entryId="466173742041747461636b23232344415441232323" primary="false"/>
+        <category id="cdd6-d867-6793-0cd6" name="Heavy Support" entryId="486561767920537570706f727423232344415441232323" primary="false"/>
+        <category id="8418-8c1b-fd7d-2862" name="Allegiance" entryId="5297-7e0f-fa0b-3537" primary="false"/>
+        <category id="fd83-3f20-50f0-e107" name="Cortex Controlled" entryId="3f9d-27a5-969f-399b" primary="false">
+          <rules>
+            <rule id="b0ce-e6a6-2cc5-2355" name="Optional Heavy Support" publicationId="ca571888--pubN82424" page="131" hidden="false">
+              <description>For each cortex controller present in a Space Marine detachment, 0-1 of the following units from the Mechanicum Taghmata army list are available as Heavy Support options: Thallax Cohort*, Castellax Battle-automata Maniple, Vorax Battle-automata maniple.
+*If purchased a Triaros as a Dedicated Transport, this may not transport Space Marine models of any kind</description>
+            </rule>
+          </rules>
+        </category>
+        <category id="c114-6dcf-00ed-dbda" name="Wolf Lord/Claw Leader" entryId="a5b5-33d4-9941-d832" primary="false"/>
+        <category id="2862-f059-4ba0-4632" name="Bodyguard" entryId="73b6-4f0e-c013-b242" primary="false"/>
+        <category id="98d9-19ac-500e-29ad" name="Use Playtest Rules" entryId="fdf4-0683-3e84-5a4b" primary="false"/>
+        <category id="e866-cec4-b9f1-cc20" name="0.0" entryId="219d-aefa-dfa5-44db" primary="false">
+          <rules>
+            <rule id="d7b0-bbf5-6788-67a5::adbd-7129-14fe-19bc" name="Compulsory" publicationId="839b6f2a--pubN69231" page="132" hidden="false">
+              <description>One box on a Force Organisation chart allows you to make one selection from that part of your army list. Dark boxes indicate compulsory selections, which must be included as part of the army, while the lighter boxes indicate optional choices, which are only included as part of the army if the player in question chooses to do so. If constructing an army using the Crusade Force Organisation chart, this would mean that an army would be required to take at least one HQ choice and two Troops choices. These compulsory choices are intended to ensure that the core of each army is illustrative of the force represented by the Army List in use, and that all armies are capable of properly participating in the varied missions available to players in the Age of Darkness.</description>
+            </rule>
+          </rules>
+        </category>
+      </categories>
+    </force>
+  </forces>
+</roster>

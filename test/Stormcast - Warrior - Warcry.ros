@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<roster id="1d9f-bc42-0e63-1455" name="Stormcast - Warrior" battleScribeVersion="2.03" gameSystemId="e5fe-db52-95ba-6b62" gameSystemName="Warhammer Age of Sigmar: Warcry" gameSystemRevision="15" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+  <costs>
+    <cost name="pts" typeId="820d-9f65-fcb1-d476" value="995.0"/>
+  </costs>
+  <forces>
+    <force id="cf38-2b19-03d6-338b" name="Open Play" entryId="b12a-e361-2540-1376" catalogueId="369c-035e-3988-af8e" catalogueRevision="3" catalogueName="Stormcast Warrior Chamber">
+      <rules>
+        <rule id="455e-5564-41d2-766f" name="⚂ [Triple] Staunch Defender (Faction: Stormcast Warrior Chamber, Leader)" hidden="false">
+          <description>Until the end of the battle round, add 1 to the Toughness characteristic of friendly fighters while they are within 6&quot; of this fighter.</description>
+        </rule>
+        <rule id="058d-6427-9437-521c" name="⚁ [Double] Lay Low the Tyrants (Faction: Stormcast Warrior Chamber, Warrior)" hidden="false">
+          <description>Until the end of this fighter&apos;s activation, add 2 to the Attacks and Strength characteristics of attack actions made by this fighter that have a Range characteristic of 3 or less and that target an enemy fighter with a Wounds characteristic of 15 or more.</description>
+        </rule>
+        <rule id="b1df-be19-d340-9e41" name="⚃ [Quad] Earth-shattering Blow (Faction: Stormcast Warrior Chamber, Brute)" hidden="false">
+          <description>This fighter makes a bonus attack action. In addition, add half the value of this ability (rounding up) to the damage points allocated by each hit or critical hit from that attack action.</description>
+        </rule>
+        <rule id="c7cb-9c7e-2f73-5ed1" name="⚁ [Double] Furious Avengers (Faction: Stormcast Warrior Chamber)" hidden="false">
+          <description>A fighter can use this ability only if there is another friendly fighter within 6&quot; of this fighter with 1 or more damage points allocated to them. This fighter makes a bonus move.</description>
+        </rule>
+        <rule id="f574-01e8-a7f3-ef39" name="⚁ [Double] Rush" hidden="false">
+          <description>Add 1 to the Move characteristic of this fighter until the end of their activation</description>
+        </rule>
+        <rule id="9806-9e74-bdee-04fb" name="⚂ [Triple] Inspiring Presence" hidden="false">
+          <description>Pick a friendly fighter that has not activated yet this battle round and that is within 6&quot; of this fighter. You can activate that fighter immediately after the activation of this fighter ends.</description>
+        </rule>
+        <rule id="7a9e-f73e-6952-cc73" name="⚁ [Double] Onslaught" hidden="false">
+          <description>Add 1 to the Attacks characteristic of attack actions made by this fighter that have a Range characteristic of 3 or less until the end of their activation.</description>
+        </rule>
+        <rule id="e8bf-46d4-c8bc-103f" name="⚂ [Triple] Respite" hidden="false">
+          <description>A fighter cannot use this ability if they are within 1&quot; of any enemy fighters. Remove a number of damage points allocated to this fighter equal to the value of this ability.</description>
+        </rule>
+        <rule id="3ab2-db70-3462-b5f1" name="⚃ [Quad] Rampage" hidden="false">
+          <description>This fighter makes a bonus move action. Then, they can make a bonus attack action.</description>
+        </rule>
+      </rules>
+      <profiles>
+        <profile id="eb0e-64ba-2568-8678" name="[Double] Rush" hidden="false" typeId="3f17-da96-b02a-c0ef" typeName="Ability">
+          <characteristics>
+            <characteristic name="Runemark" typeId="df65-615b-2ee0-5fb9"/>
+            <characteristic name="Description" typeId="9b71-a24e-4046-7a28">Add 1 to the Move characteristic of this fighter until the end of their activation</characteristic>
+          </characteristics>
+        </profile>
+      </profiles>
+      <selections>
+        <selection id="2396-d855-4af3-86dc" name="Paladin Prime" entryId="41ee-2f02-11c5-c913::e8b5-cfb3-c23e-385c" number="1" type="upgrade">
+          <rules>
+            <rule id="c910-f5c2-a72f-3a48" name="Leader" hidden="false"/>
+            <rule id="7386-63b1-9997-102d" name="Brute" hidden="false"/>
+          </rules>
+          <profiles>
+            <profile id="41ee-2f02-11c5-c913::ec46-eade-c560-10f1" name="Paladin Prime" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">3</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">6</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">30</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="9b23-6c36-b7f3-5ab3" name="Retributor Prime" entryId="41ee-2f02-11c5-c913::99b4-52d6-4ec5-c9fa" entryGroupId="41ee-2f02-11c5-c913::6e04-9397-c352-0ca6" number="1" type="model">
+              <profiles>
+                <profile id="41ee-2f02-11c5-c913::7d2a-2e11-8e3d-79ab" name="Hammer" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                    <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">4</characteristic>
+                    <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">5</characteristic>
+                    <characteristic name="Damage" typeId="446b-a910-1596-123b">3/5</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="255.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="d1f2-39ac-5287-22bb" name="Faction: Stormcast Warrior Chamber" entryId="4362-4307-bc10-c953" primary="false"/>
+            <category id="96fa-0caf-d5b5-13e8" name="Leader" entryId="4d50-0ab6-f937-3410" primary="true"/>
+            <category id="16a5-59a0-93ed-a941" name="Brute" entryId="1a5f-39a9-6bfb-a39e" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="6787-9e24-82af-5b02" name="Judicator" entryId="3b1a-6497-a2f9-90c3::a4f9-1a9f-35a0-eaae" number="1" type="model">
+          <profiles>
+            <profile id="3b1a-6497-a2f9-90c3::071e-f265-1176-254a" name="Judicator" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">4</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">5</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">20</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="caec-41b9-840e-7fd2" name="Skybolt Bow" entryId="3b1a-6497-a2f9-90c3::bec9-11ec-1bc1-605b" entryGroupId="3b1a-6497-a2f9-90c3::9bd5-99d2-687f-0695" number="1" type="model">
+              <profiles>
+                <profile id="3b1a-6497-a2f9-90c3::f541-1f86-3db9-1a7c" name="Ranged" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">3-20</characteristic>
+                    <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                    <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                    <characteristic name="Damage" typeId="446b-a910-1596-123b">2/4</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="3b1a-6497-a2f9-90c3::60b6-c24c-fc87-0882" name="Dagger" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                    <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                    <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                    <characteristic name="Damage" typeId="446b-a910-1596-123b">1/4</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="185.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="b7d6-d412-976a-2c0b" name="Fighter" entryId="f2ce-030d-9971-73f0" primary="true"/>
+            <category id="1e82-2377-388a-c852" name="Faction: Stormcast Warrior Chamber" entryId="4362-4307-bc10-c953" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="79ff-6711-8391-cca2" name="Liberator" entryId="e411-1096-ee46-8eea::4e97-df96-2f32-9cdb" number="1" type="model">
+          <rules>
+            <rule id="c8e9-2b85-07d7-05dc" name="Warrior" hidden="false"/>
+          </rules>
+          <selections>
+            <selection id="8f87-009e-220a-dced" name="Warhammer and Sigmarite Shield" entryId="e411-1096-ee46-8eea::5663-381b-d9ad-14a0" entryGroupId="e411-1096-ee46-8eea::e2d9-27d0-6782-82f6" number="1" type="model">
+              <rules>
+                <rule id="ca1b-7653-92f4-2a5e" name="Bulwark" hidden="false"/>
+              </rules>
+              <profiles>
+                <profile id="e411-1096-ee46-8eea::49ce-e9df-94a8-e53e" name="Hammer" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                    <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">2</characteristic>
+                    <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">5</characteristic>
+                    <characteristic name="Damage" typeId="446b-a910-1596-123b">2/4</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="e411-1096-ee46-8eea::3f8c-e2f6-dbc7-a783::3ebd-7ee6-1b59-20d8" name="Liberator with Shield" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+                  <characteristics>
+                    <characteristic name="Move" typeId="c652-026b-c19b-fb1a">4</characteristic>
+                    <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">6</characteristic>
+                    <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">20</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="185.0"/>
+              </costs>
+              <categories>
+                <category id="9473-0f47-2bb1-db70" name="Bulwark" entryId="e250-737c-002f-8734" primary="false"/>
+              </categories>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="ac95-45b7-8c92-3461" name="Fighter" entryId="f2ce-030d-9971-73f0" primary="true"/>
+            <category id="4aa4-9d5d-7517-83ab" name="Faction: Stormcast Warrior Chamber" entryId="4362-4307-bc10-c953" primary="false"/>
+            <category id="0593-627a-2e22-82ec" name="Warrior" entryId="596f-ef0a-d93e-64de" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="38cb-07df-aa5f-501b" name="Judicator" entryId="3b1a-6497-a2f9-90c3::a4f9-1a9f-35a0-eaae" number="1" type="model">
+          <profiles>
+            <profile id="3b1a-6497-a2f9-90c3::071e-f265-1176-254a" name="Judicator" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+              <characteristics>
+                <characteristic name="Move" typeId="c652-026b-c19b-fb1a">4</characteristic>
+                <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">5</characteristic>
+                <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">20</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="ad74-e209-637d-5939" name="Skybolt Bow" entryId="3b1a-6497-a2f9-90c3::bec9-11ec-1bc1-605b" entryGroupId="3b1a-6497-a2f9-90c3::9bd5-99d2-687f-0695" number="1" type="model">
+              <profiles>
+                <profile id="3b1a-6497-a2f9-90c3::f541-1f86-3db9-1a7c" name="Ranged" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">3-20</characteristic>
+                    <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                    <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                    <characteristic name="Damage" typeId="446b-a910-1596-123b">2/4</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="3b1a-6497-a2f9-90c3::60b6-c24c-fc87-0882" name="Dagger" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                    <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">3</characteristic>
+                    <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">4</characteristic>
+                    <characteristic name="Damage" typeId="446b-a910-1596-123b">1/4</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="185.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="c125-c547-9680-f09c" name="Fighter" entryId="f2ce-030d-9971-73f0" primary="true"/>
+            <category id="474b-38aa-2e7e-b266" name="Faction: Stormcast Warrior Chamber" entryId="4362-4307-bc10-c953" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="9bf3-42dd-339c-c016" name="Liberator" entryId="e411-1096-ee46-8eea::4e97-df96-2f32-9cdb" number="1" type="model">
+          <rules>
+            <rule id="c8e9-2b85-07d7-05dc" name="Warrior" hidden="false"/>
+          </rules>
+          <selections>
+            <selection id="02a9-a701-5b49-cb79" name="Warhammer and Sigmarite Shield" entryId="e411-1096-ee46-8eea::5663-381b-d9ad-14a0" entryGroupId="e411-1096-ee46-8eea::e2d9-27d0-6782-82f6" number="1" type="model">
+              <rules>
+                <rule id="ca1b-7653-92f4-2a5e" name="Bulwark" hidden="false"/>
+              </rules>
+              <profiles>
+                <profile id="e411-1096-ee46-8eea::49ce-e9df-94a8-e53e" name="Hammer" hidden="false" typeId="d83c-f0e3-af8e-b6b0" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Range" typeId="e85b-c9e0-0d39-7786">1</characteristic>
+                    <characteristic name="Attacks" typeId="60cf-9920-ff5d-032d">2</characteristic>
+                    <characteristic name="Strength" typeId="4591-7140-62c7-f2f1">5</characteristic>
+                    <characteristic name="Damage" typeId="446b-a910-1596-123b">2/4</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="e411-1096-ee46-8eea::3f8c-e2f6-dbc7-a783::3ebd-7ee6-1b59-20d8" name="Liberator with Shield" hidden="false" typeId="7bf1-ad0a-0d19-6565" typeName="Model">
+                  <characteristics>
+                    <characteristic name="Move" typeId="c652-026b-c19b-fb1a">4</characteristic>
+                    <characteristic name="Toughness" typeId="68cf-bb2c-bce1-e83e">6</characteristic>
+                    <characteristic name="Wounds" typeId="585d-de0f-f39b-3633">20</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="820d-9f65-fcb1-d476" value="185.0"/>
+              </costs>
+              <categories>
+                <category id="76d5-da13-48c1-d827" name="Bulwark" entryId="e250-737c-002f-8734" primary="false"/>
+              </categories>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="820d-9f65-fcb1-d476" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="1b9b-8d30-953b-ca99" name="Fighter" entryId="f2ce-030d-9971-73f0" primary="true"/>
+            <category id="4a63-8cc8-7613-be9e" name="Faction: Stormcast Warrior Chamber" entryId="4362-4307-bc10-c953" primary="false"/>
+            <category id="12e9-8475-0348-159d" name="Warrior" entryId="596f-ef0a-d93e-64de" primary="false"/>
+          </categories>
+        </selection>
+      </selections>
+      <categories>
+        <category id="5b12-43b1-1aa4-59a3" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="8230-9b79-9720-b8e5" name="Fighter" entryId="f2ce-030d-9971-73f0" primary="false"/>
+        <category id="cfd1-0237-ebdc-c825" name="Leader" entryId="4d50-0ab6-f937-3410" primary="false">
+          <rules>
+            <rule id="c910-f5c2-a72f-3a48" name="Leader" hidden="false"/>
+          </rules>
+        </category>
+        <category id="9423-499f-6afa-a5db" name="Thrall" entryId="a032-0ba0-1821-c59d" primary="false">
+          <rules>
+            <rule id="ca49-881b-70b0-9350" name="Thrall" hidden="false"/>
+          </rules>
+        </category>
+        <category id="b06a-88ee-7fed-f25b" name="Ally" entryId="c2de-1520-8af2-adcb" primary="false">
+          <rules>
+            <rule id="4a7c-0ae6-a983-e756" name="Ally" hidden="false"/>
+          </rules>
+        </category>
+      </categories>
+    </force>
+  </forces>
+</roster>

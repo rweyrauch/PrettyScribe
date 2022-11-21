@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>PrettyScribe</title>
+
+      <link rel="shortcut icon" href="./assets/favicon.ico" sizes="32x32">
+
+      <link href="https://fonts.googleapis.com/css?family=Fjalla+One|PT+Serif|Source+Sans+Pro&display=swap"
+            rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro&display=swap" rel="stylesheet">
+
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <link rel="stylesheet" href="./css/prettyscribe.css">
+
+      <script src="https://kit.fontawesome.com/324895d590.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+      <div style="display:none;">
+            <img id="octagon" src="./assets/octagon.png">
+            <img id="role_dt" src="./assets/icon_DT.png">
+            <img id="role_el" src="./assets/icon_EL.png">
+            <img id="role_fa" src="./assets/icon_FA.png">
+            <img id="role_fl" src="./assets/icon_FL.png">
+            <img id="role_ft" src="./assets/icon_FT.png">
+            <img id="role_hq" src="./assets/icon_HQ.png">
+            <img id="role_hs" src="./assets/icon_HS.png">
+            <img id="role_lw" src="./assets/icon_LW.png">
+            <img id="role_tr" src="./assets/icon_TR.png">
+            <img id="aos_stats" src="./assets/aos_stats_min.svg">
+      </div>
+
+      <div class="d-print-none">
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+                  <div class="container">
+                        <a class="navbar-brand" href="index.html">PrettyScribe</a>
+                        <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
+                              data-bs-target="#collapsibleNavbarAbout" aria-controls="navbarNav" aria-expanded="false"
+                              aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="collapsibleNavbarAbout">
+                              <ul class="navbar-nav me-auto">
+                                    <li class="nav-item">
+                                          <a class="nav-link" href="help.html">Help</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                          <a class="nav-link active" href="about.html">About</a>
+                                    </li>
+                              </ul>
+                        </div>
+                        <div>A pretty-printer for BattleScribe rosters.</div>
+                  </div>
+            </nav>
+
+            <div class="container">
+                  <div class="input-group input-file mb-3">
+                        <input type="file" class="form-control" files="roster-file" id="roster-file" name="roster-file">
+                        <label class="input-group-text" for="roster-file">Select roster file (.ros, .rosz)</label>
+                  </div>
+            </div>
+
+            <hr class="border-top border-primary">
+      </div>
+
+      <div class="container-fluid">
+            <div id="roster-title"></div>
+
+            <div id="roster-lists"></div>
+
+            <div id="force-units"></div>
+      </div>
+
+      <!-- AoS Warcry unit display prototype -->
+      <div class="container-fluid border" style="display:none;">
+            <div class="row align-items-center">
+                  <div class="col-1">
+                        <img class="border border-dark rounded-circle warcry_card"
+                              src="./assets/warcry/runemarks/black/factions-chaos-tzeentch-arcanites.svg" alt="">
+                  </div>
+                  <div class="col">
+                        <span class="warcry_font" style="font-size: 2.2em;">Gaunt Summoner on Disc</span>
+                  </div>
+                  <div class="col-4">
+                        <img class="border border-dark rounded-circle warcry_card"
+                              src="./assets/warcry/runemarks/black/fighters-agile.svg" alt="">
+                        <img class="border border-dark rounded-circle warcry_card"
+                              src="./assets/warcry/runemarks/black/fighters-champion.svg" alt="">
+                        <img class="border border-dark rounded-circle warcry_card"
+                              src="./assets/warcry/runemarks/black/fighters-mount.svg" alt="">
+                  </div>
+                  <div class="col-1">
+                        <div class="border border-dark text-center rounded-circle warcry_font"
+                              style="width: 72px; height: 72px; line-height: 72px;">
+                              260
+                        </div>
+                  </div>
+            </div>
+            <div class="row align-items-center">
+                  <div class="col">
+                        <p class="card-title warcry_font">Tzeentch Arcane Bolt</p>
+                        <div class="row">
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img src="./assets/warcry/runemarks/black/weapons-blast.svg" alt="">
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="card-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-range.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">3-7</p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="card-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-attacks.svg"
+                                                alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">2</p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="card-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-strength.svg"
+                                                alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">3</p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="card-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-damage.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">3/6</p>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="col">
+                        <!-- Empty -->
+                  </div>
+            </div>
+            <div class="row align-items-center">
+                  <div class="col">
+                        <p class="card-title warcry_font">Teeth and Horns</p>
+                        <div class="row">
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img src="./assets/warcry/runemarks/black/weapons-fangs.svg" alt="">
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-range.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">1</p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-attacks.svg"
+                                                alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">4</p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-strength.svg"
+                                                alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">4</p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="carg-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-damage.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">2/4</p>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="col">
+                        <div class="row">
+                              <div class="col">
+                                    <!-- Empty -->
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="card-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-move.svg" alt="">
+                                          <div class="card-body  warcry_card_label">
+                                                <p class="card-title warcry_font">10</p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="card-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-toughness.svg"
+                                                alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-text warcry_font">4</p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="card warcry_card">
+                                          <img class="card-img-top warcry_card_img"
+                                                src="./assets/warcry/runemarks/black/characteristics-wounds.svg" alt="">
+                                          <div class="card-body warcry_card_label">
+                                                <p class="card-title warcry_font">30</p>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <!-- Empty -->
+                              </div>
+                        </div>
+                  </div>
+            </div>
+
+            <div class="row container">
+                  <div class="p-2 mb-2 text-center text-uppercase text-black"><span class="warcry_font">Damage
+                              Table</span></div>
+                  <table class="table table-bordered table-sm text-center">
+                        <thead>
+                              <tr>
+                                    <th>Damage Points Allocated</th>
+                                    <th>Move</th>
+                                    <th>Damage</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <tr>
+                                    <td>0-10</td>
+                                    <td>6"</td>
+                                    <td>4/8</td>
+                              </tr>
+                              <tr>
+                                    <td>11-20</td>
+                                    <td>5"</td>
+                                    <td>4/6</td>
+                              </tr>
+                              <tr>
+                                    <td>21-30</td>
+                                    <td>4"</td>
+                                    <td>3/6</td>
+                              </tr>
+                              <tr>
+                                    <td>31-40</td>
+                                    <td>3"</td>
+                                    <td>3/4</td>
+                              </tr>
+                              <tr>
+                                    <td>41-49</td>
+                                    <td>2"</td>
+                                    <td>2/4</td>
+                              </tr>
+                        </tbody>
+                  </table>
+            </div>
+      </div>
+
+      <!-- AoS unit display prototype -->
+      <div class="container-fluid" style="display:none;">
+            <div class="row">
+                  <div class="col-3">
+                        <div class="aos_unit_stats">
+                              <div class="aos_unit_move">
+                                    <p class="h2">6"</p>
+                              </div>
+                              <div class="aos_unit_wounds">
+                                    <p class="h2">1</p>
+                              </div>
+                              <div class="aos_unit_bravery">
+                                    <p class="h2">6</p>
+                              </div>
+                              <div class="aos_unit_save">
+                                    <p class="h2">5+</p>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="col">
+                        <div class="p-2 mb-2 aos_medium text-center text-uppercase text-black"><span class="h3">Horrors
+                                    of Tzeentch</span></div>
+                        <table class="table table-sm aos_font text-center">
+                              <thead class="aos_light">
+                                    <tr>
+                                          <th>Missile Weapons</th>
+                                          <th>Range</th>
+                                          <th>Attacks</th>
+                                          <th>To Hit</th>
+                                          <th>To Wound</th>
+                                          <th>Rend</th>
+                                          <th>Damage</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr>
+                                          <td>Magical Flames</td>
+                                          <td>12"</td>
+                                          <td>*</td>
+                                          <td>5+</td>
+                                          <td>4+</td>
+                                          <td>-</td>
+                                          <td>1</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                        <table class="table table-sm aos_font text-center">
+                              <thead class="aos_light">
+                                    <tr>
+                                          <th>Melee Weapons</th>
+                                          <th>Range</th>
+                                          <th>Attacks</th>
+                                          <th>To Hit</th>
+                                          <th>To Wound</th>
+                                          <th>Rend</th>
+                                          <th>Damage</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr>
+                                          <td>Taloned Hands</td>
+                                          <td>1"</td>
+                                          <td>*</td>
+                                          <td>4+</td>
+                                          <td>4+</td>
+                                          <td>-</td>
+                                          <td>1</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+
+                        <table class="table table-sm aos_font text-center">
+                              <thead>
+                                    <tr>
+                                          <th class="aos_medium">Damage Table</th>
+                                    </tr>
+                                    <tr class="aos_light">
+                                          <th>Horror Color</th>
+                                          <th>Magical Flames</th>
+                                          <th>Taloned Hands</th>
+                                          <th>Petty Vengeance Roll</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr>
+                                          <td>Iridescent</td>
+                                          <td>6</td>
+                                          <td>2</td>
+                                          <td>3+</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Pink</td>
+                                          <td>3</td>
+                                          <td>1</td>
+                                          <td>4+</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Blue</td>
+                                          <td>2</td>
+                                          <td>1</td>
+                                          <td>5+</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Brimstone</td>
+                                          <td>1</td>
+                                          <td>2</td>
+                                          <td>6+</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+                        <h4 class="text-uppercase">Abilities</h4>
+                        <p class="aos_font"><strong>STANDARD BEARER: </strong>1 in every
+                              10 Pink Horrors in this unit can be a
+                              Pink Horror Icon Bearer instead. At
+                              the start of your hero phase, if you have
+                              a Disciples of Tzeentch army, roll 1
+                              dice for each Pink Horror Icon Bearer
+                              in this unit. For each 3+, you receive 1
+                              Fate Point.
+                        </p>
+                        <p class="aos_font">
+                              <strong>MUSICIAN: </strong>1 in every 10 Pink
+                              Horrors in this unit can be a Pink
+                              Horror Hornblower instead. Add 1 to
+                              save rolls for this unit while it includes
+                              any Pink Horror Hornblowers.
+                        </p>
+                        <p class="aos_font">
+                              <strong>Split and Split Again: </strong>
+                              Each time an Iridescent Horror or
+                              Pink Horror in this unit is slain by a
+                              wound or mortal wound, it does not
+                              count as having been slain but you must
+                              immediately remove it from play and
+                              replace it with 2 Blue Horrors that are
+                              added to its unit.
+
+                              Each time a Blue Horror in this unit is
+                              slain by a wound or mortal wound, it
+                              does not count as having been slain but
+                              you must immediately remove it from
+                              play and replace it with 1 Brimstone
+                              Horrors model that is added to its unit.
+                        </p>
+                        <p class="aos_font">
+                              <strong>Petty Vengeance: </strong>
+                              If a model in this unit is slain, you can
+                              pick 1 enemy unit within 1" of this unit
+                              and roll a dice. If the roll is equal to or
+                              greater than the Petty Vengeance Roll
+                              for the slain model, that enemy unit
+                              suffers 1 mortal wound.
+                        </p>
+                        <div class="container">
+                              <div class="row">
+                                    <div class="col-2 border aos_dark text-center">KEYWORDS</div>
+                                    <div class="col border text-left text-uppercase">
+                                          Chaos Disciples of Tzeentch, Daemon, Horrors of Tzeentch
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+      <!-- 40k unit display prototype -->
+      <div class="container-fluid" style="display:none;">
+            <div class="row">
+                  <div>
+                        Beast Snagga Boyz
+                  </div>
+                  <div>
+                        <p>Power Level: 5 Points: 225</p>
+                  </div>
+            </div>
+            <hr>
+            <table class="table table-striped tabel-sm">
+                  <thead>
+                        <tr>
+                              <th>Model</th>
+                              <th>M</th>
+                              <th>WS</th>
+                              <th>BS</th>
+                              <th>S</th>
+                              <th>T</th>
+                              <th>W</th>
+                              <th>A</th>
+                              <th>LD</th>
+                              <th>SAVE</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                        <tr>
+                              <td>Beast Snagga Boy</td>
+                              <td>5"</td>
+                              <td>3+</td>
+                              <td>5+</td>
+                              <td>5</td>
+                              <td>5</td>
+                              <td>1</td>
+                              <td>2</td>
+                              <td>6</td>
+                              <td>6+</td>
+                        </tr>
+                  </tbody>
+            </table>
+
+            <table class="table table-striped tabel-sm">
+                  <thead>
+                        <tr>
+                              <th>Weapons</th>
+                              <th>Range</th>
+                              <th>Type</th>
+                              <th>S</th>
+                              <th>AP</th>
+                              <th>D</th>
+                              <th>Abilities</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                        <tr>
+                              <td>Slugga</td>
+                              <td>12"</td>
+                              <td>Pistol 1</td>
+                              <td>4</td>
+                              <td>0</td>
+                              <td>1</td>
+                              <td>-</td>
+                        </tr>
+                        <tr>
+                              <td>Choppa</td>
+                              <td>Melee</td>
+                              <td>Melee</td>
+                              <td>User</td>
+                              <td>-1</td>
+                              <td>1</td>
+                              <td>Each time the bearer fights, it can make 1 additional attack with this weapon.</td>
+                        </tr>
+                  </tbody>
+            </table>
+            <hr>
+            <h3>Abilities</h3>
+            <p>Beast Snagga</p>
+            <p>'Ere We Go</p>
+            <hr>
+            <h3>Factions</h3>
+            <p>Orks, Geoff</p>
+            <h3>Keywords</h3>
+            <p>Infantry, Mob, Core, Beast Snagga, Beast Snagga Boyz</p>
+            <h3>Models</h3>
+            <p>Beast Snagga Nob</p>
+            <p>Beast Snagga Boyz (9x)</p>
+      </div>
+
+      <!-- Error dialog -->
+      <div class="modal fade" id="errorDialog">
+            <div class="modal-dialog">
+                  <div class="modal-content">
+                        <div class="modal-header">
+                              <h4 class="modal-title">Message</h4>
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body" id="errorText">
+                        </div>
+                        <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+      <script type="module" src="./dist/prettyscribe.js"></script>
+
+</body>
+
+</html>

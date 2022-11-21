@@ -1,0 +1,1573 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<roster id="2678-a5ab-27ed-6f41" name="New Roster" battleScribeVersion="2.03" gameSystemId="e51d-b1a3-75fc-dc33" gameSystemName="Age of Sigmar" gameSystemRevision="55" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+  <costs>
+    <cost name="pts" typeId="points" value="1990.0"/>
+  </costs>
+  <forces>
+    <force id="3beb-f2f7-afab-a927" name="**Pitched Battle** 2,000" entryId="36b7-ee1e-0855-f23f" catalogueId="750c-157c-3186-61d3" catalogueRevision="19" catalogueName="Destruction - Gloomspite Gitz">
+      <selections>
+        <selection id="1677-42a3-84a9-c5c6" name="Allegiance" entryId="2e34-4297-2fc7-b0fd::b612-c701-be32-d00d" number="1" type="upgrade">
+          <selections>
+            <selection id="ed8f-fc3c-01cb-c297" name="Gloomspite Gitz" entryId="2e34-4297-2fc7-b0fd::f8e3-641a-7a46-2f84" entryGroupId="2e34-4297-2fc7-b0fd::86e0-75e6-39af-5817" number="1" type="upgrade">
+              <profiles>
+                <profile id="2e34-4297-2fc7-b0fd::aa00-e721-3551-b962" name="The Bad Moon" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                  <characteristics>
+                    <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">If any of the armies in a battle are Gloomspite Gitz armies, at the start of the first battle round, before determining who has the first turn, the player commanding the Gloomspite Gitz army must pick one corner of the battlefield as the starting location of the Bad Moon. If both players have Gloomspite Gitz armies, then they must roll off and the winner picks the starting location. The Bad Moon is located at the edge of the battlefield in that corner, and its direction of travel is always diagonally across the map from its starting location.  Starting from the second battle round, before determining who has the first turn, the player commanding the Gloomspite Gitz army must roll a dice. On a 1, the Bad Moon does not move. On a 2-5, it makes 1 move. On a 6, it makes 2 moves. Each move takes the Bad Moon from its current location along its direction of travel to the next location shown on the map. When a move takes the Bad Moon to the opposite edge of the battlefield, it is removed and has no further effect on the battle.   The location of the Bad Moon determines which models are affected by its light. If the Bad Moon’s location is at the edge of the battlefield, its light does not affect any units. If the Bad Moon’s location is in a quarter, its light affects models wholly within the same quarter of the battlefield as its location. If the Bad Moon’s location is at the center of the battlefield, its light affects all models on the battlefield.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="924f-a888-136b-f319" name="Light of the Bad Moon" entryId="2e34-4297-2fc7-b0fd::d350-6aa5-77cb-1c20" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="2e34-4297-2fc7-b0fd::c84d-7402-210c-55d6" name="Bad Moon Magic" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                      <characteristics>
+                        <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">Add 1 to casting rolls for WIZARDS affected by the light of the Bad Moon if they have the GLOOMSPITE GITZ keyword, and subtract 1 from casting rolls for WIZARDS affected by the light of the Bad Moon that do not have the GLOOMSPITE GITZ keyword.</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="2e34-4297-2fc7-b0fd::07f7-f22b-e67a-7f4e" name="Troggoth Renewal" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                      <characteristics>
+                        <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">If all of the models in a friendly TROGGOTH unit are affected by the light of the Bad Moon when it uses its Regeneration ability, you can reroll the dice that determines if the ability heals any wounds, or you can double the number of wounds that are healed by the ability if the first roll is successful.</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="2e34-4297-2fc7-b0fd::8d57-3517-9969-9040" name="Moonclan Fungus Brew" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                      <characteristics>
+                        <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">You can re-roll hit rolls of 1 for attacks made by MOONCLAN GROT models while they are affected by the light of the Bad Moon.</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="2e34-4297-2fc7-b0fd::2ae8-2911-108e-a7d6" name="Lunar Squigs" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                      <characteristics>
+                        <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">If all of the models in a friendly SQUIG unit are affected by the light of the Bad Moon at the start of your charge phase, that unit can attempt to charge even if it ran in the same turn. </characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="2e34-4297-2fc7-b0fd::1784-b78d-2eab-4e18" name="Fangz of the Bad Moon" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                      <characteristics>
+                        <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">If your army is a Gloomspite Gitz army, at the start of your hero phase you can pick 1 enemy unit and roll a dice. If the roll is equal to or less than the number of models in that unit affected by the light of the Bad Moon, that unit suffers D3 mortal wounds. </characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="2e34-4297-2fc7-b0fd::3a89-c404-8744-27b4" name="Loonatic Inspiration" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                      <characteristics>
+                        <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">If your general has the GLOOMSPITE GITZ keyword and is affected by the light of the Bad Moon at the start of your hero phase, you receive 1 extra command point.</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="2e34-4297-2fc7-b0fd::f900-1661-6cb4-f658" name="Spiderfang Venom" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                      <characteristics>
+                        <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">While a SPIDERFANG model is affected by the light of the Bad Moon, its Spider Venom ability causes mortal wounds on an unmodified hit roll of 5+ instead of 6. </characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="e6d3-5ef9-dbb8-4f3d" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="e92d-e66e-cb2c-e2fd" name="Game Type" entryId="e12e-ffc5-6892-4795::a741-5681-7572-fa32" number="1" type="upgrade">
+          <selections>
+            <selection id="7f5d-802d-3936-6406" name="2000 Points - Battlehost" entryId="e12e-ffc5-6892-4795::39f6-88b3-177e-2535::cea8-e4b2-c44f-c7b4" entryGroupId="e12e-ffc5-6892-4795::39f6-88b3-177e-2535::5927-9c5a-8b20-8f37" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="98a0-1bb4-6f4e-c807" name="Battlehost" entryId="6330-7561-7a32-0851" primary="false"/>
+              </categories>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="d27b-6190-eb20-da2d" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="60f5-168c-48bb-0ca9" name="Sneaky Shufflers" entryId="b067-d8cd-64cb-2ce1::7f2d-e883-6fb0-ef8b" number="1" type="unit">
+          <profiles>
+            <profile id="b067-d8cd-64cb-2ce1::0258-05a3-e7a9-31a5" name="Sneaky Shufflers" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">4</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">6+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="b067-d8cd-64cb-2ce1::56f3-f8cb-fc8e-c2e7" name="Looncap Mushrooms" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">At the start of your movement phase, you can say that this unit is harvesting looncap mushrooms. If you do so, it cannot move in that movement phase, but you can roll a dice. If the roll is less than or equal to the number of models in this unit, pick 1 friendly MOONCLAN unit wholly within 12&quot; of this unit. Add 1 to the Attacks characteristic of melee weapons used by that unit until your next movement phase. If you pick the same unit to be affected by this ability more than once in the same turn, it suffers 2D6 mortal wounds each time you pick it an additional time.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="00eb-3057-2142-22ef" name="6 Sneaky Snufflers" entryId="b067-d8cd-64cb-2ce1::3db2-3139-3b64-49d5" number="1" type="unit">
+              <costs>
+                <cost name="pts" typeId="points" value="70.0"/>
+              </costs>
+            </selection>
+            <selection id="f911-2d48-e0c1-45c9" name="Gnashers" entryId="b067-d8cd-64cb-2ce1::f5e9-5fa6-a992-e605" number="1" type="upgrade">
+              <profiles>
+                <profile id="b067-d8cd-64cb-2ce1::23e6-5e2c-7bcc-fe9f" name="Gnashers" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="2ef9-3a2a-6361-fdee" name="Loonfungus Sickle" entryId="b067-d8cd-64cb-2ce1::74c9-603c-b3cf-eb11" number="1" type="upgrade">
+              <profiles>
+                <profile id="b067-d8cd-64cb-2ce1::33ad-bc9a-2e1e-cf8e" name="Loonfungus Sickle" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="3806-e238-5c8c-e96e" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="2e2f-14c9-2e3a-ffd0" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="244f-c553-cf8d-8094" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="4b4f-59fe-2da8-55f2" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="61e2-e709-39a7-bf5e" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="412f-bc9e-33ac-8a45" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="cdf4-ac5d-5dc9-60e6" name="Loonboss on Mangler Squigs" entryId="f5ba-3dd8-de2e-78fa::6a0d-90f0-a499-dfbb" publicationId="3323-8984-c803-feb5" number="1" type="model">
+          <profiles>
+            <profile id="f5ba-3dd8-de2e-78fa::4000-b4e9-0170-68d1" name="Fly" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can fly.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f5ba-3dd8-de2e-78fa::42ad-bf90-faba-9d9c" name="Redcap Mushrooms" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Once per battle, in your hero phase, you can say that this model is eating a redcap mushroom. If you do so, you can re-roll hit and wound rolls for this model’s Mooncutta or Moonclan Stabba until your next hero phase.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f5ba-3dd8-de2e-78fa::1872-3463-0f9f-494f" name="Ker-splat!" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to hit rolls for attacks made with this model’s Balls and Chains if this model made a charge move in the same turn.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f5ba-3dd8-de2e-78fa::0c13-189b-84ac-0951" name="Bite Da Moon!" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+              <characteristics>
+                <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this command ability at the start of a combat phase. If you do so, pick 1 friendly model with this command ability. In that combat phase you can add 1 to wound rolls for friendly SQUIG units while they are wholly within 18&quot; of that model.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f5ba-3dd8-de2e-78fa::5293-77e2-a986-abfd" name="Watch Out!" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If this model is slain, before the model is removed from play roll a dice for each unit within 6&quot; of this model. On a 4+ that unit suffers D3 mortal wounds.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f5ba-3dd8-de2e-78fa::38ef-5a36-5742-1e5a" name="Loonboss on Mangler Squigs" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">*</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">12</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">10</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="7afb-d3ce-9b5e-f53c" name="Wound Suffered" entryId="f5ba-3dd8-de2e-78fa::8ebe-d026-7639-5ca6" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::0f22-3eea-6512-42ed" name="00-02" hidden="false" typeId="2a8e-0fcd-1727-325b" typeName="Wound Track Manglers">
+                  <characteristics>
+                    <characteristic name="Move" typeId="4854-6a55-b0ef-351b">3D6&quot;</characteristic>
+                    <characteristic name="Huge Fang-filled Gobs" typeId="e5dc-d38b-1f72-69bf">3+</characteristic>
+                    <characteristic name="Balls and Chains" typeId="0d06-8fc6-6913-e32c">7</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="f5ba-3dd8-de2e-78fa::146e-74d6-9352-e014" name="03-04" hidden="false" typeId="2a8e-0fcd-1727-325b" typeName="Wound Track Manglers">
+                  <characteristics>
+                    <characteristic name="Move" typeId="4854-6a55-b0ef-351b">2D6&quot;</characteristic>
+                    <characteristic name="Huge Fang-filled Gobs" typeId="e5dc-d38b-1f72-69bf">4+</characteristic>
+                    <characteristic name="Balls and Chains" typeId="0d06-8fc6-6913-e32c">6</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="f5ba-3dd8-de2e-78fa::b5ee-69b3-f7b7-1b24" name="05-07" hidden="false" typeId="2a8e-0fcd-1727-325b" typeName="Wound Track Manglers">
+                  <characteristics>
+                    <characteristic name="Move" typeId="4854-6a55-b0ef-351b">D6&quot;</characteristic>
+                    <characteristic name="Huge Fang-filled Gobs" typeId="e5dc-d38b-1f72-69bf">5+</characteristic>
+                    <characteristic name="Balls and Chains" typeId="0d06-8fc6-6913-e32c">5</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="f5ba-3dd8-de2e-78fa::6078-bdbe-9177-6783" name="08-09" hidden="false" typeId="2a8e-0fcd-1727-325b" typeName="Wound Track Manglers">
+                  <characteristics>
+                    <characteristic name="Move" typeId="4854-6a55-b0ef-351b">2D6&quot;</characteristic>
+                    <characteristic name="Huge Fang-filled Gobs" typeId="e5dc-d38b-1f72-69bf">4+</characteristic>
+                    <characteristic name="Balls and Chains" typeId="0d06-8fc6-6913-e32c">6</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="f5ba-3dd8-de2e-78fa::c87b-2506-6558-815d" name="10+" hidden="false" typeId="2a8e-0fcd-1727-325b" typeName="Wound Track Manglers">
+                  <characteristics>
+                    <characteristic name="Move" typeId="4854-6a55-b0ef-351b">3D6&quot;</characteristic>
+                    <characteristic name="Huge Fang-filled Gobs" typeId="e5dc-d38b-1f72-69bf">3+</characteristic>
+                    <characteristic name="Balls and Chains" typeId="0d06-8fc6-6913-e32c">7</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="d5bc-7791-7feb-a5ac" name="General - Loonboss with Squig" entryId="f5ba-3dd8-de2e-78fa::1640-e4d4-6110-db01::ed19-e955-1653-b94d::f0a0-7340-338a-fdd2" entryGroupId="f5ba-3dd8-de2e-78fa::1640-e4d4-6110-db01::1a82-5c07-3561-514c" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="4e53-33e1-c689-36af" name="2. Fight Another Day" entryId="f5ba-3dd8-de2e-78fa::b916-d9c1-61fe-9dcd::05c2-3a95-cf74-4ed1" entryGroupId="f5ba-3dd8-de2e-78fa::b916-d9c1-61fe-9dcd::6eed-3cba-2a72-3cd9" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::b916-d9c1-61fe-9dcd::9c95-5385-b23e-2029" name="Fight Another Day" hidden="false" typeId="c749-bae4-71a8-0c36" typeName="Command Trait">
+                  <characteristics>
+                    <characteristic name="Command Trait Details" typeId="ee96-6f3a-e5ca-2350">Each time this general attacks with its melee weapons, it can make a 2d6&quot; move after all of its attacks have been resolved. If it does so, it must finish the move more than 3&quot; from enemy units.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="d136-dca4-e867-a29d" name="3. Loonstone Talisman" entryId="f5ba-3dd8-de2e-78fa::98ae-8646-095a-f840::20c8-5a3b-dd7a-d7bd::5da0-217a-dc21-a765" entryGroupId="f5ba-3dd8-de2e-78fa::98ae-8646-095a-f840::20c8-5a3b-dd7a-d7bd::41ab-c0e7-8a77-1441" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::98ae-8646-095a-f840::20c8-5a3b-dd7a-d7bd::bd23-7438-01be-bb1f" name="Loonstone Talisman" hidden="false" typeId="0ac4-aacb-2481-8e72" typeName="Artefact">
+                  <characteristics>
+                    <characteristic name="Artefact Details" typeId="0918-c47a-d84e-c0cf">Roll a dice each time you allocate a mortal wound to the bearer. On a 5+ that mortal wound is negated. </characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="46bd-d74b-6d24-733b" name="Balls and Chains" entryId="f5ba-3dd8-de2e-78fa::a8da-f2d9-d9b2-9756" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::0f16-5592-151f-ceb3" name="Balls and Chains" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">*</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-2</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="7c1d-1870-f868-88fd" name="Grots&apos; Bashin&apos; Stikks" entryId="f5ba-3dd8-de2e-78fa::a3bc-a01d-744c-3916" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::bf21-d882-60fa-3513" name="Grots&apos; Bashin&apos; Stikks" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="df41-4602-57f4-28c7" name="Huge Fang-filled Gobs" entryId="f5ba-3dd8-de2e-78fa::f1b7-3f66-cc0b-0b39" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::ed67-ad9f-aaf3-d054" name="Huge Fang-filled Gobs" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">*</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D6</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="f4e5-4f9f-a47d-d1f9" name="Moon-cutta" entryId="f5ba-3dd8-de2e-78fa::daf2-f873-d681-6692" number="1" type="upgrade">
+              <profiles>
+                <profile id="f5ba-3dd8-de2e-78fa::2fdb-43c1-55b8-7553" name="Moon-cutta" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">5</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707"/>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="280.0"/>
+          </costs>
+          <categories>
+            <category id="7e59-3223-f2d3-1976" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="2896-e8f4-266e-baab" name="SQUIG-BOSS" entryId="647a-69d4-fe9c-2491" primary="false"/>
+            <category id="557f-f513-a31d-6191" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="9e05-48ae-129f-1008" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="0e0d-0a5e-d26f-71ab" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="c3e1-bcbf-591b-0606" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="82f9-1c48-2766-7e8b" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="83f9-94bc-86ca-2491" name="MONSTER" entryId="1959-9f6a-3056-913a" primary="false"/>
+            <category id="8a05-1de3-3510-75d4" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="b81e-1662-92aa-03f3" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="483c-6efc-11c2-b310" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="65bc-b769-fc61-f59f" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="4d8e-a37b-535c-ad78" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="04a5-a2d6-8bbc-1517" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="80d0-9235-7798-fd71" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="4eb5-d594-067e-4afa" name="Zarbag" entryId="2fa8-e4d0-5fd3-fd08::db84-4cbf-0008-9a63" number="1" type="model">
+          <profiles>
+            <profile id="2fa8-e4d0-5fd3-fd08::73e9-1e8d-2315-9e3c" name="Sniffer Spite" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Once per battle, before you attempt to cast a spell with this model, you can roll a dice. On a 2+, add 2 to the casting roll.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="2fa8-e4d0-5fd3-fd08::51ad-7bb6-fd2f-06e7" name="Zarbag" hidden="false" typeId="f55d-ee3a-1597-110f" typeName="Magic">
+              <characteristics>
+                <characteristic name="Cast/Unbind" typeId="8294-f605-2c0f-8f92">1/1</characteristic>
+                <characteristic name="Spells Known" typeId="dc9c-47d3-6931-859c">Arcane Bolt, Mystic Shield, Face of Da Bad Moon, one other from the Lore of the Moonclan</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="2fa8-e4d0-5fd3-fd08::d1a3-0e74-a625-4f9b" name="Zarbag" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">5</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">4</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">6+</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="d594-e03b-de89-9452" name="2. Itchy Nuisance" entryId="2fa8-e4d0-5fd3-fd08::1b06-293f-e81b-da72::7ca2-76ce-0fc4-fc8e" entryGroupId="2fa8-e4d0-5fd3-fd08::1b06-293f-e81b-da72::9e4b-9a06-84c4-c5d9" number="1" type="upgrade">
+              <profiles>
+                <profile id="2fa8-e4d0-5fd3-fd08::1b06-293f-e81b-da72::4b60-cc4b-b748-bf22" name="Itchy Nuisance" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">6</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick 1 enemy unit within 18&quot; of the caster and visible to them. That unit fights at the end of the next combat phase, after the players have picked any other units to fight in that combat phase. </characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e6c1-efc1-59dc-719f" name="Mystic Shield" entryId="2fa8-e4d0-5fd3-fd08::b959-e4cf-f681-7d99" number="1" type="upgrade">
+              <profiles>
+                <profile id="2fa8-e4d0-5fd3-fd08::140b-8492-9358-0108::b41f-f1ce-7aa5-4f81" name="Mystic Shield" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">6</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick a friendly unit within 18&quot; of the caster that is visible to them. Re-roll save rolls of 1 for that unit until your next hero phase.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="0d4e-ed93-312b-c27d" name="Arcane Bolt" entryId="2fa8-e4d0-5fd3-fd08::724f-2551-d750-60e6" number="1" type="upgrade">
+              <profiles>
+                <profile id="2fa8-e4d0-5fd3-fd08::06ac-773f-2e63-1c73::ae02-a84f-a903-1ff8" name="Arcane Bolt" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick an enemy unit within 18&quot; of the caster that is visible to them. That unit suffers 1 mortal wound. If the casting roll was 10 or more, the unit suffers D3 mortal wounds instead.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="108c-0ed2-62ab-8db3" name="Cursed Sickle" entryId="2fa8-e4d0-5fd3-fd08::c310-6e22-7215-0237" number="1" type="upgrade">
+              <profiles>
+                <profile id="2fa8-e4d0-5fd3-fd08::ea86-1f44-2659-1855" name="Cursed Sickle" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="b6dd-5516-2337-2a8c" name="Face of Da Bad Moon" entryId="2fa8-e4d0-5fd3-fd08::87dd-f0b2-7b2a-19e7" number="1" type="upgrade">
+              <profiles>
+                <profile id="2fa8-e4d0-5fd3-fd08::d46e-cf66-116c-4903" name="Face of Da Bad Moon" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick 1 enemy unit within 3&quot; of the caster that is visible to them. That unit must make a normal move and must retreat. If it is impossible for the unit to make the move for any reason, it suffers D6 mortal wounds, instead.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="160.0"/>
+          </costs>
+          <categories>
+            <category id="dd89-426e-3ff1-d56d" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="fdae-2247-3161-3df7" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="e8bf-4bfc-53a3-5951" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="e66f-4973-8e2f-db6d" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="3a59-4189-18dd-04bd" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="d384-d121-68e4-d695" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="f4b8-6ac2-d697-c090" name="MADCAP SHAMAN" entryId="3c1c-ad7a-13e9-7e3b" primary="false"/>
+            <category id="fb5a-c2ed-29cd-dfa1" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="ef0c-0d1c-bf7f-59c1" name="MOONCLAN WIZARD" entryId="930d-b87d-0db6-2b35" primary="false"/>
+            <category id="64d7-d0f2-6590-f299" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="b970-0f7f-9003-3efc" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="7774-a93c-8744-cb95" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="6c9f-4582-5fee-a0c5" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="03f8-e6fd-540d-1e7e" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="bf6c-5581-ba03-a177" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="7849-d4d9-62ac-70fb" name="Zarbag&apos;s Gitz" entryId="403d-f219-0811-551b::2653-d92c-7afc-5bf6" number="1" type="unit">
+          <profiles>
+            <profile id="403d-f219-0811-551b::4284-e1f5-c620-869f" name="Description" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit consists of 7 models; the Squig Herder armed with a Squid Prodder, 2 Cave Squigs each armed with a Massive Gob Full of Teeth, the Netter armed with a Slitta and a Barbed Net, and 3 Moonclan Shootas each armed with a Moonclan Bow and Slitta.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="403d-f219-0811-551b::d58b-f001-389f-2aac" name="Zarbag&apos;s Gitz" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">1</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">4</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">6+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="403d-f219-0811-551b::9ae2-ba72-804a-3bdf" name="Loonsmasha Fanatic" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">A Loonsmasha Fanatic unit consisting of 1 model lurks with Zarbag&apos;s Gitz.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="403d-f219-0811-551b::37bc-c197-746a-80f4" name="Squigs Go Wild" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Roll a dice each time a Cave Squig model from this unit flees, before the model is removed from play. On a 4+, the nearest other unit within 6&quot; of the fleeing model suffers 1 mortal wound. If two or more of such units are equally close, you can pick which suffers the mortal wound.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="403d-f219-0811-551b::1668-7005-0049-6760" name="Netters" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Subtract 1 from hit rolls for attacks made by enemy models while they are within 2&quot; of any friendly models with a Barbed Net.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="403d-f219-0811-551b::1a0d-cad6-d765-d18b" name="Tough as Old Boots" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Squig Herder and Cave Squig models in this unit have a Wounds characteristic of 2.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="3cae-782b-fddd-536f" name="Massive Gob Full of Teeth" entryId="403d-f219-0811-551b::da64-8419-eecb-5169" number="1" type="upgrade">
+              <profiles>
+                <profile id="403d-f219-0811-551b::ed0f-bb8f-bda1-4ef5" name="Massive Gob Full of Teeth" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="4d13-a8f8-452f-3dec" name="Moonclan Bow" entryId="403d-f219-0811-551b::ccba-e699-773c-6f61" number="1" type="upgrade">
+              <profiles>
+                <profile id="403d-f219-0811-551b::1f8f-93f3-31cc-38ee" name="Moonclan Bow" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">16&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">5+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="5391-8d15-0763-002a" name="Slitta" entryId="403d-f219-0811-551b::3322-a12f-25af-b496" number="1" type="upgrade">
+              <profiles>
+                <profile id="403d-f219-0811-551b::401e-3ca7-ca2f-dc17" name="Slitta" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">5+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e063-eebf-551d-1331" name="Squig Prodder" entryId="403d-f219-0811-551b::83a1-4f46-fcbe-449d" number="1" type="upgrade">
+              <profiles>
+                <profile id="403d-f219-0811-551b::8b3e-a92d-8357-3401" name="Squig Prodder" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="7121-3f86-c0d3-7b54" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="3066-8c18-1a6c-d3c0" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="0fe0-9c18-4502-2d36" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="ae75-f6ce-8afa-bf6e" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="bae5-0d0c-8f76-2f9c" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="0f42-cef7-326e-85ad" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="9452-eb0f-b202-cc84" name="Boingrot Bounders" entryId="b583-cda5-78cc-82b3::ff2e-4400-dbde-d4c4" number="1" type="unit">
+          <profiles>
+            <profile id="b583-cda5-78cc-82b3::86e7-ae34-7bb9-331f" name="Boingrot Bounders" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">2D6&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">5</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="b583-cda5-78cc-82b3::f336-19ec-5dbe-ff29" name="Boing! Smash!" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">After this unit has made a charge move, pick 1 enemy unit within 1&quot; of this unit and roll a dice for each model in this unit. For each 4+, that enemy unit suffers 1 mortal wound.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="b583-cda5-78cc-82b3::c221-7612-f848-cf94" name="Lances of the Bounderz" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to wound rolls for attacks made with this unit&apos;s Pokin&apos; Lances if this unit made a charge move in the same turn.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="b583-cda5-78cc-82b3::2ee4-9943-15c7-298b" name="Bounder Boss" hidden="false" typeId="8b8c-5816-cbdb-9763" typeName="Unit Leader">
+              <characteristics>
+                <characteristic name="Leader Ability" typeId="afb5-0652-767a-6769">You can add 1 to hit rolls for attacks made with a Bounder Boss&apos;s Pokin&apos; Lance.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="b583-cda5-78cc-82b3::b119-4064-6c1d-8deb::8e0c-cbe4-27be-8a30" name="Fly" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can fly.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="43c3-7f44-6b52-ff98" name="5 Boingrot Bounderz" entryId="b583-cda5-78cc-82b3::03de-94a7-ba65-6208" number="2" type="unit">
+              <costs>
+                <cost name="pts" typeId="points" value="200.0"/>
+              </costs>
+            </selection>
+            <selection id="89d7-30fd-acab-43be" name="Fang-filled Gob" entryId="b583-cda5-78cc-82b3::cc25-1590-0117-24d3" number="1" type="upgrade">
+              <profiles>
+                <profile id="b583-cda5-78cc-82b3::b8d9-1464-6ccb-c48f" name="Fang-filled Gob" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="bd1c-a014-5e6c-c66c" name="Pokin&apos; Lance" entryId="b583-cda5-78cc-82b3::6afe-2a78-a219-8135" number="1" type="upgrade">
+              <profiles>
+                <profile id="b583-cda5-78cc-82b3::e683-9706-d1aa-781e" name="Pokin&apos; Lance" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="cd98-e5e1-44ea-8a88" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="ceb4-951b-5259-0704" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="2ed1-dd3c-3998-03a3" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="06e5-3c67-5d52-1ebe" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="a3dd-bee1-69e1-177d" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="4c50-6cf8-857f-a087" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="ed42-e58f-f6b1-4ccd" name="Fungoid Cave-Shaman" entryId="04ca-f4e4-7e08-496a::6d41-0a01-8e38-6094" number="1" type="model">
+          <profiles>
+            <profile id="04ca-f4e4-7e08-496a::a49a-c5fd-19a2-4715" name="Mouthpiece of Mork" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If this model is on the battlefield at the start of your hero phase, roll a dice. On a 4+ you receive 1 extra command point.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="04ca-f4e4-7e08-496a::272d-a863-c872-f328" name="Deffcap Mushroom" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Once per battle, this model can attempt to cast 1 extra spell in your hero phase.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="04ca-f4e4-7e08-496a::dd62-7b93-f7a4-f7e7" name="Spore Squig" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Roll a dice each time you allocate a wound or mortal wound to this model. On a 4+ the wound or mortal wound is negated.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="04ca-f4e4-7e08-496a::0914-d8df-782d-9644" name="Fungoid Cave-Shaman" hidden="false" typeId="f55d-ee3a-1597-110f" typeName="Magic">
+              <characteristics>
+                <characteristic name="Cast/Unbind" typeId="8294-f605-2c0f-8f92">1/1</characteristic>
+                <characteristic name="Spells Known" typeId="dc9c-47d3-6931-859c">Arcane Bolt, Mystic Shield, Spore Maws, one other from the Lore of the Moonclan</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="04ca-f4e4-7e08-496a::055b-d3b5-6d41-8dc4" name="Fungoid Cave-Shaman" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">4</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">4</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">6+</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="3b3e-a8ac-6ca0-c0f8" name="4. The Hand of Gork" entryId="04ca-f4e4-7e08-496a::a697-a968-e7fe-16c1::2c7d-c7d2-7226-fc8a" entryGroupId="04ca-f4e4-7e08-496a::a697-a968-e7fe-16c1::9e4b-9a06-84c4-c5d9" number="1" type="upgrade">
+              <profiles>
+                <profile id="04ca-f4e4-7e08-496a::a697-a968-e7fe-16c1::cd34-e4d4-3071-8942" name="The Hand of Gork" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">7</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick 1 friendly GLOOMSPITE GITZ unit wholly within 24&quot; of the caster, visible to them and more than 3&quot; from any enemy units. Remove that unit from the battlefield and set it up again anywhere on the battlefield more than 9&quot; from any enemy units. It may not move in the subsequent movement phase. </characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="827e-495e-6685-2fb5" name="Mystic Shield" entryId="04ca-f4e4-7e08-496a::9500-ae79-f491-68eb" number="1" type="upgrade">
+              <profiles>
+                <profile id="04ca-f4e4-7e08-496a::48ef-cac9-ad68-2062::b41f-f1ce-7aa5-4f81" name="Mystic Shield" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">6</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick a friendly unit within 18&quot; of the caster that is visible to them. Re-roll save rolls of 1 for that unit until your next hero phase.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="0306-c650-a97f-75ce" name="Arcane Bolt" entryId="04ca-f4e4-7e08-496a::79ce-ba67-71b6-3e61" number="1" type="upgrade">
+              <profiles>
+                <profile id="04ca-f4e4-7e08-496a::ba37-ebd4-75e9-a465::ae02-a84f-a903-1ff8" name="Arcane Bolt" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick an enemy unit within 18&quot; of the caster that is visible to them. That unit suffers 1 mortal wound. If the casting roll was 10 or more, the unit suffers D3 mortal wounds instead.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="795b-bf5c-e8ff-37db" name="Moon-sickle" entryId="04ca-f4e4-7e08-496a::e97d-9934-c8c9-a580" number="1" type="upgrade">
+              <profiles>
+                <profile id="04ca-f4e4-7e08-496a::6050-c026-e8c8-f789" name="Moon-sickle" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="63d0-35e8-8573-18da" name="Spore Maws" entryId="04ca-f4e4-7e08-496a::4787-fd15-b6d9-50f6" number="1" type="upgrade">
+              <profiles>
+                <profile id="04ca-f4e4-7e08-496a::4c23-1aac-1d33-cc2a" name="Spore Maws" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">7</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, each enemy unit within D6&quot; of the caster suffers D3 mortal wounds.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e02e-f291-c202-a200" name="Spore Squig&apos;s Vicious Teeth" entryId="04ca-f4e4-7e08-496a::13ef-9bd6-75ad-1476" number="1" type="upgrade">
+              <profiles>
+                <profile id="04ca-f4e4-7e08-496a::08e8-a816-a9aa-131e" name="Spore Squig&apos;s Vicious Teeth" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="90.0"/>
+          </costs>
+          <categories>
+            <category id="e0a7-192e-d02a-9b70" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="1e15-3302-61b7-c65f" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="d210-52a8-1844-3dde" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="e69b-682a-0dc1-a641" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="6fce-bf98-1b14-57c3" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="1cf2-c38c-7870-180e" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="fb64-a2d6-ff3e-27d1" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="f3b2-c444-6897-2d9d" name="MOONCLAN WIZARD" entryId="930d-b87d-0db6-2b35" primary="false"/>
+            <category id="f1ff-8033-d61b-9c9a" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="2641-9981-2028-000a" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="c2ec-4b4a-cc50-3c64" name="Boingrot Bounders" entryId="b583-cda5-78cc-82b3::ff2e-4400-dbde-d4c4" number="1" type="unit">
+          <profiles>
+            <profile id="b583-cda5-78cc-82b3::86e7-ae34-7bb9-331f" name="Boingrot Bounders" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">2D6&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">5</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="b583-cda5-78cc-82b3::f336-19ec-5dbe-ff29" name="Boing! Smash!" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">After this unit has made a charge move, pick 1 enemy unit within 1&quot; of this unit and roll a dice for each model in this unit. For each 4+, that enemy unit suffers 1 mortal wound.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="b583-cda5-78cc-82b3::c221-7612-f848-cf94" name="Lances of the Bounderz" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to wound rolls for attacks made with this unit&apos;s Pokin&apos; Lances if this unit made a charge move in the same turn.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="b583-cda5-78cc-82b3::2ee4-9943-15c7-298b" name="Bounder Boss" hidden="false" typeId="8b8c-5816-cbdb-9763" typeName="Unit Leader">
+              <characteristics>
+                <characteristic name="Leader Ability" typeId="afb5-0652-767a-6769">You can add 1 to hit rolls for attacks made with a Bounder Boss&apos;s Pokin&apos; Lance.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="b583-cda5-78cc-82b3::b119-4064-6c1d-8deb::8e0c-cbe4-27be-8a30" name="Fly" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can fly.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="2aac-dd07-ecc3-80b2" name="5 Boingrot Bounderz" entryId="b583-cda5-78cc-82b3::03de-94a7-ba65-6208" number="2" type="unit">
+              <costs>
+                <cost name="pts" typeId="points" value="200.0"/>
+              </costs>
+            </selection>
+            <selection id="9936-9b7d-2b0a-167f" name="Fang-filled Gob" entryId="b583-cda5-78cc-82b3::cc25-1590-0117-24d3" number="1" type="upgrade">
+              <profiles>
+                <profile id="b583-cda5-78cc-82b3::b8d9-1464-6ccb-c48f" name="Fang-filled Gob" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="5363-214d-1845-9b39" name="Pokin&apos; Lance" entryId="b583-cda5-78cc-82b3::6afe-2a78-a219-8135" number="1" type="upgrade">
+              <profiles>
+                <profile id="b583-cda5-78cc-82b3::e683-9706-d1aa-781e" name="Pokin&apos; Lance" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="1f54-ca23-8e39-487a" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="e1b4-c266-6aec-1e9c" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="2fc3-bf9b-1f1f-f73f" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="7abf-5f52-54a4-5cd6" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="d85e-424c-e42d-a2c1" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+            <category id="9e6c-153d-b892-169f" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="7542-b527-a7c6-df49" name="Stabbas" entryId="4e28-9e45-8827-ceed::f468-427a-bd3b-4e91" number="1" type="unit">
+          <profiles>
+            <profile id="4e28-9e45-8827-ceed::545f-1b87-086a-ff82" name="Stabbas" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">1</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">4</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">6+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4e28-9e45-8827-ceed::3199-05c2-f53b-7c18" name="Barbed Net" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+              <characteristics>
+                <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">5+</characteristic>
+                <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4e28-9e45-8827-ceed::12ff-9884-3cf4-0d2c" name="Backstabbing Mob" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to wound rolls for attacks made with melee weapons by this unit while it has at least 15 models. Add 2 to the wound rolls made with melee weapons by this unit instead while it has at least 30 models. </characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4e28-9e45-8827-ceed::8c2f-815a-2c10-7044" name="Moon Shields" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to save rolls for attacks that target this unit while it has at least 10 models with Moon Shields.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4e28-9e45-8827-ceed::eddf-ed87-dd7d-07fc" name="Netters" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Subtract 1 from hit rolls for attacks made by enemy models while they are within 2&quot; of any friendly models with a Barbed Net.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4e28-9e45-8827-ceed::f142-d277-ff4e-a3b9" name="Moonclan Boss" hidden="false" typeId="8b8c-5816-cbdb-9763" typeName="Unit Leader">
+              <characteristics>
+                <characteristic name="Leader Ability" typeId="afb5-0652-767a-6769">You can add 1 to hit rolls for attacks made with melee weapons by a Moonclan Boss.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="8758-6c13-fe50-705e" name="20 Stabbas" entryId="4e28-9e45-8827-ceed::9379-5c13-bfd0-98f8" number="3" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="360.0"/>
+              </costs>
+            </selection>
+            <selection id="4e2e-0c01-bdd6-87a1" name="Stabba" entryId="4e28-9e45-8827-ceed::1e47-11ba-f39f-54ba" number="1" type="upgrade">
+              <profiles>
+                <profile id="4e28-9e45-8827-ceed::3577-e4a3-4a0d-e93b" name="Stabba" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="96d2-3bcd-a8f6-0b4c" name="Pokin&apos; Spear" entryId="4e28-9e45-8827-ceed::b923-2056-cb35-65d5" number="1" type="upgrade">
+              <profiles>
+                <profile id="4e28-9e45-8827-ceed::b8fa-2e36-46ed-d335" name="Pokin&apos; Spear" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="1bdf-b4a4-f342-fc4c" name="Barbed Net" entryId="4e28-9e45-8827-ceed::b6ba-f9c8-815d-0bc6" number="1" type="upgrade">
+              <profiles>
+                <profile id="4e28-9e45-8827-ceed::d8c3-5d5a-0855-da10" name="Barbed Net" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">5+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="3ba5-bf22-78f8-7e7f" name="Gong Basher" entryId="4e28-9e45-8827-ceed::67d1-4084-739e-e146" number="3" type="upgrade">
+              <rules>
+                <rule id="4e28-9e45-8827-ceed::9c3e-a141-b771-8087" name="Gong Basher" hidden="false">
+                  <description>1 in every 20 models in this unit can be a Gong Basher. Add 2 to run rolls for a unit that includes any Gong Bashers.</description>
+                </rule>
+              </rules>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="c389-e976-a586-12d9" name="Standard Bearer" entryId="4e28-9e45-8827-ceed::261e-83df-236c-7e6b" number="3" type="upgrade">
+              <rules>
+                <rule id="4e28-9e45-8827-ceed::8f00-594e-dd2f-63ad" name="Standard Bearer" hidden="false">
+                  <description>1 in every 20 models in this unit can either be a Moonclan Flag Bearer or a Bad Moon Icon Bearer. Add 1 to the Bravery characteristic of a unit that includes any Moonclan Flag Bearers. Add 1 to save rolls for attacks made with missile weapons that target a unit that includes any Bad Moon Icon Bearers.</description>
+                </rule>
+              </rules>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="2ba4-8899-36bd-30f5" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="ef73-f35d-5aa6-4285" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="f9fa-d204-79dd-7b1e" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="8e8c-022e-40da-d387" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="2d36-afea-f45c-9b30" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+            <category id="e003-0293-9178-fcee" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="cffd-c1c8-f239-b7c4" name="Squig Herd" entryId="8d20-a798-f03a-d4a6::d7f2-6558-9c0f-89bc" number="1" type="unit">
+          <profiles>
+            <profile id="8d20-a798-f03a-d4a6::316e-4472-7656-59ac" name="Squig Herd" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">3</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">6+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="8d20-a798-f03a-d4a6::3c57-bbf7-7445-034c" name="Go Dat Way!" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll run and charge rolls for this unit while it includes any Squig Herders. </characteristic>
+              </characteristics>
+            </profile>
+            <profile id="8d20-a798-f03a-d4a6::8ca2-5071-5816-8456" name="Squigs Go Wild" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Roll a dice each time a Cave Squig model from this unit flees, before the model is removed from play. On a 4+, the nearest other unit within 6&quot; of the fleeing model suffers 1 mortal wound. If two or more of such units are equally close, you can pick which suffers the mortal wound.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="8d20-a798-f03a-d4a6::23bd-5296-d248-38e7" name="Squig Herder" hidden="false" typeId="8b8c-5816-cbdb-9763" typeName="Unit Leader">
+              <characteristics>
+                <characteristic name="Leader Ability" typeId="afb5-0652-767a-6769">1 in every 6 models in this unit must be a Squig Herder model instead of a Cave Squig model. A Squig Herder is armed with a Squig Prodder instead of a Fang-filled Gob.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="b6fa-3029-0563-cba3" name="5 Squigs &amp; Squig Herder" entryId="8d20-a798-f03a-d4a6::4cd8-36a2-0d7b-eed9" number="2" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="140.0"/>
+              </costs>
+            </selection>
+            <selection id="1247-54b7-a956-2133" name="Squig Prodder" entryId="8d20-a798-f03a-d4a6::856f-da16-0be8-ba3d" number="1" type="upgrade">
+              <profiles>
+                <profile id="8d20-a798-f03a-d4a6::436e-93f9-57cf-f6c3" name="Squig Prodder" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">5+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="d0d6-3702-e6a7-1718" name="Fang-filled Gob" entryId="8d20-a798-f03a-d4a6::5d62-bbd8-97e1-431d" number="1" type="upgrade">
+              <profiles>
+                <profile id="8d20-a798-f03a-d4a6::00d6-6788-094c-ab5a" name="Fang-filled Gob" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="fd63-6ab8-5150-e428" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="c8d0-af74-8e9a-2267" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="a612-ddd6-fb1c-2da2" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="3884-66c5-69e2-c04f" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="2e1c-3310-0f9a-9b10" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="9d1b-fdf4-991a-f479" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="07ff-9e4d-413d-d1ea" name="Squig Herd" entryId="8d20-a798-f03a-d4a6::d7f2-6558-9c0f-89bc" number="1" type="unit">
+          <profiles>
+            <profile id="8d20-a798-f03a-d4a6::316e-4472-7656-59ac" name="Squig Herd" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">3</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">6+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="8d20-a798-f03a-d4a6::3c57-bbf7-7445-034c" name="Go Dat Way!" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll run and charge rolls for this unit while it includes any Squig Herders. </characteristic>
+              </characteristics>
+            </profile>
+            <profile id="8d20-a798-f03a-d4a6::8ca2-5071-5816-8456" name="Squigs Go Wild" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Roll a dice each time a Cave Squig model from this unit flees, before the model is removed from play. On a 4+, the nearest other unit within 6&quot; of the fleeing model suffers 1 mortal wound. If two or more of such units are equally close, you can pick which suffers the mortal wound.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="8d20-a798-f03a-d4a6::23bd-5296-d248-38e7" name="Squig Herder" hidden="false" typeId="8b8c-5816-cbdb-9763" typeName="Unit Leader">
+              <characteristics>
+                <characteristic name="Leader Ability" typeId="afb5-0652-767a-6769">1 in every 6 models in this unit must be a Squig Herder model instead of a Cave Squig model. A Squig Herder is armed with a Squig Prodder instead of a Fang-filled Gob.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="1583-ea55-028f-3eae" name="5 Squigs &amp; Squig Herder" entryId="8d20-a798-f03a-d4a6::4cd8-36a2-0d7b-eed9" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="70.0"/>
+              </costs>
+            </selection>
+            <selection id="d190-5f08-0a94-44c8" name="Fang-filled Gob" entryId="8d20-a798-f03a-d4a6::5d62-bbd8-97e1-431d" number="1" type="upgrade">
+              <profiles>
+                <profile id="8d20-a798-f03a-d4a6::00d6-6788-094c-ab5a" name="Fang-filled Gob" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="522a-a347-eb97-dc99" name="Squig Prodder" entryId="8d20-a798-f03a-d4a6::856f-da16-0be8-ba3d" number="1" type="upgrade">
+              <profiles>
+                <profile id="8d20-a798-f03a-d4a6::436e-93f9-57cf-f6c3" name="Squig Prodder" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">5+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="90ee-aa7b-7f06-5d68" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="7782-bae1-6b80-80a0" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="bf54-e81a-58ba-c79f" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="066c-f2cd-93fe-c389" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="afb8-c695-4a30-7a4f" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="133e-5d56-da0e-c17c" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="0124-2ce2-cd2f-3394" name="Loonboss on Giant Cave Squig" entryId="90c2-6206-9d63-9e26::8616-ec44-afd5-57d3" number="1" type="model">
+          <profiles>
+            <profile id="90c2-6206-9d63-9e26::113b-482d-f566-11ae" name="Redcap Mushrooms" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Once per battle, in your hero phase, you can say that this model is eating a redcap mushroom. If you do so, you can re-roll hit and wound rolls for this model’s Mooncutta or Moonclan Stabba until your next hero phase.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="90c2-6206-9d63-9e26::949a-e829-2182-4d8d" name="Let&apos;s Get Bouncing!" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+              <characteristics>
+                <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this command ability at the start of your movement phase. If you do so, pick 1 friendly model with this command ability. All friendly SQUIG units wholly within 12&quot; of that model at the start of that phase can move an extra 3&quot; if they make a move in that phase. A unit cannot benefit from this command ability more than once per movement phase.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="90c2-6206-9d63-9e26::350b-fa46-3d11-4a65" name="Loonboss on Giant Cave Squig" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">2D6&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">6</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">6</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="90c2-6206-9d63-9e26::ea42-8e3a-9e8e-d4d2" name="Fly" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can fly.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="0a47-e4b0-d880-0477" name="Moon-cutta" entryId="90c2-6206-9d63-9e26::7b7c-eab1-c603-e09e" number="1" type="upgrade">
+              <profiles>
+                <profile id="90c2-6206-9d63-9e26::1780-df0b-e4f6-25c2" name="Moon-cutta" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">5</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707"/>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="3c37-e80b-5b5a-1afb" name="Moonclan Stabba" entryId="90c2-6206-9d63-9e26::2665-e8bb-d3dd-50b5" number="1" type="upgrade">
+              <profiles>
+                <profile id="90c2-6206-9d63-9e26::a911-960b-3f17-7547" name="Moonclan Stabba" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">5</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="61fb-7d31-ba88-292d" name="Massive Fang-filled Gob" entryId="90c2-6206-9d63-9e26::7a31-8173-ff14-77f4" number="1" type="upgrade">
+              <profiles>
+                <profile id="90c2-6206-9d63-9e26::1fe8-5fd4-9235-8df3" name="Massive Fang-filled Gob" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="110.0"/>
+          </costs>
+          <categories>
+            <category id="0f62-301f-cf30-0f00" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="365e-1c0b-4f66-b004" name="SQUIG-BOSS" entryId="647a-69d4-fe9c-2491" primary="false"/>
+            <category id="2365-878b-d16d-8061" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="89aa-2d43-6ae6-564e" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="eca5-f8cb-1f00-a9ca" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="08ee-060d-f4cd-7018" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="2ff2-f941-7e91-6618" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="e317-6291-08ab-e1dd" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="048d-c0f1-28e5-d9e9" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="f198-7a6b-8ce2-cfcd" name="SQUIG-BOSS" entryId="647a-69d4-fe9c-2491" primary="false"/>
+            <category id="c3b4-f8a0-01a8-3a6f" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="07a6-2dd4-f59a-8278" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="33f5-745e-8390-8f4f" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="8f4f-cf96-2796-c535" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="a6c5-33f4-f40e-d8e6" name="Skragrott, the Loonking" entryId="769c-213a-a559-9692::a2bb-637e-6b79-4ea3" number="1" type="model">
+          <profiles>
+            <profile id="769c-213a-a559-9692::d2ba-f49f-19f0-c370" name="Babbling Wand" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If this model is your general and is on the battlefield at the start of your hero phase, roll a dice. On a 4+, you receive D3 extra command points.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="769c-213a-a559-9692::03d7-41a0-761c-62f1" name="Da Moon Onna Stikk" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If any wounds inflicted by Da Moon Onna Stikk are allocated to an enemy model and not negated, that enemy model suffers 1 mortal wound at the end of each battle round (even if the wounds inflicted by Da Moon Onna Stikk are subsequently healed).</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="769c-213a-a559-9692::5510-3f43-368c-ef4a" name="Loonking&apos;s Crown" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to casting and unbinding rolls for this model. In addition, roll a dice each time a wound or mortal wound is allocated to this model. On a 4+ that wound or mortal wound is negated.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="769c-213a-a559-9692::6494-0724-0309-62c8" name="Skragrott" hidden="false" typeId="f55d-ee3a-1597-110f" typeName="Magic">
+              <characteristics>
+                <characteristic name="Cast/Unbind" typeId="8294-f605-2c0f-8f92">2/2</characteristic>
+                <characteristic name="Spells Known" typeId="dc9c-47d3-6931-859c">Arcane Bolt, Mystic Shield, Nikkit! Nikkit!, one other from the Lore of the Moonclan</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="769c-213a-a559-9692::c0b2-b94b-8aac-6b9b" name="The Loonking’s Entreaty" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+              <characteristics>
+                <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this command ability once per battle if this model is your general and on the battlefield, before you roll the dice to determine how far the Bad Moon moves that battle round. If you do so, you can choose for the Bad Moon to either not move that battle round, or to make 1 move or 2 moves that battle round (do not roll the dice to determine how far it moves).</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="769c-213a-a559-9692::197c-9666-418f-e4de" name="Skragrott, the Loonking" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">4&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">6</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">6</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">5+</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="fc99-62bd-66ef-b4af" name="Da Moon Onna Stikk (Missile)" entryId="769c-213a-a559-9692::bf58-4778-2935-152b" number="1" type="upgrade">
+              <profiles>
+                <profile id="769c-213a-a559-9692::ecab-fed2-f003-631a" name="Da Moon Onna Stikk (Missile)" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">28&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">6</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e550-b01b-ef8c-5a65" name="Da Moon Onna Stikk" entryId="769c-213a-a559-9692::e3fc-89be-6686-25e3" number="1" type="upgrade">
+              <profiles>
+                <profile id="769c-213a-a559-9692::17db-ea68-0055-3543" name="Da Moon Onna Stikk" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="8bc9-3ee7-4bb4-b919" name="Nikkit! Nikkit!" entryId="769c-213a-a559-9692::0e6c-6684-6459-0445" number="1" type="upgrade">
+              <profiles>
+                <profile id="769c-213a-a559-9692::65e8-0808-bdba-d07e" name="Nikkit! Nikkit!" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">8</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick 1 enemy model within 18&quot; of the caster that is visible to them. The unit that model belongs to suffers D3 mortal wounds. In addition, if that model has an artefact of power and the casting roll was 10+, that model’s artefact of power can no longer be used (if it was used to enhance a weapon, that weapon reverts to its normal form).</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="f901-f1e1-cacb-6ebb" name="Arcane Bolt" entryId="769c-213a-a559-9692::c1a8-3895-939f-dbb8" number="1" type="upgrade">
+              <profiles>
+                <profile id="769c-213a-a559-9692::7b98-b137-612a-16e9::ae02-a84f-a903-1ff8" name="Arcane Bolt" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick an enemy unit within 18&quot; of the caster that is visible to them. That unit suffers 1 mortal wound. If the casting roll was 10 or more, the unit suffers D3 mortal wounds instead.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e382-3720-7ffe-4442" name="Mystic Shield" entryId="769c-213a-a559-9692::6d33-75c6-69b1-17b9" number="1" type="upgrade">
+              <profiles>
+                <profile id="769c-213a-a559-9692::7e5b-3fa3-b9af-5983::b41f-f1ce-7aa5-4f81" name="Mystic Shield" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">6</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick a friendly unit within 18&quot; of the caster that is visible to them. Re-roll save rolls of 1 for that unit until your next hero phase.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="2685-560f-6c8c-5f72" name="5. Squig Lure" entryId="769c-213a-a559-9692::0d9d-7f20-1757-0393::9e26-d6e3-4964-6ba6" entryGroupId="769c-213a-a559-9692::0d9d-7f20-1757-0393::9e4b-9a06-84c4-c5d9" number="1" type="upgrade">
+              <profiles>
+                <profile id="769c-213a-a559-9692::0d9d-7f20-1757-0393::39b2-e4ab-67f6-afc2" name="Squig Lure" hidden="false" typeId="2e81-5e22-c6e1-73cb" typeName="Spell">
+                  <characteristics>
+                    <characteristic name="Casting Value" typeId="2508-b604-1258-a920">5</characteristic>
+                    <characteristic name="Description" typeId="76ff-781d-b8e6-5f27">If successfully cast, pick up to D3 friendly SQUIG units wholly within 18&quot; of the caster and visible to them. Those units can run and still charge later in the same turn.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="220.0"/>
+          </costs>
+          <categories>
+            <category id="9370-951d-f64d-8352" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+            <category id="f694-e71d-d53d-13b3" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="b441-d73b-2ed2-54cf" name="LOONBOSS" entryId="4df8-b60f-f24f-8cf1" primary="false"/>
+            <category id="c2f2-a52b-bec2-7d37" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="b6be-2738-cce9-5c22" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="be1c-ccfc-d44b-9d7b" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="0d41-d0e8-a32d-6b8c" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="92c9-82e6-5776-6c2d" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="5dab-40ed-b8ce-8152" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="5cd1-c8b4-bfa6-ed7f" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="84d7-5b43-1ec0-e1fe" name="GROT" entryId="ef9c-701b-aad2-4e19" primary="false"/>
+            <category id="2407-6f56-52ec-ff53" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="78a5-dd1a-a43a-b612" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="f580-eca4-1b80-97e6" name="WIZARD" entryId="4f53-8230-2f02-9639" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="0b2e-314c-d9b9-d7ea" name="Squig Hoppers" entryId="19c7-4f2e-b279-e1d4::73c2-8a55-9faa-bb56" number="1" type="unit">
+          <profiles>
+            <profile id="19c7-4f2e-b279-e1d4::1b89-1a05-5b4d-bc14" name="Boing! Boing! Boing!" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">After this unit has made a normal move, pick 1 enemy unit and roll a dice for each model in this unit that passed across a model from that unit. For each 4+ that unit suffers 1 mortal wound. </characteristic>
+              </characteristics>
+            </profile>
+            <profile id="19c7-4f2e-b279-e1d4::09da-9891-163d-9a2f" name="Squig Hoppers" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">3D6&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">4</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">6+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="19c7-4f2e-b279-e1d4::1425-6cd0-e42e-4f85" name="Squig Hopper Boss" hidden="false" typeId="8b8c-5816-cbdb-9763" typeName="Unit Leader">
+              <characteristics>
+                <characteristic name="Leader Ability" typeId="afb5-0652-767a-6769">You can add 1 to hit rolls for attacks made with a Squig Hopper Boss&apos;s Slitta.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="19c7-4f2e-b279-e1d4::27bb-c088-cb52-d0ea::8e0c-cbe4-27be-8a30" name="Fly" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can fly.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="9e9f-2727-7e13-5970" name="5 Squig Hoppers" entryId="19c7-4f2e-b279-e1d4::c6be-f07c-c1ff-1f00" number="1" type="unit">
+              <costs>
+                <cost name="pts" typeId="points" value="90.0"/>
+              </costs>
+            </selection>
+            <selection id="3ab1-1ca7-6a6f-f9ee" name="Fang-filled Gob" entryId="19c7-4f2e-b279-e1d4::f3eb-c625-0e78-a946" number="1" type="upgrade">
+              <profiles>
+                <profile id="19c7-4f2e-b279-e1d4::0d10-3972-0893-c7f3" name="Fang-filled Gob" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="dc31-ca4b-a9ea-7c2d" name="Slitta" entryId="19c7-4f2e-b279-e1d4::dba4-a169-0584-3e02" number="1" type="upgrade">
+              <profiles>
+                <profile id="19c7-4f2e-b279-e1d4::b86e-4bbb-1865-11fe" name="Slitta" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">5+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">5+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="5347-d342-201c-cc0d" name="DESTRUCTION" entryId="d963-a5fb-c348-2371" primary="false"/>
+            <category id="6ba5-72d5-6b41-3111" name="GLOOMSPITE GITZ" entryId="19e1-59e0-e5c6-2e94" primary="false"/>
+            <category id="fe95-a1ed-8ba3-dc62" name="MOONCLAN" entryId="2736-9589-d74d-1c51" primary="false"/>
+            <category id="b3ed-e8e9-c38c-3daf" name="SQUIG" entryId="6f5e-2209-6f2b-8f48" primary="false"/>
+            <category id="b51c-3ec1-bef8-59fe" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="259f-d1bd-de95-fd57" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="5605-ba3b-1ddd-2c91" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+          </categories>
+        </selection>
+      </selections>
+      <publications>
+        <publication id="e51d-b1a3-pubEC" name="The General&apos;s Handbook"/>
+        <publication id="e51d-b1a3-pubEHOGM" name="Malign Sorcery"/>
+        <publication id="e51d-b1a3-pubEQOCI" name="General&apos;s Handbook 2017"/>
+        <publication id="e51d-b1a3-pubEFCFK" name="Malign Sorcery; Errata, July 2018"/>
+        <publication id="e51d-b1a3-pubE5LCI" name="General&apos;s Handbook 2018"/>
+        <publication id="e51d-b1a3-pubEKHGM" name="Malign Sorcery"/>
+        <publication id="e51d-b1a3-pubETJDK" name="Malign Sorcery; Official Errata, December 2018"/>
+        <publication id="3323-8984-c803-feb5" name="Gloomspite Errata/Points, July 2019"/>
+        <publication id="e51d-b1a3-pubEQ" name="Core Rules"/>
+      </publications>
+      <categories>
+        <category id="061b-35c1-ee6c-2177" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="43ef-b488-b3bf-a879" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+        <category id="816e-91ed-3bca-272b" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+        <category id="46d9-939b-9fce-5930" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="false"/>
+        <category id="0640-6f7f-941d-913c" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="false"/>
+        <category id="0f29-1b6a-229c-f1c1" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+        <category id="1079-733c-d99f-b073" name="Battalion" entryId="be17-6bbd-b857-3f43" primary="false"/>
+        <category id="ecd4-91d3-af04-b49d" name="General" entryId="b745-17c4-8fbf-8b04" primary="false"/>
+        <category id="20d2-0591-70a4-0c69" name="Artefact" entryId="3564-4c26-10b4-d953" primary="false"/>
+        <category id="a2fa-cf14-0757-1f68" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="false"/>
+        <category id="cfd8-b6c7-9f72-3ea2" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="false"/>
+        <category id="7906-900a-2ade-2114" name="Realm of Origin" entryId="5c6d-5384-bcb1-b474" primary="false"/>
+        <category id="a87b-fd4c-bc1c-f867" name="Malign Sorcery" entryId="eecb-ed66-d474-9ddd" primary="false"/>
+        <category id="bad7-f3ae-28bc-61a5" name="Command Points" entryId="8be8-3ccd-be93-b55e" primary="false"/>
+        <category id="7f32-c52b-d39e-6a85" name="Realm of Battle" entryId="5e28-c4f1-4a92-b75c" primary="false"/>
+        <category id="7a00-c178-b581-ea59" name="Scenery" entryId="bc8a-9257-1601-6d62" primary="false"/>
+      </categories>
+    </force>
+  </forces>
+</roster>

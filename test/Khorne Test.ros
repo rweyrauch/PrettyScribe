@@ -1,0 +1,1457 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<roster id="20c3-ee51-e28b-904a" name="Khorne Test" battleScribeVersion="2.03" gameSystemId="e51d-b1a3-75fc-dc33" gameSystemName="Age of Sigmar" gameSystemRevision="57" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+  <costs>
+    <cost name="pts" typeId="points" value="1840.0"/>
+  </costs>
+  <forces>
+    <force id="b0c2-9075-08f3-199e" name="**Pitched Battle** 2,000" entryId="36b7-ee1e-0855-f23f" catalogueId="cac4-1eec-d548-b34d" catalogueRevision="46" catalogueName="Chaos - Khorne">
+      <rules>
+        <rule id="a954-6cfc-59ca-674e" name="Inspiring Presence" publicationId="e51d-b1a3-pubEQ" page="3" hidden="false">
+          <description>You can use this command ability at the start of the battleshock phase. If you do so, pick a friendly unit that is within 6&quot; of friendly HERO, or 12&quot; of a friendly HERO that is a general. That unit does not have to take battleshock tests in that phase.</description>
+        </rule>
+        <rule id="3f48-3925-7123-3392" name="At the Double" publicationId="e51d-b1a3-pubEQ" page="3" hidden="false">
+          <description>You can use this command ability after you make a run roll for a friendly unit that is within 6&quot; of a friendly HERO, or 12&quot; of a friendly HERO that is a general. If you do so, the run roll is treated as being a 6.</description>
+        </rule>
+        <rule id="c157-62a0-2514-c4f4" name="Forward to Victory" publicationId="e51d-b1a3-pubEQ" page="3" hidden="false">
+          <description>You can use this command ability after you make a charge roll for a friendly unit that is within 6&quot; of a friendly HERO, or 12&quot; of a friendly HERO that is a general. If you do so, re-roll the charge roll.</description>
+        </rule>
+      </rules>
+      <selections>
+        <selection id="ba24-b1d2-8429-1195" name="Allegiance" entryId="5ba2-1eeb-9ce0-f285::c765-43a7-53c3-d8cf" number="1" type="upgrade">
+          <selections>
+            <selection id="715b-27b8-a770-fc43" name="Khorne" entryId="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::b541-3b22-08bb-d772" entryGroupId="5ba2-1eeb-9ce0-f285::186c-e4ad-284a-0209" number="1" type="upgrade">
+              <profiles>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::cd58-f2c2-f861-e9a6" name="Blood for the Blood God!" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                  <characteristics>
+                    <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">You can receive rewards from the Blood Tithe Rewards Table below by using  Blood Tithe points. You receive 1 Blood Tithe point each time a unit is destroyed. At the start of the hero phase, you can use 1 or more Blood Tithe points to receive 1 reward from the Blood Tithe Rewards table. Immediately carry out that reward&apos;s effect. Each reward costs a number of points as shown on the Blood Tithe Rewards table, and you can only receive a reward if you have enough Blood Tithe points to pay its cost. Note that Blood Tithe points can be spent to receive the Spelleater Curse reward at any point during the hero phase, instead of at the start of the hero phase. If you choose a reward, after resolving its effect your Blood Tithe points total is reset to zero.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::0d58-d83e-cad6-bf97" name="1" hidden="false" typeId="2e4a-4480-cd92-0b43" typeName="Blood Tithe Table - Points Expended">
+                  <characteristics>
+                    <characteristic name="Reward" typeId="c248-0586-10ea-3e0c">Bloody Exemplar: You receive 1 command point.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::c0af-f92b-0c8f-8758" name="2" hidden="false" typeId="2e4a-4480-cd92-0b43" typeName="Blood Tithe Table - Points Expended">
+                  <characteristics>
+                    <characteristic name="Reward" typeId="c248-0586-10ea-3e0c">Spelleater Curse: Choose this reward immediately after a WIZARD has cast a spell anywhere on the battlefield, before any attempts to unbind that spell are made. That spell is not successfully cast.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::c7a4-56b9-0b8b-989e" name="3" hidden="false" typeId="2e4a-4480-cd92-0b43" typeName="Blood Tithe Table - Points Expended">
+                  <characteristics>
+                    <characteristic name="Reward" typeId="c248-0586-10ea-3e0c">Murderlust: Pick 1 friendly KHORNE unit; that unit can make a normal move. If it is within 12&quot; of an enemy model, it can either make a normal move or attempt to make a charge move. </characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::7c59-b7ea-fdd3-44ab" name="4" hidden="false" typeId="2e4a-4480-cd92-0b43" typeName="Blood Tithe Table - Points Expended">
+                  <characteristics>
+                    <characteristic name="Reward" typeId="c248-0586-10ea-3e0c">Apoplectic Frenzy: Pick 1 friendly KHORNE unit within 3&quot; of an enemy unit. That KHORNE unit can make a pile-in move and then attack with all of the melee weapons it is armed with.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::c9ef-8405-a7fe-2ce5" name="5" hidden="false" typeId="2e4a-4480-cd92-0b43" typeName="Blood Tithe Table - Points Expended">
+                  <characteristics>
+                    <characteristic name="Reward" typeId="c248-0586-10ea-3e0c">Brass Skull Meteor: Pick 1 unit anywhere on the battlefield, that unit suffers D3 mortal wounds. In addition, roll a dice for each unit within 8&quot; of that unit; on a 3+ the unit being rolled for suffers 1 mortal wound. On a 6, the unit being rolled for suffers D3 mortal wounds instead.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::b513-b4b7-cf40-0ffc" name="6" hidden="false" typeId="2e4a-4480-cd92-0b43" typeName="Blood Tithe Table - Points Expended">
+                  <characteristics>
+                    <characteristic name="Reward" typeId="c248-0586-10ea-3e0c">Relentless Fury: Until your next hero phase, each time a friendly KHORNE model is slain in the combat phase, before the model is removed from play, it can make a pile-in move and then attack with all of the melee weapons it is armed with.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::53be-1111-f402-7d1e" name="7" hidden="false" typeId="2e4a-4480-cd92-0b43" typeName="Blood Tithe Table - Points Expended">
+                  <characteristics>
+                    <characteristic name="Reward" typeId="c248-0586-10ea-3e0c">Crimson Rain: You can choose this reward once per battle. Immediately after you do so, and at the start of each of your subsequent hero phases, you can heal up to D3 wounds allocated to each friendly KHORNE unit on the battlefield.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::9cdd-abbf-87c3-932a" name="8" hidden="false" typeId="2e4a-4480-cd92-0b43" typeName="Blood Tithe Table - Points Expended">
+                  <characteristics>
+                    <characteristic name="Reward" typeId="c248-0586-10ea-3e0c">Slaughter Triumphant: You can choose this reward once per battle. After you do so, if the unmodified hit roll for an attack made with a melee weapon by a friendly KHORNE unit is 6, that attack scores 2 hits on the target instead of 1. Make a wound roll and save roll for each hit.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::18cd-9282-6d84-33e8" name="(03) 1 Bloodthirster of Insensate Rage" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">8</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::1cd6-32de-5d3a-4a84" name="(02) 1 Wrath of Khorne Bloodthirster" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">8</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::2ecd-daea-2365-ae23" name="(06) 15 Bloodletters" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">6</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::8695-0c77-7b9e-1678" name="Summon Daemons of Khorne" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                  <characteristics>
+                    <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">You can summon units of KHORNE DAEMONS to the battlefield by expending Blood Tithe points. If you have 2 or more Blood Tithe points at the end of your movement phase, you can summon one unit from the list below onto the battlefield, and add it to your army. Each unit you summon costs a number of Blood Tithe points to pay its cost. If you summon a unit in this manner, your Blood Tithe points total is reset to zero immediately after the unit has been set up (you cannot save any Blood Tithe points you did not use). Units summoned in this way must be set up wholly within 12&quot; of a friendly KHORNE HERO or SKULL ALTAR and more than 9&quot; from any enemy units.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::79e3-e822-e294-ae4a" name="(05) 20 Bloodletters" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">7</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::4fa5-8bc5-873a-47d2" name="(04) 1 Bloodthirster of Unfettered Fury" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">8</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::63be-d82b-f68d-9e42" name="(07) 10 Flesh Hounds" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">6</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::4e1e-1b9c-172e-87ac" name="(15) 1 Bloodmaster, Herald of Khorne" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">2</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::915e-bd46-0caa-7859" name="(08) 3 Bloodcrushers" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">5</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::198a-4ff6-0bcc-455d" name="(13) 1 Skullmaster, Herald of Khorne" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">3</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::fbd2-b430-93d5-0d78" name="(12) 5 Flesh Hounds" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">4</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::a784-e9c1-d286-8614" name="(11) 1 Herald of Khorne on Blood Throne" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">4</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::488d-52a2-c491-63b4" name="(10) 10 Bloodletters" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">4</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::f7ce-dbcf-5f71-0ae8" name="(09) 1 Skull Cannon" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">5</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::7e0f-5f88-576f-55c5" name="(14) 5 Bloodletters" hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">2</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::a7c2-aee2-e2a0-c37c" name="(01) 1 Exalted Greater Daemon of Khorne " hidden="false" typeId="53ae-6af8-0d87-ae4d" typeName="Blood Tithe Table - Unit Summoning">
+                  <characteristics>
+                    <characteristic name="Cost" typeId="d5b0-7d16-f65b-4b39">16</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::3a10-c998-d24f-7111" name="Locus of Fury" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                  <characteristics>
+                    <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">You can re-roll hit rolls of 1 for attacks made by friendly KHORNE DAEMON units while they are wholly within 12&quot; of any friendly KHORNE DAEMON HEROES, or wholly within 16&quot; of any friendly KHORNE GREATER DAEMONS.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="1382-8811-c56b-9e94" name="The Bloodlords" entryId="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::9879-5dd6-b88c-401e::e7b9-37ef-0611-590b" entryGroupId="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::9879-5dd6-b88c-401e::92c7-7625-2526-73bc" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::9879-5dd6-b88c-401e::80aa-1fc6-2642-1eca" name="Slay the Mighty" hidden="false" typeId="c137-4d1f-9d1a-524d" typeName="Battle Trait">
+                      <characteristics>
+                        <characteristic name="Battle Trait Details" typeId="9fdd-b4b1-5f7a-0970">You can re-roll wound rolls of 1 for attacks made by friendly BLOODLORDS DAEMON units that target a HERO or MONSTER.</characteristic>
+                      </characteristics>
+                    </profile>
+                    <profile id="5ba2-1eeb-9ce0-f285::76d7-b2c4-7d22-15a2::9879-5dd6-b88c-401e::7b18-fe38-af94-831e" name="First In His Sight" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+                      <characteristics>
+                        <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this command ability at the start of the hero phase. If you do so, pick a friendly model with this command ability. You can heal 1 wound allocated to each friendly BLOODLORDS DAEMON unit wholly within 16&quot; of that model.</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="86cd-453e-a6e7-356b" name="Allegiance: Khorne" entryId="be2f-aa63-6d82-e2fc" primary="false"/>
+              </categories>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="66b0-f0db-2de2-0306" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="718d-fbbf-336f-8fd6" name="Game Type" entryId="e12e-ffc5-6892-4795::a741-5681-7572-fa32" number="1" type="upgrade">
+          <selections>
+            <selection id="87b1-9b7c-5577-d34c" name="2000 Points - Battlehost" entryId="e12e-ffc5-6892-4795::39f6-88b3-177e-2535::cea8-e4b2-c44f-c7b4" entryGroupId="e12e-ffc5-6892-4795::39f6-88b3-177e-2535::5927-9c5a-8b20-8f37" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="638e-b8c5-7b48-0ca8" name="Battlehost" entryId="6330-7561-7a32-0851" primary="false"/>
+              </categories>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="6a56-1b67-2e7e-b141" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="517f-f262-a800-67c0" name="Skull Altar" entryId="2549-37a4-9999-4228::3bff-8d6b-bf69-fc6c" number="1" type="upgrade">
+          <profiles>
+            <profile id="2549-37a4-9999-4228::d345-8709-8c65-8dbc" name="Words of Hate" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll prayer and judgement rolls for friendly KHORNE PRIESTS wholly within 8&quot; of this model.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="2549-37a4-9999-4228::e659-43f2-4f9d-a24a" name="Witchbane" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Subtract 1 from casting rolls for WIZARDS while they are within 16&quot; of this model.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+        </selection>
+        <selection id="7a35-73d8-b008-c604" name="Bloodthirster of Insensate Rage" entryId="4017-51e7-4a34-d4bc::9e48-1e04-c653-4aaf" number="1" type="unit">
+          <profiles>
+            <profile id="4017-51e7-4a34-d4bc::19af-6b98-f214-0c11" name="Bloodthirster of Insensate Rage" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">*</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">14</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">10</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4017-51e7-4a34-d4bc::374b-f912-10e7-58b3" name="Rage Unbound" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll hit rolls of 1 for attacks made by this model if it made a charge move in the same turn.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4017-51e7-4a34-d4bc::d32d-2b9c-841b-5032" name="Outrageous Carnage" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the unmodified wound roll for an attack made by this weapon is 6, each enemy unit within 8&quot; of this model suffers the number of mortal wounds shown on the damage table, in addition to any normal damage.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4017-51e7-4a34-d4bc::b853-068f-20ff-7012" name="Bloodthirsty Charge" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+              <characteristics>
+                <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this command ability at the start of your charge phase. If you do so, pick a friendly model with this command ability. Until the end of that pase, you can re-roll charge rolls for friendly KHORNE DAEMON units wholly within 16&quot; of that model when the charge roll is made.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4017-51e7-4a34-d4bc::3620-0abd-accd-da84::8e0c-cbe4-27be-8a30" name="Fly" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can fly.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="d9f3-49d8-2de2-6122" name="Great Axe of Khorne" entryId="4017-51e7-4a34-d4bc::e060-be90-80b8-a6f1" number="1" type="upgrade">
+              <profiles>
+                <profile id="4017-51e7-4a34-d4bc::9b9c-0425-0c14-9755" name="Great Axe of Khorne" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">*</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">2+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-2</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D6</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="9321-b9ec-9d1a-d887" name="Wound Track Bloodthirster" entryId="4017-51e7-4a34-d4bc::bb27-331d-29d7-35ca" number="1" type="upgrade">
+              <profiles>
+                <profile id="4017-51e7-4a34-d4bc::a031-a276-f11d-62c5" name="00-03" hidden="false" typeId="f6e4-6a2b-0638-cb67" typeName="Bloodthirster of Rage Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="e696-12bc-b8d8-f1a5">10&quot;</characteristic>
+                    <characteristic name="Great Axe of Khorne" typeId="06ca-c1e8-12d5-8bde">5</characteristic>
+                    <characteristic name="Outrageous Carnage" typeId="95d9-935f-6874-912f">4 mortal wounds</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="4017-51e7-4a34-d4bc::8595-0573-0bc4-6eb2" name="04-06" hidden="false" typeId="f6e4-6a2b-0638-cb67" typeName="Bloodthirster of Rage Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="e696-12bc-b8d8-f1a5">9&quot;</characteristic>
+                    <characteristic name="Great Axe of Khorne" typeId="06ca-c1e8-12d5-8bde">5</characteristic>
+                    <characteristic name="Outrageous Carnage" typeId="95d9-935f-6874-912f">3 mortal wounds</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="4017-51e7-4a34-d4bc::7aa3-b708-d160-4e46" name="07-09" hidden="false" typeId="f6e4-6a2b-0638-cb67" typeName="Bloodthirster of Rage Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="e696-12bc-b8d8-f1a5">8&quot;</characteristic>
+                    <characteristic name="Great Axe of Khorne" typeId="06ca-c1e8-12d5-8bde">4</characteristic>
+                    <characteristic name="Outrageous Carnage" typeId="95d9-935f-6874-912f">2 mortal wounds</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="4017-51e7-4a34-d4bc::189e-0ba3-fc12-6e0c" name="10-12" hidden="false" typeId="f6e4-6a2b-0638-cb67" typeName="Bloodthirster of Rage Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="e696-12bc-b8d8-f1a5">7&quot;</characteristic>
+                    <characteristic name="Great Axe of Khorne" typeId="06ca-c1e8-12d5-8bde">4</characteristic>
+                    <characteristic name="Outrageous Carnage" typeId="95d9-935f-6874-912f">1 mortal wound</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="4017-51e7-4a34-d4bc::8f6d-45b8-0672-82ef" name="13+" hidden="false" typeId="f6e4-6a2b-0638-cb67" typeName="Bloodthirster of Rage Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="e696-12bc-b8d8-f1a5">6&quot;</characteristic>
+                    <characteristic name="Great Axe of Khorne" typeId="06ca-c1e8-12d5-8bde">3</characteristic>
+                    <characteristic name="Outrageous Carnage" typeId="95d9-935f-6874-912f">1 mortal wound</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="d1d6-3041-5bb2-3d8e" name="0. Halo of Blood" entryId="4017-51e7-4a34-d4bc::f5f2-b2b5-322d-be30::e47b-cf75-f4f2-5183::eeb6-5f52-eec7-7cbb" entryGroupId="4017-51e7-4a34-d4bc::f5f2-b2b5-322d-be30::e47b-cf75-f4f2-5183::cb0a-a740-8b20-09ff" number="1" type="upgrade">
+              <profiles>
+                <profile id="4017-51e7-4a34-d4bc::f5f2-b2b5-322d-be30::e47b-cf75-f4f2-5183::9b22-771d-5f5a-7684" name="Halo of Blood" hidden="false" typeId="0ac4-aacb-2481-8e72" typeName="Artefact">
+                  <characteristics>
+                    <characteristic name="Artefact Details" typeId="0918-c47a-d84e-c0cf">The bearer fights at the start of the combat phase, before the players pick any other units to fight in that combat phase. The bearer cannot fight again in that combat phase unless an ability or spell allows it to fight more than once.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="54f1-c394-5100-3f99" name="Artefact" entryId="3564-4c26-10b4-d953" primary="false"/>
+              </categories>
+            </selection>
+            <selection id="a858-2dc3-4ee1-bee4" name="General" entryId="4017-51e7-4a34-d4bc::efbb-c4f9-d602-6b31::a43e-ee01-c76d-d3a7" number="1" type="upgrade">
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+              <categories>
+                <category id="c22d-d4cb-f350-d50e" name="General" entryId="b745-17c4-8fbf-8b04" primary="false"/>
+              </categories>
+            </selection>
+            <selection id="784e-1115-24a9-1708" name="0. Slaughterer&apos;s Thirst" entryId="4017-51e7-4a34-d4bc::910b-3517-315b-bf35::dfc6-4425-08a1-36c8::d730-2fbf-ea96-5239" entryGroupId="4017-51e7-4a34-d4bc::910b-3517-315b-bf35::dfc6-4425-08a1-36c8::1aa0-14d1-5940-3c9e" number="1" type="upgrade">
+              <profiles>
+                <profile id="4017-51e7-4a34-d4bc::910b-3517-315b-bf35::dfc6-4425-08a1-36c8::5e71-7b8b-494f-d894" name="Slaughterer&apos;s Thirst" hidden="false" typeId="c749-bae4-71a8-0c36" typeName="Command Trait">
+                  <characteristics>
+                    <characteristic name="Command Trait Details" typeId="ee96-6f3a-e5ca-2350">Add 4&quot; to the Move characteristic of this general. In addition, you can re-roll charge rolls for this general.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="270.0"/>
+          </costs>
+          <categories>
+            <category id="ecd5-423a-82a7-59cb" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="2eab-ce37-20d6-ecf0" name="DAEMON" entryId="1418-9a68-9f9e-e9a7" primary="false"/>
+            <category id="041c-2e32-3070-2a9b" name="BLOODTHIRSTER" entryId="246f-c9a0-65ab-f616" primary="false"/>
+            <category id="15fd-1715-b3c1-ddb0" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="db23-fa76-8827-2456" name="MONSTER" entryId="1959-9f6a-3056-913a" primary="false"/>
+            <category id="53e7-d861-df4e-6423" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="7c34-9430-74c2-2252" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+            <category id="ba08-43fe-f6bc-8a92" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+            <category id="4d20-e350-7057-4ee1" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+            <category id="1036-3305-263b-c533" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="76f9-28c3-c8ed-e3aa" name="Blood Warriors" entryId="4c7f-0376-a31e-9c20::9361-fa26-31b7-4a10" number="1" type="unit">
+          <profiles>
+            <profile id="4c7f-0376-a31e-9c20::49e4-3721-a679-6056" name="Blood Warrior" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">6</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4c7f-0376-a31e-9c20::e674-6b12-4e9b-1db5" name="Chaos Champion" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 model in this unit can be a Chaos Champion. Add 1 to the Attacks characteristic of that model&apos;s Goreaxe(s).</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4c7f-0376-a31e-9c20::9255-e045-eda9-bf3b" name="No Respite" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If a model from this unit is slain in the combat phase, before that model is removed from play, that model can make a pile-in move and then attack wtih all of the melee weapons it is armed with.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="55d7-c242-a798-3d04" name="5 Blood Warriors" entryId="4c7f-0376-a31e-9c20::4444-27a1-009d-110a" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="100.0"/>
+              </costs>
+            </selection>
+            <selection id="6b75-5248-83bc-cf42" name="Goreaxe and Gorefist" entryId="4c7f-0376-a31e-9c20::554b-39c8-fcb5-c0ed" entryGroupId="4c7f-0376-a31e-9c20::fad9-b262-3889-16ca" number="1" type="upgrade">
+              <profiles>
+                <profile id="4c7f-0376-a31e-9c20::00d4-fb47-87f9-e61d" name="Gorefists" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If an unmodified save roll for an attack made with a melee weapon that targets a unit that includes any models armed with a Goreaxe and Gorefist is 6, the attacking unit suffers 1 mortal wound after all of its attacks have been resolved.</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="4c7f-0376-a31e-9c20::3c25-74c3-17eb-ef69::1ebc-6dfb-5777-dfab" name="Goreaxe" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="a6b6-202c-262d-7049" name="Icon Bearer" entryId="4c7f-0376-a31e-9c20::2a1f-b0b4-e59d-984b" number="1" type="upgrade">
+              <profiles>
+                <profile id="4c7f-0376-a31e-9c20::8cdd-d7cc-bf5e-3d7b" name="Icon Bearers" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 in every 10 models in this unit can be an Icon Bearer. Add 1 to the Bravery characteristic of this unit while it includes any Icon Bearers.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="e39e-9396-be02-6fa2" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="adde-5096-6fc1-18e9" name="MORTAL" entryId="a934-6d15-9932-b7ea" primary="false"/>
+            <category id="b798-3e2a-a903-3c0d" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="1f2d-209c-f516-daaf" name="BLOODBOUND" entryId="28cc-5c0c-ed3e-fa91" primary="false"/>
+            <category id="739e-1bd2-381b-34f1" name="BLOOD WARRIORS" entryId="e144-e909-7174-c464" primary="false"/>
+            <category id="1850-3234-9d37-fefd" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="f853-2b09-5304-8583" name="Bloodletters" entryId="ad0b-7f5b-4bc2-1780::635a-740a-3918-486d" number="1" type="unit">
+          <profiles>
+            <profile id="ad0b-7f5b-4bc2-1780::7749-1859-09ba-3b6e" name="Bloodreaper" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 Model in this unit can be a Bloodreaper. Add 1 to the Attacks characteristic of that model&apos;s Hellblade.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="ad0b-7f5b-4bc2-1780::16e3-6906-7d21-f357" name="Murderous Tide" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can add 1 to hit rolls for attacks made by this unit while this unit has at least 20 models.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="ad0b-7f5b-4bc2-1780::6ef7-fc15-4263-903d" name="Bloodletters" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">1</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">10</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">5+</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="1d38-3957-e758-fd4c" name="10 Bloodletters" entryId="ad0b-7f5b-4bc2-1780::9162-c5d7-60ce-8e78" number="2" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="220.0"/>
+              </costs>
+            </selection>
+            <selection id="b6f4-02bd-a759-a18c" name="Hellblade" entryId="ad0b-7f5b-4bc2-1780::d810-247b-1a65-1536" number="1" type="upgrade">
+              <profiles>
+                <profile id="ad0b-7f5b-4bc2-1780::0276-48ec-a3ba-7539" name="Hellblade" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="ad0b-7f5b-4bc2-1780::7120-bc31-b516-0a33" name="Decapitating Blow" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the unmodified hit roll for an attack made with a Hellblade is 6, that attack inflicts 1 mortal wound on the target in addition to any normal damage.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="f983-6baa-ea76-edad" name="Icon Bearer" entryId="ad0b-7f5b-4bc2-1780::3efc-fc05-b84f-001c" number="1" type="upgrade">
+              <profiles>
+                <profile id="ad0b-7f5b-4bc2-1780::ddff-81e3-dd33-c396" name="Standard Bearers" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 in every 10 models in this unit can be an Icon Bearer or a Standard Bearer.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <selections>
+                <selection id="14c2-e9c2-7aaf-a374" name="Bloodsoaked Banner" entryId="ad0b-7f5b-4bc2-1780::bf6f-57d0-064a-c0f7" entryGroupId="ad0b-7f5b-4bc2-1780::5390-b264-abed-e8e3" number="1" type="upgrade">
+                  <profiles>
+                    <profile id="ad0b-7f5b-4bc2-1780::d87c-8606-a5bc-3488" name="Bloodsoaked Banner" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                      <characteristics>
+                        <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll charge rolls for this unit while it includes any Bloodsoaked Banner Bearers.</characteristic>
+                      </characteristics>
+                    </profile>
+                  </profiles>
+                  <costs>
+                    <cost name="pts" typeId="points" value="0.0"/>
+                  </costs>
+                </selection>
+              </selections>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="b1a3-7f8e-0a60-2831" name="Hornblower" entryId="ad0b-7f5b-4bc2-1780::544e-7ae0-e824-c16a" number="1" type="upgrade">
+              <profiles>
+                <profile id="ad0b-7f5b-4bc2-1780::edc5-be7f-c0e1-560a" name="Hornblower" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 in every 10 models in this unit can be a Hornblower. While this unit includes any Hornblowers, if the unmodified roll for a battleshock test for an enemy unit that is within 8&quot; of this unit is 1, that battleshock test must be re-rolled.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="aa06-9132-d480-dec9" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="237f-4abf-f79d-cfb6" name="DAEMON" entryId="1418-9a68-9f9e-e9a7" primary="false"/>
+            <category id="4373-f79a-3bf7-d411" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="a8a8-3bcf-5c03-6665" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+            <category id="11d3-fe51-b5ea-e009" name="BLOODLETTER" entryId="2dda-37e1-7c22-9081" primary="false"/>
+          </categories>
+        </selection>
+        <selection id="c75d-1fff-e7d0-1c2f" name="Bloodreavers" entryId="56e5-1db8-f277-df8e::78be-9de2-98c0-1b84" number="1" type="unit">
+          <profiles>
+            <profile id="56e5-1db8-f277-df8e::bbad-ee68-91fe-51a2" name="Bloodreaver" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">6&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">1</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">5</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">6+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="56e5-1db8-f277-df8e::ddb4-7cf6-da0e-67da" name="Chieftain" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 model in this unit can be a Chieftain. Add 1 to the Attacks characteristic of that model&apos;s melee weapons.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="56e5-1db8-f277-df8e::5190-b17d-b718-5294" name="Frenzied Devotion" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to the Attacks characteristic of this unit&apos;s melee weapons while this unit is wholly within 16&quot; of any friendly KHORNE TOTEMS.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="4063-e685-f80e-4fb8" name="10 Bloodreavers" entryId="56e5-1db8-f277-df8e::2dd2-2cfa-1a09-4f9c" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="70.0"/>
+              </costs>
+            </selection>
+            <selection id="17b4-48a8-8867-cbed" name="Reaver Blades" entryId="56e5-1db8-f277-df8e::4b24-bb27-15f1-f660" entryGroupId="56e5-1db8-f277-df8e::806d-2e4c-1aaa-e454" number="1" type="upgrade">
+              <profiles>
+                <profile id="56e5-1db8-f277-df8e::295f-fad0-6d9c-188d" name="Reaver Blades" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="56e5-1db8-f277-df8e::9ee9-21b9-7457-17df" name="Reaver Blades" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll hit rolls of 1 for models attacks made with Reaver Blades.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="40c7-4747-5109-1ff2" name="Icon Bearers" entryId="56e5-1db8-f277-df8e::2ec0-21bc-c4e8-bfc3" number="1" type="upgrade">
+              <profiles>
+                <profile id="56e5-1db8-f277-df8e::a38c-3eda-4500-1da1" name="Icon Bearers" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 in every 10 models in this unit can be an Icon Bearer. Add 1 to the Bravery characteristic of this unit while it includes any Icon Bearers.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="27e7-6370-a9ab-77cf" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="9103-e168-eb83-358d" name="MORTAL" entryId="a934-6d15-9932-b7ea" primary="false"/>
+            <category id="c222-8b7c-b54b-d529" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="04b3-7c74-f32c-e0ee" name="BLOODBOUND" entryId="28cc-5c0c-ed3e-fa91" primary="false"/>
+            <category id="7576-fa03-691b-867d" name="BLOODREAVERS" entryId="e6fc-7f8a-21cd-ca24" primary="false"/>
+            <category id="d130-f0ce-17f9-c6f1" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="1240-3e15-4e6d-7bdf" name="Flesh Hounds" entryId="f242-5e9e-0cce-5fc6::689f-60c4-e598-6550" number="1" type="unit">
+          <profiles>
+            <profile id="f242-5e9e-0cce-5fc6::1d56-c1a1-f094-f6c5" name="Flesh Hounds" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">8&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">2</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">10</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">5+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f242-5e9e-0cce-5fc6::645a-d41c-2e3d-8fc3" name="Collars of Khorne" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This unit can attempt to unbind one spell in each enemy hero phase in the same manner as a WIZARD. In addition, this unit can attempt to dispel one endless spell at the start of your hero phase in the same manner as a WIZARD. Add 1 to unbinding and dispelling rolls for this unit while it contains 10 or more models.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f242-5e9e-0cce-5fc6::f292-6ac2-21ca-2a04" name="Unflagging Hunters" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll charge rolls for this unit.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="f242-5e9e-0cce-5fc6::6ab2-70c5-8bf9-d3d4" name="Gore Hounds" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 in every 5 models in this unit can be a Gore Hound.That model is armed with a Burning Roar in addition to its other weapons.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="2c83-1fad-0f1d-ec93" name="5 Flesh Hounds" entryId="f242-5e9e-0cce-5fc6::1a63-137e-d857-102a" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="100.0"/>
+              </costs>
+            </selection>
+            <selection id="aa64-b3aa-e1ff-f9e1" name="Blood-dark Claws" entryId="f242-5e9e-0cce-5fc6::2863-ed77-08b7-d077" number="1" type="upgrade">
+              <profiles>
+                <profile id="f242-5e9e-0cce-5fc6::5fe4-9be1-97bc-b8ff" name="Blood-dark Claws" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="ab0b-cab7-c22d-17e6" name="Burning Roar" entryId="f242-5e9e-0cce-5fc6::bca2-851a-7245-63fb" number="1" type="upgrade">
+              <profiles>
+                <profile id="f242-5e9e-0cce-5fc6::d339-2760-4cad-2ce6" name="Burning Roar" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">8&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">2+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="232f-3028-a5d0-de69" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="e04c-9095-fea8-0b81" name="DAEMON" entryId="1418-9a68-9f9e-e9a7" primary="false"/>
+            <category id="b8cc-3d9a-8b6c-d505" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="b85f-a94b-de23-79e6" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="e445-6083-f383-fb4e" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="c1b0-d7fb-963d-bcd6" name="Karanak" entryId="9424-1a98-6584-366f::6578-af62-39ff-f9f2" number="1" type="unit">
+          <profiles>
+            <profile id="9424-1a98-6584-366f::dea0-3090-1379-d718" name="Karanak" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">8&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">5</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">10</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="9424-1a98-6584-366f::9915-8b00-b83d-1c1b" name="Brass Collar of Bloody Vengeance" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This model can attempt to unbind one spell in the enemy hero phase in the same manner as a WIZARD. In addition, this model can attempt to dispel one endless spell at the start of your hero phase in the same manner as a WIZARD. If this model successfully unbinds a spell or dispels an endless spell, the caster suffers D3 mortal wounds.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="9424-1a98-6584-366f::37ca-016f-4904-4155" name="Prey of the Blood God" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">After armies are set up, but before the first battle round begins, pick 1 enemy HERO to be this model&apos;s quarry. You can re-roll hit and wound rolls for attacks made by this model that target that HERO.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="9424-1a98-6584-366f::8925-fe58-329b-6b6d" name="Call of the Hunt" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Once per game, during the hero phase, you can summon 1 unit of 5 Flesh Hounds to the battlefield and add it to your army if this model is within 8&quot; of its quarry. The summoned unit must be set up wholly within 8&quot; of this model and more than 9&quot; away from enemy units. The summoned unit cannot move in the following movement phase.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="9424-1a98-6584-366f::7065-23e5-2cce-aa63" name="Unflagging Hunter" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">You can re-roll charge rolls for this model.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="e4ff-5c97-2952-85a1" name="Gore-slick Claws" entryId="9424-1a98-6584-366f::9738-0bb6-e3e4-824a" number="1" type="upgrade">
+              <profiles>
+                <profile id="9424-1a98-6584-366f::be30-9a1c-b131-9250" name="Gore-slick Claws" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="eba8-39ba-c744-62f2" name="Three Savage Maws" entryId="9424-1a98-6584-366f::4118-7f1f-d27a-6afe" number="1" type="upgrade">
+              <profiles>
+                <profile id="9424-1a98-6584-366f::15b1-8378-40e8-1f7b" name="Three Savage Maws" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">6</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="140.0"/>
+          </costs>
+          <categories>
+            <category id="ebb1-3f15-66d7-c8d2" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="af33-d5cb-0e9b-26f4" name="DAEMON" entryId="1418-9a68-9f9e-e9a7" primary="false"/>
+            <category id="cf4c-cf81-6214-38a7" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="5b3c-c56e-2773-35d8" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="6690-70e5-e3e2-374d" name="Named" entryId="088b-3a27-03f7-8249" primary="false"/>
+            <category id="5b8c-6363-c400-ff76" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+            <category id="94e8-1a6e-df5a-1ee9" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="5c82-7381-7765-eea7" name="Mighty Skullcrushers" entryId="d1a7-f946-3bfc-56e4::f22b-7afb-d696-5145" number="1" type="unit">
+          <profiles>
+            <profile id="d1a7-f946-3bfc-56e4::00ea-c487-6759-ed68" name="Mighty Skullcrusher" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">8&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">5</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">6</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">3+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="d1a7-f946-3bfc-56e4::eb39-a14f-7990-c1ce" name="Skullhunter" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 model in this unit can be a Skullhunter. Add 1 to the Attacks characteristic of that model&apos;s melee weapons.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="d1a7-f946-3bfc-56e4::2291-44d9-962c-c8b2" name="Murderous Charge" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">After a model in this unit makes a charge move, you can pick 1 enemy unit within 1&quot; of that model and roll a dice. On a 2+ that enemy unit suffers 1 mortal wound. If this unit has more than 1 model, roll to determine if mortal wounds are inflicted after each model completes its charge move, but do not allocate the mortal wounds until after all of the models in the unit have moved. If this unit has 6 or more models when it makes a charge move, change the mortal wounds inflicted by this ability from 1 to D3.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="0a66-db53-0cf9-b2f3" name="3 Mighty Skullcrushers" entryId="d1a7-f946-3bfc-56e4::f4d2-b7de-fc74-79cc" number="1" type="unit">
+              <costs>
+                <cost name="pts" typeId="points" value="160.0"/>
+              </costs>
+            </selection>
+            <selection id="25df-e350-4f94-4080" name="Juggernaut&apos;s Brazen Hooves" entryId="d1a7-f946-3bfc-56e4::0d90-2abf-920d-eaf2::1068-5c47-aa14-e3ff" number="1" type="upgrade">
+              <profiles>
+                <profile id="d1a7-f946-3bfc-56e4::0d90-2abf-920d-eaf2::3b68-27f9-8081-695a" name="Juggernaut&apos;s Brazen Hooves" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="ebf6-add0-8624-f76e" name="Ensorcelled Axe" entryId="d1a7-f946-3bfc-56e4::905a-077e-51b8-1b5c" entryGroupId="d1a7-f946-3bfc-56e4::d142-9c81-7606-32ca" number="1" type="upgrade">
+              <profiles>
+                <profile id="d1a7-f946-3bfc-56e4::ff5f-6e19-e782-f78b" name="Ensorcelled Axe" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="6917-e4c2-3645-ae22" name="Standard Bearers" entryId="d1a7-f946-3bfc-56e4::96f2-544b-596c-155a" number="1" type="upgrade">
+              <profiles>
+                <profile id="d1a7-f946-3bfc-56e4::722e-034e-12c7-4b05" name="Standard Bearers" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 in every 3 models in this unit can be a Standard Bearer. Add 2 to the Bravery characteristic of this unit while it includes any Standard Bearers.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e53c-c261-92db-8480" name="Hornblowers" entryId="d1a7-f946-3bfc-56e4::ee3a-bd69-1f6f-26c8" number="1" type="upgrade">
+              <profiles>
+                <profile id="d1a7-f946-3bfc-56e4::6a02-7f40-bc17-9834" name="Hornblowers" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 in every 3 models in this unit can be a Hornblower. Add 1 to run and charge rolls made for this unit while it includes any Hornblowers.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="488e-2c39-055c-cda8" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="615a-8a11-a1a7-4f0f" name="MORTAL" entryId="a934-6d15-9932-b7ea" primary="false"/>
+            <category id="3da7-1f05-b12f-e8de" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="b5cf-e991-7575-8539" name="BLOODBOUND" entryId="28cc-5c0c-ed3e-fa91" primary="false"/>
+            <category id="86ff-af82-4f6a-5f34" name="MIGHTY SKULLCRUSHERS" entryId="5a33-b1d2-75c2-db03" primary="false"/>
+            <category id="9e47-8113-749d-6890" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="4545-453d-022d-62f6" name="Skull Cannons" entryId="c120-bc74-29a2-b82f::ae26-5d97-dc6e-1e89" number="1" type="unit">
+          <profiles>
+            <profile id="c120-bc74-29a2-b82f::40c6-200d-3b6c-c14e" name="Grind their Bones, Seize their Skulls" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">After this unit attacks for the first time in each combat phase, if any enemy models were slain by this unit&apos;s attacks, this unit can attack with all of the missile weapons it is armed with.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="c120-bc74-29a2-b82f::23ad-7623-88d5-b98e" name="Skull Cannon" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">8&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">7</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">10</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="89c9-1c4c-4c86-3f53" name="Skull Cannon" entryId="c120-bc74-29a2-b82f::d8ee-7b1c-7177-7c05" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="130.0"/>
+              </costs>
+            </selection>
+            <selection id="d5f8-87c3-855a-633b" name="Burning Skull" entryId="c120-bc74-29a2-b82f::dafd-93e4-7489-c3cd" number="1" type="upgrade">
+              <profiles>
+                <profile id="c120-bc74-29a2-b82f::4853-094e-0a75-787b" name="Burning Skull" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Missile</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">30&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-2</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D6</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="c120-bc74-29a2-b82f::c56e-bef5-0880-0993" name="Burning Skull" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to hit rolls for attacks made with this unit&apos;s Burning Skulls if the target unit contains 10 or more models.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="bcd4-f782-5996-5415" name="Hellblades" entryId="c120-bc74-29a2-b82f::534f-869c-330a-4386" number="1" type="upgrade">
+              <profiles>
+                <profile id="c120-bc74-29a2-b82f::21c4-e0a7-c3d4-9925" name="Hellblades" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="c120-bc74-29a2-b82f::0f45-5929-c130-b6a9" name="Decapitating Blow" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the unmodified hit roll for an attack made with a Hellblade is 6, that attack inflicts 1 mortal wound on the target in addition to any normal damage.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="e8da-e959-8433-2db5" name="Gnashing Maw" entryId="c120-bc74-29a2-b82f::8610-780e-ffa5-ce4d" number="1" type="upgrade">
+              <profiles>
+                <profile id="c120-bc74-29a2-b82f::ff27-148d-203e-f808" name="Gnashing Maw" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="8386-ec6a-8f6d-f126" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="ae3f-5b01-9a6a-f455" name="DAEMON" entryId="1418-9a68-9f9e-e9a7" primary="false"/>
+            <category id="25d4-ff7b-b7d3-f9a8" name="BLOODLETTER" entryId="2dda-37e1-7c22-9081" primary="false"/>
+            <category id="dd07-ba2f-7cc8-cb66" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="8c86-bdab-3c94-3aef" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="false"/>
+            <category id="dbd4-a87a-af1c-86b8" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="5d5b-39d9-af97-05e8" name="Skullgrinder" entryId="9b4f-07af-6222-0d18::e167-7729-8c8b-bf26" number="1" type="unit">
+          <profiles>
+            <profile id="9b4f-07af-6222-0d18::d82a-d56a-c516-223d" name="Skullgrinder" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">5</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">8</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="9b4f-07af-6222-0d18::0f95-fb77-0603-de19" name="Fiery Anvil" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">At the end of the combat phase, y ou can pick 1 enemy HERO or MONSTER within 2&quot; of this model and roll a dice. On a 2+ that enemy unit suffers D3 mortal wounds.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="9b4f-07af-6222-0d18::c7ca-de5a-c791-beff" name="Favoured by Khorne" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Add 1 to the Bravery characteristic of friendly KHORNE MORTAL units wholly within 12&quot; of any friendly models with this ability.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="ed2e-6e86-d207-3c73" name="Brazen Anvil" entryId="9b4f-07af-6222-0d18::9e7b-b3d9-7f43-4040" number="1" type="upgrade">
+              <profiles>
+                <profile id="9b4f-07af-6222-0d18::279b-ef8c-9da0-fc76" name="Brazen Anvil" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">2+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="80.0"/>
+          </costs>
+          <categories>
+            <category id="c132-7777-b739-b43e" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="a2c5-b166-b5bb-bfc6" name="MORTAL" entryId="a934-6d15-9932-b7ea" primary="false"/>
+            <category id="cb2b-9a5c-6538-086c" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="b425-116d-9d26-ef47" name="BLOODBOUND" entryId="28cc-5c0c-ed3e-fa91" primary="false"/>
+            <category id="e998-fdd4-00d5-880a" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="5fa2-3ff6-bc8f-37ae" name="SKULLGRINDER" entryId="524c-8a4c-7e20-9218" primary="false"/>
+            <category id="f698-e77d-410c-a54f" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="47fe-b505-2a16-45f7" name="Skarr Bloodwrath" entryId="4278-b99a-b12f-5792::be72-b584-fc3e-decc" number="1" type="unit">
+          <profiles>
+            <profile id="4278-b99a-b12f-5792::41c6-b84c-b2ef-23d1" name="Skarr Bloodwrath" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">5</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">9</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4278-b99a-b12f-5792::97d5-f527-838c-d20e" name="The Slaughterborn" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">At the end of the movement phase, if this model has been slain, roll 2D6. On an 8+ you can set up this model anywhere on the battlefield more than 9&quot; away from an enemy units, with all wounds allocated to it removed.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="4278-b99a-b12f-5792::da59-0f7f-061b-9b4f" name="Slaughterstorm" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">The Attacks characteristic of this model&apos;s Bloodstorm Blades is either 5, or equal to the number of enemy models within 3&quot; of this model when the number of attacks made with the weapon is determined (whichever is higher).</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="a14c-aa71-655f-35f0" name="Bloodstorm Blades" entryId="4278-b99a-b12f-5792::1696-4ea7-4a61-c52d" number="1" type="upgrade">
+              <profiles>
+                <profile id="4278-b99a-b12f-5792::836d-8512-88fe-82d9" name="Bloodstorm Blades" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">3&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">*</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">2+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="100.0"/>
+          </costs>
+          <categories>
+            <category id="214a-bf37-e741-da41" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="ab89-eb33-8d5e-733b" name="MORTAL" entryId="a934-6d15-9932-b7ea" primary="false"/>
+            <category id="1282-8a75-54f0-64d1" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="bc9e-cd42-7a92-d49b" name="BLOODBOUND" entryId="28cc-5c0c-ed3e-fa91" primary="false"/>
+            <category id="4540-505d-d525-9d5d" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="8852-760a-75b9-2acb" name="SKARR BLOODWRATH" entryId="390d-0f8a-4387-24b9" primary="false"/>
+            <category id="cc49-e479-761d-d02a" name="Named" entryId="088b-3a27-03f7-8249" primary="false"/>
+            <category id="657a-d7a8-9b0a-a776" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="6250-0df3-47d1-b28a" name="Korghos Khul" entryId="e242-b864-5104-3526::595a-599f-1b18-246c" number="1" type="unit">
+          <profiles>
+            <profile id="e242-b864-5104-3526::2734-9759-c7c4-3bdb" name="Collar of Khorne" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This model can attempt to unbind one spell in the enemy hero phase in the same manner as a WIZARD. In addition, this model can attempt to dispel one endless spell at the start of your hero phase in the same manner as a WIZARD. </characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e242-b864-5104-3526::fdf9-bab6-ec65-7380" name="Aqshy&apos;s Bane" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">This model is eligible to fight in the combat phase if it is within 8&quot; of an enemy unit instead of 3&quot; and can move an extra 5&quot; when it piles in.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e242-b864-5104-3526::0115-960c-b720-6f0f" name="Lord of the Goretide" hidden="false" typeId="f71f-b0a4-730e-ced3" typeName="Command Abilities">
+              <characteristics>
+                <characteristic name="Command Ability Details" typeId="1b71-4c83-4e8c-093f">You can use this command ability at the start of the combat phase. If you do so, pick a friendly model with this command ability that is a general. Until the end of that phase, you can re-roll hit rolls of 1 for attacks made by friendly GORETIDE units wholly within 16&quot; of that model.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e242-b864-5104-3526::257a-2d27-ce54-e4b4" name="Korghos Khul" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">5&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">6</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">9</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">3+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="e242-b864-5104-3526::e259-f4c0-2f5b-5a3a" name="Companion" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">Khorghos Khul is accompanied by Grizzlemaw, who attacks with its Claws and Fangs. For rules purposes, Grizzlemaw is treated in the same manner as a mount.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="1fde-5955-799e-4a30" name="Axe of Khorne" entryId="e242-b864-5104-3526::5849-2cbb-b075-6f94" number="1" type="upgrade">
+              <profiles>
+                <profile id="e242-b864-5104-3526::6d77-5cdd-cb72-2b55" name="Axe of Khorne" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D3</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="e242-b864-5104-3526::4ad5-29b3-75ac-fa72" name="Reality-splitting Axe" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">At the end of any phase, if any wounds inflicted by this model&apos;s Axe of Khorne in that phase were allocated to an enemy model and not negated, and that enemy model has not been slain, roll a dice. On a 5+ that enemy model is slain.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="9121-b691-22d1-30a7" name="Claws and Fangs" entryId="e242-b864-5104-3526::b732-827a-f0e9-5e9e" number="1" type="upgrade">
+              <profiles>
+                <profile id="e242-b864-5104-3526::aa2f-0d4a-1540-352f" name="Claws and Fangs" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">4</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">4+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="180.0"/>
+          </costs>
+          <categories>
+            <category id="2536-f7e5-a3f7-6c19" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="70f4-5f85-166a-dfa8" name="MORTAL" entryId="a934-6d15-9932-b7ea" primary="false"/>
+            <category id="b37a-36dd-e8f7-c848" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="1a34-2ee3-93a7-e1ea" name="BLOODBOUND" entryId="28cc-5c0c-ed3e-fa91" primary="false"/>
+            <category id="fdbb-5dbe-e435-8544" name="HERO" entryId="4e0e-664d-51ea-0929" primary="false"/>
+            <category id="9438-debd-34cd-dc4f" name="MIGHTY LORD OF KHORNE" entryId="eade-9643-cc4a-9793" primary="false"/>
+            <category id="6931-b590-c00f-3b54" name="KHORGOS KHULL" entryId="cf14-4b5c-1c74-17b8" primary="false"/>
+            <category id="be9d-049f-3d08-5298" name="Named" entryId="088b-3a27-03f7-8249" primary="false"/>
+            <category id="40d3-ad3d-6e25-0eb6" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="b130-566e-6fea-baac" name="Slaughterbrute of Khorne" entryId="72de-b289-51ee-824b::29f7-0f99-f720-3119" number="1" type="unit">
+          <profiles>
+            <profile id="72de-b289-51ee-824b::eac0-6ae1-7937-c170" name="Slaughterbrute" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">*</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">12</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">7</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="72de-b289-51ee-824b::eb12-25ff-e00d-4e88" name="Runes of Binding" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">When you set up a Slaughterbrute of Khorne, you can pick a KHORNE MORTAL HERO in your army to be its master (a model cannot be the master of more than one Slaughterbrute - the effort required would be fatal). As long as the Slaughterbrute&apos;s master is on the battlefield, the Slaughterbrute&apos;s melee weapons hit on rolls of 3+ rather than 4+.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="72de-b289-51ee-824b::8721-2bae-f32d-799f" name="Beast Unbound" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">A slaughterbrute without a master is a terrifying force of destruction, running rampant and attacking anything that comes near. If a Slaughterbrute does not have a master on the battlefield in the charge phase, roll a dice. If the result is 3 or less it lashes out in a wild berserk fury at the nearest model, friend or foe, within 3&quot;. That model&apos;s unit immediately suffers D3 mortal wounds.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="737e-50b1-07e1-98a0" name="Razor-tipped Claws" entryId="72de-b289-51ee-824b::e3be-38da-8529-c060" number="1" type="upgrade">
+              <profiles>
+                <profile id="72de-b289-51ee-824b::bf01-bdf5-d1fe-fbb3" name="Razor-tipped Claws" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">2&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">*</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">D3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="5a6d-d55e-d495-e68c" name="Mighty Jaws" entryId="72de-b289-51ee-824b::920c-83b2-a489-66c4" number="1" type="upgrade">
+              <profiles>
+                <profile id="72de-b289-51ee-824b::b539-3575-63ea-83ce" name="Mighty Jaws" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">*</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">3</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="82b4-bb8b-7c1f-f1a2" name="Lesser Claws" entryId="72de-b289-51ee-824b::471c-b59d-63e3-4c82" number="1" type="upgrade">
+              <profiles>
+                <profile id="72de-b289-51ee-824b::b5fa-914c-71c0-2c57" name="Lesser Claws" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">2</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="b250-e0f2-b2a8-2b28" name="Wound Track Slaughterbrute" entryId="72de-b289-51ee-824b::142f-8a30-94e5-d553" number="1" type="upgrade">
+              <profiles>
+                <profile id="72de-b289-51ee-824b::62ad-c169-8a0f-759c" name="00-02" hidden="false" typeId="7c6d-89dc-666a-1e34" typeName="Slaughterbrute Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="0bab-c983-61f2-ed93">10&quot;</characteristic>
+                    <characteristic name="Razor-tipped Claws" typeId="0358-96f4-fa7e-d8c2">6</characteristic>
+                    <characteristic name="Mighty Jaws" typeId="f540-d65e-461a-79a0">2+</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="72de-b289-51ee-824b::45e0-89bd-f503-4943" name="03-04" hidden="false" typeId="7c6d-89dc-666a-1e34" typeName="Slaughterbrute Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="0bab-c983-61f2-ed93">8&quot;</characteristic>
+                    <characteristic name="Razor-tipped Claws" typeId="0358-96f4-fa7e-d8c2">5</characteristic>
+                    <characteristic name="Mighty Jaws" typeId="f540-d65e-461a-79a0">3+</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="72de-b289-51ee-824b::24e7-52b4-56fc-89f4" name="05-07" hidden="false" typeId="7c6d-89dc-666a-1e34" typeName="Slaughterbrute Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="0bab-c983-61f2-ed93">8&quot;</characteristic>
+                    <characteristic name="Razor-tipped Claws" typeId="0358-96f4-fa7e-d8c2">4</characteristic>
+                    <characteristic name="Mighty Jaws" typeId="f540-d65e-461a-79a0">3+</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="72de-b289-51ee-824b::684c-079e-1d09-3c49" name="08-09" hidden="false" typeId="7c6d-89dc-666a-1e34" typeName="Slaughterbrute Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="0bab-c983-61f2-ed93">6&quot;</characteristic>
+                    <characteristic name="Razor-tipped Claws" typeId="0358-96f4-fa7e-d8c2">3</characteristic>
+                    <characteristic name="Mighty Jaws" typeId="f540-d65e-461a-79a0">4+</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="72de-b289-51ee-824b::ee39-f21b-6004-e4e5" name="10+" hidden="false" typeId="7c6d-89dc-666a-1e34" typeName="Slaughterbrute Wounds">
+                  <characteristics>
+                    <characteristic name="Move" typeId="0bab-c983-61f2-ed93">4&quot;</characteristic>
+                    <characteristic name="Razor-tipped Claws" typeId="0358-96f4-fa7e-d8c2">2</characteristic>
+                    <characteristic name="Mighty Jaws" typeId="f540-d65e-461a-79a0">4+</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="170.0"/>
+          </costs>
+          <categories>
+            <category id="10de-0743-1f0d-ffdc" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="f091-f1ff-32bd-51be" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="8ff9-1317-e5f3-c263" name="MONSTER" entryId="1959-9f6a-3056-913a" primary="false"/>
+            <category id="7eea-7eb3-95d0-943f" name="SLAUGHTERBRUTE" entryId="d835-19ec-be5f-a4e0" primary="false"/>
+            <category id="dcfc-27ff-ffe9-5b8d" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="true"/>
+          </categories>
+        </selection>
+        <selection id="b3ec-db47-06ab-f38d" name="Bloodcrushers" entryId="9aed-28c1-5b53-6cb1::41fb-f03e-b188-fdbd" number="1" type="unit">
+          <profiles>
+            <profile id="9aed-28c1-5b53-6cb1::61e5-21e4-04fc-8194" name="Bloodcrushers" hidden="false" typeId="1960-ca8e-67ce-2014" typeName="Unit">
+              <characteristics>
+                <characteristic name="Move" typeId="8655-6213-2824-1752">8&quot;</characteristic>
+                <characteristic name="Wounds" typeId="cd0e-fea6-411f-904d">4</characteristic>
+                <characteristic name="Bravery" typeId="0c85-bf79-836b-759e">10</characteristic>
+                <characteristic name="Save" typeId="f8dd-4f2a-8543-4f36">4+</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="9aed-28c1-5b53-6cb1::7045-7509-79a5-1ae7" name="Bloodhunter" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 model in this unit is a Bloodhunter. Add 1 to the Attacks characteristic of that model&apos;s Hellblade.</characteristic>
+              </characteristics>
+            </profile>
+            <profile id="9aed-28c1-5b53-6cb1::1ec4-3334-469b-948b" name="Murderous Charge" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+              <characteristics>
+                <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">After a model in this unit makes a charge move, you can pick 1 enemy unit within 1&quot; of that model and roll a dice. On a 2+ that enemy unit suffers 1 mortal wound. If this unit has more than 1 model, roll to determine if mortal wounds are inflicted after each model completes its charge move, but do not allocate the mortal wounds until after all of the models in the unit have moved. If this unit has 6 or more models when it makes a charge move, change the mortal wounds inflicted by this ability from 1 to D3.</characteristic>
+              </characteristics>
+            </profile>
+          </profiles>
+          <selections>
+            <selection id="6fdb-2f95-6752-2d6c" name="3 Bloodcrushers" entryId="9aed-28c1-5b53-6cb1::63d2-c254-d13e-84dd" number="1" type="model">
+              <costs>
+                <cost name="pts" typeId="points" value="120.0"/>
+              </costs>
+            </selection>
+            <selection id="1573-fcb0-b67f-ec9e" name="Juggernaut&apos;s Brazen Hooves" entryId="9aed-28c1-5b53-6cb1::827e-05c2-9118-97c6" number="1" type="upgrade">
+              <profiles>
+                <profile id="9aed-28c1-5b53-6cb1::cb79-3314-50f2-bdb1" name="Juggernaut&apos;s Brazen Hooves" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">3</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">3+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="437d-0560-712d-c137" name="Hellblade" entryId="9aed-28c1-5b53-6cb1::ed6a-fe8f-1d81-3a5b" number="1" type="upgrade">
+              <profiles>
+                <profile id="9aed-28c1-5b53-6cb1::f732-2b17-fa8e-b33e" name="Hellblade" hidden="false" typeId="96df-ab28-5d72-bbb3" typeName="Weapon">
+                  <characteristics>
+                    <characteristic name="Type" typeId="655c-362e-a663-3e50">Melee</characteristic>
+                    <characteristic name="Range" typeId="ee32-7f8e-ccd7-b7b0">1&quot;</characteristic>
+                    <characteristic name="Attacks" typeId="0bd7-bded-a0e0-19a0">1</characteristic>
+                    <characteristic name="To Hit" typeId="87f2-fb99-33f9-7269">4+</characteristic>
+                    <characteristic name="To Wound" typeId="8842-17f1-9794-4efc">3+</characteristic>
+                    <characteristic name="Rend" typeId="f578-d2a5-f0d3-b707">-1</characteristic>
+                    <characteristic name="Damage" typeId="b5b6-4cbd-661d-1b70">1</characteristic>
+                  </characteristics>
+                </profile>
+                <profile id="9aed-28c1-5b53-6cb1::47dc-c08d-d938-79c2" name="Decapitating Blow" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">If the unmodified hit roll for an attack made with a Hellblade is 6, that attack inflicts 1 mortal wound on the target in addition to any normal damage.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="475a-4c74-131c-c5f1" name="Hornblower" entryId="9aed-28c1-5b53-6cb1::e945-eeee-9088-d6ba" number="1" type="upgrade">
+              <profiles>
+                <profile id="9aed-28c1-5b53-6cb1::3878-5a96-af7e-8e64" name="Hornblower" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 in every 3 models in this unit can be a Hornblower.  While this model contains any Hornblowers, if the unmodified roll for a battleshock test for an enemy unit that is within 8&quot; of this unit is 1, that battleshock test must be re-rolled.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+            <selection id="4ee1-2c13-b663-ab2d" name="Icon Bearer" entryId="9aed-28c1-5b53-6cb1::cef3-9f39-6500-c205" number="1" type="upgrade">
+              <profiles>
+                <profile id="9aed-28c1-5b53-6cb1::be00-5516-64f5-f558" name="Icon Bearer" hidden="false" typeId="c924-5a68-471a-2fd5" typeName="Unit Abilities">
+                  <characteristics>
+                    <characteristic name="Ability Details" typeId="d4dc-8e81-bc0e-b8f0">1 in every 3 models in this unit can be an Icon Bearer. If an unmodified battleshock roll of 1 is made for this unit while it includees any Icon Bearers, you can add 1 model to this unit, and no models from this unit will flee in that phase.</characteristic>
+                  </characteristics>
+                </profile>
+              </profiles>
+              <costs>
+                <cost name="pts" typeId="points" value="0.0"/>
+              </costs>
+            </selection>
+          </selections>
+          <costs>
+            <cost name="pts" typeId="points" value="0.0"/>
+          </costs>
+          <categories>
+            <category id="7985-9712-a431-5eab" name="CHAOS" entryId="7cdd-80ea-cbeb-8e16" primary="false"/>
+            <category id="f947-4af8-4a56-610c" name="DAEMON" entryId="1418-9a68-9f9e-e9a7" primary="false"/>
+            <category id="bbb3-890d-8775-5eca" name="BLOODLETTER" entryId="2dda-37e1-7c22-9081" primary="false"/>
+            <category id="7373-df63-df2d-77b8" name="KHORNE" entryId="f22b-976f-fc38-366a" primary="false"/>
+            <category id="aff4-5bb9-df97-fb0c" name="Other" entryId="065e-fda7-fd27-1f40" primary="true"/>
+          </categories>
+        </selection>
+      </selections>
+      <publications>
+        <publication id="cac4-1eec-pubN65537" name="Chaos Battletome: Blades of Khorne"/>
+        <publication id="e51d-b1a3-pubEC" name="The General&apos;s Handbook"/>
+        <publication id="e51d-b1a3-pubEHOGM" name="Malign Sorcery"/>
+        <publication id="cac4-1eec-pubN105675" name="Grand Alliance: Chaos"/>
+        <publication id="cac4-1eec-pubN110134" name="Battalion Set: Khorne Bloodbound Slaughterstorm"/>
+        <publication id="cac4-1eec-pubN107006" name="Forgeworld: Monstrous Arcanum"/>
+        <publication id="cac4-1eec-pubN109547" name="Start Collecting: Khorne Bloodbound"/>
+        <publication id="cac4-1eec-pubN124386" name="Magore&apos;s Fiends"/>
+        <publication id="e51d-b1a3-pubE5LCI" name="General&apos;s Handbook 2018"/>
+        <publication id="c9b2-1fe6-pubN65537" name="Battletome: Beasts of Chaos"/>
+        <publication id="cac4-1eec-pubN114183" name="Start Collecting: Daemons of Khorne"/>
+        <publication id="798b-2f60-pubN65537" name="Grand Alliance: Chaos"/>
+        <publication id="6894-a70d-pubN65537" name="Chaos Battletome: Maggotkin of Nurgle"/>
+        <publication id="e51d-b1a3-pubEQOCI" name="General&apos;s Handbook 2017"/>
+        <publication id="e51d-b1a3-pubEFCFK" name="Malign Sorcery; Errata, July 2018"/>
+        <publication id="e51d-b1a3-pubEKHGM" name="Malign Sorcery"/>
+        <publication id="cac4-1eec-pubN112244" name="Battletome: Everchosen"/>
+        <publication id="c9b2-1fe6-pubN83353" name="1"/>
+        <publication id="cac4-1eec-pubN111094" name="Warscroll Compendium: Daemons of Chaos (2015)"/>
+        <publication id="cac4-1eec-pubN114770" name="Battletome: Khorne Bloodbound (2015)"/>
+        <publication id="e51d-b1a3-pubETJDK" name="Malign Sorcery; Official Errata, December 2018"/>
+        <publication id="798b-2f60-pubN85643" name="Forgeworld: Monstrous Arcanum"/>
+        <publication id="e51d-b1a3-pubEQ" name="Core Rules"/>
+      </publications>
+      <categories>
+        <category id="b23d-fd0c-6325-33c4" name="Uncategorised" entryId="(No Category)" primary="false"/>
+        <category id="a3bc-a03e-d743-8767" name="Leader" entryId="6c6b-e787-f9b8-a510" primary="false"/>
+        <category id="68b1-c011-3e5b-2b14" name="Behemoth" entryId="fa0c-9044-2568-fa02" primary="false"/>
+        <category id="2578-d387-8178-f5c6" name="Artillery" entryId="1d26-07fc-6a66-d73e" primary="false"/>
+        <category id="11cd-e1e1-6c10-2a64" name="Battleline" entryId="e9f2-765a-b7b8-ce8e" primary="false"/>
+        <category id="84d1-7976-45d1-8f78" name="Other" entryId="065e-fda7-fd27-1f40" primary="false"/>
+        <category id="2093-03e5-cc2f-405d" name="Battalion" entryId="be17-6bbd-b857-3f43" primary="false"/>
+        <category id="a9e8-e966-cf36-3c76" name="General" entryId="b745-17c4-8fbf-8b04" primary="false"/>
+        <category id="3690-ef0c-7bad-43c7" name="Artefact" entryId="3564-4c26-10b4-d953" primary="false"/>
+        <category id="7573-1fea-2a38-4ad9" name="Allegiance" entryId="87e8-c095-f059-5f7b" primary="false"/>
+        <category id="9178-a812-1095-45c6" name="Game Options" entryId="1974-3f49-7f0b-8422" primary="false"/>
+        <category id="595f-efde-e2dd-3a7e" name="Realm of Origin" entryId="5c6d-5384-bcb1-b474" primary="false"/>
+        <category id="1c28-2ef7-c7eb-2874" name="Malign Sorcery" entryId="eecb-ed66-d474-9ddd" primary="false"/>
+        <category id="dc94-9e58-b935-06ca" name="Command Points" entryId="8be8-3ccd-be93-b55e" primary="false"/>
+        <category id="d509-807d-bc47-bd39" name="Realm of Battle" entryId="5e28-c4f1-4a92-b75c" primary="false"/>
+        <category id="99ef-d420-5e9a-dea7" name="Scenery" entryId="bc8a-9257-1601-6d62" primary="false"/>
+      </categories>
+    </force>
+  </forces>
+</roster>
