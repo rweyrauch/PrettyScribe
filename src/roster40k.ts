@@ -106,6 +106,7 @@ export enum UnitRole {
     NONE,
 
     // 40k
+    SCD,
     HQ,
     TR,
     EL,
@@ -117,7 +118,6 @@ export enum UnitRole {
     LW,
     AGENTS,
     NF,
-    SCD,
 
     // Kill Team
     COMMANDER,
@@ -130,6 +130,7 @@ export const UnitRoleToString: string[] = [
     'None',
 
     // 40k
+    'Supreme Command Detachment',
     'HQ',
     'Troops',
     'Elites',
@@ -141,7 +142,6 @@ export const UnitRoleToString: string[] = [
     'Lord of War',
     'Agent of the Imperium',
     'No Force Org Slot',
-    'Supreme Command Detachment',
 
     // Kill Team
     'Commander',
@@ -441,7 +441,7 @@ function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void 
 
             // Only include the allegiance rules once.
             if (!DuplicateForce(f, roster)) {
-                var rules = root.querySelectorAll("force>rules>rule");
+                const rules = root.querySelectorAll("force>rules>rule");
                 for (let rule of rules) {
                     ExtractRuleDescription(rule, f._rules);
                 }
@@ -551,7 +551,7 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
         const profileType = profile.getAttribute("typeName");
         if (profileType === "Abilities" || profileType === "Dynastic Code" ||
                 profileType === "Household Tradition") {
-            ParseProfileCharacteristics(profile, profileName, map);
+            ParseProfileCharacteristics(profile, profileName, profileType,map);
         }
     }
 
@@ -918,23 +918,22 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
             const explosion = ParseExplosionProfile(profile);
             model._explosions.push(explosion);
         } else if (typeName == "Psyker") {
-            const psyker = ParsePsykerProfile(profile);
-            model._psyker = psyker;
+            model._psyker = ParsePsykerProfile(profile);
         } else {
             // Everything else, like Prayers and Warlord Traits. 
             if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
-            ParseProfileCharacteristics(profile, profileName, unit._abilities[typeName]);
+            ParseProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
         }
     }
 }
 
-function ParseProfileCharacteristics(profile: Element, profileName: string, map: Map<string, string | null>) {
+function ParseProfileCharacteristics(profile: Element, profileName: string, typeName:string,  map: Map<string, string | null>) {
     const chars = profile.querySelectorAll("characteristics>characteristic");
     for (const char of chars) {
         if (!char.textContent) continue;
 
         const charName = char.getAttribute("name");
-        if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus") || (charName === 'Capacity')) {
+        if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus") || (charName === 'Capacity') || typeName === 'Invocations') {
             map.set(profileName, char.textContent);
         }
         if ((charName === 'Standard') || (charName === 'Favoured')) {

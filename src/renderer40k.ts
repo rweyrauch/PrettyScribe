@@ -19,7 +19,7 @@ import {Renderer} from "./renderer";
 
 export class Renderer40k implements Renderer {
 
-    private _roster: Roster40k | null = null;
+    private readonly _roster: Roster40k | null = null;
 
     private _roles: Map<UnitRole, HTMLImageElement | null> = new Map();
 
@@ -52,7 +52,7 @@ export class Renderer40k implements Renderer {
             const text = `${this._roster.name()} (${costs.join(', ')})`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
 
-            // Footer div is hidden, except when printing.
+            // Footer div is hideEnabled, except when printing.
             const footer = title.appendChild(document.createElement('div'));
             footer.classList.add('footer');
             footer.appendChild(document.createElement('div')).appendChild(document.createTextNode('PrettyScribe'));
@@ -101,7 +101,10 @@ export class Renderer40k implements Renderer {
             thead.classList.add('thead-light');
             const tr = document.createElement('tr');
             thead.appendChild(tr);
-            const headerInfo = [{ name: "NAME", w: '20%' }, { name: "ROLE", w: '15%' }, { name: "MODELS", w: '55%' }, { name: "POINTS", w: '5%' }, { name: "POWER", w: '5%' }];
+            const headerInfo = [{name: "NAME", w: '20%'}, {name: "ROLE", w: '15%'}, {name: "MODELS", w: '55%'}, {name: "POINTS", w: '5%'}, {
+                name: "POWER",
+                w: '5%'
+            }];
             if (unitsHaveCpCost) {
                 headerInfo.push({name: "CP", w: '5%'});
             }
@@ -143,7 +146,7 @@ export class Renderer40k implements Renderer {
         optionsDiv.classList.add('wh40k_options_div', 'd-print-none');
         optionsDiv.appendChild(document.createTextNode('Options:'));
         optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
-        this.renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase', 
+        this.renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase',
             (e) => {
                 const abilities = document.getElementById('wh40k_abilities_list');
                 if (!abilities) return;
@@ -193,6 +196,19 @@ export class Renderer40k implements Renderer {
                     detachmentSheets.classList.remove('d-none')
                 }
             });
+        // ability to hide divs (abilities, rules, ...) from printing
+        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
+        this.renderCheckboxOption(optionsDiv, 'hideElements', 'Hide Elements from Printing',
+            (e: Event) => {
+                const body = document.body;
+                if ((e.target as any).checked) {
+                    body.classList.add('hide_enabled')
+                    body.addEventListener('click', toggleHidden)
+                } else {
+                    body.classList.remove('hide_enabled')
+                    body.removeEventListener('click', toggleHidden)
+                }
+            });
     }
 
     private renderCheckboxOption(optionsDiv: HTMLElement, idAndName: string, text: string, eventHandler: EventListenerOrEventListenerObject) {
@@ -209,8 +225,8 @@ export class Renderer40k implements Renderer {
     private renderAbilitiesByPhase(list: HTMLElement) {
         if (!this._roster) return;
 
-        const allPhaseAbilities: {[key: string]: Element[]} = {};
-        const allPhaseAbilityNames: {[key: string]: string[]} = {};
+        const allPhaseAbilities: { [key: string]: Element[] } = {};
+        const allPhaseAbilityNames: { [key: string]: string[] } = {};
         for (const force of this._roster._forces) {
             for (const unit of force._units) {
                 for (const abilities of Object.values(unit._abilities)) {
@@ -220,7 +236,7 @@ export class Renderer40k implements Renderer {
 
                         // Create a div with the ability, to highlight the phase in
                         // the ability's rule.
-                        const abilityDiv = document.createElement('div');
+                        const abilityDiv = addHideAble(document.createElement('div'));
                         abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(unit.name()));
                         abilityDiv.appendChild(document.createTextNode(' - '));
                         abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(ability));
@@ -248,7 +264,7 @@ export class Renderer40k implements Renderer {
                                     phase = 'pre-game phase';
                                     break;
                                 case 'set up':
-                                    if(!description.includes('reinforcements')) {
+                                    if (!description.includes('reinforcements')) {
                                         phase = 'pre-game phase';
                                     }
                                     break;
@@ -391,7 +407,7 @@ export class Renderer40k implements Renderer {
         unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
         unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._points.toString()));
 
-        let cpCostDiv: Element|string = '';
+        let cpCostDiv: Element | string = '';
         if (unit._cost._commandPoints !== 0) {
             cpCostDiv = document.createElement('div');
             cpCostDiv.classList.add('unit_costs', 'unit_cp_costs');
@@ -445,14 +461,14 @@ export class Renderer40k implements Renderer {
 
             // Determine wound table headers.
             if (unit._woundTracker.length == 4) {
-              // Use first entry in table as labels.
-              // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
-              const newLabels = Array.from(unit._woundTracker[0]._table.values());
-              labels.splice(1, newLabels.length, ...newLabels);
+                // Use first entry in table as labels.
+                // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
+                const newLabels = Array.from(unit._woundTracker[0]._table.values());
+                labels.splice(1, newLabels.length, ...newLabels);
             } else if (unit._woundTracker.length == 3) {
-              // Use keys as labels.
-              const newLabels = Array.from(unit._woundTracker[0]._table.keys());
-              labels.splice(1, newLabels.length, ...newLabels);
+                // Use keys as labels.
+                const newLabels = Array.from(unit._woundTracker[0]._table.keys());
+                labels.splice(1, newLabels.length, ...newLabels);
             }
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
@@ -589,7 +605,7 @@ export class Renderer40k implements Renderer {
         }
         const abilities = Array.from(abilitiesMap.keys()).sort(Compare);
         for (const ability of abilities) {
-            const abilityDiv = abilitiesDiv.appendChild(document.createElement('div'));
+            const abilityDiv = addHideAble(abilitiesDiv.appendChild(document.createElement('div')));
             abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
             abilityDiv.appendChild(document.createTextNode(abilitiesMap.get(ability) || '??'));
         }
@@ -631,7 +647,7 @@ export class Renderer40k implements Renderer {
             rulesHeader.appendChild(document.createTextNode(subFaction));
 
             for (let rule of rules) {
-                let row = document.createElement('div');
+                let row = addHideAble(document.createElement('div'));
                 let name = document.createElement('b');
                 name.appendChild(document.createTextNode(rule[0]));
                 let desc = document.createElement('p');
@@ -658,17 +674,17 @@ export class Renderer40k implements Renderer {
 
     private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
     private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
-};
+}
 
 function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {
     if (rulesToAdd.size === 0) return;
     ruleGroups.set(groupName, new Map([...ruleGroups.get(groupName) || [], ...rulesToAdd]));
 }
 
-function createTableRow(labels: (string|Element)[], widths: number[], header = false) {
-    const row = document.createElement('tr');
+function createTableRow(labels: (string | Element)[], widths: number[], header = false) {
+    const row = addHideAble(document.createElement('tr'));
     if (header) row.classList.add('header_row');
-    for (var i = 0, colCount = 0; i < labels.length && i < widths.length || colCount < 20; i++) {
+    for (let i = 0, colCount = 0; i < labels.length && i < widths.length || colCount < 20; i++) {
         const cell = document.createElement(header ? 'th' : 'td');
         cell.scope = 'col';
         if (i < labels.length && i < widths.length) {
@@ -695,7 +711,7 @@ function createTableRow(labels: (string|Element)[], widths: number[], header = f
 }
 
 function createNoteHead(title: string, note: BaseNotes) {
-    if (!note._customNotes) return null;
+    if (!note.notes()) return null;
 
     const thead = document.createElement('thead');
     thead.classList.add('info_row');
@@ -711,7 +727,7 @@ function createNotesHead(title: string, notes: BaseNotes[]) {
     thead.classList.add('info_row');
     const notesDiv = document.createElement('div');
     for (const note of notes) {
-        if (!note._customNotes) continue;
+        if (!note.notes()) continue;
 
         const noteDiv = notesDiv.appendChild(document.createElement('div'));
         noteDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${note.name()}: `));
@@ -720,6 +736,22 @@ function createNotesHead(title: string, notes: BaseNotes[]) {
     thead.appendChild(createTableRow([title, notesDiv], [0.10, 0.90], /* header= */ false));
 
     return thead;
+}
+
+function addHideAble<T extends Element>(e: T): T {
+    e.classList.add('hide_able')
+    return e;
+}
+
+function toggleHidden(e: Event) {
+    let element = e.target as Element;
+    if (element) element = element.closest('.hide_able') as Element;
+    if (!element) return;
+    if (element.classList.contains('hidden')) {
+        element.classList.remove('hidden')
+    } else {
+        element.classList.add('hidden')
+    }
 }
 
 
