@@ -8,7 +8,7 @@
  *   -v: verbose; print out everything in the roster file
  */
 
-import { readZippedRosterFile } from './readRosterFile';
+import { readZippedRosterFile } from '../spec/helpers/readRosterFile';
 
 let verbose = false;
 

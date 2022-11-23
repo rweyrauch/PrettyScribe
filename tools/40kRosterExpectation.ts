@@ -1,4 +1,4 @@
-import { readZippedRosterFile } from './readRosterFile';
+import { readZippedRosterFile } from '../spec/helpers/readRosterFile';
 import { BaseNotes, Costs, Create40kRoster, Force, Unit } from "../src/roster40k";
 
 export async function getRosterExpectation(filename: string): Promise<string> {
