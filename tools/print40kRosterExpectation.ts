@@ -2,12 +2,10 @@
  * Utility script to render Jasmine-stype expect() statements for a roster.
  *
  * Run with:
- *   $ ts-node spec/helpers/print40kRosterExpectation.ts 'path/to/file'
+ *   $ npx ts-node tools/print40kRosterExpectation.ts 'path/to/file'
  */
 
 import { getRosterExpectation } from "./40kRosterExpectation";
-import { readRosterFile } from './readRosterFile';
-import { BaseNotes, Create40kRoster, Force, Unit } from "../../src/roster40k";
 
 function main(args: string[]) {
   if (args.length < 3) {
@@ -15,7 +13,7 @@ function main(args: string[]) {
     return;
   }
 
-  Promise.all(args.slice(2).map(getRosterExpectation));
+  Promise.all(args.slice(2).map(f => getRosterExpectation(f).then(console.log)));
 }
 
 main(process.argv);

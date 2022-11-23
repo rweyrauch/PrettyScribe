@@ -2,7 +2,10 @@
  * Utility script to render Roster file contents on the command line.
  *
  * Run with:
- *   $ ts-node spec/helpers/printRosterStructure.ts 'path/to/file'
+ *   $ npx ts-node tools/printRosterStructure.ts [-v] 'path/to/file'
+ * 
+ * Options:
+ *   -v: verbose; print out everything in the roster file
  */
 
 import { readZippedRosterFile } from './readRosterFile';
