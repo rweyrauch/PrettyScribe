@@ -269,6 +269,15 @@ export class Unit extends BaseNotes {
 
     _id: number = 0;
 
+    nameWithExtraCosts(): string {
+        const extraCosts = [];  // Track extra costs like cabal points.
+        for (const freeformCostType in this._cost._freeformValues) {
+            if (this._cost._freeformValues[freeformCostType] === 0) continue;
+            extraCosts.push(`${this._cost._freeformValues[freeformCostType]}${freeformCostType}`);
+        }
+        return extraCosts.length ? `${this.name()} [${extraCosts.join(', ')}]` : this.name();
+    }
+
     equal(unit: Unit | null): boolean {
         if (unit == null) return false;
 
