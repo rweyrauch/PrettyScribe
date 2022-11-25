@@ -161,6 +161,11 @@ label {
     margin-bottom: 0.5em;
 }
 
+.wh40k_option {
+    margin-left: 0.75em;
+    display: inline-block;
+}
+
 .wh40k_unit_sheet {
     padding: 0 10px 0 5px;
 }
