@@ -121,12 +121,7 @@ export class Renderer40k implements Renderer {
             table.appendChild(body);
             for (let unit of force._units) {
                 const tr = document.createElement('tr');
-                const extraCosts = [];  // Track extra costs like cabal points.
-                for (const freeformCostType in unit._cost._freeformValues) {
-                    if (unit._cost._freeformValues[freeformCostType] === 0) continue;
-                    extraCosts.push(`${unit._cost._freeformValues[freeformCostType]}${freeformCostType}`);
-                }
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.name() + (extraCosts.length ? ` [${extraCosts.join(', ')}]` : '')));
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.nameWithExtraCosts()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
                 this.renderModelList(models, unit);
@@ -145,7 +140,6 @@ export class Renderer40k implements Renderer {
         const optionsDiv = title.appendChild(document.createElement('div'));
         optionsDiv.classList.add('wh40k_options_div', 'd-print-none');
         optionsDiv.appendChild(document.createTextNode('Options:'));
-        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
         this.renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase',
             (e) => {
                 const abilities = document.getElementById('wh40k_abilities_list');
@@ -157,7 +151,6 @@ export class Renderer40k implements Renderer {
                     abilities.classList.add('d-none');
                 }
             });
-        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
         this.renderCheckboxOption(optionsDiv, 'showUpgradeCosts', 'Show upgrade costs',
             (e: Event) => {
                 const costSpans = document.getElementsByClassName('wh40k_upgrade_cost');
@@ -169,7 +162,6 @@ export class Renderer40k implements Renderer {
                     }
                 }
             });
-        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
         this.renderCheckboxOption(optionsDiv, 'printBigger', 'Print Larger Text',
             (e: Event) => {
                 const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
@@ -181,7 +173,6 @@ export class Renderer40k implements Renderer {
                     }
                 }
             });
-        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
         this.renderCheckboxOption(optionsDiv, 'collateDatasheets', 'Collate Detachment Datasheets',
             (e: Event) => {
                 const collatedSheets = document.getElementById('collated_sheets');
@@ -197,7 +188,6 @@ export class Renderer40k implements Renderer {
                 }
             });
         // ability to hide divs (abilities, rules, ...) from printing
-        optionsDiv.appendChild(document.createElement('span')).innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;';
         this.renderCheckboxOption(optionsDiv, 'hideElements', 'Hide Elements from Printing',
             (e: Event) => {
                 const body = document.body;
@@ -212,12 +202,14 @@ export class Renderer40k implements Renderer {
     }
 
     private renderCheckboxOption(optionsDiv: HTMLElement, idAndName: string, text: string, eventHandler: EventListenerOrEventListenerObject) {
-        const input = optionsDiv.appendChild(document.createElement('input'));
+        const optDiv = optionsDiv.appendChild(document.createElement('div'));
+        optDiv.classList.add('wh40k_option');
+        const input = optDiv.appendChild(document.createElement('input'));
         input.setAttribute('type', 'checkbox');
         input.setAttribute('name', idAndName);
         input.setAttribute('id', idAndName);
         input.addEventListener('input', eventHandler);
-        const label = optionsDiv.appendChild(document.createElement('label'));
+        const label = optDiv.appendChild(document.createElement('label'));
         label.setAttribute('for', idAndName);
         label.appendChild(document.createTextNode(` ${text}`));
     }
