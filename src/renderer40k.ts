@@ -67,6 +67,8 @@ export class Renderer40k implements Renderer {
         if (forces) {
             this.renderRosterDetails(forces);
         }
+
+        this.loadOptionsFromLocalStorage();
     }
 
     private renderRosterSummary(list: HTMLElement) {
@@ -145,7 +147,7 @@ export class Renderer40k implements Renderer {
                 const abilities = document.getElementById('wh40k_abilities_list');
                 if (!abilities) return;
 
-                if ((e.target as any).checked) {
+                if ((e.target as HTMLInputElement).checked) {
                     abilities.classList.remove('d-none');
                 } else {
                     abilities.classList.add('d-none');
@@ -155,7 +157,7 @@ export class Renderer40k implements Renderer {
             (e: Event) => {
                 const costSpans = document.getElementsByClassName('wh40k_upgrade_cost');
                 for (const span of costSpans) {
-                    if ((e.target as any).checked) {
+                    if ((e.target as HTMLInputElement).checked) {
                         span.classList.remove('d-none')
                     } else {
                         span.classList.add('d-none')
@@ -166,7 +168,7 @@ export class Renderer40k implements Renderer {
             (e: Event) => {
                 const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
                 for (const div of unitSheetDiv) {
-                    if ((e.target as any).checked) {
+                    if ((e.target as HTMLInputElement).checked) {
                         div.classList.add('bigger')
                     } else {
                         div.classList.remove('bigger')
@@ -179,7 +181,7 @@ export class Renderer40k implements Renderer {
                 const detachmentSheets = document.getElementById('detachment_sheets');
                 if (!collatedSheets || !detachmentSheets) return;
 
-                if ((e.target as any).checked) {
+                if ((e.target as HTMLInputElement).checked) {
                     collatedSheets.classList.remove('d-none')
                     detachmentSheets.classList.add('d-none')
                 } else {
@@ -191,7 +193,7 @@ export class Renderer40k implements Renderer {
         this.renderCheckboxOption(optionsDiv, 'hideElements', 'Hide Elements from Printing',
             (e: Event) => {
                 const body = document.body;
-                if ((e.target as any).checked) {
+                if ((e.target as HTMLInputElement).checked) {
                     body.classList.add('hide_enabled')
                     body.addEventListener('click', toggleHidden)
                 } else {
@@ -209,9 +211,39 @@ export class Renderer40k implements Renderer {
         input.setAttribute('name', idAndName);
         input.setAttribute('id', idAndName);
         input.addEventListener('input', eventHandler);
+        input.addEventListener('change', e => this.saveOptionToLocalStorage(idAndName));
         const label = optDiv.appendChild(document.createElement('label'));
         label.setAttribute('for', idAndName);
         label.appendChild(document.createTextNode(` ${text}`));
+    }
+
+    private saveOptionToLocalStorage(idAndName: string) {
+        try {
+            const el = document.getElementById(idAndName) as HTMLInputElement;
+            if (!el) return;
+
+            window.localStorage[`option-checkbox-${idAndName}`] = el.checked;
+        } catch (e) {
+            // localStorage not supported or enabled
+        }
+    }
+
+    private loadOptionsFromLocalStorage() {
+        try { 
+            for (let i = 0; i < window.localStorage.length; i++) {
+                const key = window.localStorage.key(i);
+                const checkboxId = key?.match(/option-checkbox-(.*)/)?.[1];
+                if (checkboxId) {
+                    const option = document.getElementById(checkboxId) as HTMLInputElement;
+                    if (!option) continue;
+
+                    option.checked = window.localStorage[key] === 'true';
+                    option.dispatchEvent(new Event('input'));
+                }
+            }
+        } catch (e) {
+            // localStorage not supported or enabled
+        }
     }
 
     private renderAbilitiesByPhase(list: HTMLElement) {
