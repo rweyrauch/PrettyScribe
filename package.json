@@ -31,7 +31,8 @@
     "test": "jasmine --config=jasmine.json",
     "start": "webpack-dev-server",
     "buildprod": "webpack --config webpack.config.prod.js",
-    "build": "webpack"
+    "build": "webpack",
+    "writetests": "ts-node tools/write40kRosterExpectation.ts"
   },
   "author": "Rick Weyrauch",
   "license": "ISC"
