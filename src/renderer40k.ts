@@ -141,7 +141,31 @@ export class Renderer40k implements Renderer {
     private renderOptionsDiv(title: HTMLElement) {
         const optionsDiv = title.appendChild(document.createElement('div'));
         optionsDiv.classList.add('wh40k_options_div', 'd-print-none');
-        optionsDiv.appendChild(document.createTextNode('Options:'));
+        optionsDiv.id = 'wh40k_options_div';
+
+        // A toggle to hide or show options, since there are several.
+        const optionsToggleSpan = optionsDiv.appendChild(document.createElement('span'));
+        optionsToggleSpan.classList.add('wh40k_options_toggle');
+        optionsToggleSpan.id = 'wh40k_options_toggle';
+        const optionsToggleExpandedText = '[\u2212] Options:';
+        const optionsToggleCollapsedText = '[+] Options';
+        optionsToggleSpan.appendChild(document.createTextNode(optionsToggleExpandedText));
+        optionsToggleSpan.addEventListener('click', (e: Event) => {
+            const optionsDiv = document.getElementById('wh40k_options_div');
+            const optionsToggle = document.getElementById('wh40k_options_toggle');
+            if (!optionsDiv || !optionsToggle) return;
+
+            if (optionsDiv.classList.contains('hide_options')) {
+                optionsDiv.classList.remove('hide_options');
+                optionsToggle.innerText = optionsToggleExpandedText;
+                this.saveOptionToLocalStorage('option-toggle-hidden', 'false');
+            } else {
+                optionsDiv.classList.add('hide_options');
+                optionsToggle.innerText = optionsToggleCollapsedText;
+                this.saveOptionToLocalStorage('option-toggle-hidden', 'true');
+            }
+        });
+
         this.renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase',
             (e) => {
                 const abilities = document.getElementById('wh40k_abilities_list');
@@ -164,17 +188,6 @@ export class Renderer40k implements Renderer {
                     }
                 }
             });
-        this.renderCheckboxOption(optionsDiv, 'printBigger', 'Print Larger Text',
-            (e: Event) => {
-                const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
-                for (const div of unitSheetDiv) {
-                    if ((e.target as HTMLInputElement).checked) {
-                        div.classList.add('bigger')
-                    } else {
-                        div.classList.remove('bigger')
-                    }
-                }
-            });
         this.renderCheckboxOption(optionsDiv, 'collateDatasheets', 'Collate Detachment Datasheets',
             (e: Event) => {
                 const collatedSheets = document.getElementById('collated_sheets');
@@ -189,8 +202,25 @@ export class Renderer40k implements Renderer {
                     detachmentSheets.classList.remove('d-none')
                 }
             });
+
+        // Options related to printing are grouped together
+        const printOptionsDiv = optionsDiv.appendChild(document.createElement('span'));
+        printOptionsDiv.classList.add('wh40k_options_print_subsection');
+        printOptionsDiv.appendChild(document.createTextNode('Print:'));
+        this.renderCheckboxOption(printOptionsDiv, 'printBigger', 'Larger Text',
+            (e: Event) => {
+                const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
+                for (const div of unitSheetDiv) {
+                    if ((e.target as HTMLInputElement).checked) {
+                        div.classList.add('bigger')
+                    } else {
+                        div.classList.remove('bigger')
+                    }
+                }
+            });
+
         // ability to hide divs (abilities, rules, ...) from printing
-        this.renderCheckboxOption(optionsDiv, 'hideElements', 'Hide Elements from Printing',
+        this.renderCheckboxOption(printOptionsDiv, 'hideElements', 'Hide Elements',
             (e: Event) => {
                 const body = document.body;
                 if ((e.target as HTMLInputElement).checked) {
@@ -199,6 +229,17 @@ export class Renderer40k implements Renderer {
                 } else {
                     body.classList.remove('hide_enabled')
                     body.removeEventListener('click', toggleHidden)
+                }
+            });
+        this.renderCheckboxOption(printOptionsDiv, 'datasheetPageBreaks', 'One Datasheet per Page',
+            (e: Event) => {
+                const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
+                for (const div of unitSheetDiv) {
+                    if ((e.target as HTMLInputElement).checked) {
+                        div.classList.add('page_break')
+                    } else {
+                        div.classList.remove('page_break')
+                    }
                 }
             });
     }
@@ -211,18 +252,21 @@ export class Renderer40k implements Renderer {
         input.setAttribute('name', idAndName);
         input.setAttribute('id', idAndName);
         input.addEventListener('input', eventHandler);
-        input.addEventListener('change', e => this.saveOptionToLocalStorage(idAndName));
+        input.addEventListener('change', e => this.saveCheckboxToLocalStorage(idAndName));
         const label = optDiv.appendChild(document.createElement('label'));
         label.setAttribute('for', idAndName);
         label.appendChild(document.createTextNode(` ${text}`));
     }
 
-    private saveOptionToLocalStorage(idAndName: string) {
-        try {
-            const el = document.getElementById(idAndName) as HTMLInputElement;
-            if (!el) return;
+    private saveCheckboxToLocalStorage(idAndName: string) {
+        const el = document.getElementById(idAndName) as HTMLInputElement;
+        if (!el) return;
+        this.saveOptionToLocalStorage(`option-checkbox-${idAndName}`, el.checked);
+    }
 
-            window.localStorage[`option-checkbox-${idAndName}`] = el.checked;
+    private saveOptionToLocalStorage(key: string, value: any) {
+        try {
+            window.localStorage[key] = value;
         } catch (e) {
             // localStorage not supported or enabled
         }
@@ -239,6 +283,16 @@ export class Renderer40k implements Renderer {
 
                     option.checked = window.localStorage[key] === 'true';
                     option.dispatchEvent(new Event('input'));
+                } else if (key === 'option-toggle-hidden') {
+                    const optionsDiv = document.getElementById('wh40k_options_div');
+                    const optionsToggle = document.getElementById('wh40k_options_toggle');
+                    if (!optionsDiv || !optionsToggle) return;
+
+                    const hideOptions = !!window.localStorage[key];
+        
+                    if (optionsDiv.classList.contains('hide_options') !== hideOptions) {
+                        optionsToggle.dispatchEvent(new Event('click'));
+                    }
                 }
             }
         } catch (e) {
