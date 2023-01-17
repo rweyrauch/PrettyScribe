@@ -19,6 +19,7 @@ import { RendererKT21 } from "./rendererKT21";
 import { Create40kRoster } from "./roster40k";
 import { Renderer40k } from "./renderer40k";
 import { Create30kRoster } from "./roster30k";
+import { CreateHH2Roster } from "./rosterHH2";
 import { Renderer30k } from "./renderer30k";
 import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
@@ -119,7 +120,16 @@ function parseXML(xmldata: string) {
             }
           }
       }
-      // TODO: add (proper) support for Apocalypse
+      else if (gameType == "(HH V2) Horus Heresy (2022)") {
+        let roster = CreateHH2Roster(doc);
+        if (roster) {
+          if (roster._forces.length > 0) {
+            //const renderer: RendererHH2 = new RendererHH2(roster);
+            //renderer.render(rosterTitle, rosterList, forceUnits);
+          }
+        }
+    }
+    // TODO: add (proper) support for Apocalypse
       // else if (gameType == "Warhammer 40,000: Apocalypse") {
       //    let roster = Create40kRoster(doc);
       //    if (roster) {
