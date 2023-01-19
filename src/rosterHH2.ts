@@ -14,9 +14,11 @@
     OF THIS SOFTWARE.
 */
 
+export namespace HorusHeresy {
+
 type WeaponStrength = number | string;
 
-export class WeaponHH2 {
+export class Weapon {
     _name: string = "";
     _range: string = "Melee";
     _str: WeaponStrength = "user";
@@ -24,13 +26,13 @@ export class WeaponHH2 {
     _type: string = "Melee";
 }
 
-export class PsykerHH2 {
+export class Psyker {
     _name: string = "";
     _masteryLevel: string = "";
     _disciplines: string = "";
 }
 
-export class PsychicPowerHH2 {
+export class PsychicPower {
     _name: string = "";
     _warpCharge: number = 0;
     _category: string = "";
@@ -38,10 +40,9 @@ export class PsychicPowerHH2 {
     _details: string = "";
 }
 
-export enum UnitRoleHH2 {
+export enum UnitRole {
     NONE,
 
-    // HH2
     HQ,
     TR,
     EL,
@@ -53,10 +54,9 @@ export enum UnitRoleHH2 {
     LW,
 }
 
-export const UnitRoleToStringHH2: string[] = [
+export const UnitRoleToString: string[] = [
     'None',
 
-    // HH2
     'HQ',
     'Troops',
     'Elites',
@@ -68,9 +68,36 @@ export const UnitRoleToStringHH2: string[] = [
     'Lord of War',
 ];
 
-export class VehicleHH2 {
+export class BaseNote {
     _name: string = "";
+    _customName: string = "";
+    _customNotes: string = "";
+
+    name(): string {
+        if (this._customName) return this._customName;
+        return this._name;
+    }
+
+    notes(): string | null {
+        return this._customNotes;
+    }
+
+    equal(other: BaseNote | null): boolean {
+        if (other == null) return false;
+        return (this._name === other._name);
+    }
+}
+
+export class BaseModel extends BaseNote {
     _count: number = 0;
+
+    _weapons: Weapon[] = [];
+
+    _psyker: Psyker | null = null;
+    _psychicPowers: PsychicPower[] = [];
+};
+
+export class Vehicle extends BaseModel {
 
     // Characteristics
     _type: string = "Vehicle";
@@ -82,14 +109,9 @@ export class VehicleHH2 {
     _hp: number = 1;
     _capacity: number | string = "-";
     _accessPoints: number | string = "-";
-    
-    _weapons: WeaponHH2[] = [];
 }
 
-export class ModelHH2 {
-
-    _name: string = "";
-    _count: number = 0;
+export class Model extends BaseModel {
 
     // Characteristics
     _type: string = "Infantry";
@@ -103,70 +125,85 @@ export class ModelHH2 {
     _attacks: number = 1;
     _leadership: number = 7;
     _save: string = "";
-
-    _weapons: WeaponHH2[] = [];
-    _psyker: PsykerHH2 | null = null;
-    _psychicPowers: PsychicPowerHH2[] = [];
 };
 
-export class FortificationHH2 {
+export class Knight extends BaseModel {
 
-    _name: string = "";
-    _composition: string = "";
+    // Characteristics
+    _type: string = "Knight/Titan";
+    _move: number = 8;
+    _ws: number = 4;
+    _bs: number = 4;
+    _str: number = 4;
+    _front: number = 4;
+    _side: number = 4;
+    _rear: number = 4;
+    _initiative: number = 1;
+    _attacks: number = 1;
+    _hp: number = 1;
+}
+
+export class Fortification extends BaseNote {
+
+     _composition: string = "";
     _type: string = "";
 };
 
-export class UnitHH2 {
+export class Unit extends BaseNote {
 
-    _name: string = "";
-    _role: UnitRoleHH2 = UnitRoleHH2.NONE;
+    _role: UnitRole = UnitRole.NONE;
     _factions: Set<string> = new Set();
     _keywords: Set<string> = new Set();
 
     _abilities: Map<string, string> = new Map();
     _rules: Map<string, string> = new Map();
 
-    _models: ModelHH2[] = [];
-    _vehicles: VehicleHH2[] = [];
-
+    _models: BaseModel[] = [];
+ 
     _points: number = 0;
 }
 
-export class ForceHH2 {
+export class Force extends BaseNote {
     _catalog: string = "";
     _name: string = "Unknown";
     _faction: string = "Unknown";
     _rules: Map<string, string | null> = new Map();
-    _units: UnitHH2[] = [];
+    _units: Unit[] = [];
 
     constructor() {
-
+        super();
     }
 };
 
-export class RosterHH2 {
+export class Roster extends BaseNote {
     _points: number = 0;
     _name: string = "";
-    _forces: ForceHH2[] = [];
+    _forces: Force[] = [];
 
     constructor() {
-
+        super();
     }
 };
 
-export function CreateHH2Roster(doc: Document): RosterHH2 | null {
+export function Compare(a: string, b: string): number {
+    if (a > b) return 1;
+    else if (a == b) return 0;
+    return -1;
+}
+
+export function CreateRoster(doc: Document): Roster | null {
     if (doc) {
         // Determine roster type (game system).
         let info = doc.querySelector("roster");
         if (info) {
-            const roster = new RosterHH2();
+            const roster = new Roster();
 
             const name = info.getAttributeNode("name")?.nodeValue;
             if (name) {
                 roster._name = name;
             }
             else {
-                roster._name = "HH2 Army Roster";
+                roster._name = "Horus Heresy Army Roster";
             }
 
             ParseRosterPoints(doc, roster);
@@ -178,7 +215,7 @@ export function CreateHH2Roster(doc: Document): RosterHH2 | null {
     return null;
 }
 
-function ParseRosterPoints(doc: XMLDocument, roster: RosterHH2): void {
+function ParseRosterPoints(doc: XMLDocument, roster: Roster): void {
     let costs = doc.querySelectorAll("roster>costs>cost");
     for (let cost of costs) {
         if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
@@ -193,12 +230,12 @@ function ParseRosterPoints(doc: XMLDocument, roster: RosterHH2): void {
     }
 }
 
-function ParseForces(doc: XMLDocument, roster: RosterHH2): void {
+function ParseForces(doc: XMLDocument, roster: Roster): void {
     let forcesRoot = doc.querySelectorAll("roster>forces>force");
     for (let root of forcesRoot) {
         if (root.hasAttribute("name") && root.hasAttribute("catalogueName")) {
 
-            let force = new ForceHH2();
+            let force = new Force();
 
             let which = root.getAttributeNode("name")?.nodeValue;
             let value = root.getAttributeNode("catalogueName")?.nodeValue;
@@ -216,7 +253,7 @@ function ParseForces(doc: XMLDocument, roster: RosterHH2): void {
             }
 
             // Sort force units by role.
-            force._units.sort((a: UnitHH2, b: UnitHH2): number => {
+            force._units.sort((a: Unit, b: Unit): number => {
                 if (a._role > b._role) return 1;
                 else if (a._role == b._role) return 0;
                 return -1;
@@ -227,26 +264,27 @@ function ParseForces(doc: XMLDocument, roster: RosterHH2): void {
     }
 }
 
-function ParseSelection(root: Element, force: ForceHH2): void {
+function ParseSelection(root: Element, force: Force): void {
     let elementType = root.getAttributeNode("type")?.nodeValue;
     if (elementType) {
         let elementName = root.getAttributeNode("name")?.nodeValue;
-        console.log("Selection: " + elementName);
-        if (elementType == "upgrade") {
-        }
-        else if (elementType == "unit") {
+        console.log("Selection: " + elementName + " of type: " + elementType);
+        if (elementType == "unit") {
             let unit = CreateUnit(root);
             if (unit) {
                 force._units.push(unit);
             }
         }
-        else if (elementType == "model") {
-
+        else if (elementType == "upgrade") {
+            // TODO: implement the various upgrades
+        }
+        else {
+            console.log("Unexpected selection type: " + elementType);
         }
     }
 }
 
-function DuplicateForce(force: ForceHH2, roster: RosterHH2): boolean {
+function DuplicateForce(force: Force, roster: Roster): boolean {
     if (!roster || !force) return false;
 
     for (let f of roster._forces) {
@@ -255,23 +293,23 @@ function DuplicateForce(force: ForceHH2, roster: RosterHH2): boolean {
     return false;
 }
 
-function LookupRole(roleText: string): UnitRoleHH2 {
+function LookupRole(roleText: string): UnitRole {
     switch (roleText) {
-        case 'HQ': return UnitRoleHH2.HQ;
-        case 'Troops': return UnitRoleHH2.TR;
-        case 'Elites': return UnitRoleHH2.EL;
-        case 'Fast Attack': return UnitRoleHH2.FA;
-        case 'Heavy Support': return UnitRoleHH2.HS;
-        case 'Flyer': return UnitRoleHH2.FL;
-        case 'Dedicated Transport': return UnitRoleHH2.DT;
-        case 'Fortification': return UnitRoleHH2.FT;
-        case 'Lord of War': return UnitRoleHH2.LW;
+        case 'HQ': return UnitRole.HQ;
+        case 'Troops': return UnitRole.TR;
+        case 'Elites': return UnitRole.EL;
+        case 'Fast Attack': return UnitRole.FA;
+        case 'Heavy Support': return UnitRole.HS;
+        case 'Flyer': return UnitRole.FL;
+        case 'Dedicated Transport': return UnitRole.DT;
+        case 'Fortification': return UnitRole.FT;
+        case 'Lord of War': return UnitRole.LW;
     }
-    return UnitRoleHH2.NONE;
+    return UnitRole.NONE;
 }
 
-function CreateUnit(root: Element): UnitHH2 | null {
-    let unit: UnitHH2 = new UnitHH2();
+function CreateUnit(root: Element): Unit | null {
+    let unit: Unit = new Unit();
     let unitName = root.getAttributeNode("name")?.nodeValue;
     if (unitName) {
         unit._name = unitName;
@@ -283,166 +321,204 @@ function CreateUnit(root: Element): UnitHH2 | null {
     
 
     // First pass - find all units, vehicles, etc.
-    let activeModel: ModelHH2 | null = null;
-    let activeVehicle: VehicleHH2 | null = null;
+    let activeModel: BaseModel | null = null;
+ 
+    let selections = root.querySelectorAll(":scope>selections>selection");
+    for (let selection of selections) {
+        let selectionType = selection.getAttributeNode("type")?.nodeValue;
+        if (!selectionType || selectionType != "model") {
+            continue;
+        }
+        let selectionName = selection.getAttributeNode("name")?.nodeValue;
 
-    let props = root.querySelectorAll(":scope>selections>selection>profiles>profile");
-    for (let prop of props) {
-        // What kind of prop is this
-        let propName = prop.getAttributeNode("name")?.nodeValue;
-        let propType = prop.getAttributeNode("typeName")?.nodeValue;
-        if (propName && propType) {
-            console.log("Unit Type: " + propType.trim());
-            if (propType.trim() === "Unit") {
-                activeModel = new ModelHH2();
-                activeModel._name = propName;
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'Unit Type': activeModel._type = char.textContent; break;
-                                case 'Move': activeModel._move = +char.textContent; break;
-                                case 'WS': activeModel._ws = +char.textContent; break;
-                                case 'BS': activeModel._bs = +char.textContent; break;
-                                case 'S': activeModel._str = +char.textContent; break;
-                                case 'T': activeModel._toughness = +char.textContent; break;
-                                case 'W': activeModel._wounds = +char.textContent; break;
-                                case 'I': activeModel._initiative = +char.textContent; break;
-                                case 'A': activeModel._attacks = +char.textContent; break;
-                                case 'Ld': activeModel._leadership = +char.textContent; break;
-                                case 'Save': activeModel._save = char.textContent; break;
+        //console.log("Profile Type (model): " + selectionType + " Name: " + selectionName);
+        let profs = selection.querySelectorAll(":scope>profiles>profile");
+        for (let prof of profs) {
+            // What kind of profile is this
+            let profName = prof.getAttributeNode("name")?.nodeValue;
+            let profType = prof.getAttributeNode("typeName")?.nodeValue;
+            if (profName && profType) {
+                profType = profType.trim();
+                //console.log("Profile Type (1st pass): " + profType);
+                if (profType === "Unit") {
+                    let model = new Model();
+                    model._name = profName;
+                    activeModel = model;
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName) {
+                            if (char.textContent) {
+                                switch (charName) {
+                                    case 'Unit Type': model._type = char.textContent; break;
+                                    case 'Move': model._move = +char.textContent; break;
+                                    case 'WS': model._ws = +char.textContent; break;
+                                    case 'BS': model._bs = +char.textContent; break;
+                                    case 'S': model._str = +char.textContent; break;
+                                    case 'T': model._toughness = +char.textContent; break;
+                                    case 'W': model._wounds = +char.textContent; break;
+                                    case 'I': model._initiative = +char.textContent; break;
+                                    case 'A': model._attacks = +char.textContent; break;
+                                    case 'Ld': model._leadership = +char.textContent; break;
+                                    case 'Save': model._save = char.textContent; break;
+                                }
+                            }
+                        }
+
+                        // TODO: determine model count.
+                    }
+                    unit._models.push(activeModel);
+                }
+                else if (profType === "Knights and Titans") {
+                    let knight = new Knight();
+                    knight._name = profName;
+                    activeModel = knight;
+
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName) {
+                            if (char.textContent) {
+                                switch (charName) {
+                                    case 'Unit Type': knight._type = char.textContent; break;
+                                    case 'Move': knight._move = +char.textContent; break;
+                                    case 'WS': knight._ws = +char.textContent; break;
+                                    case 'BS': knight._bs = +char.textContent; break;
+                                    case 'S': knight._str = +char.textContent; break;
+                                    case 'Front': knight._front = +char.textContent; break;
+                                    case 'Side': knight._side = +char.textContent; break;
+                                    case 'Rear': knight._rear = +char.textContent; break;
+                                    case 'I': knight._initiative = +char.textContent; break;
+                                    case 'A': knight._attacks = +char.textContent; break;
+                                    case 'HP': knight._hp = +char.textContent; break;
+                                }
                             }
                         }
                     }
-
-                    // TODO: determine model count.
+                    unit._models.push(activeModel);
                 }
-                unit._models.push(activeModel);
-            }
-            else if (propType.trim() === "Vehicle") {
-                activeVehicle = new VehicleHH2();
-                activeVehicle._name = propName;
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'Unit Type': activeVehicle._type = char.textContent; break;
-                                case 'Move': activeVehicle._move = +char.textContent; break;
-                                case 'BS': activeVehicle._bs = +char.textContent; break;
-                                case 'Front': activeVehicle._front = +char.textContent; break;
-                                case 'Side': activeVehicle._side = +char.textContent; break;
-                                case 'Rear': activeVehicle._rear = +char.textContent; break;
-                                case 'HP': activeVehicle._hp = +char.textContent; break;
-                                case 'Transport Capacity': activeVehicle._capacity = char.textContent; break;
-                                case 'Access Points': activeVehicle._accessPoints = char.textContent; break;
+                else if (profType === "Vehicle") {
+                    let vehicle = new Vehicle();
+                    vehicle._name = profName;
+                    activeModel = vehicle;
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName) {
+                            if (char.textContent) {
+                                switch (charName) {
+                                    case 'Unit Type': vehicle._type = char.textContent; break;
+                                    case 'Move': vehicle._move = +char.textContent; break;
+                                    case 'BS': vehicle._bs = +char.textContent; break;
+                                    case 'Front': vehicle._front = +char.textContent; break;
+                                    case 'Side': vehicle._side = +char.textContent; break;
+                                    case 'Rear': vehicle._rear = +char.textContent; break;
+                                    case 'HP': vehicle._hp = +char.textContent; break;
+                                    case 'Transport Capacity': vehicle._capacity = char.textContent; break;
+                                    case 'Access Points': vehicle._accessPoints = char.textContent; break;
+                                }
                             }
                         }
                     }
-                }
-                unit._vehicles.push(activeVehicle);
-            }
-            else if (propType.trim() === "Wargear Item") {
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName && char.textContent && propName) {
-                        if (charName === "Description") {
-                            unit._abilities.set(propName, char.textContent);
-                        }
-                    }
-                }
-            }
-            else if (propType.trim() === "Weapon") {
-                let weapon: WeaponHH2 = new WeaponHH2();
-                weapon._name = propName;
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'Range': weapon._range = char.textContent; break;
-                                case 'Type': weapon._type = char.textContent; break;
-                                case 'Strength': weapon._str = char.textContent; break;
-                                case 'AP': weapon._ap = char.textContent; break;
-                            }
-                        }
-                    }
-                }
-
-                if (activeModel) {
-                    activeModel._weapons.push(weapon);
-                }
-                else if (activeVehicle) {
-                    activeVehicle._weapons.push(weapon);
-                }
-                else {
-                    console.log("Unexpected: Created a weapon without an active model.  Unit: " + unitName);
-                }                
-            }
-            else {
-                console.log("Unknown property type: " + propType);
-            }    
-         }
-    }
-
-    // Second pass - attach attributes to models.
-    for (let prop of props) {
-        // What kind of prop is this
-        let propName = prop.getAttributeNode("name")?.nodeValue;
-        let propType = prop.getAttributeNode("typeName")?.nodeValue;
-        if (propName && propType) {
-            if (propType == "Psychic Power") {
-                let power: PsychicPowerHH2 = new PsychicPowerHH2();
-                power._name = propName;
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName) {
-                        if (char.textContent) {
-                            switch (charName) {
-                                case 'Warp Charge': power._warpCharge = +char.textContent; break;
-                                case 'Power Category': power._category = char.textContent; break;
-                                case 'Range': power._range = char.textContent; break;
-                                case 'Details': power._details = char.textContent; break;
-                            }
-                        }
-                    }
-                }
-                if (activeModel) {
-                    activeModel._psychicPowers.push(power);
-                }
-                else {
-                    console.log("Unexpected: Created a psychic power without an active model.  Unit: " + unitName);
-                }
-            }
-            else if (propType == "Psyker") {
-                let psyker: PsykerHH2 = new PsykerHH2();
-                psyker._name = propName;
-                let chars = prop.querySelectorAll("characteristics>characteristic");
-                for (let char of chars) {
-                    let charName = char.getAttributeNode("name")?.nodeValue;
-                    if (charName && char.textContent) {
-                        switch (charName) {
-                            case 'Mastery Level': psyker._masteryLevel = char.textContent; break;
-                            case 'Disciplines': psyker._disciplines = char.textContent; break;
-                        }
-                    }
-                }
-                if (activeModel) {
-                    activeModel._psyker = psyker;  
-                }         
-                else {
-                    console.log("Unexpected: Created a psyker without an active model.  Unit: " + unitName);
+                    unit._models.push(activeModel);
                 }
             }
         }
-        else {
-            console.log("Unknown property type: " + propType);
+
+        // Second pass - attach attributes to models.
+        for (let prof of profs) {
+            // What kind of profile is this
+            let profName = prof.getAttributeNode("name")?.nodeValue;
+            let profType = prof.getAttributeNode("typeName")?.nodeValue;
+            if (profName && profType) {
+                profType = profType.trim();
+                if (profType == "Psychic Power") {
+                    let power: PsychicPower = new PsychicPower();
+                    power._name = profName;
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName) {
+                            if (char.textContent) {
+                                switch (charName) {
+                                    case 'Warp Charge': power._warpCharge = +char.textContent; break;
+                                    case 'Power Category': power._category = char.textContent; break;
+                                    case 'Range': power._range = char.textContent; break;
+                                    case 'Details': power._details = char.textContent; break;
+                                }
+                            }
+                        }
+                    }
+                    if (activeModel) {
+                        activeModel._psychicPowers.push(power);
+                    }
+                    else {
+                        console.log("Unexpected: Created a psychic power without an active model.  Unit: " + unitName);
+                    }
+                }
+                else if (profType == "Psyker") {
+                    let psyker: Psyker = new Psyker();
+                    psyker._name = profName;
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName && char.textContent) {
+                            switch (charName) {
+                                case 'Mastery Level': psyker._masteryLevel = char.textContent; break;
+                                case 'Disciplines': psyker._disciplines = char.textContent; break;
+                            }
+                        }
+                    }
+                    if (activeModel) {
+                        activeModel._psyker = psyker;  
+                    }         
+                    else {
+                        console.log("Unexpected: Created a psyker without an active model.  Unit: " + unitName);
+                    }
+                }
+                else if (profType === "Wargear Item") {
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName && char.textContent && profName) {
+                            if (charName === "Description") {
+                                unit._abilities.set(profName, char.textContent);
+                            }
+                        }
+                    }
+                }
+                else if (profType === "Weapon") {
+                    let weapon: Weapon = new Weapon();
+                    weapon._name = profName;
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName) {
+                            if (char.textContent) {
+                                switch (charName) {
+                                    case 'Range': weapon._range = char.textContent; break;
+                                    case 'Type': weapon._type = char.textContent; break;
+                                    case 'Strength': weapon._str = char.textContent; break;
+                                    case 'AP': weapon._ap = char.textContent; break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (activeModel) {
+                        activeModel._weapons.push(weapon);
+                    }
+                    else {
+                        console.log("Unexpected: Created a weapon without an active model.  Unit: " + unitName);
+                    }                
+                }
+                else if (profType === "Unit" || profType === "Knights and Titans" || profType === "Vehicle") {
+                    // Do nothing about previously handled types.
+                }
+                else {
+                    console.log("Unknown unit profile type: " + profType + " with name: " + profName);
+                }
+            }
         }
     }
 
@@ -453,7 +529,7 @@ function CreateUnit(root: Element): UnitHH2 | null {
             let which = cost.getAttributeNode("name")?.nodeValue;
             let value = cost.getAttributeNode("value")?.nodeValue;
             if (value) {
-                if (which == "pts") {
+                if (which == "Pts") {
                     unit._points += +value;
                 }
             }
@@ -468,10 +544,12 @@ function CreateUnit(root: Element): UnitHH2 | null {
             let desc = rule.querySelector("description");
             if (ruleName && desc && desc.textContent) {
                 unit._rules.set(ruleName, desc.textContent);
-                console.log("Rule: " + ruleName);
+                //console.log("Rule: " + ruleName);
             }
         }
     }
 
     return unit;
 }
+
+} // namespace HorusHeresy

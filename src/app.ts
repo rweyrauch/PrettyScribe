@@ -19,13 +19,13 @@ import { RendererKT21 } from "./rendererKT21";
 import { Create40kRoster } from "./roster40k";
 import { Renderer40k } from "./renderer40k";
 import { Create30kRoster } from "./roster30k";
-import { CreateHH2Roster } from "./rosterHH2";
 import { Renderer30k } from "./renderer30k";
+import { HorusHeresy } from "./rosterHH2";
+import { RendererHH2 } from "./rendererHH2";
 import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
 import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
-//import { RendererHtml40k } from "./rendererHtml40k";
 
 import JSZip from "jszip";
 import { reject } from "lodash";
@@ -78,7 +78,6 @@ function parseXML(xmldata: string) {
         }
       }
       else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
-        //alert("Kill Team not supported yet.");
         let roster = Create40kRoster(doc, false);
         if (roster) {
           if (roster._forces.length > 0) {
@@ -88,7 +87,6 @@ function parseXML(xmldata: string) {
         }
       }
       else if (gameType == "Warhammer 40,000: Kill Team (2021)") {
-        //alert("Kill Team not supported yet.");
         let roster = CreateKT21Roster(doc);
         if (roster) {
           if (roster._forces.length > 0) {
@@ -121,11 +119,11 @@ function parseXML(xmldata: string) {
           }
       }
       else if (gameType == "(HH V2) Horus Heresy (2022)") {
-        let roster = CreateHH2Roster(doc);
+        let roster = HorusHeresy.CreateRoster(doc);
         if (roster) {
           if (roster._forces.length > 0) {
-            //const renderer: RendererHH2 = new RendererHH2(roster);
-            //renderer.render(rosterTitle, rosterList, forceUnits);
+            const renderer: RendererHH2 = new RendererHH2(roster);
+            renderer.render(rosterTitle, rosterList, forceUnits);
           }
         }
     }
