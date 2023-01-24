@@ -131,7 +131,7 @@ function parseXML(xmldata: string) {
       // }
       else {
           $('#errorText').html('PrettyScribe does not support game type \'' + gameType + '\'.');
-          $('#errorDialog').modal();
+          $('#errorDialog').modal('show');
       }
     }
   }

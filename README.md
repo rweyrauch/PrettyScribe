@@ -40,7 +40,19 @@ To build PrettyScribe for release:
 
     $ npm run buildprod
 
+### Tests
+
+Prettyscribe uses jasmine tests to validate roster parsing.   Test rosters live under the `test/`
+directory.   Test specs live under `spec/` and are generated via a command, but should be reviewed
+manually to verify changes.
+
+Only 40k has tests, and parsing fixes must include minimal rosters and specs verifying the fix.
+
 To run PrettyScribe tests:
 
     $ npm test
+
+To (re)generate PrettyScribe tests:
+
+    $ npm run writetests
 

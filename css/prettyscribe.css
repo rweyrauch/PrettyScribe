@@ -161,6 +161,24 @@ label {
     margin-bottom: 0.5em;
 }
 
+.wh40k_options_toggle {
+    cursor: pointer;
+}
+
+.wh40k_options_div.hide_options > :not(.wh40k_options_toggle) {
+    display: none;
+}
+
+.wh40k_options_print_subsection {
+    display: inline-block;
+    margin-left: 0.75em;
+}
+
+.wh40k_option {
+    margin-left: 0.75em;
+    display: inline-block;
+}
+
 .wh40k_unit_sheet {
     padding: 0 10px 0 5px;
 }
@@ -342,4 +360,8 @@ label {
     .hide_enabled .hidden {
         display: none;
     }
+}
+
+.page_break {
+    break-before: page;
 }

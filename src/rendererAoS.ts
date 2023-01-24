@@ -295,7 +295,7 @@ export class RendererAoS implements Renderer {
 
         if (unit.isNormalUnit()) {
             let unitStats = document.createElement('div');
-            unitStats.classList.add("col-6", "col-sm-3");
+            unitStats.classList.add("col-3");
             unitStats.innerHTML = `<div class="aos_unit_stats">
                 <div class="aos_unit_move"><p class="h2">${unit._move}</p></div>
                 <div class="aos_unit_wounds"><p class="h2">${unit._wounds}</p></div>
