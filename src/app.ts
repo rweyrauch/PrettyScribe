@@ -44,96 +44,82 @@ function getFileExtension(filename: string): string {
 }
 
 function parseXML(xmldata: string) {
-  let parser = new DOMParser();
-  let doc = parser.parseFromString(xmldata, "text/xml");
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(xmldata, "text/xml");
+  if (!doc) return;
 
-  if (doc) {
-    // Determine roster type (game system).
-    let info = doc.querySelector("roster");
-    if (info) {
-      const gameType = info.getAttributeNode("gameSystemName")?.nodeValue;
-      if (!gameType) return;
+  // Determine roster type (game system).
+  const info = doc.querySelector("roster");
+  if (!info) return;
 
-      const rosterTitle = $('#roster-title')[0];
-      const rosterList = $('#roster-lists')[0];
-      const forceUnits = $('#force-units')[0];
+  const gameType = info.getAttribute("gameSystemName");
+  if (!gameType) return;
 
-      if (gameType == "Warhammer 40,000 8th Edition") {
-        let roster = Create40kRoster(doc);
-        if (roster) {
-          if (roster._forces.length > 0) {
-            const renderer: Renderer40k = new Renderer40k(roster);
-            renderer.render(rosterTitle, rosterList, forceUnits);
-          }
-        }
-      }
-      else if (gameType == "Warhammer 40,000 9th Edition") {
-        let roster = Create40kRoster(doc);
-        if (roster) {
-          if (roster._forces.length > 0) {
-            const renderer: Renderer40k = new Renderer40k(roster);
-            renderer.render(rosterTitle, rosterList, forceUnits);
-          }
-        }
-      }
-      else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
-        //alert("Kill Team not supported yet.");
-        let roster = Create40kRoster(doc, false);
-        if (roster) {
-          if (roster._forces.length > 0) {
-            const renderer: Renderer40k = new Renderer40k(roster);
-            renderer.render(rosterTitle, rosterList, forceUnits);
-          }
-        }
-      }
-      else if (gameType == "Warhammer 40,000: Kill Team (2021)") {
-        //alert("Kill Team not supported yet.");
-        let roster = CreateKT21Roster(doc);
-        if (roster) {
-          if (roster._forces.length > 0) {
-            const renderer: RendererKT21 = new RendererKT21(roster);
-            renderer.render(rosterTitle, rosterList, forceUnits);
-          }
-        }
-      }
-      else if (gameType == "Age of Sigmar") {
-        let roster = CreateAoSRoster(doc);
-        if (roster) {
-          const renderer: RendererAoS = new RendererAoS(roster);
-          renderer.render(rosterTitle, rosterList, forceUnits);
-        }
-      }
-      else if (gameType == "Warhammer Age of Sigmar: Warcry") {
-        let roster = CreateWarcryRoster(doc);
-        if (roster) {
-          const renderer: RendererWarcry = new RendererWarcry(roster);
-          renderer.render(rosterTitle, rosterList, forceUnits);
-        }
-      }
-      else if (gameType == "Warhammer 30,000 - The Horus Heresy") {
-          let roster = Create30kRoster(doc);
-          if (roster) {
-            if (roster._forces.length > 0) {
-              const renderer: Renderer30k = new Renderer30k(roster);
-              renderer.render(rosterTitle, rosterList, forceUnits);
-            }
-          }
-      }
-      // TODO: add (proper) support for Apocalypse
-      // else if (gameType == "Warhammer 40,000: Apocalypse") {
-      //    let roster = Create40kRoster(doc);
-      //    if (roster) {
-      //      if (roster._forces.length > 0) {
-      //        const renderer: Renderer40k = new Renderer40k(roster);
-      //        renderer.render(rosterTitle, rosterList, forceUnits);
-      //      }
-      //    }
-      // }
-      else {
-          $('#errorText').html('PrettyScribe does not support game type \'' + gameType + '\'.');
-          $('#errorDialog').modal('show');
-      }
+  const rosterName = info.getAttribute("name");
+  if (rosterName) {
+    document.title = `PrettyScribe ${rosterName}`;
+  }
+
+  const rosterTitle = $('#roster-title')[0];
+  const rosterList = $('#roster-lists')[0];
+  const forceUnits = $('#force-units')[0];
+
+  if (gameType == "Warhammer 40,000 8th Edition") {
+    const roster = Create40kRoster(doc);
+    if (roster && roster._forces.length > 0) {
+      const renderer: Renderer40k = new Renderer40k(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
     }
+  } else if (gameType == "Warhammer 40,000 9th Edition") {
+    const roster = Create40kRoster(doc);
+    if (roster && roster._forces.length > 0) {
+      const renderer: Renderer40k = new Renderer40k(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  } else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
+    const roster = Create40kRoster(doc, false);
+    if (roster && roster._forces.length > 0) {
+      const renderer: Renderer40k = new Renderer40k(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  } else if (gameType == "Warhammer 40,000: Kill Team (2021)") {
+    const roster = CreateKT21Roster(doc);
+    if (roster && roster._forces.length > 0) {
+      const renderer: RendererKT21 = new RendererKT21(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  } else if (gameType == "Age of Sigmar") {
+    const roster = CreateAoSRoster(doc);
+    if (roster) {
+      const renderer: RendererAoS = new RendererAoS(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  } else if (gameType == "Warhammer Age of Sigmar: Warcry") {
+    const roster = CreateWarcryRoster(doc);
+    if (roster) {
+      const renderer: RendererWarcry = new RendererWarcry(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  } else if (gameType == "Warhammer 30,000 - The Horus Heresy") {
+    const roster = Create30kRoster(doc);
+    if (roster && roster._forces.length > 0) {
+      const renderer: Renderer30k = new Renderer30k(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  }
+  // TODO: add (proper) support for Apocalypse
+  // else if (gameType == "Warhammer 40,000: Apocalypse") {
+  //    let roster = Create40kRoster(doc);
+  //    if (roster) {
+  //      if (roster._forces.length > 0) {
+  //        const renderer: Renderer40k = new Renderer40k(roster);
+  //        renderer.render(rosterTitle, rosterList, forceUnits);
+  //      }
+  //    }
+  // }
+  else {
+      $('#errorText').html('PrettyScribe does not support game type \'' + gameType + '\'.');
+      $('#errorDialog').modal('show');
   }
 }
 
