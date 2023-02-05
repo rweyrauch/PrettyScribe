@@ -196,6 +196,7 @@ label {
     --notchSize: 0.8em;
     --borderSize: 1px;
 
+    print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
     position: relative;
     line-height: 1;
