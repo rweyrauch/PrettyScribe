@@ -169,3 +169,14 @@ function handleFileSelect(event: Event) {
 //$(window).on("resize", handleFileSelect);
 
 $('#roster-file').on("change", handleFileSelect);
+
+document.addEventListener('DOMContentLoaded', () => {
+  if (navigator.userAgent.match(/AppleWebKit.*Safari/)
+      && !navigator.userAgent.includes('Chrome')) {
+    // iPhone and iPad devices don't support extensions on the accept attribute
+    // for input type=file (https://caniuse.com/input-file-accept). If set, they
+    // will not allow any file to be selected, so remove the attribute.
+    const inputEl = document.querySelector('input[type="file"');
+    inputEl?.removeAttribute('accept');
+  }
+});
