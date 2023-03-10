@@ -87,7 +87,7 @@ describe("Create40kRoster", function() {
                 '_rules': mapWithKeys(["Conquerors Without Mercy", "Daemonic Surge (Faction: Iconoclast Household)", "Harbingers of Dread", "Ion Shields", "Objective Secured", "Towering Foe", "War Dog Squadron"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Explodes (War Dog)"]),
-                  "D3 Roll": new Map(),
+                  "D3 Roll": mapWithKeys(["1 - Daemonic Hunger", "2 - Daemonic Fortitude", "3 - Daemonic Power"]),
                   "Favour of the Dark Gods": mapWithKeys(["Mirror of Fates - Favoured", "Mirror of Fates - Standard"]),
                   "Fell Bond": mapWithKeys(["Dauntless"]),
                 }}),
