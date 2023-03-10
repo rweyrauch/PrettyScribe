@@ -942,11 +942,12 @@ function ParseProfileCharacteristics(profile: Element, profileName: string, type
         if (!char.textContent) continue;
 
         const charName = char.getAttribute("name");
-        if ((charName === "Description") || (charName === "Ability") || (charName === "Effect") || (charName === "Bonus") || (charName === 'Capacity') || typeName === 'Invocations') {
-            map.set(profileName, char.textContent);
-        }
-        if ((charName === 'Standard') || (charName === 'Favoured')) {
+        if (charName && chars.length > 1) {
+            // Profiles with multiple characteristics need to distinguish them by name.
             map.set([profileName, charName.toString()].join(' - '), char.textContent);
+        } else {
+            // Profiles with a single characteristic can ignore the char name.
+            map.set(profileName, char.textContent);
         }
     }
 }

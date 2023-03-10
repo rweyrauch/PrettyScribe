@@ -37,7 +37,7 @@ describe("Create40kRoster", function() {
                 '_rules': mapWithKeys(["Command Protocols", "Living Metal"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Dynastic Advisors", "Harbinger of Despair", "Nightmare Shroud (Aura)"]),
-                  "Harbinger of Despair": new Map(),
+                  "Harbinger of Despair": mapWithKeys(["Despair 1", "Despair 2", "Despair 3", "Despair 4"]),
                 }}),
             ],
             '_rules': new Map([
