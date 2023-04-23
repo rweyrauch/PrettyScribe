@@ -46,8 +46,8 @@ export class RendererHH2 implements Renderer {
         if (title) {
             this.renderOptionsDiv(title);
 
-            const costs = [`${this._roster._points} pts`];
-             const text = `${this._roster._name} (${costs.join(', ')})`;
+            const costs = [`${this._roster._cost._points} pts`];
+            const text = `${this._roster._name} (${costs.join(', ')})`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
 
             // Footer div is hideEnabled, except when printing.
@@ -379,94 +379,102 @@ export class RendererHH2 implements Renderer {
         if (unit._models.length > 0) {
             // Assuming all models of the same type!
             let firstModel = unit._models[0];
-            if (typeof(firstModel) == typeof(HorusHeresy.Vehicle)) {
+            if (firstModel instanceof HorusHeresy.Vehicle) {
                 thead.appendChild(createTableRow(RendererHH2._vehicleLabels, this._vehicleLabelWidthsNormalized, /* header= */ true));
                 let tbody = statsTable.appendChild(document.createElement('tbody'));
                 tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
                 for (const model of unit._models) {
-                    let vehicle = model as HorusHeresy.Vehicle;
-                    tbody.append(createTableRow([
-                        vehicle._name,
-                        vehicle._move.toString(),
-                        vehicle._bs.toString(),
-                        vehicle._front.toString(),
-                        vehicle._side.toString(),
-                        vehicle._rear.toString(),
-                        vehicle._hp.toString(),
-                        vehicle._capacity.toString(),
-                    ], this._vehicleLabelWidthsNormalized));
+                    if (model instanceof HorusHeresy.Vehicle) {
+                        let vehicle = model as HorusHeresy.Vehicle;
+                        tbody.append(createTableRow([
+                            vehicle._name,
+                            vehicle._move.toString(),
+                            vehicle._bs.toString(),
+                            vehicle._front.toString(),
+                            vehicle._side.toString(),
+                            vehicle._rear.toString(),
+                            vehicle._hp.toString(),
+                            vehicle._capacity.toString(),
+                        ], this._vehicleLabelWidthsNormalized));
+                    }
                 }
-                }
-            else if (typeof(firstModel) == typeof(HorusHeresy.Knight)) {
+            }
+            else if (firstModel instanceof HorusHeresy.Knight) {
                 thead.appendChild(createTableRow(RendererHH2._knightLabels, this._knightLabelWidthsNormalized, /* header= */ true));
                 let tbody = statsTable.appendChild(document.createElement('tbody'));
                 tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
                 for (const model of unit._models) {
-                    let knight = model as HorusHeresy.Knight;
-                    tbody.append(createTableRow([
-                        knight._name,
-                        knight._move.toString(),
-                        knight._ws.toString(),
-                        knight._bs.toString(),
-                        knight._str.toString(),
-                        knight._front.toString(),
-                        knight._side.toString(),
-                        knight._rear.toString(),
-                        knight._hp.toString(),
-                        knight._initiative.toString(),
-                        knight._attacks.toString(),
-                        knight._hp.toString(),
-                    ], this._knightLabelWidthsNormalized));
+                    if (model instanceof HorusHeresy.Knight) {
+                        let knight = model as HorusHeresy.Knight;
+                        tbody.append(createTableRow([
+                            knight._name,
+                            knight._move.toString(),
+                            knight._ws.toString(),
+                            knight._bs.toString(),
+                            knight._str.toString(),
+                            knight._front.toString(),
+                            knight._side.toString(),
+                            knight._rear.toString(),
+                            knight._hp.toString(),
+                            knight._initiative.toString(),
+                            knight._attacks.toString(),
+                            knight._hp.toString(),
+                        ], this._knightLabelWidthsNormalized));
+                    }
                 }
-                }
+            }
             else {
                 thead.appendChild(createTableRow(RendererHH2._infantryLabels, this._infantryLabelWidthsNormalized, /* header= */ true));
                 let tbody = statsTable.appendChild(document.createElement('tbody'));
                 tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
                 for (const model of unit._models) {
-                    let infantry = model as HorusHeresy.Model;
-                    tbody.append(createTableRow([
-                        infantry._name,
-                        infantry._move.toString(),
-                        infantry._ws.toString(),
-                        infantry._bs.toString(),
-                        infantry._str.toString(),
-                        infantry._toughness.toString(),
-                        infantry._wounds.toString(),
-                        infantry._initiative.toString(),
-                        infantry._attacks.toString(),
-                        infantry._leadership.toString(),
-                        infantry._save,
-                    ], this._infantryLabelWidthsNormalized));
+                    if (model instanceof HorusHeresy.Model) {
+                        let infantry = model as HorusHeresy.Model;
+                        tbody.append(createTableRow([
+                            infantry._name,
+                            infantry._move.toString(),
+                            infantry._ws.toString(),
+                            infantry._bs.toString(),
+                            infantry._str.toString(),
+                            infantry._toughness.toString(),
+                            infantry._wounds.toString(),
+                            infantry._initiative.toString(),
+                            infantry._attacks.toString(),
+                            infantry._leadership.toString(),
+                            infantry._save,
+                        ], this._infantryLabelWidthsNormalized));
+                    }
                 }
-                }
+            }
 
             notesTableHead = createNotesHead('Model notes', unit._models);
             if (notesTableHead) statsTable.appendChild(notesTableHead);
+
+
         }
+
         // weapons
-        // if (unit._weapons.length > 0) {
-        //     thead = statsTable.appendChild(document.createElement('thead'));
-        //     thead.classList.add('table-active');
-        //     thead.appendChild(createTableRow(RendererHH2._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
-
-        //     tbody = statsTable.appendChild(document.createElement('tbody'));
-        //     tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-
-        //     for (const weapon of unit._weapons) {
-        //         tbody.append(createTableRow([
-        //             weapon.name().toString(),
-        //             weapon._range,
-        //             weapon._type,
-        //             weapon._str.toString(),
-        //             weapon._ap,
-        //             weapon._damage,
-        //             weapon._abilities,
-        //         ], this._weaponLabelWidthNormalized));
-        //     }
-        // }
-        // notesTableHead = createNotesHead('Weapon notes', unit._weapons);
-        // if (notesTableHead) statsTable.appendChild(notesTableHead);
+        for (const model of unit._models) {
+            if (model._weapons.length > 0) {
+                thead = statsTable.appendChild(document.createElement('thead'));
+                thead.classList.add('table-active');
+                thead.appendChild(createTableRow(RendererHH2._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
+   
+                let tbody = statsTable.appendChild(document.createElement('tbody'));
+                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+   
+                for (const weapon of model._weapons) {
+                    tbody.append(createTableRow([
+                        weapon.name().toString(),
+                        weapon._range,
+                        weapon._str.toString(),
+                        weapon._ap,
+                        weapon._type], this._weaponLabelWidthNormalized));
+                }
+           }
+           notesTableHead = createNotesHead('Weapon notes', model._weapons);
+           if (notesTableHead) statsTable.appendChild(notesTableHead)   
+        }
 
         // spells
         // if (unit._spells.length > 0) {
@@ -611,7 +619,7 @@ export class RendererHH2 implements Renderer {
     private _knightLabelWidthsNormalized = [0.35, 0.05, 0.05, 0.05, 0.05, 0.1, 0.1, 0.1, 0.05, 0.05, 0.05];
 
     private static _weaponLabels = ["Weapon", "Range", "Str", "AP", "Type"];
-    private _weaponLabelWidthNormalized = [0.35, 0.1, 0.05, 0.05, 0.45];
+    private _weaponLabelWidthNormalized = [0.3, 0.1, 0.1, 0.1, 0.4];
 
     private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
     private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
