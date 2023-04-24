@@ -13,6 +13,7 @@
     TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE 
     OF THIS SOFTWARE.
 */
+import * as _ from "lodash";
 
 export namespace HorusHeresy {
 
@@ -113,7 +114,7 @@ export class BaseModel extends BaseNote {
     _psyker: Psyker | null = null;
     _psychicPowers: PsychicPower[] = [];
 
-    equal(model: Model | null): boolean {
+    equal(model: BaseModel | null): boolean {
         if (model == null) return false;
 
         if ((this._name === model._name) &&
@@ -250,8 +251,82 @@ export class Unit extends BaseNote {
     _rules: Map<string, string> = new Map();
 
     _models: BaseModel[] = [];
- 
+    readonly _modelStats: BaseModel[] = [];
+    _modelList: string[] = [];
+
+    _weapons: Weapon[] = [];
+
     _points: number = 0;
+
+    equal(unit: Unit | null): boolean {
+        if (unit == null) return false;
+
+        if ((unit._name === this._name) && (unit._role === this._role) &&
+            (unit._models.length === this._models.length) &&
+            (unit._modelStats.length === this._modelStats.length)) {
+
+            for (let mi = 0; mi < this._models.length; mi++) {
+                if (!this._models[mi].equal(unit._models[mi])) {
+                    return false;
+                }
+            }
+
+            for (let mi = 0; mi < this._modelStats.length; mi++) {
+                if (!this._modelStats[mi].equal(unit._modelStats[mi])) {
+                    return false;
+                }
+            }
+
+            if (!_.isEqual(this._abilities, unit._abilities)) {
+                return false;
+            }
+            else if (!_.isEqual(this._rules, unit._rules)) {
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    normalize(): void {
+        // Sort force units by role and name
+        this._models.sort(CompareModel);
+        this._modelStats.sort(CompareObj);
+
+        for (let model of this._models) {
+            model.normalize();
+        }
+
+        for (let i = 0; i < (this._models.length - 1); i++) {
+            const model = this._models[i];
+
+            if (model.nameAndGear() === this._models[i+1].nameAndGear()) {
+                model._count++;
+                this._models.splice(i+1, 1);
+                i--;
+            }
+        }
+
+        for (let i = 0; i < (this._modelStats.length - 1); i++) {
+            const model = this._modelStats[i];
+
+            if (model.equal(this._modelStats[i+1])) {
+                this._modelStats.splice(i+1, 1);
+                i--;
+            }
+        }
+
+        this._modelList = this._models.map(model => (model._count > 1 ? `${model._count}x ` : '') + model.nameAndGear());
+        this._weapons = this._models.map(m => m._weapons)
+            .reduce((acc, val) => acc.concat(val), [])
+            .sort(CompareWeapon)
+            .filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
+
+        //this._spells.push(...this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []));
+        //this._psykers.push(...this._models.map(m => m._psyker).filter(p => p) as Psyker[]);
+        //this._explosions.push(...this._models.map(m => m._explosions).reduce((acc, val) => acc.concat(val), []));
+    }
 }
 
 export class Force extends BaseNote {
@@ -494,10 +569,7 @@ function LookupRole(roleText: string): UnitRole {
 
 function CreateUnit(root: Element): Unit | null {
     let unit: Unit = new Unit();
-    let unitName = root.getAttributeNode("name")?.nodeValue;
-    if (unitName) {
-        unit._name = unitName;
-    }
+    const unitName = ExpandBaseNotes(root, unit);
 
     // Selections
 
@@ -525,8 +597,150 @@ function CreateUnit(root: Element): Unit | null {
             }
         }
     }
-    
 
+    const seenProfiles: Element[] = [];
+
+    // First, find model stats. These have typeName=" Unit".
+    const modelStatsProfiles = Array.from(root.querySelectorAll('profile[typeId="4bb2-cb95-e6c8-5a21"]'));
+    ParseModelStatsProfiles(modelStatsProfiles, unit, unitName);
+    seenProfiles.push(...modelStatsProfiles);
+
+    // Next, look for selections with models. These usually have type="model",
+    // but may have type="upgrade" containing a profile of type="Unit".
+    const modelSelections = [];
+    if (root.getAttribute('type') === 'model') {
+        modelSelections.push(root);  // Single-model unit.
+    } else {
+        const immediateSelections = GetImmediateSelections(root);
+        for (const selection of immediateSelections) {
+            if (selection.getAttribute('type') === 'model' || HasImmediateProfileWithTypeName(selection, 'Unit')) {
+                modelSelections.push(selection);
+            }
+        }
+        // Some units are under a root selection with type="upgrade".
+        if (modelSelections.length === 0) {
+            modelSelections.push(...Array.from(root.querySelectorAll('selection[type="model"]')));
+        }
+        // Some single-model units have type="unit" or type="upgrade".
+        if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, 'Unit')) {
+            modelSelections.push(root);
+        }
+    }
+
+    // Now, parse the model -- profiles for stats, and selections for upgrades.
+    for (const modelSelection of modelSelections) {
+        const profiles = Array.from(modelSelection.querySelectorAll("profiles>profile"));
+        const unseenProfiles = profiles.filter((e: Element) => !seenProfiles.includes(e));
+        seenProfiles.push(...unseenProfiles);
+
+        const model = new Model();
+        model._name = modelSelection.getAttribute('name') || 'Unknown Model';
+        model._count = Number(modelSelection.getAttribute("number") || 1);
+        unit._models.push(model);
+
+        // Find stats for all profiles (weapons, powers, abilities, etc).
+        ParseModelProfiles(profiles, model, unit);
+
+        // Find all upgrades on the model. This may include weapons that were
+        // parsed from profiles (above), so dedupe those in nameAndGear().
+        for (const upgradeSelection of modelSelection.querySelectorAll('selections>selection[type="upgrade"]')) {
+            // Ignore selections without abilities but with sub-selection upgrades,
+            // since those sub-selections will be picked up individually.
+            if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')
+                && !HasImmediateProfileWithTypeName(upgradeSelection, 'Abilities')) continue;
+
+            let upgradeName = upgradeSelection.getAttribute('name');
+            if (upgradeName) {
+                const upgrade = new Upgrade();
+                upgrade._name = upgradeName;
+                upgrade._cost = GetSelectionCosts(upgradeSelection);
+                upgrade._count = Number(upgradeSelection.getAttribute('number'));
+                model._upgrades.push(upgrade);
+            }
+        }
+    }
+    
+    // Finally, look for profiles that are not under models. They may apply to
+    //    a) model loadouts, if it's selection with a Weapon (eg Immortals)
+    //    b) unit loadout, if it's a selection with an Ability (eg Bomb Squigs)
+    //    c) abilities for the unit, if it's not under a child selection
+    let profiles = Array.from(root.querySelectorAll("profiles>profile"));
+    let unseenProfiles = profiles.filter((e: Element) => !seenProfiles.includes(e));
+    seenProfiles.push(...unseenProfiles);
+    if (unseenProfiles.length > 0) {
+        const unitUpgradesModel = new Model();
+        unitUpgradesModel._name = 'Unit Upgrades';
+        ParseModelProfiles(unseenProfiles, unitUpgradesModel, unit);
+        if (unitUpgradesModel._weapons.length > 0 && unit._models.length > 0) {
+            // Apply weapons at the unit level to all models in the unit.
+            for (const model of unit._models) {
+                model._weapons.push(...unitUpgradesModel._weapons);
+            }
+            unitUpgradesModel._weapons.length = 0;  // Clear the array.
+        }
+/*        
+        if (unitUpgradesModel._psychicPowers.length > 0) {
+            // Add spells to the unit's spell list. However, we'll still need
+            // to add spell upgrade selections to the upgrade list, below.
+            unit._spells.push(...unitUpgradesModel._psychicPowers);
+            unitUpgradesModel._psychicPowers.length = 0;
+        }
+        if (unitUpgradesModel._psyker) {
+            unit._psykers.push(unitUpgradesModel._psyker);
+            unitUpgradesModel._psyker = null;
+        }
+        if (unitUpgradesModel._explosions.length > 0) {
+            unit._explosions.push(...unitUpgradesModel._explosions);
+            unitUpgradesModel._explosions.length = 0;
+        }
+*/
+        // Look for any unit-level upgrade selections that we didn't catch
+        // previously, and stuff them in the "Unit Upgrades" model.
+        for (const selection of GetImmediateSelections(root)) {
+            if (selection.getAttribute('type') !== 'upgrade') continue;
+            // Ignore model selections (which were already processed).
+            if (modelSelections.includes(selection))  continue;
+            // Ignore unit-level weapon selections; these were handled above.
+            if (selection.querySelector('profiles>profile[typeName="Weapon"]')) continue;
+
+            let name = selection.getAttribute('name');
+            if (!name) continue;
+
+            const upgrade = new Upgrade();
+            upgrade._name = name;
+            upgrade._cost = GetSelectionCosts(selection);
+            upgrade._count = Number(selection.getAttribute('number'));
+            unitUpgradesModel._upgrades.push(upgrade);
+        }
+
+        if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0) {
+            unit._models.push(unitUpgradesModel);
+        }
+    }
+
+    // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
+    let costs = root.querySelectorAll(":scope>costs>cost");
+    for (let cost of costs) {
+        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
+            let which = cost.getAttributeNode("name")?.nodeValue;
+            let value = cost.getAttributeNode("value")?.nodeValue;
+            if (value) {
+                if (which == "Pts") {
+                    unit._points += +value;
+                }
+            }
+        }
+    }
+    console.log("Points: " + unit._points);
+
+    let rules = root.querySelectorAll("rules > rule");
+    for (let rule of rules) {
+        ExtractRuleDescription(rule, unit._rules);
+    }
+
+    unit.normalize();
+
+/*
     // First pass - find all units, vehicles, etc.
     let activeModel: BaseModel | null = null;
  
@@ -540,98 +754,6 @@ function CreateUnit(root: Element): Unit | null {
 
         let profs = selection.querySelectorAll(":scope>profiles>profile");
         console.log("Selection Type: " + selectionType + " Name: " + selectionName + "  Profiles: " + profs.length);
-        for (let prof of profs) {
-            // What kind of profile is this
-            let profName = prof.getAttributeNode("name")?.nodeValue;
-            let profType = prof.getAttributeNode("typeName")?.nodeValue;
-            if (profName && profType) {
-                profType = profType.trim();
-                console.log("\tProfile Type (1st pass): " + profType);
-                if (profType === "Unit") {
-                    let model = new Model();
-                    model._name = profName;
-                    activeModel = model;
-                    let chars = prof.querySelectorAll("characteristics>characteristic");
-                    for (let char of chars) {
-                        let charName = char.getAttributeNode("name")?.nodeValue;
-                        if (charName) {
-                            if (char.textContent) {
-                                switch (charName) {
-                                    case 'Unit Type': model._type = char.textContent; break;
-                                    case 'Move': model._move = ConvertToInches(char.textContent); break;
-                                    case 'WS': model._ws = +char.textContent; break;
-                                    case 'BS': model._bs = +char.textContent; break;
-                                    case 'S': model._str = +char.textContent; break;
-                                    case 'T': model._toughness = +char.textContent; break;
-                                    case 'W': model._wounds = +char.textContent; break;
-                                    case 'I': model._initiative = +char.textContent; break;
-                                    case 'A': model._attacks = +char.textContent; break;
-                                    case 'Ld': model._leadership = +char.textContent; break;
-                                    case 'Save': model._save = char.textContent; break;
-                                }
-                            }
-                        }
-
-                        // TODO: determine model count.
-                    }
-                    unit._models.push(activeModel);
-                }
-                else if (profType === "Knights and Titans") {
-                    console.log("Created a knight!");
-                    let knight = new Knight();
-                    knight._name = profName;
-                    activeModel = knight;
-
-                    let chars = prof.querySelectorAll("characteristics>characteristic");
-                    for (let char of chars) {
-                        let charName = char.getAttributeNode("name")?.nodeValue;
-                        if (charName) {
-                            if (char.textContent) {
-                                switch (charName) {
-                                    case 'Unit Type': knight._type = char.textContent; break;
-                                    case 'Move': knight._move = ConvertToInches(char.textContent); break;
-                                    case 'WS': knight._ws = +char.textContent; break;
-                                    case 'BS': knight._bs = +char.textContent; break;
-                                    case 'S': knight._str = +char.textContent; break;
-                                    case 'Front': knight._front = +char.textContent; break;
-                                    case 'Side': knight._side = +char.textContent; break;
-                                    case 'Rear': knight._rear = +char.textContent; break;
-                                    case 'I': knight._initiative = +char.textContent; break;
-                                    case 'A': knight._attacks = +char.textContent; break;
-                                    case 'HP': knight._hp = +char.textContent; break;
-                                }
-                            }
-                        }
-                    }
-                    unit._models.push(activeModel);
-                }
-                else if (profType === "Vehicle") {
-                    let vehicle = new Vehicle();
-                    vehicle._name = profName;
-                    activeModel = vehicle;
-                    let chars = prof.querySelectorAll("characteristics>characteristic");
-                    for (let char of chars) {
-                        let charName = char.getAttributeNode("name")?.nodeValue;
-                        if (charName) {
-                            if (char.textContent) {
-                                switch (charName) {
-                                    case 'Unit Type': vehicle._type = char.textContent; break;
-                                    case 'Move': vehicle._move = ConvertToInches(char.textContent); break;
-                                    case 'BS': vehicle._bs = +char.textContent; break;
-                                    case 'Front': vehicle._front = +char.textContent; break;
-                                    case 'Side': vehicle._side = +char.textContent; break;
-                                    case 'Rear': vehicle._rear = +char.textContent; break;
-                                    case 'HP': vehicle._hp = +char.textContent; break;
-                                    case 'Transport Capacity': vehicle._capacity = char.textContent; break;
-                                    case 'Access Points': vehicle._accessPoints = char.textContent; break;
-                                }
-                            }
-                        }
-                    }
-                    unit._models.push(activeModel);
-                }
-            }
-        }
 
         // Second pass - attach attributes to models.
         for (let prof of profs) {
@@ -739,20 +861,6 @@ function CreateUnit(root: Element): Unit | null {
         }
     }
 
-    // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
-    let costs = root.querySelectorAll(":scope>costs>cost");
-    for (let cost of costs) {
-        if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
-            let which = cost.getAttributeNode("name")?.nodeValue;
-            let value = cost.getAttributeNode("value")?.nodeValue;
-            if (value) {
-                if (which == "Pts") {
-                    unit._points += +value;
-                }
-            }
-        }
-    }
-    console.log("Points: " + unit._points);
 
     let rules = root.querySelectorAll(":scope>rules>rule");
     for (let rule of rules) {
@@ -765,7 +873,7 @@ function CreateUnit(root: Element): Unit | null {
             }
         }
     }
-
+*/
     return unit;
 }
 
@@ -789,7 +897,7 @@ function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
     return Compare(a._name, b._name);
 }
 
-function CompareModel(a: Model, b: Model): number {
+function CompareModel(a: BaseModel, b: BaseModel): number {
     if (a._name === b._name) {
         return Compare(a.nameAndGear(), b.nameAndGear());
     } else if (a._name === 'Unit Upgrades') {
@@ -822,6 +930,176 @@ function GetSelectionCosts(selection: Element): Costs {
         }
     }
     return costs;
+}
+
+function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: string) {
+    for (const profile of profiles) {
+        const profileName = profile.getAttribute("name");
+        const profileType = profile.getAttribute("typeName");
+        if (!profileName || !profileType) return;
+
+        if (profileType === "Unit") {
+            const model = new Model();
+            model._name = profileName;
+            unit._modelStats.push(model);
+
+            ExpandBaseNotes(profile, model);
+
+            const chars = profile.querySelectorAll("characteristics>characteristic");
+            for (const char of chars) {
+                const charName = char.getAttribute("name");
+                if (!charName) continue;
+
+                console.log("Model " + profileName);
+                if (char.textContent) {
+                    switch (charName) {
+                        case 'Unit Type': model._type = char.textContent; break;
+                        case 'Move': model._move = ConvertToInches(char.textContent); break;
+                        case 'WS': model._ws = +char.textContent; break;
+                        case 'BS': model._bs = +char.textContent; break;
+                        case 'S': model._str = +char.textContent; break;
+                        case 'T': model._toughness = +char.textContent; break;
+                        case 'W': model._wounds = +char.textContent; break;
+                        case 'I': model._initiative = +char.textContent; break;
+                        case 'A': model._attacks = +char.textContent; break;
+                        case 'Ld': model._leadership = +char.textContent; break;
+                        case 'Save': model._save = char.textContent; break;
+                    }            
+                }
+            }
+        }
+        else if (profileType === "Knights and Titans") {
+            let knight = new Knight();
+            knight._name = profileName;
+            unit._modelStats.push(knight);
+
+            ExpandBaseNotes(profile, knight);
+
+            const chars = profile.querySelectorAll("characteristics>characteristic");
+            for (const char of chars) {
+                const charName = char.getAttribute("name");
+                if (!charName) continue;
+
+                console.log("Knight " + profileName);
+                if (char.textContent) {
+                    switch (charName) {
+                        case 'Unit Type': knight._type = char.textContent; break;
+                        case 'Move': knight._move = ConvertToInches(char.textContent); break;
+                        case 'WS': knight._ws = +char.textContent; break;
+                        case 'BS': knight._bs = +char.textContent; break;
+                        case 'S': knight._str = +char.textContent; break;
+                        case 'Front': knight._front = +char.textContent; break;
+                        case 'Side': knight._side = +char.textContent; break;
+                        case 'Rear': knight._rear = +char.textContent; break;
+                        case 'I': knight._initiative = +char.textContent; break;
+                        case 'A': knight._attacks = +char.textContent; break;
+                        case 'HP': knight._hp = +char.textContent; break;
+                    }            
+                }
+            }
+        }
+        else if (profileType === "Vehicle") {
+            let vehicle = new Vehicle();
+            vehicle._name = profileName;
+
+            unit._modelStats.push(vehicle);
+
+            ExpandBaseNotes(profile, vehicle);
+
+            const chars = profile.querySelectorAll("characteristics>characteristic");
+            for (const char of chars) {
+                const charName = char.getAttributeNode("name")?.nodeValue;
+                if (!charName) continue;
+     
+                console.log("Vehicle " + profileName);
+                if (char.textContent) {
+                    switch (charName) {
+                             case 'Unit Type': vehicle._type = char.textContent; break;
+                            case 'Move': vehicle._move = ConvertToInches(char.textContent); break;
+                            case 'BS': vehicle._bs = +char.textContent; break;
+                            case 'Front': vehicle._front = +char.textContent; break;
+                            case 'Side': vehicle._side = +char.textContent; break;
+                            case 'Rear': vehicle._rear = +char.textContent; break;
+                            case 'HP': vehicle._hp = +char.textContent; break;
+                            case 'Transport Capacity': vehicle._capacity = char.textContent; break;
+                            case 'Access Points': vehicle._accessPoints = char.textContent; break;
+                    }
+                }
+            }
+        }
+    }
+}
+
+function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
+    for (const profile of profiles) {
+        const profileName = profile.getAttribute("name");
+        const typeName = profile.getAttribute("typeName");
+        if (!profileName || !typeName) continue;
+
+        if ((typeName === "Unit") || (typeName === "Model") || (profile.getAttribute("type") === "model")) {
+            // Do nothing; these were already handled.
+        } else if (typeName === "Weapon") {
+            const weapon = ParseWeaponProfile(profile);
+            model._weapons.push(weapon);
+        } 
+/*        
+        else if (typeName.includes("Wound Track") || typeName.includes("Stat Damage") || typeName.includes(" Wounds")) {
+            const tracker = ParseWoundTrackerProfile(profile);
+            unit._woundTracker.push(tracker);
+        } else if (typeName == "Psychic Power") {
+            const power = ParsePsychicPowerProfile(profile);
+            model._psychicPowers.push(power);
+        } else if (typeName.includes("Explosion")) {
+            const explosion = ParseExplosionProfile(profile);
+            model._explosions.push(explosion);
+        } else if (typeName == "Psyker") {
+            model._psyker = ParsePsykerProfile(profile);
+        } else {
+            // Everything else, like Prayers and Warlord Traits. 
+            if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
+            ParseProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
+        }
+*/        
+    }
+}
+
+function ExtractRuleDescription(rule: Element, map: Map<string, string | null>): void {
+    const ruleName = rule.getAttribute("name");
+    const desc = rule.querySelector("description");
+    if (ruleName && desc?.textContent) {
+        map.set(ruleName, desc.textContent);
+    }
+}
+
+function GetImmediateSelections(root: Element): Element[] {
+    // querySelectorAll(':scope > tagname') doesn't work with jsdom, so we hack
+    // around it: https://github.com/jsdom/jsdom/issues/2998
+    const selections = [];
+    for (const child of root.children) {
+        if (child.tagName === 'selections') {
+            for (const subChild of child.children) {
+                if (subChild.tagName === 'selection') {
+                    selections.push(subChild);
+                }
+            }
+        }
+    }
+    return selections;
+}
+
+function HasImmediateProfileWithTypeName(root: Element, typeName: string): boolean {
+    // querySelectorAll(':scope > tagname') doesn't work with jsdom, so we hack
+    // around it: https://github.com/jsdom/jsdom/issues/2998
+    for (const child of root.children) {
+        if (child.tagName === 'profiles') {
+            for (const subChild of child.children) {
+                if (subChild.tagName === 'profile' && subChild.getAttribute('typeName') === typeName) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 } // namespace HorusHeresy
