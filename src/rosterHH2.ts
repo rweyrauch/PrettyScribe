@@ -45,6 +45,7 @@ export enum UnitRole {
     DT,
     FT,
     LW,
+    PR,
 }
 
 export const UnitRoleToString: string[] = [
@@ -59,6 +60,7 @@ export const UnitRoleToString: string[] = [
     'Dedicated Transport',
     'Fortification',
     'Lord of War',
+    'Primarch',
 ];
 
 export class BaseNote {
@@ -244,7 +246,6 @@ export class Fortification extends BaseNote {
 export class Unit extends BaseNote {
 
     _role: UnitRole = UnitRole.NONE;
-    _factions: Set<string> = new Set();
     _keywords: Set<string> = new Set();
 
     _abilities: Map<string, string> = new Map();
@@ -649,8 +650,9 @@ function LookupRole(roleText: string): UnitRole {
         case 'Heavy Support:': return UnitRole.HS;
         case 'Flyer': return UnitRole.FL;
         case 'Transport Sub-type:': return UnitRole.DT;
-        case 'Fortification': return UnitRole.FT;
-        case 'Lord of War': return UnitRole.LW;
+        case 'Fortification:': return UnitRole.FT;
+        case 'Lords of War:': return UnitRole.LW;
+        case 'Primarch:': return UnitRole.PR
     }
     return UnitRole.NONE;
 }
@@ -666,30 +668,22 @@ function CreateUnit(root: Element): Unit | null {
     for (let cat of categories) {
         const catName = cat.getAttributeNode("name")?.nodeValue;
         if (catName) {
-            const factPattern = "Faction: ";
-            const factIndex = catName.lastIndexOf(factPattern);
-            if (factIndex >= 0) {
-                const factKeyword = catName.slice(factIndex + factPattern.length);
-                unit._factions.add(factKeyword);
+            const roleText = catName.trim();
+            let unitRole = LookupRole(roleText);
+            if (unitRole != UnitRole.NONE) {
+                unit._role = unitRole;
             }
             else {
-                const roleText = catName.trim();
-                let unitRole = LookupRole(roleText);
-                if (unitRole != UnitRole.NONE) {
-                    unit._role = unitRole;
-                }
-                else {
-                    // Keyword
-                    unit._keywords.add(catName);
-                }
+                // Keyword
+                unit._keywords.add(catName);
             }
         }
     }
 
     const seenProfiles: Element[] = [];
 
-    // First, find model stats. These have typeName=" Unit", " Vehicle" or " ".
-    const modelStatsProfiles = Array.from(root.querySelectorAll('profile[typeId="4bb2-cb95-e6c8-5a21"],profile[typeId="2fae-b053-3f78-e7b2"]'));
+    // First, find model stats. These have typeName=" Unit", " Vehicle" or "Knights and Titans".
+    const modelStatsProfiles = Array.from(root.querySelectorAll('profile[typeId="4bb2-cb95-e6c8-5a21"],profile[typeId="2fae-b053-3f78-e7b2"],profile[typeId="75b5-9f7a-156e-6889"]'));
     ParseModelStatsProfiles(modelStatsProfiles, unit, unitName);
     seenProfiles.push(...modelStatsProfiles);
 
@@ -701,7 +695,7 @@ function CreateUnit(root: Element): Unit | null {
     } else {
         const immediateSelections = GetImmediateSelections(root);
         for (const selection of immediateSelections) {
-            if (selection.getAttribute('type') === 'model' || HasImmediateProfileWithTypeName(selection, 'Unit')) {
+            if (selection.getAttribute('type') === 'model' || HasImmediateProfileWithTypeName(selection, ' Unit')) {
                 modelSelections.push(selection);
             }
         }
@@ -710,7 +704,7 @@ function CreateUnit(root: Element): Unit | null {
             modelSelections.push(...Array.from(root.querySelectorAll('selection[type="model"]')));
         }
         // Some single-model units have type="unit" or type="upgrade".
-        if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, 'Unit')) {
+        if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, ' Unit')) {
             modelSelections.push(root);
         }
     }
@@ -748,66 +742,8 @@ function CreateUnit(root: Element): Unit | null {
         }
     }
     
-    // Finally, look for profiles that are not under models. They may apply to
-    //    a) model loadouts, if it's selection with a Weapon (eg Immortals)
-    //    b) unit loadout, if it's a selection with an Ability (eg Bomb Squigs)
-    //    c) abilities for the unit, if it's not under a child selection
-    let profiles = Array.from(root.querySelectorAll("profiles>profile"));
-    let unseenProfiles = profiles.filter((e: Element) => !seenProfiles.includes(e));
-    seenProfiles.push(...unseenProfiles);
-    if (unseenProfiles.length > 0) {
-        const unitUpgradesModel = new Model();
-        unitUpgradesModel._name = 'Unit Upgrades';
-        ParseModelProfiles(unseenProfiles, unitUpgradesModel, unit);
-        if (unitUpgradesModel._weapons.length > 0 && unit._models.length > 0) {
-            // Apply weapons at the unit level to all models in the unit.
-            for (const model of unit._models) {
-                model._weapons.push(...unitUpgradesModel._weapons);
-            }
-            unitUpgradesModel._weapons.length = 0;  // Clear the array.
-        }
-/*        
-        if (unitUpgradesModel._psychicPowers.length > 0) {
-            // Add spells to the unit's spell list. However, we'll still need
-            // to add spell upgrade selections to the upgrade list, below.
-            unit._spells.push(...unitUpgradesModel._psychicPowers);
-            unitUpgradesModel._psychicPowers.length = 0;
-        }
-        if (unitUpgradesModel._psyker) {
-            unit._psykers.push(unitUpgradesModel._psyker);
-            unitUpgradesModel._psyker = null;
-        }
-        if (unitUpgradesModel._explosions.length > 0) {
-            unit._explosions.push(...unitUpgradesModel._explosions);
-            unitUpgradesModel._explosions.length = 0;
-        }
-*/
-        // Look for any unit-level upgrade selections that we didn't catch
-        // previously, and stuff them in the "Unit Upgrades" model.
-        for (const selection of GetImmediateSelections(root)) {
-            if (selection.getAttribute('type') !== 'upgrade') continue;
-            // Ignore model selections (which were already processed).
-            if (modelSelections.includes(selection))  continue;
-            // Ignore unit-level weapon selections; these were handled above.
-            if (selection.querySelector('profiles>profile[typeName="Weapon"]')) continue;
-
-            let name = selection.getAttribute('name');
-            if (!name) continue;
-
-            const upgrade = new Upgrade();
-            upgrade._name = name;
-            upgrade._cost = GetSelectionCosts(selection);
-            upgrade._count = Number(selection.getAttribute('number'));
-            unitUpgradesModel._upgrades.push(upgrade);
-        }
-
-        if (unitUpgradesModel._weapons.length > 0 || unitUpgradesModel._upgrades.length > 0) {
-            unit._models.push(unitUpgradesModel);
-        }
-    }
-
     // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
-    let costs = root.querySelectorAll(":scope>costs>cost");
+    let costs = root.querySelectorAll("costs>cost");
     for (let cost of costs) {
         if (cost.hasAttribute("name") && cost.hasAttribute("value")) {
             let which = cost.getAttributeNode("name")?.nodeValue;
@@ -819,9 +755,8 @@ function CreateUnit(root: Element): Unit | null {
             }
         }
     }
-    console.log("Points: " + unit._points);
 
-    let rules = root.querySelectorAll("rules > rule");
+    let rules = root.querySelectorAll("rules>rule");
     for (let rule of rules) {
         ExtractRuleDescription(rule, unit._rules);
     }
@@ -854,12 +789,6 @@ function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
 function CompareModel(a: BaseModel, b: BaseModel): number {
     if (a._name === b._name) {
         return Compare(a.nameAndGear(), b.nameAndGear());
-    } else if (a._name === 'Unit Upgrades') {
-        // "Unit Upgrades", a special model name, is always sorted last.
-        return 1;
-    } else if (b._name === 'Unit Upgrades') {
-        // "Unit Upgrades", a special model name, is always sorted last.
-        return -1;
     } else {
         return Compare(a._name, b._name);
     }
@@ -892,7 +821,7 @@ function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: stri
         const profileType = profile.getAttribute("typeName");
         if (!profileName || !profileType) return;
 
-        if (profileType === "Unit") {
+        if (profileType === " Unit") {
             const model = new Model();
             model._name = profileName;
             unit._modelStats.push(model);
@@ -952,7 +881,7 @@ function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: stri
                 }
             }
         }
-        else if (profileType === "Vehicle") {
+        else if (profileType === " Vehicle") {
             let vehicle = new Vehicle();
             vehicle._name = profileName;
 
@@ -990,7 +919,7 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
         const typeName = profile.getAttribute("typeName");
         if (!profileName || !typeName) continue;
 
-        if ((typeName === "Unit") || (typeName === "Model") || (profile.getAttribute("type") === "model")) {
+        if ((typeName === " Unit") || (profile.getAttribute("type") === "model")) {
             // Do nothing; these were already handled.
         } else if (typeName === "Weapon") {
             const weapon = ParseWeaponProfile(profile);

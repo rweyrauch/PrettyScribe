@@ -37,6 +37,7 @@ export class RendererHH2 implements Renderer {
         this._roles.set(HorusHeresy.UnitRole.DT, document.getElementById('role_dt') as HTMLImageElement);
         this._roles.set(HorusHeresy.UnitRole.FT, document.getElementById('role_ft') as HTMLImageElement);
         this._roles.set(HorusHeresy.UnitRole.LW, document.getElementById('role_lw') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.PR, document.getElementById('role_lw') as HTMLImageElement);
     }
 
     render(title: HTMLElement | null, list: HTMLElement | null, forces: HTMLElement | null): void {
@@ -524,12 +525,6 @@ export class RendererHH2 implements Renderer {
         //     const rules = abilitiesGroup === 'Abilities' ? unit._rules : undefined;
         //     this.renderUnitAbilitiesAndRules(statsTable, abilitiesGroup, abilitiesMap, rules);
         // }
-
-        // factions
-        thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row');
-        const factions = Array.from(unit._factions).sort(HorusHeresy.Compare).join(', ').toLocaleUpperCase();
-        thead.appendChild(createTableRow(['Factions', factions], [0.10, 0.90], /* header= */ false));
 
         // keywords
         thead = statsTable.appendChild(document.createElement('thead'));
