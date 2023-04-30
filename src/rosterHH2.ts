@@ -237,10 +237,17 @@ export class Knight extends BaseModel {
     _hp: number = 1;
 }
 
-export class Fortification extends BaseNote {
+export class Fortification extends BaseModel {
 
-    _composition: string = "";
-    _type: string = "";
+    // Characteristics
+    _type: string = "Fortification";
+    _bs: number | string = "-";
+    _front: number = 0;
+    _side: number = 0;
+    _rear: number = 0;
+    _hp: number = 1;
+    _capacity: number | string = "-";
+    _firePoints: number | string = "-";
 };
 
 export class Unit extends BaseNote {
@@ -682,8 +689,8 @@ function CreateUnit(root: Element): Unit | null {
 
     const seenProfiles: Element[] = [];
 
-    // First, find model stats. These have typeName=" Unit", " Vehicle" or "Knights and Titans".
-    const modelStatsProfiles = Array.from(root.querySelectorAll('profile[typeId="4bb2-cb95-e6c8-5a21"],profile[typeId="2fae-b053-3f78-e7b2"],profile[typeId="75b5-9f7a-156e-6889"]'));
+    // First, find model stats. These have typeName=" Unit", " Vehicle", "Fortification" or "Knights and Titans".
+    const modelStatsProfiles = Array.from(root.querySelectorAll('profile[typeId="4bb2-cb95-e6c8-5a21"],profile[typeId="2fae-b053-3f78-e7b2"],profile[typeId="75b5-9f7a-156e-6889"],profile[typeId="eeec-bde3-8ee4-35b0"]'));
     ParseModelStatsProfiles(modelStatsProfiles, unit, unitName);
     seenProfiles.push(...modelStatsProfiles);
 
@@ -695,7 +702,8 @@ function CreateUnit(root: Element): Unit | null {
     } else {
         const immediateSelections = GetImmediateSelections(root);
         for (const selection of immediateSelections) {
-            if (selection.getAttribute('type') === 'model' || HasImmediateProfileWithTypeName(selection, ' Unit')) {
+            if (selection.getAttribute('type') === 'model' || HasImmediateProfileWithTypeName(selection, ' Unit') || HasImmediateProfileWithTypeName(selection, 'Fortification') ||
+               HasImmediateProfileWithTypeName(selection, ' Vehicle') || HasImmediateProfileWithTypeName(selection, 'Knights and Titans')) {
                 modelSelections.push(selection);
             }
         }
@@ -704,7 +712,8 @@ function CreateUnit(root: Element): Unit | null {
             modelSelections.push(...Array.from(root.querySelectorAll('selection[type="model"]')));
         }
         // Some single-model units have type="unit" or type="upgrade".
-        if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, ' Unit')) {
+        if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, ' Unit')  || HasImmediateProfileWithTypeName(root, 'Fortification') ||
+            HasImmediateProfileWithTypeName(root, ' Vehicle') || HasImmediateProfileWithTypeName(root, 'Knights and Titans')){
             modelSelections.push(root);
         }
     }
@@ -906,6 +915,34 @@ function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: stri
                             case 'HP': vehicle._hp = +char.textContent; break;
                             case 'Transport Capacity': vehicle._capacity = char.textContent; break;
                             case 'Access Points': vehicle._accessPoints = char.textContent; break;
+                    }
+                }
+            }
+        }
+        else if (profileType === "Fortification") {
+            let fort = new Fortification();
+            fort._name = profileName;
+
+            unit._modelStats.push(fort);
+
+            ExpandBaseNotes(profile, fort);
+
+            const chars = profile.querySelectorAll("characteristics>characteristic");
+            for (const char of chars) {
+                const charName = char.getAttributeNode("name")?.nodeValue;
+                if (!charName) continue;
+     
+                console.log("Fortification " + profileName);
+                if (char.textContent) {
+                    switch (charName) {
+                            case 'Unit Type': fort._type = char.textContent; break;
+                            case 'BS': fort._bs = char.textContent; break;
+                            case 'Front': fort._front = +char.textContent; break;
+                            case 'Side': fort._side = +char.textContent; break;
+                            case 'Rear': fort._rear = +char.textContent; break;
+                            case 'HP': fort._hp = +char.textContent; break;
+                            case 'Transport Capacity': fort._capacity = char.textContent; break;
+                            case 'Fire Points': fort._firePoints = char.textContent; break;
                     }
                 }
             }

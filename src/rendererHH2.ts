@@ -47,6 +47,8 @@ export class RendererHH2 implements Renderer {
         if (title) {
             this.renderOptionsDiv(title);
 
+            title.appendChild(document.createElement('h2')).appendChild(document.createTextNode('...Prerelease - not ready for primetime...'));
+
             const costs = [`${this._roster._cost._points} pts`];
             const text = `${this._roster._name} (${costs.join(', ')})`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
@@ -421,6 +423,25 @@ export class RendererHH2 implements Renderer {
                     }
                 }
             }
+            else if (firstModel instanceof HorusHeresy.Fortification) {
+                thead.appendChild(createTableRow(RendererHH2._fortificationLabels, this._fortificationLabelWidthsNormalized, /* header= */ true));
+                let tbody = statsTable.appendChild(document.createElement('tbody'));
+                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+                for (const model of unit._modelStats) {
+                    if (model instanceof HorusHeresy.Fortification) {
+                        let fort = model as HorusHeresy.Fortification;
+                        tbody.append(createTableRow([
+                            fort._name,
+                            fort._bs.toString(),
+                            fort._front.toString(),
+                            fort._side.toString(),
+                            fort._rear.toString(),
+                            fort._hp.toString(),
+                            fort._capacity.toString(),
+                        ], this._fortificationLabelWidthsNormalized));
+                    }
+                }
+            }
             else {
                 thead.appendChild(createTableRow(RendererHH2._infantryLabels, this._infantryLabelWidthsNormalized, /* header= */ true));
                 let tbody = statsTable.appendChild(document.createElement('tbody'));
@@ -461,12 +482,30 @@ export class RendererHH2 implements Renderer {
             tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
 
             for (const weapon of unit._weapons) {
+                // parse weapon._type into type and special rules links.
+                let rules = weapon._type.split(',');
+                let weaponType = rules[0].trim();
+                let weaponRules = document.createElement('div');
+                rules.forEach((rule, index) => {
+                    let text = rule.trim();
+                    if (index > 1) {
+                        weaponRules.appendChild(document.createTextNode(", "));
+                    }
+                    if (index != 0) {
+                        let anchor = document.createElement('a');
+                        anchor.href = "#" + text;
+                        anchor.text = text;
+                        weaponRules.appendChild(anchor);
+                    }
+                });
+
                 tbody.append(createTableRow([
                     weapon.name().toString(),
                     weapon._range,
                     weapon._str.toString(),
                     weapon._ap,
-                    weapon._type], this._weaponLabelWidthNormalized));
+                    weaponType,
+                    weaponRules], this._weaponLabelWidthNormalized));
             }
         }
         notesTableHead = createNotesHead('Weapon notes', unit._weapons);
@@ -602,15 +641,17 @@ export class RendererHH2 implements Renderer {
         }
     }
 
-    private static _infantryLabels = ["Model", "M", "WS", "BS", "S", "T", "W", "I", "A", "Ld", "Sv"];
-    private _infantryLabelWidthsNormalized = [0.25, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
+    private static _infantryLabels = ["Model", "M", "WS", "BS", "S", "T", "W", "I", "A", "Ld", "Sv", ""];
+    private _infantryLabelWidthsNormalized = [0.30, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.2];
     private static _vehicleLabels = ["Model", "M", "BS", "Front", "Side", "Rear", "HP", "Capacity"];
-    private _vehicleLabelWidthsNormalized = [0.4, 0.05, 0.05, 0.1, 0.1, 0.1, 0.05, 0.15];
+    private _vehicleLabelWidthsNormalized = [0.30, 0.05, 0.1, 0.1, 0.1, 0.1, 0.05, 0.2];
     private static _knightLabels = ["Model", "M", "WS", "BS", "S", "Front", "Side", "Rear", "I", "A", "HP"];
-    private _knightLabelWidthsNormalized = [0.35, 0.05, 0.05, 0.05, 0.05, 0.1, 0.1, 0.1, 0.05, 0.05, 0.05];
+    private _knightLabelWidthsNormalized = [0.30, 0.05, 0.05, 0.05, 0.05, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05];
+    private static _fortificationLabels = ["Model", "BS", "Front", "Side", "Rear", "HP", "Capacity"];
+    private _fortificationLabelWidthsNormalized = [0.30, 0.1, 0.1, 0.1, 0.1, 0.05, 0.25];
 
-    private static _weaponLabels = ["Weapon", "Range", "Str", "AP", "Type"];
-    private _weaponLabelWidthNormalized = [0.3, 0.1, 0.1, 0.1, 0.4];
+    private static _weaponLabels = ["Weapon", "Range", "Str", "AP", "Type", "Rules"];
+    private _weaponLabelWidthNormalized = [0.30, 0.1, 0.1, 0.05, 0.15, 0.3];
 
     private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
     private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
