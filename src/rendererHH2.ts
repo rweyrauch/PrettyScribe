@@ -89,10 +89,7 @@ export class RendererHH2 implements Renderer {
             thead.classList.add('thead-light');
             const tr = document.createElement('tr');
             thead.appendChild(tr);
-            const headerInfo = [{name: "NAME", w: '20%'}, {name: "ROLE", w: '15%'}, {name: "MODELS", w: '55%'}, {name: "POINTS", w: '5%'}, {
-                name: "POWER",
-                w: '5%'
-            }];
+            const headerInfo = [{name: "NAME", w: '20%'}, {name: "ROLE", w: '15%'}, {name: "MODELS", w: '55%'}, {name: "POINTS", w: '5%'}];
              headerInfo.forEach(element => {
                 let th = document.createElement('th');
                 th.scope = "col";
@@ -379,12 +376,12 @@ export class RendererHH2 implements Renderer {
 
         if (unit._models.length > 0) {
             // Assuming all models of the same type!
-            let firstModel = unit._models[0];
+            let firstModel = unit._modelStats[0];
             if (firstModel instanceof HorusHeresy.Vehicle) {
                 thead.appendChild(createTableRow(RendererHH2._vehicleLabels, this._vehicleLabelWidthsNormalized, /* header= */ true));
                 let tbody = statsTable.appendChild(document.createElement('tbody'));
                 tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-                for (const model of unit._models) {
+                for (const model of unit._modelStats) {
                     if (model instanceof HorusHeresy.Vehicle) {
                         let vehicle = model as HorusHeresy.Vehicle;
                         tbody.append(createTableRow([
@@ -404,7 +401,7 @@ export class RendererHH2 implements Renderer {
                 thead.appendChild(createTableRow(RendererHH2._knightLabels, this._knightLabelWidthsNormalized, /* header= */ true));
                 let tbody = statsTable.appendChild(document.createElement('tbody'));
                 tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-                for (const model of unit._models) {
+                for (const model of unit._modelStats) {
                     if (model instanceof HorusHeresy.Knight) {
                         let knight = model as HorusHeresy.Knight;
                         tbody.append(createTableRow([
@@ -428,7 +425,7 @@ export class RendererHH2 implements Renderer {
                 thead.appendChild(createTableRow(RendererHH2._infantryLabels, this._infantryLabelWidthsNormalized, /* header= */ true));
                 let tbody = statsTable.appendChild(document.createElement('tbody'));
                 tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-                for (const model of unit._models) {
+                for (const model of unit._modelStats) {
                     if (model instanceof HorusHeresy.Model) {
                         let infantry = model as HorusHeresy.Model;
                         tbody.append(createTableRow([
@@ -455,27 +452,25 @@ export class RendererHH2 implements Renderer {
         }
 
         // weapons
-        for (const model of unit._models) {
-            if (model._weapons.length > 0) {
-                thead = statsTable.appendChild(document.createElement('thead'));
-                thead.classList.add('table-active');
-                thead.appendChild(createTableRow(RendererHH2._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
-   
-                let tbody = statsTable.appendChild(document.createElement('tbody'));
-                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-   
-                for (const weapon of model._weapons) {
-                    tbody.append(createTableRow([
-                        weapon.name().toString(),
-                        weapon._range,
-                        weapon._str.toString(),
-                        weapon._ap,
-                        weapon._type], this._weaponLabelWidthNormalized));
-                }
-           }
-           notesTableHead = createNotesHead('Weapon notes', model._weapons);
-           if (notesTableHead) statsTable.appendChild(notesTableHead)   
+        if (unit._weapons.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(RendererHH2._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
+
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const weapon of unit._weapons) {
+                tbody.append(createTableRow([
+                    weapon.name().toString(),
+                    weapon._range,
+                    weapon._str.toString(),
+                    weapon._ap,
+                    weapon._type], this._weaponLabelWidthNormalized));
+            }
         }
+        notesTableHead = createNotesHead('Weapon notes', unit._weapons);
+        if (notesTableHead) statsTable.appendChild(notesTableHead)   
 
         // spells
         // if (unit._spells.length > 0) {
@@ -517,7 +512,7 @@ export class RendererHH2 implements Renderer {
 
         // unit abilities and rules; rules are shared across units, with their
         // descriptions printed in bulk later, but show up with unit 'Abilities'
-        // if (!unit._abilities['Abilities'] && unit._rules.size > 0) {
+        //if (!unit._abilities['Abilities'] && unit._rules.size > 0) {
         //     this.renderUnitAbilitiesAndRules(statsTable, 'Abilities', new Map(), unit._rules);
         // }
         // for (const abilitiesGroup of Object.keys(unit._abilities).sort()) {
@@ -570,12 +565,12 @@ export class RendererHH2 implements Renderer {
             div.appendChild(document.createTextNode(' ('));
             for (const gear of modelGear) {
                 if (gear !== modelGear[0]) div.appendChild(document.createTextNode(', '));
-                //div.appendChild(document.createTextNode((gear._count > 1 ? `${gear._count}x ` : '') + gear.selectionName()));
-                // if (gear._cost.hasValues()) {
-                //     const costSpan = div.appendChild(document.createElement('span'));
-                //     costSpan.classList.add('wh40k_upgrade_cost', 'd-none');
-                //     costSpan.appendChild(document.createTextNode(` ${gear._cost.toString()}`));
-                // }
+                div.appendChild(document.createTextNode((gear._count > 1 ? `${gear._count}x ` : '') + gear.selectionName()));
+                if (gear._cost.hasValues()) {
+                     const costSpan = div.appendChild(document.createElement('span'));
+                     costSpan.classList.add('wh40k_upgrade_cost', 'd-none');
+                     costSpan.appendChild(document.createTextNode(` ${gear._cost.toString()}`));
+                }
             }
             div.appendChild(document.createTextNode(')'));
         }
@@ -592,8 +587,9 @@ export class RendererHH2 implements Renderer {
             rulesHeader.appendChild(document.createTextNode(subFaction));
 
             for (let rule of rules) {
-                let row = addHideAble(document.createElement('div'));
+                let row = addHideAble(document.createElement('div'));                
                 let name = document.createElement('b');
+                name.id = rule[0];
                 name.appendChild(document.createTextNode(rule[0]));
                 let desc = document.createElement('p');
                 desc.appendChild(document.createTextNode(rule[1] || ''));

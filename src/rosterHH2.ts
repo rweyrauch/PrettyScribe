@@ -833,7 +833,7 @@ function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: stri
                 const charName = char.getAttribute("name");
                 if (!charName) continue;
 
-                console.log("Model " + profileName);
+                console.log("Model " + profileName + " Characteristic: " + charName + " Value: " + char.textContent);
                 if (char.textContent) {
                     switch (charName) {
                         case 'Unit Type': model._type = char.textContent; break;
