@@ -105,6 +105,14 @@ export class Weapon extends Upgrade {
     _str: WeaponStrength = "user";
     _ap: string = "";
     _type: string = "Melee";
+
+    getRules(): string[] {
+        let rules = this._type.split(',');
+        if (rules.length > 0) {
+            rules = rules.slice(1);
+        }
+        return rules;
+    }
 }
 
 export class BaseModel extends BaseNote {
@@ -188,7 +196,6 @@ export class BaseModel extends BaseNote {
             }
         }
     }
-
 };
 
 export class Vehicle extends BaseModel {
@@ -255,7 +262,6 @@ export class Unit extends BaseNote {
     _role: UnitRole = UnitRole.NONE;
     _keywords: Set<string> = new Set();
 
-    _abilities: Map<string, string> = new Map();
     _rules: Map<string, string> = new Map();
 
     _models: BaseModel[] = [];
@@ -285,10 +291,7 @@ export class Unit extends BaseNote {
                 }
             }
 
-            if (!_.isEqual(this._abilities, unit._abilities)) {
-                return false;
-            }
-            else if (!_.isEqual(this._rules, unit._rules)) {
+            if (!_.isEqual(this._rules, unit._rules)) {
                 return false;
             }
 
@@ -981,12 +984,14 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
             model._explosions.push(explosion);
         } else if (typeName == "Psyker") {
             model._psyker = ParsePsykerProfile(profile);
-        } else {
+            
+        }
+        else {
             // Everything else, like Prayers and Warlord Traits. 
             if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
             ParseProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
-        }
-*/        
+        } 
+*/               
     }
 }
 

@@ -144,17 +144,6 @@ export class RendererHH2 implements Renderer {
             }
         });
 
-        this.renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase',
-            (e) => {
-                const abilities = document.getElementById('wh40k_abilities_list');
-                if (!abilities) return;
-
-                if ((e.target as HTMLInputElement).checked) {
-                    abilities.classList.remove('d-none');
-                } else {
-                    abilities.classList.add('d-none');
-                }
-            });
         this.renderCheckboxOption(optionsDiv, 'showUpgradeCosts', 'Show upgrade costs',
             (e: Event) => {
                 const costSpans = document.getElementsByClassName('wh40k_upgrade_cost');
@@ -374,7 +363,6 @@ export class RendererHH2 implements Renderer {
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // models
-
         if (unit._modelStats.length > 0) {
 
             const modelsByType = bucketSortModels(unit._modelStats);
@@ -554,16 +542,11 @@ export class RendererHH2 implements Renderer {
         // notesTableHead = createNotesHead('Psyker notes', unit._psykers);
         // if (notesTableHead) statsTable.appendChild(notesTableHead);
 
-        // unit abilities and rules; rules are shared across units, with their
-        // descriptions printed in bulk later, but show up with unit 'Abilities'
-        //if (!unit._abilities['Abilities'] && unit._rules.size > 0) {
-        //     this.renderUnitAbilitiesAndRules(statsTable, 'Abilities', new Map(), unit._rules);
-        // }
-        // for (const abilitiesGroup of Object.keys(unit._abilities).sort()) {
-        //     const abilitiesMap = unit._abilities[abilitiesGroup];
-        //     const rules = abilitiesGroup === 'Abilities' ? unit._rules : undefined;
-        //     this.renderUnitAbilitiesAndRules(statsTable, abilitiesGroup, abilitiesMap, rules);
-        // }
+        // unit rules; rules are shared across units, with their
+        // descriptions printed in bulk later
+        if (unit._rules.size > 0) {
+            this.renderUnitRules(statsTable, 'Rules', unit._rules);
+        }
 
         // keywords
         thead = statsTable.appendChild(document.createElement('thead'));
@@ -579,21 +562,15 @@ export class RendererHH2 implements Renderer {
         thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
     }
 
-    private renderUnitAbilitiesAndRules(container: HTMLElement, abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
+    private renderUnitRules(container: HTMLElement, rulesGroup: string, rulesMap: Map<string, string>) {
         const thead = container.appendChild(document.createElement('thead'));
         thead.classList.add('info_row');
-        const abilitiesDiv = document.createElement('div');
+        const rulesDiv = document.createElement('div');
         if (rulesMap && rulesMap.size > 0) {
             const rules = Array.from(rulesMap.keys()).sort(HorusHeresy.Compare).join(', ');
-            abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
+            rulesDiv.appendChild(document.createElement('div')).appendChild(document.createTextNode(rules));
         }
-        const abilities = Array.from(abilitiesMap.keys()).sort(HorusHeresy.Compare);
-        for (const ability of abilities) {
-            const abilityDiv = addHideAble(abilitiesDiv.appendChild(document.createElement('div')));
-            abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
-            abilityDiv.appendChild(document.createTextNode(abilitiesMap.get(ability) || '??'));
-        }
-        thead.appendChild(createTableRow([abilitiesGroup, abilitiesDiv], [0.10, 0.90], /* header= */ false));
+        thead.appendChild(createTableRow([rulesGroup, rulesDiv], [0.10, 0.90], /* header= */ false));
 
     }
 
