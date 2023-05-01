@@ -14,9 +14,10 @@
     OF THIS SOFTWARE.
 */
 
-import {HorusHeresy} from "./rosterHH2";
-import {Renderer} from "./renderer";
+import { HorusHeresy } from "./rosterHH2";
+import { Renderer } from "./renderer";
 import { first } from "lodash";
+import { type } from "jquery";
 
 export class RendererHH2 implements Renderer {
 
@@ -91,8 +92,8 @@ export class RendererHH2 implements Renderer {
             thead.classList.add('thead-light');
             const tr = document.createElement('tr');
             thead.appendChild(tr);
-            const headerInfo = [{name: "NAME", w: '20%'}, {name: "ROLE", w: '15%'}, {name: "MODELS", w: '55%'}, {name: "POINTS", w: '5%'}];
-             headerInfo.forEach(element => {
+            const headerInfo = [{ name: "NAME", w: '20%' }, { name: "ROLE", w: '15%' }, { name: "MODELS", w: '55%' }, { name: "POINTS", w: '5%' }];
+            headerInfo.forEach(element => {
                 let th = document.createElement('th');
                 th.scope = "col";
                 th.appendChild(document.createTextNode(element.name));
@@ -250,7 +251,7 @@ export class RendererHH2 implements Renderer {
     }
 
     private loadOptionsFromLocalStorage() {
-        try { 
+        try {
             for (let i = 0; i < window.localStorage.length; i++) {
                 const key = window.localStorage.key(i);
                 const checkboxId = key?.match(/option-checkbox-(.*)/)?.[1];
@@ -266,7 +267,7 @@ export class RendererHH2 implements Renderer {
                     if (!optionsDiv || !optionsToggle) return;
 
                     const hideOptions = !!window.localStorage[key];
-        
+
                     if (optionsDiv.classList.contains('hide_options') !== hideOptions) {
                         optionsToggle.dispatchEvent(new Event('click'));
                     }
@@ -373,104 +374,108 @@ export class RendererHH2 implements Renderer {
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // models
-        thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('table-active');
 
-        if (unit._models.length > 0) {
-            // Assuming all models of the same type!
-            let firstModel = unit._modelStats[0];
-            if (firstModel instanceof HorusHeresy.Vehicle) {
-                thead.appendChild(createTableRow(RendererHH2._vehicleLabels, this._vehicleLabelWidthsNormalized, /* header= */ true));
-                let tbody = statsTable.appendChild(document.createElement('tbody'));
-                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-                for (const model of unit._modelStats) {
-                    if (model instanceof HorusHeresy.Vehicle) {
-                        let vehicle = model as HorusHeresy.Vehicle;
-                        tbody.append(createTableRow([
-                            vehicle._name,
-                            vehicle._move.toString(),
-                            vehicle._bs.toString(),
-                            vehicle._front.toString(),
-                            vehicle._side.toString(),
-                            vehicle._rear.toString(),
-                            vehicle._hp.toString(),
-                            vehicle._capacity.toString(),
-                        ], this._vehicleLabelWidthsNormalized));
-                    }
-                }
-            }
-            else if (firstModel instanceof HorusHeresy.Knight) {
-                thead.appendChild(createTableRow(RendererHH2._knightLabels, this._knightLabelWidthsNormalized, /* header= */ true));
-                let tbody = statsTable.appendChild(document.createElement('tbody'));
-                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-                for (const model of unit._modelStats) {
-                    if (model instanceof HorusHeresy.Knight) {
-                        let knight = model as HorusHeresy.Knight;
-                        tbody.append(createTableRow([
-                            knight._name,
-                            knight._move.toString(),
-                            knight._ws.toString(),
-                            knight._bs.toString(),
-                            knight._str.toString(),
-                            knight._front.toString(),
-                            knight._side.toString(),
-                            knight._rear.toString(),
-                            knight._hp.toString(),
-                            knight._initiative.toString(),
-                            knight._attacks.toString(),
-                            knight._hp.toString(),
-                        ], this._knightLabelWidthsNormalized));
-                    }
-                }
-            }
-            else if (firstModel instanceof HorusHeresy.Fortification) {
-                thead.appendChild(createTableRow(RendererHH2._fortificationLabels, this._fortificationLabelWidthsNormalized, /* header= */ true));
-                let tbody = statsTable.appendChild(document.createElement('tbody'));
-                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-                for (const model of unit._modelStats) {
-                    if (model instanceof HorusHeresy.Fortification) {
-                        let fort = model as HorusHeresy.Fortification;
-                        tbody.append(createTableRow([
-                            fort._name,
-                            fort._bs.toString(),
-                            fort._front.toString(),
-                            fort._side.toString(),
-                            fort._rear.toString(),
-                            fort._hp.toString(),
-                            fort._capacity.toString(),
-                        ], this._fortificationLabelWidthsNormalized));
-                    }
-                }
-            }
-            else {
+        if (unit._modelStats.length > 0) {
+
+            const modelsByType = bucketSortModels(unit._modelStats);
+
+            const models = modelsByType.get("Models");
+            if (models != null && models.length > 0) {
+                thead = statsTable.appendChild(document.createElement('thead'));
+                thead.classList.add('table-active');        
                 thead.appendChild(createTableRow(RendererHH2._infantryLabels, this._infantryLabelWidthsNormalized, /* header= */ true));
                 let tbody = statsTable.appendChild(document.createElement('tbody'));
                 tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-                for (const model of unit._modelStats) {
-                    if (model instanceof HorusHeresy.Model) {
-                        let infantry = model as HorusHeresy.Model;
-                        tbody.append(createTableRow([
-                            infantry._name,
-                            infantry._move.toString(),
-                            infantry._ws.toString(),
-                            infantry._bs.toString(),
-                            infantry._str.toString(),
-                            infantry._toughness.toString(),
-                            infantry._wounds.toString(),
-                            infantry._initiative.toString(),
-                            infantry._attacks.toString(),
-                            infantry._leadership.toString(),
-                            infantry._save,
-                        ], this._infantryLabelWidthsNormalized));
-                    }
+                for (const model of models) {
+                    let infantry = model as HorusHeresy.Model;
+                    tbody.append(createTableRow([
+                        infantry._name,
+                        infantry._move.toString(),
+                        infantry._ws.toString(),
+                        infantry._bs.toString(),
+                        infantry._str.toString(),
+                        infantry._toughness.toString(),
+                        infantry._wounds.toString(),
+                        infantry._initiative.toString(),
+                        infantry._attacks.toString(),
+                        infantry._leadership.toString(),
+                        infantry._save,
+                    ], this._infantryLabelWidthsNormalized));
+                }
+            }
+            const vehicles = modelsByType.get("Vehicles");
+            if (vehicles != null && vehicles.length > 0) {
+                thead = statsTable.appendChild(document.createElement('thead'));
+                thead.classList.add('table-active');        
+                thead.appendChild(createTableRow(RendererHH2._vehicleLabels, this._vehicleLabelWidthsNormalized, /* header= */ true));
+                let tbody = statsTable.appendChild(document.createElement('tbody'));
+                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+                for (const model of vehicles) {
+                    let vehicle = model as HorusHeresy.Vehicle;
+                    tbody.append(createTableRow([
+                        vehicle._name,
+                        vehicle._move.toString(),
+                        vehicle._bs.toString(),
+                        vehicle._front.toString(),
+                        vehicle._side.toString(),
+                        vehicle._rear.toString(),
+                        vehicle._hp.toString(),
+                        vehicle._capacity.toString(),
+                    ], this._vehicleLabelWidthsNormalized));
+
                 }
             }
 
-            notesTableHead = createNotesHead('Model notes', unit._models);
-            if (notesTableHead) statsTable.appendChild(notesTableHead);
+            const knights = modelsByType.get("Knights");
+            if (knights != null && knights.length > 0) {
+                thead = statsTable.appendChild(document.createElement('thead'));
+                thead.classList.add('table-active');        
+                thead.appendChild(createTableRow(RendererHH2._knightLabels, this._knightLabelWidthsNormalized, /* header= */ true));
+                let tbody = statsTable.appendChild(document.createElement('tbody'));
+                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+                for (const model of knights) {
+                    let knight = model as HorusHeresy.Knight;
+                    tbody.append(createTableRow([
+                        knight._name,
+                        knight._move.toString(),
+                        knight._ws.toString(),
+                        knight._bs.toString(),
+                        knight._str.toString(),
+                        knight._front.toString(),
+                        knight._side.toString(),
+                        knight._rear.toString(),
+                        knight._hp.toString(),
+                        knight._initiative.toString(),
+                        knight._attacks.toString(),
+                        knight._hp.toString(),
+                    ], this._knightLabelWidthsNormalized));
+                }
+            }
 
-
+            const forts = modelsByType.get("Fortifications");
+            if (forts != null && forts.length > 0) {
+                thead = statsTable.appendChild(document.createElement('thead'));
+                thead.classList.add('table-active');        
+                thead.appendChild(createTableRow(RendererHH2._fortificationLabels, this._fortificationLabelWidthsNormalized, /* header= */ true));
+                let tbody = statsTable.appendChild(document.createElement('tbody'));
+                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+                for (const model of forts) {
+                    let fort = model as HorusHeresy.Fortification;
+                    tbody.append(createTableRow([
+                        fort._name,
+                        fort._bs.toString(),
+                        fort._front.toString(),
+                        fort._side.toString(),
+                        fort._rear.toString(),
+                        fort._hp.toString(),
+                        fort._capacity.toString(),
+                    ], this._fortificationLabelWidthsNormalized));
+                }
+            }
         }
+
+        notesTableHead = createNotesHead('Model notes', unit._models);
+        if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // weapons
         if (unit._weapons.length > 0) {
@@ -509,7 +514,7 @@ export class RendererHH2 implements Renderer {
             }
         }
         notesTableHead = createNotesHead('Weapon notes', unit._weapons);
-        if (notesTableHead) statsTable.appendChild(notesTableHead)   
+        if (notesTableHead) statsTable.appendChild(notesTableHead)
 
         // spells
         // if (unit._spells.length > 0) {
@@ -606,9 +611,9 @@ export class RendererHH2 implements Renderer {
                 if (gear !== modelGear[0]) div.appendChild(document.createTextNode(', '));
                 div.appendChild(document.createTextNode((gear._count > 1 ? `${gear._count}x ` : '') + gear.selectionName()));
                 if (gear._cost.hasValues()) {
-                     const costSpan = div.appendChild(document.createElement('span'));
-                     costSpan.classList.add('wh40k_upgrade_cost', 'd-none');
-                     costSpan.appendChild(document.createTextNode(` ${gear._cost.toString()}`));
+                    const costSpan = div.appendChild(document.createElement('span'));
+                    costSpan.classList.add('wh40k_upgrade_cost', 'd-none');
+                    costSpan.appendChild(document.createTextNode(` ${gear._cost.toString()}`));
                 }
             }
             div.appendChild(document.createTextNode(')'));
@@ -626,7 +631,7 @@ export class RendererHH2 implements Renderer {
             rulesHeader.appendChild(document.createTextNode(subFaction));
 
             for (let rule of rules) {
-                let row = addHideAble(document.createElement('div'));                
+                let row = addHideAble(document.createElement('div'));
                 let name = document.createElement('b');
                 name.id = rule[0];
                 name.appendChild(document.createTextNode(rule[0]));
@@ -643,9 +648,9 @@ export class RendererHH2 implements Renderer {
 
     private static _infantryLabels = ["Model", "M", "WS", "BS", "S", "T", "W", "I", "A", "Ld", "Sv", ""];
     private _infantryLabelWidthsNormalized = [0.30, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.2];
-    private static _vehicleLabels = ["Model", "M", "BS", "Front", "Side", "Rear", "HP", "Capacity"];
+    private static _vehicleLabels = ["Model (Vehicle)", "M", "BS", "Front", "Side", "Rear", "HP", "Capacity"];
     private _vehicleLabelWidthsNormalized = [0.30, 0.05, 0.1, 0.1, 0.1, 0.1, 0.05, 0.2];
-    private static _knightLabels = ["Model", "M", "WS", "BS", "S", "Front", "Side", "Rear", "I", "A", "HP"];
+    private static _knightLabels = ["Model (Knights)", "M", "WS", "BS", "S", "Front", "Side", "Rear", "I", "A", "HP"];
     private _knightLabelWidthsNormalized = [0.30, 0.05, 0.05, 0.05, 0.05, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05];
     private static _fortificationLabels = ["Model", "BS", "Front", "Side", "Rear", "HP", "Capacity"];
     private _fortificationLabelWidthsNormalized = [0.30, 0.1, 0.1, 0.1, 0.1, 0.05, 0.25];
@@ -735,4 +740,17 @@ function toggleHidden(e: Event) {
     }
 }
 
+function bucketSortModels(models: HorusHeresy.BaseModel[]): Map<string, HorusHeresy.BaseModel[]> {
 
+    let buckets = new Map<string, HorusHeresy.BaseModel[]>();
+
+    const vehicles = models.filter(model => model instanceof HorusHeresy.Vehicle);
+    buckets.set("Vehicles", vehicles);
+    const knights = models.filter(model => model instanceof HorusHeresy.Knight);
+    buckets.set("Knights", knights);
+    const forts = models.filter(model => model instanceof HorusHeresy.Fortification);
+    buckets.set("Fortifications", forts);
+    const simple = models.filter(model => model instanceof HorusHeresy.Model);
+    buckets.set("Models", simple);
+    return buckets;
+}

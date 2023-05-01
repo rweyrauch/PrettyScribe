@@ -298,9 +298,10 @@ export class Unit extends BaseNote {
     }
 
     normalize(): void {
-        // Sort force units by role and name
+        // Sort force units by role, name and type
         this._models.sort(CompareModel);
         this._modelStats.sort(CompareObj);
+        this._modelStats.sort(CompareModelTypes);
 
         for (let model of this._models) {
             model.normalize();
@@ -392,6 +393,12 @@ export class Costs {
 export function Compare(a: string, b: string): number {
     if (a > b) return 1;
     else if (a == b) return 0;
+    return -1;
+}
+
+export function CompareModelTypes(a: BaseModel, b: BaseModel): number {
+    if (typeof(a) > typeof(b)) return 1;
+    else if (typeof(a) == typeof(b)) return 0;
     return -1;
 }
 
@@ -906,7 +913,7 @@ function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: stri
                 console.log("Vehicle " + profileName);
                 if (char.textContent) {
                     switch (charName) {
-                             case 'Unit Type': vehicle._type = char.textContent; break;
+                            case 'Unit Type': vehicle._type = char.textContent; break;
                             case 'Move': vehicle._move = ConvertToInches(char.textContent); break;
                             case 'BS': vehicle._bs = +char.textContent; break;
                             case 'Front': vehicle._front = +char.textContent; break;
