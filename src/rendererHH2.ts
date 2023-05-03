@@ -466,7 +466,8 @@ export class RendererHH2 implements Renderer {
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // weapons
-        if (unit._weapons.length > 0) {
+        const unitWeapons = unit.weapons();
+        if (unitWeapons.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
             thead.appendChild(createTableRow(RendererHH2._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
@@ -474,7 +475,7 @@ export class RendererHH2 implements Renderer {
             let tbody = statsTable.appendChild(document.createElement('tbody'));
             tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
 
-            for (const weapon of unit._weapons) {
+            for (const weapon of unitWeapons) {
                 // parse weapon._type into type and special rules links.
                 let rules = weapon._type.split(',');
                 let weaponType = rules[0].trim();
@@ -501,7 +502,7 @@ export class RendererHH2 implements Renderer {
                     weaponRules], this._weaponLabelWidthNormalized));
             }
         }
-        notesTableHead = createNotesHead('Weapon notes', unit._weapons);
+        notesTableHead = createNotesHead('Weapon notes', unitWeapons);
         if (notesTableHead) statsTable.appendChild(notesTableHead)
 
         // spells
