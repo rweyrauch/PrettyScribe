@@ -105,6 +105,14 @@ export class Weapon extends Upgrade {
     _str: WeaponStrength = "user";
     _ap: string = "";
     _type: string = "Melee";
+
+    getRules(): string[] {
+        let rules = this._type.split(',');
+        if (rules.length > 0) {
+            rules = rules.slice(1);
+        }
+        return rules;
+    }
 }
 
 export class BaseModel extends BaseNote {
@@ -188,7 +196,6 @@ export class BaseModel extends BaseNote {
             }
         }
     }
-
 };
 
 export class Vehicle extends BaseModel {
@@ -255,7 +262,6 @@ export class Unit extends BaseNote {
     _role: UnitRole = UnitRole.NONE;
     _keywords: Set<string> = new Set();
 
-    _abilities: Map<string, string> = new Map();
     _rules: Map<string, string> = new Map();
 
     _models: BaseModel[] = [];
@@ -263,6 +269,7 @@ export class Unit extends BaseNote {
     _modelList: string[] = [];
 
     _weapons: Weapon[] = [];
+    _upgrades: Upgrade[] = [];
 
     _points: number = 0;
 
@@ -285,10 +292,7 @@ export class Unit extends BaseNote {
                 }
             }
 
-            if (!_.isEqual(this._abilities, unit._abilities)) {
-                return false;
-            }
-            else if (!_.isEqual(this._rules, unit._rules)) {
+            if (!_.isEqual(this._rules, unit._rules)) {
                 return false;
             }
 
@@ -327,14 +331,17 @@ export class Unit extends BaseNote {
         }
 
         this._modelList = this._models.map(model => (model._count > 1 ? `${model._count}x ` : '') + model.nameAndGear());
-        this._weapons = this._models.map(m => m._weapons)
-            .reduce((acc, val) => acc.concat(val), [])
-            .sort(CompareWeapon)
-            .filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
 
         //this._spells.push(...this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []));
         //this._psykers.push(...this._models.map(m => m._psyker).filter(p => p) as Psyker[]);
-        //this._explosions.push(...this._models.map(m => m._explosions).reduce((acc, val) => acc.concat(val), []));
+    }
+
+    weapons(): Weapon[] {
+        // List all model weapons.
+        let allWeapons = this._models.map(m => m._weapons).reduce((acc, val) => acc.concat(val), []);
+        allWeapons.push(...this._weapons);
+        // Return the unique weapon list.
+        return allWeapons.sort(CompareWeapon).filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
     }
 }
 
@@ -343,7 +350,6 @@ export class Force extends BaseNote {
     _name: string = "Unknown";
     _faction: string = "Unknown";
     _factionRules: Map<string, string | null> = new Map();
-    _configurations: string[] = [];
     _rules: Map<string, string | null> = new Map();
     _units: Unit[] = [];
 
@@ -496,11 +502,7 @@ function ParseSelection(selection: Element, force: Force): void {
     let selectionType = selection.getAttributeNode("type")?.nodeValue;
     if (!selectionType) return;
 
-    if (selectionName.includes("Detachment Command Cost")) {
-        // Ignore Detachment Command cost
-    } else if (selectionName === 'Battle Size' || selectionName === 'Gametype') {
-        ParseConfiguration(selection, force);
-    } else if (selectionType === 'unit' || selectionType === 'model') {
+    if (selectionType === 'unit' || selectionType === 'model') {
         const unit = CreateUnit(selection);
         if (unit) {
             force._units.push(unit);
@@ -508,46 +510,11 @@ function ParseSelection(selection: Element, force: Force): void {
                 force._rules.set(entry[0], entry[1]);
             }
         }
-    } else if (selection.getAttribute("type") === "upgrade") {
+    } else if (selectionType === 'upgrade') {
         ExtractRuleFromSelection(selection, force._rules);
-        ParseConfiguration(selection, force);
-        const props = selection.querySelectorAll("selections>selection");
-        for (let prop of props) {
-            // sub-faction
-            const name = prop.getAttribute("name");
-            if (name && prop.getAttribute("type") === "upgrade") {
-                if (force._faction === "Unknown") {
-                    // pick the first upgrade we see
-                    force._faction = name;
-                }
-                ExtractRuleFromSelection(prop, force._factionRules);
-            }
-        }
     } else {
-        console.log('** UNEXPECTED SELECTION **', selectionName, selection);
+        console.log('** UNEXPECTED SELECTION **', selectionName, selectionType, selection);
     }
-}
-
-function ParseConfiguration(selection: Element, force: Force) {
-    const name = selection.getAttribute("name");
-    if (!name) {
-        return;
-    }
-    const category = selection.querySelector("category")?.getAttribute('name');
-    const subSelections = selection.querySelectorAll('selections>selection');
-    const details = [];
-    let costs = GetSelectionCosts(selection);
-    for (const sel of subSelections) {
-        details.push(sel.getAttribute("name"));
-        costs.add(GetSelectionCosts(sel));
-    }
-
-    let configuration = (!category || category === 'Configuration')
-        ? name : `${category} - ${name}`;
-    if (details.length > 0) configuration += `: ${details.join(", ")}`;
-    if (costs.hasValues()) configuration += ` ${costs.toString()}`;
-
-    force._configurations.push(configuration);
 }
 
 function ParseProfileCharacteristics(profile: Element, profileName: string, typeName:string,  map: Map<string, string | null>) {
@@ -567,19 +534,6 @@ function ParseProfileCharacteristics(profile: Element, profileName: string, type
 }
 
 function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>): void {
-
-    const profiles = root.querySelectorAll("profiles>profile");
-    for (const profile of profiles) {
-        // detachment rules
-        const profileName = profile.getAttribute("name");
-        if (!profileName) continue;
-
-        const profileType = profile.getAttribute("typeName");
-        if (profileType === "Abilities" || profileType === "Dynastic Code" ||
-                profileType === "Household Tradition") {
-            ParseProfileCharacteristics(profile, profileName, profileType,map);
-        }
-    }
 
     const rules = root.querySelectorAll("rules>rule");
     for (const rule of rules) {
@@ -758,6 +712,23 @@ function CreateUnit(root: Element): Unit | null {
         }
     }
     
+    // Find unit upgrades
+    let upgrades = root.querySelectorAll('selections>selection[type="upgrade"]');
+    for (const upgradeSelection of upgrades) {
+        const profiles = Array.from(upgradeSelection.querySelectorAll("profiles>profile"));
+        ParseUnitProfiles(profiles, unit);
+
+        const upgradeName = upgradeSelection.getAttribute('name');
+        if (upgradeName) {
+            console.log("Found unit upgrade: ", upgradeName);
+            const upgrade = new Upgrade();
+            upgrade._name = upgradeName;
+            upgrade._cost = GetSelectionCosts(upgradeSelection);
+            upgrade._count = Number(upgradeSelection.getAttribute('number'));
+            unit._upgrades.push(upgrade);
+        }
+    }
+
     // Only match costs->costs associated with the unit and not its children (model and weapon) costs.
     let costs = root.querySelectorAll("costs>cost");
     for (let cost of costs) {
@@ -970,23 +941,32 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
             model._weapons.push(weapon);
         } 
 /*        
-        else if (typeName.includes("Wound Track") || typeName.includes("Stat Damage") || typeName.includes(" Wounds")) {
-            const tracker = ParseWoundTrackerProfile(profile);
-            unit._woundTracker.push(tracker);
         } else if (typeName == "Psychic Power") {
             const power = ParsePsychicPowerProfile(profile);
             model._psychicPowers.push(power);
-        } else if (typeName.includes("Explosion")) {
-            const explosion = ParseExplosionProfile(profile);
-            model._explosions.push(explosion);
         } else if (typeName == "Psyker") {
             model._psyker = ParsePsykerProfile(profile);
-        } else {
+            
+        }
+        else {
             // Everything else, like Prayers and Warlord Traits. 
             if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
             ParseProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
-        }
-*/        
+        } 
+*/               
+    }
+}
+
+function ParseUnitProfiles(profiles: Element[], unit: Unit) {
+    for (const profile of profiles) {
+        const profileName = profile.getAttribute("name");
+        const typeName = profile.getAttribute("typeName");
+        if (!profileName || !typeName) continue;
+
+        if (typeName === "Weapon") {
+            const weapon = ParseWeaponProfile(profile);
+            unit._weapons.push(weapon);
+        } 
     }
 }
 
