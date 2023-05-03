@@ -546,7 +546,16 @@ export class RendererHH2 implements Renderer {
         // unit rules; rules are shared across units, with their
         // descriptions printed in bulk later
         if (unit._rules.size > 0) {
-            this.renderUnitRules(statsTable, 'Rules', unit._rules);
+            const rules = Array.from(unit._rules.keys()).sort(HorusHeresy.Compare);
+            const weaponRules = unit.weaponRules();
+            // Hide weapon rules.
+            let unitRules: string[] = [];
+            for (const rule of rules) {
+                if (!weaponRules.includes(rule)) {
+                    unitRules.push(rule);
+                }
+            }
+            this.renderUnitRules(statsTable, 'Rules', unitRules);
         }
 
         // keywords
@@ -563,14 +572,24 @@ export class RendererHH2 implements Renderer {
         thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
     }
 
-    private renderUnitRules(container: HTMLElement, rulesGroup: string, rulesMap: Map<string, string>) {
+    private renderUnitRules(container: HTMLElement, rulesGroup: string, rules: string[]) {
         const thead = container.appendChild(document.createElement('thead'));
         thead.classList.add('info_row');
         const rulesDiv = document.createElement('div');
-        if (rulesMap && rulesMap.size > 0) {
-            const rules = Array.from(rulesMap.keys()).sort(HorusHeresy.Compare).join(', ');
-            rulesDiv.appendChild(document.createElement('div')).appendChild(document.createTextNode(rules));
-        }
+         rules.forEach((rule, index) => {
+            let text = rule.trim();
+            if (index > 1) {
+                rulesDiv.appendChild(document.createTextNode(", "));
+            }
+            if (index != 0) {
+                let anchor = document.createElement('a');
+                anchor.href = "#" + text;
+                anchor.text = text;
+                rulesDiv.appendChild(anchor);
+            }
+        });
+
+
         thead.appendChild(createTableRow([rulesGroup, rulesDiv], [0.10, 0.90], /* header= */ false));
 
     }

@@ -109,7 +109,7 @@ export class Weapon extends Upgrade {
     getRules(): string[] {
         let rules = this._type.split(',');
         if (rules.length > 0) {
-            rules = rules.slice(1);
+            rules = rules.slice(1).map(rule => rule.trim());
         }
         return rules;
     }
@@ -342,6 +342,13 @@ export class Unit extends BaseNote {
         allWeapons.push(...this._weapons);
         // Return the unique weapon list.
         return allWeapons.sort(CompareWeapon).filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
+    }
+
+    weaponRules(): string[] {
+        const allWeapons = this.weapons();
+        let allRules: string[] = [];
+        allRules = allWeapons.map(m => m.getRules()).reduce((acc, val) => acc.concat(val), []);
+        return allRules.sort().filter((rule, i, rules) => rule !== rules[i - 1]);
     }
 }
 
