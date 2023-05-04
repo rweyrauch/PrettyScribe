@@ -378,6 +378,7 @@ export class RendererHH2 implements Renderer {
                     let infantry = model as HorusHeresy.Model;
                     tbody.append(createTableRow([
                         infantry._name,
+                        infantry._type,
                         infantry._move.toString(),
                         infantry._ws.toString(),
                         infantry._bs.toString(),
@@ -402,6 +403,7 @@ export class RendererHH2 implements Renderer {
                     let vehicle = model as HorusHeresy.Vehicle;
                     tbody.append(createTableRow([
                         vehicle._name,
+                        vehicle._type,
                         vehicle._move.toString(),
                         vehicle._bs.toString(),
                         vehicle._front.toString(),
@@ -425,6 +427,7 @@ export class RendererHH2 implements Renderer {
                     let knight = model as HorusHeresy.Knight;
                     tbody.append(createTableRow([
                         knight._name,
+                        knight._type,
                         knight._move.toString(),
                         knight._ws.toString(),
                         knight._bs.toString(),
@@ -451,6 +454,7 @@ export class RendererHH2 implements Renderer {
                     let fort = model as HorusHeresy.Fortification;
                     tbody.append(createTableRow([
                         fort._name,
+                        fort._type,
                         fort._bs.toString(),
                         fort._front.toString(),
                         fort._side.toString(),
@@ -504,44 +508,6 @@ export class RendererHH2 implements Renderer {
         }
         notesTableHead = createNotesHead('Weapon notes', unitWeapons);
         if (notesTableHead) statsTable.appendChild(notesTableHead)
-
-        // spells
-        // if (unit._spells.length > 0) {
-        //     thead = statsTable.appendChild(document.createElement('thead'));
-        //     thead.classList.add('table-active');
-        //     thead.appendChild(createTableRow(RendererHH2._spellLabels, this._spellLabelWidthNormalized, /* header= */ true));
-
-        //     tbody = statsTable.appendChild(document.createElement('tbody'));
-        //     tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-
-        //     for (const spell of unit._spells) {
-        //         tbody.append(createTableRow([
-        //             spell.name(),
-        //             spell._manifest.toString(),
-        //             spell._range,
-        //             spell._details,
-        //         ], this._spellLabelWidthNormalized));
-        //     }
-        // }
-        // notesTableHead = createNotesHead('Spell notes', unit._spells);
-        // if (notesTableHead) statsTable.appendChild(notesTableHead);
-
-        // psyker
-        // if (unit._psykers.length > 0) {
-        //     thead = statsTable.appendChild(document.createElement('thead'));
-        //     thead.classList.add('info_row');
-        //     const psykersDiv = document.createElement('div');
-        //     for (const psyker of unit._psykers) {
-        //         let text = `CAST: ${psyker._cast}, DENY: ${psyker._deny}, POWERS KNOWN: ${psyker._powers}`;
-        //         if (psyker._other) {
-        //             text += `, OTHER: ${psyker._other}`;
-        //         }
-        //         psykersDiv.appendChild(document.createElement('div')).appendChild(document.createTextNode(text));
-        //     }
-        //     thead.appendChild(createTableRow(['Psykers', psykersDiv], [0.10, 0.90], /* header= */ false));
-        // }
-        // notesTableHead = createNotesHead('Psyker notes', unit._psykers);
-        // if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // unit rules; rules are shared across units, with their
         // descriptions printed in bulk later
@@ -600,7 +566,7 @@ export class RendererHH2 implements Renderer {
 
             div.appendChild(document.createTextNode((model._count > 1 ? `${model._count}x ` : '') + model._name));
 
-            const modelGear = model._weapons; //model.getDedupedWeaponsAndUpgrades();
+            const modelGear = model.getDedupedWeaponsAndUpgrades();
             if (modelGear.length === 0) continue;
 
             div.appendChild(document.createTextNode(' ('));
@@ -643,20 +609,17 @@ export class RendererHH2 implements Renderer {
         }
     }
 
-    private static _infantryLabels = ["Model", "M", "WS", "BS", "S", "T", "W", "I", "A", "Ld", "Sv", ""];
-    private _infantryLabelWidthsNormalized = [0.30, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.2];
-    private static _vehicleLabels = ["Model (Vehicle)", "M", "BS", "Front", "Side", "Rear", "HP", "Capacity"];
-    private _vehicleLabelWidthsNormalized = [0.30, 0.05, 0.1, 0.1, 0.1, 0.1, 0.05, 0.2];
-    private static _knightLabels = ["Model (Knights)", "M", "WS", "BS", "S", "Front", "Side", "Rear", "I", "A", "HP"];
-    private _knightLabelWidthsNormalized = [0.30, 0.05, 0.05, 0.05, 0.05, 0.1, 0.1, 0.1, 0.1, 0.05, 0.05];
-    private static _fortificationLabels = ["Model", "BS", "Front", "Side", "Rear", "HP", "Capacity"];
-    private _fortificationLabelWidthsNormalized = [0.30, 0.1, 0.1, 0.1, 0.1, 0.05, 0.25];
+    private static _infantryLabels = ["Model", "Type", "M", "WS", "BS", "S", "T", "W", "I", "A", "Ld", "Sv", ""];
+    private _infantryLabelWidthsNormalized = [0.20, 0.20, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1];
+    private static _vehicleLabels = ["Model", "Type", "M", "BS", "Front", "Side", "Rear", "HP", "Capacity", ""];
+    private _vehicleLabelWidthsNormalized = [0.20, 0.20, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.2, 0.1];
+    private static _knightLabels = ["Model", "Type", "M", "WS", "BS", "S", "Front", "Side", "Rear", "I", "A", "HP", ""];
+    private _knightLabelWidthsNormalized = [0.20, 0.20, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1];
+    private static _fortificationLabels = ["Model", "Type", "BS", "Front", "Side", "Rear", "HP", "Capacity", ""];
+    private _fortificationLabelWidthsNormalized = [0.20, 0.20, 0.05, 0.05, 0.05, 0.05, 0.05, 0.20, 0.15];
 
     private static _weaponLabels = ["Weapon", "Range", "Str", "AP", "Type", "Rules"];
-    private _weaponLabelWidthNormalized = [0.30, 0.1, 0.1, 0.05, 0.15, 0.3];
-
-    private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
-    private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
+    private _weaponLabelWidthNormalized = [0.25, 0.05, 0.05, 0.05, 0.15, 0.35];
 }
 
 function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {

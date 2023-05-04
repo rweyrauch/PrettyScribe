@@ -19,20 +19,6 @@ export namespace HorusHeresy {
 
 type WeaponStrength = number | string;
 
-export class Psyker {
-    _name: string = "";
-    _masteryLevel: string = "";
-    _disciplines: string = "";
-}
-
-export class PsychicPower {
-    _name: string = "";
-    _warpCharge: number = 0;
-    _category: string = "";
-    _range: string = "";
-    _details: string = "";
-}
-
 export enum UnitRole {
     NONE,
 
@@ -117,12 +103,10 @@ export class Weapon extends Upgrade {
 
 export class BaseModel extends BaseNote {
     _count: number = 0;
+    _type: string = "";
 
     _weapons: Weapon[] = [];
     _upgrades: Upgrade[] = [];
-
-    _psyker: Psyker | null = null;
-    _psychicPowers: PsychicPower[] = [];
 
     equal(model: BaseModel | null): boolean {
         if (model == null) return false;
@@ -142,9 +126,6 @@ export class BaseModel extends BaseNote {
                     return false;
                 }
             }
-
-            // TODO: check for the same psychic powers
-            if ((this._psyker != null) || (model._psyker != null)) return false;
 
             return true;
         }
@@ -201,7 +182,6 @@ export class BaseModel extends BaseNote {
 export class Vehicle extends BaseModel {
 
     // Characteristics
-    _type: string = "Vehicle";
     _move: string | number = 8;
     _bs: number = 4;
     _front: number = 4;
@@ -215,7 +195,6 @@ export class Vehicle extends BaseModel {
 export class Model extends BaseModel {
 
     // Characteristics
-    _type: string = "Infantry";
     _move: string | number = 6;
     _ws: number = 5;
     _bs: number = 4;
@@ -231,7 +210,6 @@ export class Model extends BaseModel {
 export class Knight extends BaseModel {
 
     // Characteristics
-    _type: string = "Knight/Titan";
     _move: string | number = 8;
     _ws: number = 4;
     _bs: number = 4;
@@ -247,7 +225,6 @@ export class Knight extends BaseModel {
 export class Fortification extends BaseModel {
 
     // Characteristics
-    _type: string = "Fortification";
     _bs: number | string = "-";
     _front: number = 0;
     _side: number = 0;
@@ -331,9 +308,6 @@ export class Unit extends BaseNote {
         }
 
         this._modelList = this._models.map(model => (model._count > 1 ? `${model._count}x ` : '') + model.nameAndGear());
-
-        //this._spells.push(...this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []));
-        //this._psykers.push(...this._models.map(m => m._psyker).filter(p => p) as Psyker[]);
     }
 
     weapons(): Weapon[] {
@@ -827,7 +801,7 @@ function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: stri
                 const charName = char.getAttribute("name");
                 if (!charName) continue;
 
-                console.log("Model " + profileName + " Characteristic: " + charName + " Value: " + char.textContent);
+                //console.log("Model " + profileName + " Characteristic: " + charName + " Value: " + char.textContent);
                 if (char.textContent) {
                     switch (charName) {
                         case 'Unit Type': model._type = char.textContent; break;
@@ -857,7 +831,7 @@ function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: stri
                 const charName = char.getAttribute("name");
                 if (!charName) continue;
 
-                console.log("Knight " + profileName);
+                //console.log("Knight " + profileName);
                 if (char.textContent) {
                     switch (charName) {
                         case 'Unit Type': knight._type = char.textContent; break;
@@ -888,7 +862,7 @@ function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: stri
                 const charName = char.getAttributeNode("name")?.nodeValue;
                 if (!charName) continue;
      
-                console.log("Vehicle " + profileName);
+                //console.log("Vehicle " + profileName);
                 if (char.textContent) {
                     switch (charName) {
                             case 'Unit Type': vehicle._type = char.textContent; break;
@@ -917,7 +891,7 @@ function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: stri
                 const charName = char.getAttributeNode("name")?.nodeValue;
                 if (!charName) continue;
      
-                console.log("Fortification " + profileName);
+                //console.log("Fortification " + profileName);
                 if (char.textContent) {
                     switch (charName) {
                             case 'Unit Type': fort._type = char.textContent; break;
