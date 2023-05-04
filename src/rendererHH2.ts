@@ -509,6 +509,46 @@ export class RendererHH2 implements Renderer {
         notesTableHead = createNotesHead('Weapon notes', unitWeapons);
         if (notesTableHead) statsTable.appendChild(notesTableHead)
 
+        // weapons
+        const psychicWeapons = unit.psychicWeapons();;
+        if (psychicWeapons.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(RendererHH2._psychicWeaponLabels, this._psychicWeaponLabelWidthNormalized, /* header= */ true));
+
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const weapon of psychicWeapons) {
+                // parse weapon._type into type and special rules links.
+                let rules = weapon._type.split(',');
+                let weaponType = rules[0].trim();
+                let weaponRules = document.createElement('div');
+                rules.forEach((rule, index) => {
+                    let text = rule.trim();
+                    if (index > 1) {
+                        weaponRules.appendChild(document.createTextNode(", "));
+                    }
+                    if (index != 0) {
+                        let anchor = document.createElement('a');
+                        anchor.href = "#" + text;
+                        anchor.text = text;
+                        weaponRules.appendChild(anchor);
+                    }
+                });
+
+                tbody.append(createTableRow([
+                    weapon.name().toString(),
+                    weapon._range,
+                    weapon._str.toString(),
+                    weapon._ap,
+                    weaponType,
+                    weaponRules], this._psychicWeaponLabelWidthNormalized));
+            }
+        }
+        notesTableHead = createNotesHead('Psychic Weapon notes', psychicWeapons);
+        if (notesTableHead) statsTable.appendChild(notesTableHead)
+        
         // unit rules; rules are shared across units, with their
         // descriptions printed in bulk later
         if (unit._rules.size > 0) {
@@ -620,6 +660,8 @@ export class RendererHH2 implements Renderer {
 
     private static _weaponLabels = ["Weapon", "Range", "Str", "AP", "Type", "Rules"];
     private _weaponLabelWidthNormalized = [0.25, 0.05, 0.05, 0.05, 0.15, 0.35];
+    private static _psychicWeaponLabels = ["Psychic Weapon", "Range", "Str", "AP", "Type", "Rules"];
+    private _psychicWeaponLabelWidthNormalized = [0.25, 0.05, 0.05, 0.05, 0.15, 0.35];
 }
 
 function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {

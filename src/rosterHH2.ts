@@ -107,14 +107,18 @@ export class BaseModel extends BaseNote {
 
     _weapons: Weapon[] = [];
     _upgrades: Upgrade[] = [];
-
+    _psychicWeapons: Weapon[] = [];
+    _psychicPowers: Upgrade[] = [];
+ 
     equal(model: BaseModel | null): boolean {
         if (model == null) return false;
 
         if ((this._name === model._name) &&
             (this._count === model._count) &&
             (this._weapons.length === model._weapons.length) &&
-            (this._upgrades.length === model._upgrades.length)) {
+            (this._upgrades.length === model._upgrades.length) &&
+            (this._psychicWeapons.length === model._psychicWeapons.length) &&
+            (this._psychicPowers.length === model._psychicPowers.length)) {
 
             for (let wi = 0; wi < this._weapons.length; wi++) {
                 if (!this._weapons[wi].equal(model._weapons[wi])) {
@@ -123,6 +127,16 @@ export class BaseModel extends BaseNote {
             }
             for (let wi = 0; wi < this._upgrades.length; wi++) {
                 if (!this._upgrades[wi].equal(model._upgrades[wi])) {
+                    return false;
+                }
+            }
+            for (let wi = 0; wi < this._psychicWeapons.length; wi++) {
+                if (!this._psychicWeapons[wi].equal(model._psychicWeapons[wi])) {
+                    return false;
+                }
+            }
+            for (let wi = 0; wi < this._psychicPowers.length; wi++) {
+                if (!this._psychicPowers[wi].equal(model._psychicPowers[wi])) {
                     return false;
                 }
             }
@@ -318,6 +332,13 @@ export class Unit extends BaseNote {
         return allWeapons.sort(CompareWeapon).filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
     }
 
+    psychicWeapons(): Weapon[] {
+        // List all model psychic weapons.
+        let allWeapons = this._models.map(m => m._psychicWeapons).reduce((acc, val) => acc.concat(val), []);
+        // Return the unique weapon list.
+        return allWeapons.sort(CompareWeapon).filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
+    }
+
     weaponRules(): string[] {
         const allWeapons = this.weapons();
         let allRules: string[] = [];
@@ -425,7 +446,7 @@ function ParseCost(cost: Element): Costs {
     const which = cost.getAttribute("name");
     const value = cost.getAttribute("value");
     if (which && value) {
-        if (which === "pts") {
+        if (which === "Pts") {
             costs._points += +value;
         } else {
             costs.addFreeformValue(which, +value);
@@ -579,6 +600,56 @@ function ParseWeaponProfile(profile: Element): Weapon {
         weapon._cost = GetSelectionCosts(selection);
     }
     return weapon;
+}
+
+function ParsePsychicWeaponProfile(profile: Element): Weapon {
+    const weapon = new Weapon();
+    ExpandBaseNotes(profile,  weapon);
+    weapon._count = ExtractNumberFromParent(profile);
+
+    let chars = profile.querySelectorAll("characteristics>characteristic");
+    for (let char of chars) {
+        let charName = char.getAttribute("name");
+        if (charName) {
+            if (char.textContent) {
+                switch (charName) {
+                    case 'Range': weapon._range = char.textContent; break;
+                    case 'Type': weapon._type = char.textContent; break;
+                    case 'Strength': weapon._str = char.textContent; break;
+                    case 'AP': weapon._ap = char.textContent; break;
+                }
+            }
+        }
+    }
+    // Keep track of the weapon's parent selection for its name, unless the
+    // weapon is directly under the unit's profile.
+    const selection = profile.parentElement?.parentElement;
+    const selectionName = selection?.getAttribute('name');
+    if (selection?.getAttribute('type') === 'upgrade' && selectionName) {
+        weapon._selectionName = selectionName;
+        weapon._cost = GetSelectionCosts(selection);
+    }
+    return weapon;
+}
+
+function ParsePsychicPowerProfile(profile: Element): Upgrade {
+    const power = new Upgrade();
+    ExpandBaseNotes(profile, power);
+    power._count = ExtractNumberFromParent(profile);
+
+    let chars = profile.querySelectorAll("characteristics>characteristic");
+    for (let char of chars) {
+        if (char.textContent) {
+            let charName = char.getAttribute("name");
+            if (charName) {
+                switch (charName) {
+                    case 'Description': power._customNotes = char.textContent; break;
+                }
+            }
+        }
+    }
+
+    return power;
 }
 
 function DuplicateForce(force: Force, roster: Roster): boolean {
@@ -919,22 +990,19 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
             // Do nothing; these were already handled.
         } else if (typeName === "Weapon") {
             const weapon = ParseWeaponProfile(profile);
-            model._weapons.push(weapon);
-        } 
-/*        
-        } else if (typeName == "Psychic Power") {
+            model._weapons.push(weapon);        
+        } else if (typeName === "Psychic Weapon") {
+            const weapon = ParsePsychicWeaponProfile(profile);
+            model._psychicWeapons.push(weapon);
+        } else if (typeName === "Psychic Power") {
             const power = ParsePsychicPowerProfile(profile);
             model._psychicPowers.push(power);
-        } else if (typeName == "Psyker") {
-            model._psyker = ParsePsykerProfile(profile);
-            
         }
-        else {
-            // Everything else, like Prayers and Warlord Traits. 
-            if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
-            ParseProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
-        } 
-*/               
+        // else {
+        //     // Everything else, like Prayers and Warlord Traits. 
+        //     if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
+        //     ParseProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
+        // }                
     }
 }
 
