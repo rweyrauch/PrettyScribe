@@ -101,6 +101,9 @@ export class Weapon extends Upgrade {
     }
 }
 
+export class PsychicPower extends Upgrade {
+    _description: string = "";
+}
 export class BaseModel extends BaseNote {
     _count: number = 0;
     _type: string = "";
@@ -108,7 +111,7 @@ export class BaseModel extends BaseNote {
     _weapons: Weapon[] = [];
     _upgrades: Upgrade[] = [];
     _psychicWeapons: Weapon[] = [];
-    _psychicPowers: Upgrade[] = [];
+    _psychicPowers: PsychicPower[] = [];
  
     equal(model: BaseModel | null): boolean {
         if (model == null) return false;
@@ -337,6 +340,13 @@ export class Unit extends BaseNote {
         let allWeapons = this._models.map(m => m._psychicWeapons).reduce((acc, val) => acc.concat(val), []);
         // Return the unique weapon list.
         return allWeapons.sort(CompareWeapon).filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
+    }
+
+    psychicPowers(): PsychicPower[] {
+       // List all model psychic powers.
+       let allPowers = this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []);
+       // Return the unique list.
+       return allPowers.sort(CompareObj).filter((power, i, array) => power.name() !== array[i - 1]?.name());
     }
 
     weaponRules(): string[] {
@@ -632,8 +642,8 @@ function ParsePsychicWeaponProfile(profile: Element): Weapon {
     return weapon;
 }
 
-function ParsePsychicPowerProfile(profile: Element): Upgrade {
-    const power = new Upgrade();
+function ParsePsychicPowerProfile(profile: Element): PsychicPower {
+    const power = new PsychicPower();
     ExpandBaseNotes(profile, power);
     power._count = ExtractNumberFromParent(profile);
 
@@ -643,7 +653,7 @@ function ParsePsychicPowerProfile(profile: Element): Upgrade {
             let charName = char.getAttribute("name");
             if (charName) {
                 switch (charName) {
-                    case 'Description': power._customNotes = char.textContent; break;
+                    case 'Description': power._description = char.textContent; break;
                 }
             }
         }
