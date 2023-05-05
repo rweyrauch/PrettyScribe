@@ -681,15 +681,12 @@ function ParseUnit(root: Element): AoSUnit {
 }
 
 function ParseAllegiance(root: Element): AoSAllegiance | null {
-    let allegiance: AoSAllegiance | null = null;
-    let selection = root.querySelector("selections>selection");
-    if (selection) {
-        let name = selection.getAttributeNode("name")?.nodeValue;
-        if (name) {
-            allegiance = new AoSAllegiance();
-            allegiance._name = name;
-        }
-        let profiles = selection.querySelectorAll("profiles>profile");
+    let name = root.getAttributeNode("name")?.nodeValue;
+    if (name) {
+        let allegiance = new AoSAllegiance();
+        allegiance._name = name;
+
+        let profiles = root.querySelectorAll("profiles>profile");
         for (let prof of profiles) {
             let profName = prof.getAttributeNode("name")?.nodeValue;
             let profType = prof.getAttributeNode("typeName")?.nodeValue;
@@ -739,8 +736,10 @@ function ParseAllegiance(root: Element): AoSAllegiance | null {
                 }
             }
         }
+
+        return allegiance;
     }
-    return allegiance;
+    return null;
 }
 
 function ParseGrandStrategy(root: Element): AoSGrandStrategy | null {
