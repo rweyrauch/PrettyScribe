@@ -347,6 +347,10 @@ label {
     line-height: 1;
 }
 
+.hh2-rule-link {
+    color: black;
+}
+
 .hide_enabled .hide_able:hover {
     background-color: rgba(128, 128, 128, .4);
     cursor: pointer;
@@ -361,6 +365,7 @@ label {
     .hide_enabled .hidden {
         display: none;
     }
+    a, a:visited { color: black; text-decoration: none; }
 }
 
 .page_break {

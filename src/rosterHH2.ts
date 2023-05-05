@@ -687,6 +687,10 @@ function LookupRole(roleText: string): UnitRole {
     return UnitRole.NONE;
 }
 
+function InternalKeyword(kw: string): boolean {
+    return kw.endsWith(':');
+}
+
 function CreateUnit(root: Element): Unit | null {
     let unit: Unit = new Unit();
     const unitName = ExpandBaseNotes(root, unit);
@@ -704,8 +708,10 @@ function CreateUnit(root: Element): Unit | null {
                 unit._role = unitRole;
             }
             else {
-                // Keyword
-                unit._keywords.add(catName);
+                if (!InternalKeyword(catName)) {
+                    // Keyword
+                    unit._keywords.add(catName);
+                }
             }
         }
     }
