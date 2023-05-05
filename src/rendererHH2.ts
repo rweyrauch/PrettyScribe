@@ -489,6 +489,7 @@ export class RendererHH2 implements Renderer {
                     }
                     if (index != 0) {
                         let anchor = document.createElement('a');
+                        anchor.classList.add('hh2-rule-link');
                         anchor.href = "#" + text;
                         anchor.text = text;
                         weaponRules.appendChild(anchor);
@@ -529,6 +530,7 @@ export class RendererHH2 implements Renderer {
                     }
                     if (index != 0) {
                         let anchor = document.createElement('a');
+                        anchor.classList.add('hh2-rule-link');
                         anchor.href = "#" + text;
                         anchor.text = text;
                         weaponRules.appendChild(anchor);
@@ -607,6 +609,7 @@ export class RendererHH2 implements Renderer {
             }
             if (index != 0) {
                 let anchor = document.createElement('a');
+                anchor.classList.add('hh2-rule-link');
                 anchor.href = "#" + text;
                 anchor.text = text;
                 rulesDiv.appendChild(anchor);
