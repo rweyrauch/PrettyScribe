@@ -70,6 +70,7 @@ export class BaseNote {
 }
 
 export class Upgrade extends BaseNote {
+    _description: string = "";
     _cost: Costs = new Costs();
     _count: number = 1;
 
@@ -101,17 +102,16 @@ export class Weapon extends Upgrade {
     }
 }
 
-export class PsychicPower extends Upgrade {
-    _description: string = "";
-}
 export class BaseModel extends BaseNote {
     _count: number = 0;
     _type: string = "";
 
     _weapons: Weapon[] = [];
     _upgrades: Upgrade[] = [];
+    _wargear: Upgrade[] = [];
+
     _psychicWeapons: Weapon[] = [];
-    _psychicPowers: PsychicPower[] = [];
+    _psychicPowers: Upgrade[] = [];
  
     equal(model: BaseModel | null): boolean {
         if (model == null) return false;
@@ -120,6 +120,7 @@ export class BaseModel extends BaseNote {
             (this._count === model._count) &&
             (this._weapons.length === model._weapons.length) &&
             (this._upgrades.length === model._upgrades.length) &&
+            (this._wargear.length === model._wargear.length) &&
             (this._psychicWeapons.length === model._psychicWeapons.length) &&
             (this._psychicPowers.length === model._psychicPowers.length)) {
 
@@ -130,6 +131,11 @@ export class BaseModel extends BaseNote {
             }
             for (let wi = 0; wi < this._upgrades.length; wi++) {
                 if (!this._upgrades[wi].equal(model._upgrades[wi])) {
+                    return false;
+                }
+            }
+            for (let wi = 0; wi < this._wargear.length; wi++) {
+                if (!this._wargear[wi].equal(model._wargear[wi])) {
                     return false;
                 }
             }
@@ -172,9 +178,15 @@ export class BaseModel extends BaseNote {
     normalize(): void {
         this._weapons.sort(CompareWeapon);
         this._upgrades.sort(CompareObj);
+        this._wargear.sort(CompareObj);
+        this._psychicPowers.sort(CompareObj);
+        this._psychicWeapons.sort(CompareWeapon);
 
         this.normalizeUpgrades(this._weapons);
         this.normalizeUpgrades(this._upgrades);
+        this.normalizeUpgrades(this._wargear);
+        this.normalizeUpgrades(this._psychicPowers);
+        this.normalizeUpgrades(this._psychicWeapons);
     }
 
     normalizeUpgrades(upgrades: Upgrade[]) {
@@ -264,6 +276,9 @@ export class Unit extends BaseNote {
 
     _weapons: Weapon[] = [];
     _upgrades: Upgrade[] = [];
+    _wargear: Upgrade[] = [];
+
+    _warlordTraits: Upgrade[] = [];
 
     _points: number = 0;
 
@@ -342,11 +357,19 @@ export class Unit extends BaseNote {
         return allWeapons.sort(CompareWeapon).filter((weap, i, array) => weap.name() !== array[i - 1]?.name());
     }
 
-    psychicPowers(): PsychicPower[] {
+    psychicPowers(): Upgrade[] {
        // List all model psychic powers.
        let allPowers = this._models.map(m => m._psychicPowers).reduce((acc, val) => acc.concat(val), []);
        // Return the unique list.
        return allPowers.sort(CompareObj).filter((power, i, array) => power.name() !== array[i - 1]?.name());
+    }
+
+    wargear(): Upgrade[] {
+       // List all model wargear items.
+       let allGear = this._models.map(m => m._wargear).reduce((acc, val) => acc.concat(val), []);
+       allGear.push(...this._wargear);
+       // Return the unique list.
+       return allGear.sort(CompareObj).filter((gear, i, array) => gear.name() !== array[i - 1]?.name());
     }
 
     weaponRules(): string[] {
@@ -529,22 +552,6 @@ function ParseSelection(selection: Element, force: Force): void {
     }
 }
 
-function ParseProfileCharacteristics(profile: Element, profileName: string, typeName:string,  map: Map<string, string | null>) {
-    const chars = profile.querySelectorAll("characteristics>characteristic");
-    for (const char of chars) {
-        if (!char.textContent) continue;
-
-        const charName = char.getAttribute("name");
-        if (charName && chars.length > 1) {
-            // Profiles with multiple characteristics need to distinguish them by name.
-            map.set([profileName, charName.toString()].join(' - '), char.textContent);
-        } else {
-            // Profiles with a single characteristic can ignore the char name.
-            map.set(profileName, char.textContent);
-        }
-    }
-}
-
 function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>): void {
 
     const rules = root.querySelectorAll("rules>rule");
@@ -642,10 +649,10 @@ function ParsePsychicWeaponProfile(profile: Element): Weapon {
     return weapon;
 }
 
-function ParsePsychicPowerProfile(profile: Element): PsychicPower {
-    const power = new PsychicPower();
-    ExpandBaseNotes(profile, power);
-    power._count = ExtractNumberFromParent(profile);
+function ParseUpgradeProfile(profile: Element): Upgrade {
+    const upgrade = new Upgrade();
+    ExpandBaseNotes(profile, upgrade);
+    upgrade._count = ExtractNumberFromParent(profile);
 
     let chars = profile.querySelectorAll("characteristics>characteristic");
     for (let char of chars) {
@@ -653,13 +660,14 @@ function ParsePsychicPowerProfile(profile: Element): PsychicPower {
             let charName = char.getAttribute("name");
             if (charName) {
                 switch (charName) {
-                    case 'Description': power._description = char.textContent; break;
+                    case 'Description': upgrade._description = char.textContent; break;
+                    case 'Text': upgrade._description = char.textContent; break;
                 }
             }
         }
     }
 
-    return power;
+    return upgrade;
 }
 
 function DuplicateForce(force: Force, roster: Roster): boolean {
@@ -758,7 +766,7 @@ function CreateUnit(root: Element): Unit | null {
         model._count = Number(modelSelection.getAttribute("number") || 1);
         unit._models.push(model);
 
-        // Find stats for all profiles (weapons, powers, abilities, etc).
+        // Find stats for all profiles (weapons, powers, wargear, etc).
         ParseModelProfiles(profiles, model, unit);
 
         // Find all upgrades on the model. This may include weapons that were
@@ -766,8 +774,8 @@ function CreateUnit(root: Element): Unit | null {
         for (const upgradeSelection of modelSelection.querySelectorAll('selections>selection[type="upgrade"]')) {
             // Ignore selections without abilities but with sub-selection upgrades,
             // since those sub-selections will be picked up individually.
-            if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')
-                && !HasImmediateProfileWithTypeName(upgradeSelection, 'Abilities')) continue;
+            //if (upgradeSelection.querySelector('selections>selection[type="upgrade"]')
+            //    && !HasImmediateProfileWithTypeName(upgradeSelection, 'Abilities')) continue;
 
             let upgradeName = upgradeSelection.getAttribute('name');
             if (upgradeName) {
@@ -788,7 +796,6 @@ function CreateUnit(root: Element): Unit | null {
 
         const upgradeName = upgradeSelection.getAttribute('name');
         if (upgradeName) {
-            console.log("Found unit upgrade: ", upgradeName);
             const upgrade = new Upgrade();
             upgrade._name = upgradeName;
             upgrade._cost = GetSelectionCosts(upgradeSelection);
@@ -1002,7 +1009,9 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
         const typeName = profile.getAttribute("typeName");
         if (!profileName || !typeName) continue;
 
-        if ((typeName === " Unit") || (profile.getAttribute("type") === "model")) {
+        if ((typeName === " Unit") || (typeName === " Vehicle") || 
+           (typeName === "Knights and Titans") || ((typeName === "Fortification")) ||
+           (profile.getAttribute("type") === "model")) {
             // Do nothing; these were already handled.
         } else if (typeName === "Weapon") {
             const weapon = ParseWeaponProfile(profile);
@@ -1011,15 +1020,15 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
             const weapon = ParsePsychicWeaponProfile(profile);
             model._psychicWeapons.push(weapon);
         } else if (typeName === "Psychic Power") {
-            const power = ParsePsychicPowerProfile(profile);
+            const power = ParseUpgradeProfile(profile);
             model._psychicPowers.push(power);
+        } else if (typeName === "Wargear Item") {
+            const gear = ParseUpgradeProfile(profile);
+            model._wargear.push(gear);
+        } else {
+            console.log("Unhandled model profile. " + typeName);
         }
-        // else {
-        //     // Everything else, like Prayers and Warlord Traits. 
-        //     if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
-        //     ParseProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
-        // }                
-    }
+     }
 }
 
 function ParseUnitProfiles(profiles: Element[], unit: Unit) {
@@ -1031,7 +1040,18 @@ function ParseUnitProfiles(profiles: Element[], unit: Unit) {
         if (typeName === "Weapon") {
             const weapon = ParseWeaponProfile(profile);
             unit._weapons.push(weapon);
+        }
+        else if (typeName === "Wargear Item") {
+            const gear = ParseUpgradeProfile(profile);
+            unit._wargear.push(gear);
         } 
+        else if (typeName === "Warlord Trait") {
+            const trait = ParseUpgradeProfile(profile);
+            unit._warlordTraits.push(trait);
+        } 
+        else {
+            console.log("Unhandled unit profile. " + typeName);
+        }
     }
 }
 
