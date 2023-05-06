@@ -508,7 +508,27 @@ export class RendererHH2 implements Renderer {
         notesTableHead = createNotesHead('Weapon notes', unitWeapons);
         if (notesTableHead) statsTable.appendChild(notesTableHead)
 
-        // psychic eapons
+        // wargear items
+        const wargear = unit.wargear();
+        if (wargear.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(RendererHH2._wargearLabels, this._wargearLabelWidthNormalized, /* header= */ true));
+
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const gear of wargear) {
+                tbody.append(createTableRow([
+                    gear.name(),
+                    gear._description,
+                ], this._wargearLabelWidthNormalized));
+            }
+        }
+        notesTableHead = createNotesHead('Wargear Item notes', wargear);
+        if (notesTableHead) statsTable.appendChild(notesTableHead);
+
+        // psychic weapons
         const psychicWeapons = unit.psychicWeapons();
         if (psychicWeapons.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
@@ -568,7 +588,27 @@ export class RendererHH2 implements Renderer {
         }
         notesTableHead = createNotesHead('Psychic Power notes', psychicPowers);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
-        
+
+        // warlord traits
+        const traits = unit._warlordTraits;
+        if (traits.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(["Warlord Trait", "Description"], [0.25, 0.75], /* header= */ true));
+
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const trait of traits) {
+                tbody.append(createTableRow([
+                    trait.name(),
+                    trait._description,
+                ], [0.25, 0.75]));
+            }
+        }
+        notesTableHead = createNotesHead('Warlord Trait notes', traits);
+        if (notesTableHead) statsTable.appendChild(notesTableHead);
+
         // unit rules; rules are shared across units, with their
         // descriptions printed in bulk later
         if (unit._rules.size > 0) {
@@ -685,6 +725,8 @@ export class RendererHH2 implements Renderer {
     private _psychicWeaponLabelWidthNormalized = [0.25, 0.05, 0.05, 0.05, 0.15, 0.35];
     private static _psychicPowerLabels = ["Psychic Power", "Description"];
     private _psychicPowerLabelWidthNormalized = [0.25, 0.75];
+    private static _wargearLabels = ["Wargear Item", "Description"];
+    private _wargearLabelWidthNormalized = [0.25, 0.75];
 }
 
 function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {
