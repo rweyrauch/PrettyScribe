@@ -590,7 +590,7 @@ export class RendererHH2 implements Renderer {
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // warlord traits
-        const traits = unit._warlordTraits;
+        const traits = unit.warlordTraits();
         if (traits.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
@@ -609,6 +609,24 @@ export class RendererHH2 implements Renderer {
         notesTableHead = createNotesHead('Warlord Trait notes', traits);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
+        // reactions
+        const reactions = unit.reactions();
+        if (reactions.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(["Reaction", "Description"], [0.25, 0.75], /* header= */ true));
+
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const reaaction of reactions) {
+                tbody.append(createTableRow([
+                    reaaction.name(),
+                    reaaction._description,
+                ], [0.25, 0.75]));
+            }
+        }
+ 
         // unit rules; rules are shared across units, with their
         // descriptions printed in bulk later
         if (unit._rules.size > 0) {
