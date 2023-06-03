@@ -57,6 +57,10 @@ export class Renderer40k implements Renderer {
             footer.classList.add('footer');
             footer.appendChild(document.createElement('div')).appendChild(document.createTextNode('PrettyScribe'));
             footer.appendChild(document.createElement('div')).appendChild(document.createTextNode(text));
+
+            if (this._roster._customNotes) {
+                title.appendChild(document.createElement('p')).appendChild(document.createTextNode(this._roster._customNotes));
+            }
         }
 
         if (list) {
