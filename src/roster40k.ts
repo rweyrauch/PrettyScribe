@@ -413,6 +413,11 @@ export function Create40kRoster(doc: Document, is40k: boolean = true): Roster40k
                 roster._name = "40k Army Roster";
             }
 
+            let note = info.querySelector("customNotes");
+            if (note) {
+                roster._customNotes = <string>note.textContent;
+            }
+
             ParseRosterPoints(doc, roster);
             ParseForces(doc, roster, is40k);
 
