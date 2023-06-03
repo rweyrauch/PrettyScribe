@@ -17,6 +17,7 @@
 import { CreateKT21Roster } from "./rosterKT21";
 import { RendererKT21 } from "./rendererKT21";
 import { Create40kRoster } from "./roster40k";
+import { Create40kRoster10th } from "./roster40k10th";
 import { Renderer40k } from "./renderer40k";
 import { Create30kRoster } from "./roster30k";
 import { Renderer30k } from "./renderer30k";
