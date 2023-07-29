@@ -17,7 +17,7 @@
 import { CreateKT21Roster } from "./rosterKT21";
 import { RendererKT21 } from "./rendererKT21";
 import { Create40kRoster } from "./roster40k";
-import { Create40kRoster10th } from "./roster40k10th";
+import { Wh40k } from "./roster40k10th";
 import { Renderer40k } from "./renderer40k";
 import { Create30kRoster } from "./roster30k";
 import { Renderer30k } from "./renderer30k";
@@ -27,6 +27,7 @@ import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
 import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
+import { Wh40kRenderer } from "./renderer40k10th";
 
 import JSZip from "jszip";
 import { reject } from "lodash";
@@ -112,6 +113,12 @@ function parseXML(xmldata: string) {
     const roster = HorusHeresy.CreateRoster(doc);
     if (roster && roster._forces.length > 0) {
       const renderer: RendererHH2 = new RendererHH2(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  } else if (gameType == "Warhammer 40,000 10th Edition") {
+    const roster = Wh40k.CreateRoster(doc);
+    if (roster && roster._forces.length > 0) {
+      const renderer: Wh40kRenderer = new Wh40kRenderer(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
   }      
