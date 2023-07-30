@@ -82,28 +82,31 @@ export class Weapon extends Upgrade {
 export enum UnitRole {
     NONE,
 
-    // 40k
-    HQ,
-    TR,
-    FL,
-    DT,
-    FT,
-    LW,
-    AGENTS,
+    EpicHero,
+    Character,
+    Battleline,
+    Infantry,
+    Vehicle,
+    Mounted,
+    Transport,
+    Fortification,
+    Allied,
 }
 
 export const UnitRoleToString: string[] = [
-    'Other',
+    'None',
 
-    // 40k
+    'Epic Hero',
     'Character',
     'Battleline',
-    'Flyer',
+    'Infantry',
+    'Vehicle',
+    'Mounted',
     'Dedicated Transport',
     'Fortification',
-    'Lord of War',
-    'Agent of the Imperium',
-];
+    'Allied Unit',
+
+ ];
 
 export class Model extends BaseNotes {
 
@@ -509,15 +512,17 @@ function ExtractRuleDescription(rule: Element, map: Map<string, string | null>):
     }
 }
 
-function LookupRole(roleText: string): UnitRole {
+function LookupRole(roleText: string): Wh40k.UnitRole {
     switch (roleText) {
-        case 'Character': return UnitRole.HQ;
-        case 'Battleline': return UnitRole.TR;
-        case 'Flyer': return UnitRole.FL;
-        case 'Dedicated Transport': return UnitRole.DT;
-        case 'Fortification': return UnitRole.FT;
-        case 'Lord of War': return UnitRole.LW;
-        case 'Agent of the Imperium': return UnitRole.AGENTS;
+        case 'Epic Hero': return UnitRole.EpicHero;
+        case 'Character': return UnitRole.Character;
+        case 'Battleline': return UnitRole.Battleline;
+        case 'Infantry': return UnitRole.Infantry;
+        case 'Mounted': return UnitRole.Mounted;
+        case 'Vehicle': return UnitRole.Vehicle;
+        case 'Dedicated Transport': return UnitRole.Transport;
+        case 'Fortification': return UnitRole.Fortification;
+        case 'Allied Units': return UnitRole.Allied;
     }
     return UnitRole.NONE;
 }
@@ -631,10 +636,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
                 if (unitRole != UnitRole.NONE) {
                     unit._role = unitRole;
                 }
-                else {
-                    // Keyword
-                    unit._keywords.add(catName);    
-                }
+                unit._keywords.add(catName);    
             }
         }
     }
