@@ -632,8 +632,8 @@ export class Wh40kRenderer implements Renderer {
 
     private static _unitLabels = ["MODEL", "M", "T", "SV", "W", "LD", "OC"];
     private _unitLabelWidthsNormalized = [0.40, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
-    private static _weaponLabels = ["WEAPONS", "RANGE", "A", "BS", "S", "AP", "D", "ABILITIES"];
-    private _weaponLabelWidthNormalized = [0.25, 0.1, 0.05, 0.05, 0.05, 0.05, 0.05, 0.40];
+    private static _weaponLabels = ["WEAPONS", "RANGE", "A", "BS/WS", "S", "AP", "D", "ABILITIES"];
+    private _weaponLabelWidthNormalized = [0.30, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.30];
 }
 
 function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {

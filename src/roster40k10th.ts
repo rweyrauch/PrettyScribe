@@ -62,7 +62,7 @@ export class Weapon extends Upgrade {
     _selectionName: string = "";
 
     _range: string = "Melee";
-    _attacks: number = 1;
+    _attacks: string = "1";
     _skill: string = "";
     _str: WeaponStrength = "user";
     _ap: string = "";
@@ -798,7 +798,7 @@ function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
 
         if ((typeName === "Unit") || (typeName === "Model") || (profile.getAttribute("type") === "model")) {
             // Do nothing; these were already handled.
-        } else if (typeName === "Weapon") {
+        } else if ((typeName === "Melee Weapons") || (typeName === "Ranged Weapons")) {
             const weapon = ParseWeaponProfile(profile);
             model._weapons.push(weapon);
         } else {
@@ -837,13 +837,13 @@ function ParseWeaponProfile(profile: Element): Weapon {
             if (char.textContent) {
                 switch (charName) {
                     case 'Range': weapon._range = char.textContent; break;
-                    case 'A': weapon._attacks = +char.textContent; break;
+                    case 'A': weapon._attacks = char.textContent; break;
                     case 'S': weapon._str = char.textContent; break;
-                    case 'BS': weapon._skill = char.textContent; break;
                     case 'WS': weapon._skill = char.textContent; break;
+                    case 'BS': weapon._skill = char.textContent; break;
                     case 'AP': weapon._ap = char.textContent; break;
                     case 'D': weapon._damage = char.textContent; break;
-                    case 'Abilities': weapon._abilities = char.textContent; break;
+                    case 'Keywords': weapon._abilities = char.textContent; break;
                 }
             }
         }
