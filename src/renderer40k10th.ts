@@ -27,12 +27,14 @@ export class Wh40kRenderer implements Renderer {
 
         this._roster = roster;
 
-        this._roles.set(Wh40k.UnitRole.HQ, document.getElementById('role_hq') as HTMLImageElement);
-        this._roles.set(Wh40k.UnitRole.TR, document.getElementById('role_tr') as HTMLImageElement);
-        this._roles.set(Wh40k.UnitRole.FL, document.getElementById('role_fl') as HTMLImageElement);
-        this._roles.set(Wh40k.UnitRole.DT, document.getElementById('role_dt') as HTMLImageElement);
-        this._roles.set(Wh40k.UnitRole.FT, document.getElementById('role_ft') as HTMLImageElement);
-        this._roles.set(Wh40k.UnitRole.LW, document.getElementById('role_lw') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.EpicHero, document.getElementById('role_hq') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Character, document.getElementById('role_hq') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Battleline, document.getElementById('role_tr') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Infantry, document.getElementById('role_el') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Vehicle, document.getElementById('role_hs') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Mounted, document.getElementById('role_fa') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Transport, document.getElementById('role_dt') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Fortification, document.getElementById('role_ft') as HTMLImageElement);
     }
 
     render(title: HTMLElement | null, list: HTMLElement | null, forces: HTMLElement | null): void {
