@@ -10,6 +10,7 @@
 import fs from "fs";
 import path from "path";
 import * as rosterExpectation40k from "./rosterExpectation40k";
+import * as rosterExpectation40k10th from "./rosterExpectation40k10th";
 
 /* Input directory where test rosters are. */
 const INPUT_DIRECTORY = 'test';
@@ -18,6 +19,7 @@ const INPUT_DIRECTORY = 'test';
 const INPUT_SUBDIR_TO_EXPECTATIONS: { [key: string]: (filename: string) => Promise<string>; } = {
   '40k8th': rosterExpectation40k.getRosterExpectation,
   '40k9th': rosterExpectation40k.getRosterExpectation,
+  '40k10th': rosterExpectation40k10th.getRosterExpectation,
 };
 
 /* Output directory where test specs are. */
