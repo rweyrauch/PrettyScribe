@@ -9,17 +9,38 @@
 
 import fs from "fs";
 import path from "path";
-import { getRosterExpectation } from "./40kRosterExpectation";
+import * as rosterExpectation40k from "./rosterExpectation40k";
+
+/* Input directory where test rosters are. */
+const INPUT_DIRECTORY = 'test';
+
+/* Mapping of input subdirectories to how to generate their expectations. */
+const INPUT_SUBDIR_TO_EXPECTATIONS: { [key: string]: (filename: string) => Promise<string>; } = {
+  '40k8th': rosterExpectation40k.getRosterExpectation,
+  '40k9th': rosterExpectation40k.getRosterExpectation,
+};
+
+/* Output directory where test specs are. */
+const OUTPUT_DIRECTORY = 'spec';
 
 async function writeRosterExpectations(filename: string) {
-  const filenameMatch = filename.match('([^/]+)\.rosz?$');
+  const filenameMatch = filename.match(`${INPUT_DIRECTORY}/(?:([^/]+)/)?([^/]+)\.rosz?$`);
   if (!filenameMatch) {
-    console.error(`ERROR: Unexpected input filename doesn't match regex: ${filename}`);
-    return;
+    throw new Error(`ERROR: Unexpected input filename doesn't match regex: ${filename}`);
   }
-  const outputFilename = `spec/${filenameMatch[1].replace(/\s/g, '')}Spec.ts`;
+  const subdir = filenameMatch[1];
+  if (!subdir) {
+    throw new Error(`ERROR: filename must be in in a subdirectory, but was not: ${filename}`);
+  }
+  const rosterExpectationFunction = INPUT_SUBDIR_TO_EXPECTATIONS[subdir];
+  if (!rosterExpectationFunction) {
+    throw new Error(`ERROR: No roster expectation identified for subdir "${subdir}" of file: ${filename}`)
+  }
 
-  const output = await getRosterExpectation(filename);
+  const specName = `${filenameMatch[2].replace(/\s/g, '')}Spec.ts`;
+  const outputFilename = path.join(OUTPUT_DIRECTORY, subdir, specName);
+
+  const output = await rosterExpectationFunction(filename);
 
   fs.writeFile(outputFilename, output, function (err) {
     if (err) return console.log(err);
@@ -27,20 +48,24 @@ async function writeRosterExpectations(filename: string) {
   });
 }
 
+async function readAllTestFiles() {
+  Promise.all(Object.keys(INPUT_SUBDIR_TO_EXPECTATIONS).map(async (subdir) => {
+    const subdirPath = path.join(INPUT_DIRECTORY, subdir);
+    const contents = await fs.promises.readdir(subdirPath);
+    const filenames = contents
+        .filter(name => name.endsWith('.ros') || name.endsWith('.rosz'))
+        .map(name => path.join(subdirPath, name));
+    Promise.all(
+      filenames.map(writeRosterExpectations));
+    }));
+}
+
 function main(args: string[]) {
   if (args.length >= 3) {
     Promise.all(args.slice(2).map(writeRosterExpectations));
   } else {
-    const dir = 'test';
-    const filenames = fs.readdirSync(dir)
-        .filter(name => name.endsWith('.ros') || name.endsWith('.rosz'))
-        .map(name => path.join(dir, name));
-    Promise.all(
-      // Catch errors to handle non-40k roster files.
-      filenames.map(name => writeRosterExpectations(`${name}`)
-          .catch(e => console.warn(`Unable to process file '${name}': ${e}`))));
+    readAllTestFiles();
   }
 }
 
 main(process.argv);
-

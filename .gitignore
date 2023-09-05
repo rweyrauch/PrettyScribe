@@ -5,3 +5,4 @@ node_modules
 /dist/roster*
 /dist/app*
 
+.vscode/settings.json
