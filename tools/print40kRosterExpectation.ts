@@ -5,7 +5,7 @@
  *   $ npx ts-node tools/print40kRosterExpectation.ts 'path/to/file'
  */
 
-import { getRosterExpectation } from "./40kRosterExpectation";
+import { getRosterExpectation } from "./rosterExpectation40k";
 
 function main(args: string[]) {
   if (args.length < 3) {
