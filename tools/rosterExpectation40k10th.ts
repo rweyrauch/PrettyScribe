@@ -62,14 +62,11 @@ function processUnits(units: Wh40k.Unit[]): string {
               jasmine.objectContaining({
                 '_name': ${JSON.stringify(unit._name)},
                 '_cost': ${processCost(unit._cost)},
-                '_modelStats': [
-                  ${processBaseNotes(unit._modelStats)}
-                ],
+                '_profileTables': {
+                  ${processProfileTables(unit._profileTables)}
+                },
                 '_modelList': [
                   ${unit._modelList.map(e => JSON.stringify(e)).join(',\n                  ')}
-                ],
-                '_weapons': [
-                  ${processBaseNotes(unit._weapons)}
                 ]${processOptionalUnitStats(unit)}}),`).join('');
 }
 
@@ -96,6 +93,33 @@ function processOptionalUnitStats(unit: Wh40k.Unit) {
                 }`
   }
   return output;
+}
+
+function processTabularRowsOld(rows: string[][]) {
+  if (rows.length === 1) {
+    return JSON.stringify(rows);
+  } else {
+    return `[
+                    ${rows.map(row => '  ' + JSON.stringify(row) + ',\n                    ').join('')}]`
+  }
+}
+
+function processTabularRows(rows: string[][]) {
+  return `[
+                    ${rows.map(row => `  jasmine.arrayContaining([${JSON.stringify(row[0])}]),\n                    `).join('')}]`
+}
+
+function processTabularProfile(table: Wh40k.TabularProfile) {
+  return `jasmine.objectContaining({
+                    '_headers': ${JSON.stringify(table._headers)},
+                    '_contents': ${processTabularRows(table._contents)},
+                  })`
+}
+
+function processProfileTables(_profileTables: { [key: string]: Wh40k.TabularProfile; }) {
+  return Object.keys(_profileTables).sort().map(key =>
+    `${JSON.stringify(key)}: ${processTabularProfile(_profileTables[key])}`)
+    .join(',\n                  ');
 }
 
 function processMap(map: Map<string, string | null>): string {

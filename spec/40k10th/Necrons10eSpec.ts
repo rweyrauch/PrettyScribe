@@ -24,21 +24,34 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "The Silent King",
                 '_cost': jasmine.objectContaining({_points: 470}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Szarekh"}),
-                  jasmine.objectContaining({'_name': "Triarchal Menhir"}),
-                ],
+                '_profileTables': {
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Scythe of Dust"]),
+                      jasmine.arrayContaining(["Close combat weapon"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Sceptre of Eternal Glory"]),
+                      jasmine.arrayContaining(["Staff of Stars"]),
+                      jasmine.arrayContaining(["Annihilator beam"]),
+                    ],
+                  }),
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Szarekh"]),
+                      jasmine.arrayContaining(["Triarchal Menhir"]),
+                    ],
+                  })
+                },
                 '_modelList': [
                   "Szarekh (Sceptre of Eternal Glory, Scythe of Dust, Staff of Stars)",
                   "2x Triarchal Menhir (Annihilator beam, Close combat weapon)",
                   "Unit Upgrades (Warlord)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "Annihilator beam"}),
-                  jasmine.objectContaining({'_name': "Close combat weapon"}),
-                  jasmine.objectContaining({'_name': "Sceptre of Eternal Glory"}),
-                  jasmine.objectContaining({'_name': "Scythe of Dust"}),
-                  jasmine.objectContaining({'_name': "Staff of Stars"}),
                 ],
                 '_rules': mapWithKeys(["Command Protocols", "Deadly Demise D6+3 (Szarekh model only)", "Devastating Wounds", "Indirect Fire", "Lethal Hits", "Reanimation Protocols"]),
                 '_abilities': {
@@ -48,15 +61,28 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Overlord",
                 '_cost': jasmine.objectContaining({_points: 85}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Overlord"}),
-                ],
+                '_profileTables': {
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Overlord's blade"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Tachyon arrow"]),
+                    ],
+                  }),
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Overlord"]),
+                    ],
+                  })
+                },
                 '_modelList': [
                   "Overlord (Overlord's blade, Tachyon arrow)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "Overlord's blade"}),
-                  jasmine.objectContaining({'_name': "Tachyon arrow"}),
                 ],
                 '_rules': mapWithKeys(["Command Protocols", "Devastating Wounds", "Leader", "One Shot", "Reanimation Protocols"]),
                 '_abilities': {
@@ -65,16 +91,29 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Doom Scythe",
                 '_cost': jasmine.objectContaining({_points: 225}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Doom Scythe"}),
-                ],
+                '_profileTables': {
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Armoured bulk"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Heavy death ray"]),
+                      jasmine.arrayContaining(["Twin tesla destructor"]),
+                    ],
+                  }),
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Doom Scythe"]),
+                    ],
+                  })
+                },
                 '_modelList': [
                   "Doom Scythe (Armoured bulk, Heavy death ray, Twin tesla destructor)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "Armoured bulk"}),
-                  jasmine.objectContaining({'_name': "Heavy death ray"}),
-                  jasmine.objectContaining({'_name': "Twin tesla destructor"}),
                 ],
                 '_rules': mapWithKeys(["Command Protocols", "Deadly Demise D3", "Reanimation Protocols", "Sustained Hits", "Twin-linked"]),
                 '_abilities': {
@@ -83,20 +122,40 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Tesseract Vault",
                 '_cost': jasmine.objectContaining({_points: 425}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Tesseract Vault"}),
-                ],
+                '_profileTables': {
+                  "C'tan Powers": jasmine.objectContaining({
+                    '_headers': ["C'tan Powers","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Cosmic Fire"]),
+                      jasmine.arrayContaining(["Time's Arrow"]),
+                      jasmine.arrayContaining(["Antimatter Meteor"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Armoured bulk"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Tesla sphere"]),
+                    ],
+                  }),
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Tesseract Vault"]),
+                    ],
+                  })
+                },
                 '_modelList': [
-                  "Tesseract Vault (Armoured bulk, 4x Tesla sphere, C'tan Powers)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "Armoured bulk"}),
-                  jasmine.objectContaining({'_name': "Tesla sphere"}),
+                  "Tesseract Vault (Armoured bulk, C'tan Powers, 4x Tesla sphere)"
                 ],
                 '_rules': mapWithKeys(["Anti-", "Blast", "Command Protocols", "Deadly Demise D6+3", "Devastating Wounds", "Ignores Cover", "Indirect Fire", "Precision", "Reanimation Protocols", "Sustained Hits", "Torrent"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Damaged: 1-8 wounds remaining", "Invulnerable Save", "Powers of the C’tan"]),
-                  "C'tan Powers": mapWithKeys(["Antimatter Meteor - A", "Antimatter Meteor - AP", "Antimatter Meteor - BS", "Antimatter Meteor - D", "Antimatter Meteor - Keywords", "Antimatter Meteor - Range", "Antimatter Meteor - S", "Cosmic Fire - A", "Cosmic Fire - AP", "Cosmic Fire - BS", "Cosmic Fire - D", "Cosmic Fire - Keywords", "Cosmic Fire - Range", "Cosmic Fire - S", "Time's Arrow - A", "Time's Arrow - AP", "Time's Arrow - BS", "Time's Arrow - D", "Time's Arrow - Keywords", "Time's Arrow - Range", "Time's Arrow - S"]),
                 }}),
             ],
             '_rules': new Map([
