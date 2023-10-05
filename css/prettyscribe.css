@@ -234,6 +234,10 @@ label {
     padding-left: var(--notchSize);
 }
 
+.wh40k_unit_sheet > table > thead.header_row {
+    text-transform: uppercase
+}
+
 .wh40k_unit_sheet > table > thead.info_row > tr > td:first-child {
     font: bold 1em sans-serif;
     text-transform: uppercase;
@@ -250,7 +254,7 @@ label {
 
 .wh40k_unit_sheet > table > thead.unit_header {
     text-align: center;
-    text-transform: uppercase;
+    text-transform: uppercase
 }
 
 .wh40k_unit_sheet > table > thead.unit_header > tr > td:nth-child(2) {
@@ -262,8 +266,7 @@ label {
     color: white;
 }
 
-.wh40k_unit_sheet > table > thead > tr.header_row > th {
-    text-transform: uppercase;
+.wh40k_unit_sheet > table > thead.header_row > tr > th {
     white-space: nowrap;
 }
 

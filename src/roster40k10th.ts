@@ -194,21 +194,6 @@ export class Model extends BaseNotes {
     }
 }
 
-export class TabularProfile extends BaseNotes {
-    _headers: string[] = [];
-    _contents: string[][] = [];
-
-    addRow(row: { [key: string]: string; }) {
-        const headers = Object.keys(row);
-        if (this._headers.length === 0) {
-            this._headers.push(...headers);
-        } else if (this._headers.join(', ') !== headers.join(', ')) {
-            console.error('Unexpected header:', this._headers, headers);
-        }
-        this._contents.push(Object.values(row))
-    }
-}
-
 export class Unit extends BaseNotes {
 
     _role: UnitRole = UnitRole.NONE;
@@ -216,7 +201,6 @@ export class Unit extends BaseNotes {
     readonly _keywords: Set<string> = new Set();
 
     readonly _abilities: {[key: string]: Map<string, string>} = {};
-    readonly _profileTables:  {[key: string]: TabularProfile} = {};
     readonly _rules: Map<string, string> = new Map();
 
     readonly _models: Model[] = [];
@@ -510,7 +494,7 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
         const profileType = profile.getAttribute("typeName");
         if (profileType === "Abilities" || profileType === "Dynastic Code" ||
                 profileType === "Household Tradition") {
-            ParseAbilityProfileCharacteristics(profile, profileName, profileType,map);
+            ParseProfileCharacteristics(profile, profileName, profileType,map);
         }
     }
 
@@ -661,6 +645,7 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
 
     // First, find model stats. These have typeName=Unit.
     const modelStatsProfiles = Array.from(root.querySelectorAll('profile[typeName="Unit"],profile[typeName="Model"]'));
+    ParseModelStatsProfiles(modelStatsProfiles, unit, unitName);
     seenProfiles.push(...modelStatsProfiles);
 
     // Next, look for selections with models. These usually have type="model",
@@ -776,40 +761,57 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
     return unit;
 }
 
+function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: string) {
+    for (const profile of profiles) {
+        const profileName = profile.getAttribute("name");
+        const profileType = profile.getAttribute("typeName");
+        if (!profileName || !profileType) return;
+
+        const model = new Model();
+        model._name = profileName;
+        unit._modelStats.push(model);
+
+        ExpandBaseNotes(profile, model);
+
+        const chars = profile.querySelectorAll("characteristics>characteristic");
+        for (const char of chars) {
+            const charName = char.getAttribute("name");
+            if (!charName) continue;
+
+            if (char.textContent) {
+                switch (charName) {
+                    case 'M': model._move = char.textContent; break;
+                    case 'T': model._toughness = +char.textContent; break;
+                    case 'W': model._wounds = +char.textContent; break;
+                    case 'OC': model._objControl = +char.textContent; break;
+                    case 'LD': model._leadership = char.textContent; break;
+                    case 'SV': model._save = char.textContent; break;
+                }
+            }
+        }
+    }
+}
+
 function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
     for (const profile of profiles) {
         const profileName = profile.getAttribute("name");
         const typeName = profile.getAttribute("typeName");
         if (!profileName || !typeName) continue;
 
-        // Everything else, like Prayers and Warlord Traits.
-        const chars = profile.querySelectorAll("characteristics>characteristic");
-        if (chars.length > 1) {
-            if (!unit._profileTables[typeName]) unit._profileTables[typeName] = new TabularProfile();
-            ParseTableProfileCharacteristics(profile, profileName, typeName, unit._profileTables[typeName])
+        if ((typeName === "Unit") || (typeName === "Model") || (profile.getAttribute("type") === "model")) {
+            // Do nothing; these were already handled.
+        } else if ((typeName === "Melee Weapons") || (typeName === "Ranged Weapons")) {
+            const weapon = ParseWeaponProfile(profile);
+            model._weapons.push(weapon);
         } else {
-            // Need to figure out how to do single-column abilities!!!!!!!
-            // Look at length of characteristics
+            // Everything else, like Prayers and Warlord Traits. 
             if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
-            ParseAbilityProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
+            ParseProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
         }
     }
 }
 
-function ParseTableProfileCharacteristics(profile: Element, profileName: string, typeName:string,  table: TabularProfile) {
-    const chars = profile.querySelectorAll("characteristics>characteristic");
-    const row: {[key: string]: string} = {[typeName]: profileName};
-    for (const char of chars) {
-        if (!char.textContent) continue;
-        const charName = char.getAttribute("name");
-        if (charName) {
-            row[charName] = char.textContent;
-        }
-    }
-    table.addRow(row);
-}
-
-function ParseAbilityProfileCharacteristics(profile: Element, profileName: string, typeName:string,  map: Map<string, string | null>) {
+function ParseProfileCharacteristics(profile: Element, profileName: string, typeName:string,  map: Map<string, string | null>) {
     const chars = profile.querySelectorAll("characteristics>characteristic");
     for (const char of chars) {
         if (!char.textContent) continue;
@@ -823,6 +825,40 @@ function ParseAbilityProfileCharacteristics(profile: Element, profileName: strin
             map.set(profileName, char.textContent);
         }
     }
+}
+
+function ParseWeaponProfile(profile: Element): Weapon {
+    const weapon = new Weapon();
+    ExpandBaseNotes(profile,  weapon);
+    weapon._count = ExtractNumberFromParent(profile);
+
+    let chars = profile.querySelectorAll("characteristics>characteristic");
+    for (let char of chars) {
+        let charName = char.getAttribute("name");
+        if (charName) {
+            if (char.textContent) {
+                switch (charName) {
+                    case 'Range': weapon._range = char.textContent; break;
+                    case 'A': weapon._attacks = char.textContent; break;
+                    case 'S': weapon._str = char.textContent; break;
+                    case 'WS': weapon._skill = char.textContent; break;
+                    case 'BS': weapon._skill = char.textContent; break;
+                    case 'AP': weapon._ap = char.textContent; break;
+                    case 'D': weapon._damage = char.textContent; break;
+                    case 'Keywords': weapon._abilities = char.textContent; break;
+                }
+            }
+        }
+    }
+    // Keep track of the weapon's parent selection for its name, unless the
+    // weapon is directly under the unit's profile.
+    const selection = profile.parentElement?.parentElement;
+    const selectionName = selection?.getAttribute('name');
+    if (selection?.getAttribute('type') === 'upgrade' && selectionName) {
+        weapon._selectionName = selectionName;
+        weapon._cost = GetSelectionCosts(selection);
+    }
+    return weapon;
 }
 
 function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
