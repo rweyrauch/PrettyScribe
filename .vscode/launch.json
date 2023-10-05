@@ -8,8 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Jasmine Current File",
-      "runtimeExecutable": "/usr/local/bin/npx",
-      "program": "jasmine",
+      "program": "${workspaceFolder}/node_modules/jasmine-ts/lib/index",
       "args": ["--config=./jasmine.json", "${file}"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
