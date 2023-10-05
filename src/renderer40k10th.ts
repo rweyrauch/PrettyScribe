@@ -488,19 +488,52 @@ export class Wh40kRenderer implements Renderer {
         let notesTableHead = createNoteHead('Unit notes', unit);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
-        // Tabular profile data, like model stats and weapons.
-        // Sort by unit, then weapons, then other stuff.
-        const typeNames = Object.keys(unit._profileTables).sort((a, b) => {
-            const sortOrder = ['Unit', 'Ranged Weapons', 'Melee Weapons'];
-            const aOrder = sortOrder.includes(a) ? sortOrder.indexOf(a) : sortOrder.length;
-            const bOrder = sortOrder.includes(b) ? sortOrder.indexOf(b) : sortOrder.length;
-            return aOrder - bOrder;
-        });
-        for (const typeName of typeNames) {
-            const table = unit._profileTables[typeName];
-            const widths = typeName === 'Unit' ? this._unitLabelWidthsNormalized : this._weaponLabelWidthNormalized;
-            this.renderSubTable(statsTable, table._headers, table._contents, widths, 'Notes', [table]);
+        // models
+        thead = statsTable.appendChild(document.createElement('thead'));
+        thead.classList.add('table-active');
+        thead.appendChild(createTableRow(Wh40kRenderer._unitLabels, this._unitLabelWidthsNormalized, /* header= */ true));
+
+        let tbody = statsTable.appendChild(document.createElement('tbody'));
+        tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+        for (const model of unit._modelStats) {
+            tbody.append(createTableRow([
+                model._name,
+                model._move,
+                model._toughness.toString(),
+                model._save,
+                model._wounds.toString(),
+                model._leadership.toString(),
+                model._objControl.toString()
+            ], this._unitLabelWidthsNormalized));
         }
+
+        notesTableHead = createNotesHead('Model notes', unit._modelStats);
+        if (notesTableHead) statsTable.appendChild(notesTableHead);
+
+        // weapons
+        if (unit._weapons.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(Wh40kRenderer._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
+
+            tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const weapon of unit._weapons) {
+                tbody.append(createTableRow([
+                    weapon.name().toString(),
+                    weapon._range,
+                    weapon._attacks.toString(),
+                    weapon._skill,
+                    weapon._str.toString(),
+                    weapon._ap,
+                    weapon._damage,
+                    weapon._abilities,
+                ], this._weaponLabelWidthNormalized));
+            }
+        }
+        notesTableHead = createNotesHead('Weapon notes', unit._weapons);
+        if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // unit abilities and rules; rules are shared across units, with their
         // descriptions printed in bulk later, but show up with unit 'Abilities'
@@ -531,44 +564,6 @@ export class Wh40kRenderer implements Renderer {
         const modelListDiv = document.createElement('div');
         this.renderModelList(modelListDiv, unit);
         thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
-    }
-
-    private renderUnitModelStatsAsSubTable(container: HTMLElement, unit: Wh40k.Unit) {
-        const labels = Wh40kRenderer._unitLabels;
-        const widths = this._unitLabelWidthsNormalized;
-        const contents = unit._modelStats.map(model => [
-            model._name,
-            model._move,
-            model._toughness.toString(),
-            model._save,
-            model._wounds.toString(),
-            model._leadership.toString(),
-            model._objControl.toString()
-        ]);
-        const notesName = 'Model notes';
-        const notes: Wh40k.BaseNotes[] = unit._modelStats;
-
-        this.renderSubTable(container, labels, contents, widths, notesName, notes);
-            
-    }
-
-    renderSubTable(container: HTMLElement, labels: string[], contents: string[][], widths: number[], notesName: string, notes: Wh40k.BaseNotes[]) {
-        const thead = container.appendChild(document.createElement('thead'));
-        thead.classList.add('table-active');
-
-        // header content
-        thead.appendChild(createTableRow(labels, widths, /* header= */ true));
-
-        let tbody = container.appendChild(document.createElement('tbody'));
-        tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-
-        // body content
-        for (const content of contents) {
-            tbody.append(createTableRow(content, widths));
-        }
-
-        const notesTableHead = createNotesHead(notesName, notes);
-        if (notesTableHead) container.appendChild(notesTableHead);
     }
 
     private renderUnitAbilitiesAndRules(container: HTMLElement, abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
@@ -651,10 +646,10 @@ function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupNa
 function createTableRow(labels: (string | Element)[], widths: number[], header = false) {
     const row = addHideAble(document.createElement('tr'));
     if (header) row.classList.add('header_row');
-    for (let i = 0, colCount = 0; i < labels.length || colCount < 20; i++) {
+    for (let i = 0, colCount = 0; i < labels.length && i < widths.length || colCount < 20; i++) {
         const cell = document.createElement(header ? 'th' : 'td');
         cell.scope = 'col';
-        if (i < labels.length) {
+        if (i < labels.length && i < widths.length) {
             let node: Node;
             const label = labels[i];
             if (typeof label === 'string') {
@@ -663,10 +658,8 @@ function createTableRow(labels: (string | Element)[], widths: number[], header =
                 node = labels[i] as Element; // TypeScript requires a cast here.
             }
             cell.appendChild(node);
-
-            const width = widths[i] || 0.05;
-            cell.style.width = `${width * 100}%`;
-            colCount += cell.colSpan = Math.round(width / 0.05);
+            cell.style.width = `${widths[i] * 100}%`;
+            colCount += cell.colSpan = Math.round(widths[i] / 0.05);
         } else if (colCount < 20) {
             // cell.style.width = `${(1 - width) * 100}%`;
             cell.colSpan = (20 - colCount);
