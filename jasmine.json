@@ -9,7 +9,8 @@
   ],
   "spec_dir": "spec",
   "spec_files": [
-    "**Spec.ts"
+    "**Spec.ts",
+    "*/**Spec.ts"
   ],
   "helpers": [
     "helpers/jasmine-typescript-helper.js"
