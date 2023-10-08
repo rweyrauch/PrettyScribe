@@ -194,6 +194,31 @@ export class Model extends BaseNotes {
     }
 }
 
+/** Class to represent <profile> tags as a table. Profiles include Units, Weapons, etc. */
+export class TabularProfile extends BaseNotes {
+    _headers: string[] = [];
+    _contents: string[][] = [];
+
+    /** Adds a row like { "key1": "value", "key2": "value" }. */
+    addRow(row: {[key: string]: string; }) {
+        const headers = Object.keys(row);
+        if (this._headers.length === 0) {
+            this._headers.push(...headers);
+        } else {
+            const curHeader = this._headers.join(', ');
+            const newHeader = headers.join(', ');
+            if (curHeader === newHeader || curHeader.startsWith(newHeader)) {
+                // Do nothing
+            } else if (newHeader.startsWith(curHeader)) {
+                this._headers = headers;
+            } else {
+                console.error('Unexpected header:', this._headers, headers);
+            }
+        }
+        this._contents.push(Object.values(row))
+    }
+}
+
 export class Unit extends BaseNotes {
 
     _role: UnitRole = UnitRole.NONE;
@@ -201,6 +226,7 @@ export class Unit extends BaseNotes {
     readonly _keywords: Set<string> = new Set();
 
     readonly _abilities: {[key: string]: Map<string, string>} = {};
+    readonly _profileTables:  {[key: string]: TabularProfile} = {};
     readonly _rules: Map<string, string> = new Map();
 
     readonly _models: Model[] = [];
@@ -261,6 +287,14 @@ export class Unit extends BaseNotes {
 
         for (let model of this._models) {
             model.normalize();
+        }
+
+        // Dedupe profile tables like Units and Weapons.
+        for (const profileTableKey in this._profileTables) {
+            const contents = this._profileTables[profileTableKey]._contents;
+            const names = contents.map(row => row[0]).flat();
+            this._profileTables[profileTableKey]._contents =
+                contents.filter((row, index) => names.indexOf(row[0]) === index);
         }
 
         for (let i = 0; i < (this._models.length - 1); i++) {
@@ -494,7 +528,7 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
         const profileType = profile.getAttribute("typeName");
         if (profileType === "Abilities" || profileType === "Dynastic Code" ||
                 profileType === "Household Tradition") {
-            ParseProfileCharacteristics(profile, profileName, profileType,map);
+            ParseAbilityProfileCharacteristics(profile, profileName, profileType,map);
         }
     }
 
@@ -645,7 +679,14 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
 
     // First, find model stats. These have typeName=Unit.
     const modelStatsProfiles = Array.from(root.querySelectorAll('profile[typeName="Unit"],profile[typeName="Model"]'));
-    ParseModelStatsProfiles(modelStatsProfiles, unit, unitName);
+    for (const profile of modelStatsProfiles) {
+        const profileName = profile.getAttribute('name');
+        const typeName = profile.getAttribute('typeName');
+        if (!profileName || ! typeName) continue;
+
+        if (!unit._profileTables[typeName]) unit._profileTables[typeName] = new TabularProfile();
+        ParseTableProfileCharacteristics(profile, profileName, typeName, unit._profileTables[typeName]);
+    }
     seenProfiles.push(...modelStatsProfiles);
 
     // Next, look for selections with models. These usually have type="model",
@@ -761,57 +802,40 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
     return unit;
 }
 
-function ParseModelStatsProfiles(profiles: Element[], unit: Unit, unitName: string) {
-    for (const profile of profiles) {
-        const profileName = profile.getAttribute("name");
-        const profileType = profile.getAttribute("typeName");
-        if (!profileName || !profileType) return;
-
-        const model = new Model();
-        model._name = profileName;
-        unit._modelStats.push(model);
-
-        ExpandBaseNotes(profile, model);
-
-        const chars = profile.querySelectorAll("characteristics>characteristic");
-        for (const char of chars) {
-            const charName = char.getAttribute("name");
-            if (!charName) continue;
-
-            if (char.textContent) {
-                switch (charName) {
-                    case 'M': model._move = char.textContent; break;
-                    case 'T': model._toughness = +char.textContent; break;
-                    case 'W': model._wounds = +char.textContent; break;
-                    case 'OC': model._objControl = +char.textContent; break;
-                    case 'LD': model._leadership = char.textContent; break;
-                    case 'SV': model._save = char.textContent; break;
-                }
-            }
-        }
-    }
-}
-
 function ParseModelProfiles(profiles: Element[], model: Model, unit: Unit) {
     for (const profile of profiles) {
         const profileName = profile.getAttribute("name");
         const typeName = profile.getAttribute("typeName");
         if (!profileName || !typeName) continue;
 
-        if ((typeName === "Unit") || (typeName === "Model") || (profile.getAttribute("type") === "model")) {
-            // Do nothing; these were already handled.
-        } else if ((typeName === "Melee Weapons") || (typeName === "Ranged Weapons")) {
-            const weapon = ParseWeaponProfile(profile);
-            model._weapons.push(weapon);
+        // Everything else, like Prayers and Warlord Traits.
+        const chars = profile.querySelectorAll("characteristics>characteristic");
+        if (chars.length > 1) {
+            if (!unit._profileTables[typeName]) unit._profileTables[typeName] = new TabularProfile();
+            ParseTableProfileCharacteristics(profile, profileName, typeName, unit._profileTables[typeName])
         } else {
-            // Everything else, like Prayers and Warlord Traits. 
+            // Need to figure out how to do single-column abilities!!!!!!!
+            // Look at length of characteristics
             if (!unit._abilities[typeName]) unit._abilities[typeName] = new Map();
-            ParseProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
+            ParseAbilityProfileCharacteristics(profile, profileName, typeName, unit._abilities[typeName]);
         }
     }
 }
 
-function ParseProfileCharacteristics(profile: Element, profileName: string, typeName:string,  map: Map<string, string | null>) {
+function ParseTableProfileCharacteristics(profile: Element, profileName: string, typeName:string,  table: TabularProfile) {
+    const chars = profile.querySelectorAll("characteristics>characteristic");
+    const row: {[key: string]: string} = {[typeName]: profileName};
+    for (const char of chars) {
+        if (!char.textContent) continue;
+        const charName = char.getAttribute("name");
+        if (charName) {
+            row[charName] = char.textContent;
+        }
+    }
+    table.addRow(row);
+}
+
+function ParseAbilityProfileCharacteristics(profile: Element, profileName: string, typeName:string,  map: Map<string, string | null>) {
     const chars = profile.querySelectorAll("characteristics>characteristic");
     for (const char of chars) {
         if (!char.textContent) continue;
@@ -825,40 +849,6 @@ function ParseProfileCharacteristics(profile: Element, profileName: string, type
             map.set(profileName, char.textContent);
         }
     }
-}
-
-function ParseWeaponProfile(profile: Element): Weapon {
-    const weapon = new Weapon();
-    ExpandBaseNotes(profile,  weapon);
-    weapon._count = ExtractNumberFromParent(profile);
-
-    let chars = profile.querySelectorAll("characteristics>characteristic");
-    for (let char of chars) {
-        let charName = char.getAttribute("name");
-        if (charName) {
-            if (char.textContent) {
-                switch (charName) {
-                    case 'Range': weapon._range = char.textContent; break;
-                    case 'A': weapon._attacks = char.textContent; break;
-                    case 'S': weapon._str = char.textContent; break;
-                    case 'WS': weapon._skill = char.textContent; break;
-                    case 'BS': weapon._skill = char.textContent; break;
-                    case 'AP': weapon._ap = char.textContent; break;
-                    case 'D': weapon._damage = char.textContent; break;
-                    case 'Keywords': weapon._abilities = char.textContent; break;
-                }
-            }
-        }
-    }
-    // Keep track of the weapon's parent selection for its name, unless the
-    // weapon is directly under the unit's profile.
-    const selection = profile.parentElement?.parentElement;
-    const selectionName = selection?.getAttribute('name');
-    if (selection?.getAttribute('type') === 'upgrade' && selectionName) {
-        weapon._selectionName = selectionName;
-        weapon._cost = GetSelectionCosts(selection);
-    }
-    return weapon;
 }
 
 function CompareObj(a: { _name: string; }, b: { _name: string; }): number {
@@ -883,11 +873,18 @@ export function CompareWeapon(a: Weapon, b: Weapon): number {
     return a.name().localeCompare(b.name());
 }
 
-
 export function Compare(a: string, b: string): number {
     if (a > b) return 1;
     else if (a == b) return 0;
     return -1;
+}
+
+/** Compare Profile Tables by their typeName, like 'Unit' or 'Ranged Weapons'. */
+export function CompareProfileTableName(a: string, b: string) {
+    const sortOrder = ['Unit', 'Ranged Weapons', 'Melee Weapons'];
+    const aOrder = sortOrder.includes(a) ? sortOrder.indexOf(a) : sortOrder.length;
+    const bOrder = sortOrder.includes(b) ? sortOrder.indexOf(b) : sortOrder.length;
+    return aOrder - bOrder;
 }
 
 } // namespace Wh40k
