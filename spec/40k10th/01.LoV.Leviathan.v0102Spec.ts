@@ -23,15 +23,28 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Einhyr Champion",
                 '_cost': jasmine.objectContaining({_points: 80}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Einhyr Champion"}),
-                ],
+                '_profileTables': {
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Einhyr Champion"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Autoch-pattern combi-bolter"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Mass hammer"]),
+                    ],
+                  })
+                },
                 '_modelList': [
-                  "Einhyr Champion (Autoch-pattern combi-bolter, Mass hammer, Appraising Glare [20 pts], Warlord, Weavefield crest)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "Autoch-pattern combi-bolter"}),
-                  jasmine.objectContaining({'_name': "Mass hammer"}),
+                  "Einhyr Champion (Appraising Glare [20 pts], Autoch-pattern combi-bolter, Mass hammer, Warlord, Weavefield crest)"
                 ],
                 '_rules': mapWithKeys(["Eye of the Ancestors", "Leader", "Ruthless Efficiency"]),
                 '_abilities': {
@@ -40,24 +53,37 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Hearthkyn Warriors",
                 '_cost': jasmine.objectContaining({_points: 110}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Hearthkyn Warriors"}),
-                ],
+                '_profileTables': {
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Hearthkyn Warriors"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Autoch-pattern bolt pistol"]),
+                      jasmine.arrayContaining(["Ion blaster"]),
+                      jasmine.arrayContaining(["Etacarn plasma pistol"]),
+                      jasmine.arrayContaining(["➤ L7 missile launcher - blast"]),
+                      jasmine.arrayContaining(["➤ L7 missile launcher - focused"]),
+                      jasmine.arrayContaining(["Magna-rail rifle"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Close combat weapon"]),
+                    ],
+                  })
+                },
                 '_modelList': [
                   "7x Hearthkyn Warrior (Autoch-pattern bolt pistol, Close combat weapon, Ion blaster)",
-                  "Hearthkyn Warrior w/ heavy weapon (L7 missile launcher*, Autoch-pattern bolt pistol, Close combat weapon)",
+                  "Hearthkyn Warrior w/ heavy weapon (Autoch-pattern bolt pistol, Close combat weapon, L7 missile launcher*)",
                   "Hearthkyn Warrior w/ heavy weapon (Autoch-pattern bolt pistol, Close combat weapon, Magna-rail rifle*)",
                   "Theyn (Close combat weapon, Etacarn plasma pistol, Ion blaster, Weavefield crest)",
                   "Unit Upgrades (Comms array, Medipack, Pan spectral scanner)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "➤ L7 missile launcher - blast"}),
-                  jasmine.objectContaining({'_name': "➤ L7 missile launcher - focused"}),
-                  jasmine.objectContaining({'_name': "Autoch-pattern bolt pistol"}),
-                  jasmine.objectContaining({'_name': "Close combat weapon"}),
-                  jasmine.objectContaining({'_name': "Etacarn plasma pistol"}),
-                  jasmine.objectContaining({'_name': "Ion blaster"}),
-                  jasmine.objectContaining({'_name': "Magna-rail rifle"}),
                 ],
                 '_rules': mapWithKeys(["Blast", "Devastating Wounds", "Eye of the Ancestors", "Feel No Pain 6+", "Heavy", "Ignores Cover", "Pistol", "Ruthless Efficiency"]),
                 '_abilities': {
@@ -66,24 +92,37 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Hearthkyn Warriors",
                 '_cost': jasmine.objectContaining({_points: 110}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Hearthkyn Warriors"}),
-                ],
+                '_profileTables': {
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Hearthkyn Warriors"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Autoch-pattern bolt pistol"]),
+                      jasmine.arrayContaining(["Autoch-pattern bolter"]),
+                      jasmine.arrayContaining(["Etacarn plasma pistol"]),
+                      jasmine.arrayContaining(["➤ L7 missile launcher - blast"]),
+                      jasmine.arrayContaining(["➤ L7 missile launcher - focused"]),
+                      jasmine.arrayContaining(["Magna-rail rifle"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Close combat weapon"]),
+                    ],
+                  })
+                },
                 '_modelList': [
                   "7x Hearthkyn Warrior (Autoch-pattern bolt pistol, Autoch-pattern bolter, Close combat weapon)",
-                  "Hearthkyn Warrior w/ heavy weapon (L7 missile launcher*, Autoch-pattern bolt pistol, Close combat weapon)",
+                  "Hearthkyn Warrior w/ heavy weapon (Autoch-pattern bolt pistol, Close combat weapon, L7 missile launcher*)",
                   "Hearthkyn Warrior w/ heavy weapon (Autoch-pattern bolt pistol, Close combat weapon, Magna-rail rifle*)",
                   "Theyn (Autoch-pattern bolter, Close combat weapon, Etacarn plasma pistol, Weavefield crest)",
                   "Unit Upgrades (Comms array, Medipack, Pan spectral scanner)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "➤ L7 missile launcher - blast"}),
-                  jasmine.objectContaining({'_name': "➤ L7 missile launcher - focused"}),
-                  jasmine.objectContaining({'_name': "Autoch-pattern bolt pistol"}),
-                  jasmine.objectContaining({'_name': "Autoch-pattern bolter"}),
-                  jasmine.objectContaining({'_name': "Close combat weapon"}),
-                  jasmine.objectContaining({'_name': "Etacarn plasma pistol"}),
-                  jasmine.objectContaining({'_name': "Magna-rail rifle"}),
                 ],
                 '_rules': mapWithKeys(["Blast", "Devastating Wounds", "Eye of the Ancestors", "Feel No Pain 6+", "Heavy", "Ignores Cover", "Pistol", "Ruthless Efficiency"]),
                 '_abilities': {
@@ -92,18 +131,31 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Einhyr Hearthguard",
                 '_cost': jasmine.objectContaining({_points: 150}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Einhyr Hearthguard"}),
-                ],
+                '_profileTables': {
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Einhyr Hearthguard"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Exo-armour grenade launcher"]),
+                      jasmine.arrayContaining(["Volkanite disintegrator"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Concussion hammer"]),
+                      jasmine.arrayContaining(["Concussion gauntlet"]),
+                    ],
+                  })
+                },
                 '_modelList': [
                   "4x Einhyr Hearthguard (Concussion gauntlet, Exo-armour grenade launcher, Volkanite disintegrator)",
-                  "Hesyr (Concussion hammer, Exo-armour grenade launcher, Volkanite disintegrator, Teleport crest)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "Concussion gauntlet"}),
-                  jasmine.objectContaining({'_name': "Concussion hammer"}),
-                  jasmine.objectContaining({'_name': "Exo-armour grenade launcher"}),
-                  jasmine.objectContaining({'_name': "Volkanite disintegrator"}),
+                  "Hesyr (Concussion hammer, Exo-armour grenade launcher, Teleport crest, Volkanite disintegrator)"
                 ],
                 '_rules': mapWithKeys(["Blast", "Devastating Wounds", "Eye of the Ancestors", "Ruthless Efficiency"]),
                 '_abilities': {
@@ -112,17 +164,30 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Hekaton Land Fortress",
                 '_cost': jasmine.objectContaining({_points: 225}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Hekaton Land Fortress"}),
-                ],
+                '_profileTables': {
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Hekaton Land Fortress"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["MATR autocannon"]),
+                      jasmine.arrayContaining(["SP heavy conversion beamer"]),
+                      jasmine.arrayContaining(["Twin bolt cannon"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Armoured wheels"]),
+                    ],
+                  })
+                },
                 '_modelList': [
-                  "Hekaton Land Fortress (Armoured wheels, MATR autocannon, SP heavy conversion beamer, 2x Twin bolt cannon, Pan spectral scanner)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "Armoured wheels"}),
-                  jasmine.objectContaining({'_name': "MATR autocannon"}),
-                  jasmine.objectContaining({'_name': "SP heavy conversion beamer"}),
-                  jasmine.objectContaining({'_name': "Twin bolt cannon"}),
+                  "Hekaton Land Fortress (Armoured wheels, MATR autocannon, Pan spectral scanner, SP heavy conversion beamer, 2x Twin bolt cannon)"
                 ],
                 '_rules': mapWithKeys(["Conversion", "Deadly Demise D6", "Eye of the Ancestors", "Ruthless Efficiency", "Sustained Hits", "Twin-linked"]),
                 '_abilities': {
@@ -132,21 +197,34 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Hernkyn Pioneers",
                 '_cost': jasmine.objectContaining({_points: 90}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Hernkyn Pioneer"}),
-                  jasmine.objectContaining({'_name': "Hernkyn Pioneer w/ ion beamer"}),
-                ],
+                '_profileTables': {
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Hernkyn Pioneer"]),
+                      jasmine.arrayContaining(["Hernkyn Pioneer w/ ion beamer"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Bolt revolver"]),
+                      jasmine.arrayContaining(["Bolt shotgun"]),
+                      jasmine.arrayContaining(["Magna-coil autocannon"]),
+                      jasmine.arrayContaining(["Ion beamer"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Plasma knife"]),
+                    ],
+                  })
+                },
                 '_modelList': [
                   "Hernkyn Pioneer w/ ion beamer (Bolt revolver, Bolt shotgun, Ion beamer, Magna-coil autocannon, Plasma knife)",
-                  "Hernkyn Pioneer w/ pan-spectral scanner (Bolt revolver, Bolt shotgun, Magna-coil autocannon, Plasma knife, Pan-spectral scanner)",
+                  "Hernkyn Pioneer w/ pan-spectral scanner (Bolt revolver, Bolt shotgun, Magna-coil autocannon, Pan-spectral scanner, Plasma knife)",
                   "Hernkyn Pioneer w/ searchlight (Bolt revolver, Bolt shotgun, Magna-coil autocannon, Plasma knife, Rollbar searchlight)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "Bolt revolver"}),
-                  jasmine.objectContaining({'_name': "Bolt shotgun"}),
-                  jasmine.objectContaining({'_name': "Ion beamer"}),
-                  jasmine.objectContaining({'_name': "Magna-coil autocannon"}),
-                  jasmine.objectContaining({'_name': "Plasma knife"}),
                 ],
                 '_rules': mapWithKeys(["Assault", "Eye of the Ancestors", "Ignores Cover", "Pistol", "Ruthless Efficiency", "Scouts 9\"", "Sustained Hits"]),
                 '_abilities': {
@@ -155,18 +233,31 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Sagitaur",
                 '_cost': jasmine.objectContaining({_points: 100}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Sagitaur"}),
-                ],
+                '_profileTables': {
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Sagitaur"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Twin bolt cannon"]),
+                      jasmine.arrayContaining(["Sagitaur missile launcher"]),
+                      jasmine.arrayContaining(["➤ L7 missile launcher - blast"]),
+                      jasmine.arrayContaining(["➤ L7 missile launcher - focused"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Armoured wheels"]),
+                    ],
+                  })
+                },
                 '_modelList': [
-                  "Sagitaur (L7 missile launcher and Sagitaur missile launcher, Armoured wheels, Twin bolt cannon)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "➤ L7 missile launcher - blast"}),
-                  jasmine.objectContaining({'_name': "➤ L7 missile launcher - focused"}),
-                  jasmine.objectContaining({'_name': "Armoured wheels"}),
-                  jasmine.objectContaining({'_name': "Sagitaur missile launcher"}),
-                  jasmine.objectContaining({'_name': "Twin bolt cannon"}),
+                  "Sagitaur (Armoured wheels, L7 missile launcher and Sagitaur missile launcher, Twin bolt cannon)"
                 ],
                 '_rules': mapWithKeys(["Blast", "Deadly Demise 1", "Eye of the Ancestors", "Ruthless Efficiency", "Scouts 6\"", "Sustained Hits", "Twin-linked"]),
                 '_abilities': {
@@ -176,18 +267,31 @@ describe("CreateRoster", function() {
               jasmine.objectContaining({
                 '_name': "Sagitaur",
                 '_cost': jasmine.objectContaining({_points: 100}),
-                '_modelStats': [
-                  jasmine.objectContaining({'_name': "Sagitaur"}),
-                ],
+                '_profileTables': {
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Sagitaur"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Twin bolt cannon"]),
+                      jasmine.arrayContaining(["Sagitaur missile launcher"]),
+                      jasmine.arrayContaining(["➤ L7 missile launcher - blast"]),
+                      jasmine.arrayContaining(["➤ L7 missile launcher - focused"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Armoured wheels"]),
+                    ],
+                  })
+                },
                 '_modelList': [
-                  "Sagitaur (L7 missile launcher and Sagitaur missile launcher, Armoured wheels, Twin bolt cannon)"
-                ],
-                '_weapons': [
-                  jasmine.objectContaining({'_name': "➤ L7 missile launcher - blast"}),
-                  jasmine.objectContaining({'_name': "➤ L7 missile launcher - focused"}),
-                  jasmine.objectContaining({'_name': "Armoured wheels"}),
-                  jasmine.objectContaining({'_name': "Sagitaur missile launcher"}),
-                  jasmine.objectContaining({'_name': "Twin bolt cannon"}),
+                  "Sagitaur (Armoured wheels, L7 missile launcher and Sagitaur missile launcher, Twin bolt cannon)"
                 ],
                 '_rules': mapWithKeys(["Blast", "Deadly Demise 1", "Eye of the Ancestors", "Ruthless Efficiency", "Scouts 6\"", "Sustained Hits", "Twin-linked"]),
                 '_abilities': {
