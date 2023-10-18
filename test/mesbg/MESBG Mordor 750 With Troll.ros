@@ -1,0 +1,1597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<roster xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" battleScribeVersion="2.03" gameSystemId="3e16-9abf-6238-4ed9" gameSystemName="Middle-Earth Strategy Battle Game" gameSystemRevision="112" id="aad6-9701-2a40-c4f8" name="MESBG Mordor 750 With Troll" xmlns="http://www.battlescribe.net/schema/rosterSchema">
+  <costs>
+    <cost typeId="8bde-d63c-7caa-c15d" value="749" name=" Points" />
+    <cost typeId="391e-19ac-b71d-f2e3" value="37" name=" Warriors" />
+  </costs>
+  <costLimits>
+    <costLimit typeId="8bde-d63c-7caa-c15d" value="750" name=" Points" />
+  </costLimits>
+  <forces>
+    <force catalogueId="8ce3-5f6a-16d8-078e" catalogueName="Mordor" catalogueRevision="29" entryId="70d0-3742-f6cf-863f" id="82d1-5f30-5600-63ce" name="Strategy Battle Game">
+      <publications>
+        <publication id="3e16-9abf-pubN194095" name="Gondor at War" />
+        <publication id="3e16-9abf-pubN103678" name="Armies of Lord of the Rings" />
+        <publication id="8ce3-5f6a-pubN69610" name="Armies of Lord of the Rings" />
+        <publication id="e790-6a8a-2723-abb9" name="Scouring of the Shire" />
+        <publication id="8ce3-5f6a-pubN75660" name="Gondor at War" />
+        <publication id="5ba1-ebaf-1b40-a44f" name="Quest of the Ringbearer" />
+        <publication id="3e16-9abf-pubN102460" name="Middle-Earth Strategy Battle Game Rules Manual" />
+        <publication id="3e16-9abf-pubN141412" name="Armies of the Hobbit" />
+        <publication id="b222-d397-7636-8248" name="War in Rohan" />
+        <publication id="e676-73de-7cfd-1298" name="Defence of the North" />
+        <publication id="4da3-c317-04e2-c033" name="Fall of the Necromancer" />
+      </publications>
+      <categories>
+        <category primary="false" entryId="(No Category)" id="b97f-d75e-3ae0-3482" name="Uncategorised">
+          <rules />
+          <profiles />
+        </category>
+        <category primary="false" entryId="6e9c-4e8f-3256-f4f0" id="b92e-1c87-612e-5016" name="Hero of Legend">
+          <rules />
+          <profiles />
+        </category>
+        <category primary="false" entryId="5daa-6832-f49b-2b35" id="f590-c283-7555-417f" name="Hero of Valour">
+          <rules />
+          <profiles />
+        </category>
+        <category primary="false" entryId="0ce2-d79d-fb91-3fa2" id="dd95-5534-4de6-d43e" name="Hero of Fortitude">
+          <rules />
+          <profiles />
+        </category>
+        <category primary="false" entryId="5e53-b18f-0f14-dc92" id="5a59-e5ac-6a95-a8a7" name="Minor Hero">
+          <rules />
+          <profiles />
+        </category>
+        <category primary="false" entryId="715f-06b0-fffa-1d52" id="a635-2075-fd20-a0fc" name="Independent Hero">
+          <rules />
+          <profiles />
+        </category>
+        <category primary="false" entryId="d67f-8830-6257-4932" id="a658-1ec5-17e0-725f" name="Warrior Warband">
+          <rules />
+          <profiles />
+        </category>
+        <category primary="false" entryId="990b-c865-7625-9987" id="8bd5-d6bf-9f8c-164b" name="Misc">
+          <rules />
+          <profiles />
+        </category>
+        <category primary="false" entryId="cd42-313a-a225-9ec6" id="be60-76c2-d132-9a86" name="Legendary Legion">
+          <rules />
+          <profiles />
+        </category>
+      </categories>
+      <forces />
+      <selections>
+        <selection number="1" type="upgrade" entryId="f827-6634-b47a-b6a9::ed75-3bd7-efe7-71d9" id="cc13-31eb-fef5-349e" name="Determine Alliance Level">
+          <costs>
+            <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+            <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+            <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+          </costs>
+          <categories>
+            <category primary="true" entryId="990b-c865-7625-9987" id="2ef5-8365-1a6c-88d4" name="Misc">
+              <rules />
+              <profiles />
+            </category>
+            <category primary="false" entryId="1146-f65d-18bd-b0d8" id="f164-287b-780f-000f" name="Evil Army">
+              <rules />
+              <profiles />
+            </category>
+            <category primary="false" entryId="b69a-d086-7ff1-8eaf" id="4bc6-1088-23e3-3d69" name="Mordor">
+              <rules />
+              <profiles />
+            </category>
+          </categories>
+          <selections>
+            <selection number="1" type="upgrade" entryId="f827-6634-b47a-b6a9::3ef2-6942-65cd-f09c" id="3e8f-a481-63fe-050c" name="Historical Allies">
+              <costs>
+                <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+              </costs>
+              <categories />
+              <selections />
+              <rules />
+              <profiles />
+            </selection>
+          </selections>
+          <rules />
+          <profiles />
+        </selection>
+        <selection number="1" type="upgrade" entryId="4878-3dab-84cf-7810" id="307f-0a28-856f-1e83" name="Determine Breakpoint &amp; 25%">
+          <costs>
+            <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+            <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+            <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+          </costs>
+          <categories>
+            <category primary="true" entryId="990b-c865-7625-9987" id="983b-14a7-a3eb-1116" name="Misc">
+              <rules />
+              <profiles />
+            </category>
+          </categories>
+          <selections />
+          <rules>
+            <rule hidden="false" id="ac8f-676d-5933-8a46" name="41  total models in Army. (model)">
+              <description>This is the total number of models in this Army.</description>
+              <modifiers />
+              <modifierGroups />
+            </rule>
+            <rule hidden="false" id="9a35-cc21-7c64-c4f5" name="20.50  is halfway. (model)">
+              <description>Need to kill more than this number of models to break the army.</description>
+              <modifiers />
+              <modifierGroups />
+            </rule>
+            <rule hidden="false" id="8e94-4069-1c96-d1f7" name="10  models remaining. (model)">
+              <description>Some Scenarios end when one Army is reduced to this number.</description>
+              <modifiers />
+              <modifierGroups />
+            </rule>
+          </rules>
+          <profiles />
+        </selection>
+        <selection number="1" type="upgrade" entryId="5e40-495a-066e-a557" id="e607-a32e-2570-6110" name="Gothmog, Lieutenant of Sauron">
+          <costs>
+            <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+            <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+            <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+          </costs>
+          <categories>
+            <category primary="true" entryId="5daa-6832-f49b-2b35" id="524e-d66c-2a57-d53e" name="Hero of Valour">
+              <rules />
+              <profiles />
+            </category>
+          </categories>
+          <selections>
+            <selection number="1" type="model" entryId="c8ad-d90f-c360-442e" id="5674-bc3d-5bf5-533e" name="Gothmog, Lieutenant of Sauron">
+              <costs>
+                <cost typeId="8bde-d63c-7caa-c15d" value="130" name=" Points" />
+                <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+              </costs>
+              <categories />
+              <selections>
+                <selection number="1" type="upgrade" entryId="c62d-2ca5-98c8-6461::64a3-2e98-a578-1a2d" entryGroupId="8468-9f40-d82d-22e0" id="9fd0-25b8-4e19-a959" name="Sword">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="c62d-2ca5-98c8-6461::9fa9-7925-e5fd-638c::7a14-98a2-be66-6290" name="Sword">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="b13c-d0a9-461b-6d0c::0439-1154-4306-11d8" entryGroupId="8468-9f40-d82d-22e0" id="7bd6-1d68-82fa-acb2" name="Heavy Armour">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="b13c-d0a9-461b-6d0c::836d-e8ec-ce9e-6180::7437-ddd3-3612-c30e" name="Heavy Armour">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model who is upgraded to wear heavy armour adds 2 to their Defence, unless they are already wearing armour, in which case they add 1.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="0c2a-10f8-fca2-03a1::852a-dd6e-17c4-1a59" id="db9d-4338-c5f9-f1fe" name="Leader (Valour)">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles />
+                </selection>
+                <selection number="1" type="upgrade" entryId="7241-a9a3-b953-f032::afb0-087f-dce2-2ec8" entryGroupId="039f-df3e-7a63-e0df" id="7850-2721-7a00-d2a6" name="Warg">
+                  <costs>
+                    <cost typeId="8bde-d63c-7caa-c15d" value="10" name=" Points" />
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="3e16-9abf-pubN102460" page="61" id="7241-a9a3-b953-f032::09b8-b0d9-2b04-ec1f::e642-8a1b-d6b9-2d68" name="Warg">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">10"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">4</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">4</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Warg Infantry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+              </selections>
+              <rules>
+                <rule hidden="false" publicationId="8ce3-5f6a-pubN69610" page="141" id="d062-742a-cfd5-2c9c" name="The Time of the Orc has Come (Active)">
+                  <description>Once per game, at the start of any Fight phase, Gothmog can declare that is he using this ability. For the remainder of the turn, all friendly Mordor Orc models within 12" of Gothmog may re-roll failed To Wound rolls when making Strikes.</description>
+                  <modifiers />
+                  <modifierGroups />
+                </rule>
+                <rule hidden="false" publicationId="8ce3-5f6a-pubN69610" page="141" id="0090-71a9-2707-5aed" name="The Age of Men is Over (Passive)">
+                  <description>Gothmog, and all friendly Mordor Orc models within 3" of him, gain the Hatred (Man) special rule.</description>
+                  <modifiers />
+                  <modifierGroups />
+                </rule>
+                <rule hidden="false" publicationId="3e16-9abf-pubN102460" page="105" id="698a-6030-028a-0cdb::aabf-11c7-988b-756f" name="Master of Battle (Active)">
+                  <description>Whenever an enemy Hero attempts a Heroic Action within 6" of a model with this special rule, this model may call the same Heroic Action without spending Might, even if they would not usually have access to it.
+
+Sometimes a model with this special rule will have a number after the rule in brackets, e.g., Master of Battle (5+). In this situation, wheneveran enemy Hero attempts a Heroic Action within 6" of a model with this special rule, roll a D6. If the dice score equals of beats the number after the special rule, this model may call the same Heroic Action without spending Might - even if they would not normally be able to call the same Heroic Action.</description>
+                  <modifiers />
+                  <modifierGroups />
+                </rule>
+              </rules>
+              <profiles>
+                <profile typeId="80cb-17d0-8683-a212" typeName="Hero" hidden="false" publicationId="8ce3-5f6a-pubN69610" page="141" id="012b-b8ba-6544-18ab" name="Gothmog, Lieutenant of Sauron">
+                  <characteristics>
+                    <characteristic typeId="6d57-f596-e10e-6233" name="Movement">6"</characteristic>
+                    <characteristic typeId="5930-f060-2064-c9d5" name="Fight">5/5+</characteristic>
+                    <characteristic typeId="fbbc-8f2f-c413-710a" name="Strength">4</characteristic>
+                    <characteristic typeId="49e3-08b4-2b5f-a6dd" name="Defense">6</characteristic>
+                    <characteristic typeId="7d79-496f-5c13-35c4" name="Attack">3</characteristic>
+                    <characteristic typeId="8bda-d8a5-a1e7-2146" name="Wounds">3</characteristic>
+                    <characteristic typeId="b88a-7dd4-569c-d0b1" name="Courage">5</characteristic>
+                    <characteristic typeId="db92-6a08-e1ce-a77d" name="Might">3</characteristic>
+                    <characteristic typeId="b509-13ce-7d03-816e" name="Will">3</characteristic>
+                    <characteristic typeId="67f5-8c5e-868c-5bd5" name="Fate">1</characteristic>
+                    <characteristic typeId="fc29-34ba-8883-0379" name="Heroic Actions">March Strike Defence</characteristic>
+                    <characteristic typeId="52a2-dbbe-8d97-a8a2" name="Keywords">Orc Mordor Infantry Hero</characteristic>
+                    <characteristic typeId="2b79-2cec-28e7-0b0d" name="Heroic Tier">Hero of Valour</characteristic>
+                  </characteristics>
+                  <modifiers />
+                  <modifierGroups />
+                </profile>
+              </profiles>
+            </selection>
+            <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::a26c-044d-484f-b4f5" id="b562-4a56-3144-d7cb" name="Warband">
+              <costs>
+                <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+              </costs>
+              <categories />
+              <selections>
+                <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::8ac8-5360-7e05-b51a" id="0f84-dbb4-0da5-ff27" name="Orc Warrior">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections>
+                    <selection number="6" type="model" entryId="5d79-c6ed-c9a1-4bbc::e6b0-7f28-13e2-719c" id="a19d-bcb1-4a2e-e5d2" name="Warrior">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="6" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="30" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles />
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::3f06-c9bf-8bbb-21ea::991c-46d3-d618-c49e" entryGroupId="5d79-c6ed-c9a1-4bbc::02ca-0c35-113a-cd23" id="6384-62bb-9171-76ea" name="Armour">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="5d79-c6ed-c9a1-4bbc::3f06-c9bf-8bbb-21ea::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::a88f-c39b-2e92-efc7::756a-14c1-09c9-e711" entryGroupId="5d79-c6ed-c9a1-4bbc::a88f-c39b-2e92-efc7::f6ad-e4da-7fb4-dae1" id="e53b-e038-ed96-d333" name="Sword">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="5d79-c6ed-c9a1-4bbc::a88f-c39b-2e92-efc7::339a-4276-a57a-0d71::7a14-98a2-be66-6290" name="Sword">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::a410-5610-add5-828e" entryGroupId="5d79-c6ed-c9a1-4bbc::ccf5-4ffd-fc02-357f" id="486f-32db-c545-dca7" name="Spear">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="6" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="84" id="5d79-c6ed-c9a1-4bbc::3fa0-4225-48bf-187f::81c8-1e1f-ffc7-5477" name="Spear">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">An Infantry model that is armed with a spear may assist a friendly model, with the same base size or smaller, in a Fight in a special way. If an unengaged model armed with a spear is in base contact with a friendly model, then it may contribute a single Attack to the Fight using its own Fight value and Strength.  Models that are assisting another model in this way are not considered to be part of the Fight and so cannot be targeted by Strikes, benefit from a Heroic Combat, be knocked Prone by a charging Cavalry model or be knocked Prone if the combat is itself knocked Prone for some other reason. They may, however, benefit from the effects of a friendly banner.  A model armed with a spear may use it as a hand weapon in the Fight phase, although they may not make Special Strikes when using it. A model that fires a missile weapon during the Shoot phase may not support during the Fight phase.  If the model using a spear is a Hero, they may still use Might points to improve a Duel roll and when rolling To Wound, but may not declare Heroic Actions in the Fight phase if they chose to support.  In a multiple combat, the model using a spear may choose to Strike a different target to the model they are supporting.  A model can only gain Support from one spear-armed model at a time, and a spear-armed model may only Support a single model during each turn. A spear-armed model can even support a friendly model that is Prone or armed with a two-handed weapon.  A spear-armed model may Make Way for their ally if they lose a Fight. This counts as the one model who is allowed to Make Way for a friend.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                  </selections>
+                  <rules />
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="3e16-9abf-pubN103678" page="119" id="5d79-c6ed-c9a1-4bbc::d0a0-6e59-3d5b-bdde::9132-8849-03f8-b5c2" name="Orc Warrior">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">6"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">3</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">4</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Orc Mordor Infantry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::8ac8-5360-7e05-b51a" id="d855-0e5e-f31e-17fa" name="Orc Warrior">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections>
+                    <selection number="5" type="model" entryId="5d79-c6ed-c9a1-4bbc::e6b0-7f28-13e2-719c" id="ab3f-25a0-9934-3879" name="Warrior">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="5" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="25" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles />
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::3f06-c9bf-8bbb-21ea::991c-46d3-d618-c49e" entryGroupId="5d79-c6ed-c9a1-4bbc::02ca-0c35-113a-cd23" id="9d7a-2eae-8b94-68ae" name="Armour">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="5d79-c6ed-c9a1-4bbc::3f06-c9bf-8bbb-21ea::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::a88f-c39b-2e92-efc7::756a-14c1-09c9-e711" entryGroupId="5d79-c6ed-c9a1-4bbc::a88f-c39b-2e92-efc7::f6ad-e4da-7fb4-dae1" id="f38e-0590-bacf-c75b" name="Sword">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="5d79-c6ed-c9a1-4bbc::a88f-c39b-2e92-efc7::339a-4276-a57a-0d71::7a14-98a2-be66-6290" name="Sword">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::441e-f943-6e31-6859" entryGroupId="5d79-c6ed-c9a1-4bbc::ccf5-4ffd-fc02-357f" id="f50b-739d-78b5-2592" name="Shield">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="5" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="5d79-c6ed-c9a1-4bbc::c80f-c0aa-1b99-93fe::01cf-1982-b21e-003d" name="Shield">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A Shield increases the Defence characteristic of its bearer by 1. Where the shield is listed in the model's wargear, that bonus is already taken into account in its characteristics profile. However, if the model purchases the shield as an upgrade, you will need to increase its Defence by 1. Shields also have the following rules:  Cumbersome: If a model uses a hand-and-a-half weapon as a two-handed weapon whilst carrying a shield, it will lose the +1 bonus to their defence for the duration of the fight. A model armed with a bow, crossbow, two-handed weapon or pike may carry a shield; however, they do not receive the +1 bonus to their Defence characteristic.  Shielding: Prior to either player rolling any dice in a Duel roll, a shield-armed model who is involved in the Fight may declare that they are Shielding. A model that is Shielding doubles their Attacks when making the Duel roll to see who wins the Fight, however, they make no Strikes against the enemy, having put all of their effort into surviving.  In a Multiple Combat, all friendly models in the same Fight must be Shielding for them to get the bonus. Thus, if one or more friendly models do not have shields, then none of them can use the Shielding rule. Spear and pike-armed models cannot Support a Shielding model.  Models who are Prone can use the Shielding rule like other fighters - in fact this is a very sound plan, since a Prone model cannot make Strikes if they win the Fight anyway.  Cavalry models cannot use the Shieding rule.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                  </selections>
+                  <rules />
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="3e16-9abf-pubN103678" page="119" id="5d79-c6ed-c9a1-4bbc::d0a0-6e59-3d5b-bdde::9132-8849-03f8-b5c2" name="Orc Warrior (Shield)">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">6"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">3</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">5</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Orc Mordor Infantry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::8ac8-5360-7e05-b51a" id="9d7c-d97b-1c3f-b4ff" name="Orc Warrior">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections>
+                    <selection number="1" type="model" entryId="5d79-c6ed-c9a1-4bbc::e6b0-7f28-13e2-719c" id="db3a-9ce4-4568-3548" name="Warrior">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="1" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="5" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles />
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::3f06-c9bf-8bbb-21ea::991c-46d3-d618-c49e" entryGroupId="5d79-c6ed-c9a1-4bbc::02ca-0c35-113a-cd23" id="2ce7-1886-e1d3-5d4f" name="Armour">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="5d79-c6ed-c9a1-4bbc::3f06-c9bf-8bbb-21ea::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::a88f-c39b-2e92-efc7::756a-14c1-09c9-e711" entryGroupId="5d79-c6ed-c9a1-4bbc::a88f-c39b-2e92-efc7::f6ad-e4da-7fb4-dae1" id="e81f-a040-bc55-a8ef" name="Sword">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="5d79-c6ed-c9a1-4bbc::a88f-c39b-2e92-efc7::339a-4276-a57a-0d71::7a14-98a2-be66-6290" name="Sword">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="5d79-c6ed-c9a1-4bbc::9df4-81cf-b7fe-f56a" entryGroupId="5d79-c6ed-c9a1-4bbc::ccf5-4ffd-fc02-357f" id="6b26-4c52-4ad6-46c7" name="Banner">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="25" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="89" id="5d79-c6ed-c9a1-4bbc::a488-cc03-4326-ee5c::3684-378e-2d44-d7b3" name="Banner">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A banner provides a single re-roll to friendly models who are involved in a Fight within 3". Whether it is a model fighting on their own, or several friends all fighting against a common enemy, you can re-roll one D6 in each duel roll to see who wins. This re-roll can be made after your opponent has rolled their own dice to see who wins, but must be made before any Might points are spent to adjust scores.  It makes perfect sense that a banner must be flying in order for its bearer's allies to gain the benefits of it being near, and as such a banner bearer must be standing for the effects of a banner to count. Models cannot benefit from the effects of a banner if the bearer is Prone.  It is possible that one player may re-roll a dice and find themselves winning the Fight - in which case their opponent may wish to use a banner of their own. Remember, a banner only provides one re-roll to each Duel roll.  Any model carrying a banner is encumbered by its weight, and suffers a -1 penalty to their Duel rolls.  A Warrior model carrying a banner who is slain may pass it on to a friendly Warrior model (but not to a Hero model), who is in base contact, not Prone, and is not Engaged in a Fight. Swap the models over if they are the same type of Warrior, or find a suitable banner-carrying substitute in your collection.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                  </selections>
+                  <rules />
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="3e16-9abf-pubN103678" page="119" id="5d79-c6ed-c9a1-4bbc::d0a0-6e59-3d5b-bdde::9132-8849-03f8-b5c2" name="Orc Warrior">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">6"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">3</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">4</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Orc Mordor Infantry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+              </selections>
+              <rules />
+              <profiles />
+            </selection>
+          </selections>
+          <rules />
+          <profiles />
+        </selection>
+        <selection number="1" type="upgrade" entryId="101b-2ecc-667d-a3f2" id="0397-3319-92f9-0283" name="Shagrat, Captain of Cirith Ungol">
+          <costs>
+            <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+            <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+            <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+          </costs>
+          <categories>
+            <category primary="true" entryId="0ce2-d79d-fb91-3fa2" id="4c4b-8ec1-0418-73f0" name="Hero of Fortitude">
+              <rules />
+              <profiles />
+            </category>
+          </categories>
+          <selections>
+            <selection number="1" type="model" entryId="9e35-c7b9-5cbc-db9b" id="e801-fb25-194f-da43" name="Shagrat, Captain of Cirith Ungol">
+              <costs>
+                <cost typeId="8bde-d63c-7caa-c15d" value="100" name=" Points" />
+                <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+              </costs>
+              <categories />
+              <selections>
+                <selection number="1" type="upgrade" entryId="62c1-dd7d-d817-edb1::64a3-2e98-a578-1a2d" entryGroupId="f1bd-9f61-5e38-f3c7" id="a9af-d585-d61a-9135" name="Sword">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="62c1-dd7d-d817-edb1::9fa9-7925-e5fd-638c::7a14-98a2-be66-6290" name="Sword">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="fc85-af29-e9f7-1626::991c-46d3-d618-c49e" entryGroupId="f1bd-9f61-5e38-f3c7" id="acda-828f-cfb1-a182" name="Armour">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="fc85-af29-e9f7-1626::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="c39e-8e98-fd85-8be8::713d-07e8-7930-c83c" entryGroupId="3b41-a34a-9bdd-ee5c" id="3afe-82a8-2f9f-a99b" name="Heavy Armour">
+                  <costs>
+                    <cost typeId="8bde-d63c-7caa-c15d" value="5" name=" Points" />
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="c39e-8e98-fd85-8be8::d05a-1a74-5c16-3788::7437-ddd3-3612-c30e" name="Heavy Armour">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model who is upgraded to wear heavy armour adds 2 to their Defence, unless they are already wearing armour, in which case they add 1.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="e6fc-ea3c-3d95-50ce" entryGroupId="3b41-a34a-9bdd-ee5c" id="d0ec-96d1-d325-6ac7" name="Shield of Cirith Ungol">
+                  <costs>
+                    <cost typeId="8bde-d63c-7caa-c15d" value="10" name=" Points" />
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="8ce3-5f6a-pubN69610" page="142" id="b82a-6a16-311e-df11" name="Shield of Cirith Ungol (Active)">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">This is a shield. Additionally, in a turn in which Shagrat charges, he gains the knock to the Ground bonus exactly as if he were a Cavalry model.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+              </selections>
+              <rules>
+                <rule hidden="false" publicationId="3e16-9abf-pubN102460" page="103" id="e690-2d0f-3ead-1911::72d6-8745-4ad9-d229" name="Blood &amp; Glory (Active)">
+                  <description>If this model kills an enemy Hero model in a Fight, they immediately regain a single point of Might spent earlier in the battle.</description>
+                  <modifiers />
+                  <modifierGroups />
+                </rule>
+              </rules>
+              <profiles>
+                <profile typeId="80cb-17d0-8683-a212" typeName="Hero" hidden="false" publicationId="8ce3-5f6a-pubN69610" page="142" id="4dc0-4d69-790f-8407" name="Shagrat, Captain of Cirith Ungol (Heavy Armour, Shield of Cirith Ungol)">
+                  <characteristics>
+                    <characteristic typeId="6d57-f596-e10e-6233" name="Movement">6"</characteristic>
+                    <characteristic typeId="5930-f060-2064-c9d5" name="Fight">5/4+</characteristic>
+                    <characteristic typeId="fbbc-8f2f-c413-710a" name="Strength">5</characteristic>
+                    <characteristic typeId="49e3-08b4-2b5f-a6dd" name="Defense">7</characteristic>
+                    <characteristic typeId="7d79-496f-5c13-35c4" name="Attack">3</characteristic>
+                    <characteristic typeId="8bda-d8a5-a1e7-2146" name="Wounds">3</characteristic>
+                    <characteristic typeId="b88a-7dd4-569c-d0b1" name="Courage">4</characteristic>
+                    <characteristic typeId="db92-6a08-e1ce-a77d" name="Might">3</characteristic>
+                    <characteristic typeId="b509-13ce-7d03-816e" name="Will">3</characteristic>
+                    <characteristic typeId="67f5-8c5e-868c-5bd5" name="Fate">3</characteristic>
+                    <characteristic typeId="fc29-34ba-8883-0379" name="Heroic Actions">Strike Strength Challenge</characteristic>
+                    <characteristic typeId="52a2-dbbe-8d97-a8a2" name="Keywords">Uruk-hai Mordor Infantry Hero</characteristic>
+                    <characteristic typeId="2b79-2cec-28e7-0b0d" name="Heroic Tier">Hero of Fortitude</characteristic>
+                  </characteristics>
+                  <modifiers />
+                  <modifierGroups />
+                </profile>
+              </profiles>
+            </selection>
+            <selection number="1" type="upgrade" entryId="ef49-fa23-19f1-f653::a26c-044d-484f-b4f5" id="77e3-7e4a-2485-9eaa" name="Warband">
+              <costs>
+                <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+              </costs>
+              <categories />
+              <selections>
+                <selection number="1" type="upgrade" entryId="ef49-fa23-19f1-f653::8ac8-5360-7e05-b51a" id="cf1f-529a-dd25-6b70" name="Orc Warrior">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections>
+                    <selection number="5" type="model" entryId="ef49-fa23-19f1-f653::e6b0-7f28-13e2-719c" id="a270-9c2b-fe2a-44bd" name="Warrior">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="5" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="25" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles />
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="ef49-fa23-19f1-f653::3f06-c9bf-8bbb-21ea::991c-46d3-d618-c49e" entryGroupId="ef49-fa23-19f1-f653::02ca-0c35-113a-cd23" id="227a-8b0b-f0b1-bba8" name="Armour">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="ef49-fa23-19f1-f653::3f06-c9bf-8bbb-21ea::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="ef49-fa23-19f1-f653::a88f-c39b-2e92-efc7::756a-14c1-09c9-e711" entryGroupId="ef49-fa23-19f1-f653::a88f-c39b-2e92-efc7::f6ad-e4da-7fb4-dae1" id="7246-4e95-c17d-95ae" name="Sword">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="ef49-fa23-19f1-f653::a88f-c39b-2e92-efc7::339a-4276-a57a-0d71::7a14-98a2-be66-6290" name="Sword">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="ef49-fa23-19f1-f653::a410-5610-add5-828e" entryGroupId="ef49-fa23-19f1-f653::ccf5-4ffd-fc02-357f" id="6e25-05f6-e566-0c6c" name="Spear">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="5" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="84" id="ef49-fa23-19f1-f653::3fa0-4225-48bf-187f::81c8-1e1f-ffc7-5477" name="Spear">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">An Infantry model that is armed with a spear may assist a friendly model, with the same base size or smaller, in a Fight in a special way. If an unengaged model armed with a spear is in base contact with a friendly model, then it may contribute a single Attack to the Fight using its own Fight value and Strength.  Models that are assisting another model in this way are not considered to be part of the Fight and so cannot be targeted by Strikes, benefit from a Heroic Combat, be knocked Prone by a charging Cavalry model or be knocked Prone if the combat is itself knocked Prone for some other reason. They may, however, benefit from the effects of a friendly banner.  A model armed with a spear may use it as a hand weapon in the Fight phase, although they may not make Special Strikes when using it. A model that fires a missile weapon during the Shoot phase may not support during the Fight phase.  If the model using a spear is a Hero, they may still use Might points to improve a Duel roll and when rolling To Wound, but may not declare Heroic Actions in the Fight phase if they chose to support.  In a multiple combat, the model using a spear may choose to Strike a different target to the model they are supporting.  A model can only gain Support from one spear-armed model at a time, and a spear-armed model may only Support a single model during each turn. A spear-armed model can even support a friendly model that is Prone or armed with a two-handed weapon.  A spear-armed model may Make Way for their ally if they lose a Fight. This counts as the one model who is allowed to Make Way for a friend.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                  </selections>
+                  <rules />
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="3e16-9abf-pubN103678" page="119" id="ef49-fa23-19f1-f653::d0a0-6e59-3d5b-bdde::9132-8849-03f8-b5c2" name="Orc Warrior">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">6"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">3</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">4</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Orc Mordor Infantry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="ef49-fa23-19f1-f653::5243-2341-b721-3b9a" id="7443-9a86-9946-4720" name="Morannon Orc">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections>
+                    <selection number="5" type="model" entryId="ef49-fa23-19f1-f653::f01a-e013-4509-c267" id="6601-e68a-172c-9e90" name="Orc">
+                      <costs>
+                        <cost typeId="8bde-d63c-7caa-c15d" value="35" name=" Points" />
+                        <cost typeId="391e-19ac-b71d-f2e3" value="5" name=" Warriors" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles />
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="ef49-fa23-19f1-f653::9923-f238-fcde-1c4e::0439-1154-4306-11d8" entryGroupId="ef49-fa23-19f1-f653::324e-1ab5-a51c-d2bb" id="984a-9afd-1f40-282c" name="Heavy Armour">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="ef49-fa23-19f1-f653::9923-f238-fcde-1c4e::836d-e8ec-ce9e-6180::7437-ddd3-3612-c30e" name="Heavy Armour">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model who is upgraded to wear heavy armour adds 2 to their Defence, unless they are already wearing armour, in which case they add 1.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="ef49-fa23-19f1-f653::b5ad-f127-3dc4-7736" entryGroupId="ef49-fa23-19f1-f653::bce7-fa7b-86c2-096f" id="91b5-f327-384b-6fad" name="Sword">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="ef49-fa23-19f1-f653::9955-bece-0499-c4c0::7a14-98a2-be66-6290" name="Sword">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="ef49-fa23-19f1-f653::bbcf-6895-34f7-0da0" entryGroupId="ef49-fa23-19f1-f653::fedd-0de1-aafb-5070" id="8ea0-673e-6ee8-3934" name="Shield">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="5" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="ef49-fa23-19f1-f653::9167-ab2c-0a5a-90e6::01cf-1982-b21e-003d" name="Shield">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A Shield increases the Defence characteristic of its bearer by 1. Where the shield is listed in the model's wargear, that bonus is already taken into account in its characteristics profile. However, if the model purchases the shield as an upgrade, you will need to increase its Defence by 1. Shields also have the following rules:  Cumbersome: If a model uses a hand-and-a-half weapon as a two-handed weapon whilst carrying a shield, it will lose the +1 bonus to their defence for the duration of the fight. A model armed with a bow, crossbow, two-handed weapon or pike may carry a shield; however, they do not receive the +1 bonus to their Defence characteristic.  Shielding: Prior to either player rolling any dice in a Duel roll, a shield-armed model who is involved in the Fight may declare that they are Shielding. A model that is Shielding doubles their Attacks when making the Duel roll to see who wins the Fight, however, they make no Strikes against the enemy, having put all of their effort into surviving.  In a Multiple Combat, all friendly models in the same Fight must be Shielding for them to get the bonus. Thus, if one or more friendly models do not have shields, then none of them can use the Shielding rule. Spear and pike-armed models cannot Support a Shielding model.  Models who are Prone can use the Shielding rule like other fighters - in fact this is a very sound plan, since a Prone model cannot make Strikes if they win the Fight anyway.  Cavalry models cannot use the Shieding rule.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                  </selections>
+                  <rules />
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="8ce3-5f6a-pubN69610" page="147" id="ef49-fa23-19f1-f653::d2aa-8ef1-0626-b1e4" name="Morannon Orc (Shield)">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">6"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">4</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">6</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Orc Mordor Infantry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+              </selections>
+              <rules />
+              <profiles />
+            </selection>
+          </selections>
+          <rules />
+          <profiles />
+        </selection>
+        <selection number="1" type="upgrade" entryId="7ef3-cc0b-65cf-d034" id="f1bf-26e0-e16e-ddf2" name="Grishnákh, Orc Captain">
+          <costs>
+            <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+            <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+            <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+          </costs>
+          <categories>
+            <category primary="true" entryId="0ce2-d79d-fb91-3fa2" id="4bd0-1da1-b9c4-c802" name="Hero of Fortitude">
+              <rules />
+              <profiles />
+            </category>
+          </categories>
+          <selections>
+            <selection number="1" type="upgrade" entryId="a6d9-be87-94a0-d29b::a26c-044d-484f-b4f5" id="77fb-9c63-2ee7-0b64" name="Warband">
+              <costs>
+                <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+              </costs>
+              <categories />
+              <selections>
+                <selection number="1" type="upgrade" entryId="a6d9-be87-94a0-d29b::8ac8-5360-7e05-b51a" id="3349-7d8f-7e7c-62d6" name="Orc Warrior">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections>
+                    <selection number="5" type="model" entryId="a6d9-be87-94a0-d29b::e6b0-7f28-13e2-719c" id="8a64-068c-f6af-d586" name="Warrior">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="5" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="25" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles />
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="a6d9-be87-94a0-d29b::3f06-c9bf-8bbb-21ea::991c-46d3-d618-c49e" entryGroupId="a6d9-be87-94a0-d29b::02ca-0c35-113a-cd23" id="0357-aac0-597d-ec0e" name="Armour">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="a6d9-be87-94a0-d29b::3f06-c9bf-8bbb-21ea::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="a6d9-be87-94a0-d29b::a88f-c39b-2e92-efc7::756a-14c1-09c9-e711" entryGroupId="a6d9-be87-94a0-d29b::a88f-c39b-2e92-efc7::f6ad-e4da-7fb4-dae1" id="e873-bcfe-2bd1-e260" name="Sword">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="a6d9-be87-94a0-d29b::a88f-c39b-2e92-efc7::339a-4276-a57a-0d71::7a14-98a2-be66-6290" name="Sword">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="a6d9-be87-94a0-d29b::a410-5610-add5-828e" entryGroupId="a6d9-be87-94a0-d29b::ccf5-4ffd-fc02-357f" id="d97c-0ab1-6369-5bf6" name="Spear">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="5" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="84" id="a6d9-be87-94a0-d29b::3fa0-4225-48bf-187f::81c8-1e1f-ffc7-5477" name="Spear">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">An Infantry model that is armed with a spear may assist a friendly model, with the same base size or smaller, in a Fight in a special way. If an unengaged model armed with a spear is in base contact with a friendly model, then it may contribute a single Attack to the Fight using its own Fight value and Strength.  Models that are assisting another model in this way are not considered to be part of the Fight and so cannot be targeted by Strikes, benefit from a Heroic Combat, be knocked Prone by a charging Cavalry model or be knocked Prone if the combat is itself knocked Prone for some other reason. They may, however, benefit from the effects of a friendly banner.  A model armed with a spear may use it as a hand weapon in the Fight phase, although they may not make Special Strikes when using it. A model that fires a missile weapon during the Shoot phase may not support during the Fight phase.  If the model using a spear is a Hero, they may still use Might points to improve a Duel roll and when rolling To Wound, but may not declare Heroic Actions in the Fight phase if they chose to support.  In a multiple combat, the model using a spear may choose to Strike a different target to the model they are supporting.  A model can only gain Support from one spear-armed model at a time, and a spear-armed model may only Support a single model during each turn. A spear-armed model can even support a friendly model that is Prone or armed with a two-handed weapon.  A spear-armed model may Make Way for their ally if they lose a Fight. This counts as the one model who is allowed to Make Way for a friend.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                  </selections>
+                  <rules />
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="3e16-9abf-pubN103678" page="119" id="a6d9-be87-94a0-d29b::d0a0-6e59-3d5b-bdde::9132-8849-03f8-b5c2" name="Orc Warrior">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">6"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">3</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">4</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Orc Mordor Infantry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="a6d9-be87-94a0-d29b::5243-2341-b721-3b9a" id="2936-f6ee-3d88-b5d8" name="Morannon Orc">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections>
+                    <selection number="5" type="model" entryId="a6d9-be87-94a0-d29b::f01a-e013-4509-c267" id="b847-322f-0708-1138" name="Orc">
+                      <costs>
+                        <cost typeId="8bde-d63c-7caa-c15d" value="35" name=" Points" />
+                        <cost typeId="391e-19ac-b71d-f2e3" value="5" name=" Warriors" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles />
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="a6d9-be87-94a0-d29b::9923-f238-fcde-1c4e::0439-1154-4306-11d8" entryGroupId="a6d9-be87-94a0-d29b::324e-1ab5-a51c-d2bb" id="6189-e412-b9d4-90c4" name="Heavy Armour">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="a6d9-be87-94a0-d29b::9923-f238-fcde-1c4e::836d-e8ec-ce9e-6180::7437-ddd3-3612-c30e" name="Heavy Armour">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model who is upgraded to wear heavy armour adds 2 to their Defence, unless they are already wearing armour, in which case they add 1.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="a6d9-be87-94a0-d29b::b5ad-f127-3dc4-7736" entryGroupId="a6d9-be87-94a0-d29b::bce7-fa7b-86c2-096f" id="4741-093e-258a-fcba" name="Sword">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="a6d9-be87-94a0-d29b::9955-bece-0499-c4c0::7a14-98a2-be66-6290" name="Sword">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="a6d9-be87-94a0-d29b::bbcf-6895-34f7-0da0" entryGroupId="a6d9-be87-94a0-d29b::fedd-0de1-aafb-5070" id="668b-7c3b-af71-86cd" name="Shield">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="5" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="a6d9-be87-94a0-d29b::9167-ab2c-0a5a-90e6::01cf-1982-b21e-003d" name="Shield">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A Shield increases the Defence characteristic of its bearer by 1. Where the shield is listed in the model's wargear, that bonus is already taken into account in its characteristics profile. However, if the model purchases the shield as an upgrade, you will need to increase its Defence by 1. Shields also have the following rules:  Cumbersome: If a model uses a hand-and-a-half weapon as a two-handed weapon whilst carrying a shield, it will lose the +1 bonus to their defence for the duration of the fight. A model armed with a bow, crossbow, two-handed weapon or pike may carry a shield; however, they do not receive the +1 bonus to their Defence characteristic.  Shielding: Prior to either player rolling any dice in a Duel roll, a shield-armed model who is involved in the Fight may declare that they are Shielding. A model that is Shielding doubles their Attacks when making the Duel roll to see who wins the Fight, however, they make no Strikes against the enemy, having put all of their effort into surviving.  In a Multiple Combat, all friendly models in the same Fight must be Shielding for them to get the bonus. Thus, if one or more friendly models do not have shields, then none of them can use the Shielding rule. Spear and pike-armed models cannot Support a Shielding model.  Models who are Prone can use the Shielding rule like other fighters - in fact this is a very sound plan, since a Prone model cannot make Strikes if they win the Fight anyway.  Cavalry models cannot use the Shieding rule.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                  </selections>
+                  <rules />
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="8ce3-5f6a-pubN69610" page="147" id="a6d9-be87-94a0-d29b::d2aa-8ef1-0626-b1e4" name="Morannon Orc (Shield)">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">6"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">4</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">6</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Orc Mordor Infantry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+              </selections>
+              <rules />
+              <profiles />
+            </selection>
+            <selection number="1" type="model" entryId="2ec5-c684-a4c1-3d06::65f3-c0b0-6710-054f" id="9e60-e7ca-788d-c991" name="Grishnákh, Orc Captain">
+              <costs>
+                <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                <cost typeId="8bde-d63c-7caa-c15d" value="50" name=" Points" />
+                <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+              </costs>
+              <categories />
+              <selections>
+                <selection number="1" type="upgrade" entryId="2ec5-c684-a4c1-3d06::4aee-48ac-6232-1ce4::64a3-2e98-a578-1a2d" entryGroupId="2ec5-c684-a4c1-3d06::b0da-4ad4-54a7-b3ba" id="8750-1b7d-3ec8-7ed3" name="Sword">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="2ec5-c684-a4c1-3d06::4aee-48ac-6232-1ce4::9fa9-7925-e5fd-638c::7a14-98a2-be66-6290" name="Sword">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="2ec5-c684-a4c1-3d06::c4b7-f095-c80c-b184::991c-46d3-d618-c49e" entryGroupId="2ec5-c684-a4c1-3d06::b0da-4ad4-54a7-b3ba" id="4ade-e8f7-33ce-e937" name="Armour">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="2ec5-c684-a4c1-3d06::c4b7-f095-c80c-b184::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+              </selections>
+              <rules>
+                <rule hidden="false" publicationId="3e16-9abf-pubN102460" page="103" id="2ec5-c684-a4c1-3d06::b3de-1d80-ffab-74c9::45f3-a8ee-bfe5-dcfc" name="Backstabbers (Active)">
+                  <description>This model receives +1 to their To Wound rolls when making Strikes against a Trapped model. This bonus is cumulative with other bonuses, such as using a two-handed weapon.</description>
+                  <modifiers />
+                  <modifierGroups />
+                </rule>
+              </rules>
+              <profiles>
+                <profile typeId="80cb-17d0-8683-a212" typeName="Hero" hidden="false" publicationId="3e16-9abf-pubN103678" page="143" id="2ec5-c684-a4c1-3d06::0454-a974-32c2-4d84" name="Grishnákh, Orc Captain">
+                  <characteristics>
+                    <characteristic typeId="6d57-f596-e10e-6233" name="Movement">6"</characteristic>
+                    <characteristic typeId="5930-f060-2064-c9d5" name="Fight">4/5+</characteristic>
+                    <characteristic typeId="fbbc-8f2f-c413-710a" name="Strength">4</characteristic>
+                    <characteristic typeId="49e3-08b4-2b5f-a6dd" name="Defense">5</characteristic>
+                    <characteristic typeId="7d79-496f-5c13-35c4" name="Attack">2</characteristic>
+                    <characteristic typeId="8bda-d8a5-a1e7-2146" name="Wounds">2</characteristic>
+                    <characteristic typeId="b88a-7dd4-569c-d0b1" name="Courage">3</characteristic>
+                    <characteristic typeId="db92-6a08-e1ce-a77d" name="Might">3</characteristic>
+                    <characteristic typeId="b509-13ce-7d03-816e" name="Will">1</characteristic>
+                    <characteristic typeId="67f5-8c5e-868c-5bd5" name="Fate">1</characteristic>
+                    <characteristic typeId="fc29-34ba-8883-0379" name="Heroic Actions">Strike</characteristic>
+                    <characteristic typeId="52a2-dbbe-8d97-a8a2" name="Keywords">Orc
+Mordor
+Infantry
+Hero</characteristic>
+                    <characteristic typeId="2b79-2cec-28e7-0b0d" name="Heroic Tier">Hero of Fortitude</characteristic>
+                  </characteristics>
+                  <modifiers />
+                  <modifierGroups />
+                </profile>
+                <profile typeId="ef4f-25f2-79a5-b8a3" typeName="Trackers" hidden="false" id="2ec5-c684-a4c1-3d06::5f57-23f0-7238-8807" name="Grishnákh, Orc Captain">
+                  <characteristics>
+                    <characteristic typeId="184a-5554-9c8c-3b09" name="Might">OOO</characteristic>
+                    <characteristic typeId="5d9a-0b1c-376b-442a" name="Will">O</characteristic>
+                    <characteristic typeId="1ceb-5c00-93b9-7378" name="Fate">O</characteristic>
+                    <characteristic typeId="104e-585c-9e2b-fb3f" name="Wounds">OO</characteristic>
+                  </characteristics>
+                  <modifiers />
+                  <modifierGroups />
+                </profile>
+              </profiles>
+            </selection>
+          </selections>
+          <rules />
+          <profiles />
+        </selection>
+        <selection number="1" type="upgrade" entryId="4fdc-7b8d-a5c6-ac06::3a41-6ae1-13c3-89ba" id="4174-107e-f070-1e18" name="Our Enemy is Ready, His full Strength gathered">
+          <costs>
+            <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+            <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+            <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+          </costs>
+          <categories>
+            <category primary="true" entryId="990b-c865-7625-9987" id="8e65-5009-ab34-d0bc" name="Misc">
+              <rules />
+              <profiles />
+            </category>
+          </categories>
+          <selections />
+          <rules>
+            <rule hidden="false" publicationId="3e16-9abf-pubN103678" page="134" id="4fdc-7b8d-a5c6-ac06::83bc-d7d9-7828-fb6a" name="Our Enemy is Ready, His full Strength gathered">
+              <description>Whilst you have more models on the board than your opponent, friendly Mordor Warrior models gain +1 Courage and may re-roll 1s To Wound when making Strikes.</description>
+              <modifiers />
+              <modifierGroups />
+            </rule>
+          </rules>
+          <profiles />
+        </selection>
+        <selection number="1" type="upgrade" entryId="3995-9b66-cd0d-a8f7" id="9e65-710d-14a6-d944" name="Kardûsh The Firecaller">
+          <costs>
+            <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+            <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+            <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+          </costs>
+          <categories>
+            <category primary="true" entryId="0ce2-d79d-fb91-3fa2" id="f8df-d8bf-be40-6019" name="Hero of Fortitude">
+              <rules />
+              <profiles />
+            </category>
+          </categories>
+          <selections>
+            <selection number="1" type="model" entryId="dbd3-da41-1f67-0c64" id="6564-09d8-e8d4-8a42" name="Kardûsh The Firecaller">
+              <costs>
+                <cost typeId="8bde-d63c-7caa-c15d" value="60" name=" Points" />
+                <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+              </costs>
+              <categories />
+              <selections>
+                <selection number="1" type="upgrade" entryId="aa00-082d-8f2d-e2a0::991c-46d3-d618-c49e" entryGroupId="afa3-9666-b73d-8294" id="9056-cd66-2aa8-6a36" name="Armour">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="aa00-082d-8f2d-e2a0::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="9282-3797-a475-b4a1::9cb9-9ebe-8ffa-86f3" entryGroupId="afa3-9666-b73d-8294" id="7b3a-1615-4e32-747f" name="Spear">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections />
+                  <rules />
+                  <profiles>
+                    <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="84" id="9282-3797-a475-b4a1::fdfe-f1e0-c59e-6c5b::81c8-1e1f-ffc7-5477" name="Spear">
+                      <characteristics>
+                        <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">An Infantry model that is armed with a spear may assist a friendly model, with the same base size or smaller, in a Fight in a special way. If an unengaged model armed with a spear is in base contact with a friendly model, then it may contribute a single Attack to the Fight using its own Fight value and Strength.  Models that are assisting another model in this way are not considered to be part of the Fight and so cannot be targeted by Strikes, benefit from a Heroic Combat, be knocked Prone by a charging Cavalry model or be knocked Prone if the combat is itself knocked Prone for some other reason. They may, however, benefit from the effects of a friendly banner.  A model armed with a spear may use it as a hand weapon in the Fight phase, although they may not make Special Strikes when using it. A model that fires a missile weapon during the Shoot phase may not support during the Fight phase.  If the model using a spear is a Hero, they may still use Might points to improve a Duel roll and when rolling To Wound, but may not declare Heroic Actions in the Fight phase if they chose to support.  In a multiple combat, the model using a spear may choose to Strike a different target to the model they are supporting.  A model can only gain Support from one spear-armed model at a time, and a spear-armed model may only Support a single model during each turn. A spear-armed model can even support a friendly model that is Prone or armed with a two-handed weapon.  A spear-armed model may Make Way for their ally if they lose a Fight. This counts as the one model who is allowed to Make Way for a friend.</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+              </selections>
+              <rules>
+                <rule hidden="false" publicationId="8ce3-5f6a-pubN69610" page="143" id="21b7-00ee-6f1a-a3f3" name="Shadow Pawn (Passive)">
+                  <description>At the start of any Priority phase, before any are rolled, Kardûsh's controlling player can remove him from the board as a casualty to allow a single friendly Ringwraith model within 6" to immediately regain D6 Will points. This cannot take the Ringwraith model's Will points above their starting level.</description>
+                  <modifiers />
+                  <modifierGroups />
+                </rule>
+                <rule hidden="false" publicationId="8ce3-5f6a-pubN69610" page="143" id="c155-06dd-cd19-874d" name="Heart of Darkness (Active)">
+                  <description>At the start of the Priority phase, before any dice are rolled, Kardûsh can drain the life force of a friendly Orc model within 6", causing it to be removed as a casualty. Kardûsh then immediately regains D3 Will points. This cannot take his Will points above their starting level.</description>
+                  <modifiers />
+                  <modifierGroups />
+                </rule>
+              </rules>
+              <profiles>
+                <profile typeId="80cb-17d0-8683-a212" typeName="Hero" hidden="false" publicationId="8ce3-5f6a-pubN69610" page="143" id="d3d5-f0d9-f8d5-2ee4" name="Kardûsh The Firecaller">
+                  <characteristics>
+                    <characteristic typeId="6d57-f596-e10e-6233" name="Movement">6</characteristic>
+                    <characteristic typeId="5930-f060-2064-c9d5" name="Fight">3/5+</characteristic>
+                    <characteristic typeId="fbbc-8f2f-c413-710a" name="Strength">3</characteristic>
+                    <characteristic typeId="49e3-08b4-2b5f-a6dd" name="Defense">4</characteristic>
+                    <characteristic typeId="7d79-496f-5c13-35c4" name="Attack">1</characteristic>
+                    <characteristic typeId="8bda-d8a5-a1e7-2146" name="Wounds">2</characteristic>
+                    <characteristic typeId="b88a-7dd4-569c-d0b1" name="Courage">3</characteristic>
+                    <characteristic typeId="db92-6a08-e1ce-a77d" name="Might">1</characteristic>
+                    <characteristic typeId="b509-13ce-7d03-816e" name="Will">3</characteristic>
+                    <characteristic typeId="67f5-8c5e-868c-5bd5" name="Fate">1</characteristic>
+                    <characteristic typeId="fc29-34ba-8883-0379" name="Heroic Actions">Channelling</characteristic>
+                    <characteristic typeId="52a2-dbbe-8d97-a8a2" name="Keywords">Orc Mordor Infantry Hero</characteristic>
+                    <characteristic typeId="2b79-2cec-28e7-0b0d" name="Heroic Tier">Hero of Fortitude</characteristic>
+                  </characteristics>
+                  <modifiers />
+                  <modifierGroups />
+                </profile>
+                <profile typeId="a3c2-3abf-c93f-a686" typeName="Magical Power" hidden="false" publicationId="3e16-9abf-pubN102460" page="98" id="45b9-48eb-456a-b8e0::375a-7bc5-20d4-62d1" name="Fury  (Mordor Orc)">
+                  <characteristics>
+                    <characteristic typeId="7eb8-9bc7-978c-666c" name="Duration">Exhaustion</characteristic>
+                    <characteristic typeId="1ac9-444c-5045-e1c0" name="Range">6"</characteristic>
+                    <characteristic typeId="0920-e245-e3c2-d982" name="Casting">3+</characteristic>
+                    <characteristic typeId="a482-2126-3af0-f1b8" name="Rule">Every model with this Magical Power will have a bracket after Fury denoting the models that will be affected by the power (e.g., Fury (Goblin)). This power targets all friendly models within 6" that are included in the bracket. Note that if there is more than one keyword within the brackets, then a model must have all the keywords to benefit from Fury. Whilst this power is in effect, all targets will automatically pass any Courage tests they are required to make. In the case of Cavalry models, a degree of common sense is required when applying this effect. For example, if a Mordor Orc Shaman casts Fury (Mordor Orc) and a Warg Rider is within range of the Magical Power, only the Orc rider will feel the benefits as only the rider is a Mordor Orc.</characteristic>
+                    <characteristic typeId="cbd7-145c-ff78-c8f0" name="Channelled">Additionally, each time a target suffers a Wound whilst within range of at least one friendly model that has cast Fury, roll a D6. On the roll of a 6, the target ignores the Wound exactly as if a point on Fate has been spent. This roll is taken immediately after the Wound has been suffered, can be taken before Fate rolls are made and Might may be used to influence it.</characteristic>
+                  </characteristics>
+                  <modifiers />
+                  <modifierGroups />
+                </profile>
+                <profile typeId="a3c2-3abf-c93f-a686" typeName="Magical Power" hidden="false" publicationId="3e16-9abf-pubN102460" page="98" id="96a2-bc6a-f4bc-7c8a::ec76-5b14-a24c-a478" name="Flameburst">
+                  <characteristics>
+                    <characteristic typeId="7eb8-9bc7-978c-666c" name="Duration">Instant</characteristic>
+                    <characteristic typeId="1ac9-444c-5045-e1c0" name="Range">6"</characteristic>
+                    <characteristic typeId="0920-e245-e3c2-d982" name="Casting">3+</characteristic>
+                    <characteristic typeId="a482-2126-3af0-f1b8" name="Rule">This power targets one enemy model within range. The target immediately suffers one Strength 6 hit.</characteristic>
+                    <characteristic typeId="cbd7-145c-ff78-c8f0" name="Channelled">The target instead suffers the effects of the Set Ablaze special rule.</characteristic>
+                  </characteristics>
+                  <modifiers />
+                  <modifierGroups />
+                </profile>
+              </profiles>
+            </selection>
+            <selection number="1" type="upgrade" entryId="44a7-d58b-d056-8363::a26c-044d-484f-b4f5" id="40cc-9bee-1878-7f0e" name="Warband">
+              <costs>
+                <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+              </costs>
+              <categories />
+              <selections>
+                <selection number="1" type="upgrade" entryId="44a7-d58b-d056-8363::b9e3-89c8-6a0c-d9e0" id="40a3-ce7f-a19d-14f1" name="Mordor Troll">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections>
+                    <selection number="1" type="model" entryId="44a7-d58b-d056-8363::6f26-364e-a609-9d7b" id="45e1-d6e8-4a72-fdd3" name="Troll">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="1" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="100" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles />
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="44a7-d58b-d056-8363::9e68-3204-b199-adbe::991c-46d3-d618-c49e" entryGroupId="44a7-d58b-d056-8363::6ec0-d44c-39eb-3d12" id="c509-0023-9509-be12" name="Armour">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="44a7-d58b-d056-8363::9e68-3204-b199-adbe::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="44a7-d58b-d056-8363::f659-5659-ee57-69a4::a377-602c-9c62-a7bb" entryGroupId="44a7-d58b-d056-8363::f659-5659-ee57-69a4::0092-8c65-690d-8750" id="9a94-f5e1-d984-5259" name="Hand-and-a-Half Hammer">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules>
+                        <rule hidden="false" publicationId="3e16-9abf-pubN102460" page="83" id="44a7-d58b-d056-8363::f659-5659-ee57-69a4::1e0f-b38e-681f-0c0c::1942-7fe3-0a57-32a1" name="Hand-and-a-Half">
+                          <description>A hand-and-a-half weapon can be used as either a single-handed weapon or a two-handed weapon. Whenever a model armed with a hand-and-a-half weapon is involved in a Fight, the controlling player must decide at the start of the Fight whether they will be using their weapon as a single-handed weapon or a two-handed weapon.</description>
+                          <modifiers />
+                          <modifierGroups />
+                        </rule>
+                      </rules>
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="44a7-d58b-d056-8363::f659-5659-ee57-69a4::6b84-d2c9-c8c1-bc66::b7fe-3e5e-968f-0189" name="Hammer">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon may opt to Bash. If the bashing model's side wins the Duel roll, they may attempt to knock a single opponent (of their choice) Prone instead of making Strikes. Both models roll a further D6 and add their Strength value. The basher adds a further 1 to this total if the weapon is two-handed. If the bashing model's total is equal to or higher than their opponent's total, that opponent is immediately knocked Prone. In a multiple combat, it is often a good idea to do the Bash first, as if successful, other friendly models within the multiple combat may benefit from the enemy being knocked Prone if the Bash is successful.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                  </selections>
+                  <rules>
+                    <rule hidden="false" publicationId="3e16-9abf-pubN102460" page="107" id="44a7-d58b-d056-8363::6866-dea2-16eb-e1f9::39ee-f288-50d5-973e" name="Throw Stones (Active)">
+                      <description>If this model does not move at all during the Move phase, then in the Shoot phase it may make a shooting attack with the Strength and range specified in the model's profile.</description>
+                      <modifiers />
+                      <modifierGroups />
+                    </rule>
+                    <rule hidden="false" publicationId="3e16-9abf-pubN102460" page="107" id="44a7-d58b-d056-8363::4123-58e1-fd3b-2dec::85b0-001b-cf06-77c8" name="Terror (Passive)">
+                      <description>Should a model wish to Charge this model, it must first take a Courage test before it moves. If the test is passed, the model may Charge as normal. If the test is failed, the model does not Charge and may not move at all this turn.
+
+Sometimes, a model will only cause Terror in certain enemies. In these instances, the creatures that are affected are clearly listed, and only those models need to make a Courage test before charging this model. For example, a model with the Terror (Orc) will cause Terrior in all Orc models.</description>
+                      <modifiers />
+                      <modifierGroups />
+                    </rule>
+                  </rules>
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="3e16-9abf-pubN103678" page="122" id="44a7-d58b-d056-8363::ab71-5d00-faa8-80f3::93e4-fd7b-de66-8cbd" name="Mordor Troll">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">6"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">7/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">7</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">7</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">3</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">3</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">4</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Troll Mordor Monster Infantry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                    <profile typeId="62a5-708a-12af-2fa2" typeName="Shooting Weapon" hidden="false" publicationId="3e16-9abf-pubN102460" id="44a7-d58b-d056-8363::21f5-4182-f114-908e::97f1-b8b1-1c11-c73b" name="Throw Stones">
+                      <characteristics>
+                        <characteristic typeId="8226-830c-00d8-7ea7" name="Range">12"</characteristic>
+                        <characteristic typeId="d5c2-b777-8fd5-cab3" name="Strength">8</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+                <selection number="1" type="upgrade" entryId="44a7-d58b-d056-8363::ee1d-9e8b-36fa-c843" id="c6f0-81c0-114d-fa70" name="Warg Rider">
+                  <costs>
+                    <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                    <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                    <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                  </costs>
+                  <categories />
+                  <selections>
+                    <selection number="4" type="model" entryId="44a7-d58b-d056-8363::5731-bb2c-54ef-c6a2" id="0ec3-00e3-2b7a-486a" name="Rider">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="4" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="44" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles />
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="44a7-d58b-d056-8363::5b48-3d8c-9ae8-9289::d632-0efe-5e4e-415f" entryGroupId="44a7-d58b-d056-8363::abf1-0e9a-1ff8-7ae7" id="84fe-6191-7436-7e25" name="Warg">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="3e16-9abf-pubN102460" page="61" id="44a7-d58b-d056-8363::5b48-3d8c-9ae8-9289::987f-f80c-5ff4-c61f::e642-8a1b-d6b9-2d68" name="Warg">
+                          <characteristics>
+                            <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">10"</characteristic>
+                            <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                            <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">4</characteristic>
+                            <characteristic typeId="d64a-e776-38fd-3019" name="Defense">4</characteristic>
+                            <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                            <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                            <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                            <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Warg Infantry Warrior</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="44a7-d58b-d056-8363::cd58-b893-b9f5-7d74::991c-46d3-d618-c49e" entryGroupId="44a7-d58b-d056-8363::abf1-0e9a-1ff8-7ae7" id="59a1-0e62-e7db-d2ae" name="Armour">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="44a7-d58b-d056-8363::cd58-b893-b9f5-7d74::8725-d3df-5ac3-fa5e::9610-b516-f771-251d" name="Armour">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model upgraded to wear armour adds 1 to their Defence.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="44a7-d58b-d056-8363::68cb-2653-9b97-9d06::64a3-2e98-a578-1a2d" entryGroupId="44a7-d58b-d056-8363::abf1-0e9a-1ff8-7ae7" id="a28c-cf64-1ece-b991" name="Sword">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="0" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="87" id="44a7-d58b-d056-8363::68cb-2653-9b97-9d06::9fa9-7925-e5fd-638c::7a14-98a2-be66-6290" name="Sword">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A model armed with this weapon, who has an equal to or higher Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Feint. If they do so, they reduce their Fight value by D3 when working out who wins the Fight. If the feinting model's side wins the Duel roll, however, they may re-roll any To Wound rolls of a 1.  A model armed with this weapon, who has a lower Fight value at the start of the fight than their opponent (including any Supporting models), may opt to Stab. If they do so, they may re-roll 1s To Wound if their side wins the Duel roll. However, due to the reckless abandon with which a stabbing model tends to throw themselves at their enemy, if their side loses the Duel roll, they will suffer one Strength 2 hit immediately after the Fight has been resolved.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                    <selection number="1" type="upgrade" entryId="44a7-d58b-d056-8363::0abf-c2e6-f2ad-4bd7" entryGroupId="44a7-d58b-d056-8363::99ba-d2b0-d5ad-fb87" id="8ce4-177a-1148-b770" name="Shield">
+                      <costs>
+                        <cost typeId="391e-19ac-b71d-f2e3" value="0" name=" Warriors" />
+                        <cost typeId="8bde-d63c-7caa-c15d" value="4" name=" Points" />
+                        <cost typeId="ab3b-a62b-ef54-533c" value="0" name=" Bow" />
+                      </costs>
+                      <categories />
+                      <selections />
+                      <rules />
+                      <profiles>
+                        <profile typeId="c6d6-90e7-ef64-8355" typeName="Wargear" hidden="false" publicationId="3e16-9abf-pubN102460" page="91" id="44a7-d58b-d056-8363::20e2-caa2-905a-a96e::01cf-1982-b21e-003d" name="Shield">
+                          <characteristics>
+                            <characteristic typeId="327f-0755-cd3a-d1a0" name="Rules">A Shield increases the Defence characteristic of its bearer by 1. Where the shield is listed in the model's wargear, that bonus is already taken into account in its characteristics profile. However, if the model purchases the shield as an upgrade, you will need to increase its Defence by 1. Shields also have the following rules:  Cumbersome: If a model uses a hand-and-a-half weapon as a two-handed weapon whilst carrying a shield, it will lose the +1 bonus to their defence for the duration of the fight. A model armed with a bow, crossbow, two-handed weapon or pike may carry a shield; however, they do not receive the +1 bonus to their Defence characteristic.  Shielding: Prior to either player rolling any dice in a Duel roll, a shield-armed model who is involved in the Fight may declare that they are Shielding. A model that is Shielding doubles their Attacks when making the Duel roll to see who wins the Fight, however, they make no Strikes against the enemy, having put all of their effort into surviving.  In a Multiple Combat, all friendly models in the same Fight must be Shielding for them to get the bonus. Thus, if one or more friendly models do not have shields, then none of them can use the Shielding rule. Spear and pike-armed models cannot Support a Shielding model.  Models who are Prone can use the Shielding rule like other fighters - in fact this is a very sound plan, since a Prone model cannot make Strikes if they win the Fight anyway.  Cavalry models cannot use the Shieding rule.</characteristic>
+                          </characteristics>
+                          <modifiers />
+                          <modifierGroups />
+                        </profile>
+                      </profiles>
+                    </selection>
+                  </selections>
+                  <rules />
+                  <profiles>
+                    <profile typeId="41b1-0f32-a644-93b4" typeName="Warrior" hidden="false" publicationId="3e16-9abf-pubN103678" page="120" id="44a7-d58b-d056-8363::ccd2-f60c-03b2-c0d6::ee66-f9e3-20e8-fbc7" name="Warg Rider (Shield)">
+                      <characteristics>
+                        <characteristic typeId="b547-99cc-2ac6-2a69" name="Movement">6"</characteristic>
+                        <characteristic typeId="7b7e-d26d-b685-545a" name="Fight">3/5+</characteristic>
+                        <characteristic typeId="241d-1a6f-8463-5f1c" name="Strength">3</characteristic>
+                        <characteristic typeId="d64a-e776-38fd-3019" name="Defense">5</characteristic>
+                        <characteristic typeId="6235-3861-befd-7242" name="Attack">1</characteristic>
+                        <characteristic typeId="ae83-f720-58f2-1a6d" name="Wounds">1</characteristic>
+                        <characteristic typeId="a0e1-d7a9-598e-1545" name="Courage">2</characteristic>
+                        <characteristic typeId="493a-2bc7-2330-a17b" name="Keywords">Orc Mordor Cavalry Warrior</characteristic>
+                      </characteristics>
+                      <modifiers />
+                      <modifierGroups />
+                    </profile>
+                  </profiles>
+                </selection>
+              </selections>
+              <rules />
+              <profiles />
+            </selection>
+          </selections>
+          <rules />
+          <profiles />
+        </selection>
+      </selections>
+      <rules />
+      <profiles />
+    </force>
+  </forces>
+  <tags />
+</roster>

@@ -28,6 +28,8 @@ import { RendererAoS } from "./rendererAoS";
 import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
 import { Wh40kRenderer } from "./renderer40k10th";
+import { CreateMESBGRoster } from "./rosterMESBG";
+import { renderMESBG } from "./rendererMESBG";
 
 import JSZip from "jszip";
 import { reject } from "lodash";
@@ -121,7 +123,13 @@ function parseXML(xmldata: string) {
       const renderer: Wh40kRenderer = new Wh40kRenderer(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  }      
+  } else if (gameType === "Middle-Earth Strategy Battle Game") {
+    const roster = CreateMESBGRoster(doc);
+    if(roster !== null) {
+      console.log(roster);
+      renderMESBG(roster, rosterTitle, rosterList, forceUnits);
+    }
+  }
   // TODO: add (proper) support for Apocalypse
   // else if (gameType == "Warhammer 40,000: Apocalypse") {
   //    let roster = Create40kRoster(doc);
