@@ -44,6 +44,7 @@ const renderEquipmentList = (n:string) => textEl("p", "mesbg_equipmentList", n);
 const checkboxStates = {
   showTracker: true,
   showRules: true,
+  woundChart: true,
 }
 type CheckboxStates = keyof typeof checkboxStates;
 
@@ -84,6 +85,7 @@ export const renderMESBG = (roster: RosterMESBG , titleEl: HTMLElement | null, l
     const _boxes = el("div", "mesbg_noPrint mesbg_toggleHolder");
     _boxes.appendChild(getCheckboxAndLabel("showTracker", "include hero points tracker"));
     _boxes.appendChild(getCheckboxAndLabel("showRules", "show rules text"));
+    _boxes.appendChild(getCheckboxAndLabel("woundChart", "include To Wound Chart"));
     titleEl.appendChild(_boxes);
     titleEl.appendChild(renderRosterName(roster.name));
     titleEl.appendChild(
@@ -335,6 +337,51 @@ export const renderMESBG = (roster: RosterMESBG , titleEl: HTMLElement | null, l
         });
       });
       _wrapper.appendChild(_trackerTable);
+      // TO WOUND CHART
+      const _toWound = el("table", "mesbg_pageBreak mesbg_woundChart");
+      _toWound.innerHTML = `
+        <thead>
+          <tr>
+            <th class="mesbg_toWoundHeader">&nbsp;</th><th class="mesbg_toWoundHeader" colspan="11">Defence</th>
+          </tr>
+        <thead>
+        <tbody>
+          <tr>
+            <th class="mesbg_toWoundHeader" rowspan="11" style="transform: rotate(-90deg);">Strength</th>
+            <th>&nbsp</th> <th>1</th> <th>2</th> <th>3</th> <th>4</th> <th>5</th> <th>6</th> <th>7</th> <th>8</th> <th>9</th> <th>10</th>
+          </tr>
+          <tr>
+            <th>1</th> <td>4</td> <td>5</td> <td>5</td> <td>6</td> <td>6</td> <td>6/4</td> <td>6/5</td> <td>6/6</td> <td>-</td> <td>-</td>
+          </tr>
+          <tr>
+            <th>2</th> <td>4</td> <td>4</td> <td>5</td> <td>5</td> <td>6</td> <td>6</td> <td>6/4</td> <td>6/5</td> <td>6/6</td> <td>-</td>
+          </tr>
+          <tr>
+            <th>3</th> <td>3</td> <td>4</td> <td>4</td> <td>5</td> <td>5</td> <td>6</td> <td>6</td> <td>6/4</td> <td>6/5</td> <td>6/6</td>
+          </tr>
+          <tr>
+            <th>4</th> <td>3</td> <td>3</td> <td>4</td> <td>4</td> <td>5</td> <td>5</td> <td>6</td> <td>6</td> <td>6/4</td> <td>6/5</td>
+          </tr>
+          <tr>
+            <th>5</th> <td>3</td> <td>3</td> <td>3</td> <td>4</td> <td>4</td> <td>5</td> <td>5</td> <td>6</td> <td>6</td> <td>6/4</td> </tr>
+          <tr>
+            <th>6</th> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>4</td> <td>4</td> <td>5</td> <td>5</td> <td>6</td> <td>6</td>
+          </tr>
+          <tr>
+            <th>7</th> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>4</td> <td>4</td> <td>5</td> <td>5</td> <td>6</td>
+          </tr>
+          <tr>
+            <th>8</th> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>4</td> <td>4</td> <td>5</td> <td>5</td>
+          </tr>
+          <tr>
+            <th>9</th> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>4</td> <td>4</td> <td>5</td>
+          </tr>
+          <tr>
+            <th>10</th> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>3</td> <td>4</td> <td>4</td>
+          </tr>
+        </tbody>
+      `;
+      _wrapper.appendChild(_toWound);
     })
   }
 }

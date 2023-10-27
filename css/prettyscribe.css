@@ -473,6 +473,27 @@ label {
     column-count: 2;
     column-gap: 24px;
 }
+.mesbg_woundChart {
+    border-collapse: collapse;
+}
+.mesbg_woundChart td,
+.mesbg_woundChart th {
+    border: 1px solid #666;
+    font-size: 18px;
+    width: 4em;
+    height: 4em;
+    text-align: center;
+}
+.mesbg_woundChart tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+}
+.mesbg_woundChart th {
+    background-color: #efefef;
+}
+.mesbg_woundChart th.mesbg_toWoundHeader {
+    background-color: transparent;
+    border: none;
+}
 @media screen and (max-width: 800px) {
     .mesbg_twoColumn {
         column-count: 1;
