@@ -14,28 +14,27 @@
     OF THIS SOFTWARE.
 */
 
-import {BaseNotes, Compare, Roster40k, Unit, UnitRole, UnitRoleToString} from "./roster40k";
 import {Renderer} from "./renderer";
+import {Wh40k} from "./roster40k10th";
 
-export class Renderer40k implements Renderer {
+export class Wh40kRenderer implements Renderer {
 
-    private readonly _roster: Roster40k | null = null;
+    private readonly _roster: Wh40k.Roster40k | null = null;
 
-    private _roles: Map<UnitRole, HTMLImageElement | null> = new Map();
+    private _roles: Map<Wh40k.UnitRole, HTMLImageElement | null> = new Map();
 
-    constructor(roster: Roster40k) {
+    constructor(roster: Wh40k.Roster40k) {
 
         this._roster = roster;
 
-        this._roles.set(UnitRole.HQ, document.getElementById('role_hq') as HTMLImageElement);
-        this._roles.set(UnitRole.TR, document.getElementById('role_tr') as HTMLImageElement);
-        this._roles.set(UnitRole.EL, document.getElementById('role_el') as HTMLImageElement);
-        this._roles.set(UnitRole.FA, document.getElementById('role_fa') as HTMLImageElement);
-        this._roles.set(UnitRole.HS, document.getElementById('role_hs') as HTMLImageElement);
-        this._roles.set(UnitRole.FL, document.getElementById('role_fl') as HTMLImageElement);
-        this._roles.set(UnitRole.DT, document.getElementById('role_dt') as HTMLImageElement);
-        this._roles.set(UnitRole.FT, document.getElementById('role_ft') as HTMLImageElement);
-        this._roles.set(UnitRole.LW, document.getElementById('role_lw') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.EpicHero, document.getElementById('role_hq') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Character, document.getElementById('role_hq') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Battleline, document.getElementById('role_tr') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Infantry, document.getElementById('role_el') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Vehicle, document.getElementById('role_hs') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Mounted, document.getElementById('role_fa') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Transport, document.getElementById('role_dt') as HTMLImageElement);
+        this._roles.set(Wh40k.UnitRole.Fortification, document.getElementById('role_ft') as HTMLImageElement);
     }
 
     render(title: HTMLElement | null, list: HTMLElement | null, forces: HTMLElement | null): void {
@@ -45,7 +44,7 @@ export class Renderer40k implements Renderer {
         if (title) {
             this.renderOptionsDiv(title);
 
-            const costs = [`${this._roster._cost._points} pts`, `${this._roster._cost._powerLevel} PL`, `${this._roster._cost._commandPoints} CP`];
+            const costs = [`${this._roster._cost._points} pts`];
             for (const costName in this._roster._cost._freeformValues) {
                 costs.push(`${this._roster._cost._freeformValues[costName]}${costName}`);
             }
@@ -78,10 +77,6 @@ export class Renderer40k implements Renderer {
     private renderRosterSummary(list: HTMLElement) {
         if (!this._roster) return;
 
-        // Only add units' CP costs if at least one unit has CP values. This
-        // saves horizontal space for rosters that don't spend CP on units.
-        const unitsHaveCpCost = this._roster._forces.some(f => f._units.some(u => u._cost._commandPoints !== 0));
-
         for (const force of this._roster._forces) {
 
             const forceTitle = document.createElement('div');
@@ -107,13 +102,7 @@ export class Renderer40k implements Renderer {
             thead.classList.add('thead-light');
             const tr = document.createElement('tr');
             thead.appendChild(tr);
-            const headerInfo = [{name: "NAME", w: '20%'}, {name: "ROLE", w: '15%'}, {name: "MODELS", w: '55%'}, {name: "POINTS", w: '5%'}, {
-                name: "POWER",
-                w: '5%'
-            }];
-            if (unitsHaveCpCost) {
-                headerInfo.push({name: "CP", w: '5%'});
-            }
+            const headerInfo = [{name: "NAME", w: '20%'}, {name: "ROLE", w: '15%'}, {name: "MODELS", w: '55%'}, {name: "POINTS", w: '5%'}];
             headerInfo.forEach(element => {
                 let th = document.createElement('th');
                 th.scope = "col";
@@ -128,15 +117,10 @@ export class Renderer40k implements Renderer {
             for (let unit of force._units) {
                 const tr = document.createElement('tr');
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.nameWithExtraCosts()));
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(UnitRoleToString[unit._role]));
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(Wh40k.UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
                 this.renderModelList(models, unit);
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
-                if (unitsHaveCpCost) {
-                    const commandPointsString = (unit._cost._commandPoints || '') + '';
-                    tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(commandPointsString));
-                }
                 body.appendChild(tr);
             }
         }
@@ -419,7 +403,7 @@ export class Renderer40k implements Renderer {
         collatedSheets.id = 'collated_sheets';
         collatedSheets.style.pageBreakBefore = "always";
         collatedSheets.classList.add('d-none');
-        const collatedUnits: Unit[] = [];
+        const collatedUnits: Wh40k.Unit[] = [];
 
         for (const force of this._roster._forces) {
             const forceTitle = document.createElement('div');
@@ -445,9 +429,9 @@ export class Renderer40k implements Renderer {
             mergeRules(subFactionRules, force._faction, force._factionRules);
         }
 
-        collatedUnits.sort((lhs: Unit, rhs: Unit) => {
+        collatedUnits.sort((lhs: Wh40k.Unit, rhs: Wh40k.Unit) => {
             if (lhs._role != rhs._role) return lhs._role - rhs._role;
-            if (lhs._name != rhs._name) return Compare(lhs._name, rhs._name);
+            if (lhs._name != rhs._name) return Wh40k.Compare(lhs._name, rhs._name);
             return lhs._cost._points - rhs._cost._points;  // Simple heuristic, could do better.
         });
         this.renderDatasheets(collatedSheets, collatedUnits);
@@ -459,7 +443,7 @@ export class Renderer40k implements Renderer {
         forces.appendChild(rules);
     }
 
-    private renderDatasheets(forces: HTMLElement, units: Unit[]) {
+    private renderDatasheets(forces: HTMLElement, units: Wh40k.Unit[]) {
         let numIdenticalUnits = 0;
         for (let i = 0; i < units.length; i++) {
             numIdenticalUnits++;
@@ -472,7 +456,7 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Unit, unitCount: number) {
+    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
         const statsTable = document.createElement('table');
@@ -486,17 +470,9 @@ export class Renderer40k implements Renderer {
         unitCostDiv.classList.add('unit_costs');
         const roleImg = this._roles.get(unit._role);
         unitCostDiv.appendChild(document.createElement('span')).appendChild(roleImg?.cloneNode() || document.createTextNode('-'));
-        unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
         unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._points.toString()));
 
         let cpCostDiv: Element | string = '';
-        if (unit._cost._commandPoints !== 0) {
-            cpCostDiv = document.createElement('div');
-            cpCostDiv.classList.add('unit_costs', 'unit_cp_costs');
-            const span = cpCostDiv.appendChild(document.createElement('span'));
-            span.appendChild(document.createTextNode(unit._cost._commandPoints.toString()));
-            span.appendChild(document.createElement('span')).appendChild(document.createTextNode('CP'));
-        }
         thead.appendChild(createTableRow([unitCostDiv, unit.name() + (unitCount > 1 ? ` (${unitCount})` : ''), cpCostDiv], [0.1, 0.8, 0.1]));
 
         // Add an invisible row of 20, 5% columns. This ensures correct
@@ -512,119 +488,14 @@ export class Renderer40k implements Renderer {
         let notesTableHead = createNoteHead('Unit notes', unit);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
-        // models
-        thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('table-active');
-        thead.appendChild(createTableRow(Renderer40k._unitLabels, this._unitLabelWidthsNormalized, /* header= */ true));
-
-        let tbody = statsTable.appendChild(document.createElement('tbody'));
-        tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-        for (const model of unit._modelStats) {
-            tbody.append(createTableRow([
-                model._name,
-                model._move,
-                model._ws,
-                model._bs,
-                model._str.toString(),
-                model._toughness.toString(),
-                model._wounds.toString(),
-                model._attacks.toString(),
-                model._leadership.toString(),
-                model._save,
-            ], this._unitLabelWidthsNormalized));
+        // Tabular profile data, like model stats and weapons.
+        // Sort by unit, then weapons, then other stuff.
+        const typeNames = Object.keys(unit._profileTables).sort(Wh40k.CompareProfileTableName);
+        for (const typeName of typeNames) {
+            const table = unit._profileTables[typeName];
+            const widths = typeName === 'Unit' ? this._unitLabelWidthsNormalized : this._weaponLabelWidthNormalized;
+            this.renderSubTable(statsTable, table._headers, table._contents, widths, 'Notes', [table]);
         }
-
-        notesTableHead = createNotesHead('Model notes', unit._modelStats);
-        if (notesTableHead) statsTable.appendChild(notesTableHead);
-
-        // Wound Tracker
-        if (unit._woundTracker.length > 0) {
-            const labels = Array.from(Renderer40k._trackerLabels);
-
-            // Determine wound table headers.
-            if (unit._woundTracker.length == 4) {
-                // Use first entry in table as labels.
-                // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
-                const newLabels = Array.from(unit._woundTracker[0]._table.values());
-                labels.splice(1, newLabels.length, ...newLabels);
-            } else if (unit._woundTracker.length == 3) {
-                // Use keys as labels.
-                const newLabels = Array.from(unit._woundTracker[0]._table.keys());
-                labels.splice(1, newLabels.length, ...newLabels);
-            }
-            thead = statsTable.appendChild(document.createElement('thead'));
-            thead.classList.add('table-active');
-            thead.appendChild(createTableRow(labels, this._trackerLabelWidth, /* header= */ true));
-
-            tbody = statsTable.appendChild(document.createElement('tbody'));
-            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-            for (const tracker of unit._woundTracker) {
-                // TODO fix length 4 tracker
-                tbody.appendChild(createTableRow([''].concat(Array.from(tracker._table.values())), this._trackerLabelWidth));
-            }
-        }
-
-        // weapons
-        if (unit._weapons.length > 0) {
-            thead = statsTable.appendChild(document.createElement('thead'));
-            thead.classList.add('table-active');
-            thead.appendChild(createTableRow(Renderer40k._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
-
-            tbody = statsTable.appendChild(document.createElement('tbody'));
-            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-
-            for (const weapon of unit._weapons) {
-                tbody.append(createTableRow([
-                    weapon.name().toString(),
-                    weapon._range,
-                    weapon._type,
-                    weapon._str.toString(),
-                    weapon._ap,
-                    weapon._damage,
-                    weapon._abilities,
-                ], this._weaponLabelWidthNormalized));
-            }
-        }
-        notesTableHead = createNotesHead('Weapon notes', unit._weapons);
-        if (notesTableHead) statsTable.appendChild(notesTableHead);
-
-        // spells
-        if (unit._spells.length > 0) {
-            thead = statsTable.appendChild(document.createElement('thead'));
-            thead.classList.add('table-active');
-            thead.appendChild(createTableRow(Renderer40k._spellLabels, this._spellLabelWidthNormalized, /* header= */ true));
-
-            tbody = statsTable.appendChild(document.createElement('tbody'));
-            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-
-            for (const spell of unit._spells) {
-                tbody.append(createTableRow([
-                    spell.name(),
-                    spell._manifest.toString(),
-                    spell._range,
-                    spell._details,
-                ], this._spellLabelWidthNormalized));
-            }
-        }
-        notesTableHead = createNotesHead('Spell notes', unit._spells);
-        if (notesTableHead) statsTable.appendChild(notesTableHead);
-
-        // psyker
-        if (unit._psykers.length > 0) {
-            thead = statsTable.appendChild(document.createElement('thead'));
-            thead.classList.add('info_row');
-            const psykersDiv = document.createElement('div');
-            for (const psyker of unit._psykers) {
-                let text = `CAST: ${psyker._cast}, DENY: ${psyker._deny}, POWERS KNOWN: ${psyker._powers}`;
-                if (psyker._other) {
-                    text += `, OTHER: ${psyker._other}`;
-                }
-                psykersDiv.appendChild(document.createElement('div')).appendChild(document.createTextNode(text));
-            }
-            thead.appendChild(createTableRow(['Psykers', psykersDiv], [0.10, 0.90], /* header= */ false));
-        }
-        notesTableHead = createNotesHead('Psyker notes', unit._psykers);
-        if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // unit abilities and rules; rules are shared across units, with their
         // descriptions printed in bulk later, but show up with unit 'Abilities'
@@ -640,13 +511,13 @@ export class Renderer40k implements Renderer {
         // factions
         thead = statsTable.appendChild(document.createElement('thead'));
         thead.classList.add('info_row');
-        const factions = Array.from(unit._factions).sort(Compare).join(', ').toLocaleUpperCase();
+        const factions = Array.from(unit._factions).sort(Wh40k.Compare).join(', ').toLocaleUpperCase();
         thead.appendChild(createTableRow(['Factions', factions], [0.10, 0.90], /* header= */ false));
 
         // keywords
         thead = statsTable.appendChild(document.createElement('thead'));
         thead.classList.add('info_row');
-        const keywords = Array.from(unit._keywords).sort(Compare).join(', ').toLocaleUpperCase();
+        const keywords = Array.from(unit._keywords).sort(Wh40k.Compare).join(', ').toLocaleUpperCase();
         thead.appendChild(createTableRow(['Keywords', keywords], [0.10, 0.90], /* header= */ false));
 
         // model list
@@ -655,26 +526,25 @@ export class Renderer40k implements Renderer {
         const modelListDiv = document.createElement('div');
         this.renderModelList(modelListDiv, unit);
         thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
+    }
 
-        // explosions
-        if (unit._explosions.length > 0) {
-            thead = statsTable.appendChild(document.createElement('thead'));
-            thead.classList.add('table-active');
-            thead.appendChild(createTableRow(Renderer40k._explosionLabels, this._explosionLabelWidthNormalized, /* header= */ true));
+    renderSubTable(container: HTMLElement, labels: string[], contents: string[][], widths: number[], notesName: string, notes: Wh40k.BaseNotes[]) {
+        const thead = container.appendChild(document.createElement('thead'));
+        thead.classList.add('table-active');
 
-            tbody = statsTable.appendChild(document.createElement('tbody'));
-            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-            for (const explosion of unit._explosions) {
-                tbody.append(createTableRow([
-                    explosion.name(),
-                    explosion._diceRoll,
-                    explosion._distance,
-                    explosion._mortalWounds,
-                ], this._explosionLabelWidthNormalized));
-            }
+        // header content
+        thead.appendChild(createTableRow(labels, widths, /* header= */ true));
+
+        let tbody = container.appendChild(document.createElement('tbody'));
+        tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+        // body content
+        for (const content of contents) {
+            tbody.append(createTableRow(content, widths));
         }
-        notesTableHead = createNotesHead('Explosion notes', unit._explosions);
-        if (notesTableHead) statsTable.appendChild(notesTableHead);
+
+        const notesTableHead = createNotesHead(notesName, notes);
+        if (notesTableHead) container.appendChild(notesTableHead);
     }
 
     private renderUnitAbilitiesAndRules(container: HTMLElement, abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
@@ -682,10 +552,10 @@ export class Renderer40k implements Renderer {
         thead.classList.add('info_row');
         const abilitiesDiv = document.createElement('div');
         if (rulesMap && rulesMap.size > 0) {
-            const rules = Array.from(rulesMap.keys()).sort(Compare).join(', ');
+            const rules = Array.from(rulesMap.keys()).sort(Wh40k.Compare).join(', ');
             abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
         }
-        const abilities = Array.from(abilitiesMap.keys()).sort(Compare);
+        const abilities = Array.from(abilitiesMap.keys()).sort(Wh40k.Compare);
         for (const ability of abilities) {
             const abilityDiv = addHideAble(abilitiesDiv.appendChild(document.createElement('div')));
             abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
@@ -695,7 +565,7 @@ export class Renderer40k implements Renderer {
 
     }
 
-    private renderModelList(container: HTMLElement, unit: Unit) {
+    private renderModelList(container: HTMLElement, unit: Wh40k.Unit) {
         for (const model of unit._models) {
             const div = container.appendChild(document.createElement('div'));
 
@@ -743,19 +613,10 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private static _unitLabels = ["MODEL", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
-    private _unitLabelWidthsNormalized = [0.25, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
-    private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
-    private _weaponLabelWidthNormalized = [0.25, 0.05, 0.1, 0.05, 0.05, 0.05, 0.45];
-
-    private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
-    private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
-
-    private static _explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];
-    private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.15];
-
-    private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
-    private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
+    private static _unitLabels = ["MODEL", "M", "T", "SV", "W", "LD", "OC"];
+    private _unitLabelWidthsNormalized = [0.40, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
+    private static _weaponLabels = ["WEAPONS", "RANGE", "A", "BS/WS", "S", "AP", "D", "ABILITIES"];
+    private _weaponLabelWidthNormalized = [0.30, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.30];
 }
 
 function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {
@@ -766,10 +627,10 @@ function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupNa
 function createTableRow(labels: (string | Element)[], widths: number[], header = false) {
     const row = addHideAble(document.createElement('tr'));
     if (header) row.classList.add('header_row');
-    for (let i = 0, colCount = 0; i < labels.length && i < widths.length || colCount < 20; i++) {
+    for (let i = 0, colCount = 0; i < labels.length || colCount < 20; i++) {
         const cell = document.createElement(header ? 'th' : 'td');
         cell.scope = 'col';
-        if (i < labels.length && i < widths.length) {
+        if (i < labels.length) {
             let node: Node;
             const label = labels[i];
             if (typeof label === 'string') {
@@ -778,8 +639,10 @@ function createTableRow(labels: (string | Element)[], widths: number[], header =
                 node = labels[i] as Element; // TypeScript requires a cast here.
             }
             cell.appendChild(node);
-            cell.style.width = `${widths[i] * 100}%`;
-            colCount += cell.colSpan = Math.round(widths[i] / 0.05);
+
+            const width = widths[i] || 0.05;
+            cell.style.width = `${width * 100}%`;
+            colCount += cell.colSpan = Math.round(width / 0.05);
         } else if (colCount < 20) {
             // cell.style.width = `${(1 - width) * 100}%`;
             cell.colSpan = (20 - colCount);
@@ -792,7 +655,7 @@ function createTableRow(labels: (string | Element)[], widths: number[], header =
     return row;
 }
 
-function createNoteHead(title: string, note: BaseNotes) {
+function createNoteHead(title: string, note: Wh40k.BaseNotes) {
     if (!note.notes()) return null;
 
     const thead = document.createElement('thead');
@@ -802,7 +665,7 @@ function createNoteHead(title: string, note: BaseNotes) {
     return thead;
 }
 
-function createNotesHead(title: string, notes: BaseNotes[]) {
+function createNotesHead(title: string, notes: Wh40k.BaseNotes[]) {
     if (!notes.some(note => note._customNotes)) return null;
 
     const thead = document.createElement('thead');

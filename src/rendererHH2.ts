@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Rick Weyrauch,
+    Copyright 2023 Rick Weyrauch,
 
     Permission to use, copy, modify, and/or distribute this software for any purpose
     with or without fee is hereby granted, provided that the above copyright notice
@@ -14,28 +14,29 @@
     OF THIS SOFTWARE.
 */
 
-import {BaseNotes, Compare, Roster40k, Unit, UnitRole, UnitRoleToString} from "./roster40k";
-import {Renderer} from "./renderer";
+import { HorusHeresy } from "./rosterHH2";
+import { Renderer } from "./renderer";
 
-export class Renderer40k implements Renderer {
+export class RendererHH2 implements Renderer {
 
-    private readonly _roster: Roster40k | null = null;
+    private readonly _roster: HorusHeresy.Roster | null = null;
 
-    private _roles: Map<UnitRole, HTMLImageElement | null> = new Map();
+    private _roles: Map<HorusHeresy.UnitRole, HTMLImageElement | null> = new Map();
 
-    constructor(roster: Roster40k) {
+    constructor(roster: HorusHeresy.Roster) {
 
         this._roster = roster;
 
-        this._roles.set(UnitRole.HQ, document.getElementById('role_hq') as HTMLImageElement);
-        this._roles.set(UnitRole.TR, document.getElementById('role_tr') as HTMLImageElement);
-        this._roles.set(UnitRole.EL, document.getElementById('role_el') as HTMLImageElement);
-        this._roles.set(UnitRole.FA, document.getElementById('role_fa') as HTMLImageElement);
-        this._roles.set(UnitRole.HS, document.getElementById('role_hs') as HTMLImageElement);
-        this._roles.set(UnitRole.FL, document.getElementById('role_fl') as HTMLImageElement);
-        this._roles.set(UnitRole.DT, document.getElementById('role_dt') as HTMLImageElement);
-        this._roles.set(UnitRole.FT, document.getElementById('role_ft') as HTMLImageElement);
-        this._roles.set(UnitRole.LW, document.getElementById('role_lw') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.HQ, document.getElementById('role_hq') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.TR, document.getElementById('role_tr') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.EL, document.getElementById('role_el') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.FA, document.getElementById('role_fa') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.HS, document.getElementById('role_hs') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.FL, document.getElementById('role_fl') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.DT, document.getElementById('role_dt') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.FT, document.getElementById('role_ft') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.LW, document.getElementById('role_lw') as HTMLImageElement);
+        this._roles.set(HorusHeresy.UnitRole.PR, document.getElementById('role_lw') as HTMLImageElement);
     }
 
     render(title: HTMLElement | null, list: HTMLElement | null, forces: HTMLElement | null): void {
@@ -45,11 +46,10 @@ export class Renderer40k implements Renderer {
         if (title) {
             this.renderOptionsDiv(title);
 
-            const costs = [`${this._roster._cost._points} pts`, `${this._roster._cost._powerLevel} PL`, `${this._roster._cost._commandPoints} CP`];
-            for (const costName in this._roster._cost._freeformValues) {
-                costs.push(`${this._roster._cost._freeformValues[costName]}${costName}`);
-            }
-            const text = `${this._roster.name()} (${costs.join(', ')})`;
+            title.appendChild(document.createElement('h2')).appendChild(document.createTextNode('...Prerelease - not ready for primetime...'));
+
+            const costs = [`${this._roster._cost._points} pts`];
+            const text = `${this._roster._name} (${costs.join(', ')})`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
 
             // Footer div is hideEnabled, except when printing.
@@ -57,15 +57,10 @@ export class Renderer40k implements Renderer {
             footer.classList.add('footer');
             footer.appendChild(document.createElement('div')).appendChild(document.createTextNode('PrettyScribe'));
             footer.appendChild(document.createElement('div')).appendChild(document.createTextNode(text));
-
-            if (this._roster._customNotes) {
-                title.appendChild(document.createElement('p')).appendChild(document.createTextNode(this._roster._customNotes));
-            }
         }
 
         if (list) {
             this.renderRosterSummary(list);
-            this.renderAbilitiesByPhase(list);
         }
 
         if (forces) {
@@ -78,25 +73,13 @@ export class Renderer40k implements Renderer {
     private renderRosterSummary(list: HTMLElement) {
         if (!this._roster) return;
 
-        // Only add units' CP costs if at least one unit has CP values. This
-        // saves horizontal space for rosters that don't spend CP on units.
-        const unitsHaveCpCost = this._roster._forces.some(f => f._units.some(u => u._cost._commandPoints !== 0));
-
         for (const force of this._roster._forces) {
 
             const forceTitle = document.createElement('div');
             if (force._faction) {
-                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force.name()} (${force._faction})`));
+                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force._name} (${force._faction})`));
             } else {
-                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force.name()}`));
-            }
-            if (force._configurations.length > 0) {
-                const list = forceTitle.appendChild(document.createElement('ul'));
-                for (const configuration of force._configurations) {
-                    list.appendChild(document.createElement('li'))
-                        .appendChild(document.createElement('i'))
-                        .appendChild(document.createTextNode(configuration));
-                }
+                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force._name}`));
             }
             list.appendChild(forceTitle);
 
@@ -107,13 +90,7 @@ export class Renderer40k implements Renderer {
             thead.classList.add('thead-light');
             const tr = document.createElement('tr');
             thead.appendChild(tr);
-            const headerInfo = [{name: "NAME", w: '20%'}, {name: "ROLE", w: '15%'}, {name: "MODELS", w: '55%'}, {name: "POINTS", w: '5%'}, {
-                name: "POWER",
-                w: '5%'
-            }];
-            if (unitsHaveCpCost) {
-                headerInfo.push({name: "CP", w: '5%'});
-            }
+            const headerInfo = [{ name: "NAME", w: '20%' }, { name: "ROLE", w: '15%' }, { name: "MODELS", w: '55%' }, { name: "POINTS", w: '5%' }];
             headerInfo.forEach(element => {
                 let th = document.createElement('th');
                 th.scope = "col";
@@ -127,16 +104,11 @@ export class Renderer40k implements Renderer {
             table.appendChild(body);
             for (let unit of force._units) {
                 const tr = document.createElement('tr');
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.nameWithExtraCosts()));
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(UnitRoleToString[unit._role]));
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._name));
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(HorusHeresy.UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
                 this.renderModelList(models, unit);
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
-                if (unitsHaveCpCost) {
-                    const commandPointsString = (unit._cost._commandPoints || '') + '';
-                    tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(commandPointsString));
-                }
+                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._points.toString()));
                 body.appendChild(tr);
             }
         }
@@ -170,17 +142,6 @@ export class Renderer40k implements Renderer {
             }
         });
 
-        this.renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase',
-            (e) => {
-                const abilities = document.getElementById('wh40k_abilities_list');
-                if (!abilities) return;
-
-                if ((e.target as HTMLInputElement).checked) {
-                    abilities.classList.remove('d-none');
-                } else {
-                    abilities.classList.add('d-none');
-                }
-            });
         this.renderCheckboxOption(optionsDiv, 'showUpgradeCosts', 'Show upgrade costs',
             (e: Event) => {
                 const costSpans = document.getElementsByClassName('wh40k_upgrade_cost');
@@ -277,7 +238,7 @@ export class Renderer40k implements Renderer {
     }
 
     private loadOptionsFromLocalStorage() {
-        try { 
+        try {
             for (let i = 0; i < window.localStorage.length; i++) {
                 const key = window.localStorage.key(i);
                 const checkboxId = key?.match(/option-checkbox-(.*)/)?.[1];
@@ -293,7 +254,7 @@ export class Renderer40k implements Renderer {
                     if (!optionsDiv || !optionsToggle) return;
 
                     const hideOptions = !!window.localStorage[key];
-        
+
                     if (optionsDiv.classList.contains('hide_options') !== hideOptions) {
                         optionsToggle.dispatchEvent(new Event('click'));
                     }
@@ -301,110 +262,6 @@ export class Renderer40k implements Renderer {
             }
         } catch (e) {
             // localStorage not supported or enabled
-        }
-    }
-
-    private renderAbilitiesByPhase(list: HTMLElement) {
-        if (!this._roster) return;
-
-        const allPhaseAbilities: { [key: string]: Element[] } = {};
-        const allPhaseAbilityNames: { [key: string]: string[] } = {};
-        for (const force of this._roster._forces) {
-            for (const unit of force._units) {
-                for (const abilities of Object.values(unit._abilities)) {
-                    for (const [ability, description] of abilities.entries()) {
-                        const matches = [...description.matchAll(/(?:before the first turn begins|set up|Reinforcements|(?:Command|Movement|Psychic|Shooting|Charge|Fight|Morale) phase)/ig)];
-                        if (matches.length === 0) continue;
-
-                        // Create a div with the ability, to highlight the phase in
-                        // the ability's rule.
-                        const abilityDiv = addHideAble(document.createElement('div'));
-                        abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(unit.name()));
-                        abilityDiv.appendChild(document.createTextNode(' - '));
-                        abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(ability));
-                        abilityDiv.appendChild(document.createTextNode(' - '));
-
-                        let text = description;
-                        for (const match of matches) {
-                            if (!match.index) continue;  // Should not happen.
-
-                            const phaseMatch = match[0].toLocaleLowerCase();  // Normalize phase in case cases differ by ability.
-
-                            // map special cases to the correct phase
-                            // examples:
-                            // - At the start of the first battle round but before the first turn begins, you can move this unit up to 9". It cannot end this move within 9" of any enemy models.
-
-                            // - In your Shooting phase, after this model shoots, it can make a Normal Move or Fall Back as if it were your Movement phase, even if it arrived as Reinforcements this turn.
-
-                            // - If this unit is set up in ambush, when revealing ambush markers, you can do one of the following:
-                            // -- Remove one ambush marker from the battlefield and set up this unit underground instead.
-                            // -- After setting up this unit from an ambush marker, this unit can make a Normal Move as if it were your Movement phase, but must end that move more than 9" away from enemy models.
-
-                            let phase = phaseMatch; // map special cases to the correct phase
-                            switch (phaseMatch) {
-                                case 'before the first turn begins':
-                                    phase = 'pre-game phase';
-                                    break;
-                                case 'set up':
-                                    if (!description.includes('reinforcements')) {
-                                        phase = 'pre-game phase';
-                                    }
-                                    break;
-                                case 'reinforcements':
-                                    phase = 'movement phase';
-                                    break;
-                            }
-
-                            // ignore other phase mentions
-                            if (description.toLocaleLowerCase().includes('as if it were your ' + phase)) {
-                                continue;
-                            }
-
-                            const textIndex = match.index - (description.length - text.length);
-                            if (textIndex > 0) {
-                                abilityDiv.appendChild(document.createTextNode(text.substring(0, textIndex)));
-                            }
-
-                            const phaseAbilities = allPhaseAbilities[phase] = allPhaseAbilities[phase] || [];
-                            const phaseAbilityNames = allPhaseAbilityNames[phase] = allPhaseAbilityNames[phase] || [];
-                            // I don't know why duplicates are not removed if we check phaseAbilities directly
-                            if (!phaseAbilityNames.includes(ability)) {
-                                phaseAbilityNames.push(ability)
-                                phaseAbilities.push(abilityDiv);
-                            }
-
-                            abilityDiv.appendChild(document.createElement('u')).appendChild(document.createTextNode(match[0]));
-
-                            const newOffset = textIndex + phaseMatch.length;
-                            text = text.substring(newOffset);
-                        }
-                        if (text.length > 0) {
-                            abilityDiv.appendChild(document.createTextNode(text));
-                        }
-                    }
-                }
-            }
-        }
-
-        const sectionDiv = list.appendChild(document.createElement('div'));
-        sectionDiv.setAttribute('id', 'wh40k_abilities_list');
-        sectionDiv.classList.add('d-none');  // Options will allow user to toggle this on.
-        sectionDiv.appendChild(document.createElement('h3')).appendChild(document.createTextNode('Abilities by Phase'));
-
-        const sortedPhases = ['pre-game phase', 'command phase', 'movement phase', 'psychic phase', 'shooting phase', 'charge phase', 'fight phase', 'morale phase']
-            .filter(phase => !!allPhaseAbilities[phase]);
-        if (sortedPhases.length === 0) {
-            sectionDiv.appendChild(document.createTextNode('No phase-specific abilities in roster'));
-        } else {
-            for (const phase of sortedPhases) {
-                sectionDiv.appendChild(document.createElement('h4')).appendChild(document.createTextNode(phase));
-                for (const abilitiesDiv of allPhaseAbilities[phase]) {
-                    // If an ability applies to multiple phases, the first time
-                    // we render its div, it will not have a parent; subsequent
-                    // times, clone the div as elements can only have one parent.
-                    sectionDiv.appendChild(abilitiesDiv.parentElement ? abilitiesDiv.cloneNode(true) : abilitiesDiv);
-                }
-            }
         }
     }
 
@@ -419,7 +276,7 @@ export class Renderer40k implements Renderer {
         collatedSheets.id = 'collated_sheets';
         collatedSheets.style.pageBreakBefore = "always";
         collatedSheets.classList.add('d-none');
-        const collatedUnits: Unit[] = [];
+        const collatedUnits: HorusHeresy.Unit[] = [];
 
         for (const force of this._roster._forces) {
             const forceTitle = document.createElement('div');
@@ -442,13 +299,12 @@ export class Renderer40k implements Renderer {
             collatedUnits.push(...force._units);
 
             mergeRules(catalogueRules, force._catalog, force._rules);
-            mergeRules(subFactionRules, force._faction, force._factionRules);
         }
 
-        collatedUnits.sort((lhs: Unit, rhs: Unit) => {
+        collatedUnits.sort((lhs: HorusHeresy.Unit, rhs: HorusHeresy.Unit) => {
             if (lhs._role != rhs._role) return lhs._role - rhs._role;
-            if (lhs._name != rhs._name) return Compare(lhs._name, rhs._name);
-            return lhs._cost._points - rhs._cost._points;  // Simple heuristic, could do better.
+            if (lhs._name != rhs._name) return HorusHeresy.Compare(lhs._name, rhs._name);
+            return lhs._points - rhs._points;  // Simple heuristic, could do better.
         });
         this.renderDatasheets(collatedSheets, collatedUnits);
 
@@ -459,7 +315,7 @@ export class Renderer40k implements Renderer {
         forces.appendChild(rules);
     }
 
-    private renderDatasheets(forces: HTMLElement, units: Unit[]) {
+    private renderDatasheets(forces: HTMLElement, units: HorusHeresy.Unit[]) {
         let numIdenticalUnits = 0;
         for (let i = 0; i < units.length; i++) {
             numIdenticalUnits++;
@@ -472,7 +328,7 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Unit, unitCount: number) {
+    private renderUnitHtml(forces: HTMLElement, unit: HorusHeresy.Unit, unitCount: number) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
         const statsTable = document.createElement('table');
@@ -486,18 +342,10 @@ export class Renderer40k implements Renderer {
         unitCostDiv.classList.add('unit_costs');
         const roleImg = this._roles.get(unit._role);
         unitCostDiv.appendChild(document.createElement('span')).appendChild(roleImg?.cloneNode() || document.createTextNode('-'));
-        unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._powerLevel.toString()));
-        unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._points.toString()));
+        unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._points.toString()));
 
         let cpCostDiv: Element | string = '';
-        if (unit._cost._commandPoints !== 0) {
-            cpCostDiv = document.createElement('div');
-            cpCostDiv.classList.add('unit_costs', 'unit_cp_costs');
-            const span = cpCostDiv.appendChild(document.createElement('span'));
-            span.appendChild(document.createTextNode(unit._cost._commandPoints.toString()));
-            span.appendChild(document.createElement('span')).appendChild(document.createTextNode('CP'));
-        }
-        thead.appendChild(createTableRow([unitCostDiv, unit.name() + (unitCount > 1 ? ` (${unitCount})` : ''), cpCostDiv], [0.1, 0.8, 0.1]));
+        thead.appendChild(createTableRow([unitCostDiv, unit._name + (unitCount > 1 ? ` (${unitCount})` : ''), cpCostDiv], [0.1, 0.8, 0.1]));
 
         // Add an invisible row of 20, 5% columns. This ensures correct
         // spacing for the first few columns of visible rows.
@@ -513,140 +361,291 @@ export class Renderer40k implements Renderer {
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
         // models
-        thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('table-active');
-        thead.appendChild(createTableRow(Renderer40k._unitLabels, this._unitLabelWidthsNormalized, /* header= */ true));
+        if (unit._modelStats.length > 0) {
 
-        let tbody = statsTable.appendChild(document.createElement('tbody'));
-        tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-        for (const model of unit._modelStats) {
-            tbody.append(createTableRow([
-                model._name,
-                model._move,
-                model._ws,
-                model._bs,
-                model._str.toString(),
-                model._toughness.toString(),
-                model._wounds.toString(),
-                model._attacks.toString(),
-                model._leadership.toString(),
-                model._save,
-            ], this._unitLabelWidthsNormalized));
+            const modelsByType = bucketSortModels(unit._modelStats);
+
+            const models = modelsByType.get("Models");
+            if (models != null && models.length > 0) {
+                thead = statsTable.appendChild(document.createElement('thead'));
+                thead.classList.add('table-active');        
+                thead.appendChild(createTableRow(RendererHH2._infantryLabels, this._infantryLabelWidthsNormalized, /* header= */ true));
+                let tbody = statsTable.appendChild(document.createElement('tbody'));
+                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+                for (const model of models) {
+                    let infantry = model as HorusHeresy.Model;
+                    tbody.append(createTableRow([
+                        infantry._name,
+                        infantry._type,
+                        infantry._move.toString(),
+                        infantry._ws.toString(),
+                        infantry._bs.toString(),
+                        infantry._str.toString(),
+                        infantry._toughness.toString(),
+                        infantry._wounds.toString(),
+                        infantry._initiative.toString(),
+                        infantry._attacks.toString(),
+                        infantry._leadership.toString(),
+                        infantry._save,
+                    ], this._infantryLabelWidthsNormalized));
+                }
+            }
+            const vehicles = modelsByType.get("Vehicles");
+            if (vehicles != null && vehicles.length > 0) {
+                thead = statsTable.appendChild(document.createElement('thead'));
+                thead.classList.add('table-active');        
+                thead.appendChild(createTableRow(RendererHH2._vehicleLabels, this._vehicleLabelWidthsNormalized, /* header= */ true));
+                let tbody = statsTable.appendChild(document.createElement('tbody'));
+                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+                for (const model of vehicles) {
+                    let vehicle = model as HorusHeresy.Vehicle;
+                    tbody.append(createTableRow([
+                        vehicle._name,
+                        vehicle._type,
+                        vehicle._move.toString(),
+                        vehicle._bs.toString(),
+                        vehicle._front.toString(),
+                        vehicle._side.toString(),
+                        vehicle._rear.toString(),
+                        vehicle._hp.toString(),
+                        vehicle._capacity.toString(),
+                    ], this._vehicleLabelWidthsNormalized));
+
+                }
+            }
+
+            const knights = modelsByType.get("Knights");
+            if (knights != null && knights.length > 0) {
+                thead = statsTable.appendChild(document.createElement('thead'));
+                thead.classList.add('table-active');        
+                thead.appendChild(createTableRow(RendererHH2._knightLabels, this._knightLabelWidthsNormalized, /* header= */ true));
+                let tbody = statsTable.appendChild(document.createElement('tbody'));
+                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+                for (const model of knights) {
+                    let knight = model as HorusHeresy.Knight;
+                    tbody.append(createTableRow([
+                        knight._name,
+                        knight._type,
+                        knight._move.toString(),
+                        knight._ws.toString(),
+                        knight._bs.toString(),
+                        knight._str.toString(),
+                        knight._front.toString(),
+                        knight._side.toString(),
+                        knight._rear.toString(),
+                        knight._hp.toString(),
+                        knight._initiative.toString(),
+                        knight._attacks.toString(),
+                        knight._hp.toString(),
+                    ], this._knightLabelWidthsNormalized));
+                }
+            }
+
+            const forts = modelsByType.get("Fortifications");
+            if (forts != null && forts.length > 0) {
+                thead = statsTable.appendChild(document.createElement('thead'));
+                thead.classList.add('table-active');        
+                thead.appendChild(createTableRow(RendererHH2._fortificationLabels, this._fortificationLabelWidthsNormalized, /* header= */ true));
+                let tbody = statsTable.appendChild(document.createElement('tbody'));
+                tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+                for (const model of forts) {
+                    let fort = model as HorusHeresy.Fortification;
+                    tbody.append(createTableRow([
+                        fort._name,
+                        fort._type,
+                        fort._bs.toString(),
+                        fort._front.toString(),
+                        fort._side.toString(),
+                        fort._rear.toString(),
+                        fort._hp.toString(),
+                        fort._capacity.toString(),
+                    ], this._fortificationLabelWidthsNormalized));
+                }
+            }
         }
 
-        notesTableHead = createNotesHead('Model notes', unit._modelStats);
+        notesTableHead = createNotesHead('Model notes', unit._models);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
-        // Wound Tracker
-        if (unit._woundTracker.length > 0) {
-            const labels = Array.from(Renderer40k._trackerLabels);
-
-            // Determine wound table headers.
-            if (unit._woundTracker.length == 4) {
-                // Use first entry in table as labels.
-                // TODO: Grrrh some tables put the column labels at the end.  Deal with this.
-                const newLabels = Array.from(unit._woundTracker[0]._table.values());
-                labels.splice(1, newLabels.length, ...newLabels);
-            } else if (unit._woundTracker.length == 3) {
-                // Use keys as labels.
-                const newLabels = Array.from(unit._woundTracker[0]._table.keys());
-                labels.splice(1, newLabels.length, ...newLabels);
-            }
-            thead = statsTable.appendChild(document.createElement('thead'));
-            thead.classList.add('table-active');
-            thead.appendChild(createTableRow(labels, this._trackerLabelWidth, /* header= */ true));
-
-            tbody = statsTable.appendChild(document.createElement('tbody'));
-            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-            for (const tracker of unit._woundTracker) {
-                // TODO fix length 4 tracker
-                tbody.appendChild(createTableRow([''].concat(Array.from(tracker._table.values())), this._trackerLabelWidth));
-            }
-        }
-
         // weapons
-        if (unit._weapons.length > 0) {
+        const unitWeapons = unit.weapons();
+        if (unitWeapons.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
-            thead.appendChild(createTableRow(Renderer40k._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
+            thead.appendChild(createTableRow(RendererHH2._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
 
-            tbody = statsTable.appendChild(document.createElement('tbody'));
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
             tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
 
-            for (const weapon of unit._weapons) {
+            for (const weapon of unitWeapons) {
+                // parse weapon._type into type and special rules links.
+                let rules = weapon._type.split(',');
+                let weaponType = rules[0].trim();
+                let weaponRules = document.createElement('div');
+                rules.forEach((rule, index) => {
+                    let text = rule.trim();
+                    if (index > 1) {
+                        weaponRules.appendChild(document.createTextNode(", "));
+                    }
+                    if (index != 0) {
+                        let anchor = document.createElement('a');
+                        anchor.classList.add('hh2-rule-link');
+                        anchor.href = "#" + text;
+                        anchor.text = text;
+                        weaponRules.appendChild(anchor);
+                    }
+                });
+
                 tbody.append(createTableRow([
                     weapon.name().toString(),
                     weapon._range,
-                    weapon._type,
                     weapon._str.toString(),
                     weapon._ap,
-                    weapon._damage,
-                    weapon._abilities,
-                ], this._weaponLabelWidthNormalized));
+                    weaponType,
+                    weaponRules], this._weaponLabelWidthNormalized));
             }
         }
-        notesTableHead = createNotesHead('Weapon notes', unit._weapons);
-        if (notesTableHead) statsTable.appendChild(notesTableHead);
+        notesTableHead = createNotesHead('Weapon notes', unitWeapons);
+        if (notesTableHead) statsTable.appendChild(notesTableHead)
 
-        // spells
-        if (unit._spells.length > 0) {
+        // wargear items
+        const wargear = unit.wargear();
+        if (wargear.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
-            thead.appendChild(createTableRow(Renderer40k._spellLabels, this._spellLabelWidthNormalized, /* header= */ true));
+            thead.appendChild(createTableRow(RendererHH2._wargearLabels, this._wargearLabelWidthNormalized, /* header= */ true));
 
-            tbody = statsTable.appendChild(document.createElement('tbody'));
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
             tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
 
-            for (const spell of unit._spells) {
+            for (const gear of wargear) {
+                tbody.append(createTableRow([
+                    gear.name(),
+                    gear._description,
+                ], this._wargearLabelWidthNormalized));
+            }
+        }
+        notesTableHead = createNotesHead('Wargear Item notes', wargear);
+        if (notesTableHead) statsTable.appendChild(notesTableHead);
+
+        // psychic weapons
+        const psychicWeapons = unit.psychicWeapons();
+        if (psychicWeapons.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(RendererHH2._psychicWeaponLabels, this._psychicWeaponLabelWidthNormalized, /* header= */ true));
+
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const weapon of psychicWeapons) {
+                // parse weapon._type into type and special rules links.
+                let rules = weapon._type.split(',');
+                let weaponType = rules[0].trim();
+                let weaponRules = document.createElement('div');
+                rules.forEach((rule, index) => {
+                    let text = rule.trim();
+                    if (index > 1) {
+                        weaponRules.appendChild(document.createTextNode(", "));
+                    }
+                    if (index != 0) {
+                        let anchor = document.createElement('a');
+                        anchor.classList.add('hh2-rule-link');
+                        anchor.href = "#" + text;
+                        anchor.text = text;
+                        weaponRules.appendChild(anchor);
+                    }
+                });
+
+                tbody.append(createTableRow([
+                    weapon.name().toString(),
+                    weapon._range,
+                    weapon._str.toString(),
+                    weapon._ap,
+                    weaponType,
+                    weaponRules], this._psychicWeaponLabelWidthNormalized));
+            }
+        }
+        notesTableHead = createNotesHead('Psychic Weapon notes', psychicWeapons);
+        if (notesTableHead) statsTable.appendChild(notesTableHead)
+        
+        // psychic powers
+        const psychicPowers = unit.psychicPowers();
+        if (psychicPowers.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(RendererHH2._psychicPowerLabels, this._psychicPowerLabelWidthNormalized, /* header= */ true));
+
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const spell of psychicPowers) {
                 tbody.append(createTableRow([
                     spell.name(),
-                    spell._manifest.toString(),
-                    spell._range,
-                    spell._details,
-                ], this._spellLabelWidthNormalized));
+                    spell._description,
+                ], this._psychicPowerLabelWidthNormalized));
             }
         }
-        notesTableHead = createNotesHead('Spell notes', unit._spells);
+        notesTableHead = createNotesHead('Psychic Power notes', psychicPowers);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
-        // psyker
-        if (unit._psykers.length > 0) {
+        // warlord traits
+        const traits = unit.warlordTraits();
+        if (traits.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
-            thead.classList.add('info_row');
-            const psykersDiv = document.createElement('div');
-            for (const psyker of unit._psykers) {
-                let text = `CAST: ${psyker._cast}, DENY: ${psyker._deny}, POWERS KNOWN: ${psyker._powers}`;
-                if (psyker._other) {
-                    text += `, OTHER: ${psyker._other}`;
-                }
-                psykersDiv.appendChild(document.createElement('div')).appendChild(document.createTextNode(text));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(["Warlord Trait", "Description"], [0.25, 0.75], /* header= */ true));
+
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const trait of traits) {
+                tbody.append(createTableRow([
+                    trait.name(),
+                    trait._description,
+                ], [0.25, 0.75]));
             }
-            thead.appendChild(createTableRow(['Psykers', psykersDiv], [0.10, 0.90], /* header= */ false));
         }
-        notesTableHead = createNotesHead('Psyker notes', unit._psykers);
+        notesTableHead = createNotesHead('Warlord Trait notes', traits);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
-        // unit abilities and rules; rules are shared across units, with their
-        // descriptions printed in bulk later, but show up with unit 'Abilities'
-        if (!unit._abilities['Abilities'] && unit._rules.size > 0) {
-            this.renderUnitAbilitiesAndRules(statsTable, 'Abilities', new Map(), unit._rules);
-        }
-        for (const abilitiesGroup of Object.keys(unit._abilities).sort()) {
-            const abilitiesMap = unit._abilities[abilitiesGroup];
-            const rules = abilitiesGroup === 'Abilities' ? unit._rules : undefined;
-            this.renderUnitAbilitiesAndRules(statsTable, abilitiesGroup, abilitiesMap, rules);
-        }
+        // reactions
+        const reactions = unit.reactions();
+        if (reactions.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(["Reaction", "Description"], [0.25, 0.75], /* header= */ true));
 
-        // factions
-        thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row');
-        const factions = Array.from(unit._factions).sort(Compare).join(', ').toLocaleUpperCase();
-        thead.appendChild(createTableRow(['Factions', factions], [0.10, 0.90], /* header= */ false));
+            let tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const reaaction of reactions) {
+                tbody.append(createTableRow([
+                    reaaction.name(),
+                    reaaction._description,
+                ], [0.25, 0.75]));
+            }
+        }
+ 
+        // unit rules; rules are shared across units, with their
+        // descriptions printed in bulk later
+        if (unit._rules.size > 0) {
+            const rules = Array.from(unit._rules.keys()).sort(HorusHeresy.Compare);
+            const weaponRules = unit.weaponRules();
+            // Hide weapon rules.
+            let unitRules: string[] = [];
+            for (const rule of rules) {
+                if (!weaponRules.includes(rule)) {
+                    unitRules.push(rule);
+                }
+            }
+            this.renderUnitRules(statsTable, 'Rules', unitRules);
+        }
 
         // keywords
         thead = statsTable.appendChild(document.createElement('thead'));
         thead.classList.add('info_row');
-        const keywords = Array.from(unit._keywords).sort(Compare).join(', ').toLocaleUpperCase();
+        const keywords = Array.from(unit._keywords).sort(HorusHeresy.Compare).join(', ').toLocaleUpperCase();
         thead.appendChild(createTableRow(['Keywords', keywords], [0.10, 0.90], /* header= */ false));
 
         // model list
@@ -655,51 +654,36 @@ export class Renderer40k implements Renderer {
         const modelListDiv = document.createElement('div');
         this.renderModelList(modelListDiv, unit);
         thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
-
-        // explosions
-        if (unit._explosions.length > 0) {
-            thead = statsTable.appendChild(document.createElement('thead'));
-            thead.classList.add('table-active');
-            thead.appendChild(createTableRow(Renderer40k._explosionLabels, this._explosionLabelWidthNormalized, /* header= */ true));
-
-            tbody = statsTable.appendChild(document.createElement('tbody'));
-            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-            for (const explosion of unit._explosions) {
-                tbody.append(createTableRow([
-                    explosion.name(),
-                    explosion._diceRoll,
-                    explosion._distance,
-                    explosion._mortalWounds,
-                ], this._explosionLabelWidthNormalized));
-            }
-        }
-        notesTableHead = createNotesHead('Explosion notes', unit._explosions);
-        if (notesTableHead) statsTable.appendChild(notesTableHead);
     }
 
-    private renderUnitAbilitiesAndRules(container: HTMLElement, abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
+    private renderUnitRules(container: HTMLElement, rulesGroup: string, rules: string[]) {
         const thead = container.appendChild(document.createElement('thead'));
         thead.classList.add('info_row');
-        const abilitiesDiv = document.createElement('div');
-        if (rulesMap && rulesMap.size > 0) {
-            const rules = Array.from(rulesMap.keys()).sort(Compare).join(', ');
-            abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
-        }
-        const abilities = Array.from(abilitiesMap.keys()).sort(Compare);
-        for (const ability of abilities) {
-            const abilityDiv = addHideAble(abilitiesDiv.appendChild(document.createElement('div')));
-            abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
-            abilityDiv.appendChild(document.createTextNode(abilitiesMap.get(ability) || '??'));
-        }
-        thead.appendChild(createTableRow([abilitiesGroup, abilitiesDiv], [0.10, 0.90], /* header= */ false));
+        const rulesDiv = document.createElement('div');
+         rules.forEach((rule, index) => {
+            let text = rule.trim();
+            if (index > 1) {
+                rulesDiv.appendChild(document.createTextNode(", "));
+            }
+            if (index != 0) {
+                let anchor = document.createElement('a');
+                anchor.classList.add('hh2-rule-link');
+                anchor.href = "#" + text;
+                anchor.text = text;
+                rulesDiv.appendChild(anchor);
+            }
+        });
+
+
+        thead.appendChild(createTableRow([rulesGroup, rulesDiv], [0.10, 0.90], /* header= */ false));
 
     }
 
-    private renderModelList(container: HTMLElement, unit: Unit) {
+    private renderModelList(container: HTMLElement, unit: HorusHeresy.Unit) {
         for (const model of unit._models) {
             const div = container.appendChild(document.createElement('div'));
 
-            div.appendChild(document.createTextNode((model._count > 1 ? `${model._count}x ` : '') + model.name()));
+            div.appendChild(document.createTextNode((model._count > 1 ? `${model._count}x ` : '') + model._name));
 
             const modelGear = model.getDedupedWeaponsAndUpgrades();
             if (modelGear.length === 0) continue;
@@ -731,6 +715,7 @@ export class Renderer40k implements Renderer {
             for (let rule of rules) {
                 let row = addHideAble(document.createElement('div'));
                 let name = document.createElement('b');
+                name.id = rule[0];
                 name.appendChild(document.createTextNode(rule[0]));
                 let desc = document.createElement('p');
                 desc.appendChild(document.createTextNode(rule[1] || ''));
@@ -743,19 +728,23 @@ export class Renderer40k implements Renderer {
         }
     }
 
-    private static _unitLabels = ["MODEL", "M", "WS", "BS", "S", "T", "W", "A", "LD", "SAVE"];
-    private _unitLabelWidthsNormalized = [0.25, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
-    private static _weaponLabels = ["WEAPONS", "RANGE", "TYPE", "S", "AP", "D", "ABILITIES"];
-    private _weaponLabelWidthNormalized = [0.25, 0.05, 0.1, 0.05, 0.05, 0.05, 0.45];
+    private static _infantryLabels = ["Model", "Type", "M", "WS", "BS", "S", "T", "W", "I", "A", "Ld", "Sv", ""];
+    private _infantryLabelWidthsNormalized = [0.20, 0.20, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1];
+    private static _vehicleLabels = ["Model", "Type", "M", "BS", "Front", "Side", "Rear", "HP", "Capacity", ""];
+    private _vehicleLabelWidthsNormalized = [0.20, 0.20, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.2, 0.1];
+    private static _knightLabels = ["Model", "Type", "M", "WS", "BS", "S", "Front", "Side", "Rear", "I", "A", "HP", ""];
+    private _knightLabelWidthsNormalized = [0.20, 0.20, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.1];
+    private static _fortificationLabels = ["Model", "Type", "BS", "Front", "Side", "Rear", "HP", "Capacity", ""];
+    private _fortificationLabelWidthsNormalized = [0.20, 0.20, 0.05, 0.05, 0.05, 0.05, 0.05, 0.20, 0.15];
 
-    private static _spellLabels = ["PSYCHIC POWER", "MANIFEST", "RANGE", "DETAILS"];
-    private _spellLabelWidthNormalized = [0.25, 0.05, 0.1, 0.60];
-
-    private static _explosionLabels = ["EXPLOSION", "DICE ROLL", "DISTANCE", "MORTAL WOUNDS"];
-    private _explosionLabelWidthNormalized = [0.2, 0.10, 0.10, 0.15];
-
-    private static _trackerLabels = ["WOUND TRACK", "REMAINING W", "ATTRIBUTE", "ATTRIBUTE", "ATTRIBUTE"];
-    private _trackerLabelWidth = [0.2, 0.15, 0.1, 0.1, 0.1];
+    private static _weaponLabels = ["Weapon", "Range", "Str", "AP", "Type", "Rules"];
+    private _weaponLabelWidthNormalized = [0.25, 0.05, 0.05, 0.05, 0.15, 0.35];
+    private static _psychicWeaponLabels = ["Psychic Weapon", "Range", "Str", "AP", "Type", "Rules"];
+    private _psychicWeaponLabelWidthNormalized = [0.25, 0.05, 0.05, 0.05, 0.15, 0.35];
+    private static _psychicPowerLabels = ["Psychic Power", "Description"];
+    private _psychicPowerLabelWidthNormalized = [0.25, 0.75];
+    private static _wargearLabels = ["Wargear Item", "Description"];
+    private _wargearLabelWidthNormalized = [0.25, 0.75];
 }
 
 function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupName: string, rulesToAdd: Map<string, string | null>) {
@@ -792,7 +781,7 @@ function createTableRow(labels: (string | Element)[], widths: number[], header =
     return row;
 }
 
-function createNoteHead(title: string, note: BaseNotes) {
+function createNoteHead(title: string, note: HorusHeresy.BaseNote) {
     if (!note.notes()) return null;
 
     const thead = document.createElement('thead');
@@ -802,7 +791,7 @@ function createNoteHead(title: string, note: BaseNotes) {
     return thead;
 }
 
-function createNotesHead(title: string, notes: BaseNotes[]) {
+function createNotesHead(title: string, notes: HorusHeresy.BaseNote[]) {
     if (!notes.some(note => note._customNotes)) return null;
 
     const thead = document.createElement('thead');
@@ -836,4 +825,17 @@ function toggleHidden(e: Event) {
     }
 }
 
+function bucketSortModels(models: HorusHeresy.BaseModel[]): Map<string, HorusHeresy.BaseModel[]> {
 
+    let buckets = new Map<string, HorusHeresy.BaseModel[]>();
+
+    const vehicles = models.filter(model => model instanceof HorusHeresy.Vehicle);
+    buckets.set("Vehicles", vehicles);
+    const knights = models.filter(model => model instanceof HorusHeresy.Knight);
+    buckets.set("Knights", knights);
+    const forts = models.filter(model => model instanceof HorusHeresy.Fortification);
+    buckets.set("Fortifications", forts);
+    const simple = models.filter(model => model instanceof HorusHeresy.Model);
+    buckets.set("Models", simple);
+    return buckets;
+}

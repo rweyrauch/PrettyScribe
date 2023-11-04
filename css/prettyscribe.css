@@ -196,6 +196,7 @@ label {
     --notchSize: 0.8em;
     --borderSize: 1px;
 
+    print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
     position: relative;
     line-height: 1;
@@ -233,10 +234,6 @@ label {
     padding-left: var(--notchSize);
 }
 
-.wh40k_unit_sheet > table > thead.header_row {
-    text-transform: uppercase
-}
-
 .wh40k_unit_sheet > table > thead.info_row > tr > td:first-child {
     font: bold 1em sans-serif;
     text-transform: uppercase;
@@ -253,7 +250,7 @@ label {
 
 .wh40k_unit_sheet > table > thead.unit_header {
     text-align: center;
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
 .wh40k_unit_sheet > table > thead.unit_header > tr > td:nth-child(2) {
@@ -265,7 +262,8 @@ label {
     color: white;
 }
 
-.wh40k_unit_sheet > table > thead.header_row > tr > th {
+.wh40k_unit_sheet > table > thead > tr.header_row > th {
+    text-transform: uppercase;
     white-space: nowrap;
 }
 
@@ -346,6 +344,176 @@ label {
     line-height: 1;
 }
 
+/* MESBG Start */
+.mesbg_container {
+    font-family: 'Crimson Pro', serif;
+    font-size: 18px;
+}
+@media print {
+    .mesbg_container {
+        font-size: 12px;
+    }
+}
+.mesbg_container  * {
+    margin: 0;
+    padding: 0;
+}
+.mesbg_rosterName {
+    font-size: 1.5em;
+    font-weight: lighter;
+}
+.mesbg_rosterInfo {
+    font-size: 1em;
+}
+.mesbg_h1 {
+    font-size: 1.5em;
+}
+.mesbg_h2 {
+    font-size: 1.25em;
+}
+.mesbg_h3 {
+    font-size: 1.125em;
+}
+.mesbg_h4 {
+    font-size: 1.125em;
+}
+.mesbg_equipmentList {
+    font-size: 1em;
+}
+.mesbg_profileTable {
+    border: 1px solid #333;
+    border-collapse: collapse;
+}
+.mesbg_profileTable tr th {
+    width: 2em;
+    padding: 4px 8px;
+    text-align: center;
+    font-size: 1.25em;
+    background-color: #ccc;
+}
+.mesbg_trackerTable tr td {
+    padding: 4px;
+}
+.mesbg_trackerTable tr th {
+    text-align: center;
+}
+.mesbg_profileTable tr td {
+    width: 2em;
+    padding: 4px 8px;
+    text-align: center;
+    font-size: 1em;
+}
+.mesbg_powerTable tr th {
+    text-align: left;
+    padding: 4px 16px 4px 0px;
+}
+.mesbg_list {
+    margin-left: 1em;
+}
+.mesbg_cardWargear {
+    font-size: 1.25;
+    font-weight: bold;
+}
+.mesbg_noBreak {
+    break-inside: avoid;
+}
+.mesbg_pageBreak {
+    break-before: page;
+}
+.mesbg_diceBlock {
+    width: 1in;
+    height: 1in;
+    border-radius: 0.125in;
+    border: 1px solid #333;
+}
+.mesbg_flexGrid {
+    display: flex;
+    flex-wrap: wrap;
+}
+.mesbg_flexGrid > * {
+    width: calc(50% - 16px);
+    margin-right: 16px;
+}
+.mesbg_flexGrid > *:last-child {
+    margin-right: 0px;
+}
+/*
+.mesbg_flex > *  {
+    display: inline-block;
+}
+*/
+.mesbg_flex  {
+ display: flex;
+    align-items: center;
+}
+.mesbg_flexBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mesbg_card {
+    border: 1px solid #333;
+    padding: 16px;
+    margin-bottom: 16px;
+    break-inside: avoid;
+}
+.mesbg_toggleHolder {
+    border: 1px dashed #333;
+    padding: 16px;
+    margin-bottom: 16px;
+    break-inside: avoid;
+}
+.mesbg_toggleHolder > * {
+    margin-left: 16px;
+}
+.mesbg_bumpDown {
+    margin-bottom: 8px;
+}
+.mesbg_twoColumn {
+    column-count: 2;
+    column-gap: 24px;
+}
+.mesbg_woundChart {
+    border-collapse: collapse;
+}
+.mesbg_woundChart td,
+.mesbg_woundChart th {
+    border: 1px solid #666;
+    font-size: 18px;
+    width: 4em;
+    height: 4em;
+    text-align: center;
+}
+.mesbg_woundChart tbody tr:nth-child(odd) {
+    background-color: #fafafa;
+}
+.mesbg_woundChart th {
+    background-color: #efefef;
+}
+.mesbg_woundChart th.mesbg_toWoundHeader {
+    background-color: transparent;
+    border: none;
+}
+@media screen and (max-width: 800px) {
+    .mesbg_twoColumn {
+        column-count: 1;
+        column-gap: 0px;
+    }
+}
+.mesbg_hideMe {
+    display: none;
+}
+@media print {
+    .mesbg_noPrint {
+        display: none;
+    }
+}
+/* MESBG End */
+
+.hh2-rule-link {
+    color: black;
+}
+
 .hide_enabled .hide_able:hover {
     background-color: rgba(128, 128, 128, .4);
     cursor: pointer;
@@ -360,6 +528,7 @@ label {
     .hide_enabled .hidden {
         display: none;
     }
+    a, a:visited { color: black; text-decoration: none; }
 }
 
 .page_break {

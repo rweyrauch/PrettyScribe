@@ -341,11 +341,16 @@ function ParseSelections(root: Element, force: AoSForce): void {
             force._battalions.push(battalion);
         }
         else if (selectionName.includes('Realm of Battle')) {
-           // TODO: implement Realm of Battle
            let realm = ParseRealmOfBattle(selection);
            if (realm) {
                force._realmOfBattle = realm;
            }
+        }
+        else if (selectionName.includes('GHB 2023 Rules')) {
+            let ghb = ParseGHBRules(selection);
+            if (ghb) {
+                force._realmOfBattle = ghb;
+            }
         }
         else if (selectionName.includes('Triumphs')) {
             let triumph = ParseTriumph(selection);
@@ -676,15 +681,12 @@ function ParseUnit(root: Element): AoSUnit {
 }
 
 function ParseAllegiance(root: Element): AoSAllegiance | null {
-    let allegiance: AoSAllegiance | null = null;
-    let selection = root.querySelector("selections>selection");
-    if (selection) {
-        let name = selection.getAttributeNode("name")?.nodeValue;
-        if (name) {
-            allegiance = new AoSAllegiance();
-            allegiance._name = name;
-        }
-        let profiles = selection.querySelectorAll("profiles>profile");
+    let name = root.getAttributeNode("name")?.nodeValue;
+    if (name) {
+        let allegiance = new AoSAllegiance();
+        allegiance._name = name;
+
+        let profiles = root.querySelectorAll("profiles>profile");
         for (let prof of profiles) {
             let profName = prof.getAttributeNode("name")?.nodeValue;
             let profType = prof.getAttributeNode("typeName")?.nodeValue;
@@ -734,8 +736,10 @@ function ParseAllegiance(root: Element): AoSAllegiance | null {
                 }
             }
         }
+
+        return allegiance;
     }
-    return allegiance;
+    return null;
 }
 
 function ParseGrandStrategy(root: Element): AoSGrandStrategy | null {
@@ -853,6 +857,58 @@ function ParseRealmOfBattle(root: Element): AoSRealmOfBattle | null {
                 }
             }    
         }
+    }
+    return realm;
+}
+
+function ParseGHBRules(root: Element): AoSRealmOfBattle | null {
+    let realm: AoSRealmOfBattle | null = null;
+    let name = root.getAttributeNode("name")?.nodeValue;
+    if (name) {
+        realm = new AoSRealmOfBattle();
+        realm._name = name;
+    
+        let profiles = root.querySelectorAll("profiles>profile");
+        for (let prof of profiles) {
+            let profName = prof.getAttributeNode("name")?.nodeValue;
+            let profType = prof.getAttributeNode("typeName")?.nodeValue;
+            if (profName && profType) {
+                if (profType == "Spell") {
+                    let spell = new AoSSpell();
+                    spell._name = profName;
+                    let chars = prof.querySelectorAll("characteristics>characteristic");
+                    for (let char of chars) {
+                        let charName = char.getAttributeNode("name")?.nodeValue;
+                        if (charName && char.textContent) {
+                            switch (charName) {
+                                case 'Casting Value': spell._castingValue = +char.textContent; break;
+                                case 'Range': spell._range = char.textContent; break;
+                                case 'Description': spell._description = char.textContent; break;
+                            }
+                        }
+                    }
+                    realm._spells.push(spell);
+                }
+                else if (profType == "Command Abilities") {
+                    let char = prof.querySelector("characteristics>characteristic");
+                    if (char && char.textContent) {
+                        realm._commandAbilities.set(profName, char.textContent);
+                    }    
+                }
+                else if ((profType == "Special Rules") || (profType == "Heroic Action")) {
+                    let char = prof.querySelector("characteristics>characteristic");
+                    if (char && char.textContent) {
+                        let rule = new AoSSpecialRules();
+                        rule._name = profName;
+                        rule._description = char.textContent;
+                        realm._rules.push(rule);
+                    }    
+                }
+                else {
+                    console.log("Unexpected Realm of Battle profile type: " + profType);
+                }
+            }
+        }    
     }
     return realm;
 }
