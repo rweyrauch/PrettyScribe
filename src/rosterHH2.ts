@@ -757,7 +757,7 @@ export namespace HorusHeresy {
 
         const seenProfiles: Element[] = [];
 
-        // First, find model stats. These have typeName=" Unit", " Vehicle", "Fortification" or "Knights and Titans".
+        // First, find model stats. These have typeName="Unit", "Vehicle", "Fortification" or "Knights and Titans".
         const modelStatsProfiles = Array.from(root.querySelectorAll('profile[typeId="4bb2-cb95-e6c8-5a21"],profile[typeId="2fae-b053-3f78-e7b2"],profile[typeId="75b5-9f7a-156e-6889"],profile[typeId="eeec-bde3-8ee4-35b0"]'));
         ParseModelStatsProfiles(modelStatsProfiles, unit, unitName);
         seenProfiles.push(...modelStatsProfiles);
@@ -911,7 +911,7 @@ export namespace HorusHeresy {
             const profileType = profile.getAttribute("typeName");
             if (!profileName || !profileType) return;
 
-            if (profileType === " Unit") {
+            if (profileType.trim() === "Unit") {
                 const model = new Model();
                 model._name = profileName;
                 unit._modelStats.push(model);
@@ -941,7 +941,7 @@ export namespace HorusHeresy {
                     }
                 }
             }
-            else if (profileType === "Knights and Titans") {
+            else if (profileType.trim() === "Knights and Titans") {
                 let knight = new Knight();
                 knight._name = profileName;
                 unit._modelStats.push(knight);
@@ -971,7 +971,7 @@ export namespace HorusHeresy {
                     }
                 }
             }
-            else if (profileType === " Vehicle") {
+            else if (profileType.trim() === "Vehicle") {
                 let vehicle = new Vehicle();
                 vehicle._name = profileName;
 
@@ -1000,7 +1000,7 @@ export namespace HorusHeresy {
                     }
                 }
             }
-            else if (profileType === "Fortification") {
+            else if (profileType.trim() === "Fortification") {
                 let fort = new Fortification();
                 fort._name = profileName;
 
@@ -1034,10 +1034,11 @@ export namespace HorusHeresy {
     function ParseProfiles(profiles: Element[], owner: Model | Unit) {
         for (const profile of profiles) {
             const profileName = profile.getAttribute("name");
-            const typeName = profile.getAttribute("typeName");
+            let typeName = profile.getAttribute("typeName");
             if (!profileName || !typeName) continue;
 
-            if ((typeName === " Unit") || (typeName === " Vehicle") ||
+            typeName = typeName.trim();
+            if ((typeName === "Unit") || (typeName === "Vehicle") ||
                 (typeName === "Knights and Titans") || ((typeName === "Fortification")) ||
                 (profile.getAttribute("type") === "model")) {
                 // Do nothing; these were already handled.
