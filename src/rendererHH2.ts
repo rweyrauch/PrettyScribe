@@ -46,8 +46,6 @@ export class RendererHH2 implements Renderer {
         if (title) {
             this.renderOptionsDiv(title);
 
-            title.appendChild(document.createElement('h2')).appendChild(document.createTextNode('...Prerelease - not ready for primetime...'));
-
             const costs = [`${this._roster._cost._points} pts`];
             const text = `${this._roster._name} (${costs.join(', ')})`;
             title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
