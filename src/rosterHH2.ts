@@ -568,7 +568,10 @@ export namespace HorusHeresy {
         let selectionType = selection.getAttributeNode("type")?.nodeValue;
         if (!selectionType) return;
 
-        if (selectionType === 'unit' || selectionType === 'model') {
+        if (selection.querySelector('profile[typeId="4bb2-cb95-e6c8-5a21"]') || // Unit
+            selection.querySelector('profile[typeId="2fae-b053-3f78-e7b2"]') || // Vehicle
+            selection.querySelector('profile[typeId="75b5-9f7a-156e-6889"]') || // Fortification
+            selection.querySelector('profile[typeId="eeec-bde3-8ee4-35b0"]')) { // Knights or Titans
             const unit = CreateUnit(selection);
             if (unit) {
                 force._units.push(unit);
@@ -770,8 +773,8 @@ export namespace HorusHeresy {
         } else {
             const immediateSelections = GetImmediateSelections(root);
             for (const selection of immediateSelections) {
-                if (selection.getAttribute('type') === 'model' || HasImmediateProfileWithTypeName(selection, ' Unit') || HasImmediateProfileWithTypeName(selection, 'Fortification') ||
-                    HasImmediateProfileWithTypeName(selection, ' Vehicle') || HasImmediateProfileWithTypeName(selection, 'Knights and Titans')) {
+                if (selection.getAttribute('type') === 'model' || HasImmediateProfileWithTypeName(selection, 'Unit') || HasImmediateProfileWithTypeName(selection, 'Fortification') ||
+                    HasImmediateProfileWithTypeName(selection, 'Vehicle') || HasImmediateProfileWithTypeName(selection, 'Knights and Titans')) {
                     modelSelections.push(selection);
                 }
             }
@@ -780,8 +783,8 @@ export namespace HorusHeresy {
                 modelSelections.push(...Array.from(root.querySelectorAll('selection[type="model"]')));
             }
             // Some single-model units have type="unit" or type="upgrade".
-            if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, ' Unit') || HasImmediateProfileWithTypeName(root, 'Fortification') ||
-                HasImmediateProfileWithTypeName(root, ' Vehicle') || HasImmediateProfileWithTypeName(root, 'Knights and Titans')) {
+            if (modelSelections.length === 0 && HasImmediateProfileWithTypeName(root, 'Unit') || HasImmediateProfileWithTypeName(root, 'Fortification') ||
+                HasImmediateProfileWithTypeName(root, 'Vehicle') || HasImmediateProfileWithTypeName(root, 'Knights and Titans')) {
                 modelSelections.push(root);
             }
         }
@@ -1098,7 +1101,7 @@ export namespace HorusHeresy {
         for (const child of root.children) {
             if (child.tagName === 'profiles') {
                 for (const subChild of child.children) {
-                    if (subChild.tagName === 'profile' && subChild.getAttribute('typeName') === typeName) {
+                    if (subChild.tagName === 'profile' && subChild.getAttribute('typeName')?.trim() === typeName) {
                         return true;
                     }
                 }
