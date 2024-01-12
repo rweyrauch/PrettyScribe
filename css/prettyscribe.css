@@ -351,7 +351,7 @@ label {
 }
 @media print {
     .mesbg_container {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 .mesbg_container  * {
@@ -363,16 +363,17 @@ label {
     font-weight: lighter;
 }
 .mesbg_rosterInfo {
-    font-size: 1em;
+    font-size: 16px;
 }
 .mesbg_h1 {
-    font-size: 1.5em;
+    font-size: 2rem;
+    line-height: 1;
 }
 .mesbg_h2 {
-    font-size: 1.25em;
+    font-size: 1.5em;
 }
 .mesbg_h3 {
-    font-size: 1.125em;
+    font-size: 1.25em;
 }
 .mesbg_h4 {
     font-size: 1.125em;
@@ -392,7 +393,7 @@ label {
     background-color: #ccc;
 }
 .mesbg_trackerTable tr td {
-    padding: 4px;
+    padding: 32px;
 }
 .mesbg_trackerTable tr th {
     text-align: center;
@@ -402,6 +403,7 @@ label {
     padding: 4px 8px;
     text-align: center;
     font-size: 1em;
+    margin-top: 1em;
 }
 .mesbg_powerTable tr th {
     text-align: left;
@@ -467,11 +469,16 @@ label {
     margin-left: 16px;
 }
 .mesbg_bumpDown {
-    margin-bottom: 8px;
+    margin-bottom: 2em;
 }
 .mesbg_twoColumn {
     column-count: 2;
     column-gap: 24px;
+}
+.mesbg_twoColumnGrid {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 1fr 1fr;
 }
 .mesbg_woundChart {
     border-collapse: collapse;
