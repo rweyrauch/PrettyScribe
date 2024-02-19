@@ -222,8 +222,12 @@ label {
     border-bottom-color: currentColor;
 }
 
-.wh40k_unit_sheet > table > * > * > *:not(:first-child):not(:last-child) {
+.wh40k_unit_sheet > table > *:not(.keywords_row) > * > *:not(:first-child):not(:last-child) {
     text-align: center;
+}
+
+.wh40k_unit_sheet > table > thead.keywords_row > * > * {
+    text-align: left;
 }
 
 .wh40k_unit_sheet > table > * > * > td {
@@ -234,7 +238,8 @@ label {
     padding-left: var(--notchSize);
 }
 
-.wh40k_unit_sheet > table > thead.info_row > tr > td:first-child {
+.wh40k_unit_sheet > table > thead.info_row > tr > td:first-child,
+.wh40k_unit_sheet > table > thead.info_row.keywords_row > tr > td:nth-child(3) {
     font: bold 1em sans-serif;
     text-transform: uppercase;
     vertical-align: top;

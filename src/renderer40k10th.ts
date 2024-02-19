@@ -508,17 +508,12 @@ export class Wh40kRenderer implements Renderer {
             this.renderUnitAbilitiesAndRules(statsTable, abilitiesGroup, abilitiesMap, rules);
         }
 
-        // factions
-        thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row');
-        const factions = Array.from(unit._factions).sort(Wh40k.Compare).join(', ').toLocaleUpperCase();
-        thead.appendChild(createTableRow(['Factions', factions], [0.10, 0.90], /* header= */ false));
-
         // keywords
         thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row');
+        thead.classList.add('info_row', 'keywords_row');
         const keywords = Array.from(unit._keywords).sort(Wh40k.Compare).join(', ').toLocaleUpperCase();
-        thead.appendChild(createTableRow(['Keywords', keywords], [0.10, 0.90], /* header= */ false));
+        const factions = Array.from(unit._factions).sort(Wh40k.Compare).join(', ').toLocaleUpperCase();
+        thead.appendChild(createTableRow(['Keywords', keywords, 'Factions', factions], [0.10, 0.60, 0.10, 0.20], /* header= */ false));
 
         // model list
         thead = statsTable.appendChild(document.createElement('thead'));
