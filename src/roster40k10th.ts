@@ -228,6 +228,7 @@ export class Unit extends BaseNotes {
     readonly _abilities: {[key: string]: Map<string, string>} = {};
     readonly _profileTables:  {[key: string]: TabularProfile} = {};
     readonly _rules: Map<string, string> = new Map();
+    readonly _weaponRules: Map<string, string> = new Map();
 
     readonly _models: Model[] = [];
     readonly _modelStats: Model[] = [];
@@ -449,6 +450,9 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
             for (const entry of unit._rules.entries()) {
                 force._rules.set(entry[0], entry[1]);
             }
+            for (const entry of unit._weaponRules.entries()) {
+                force._rules.set(entry[0], entry[1]);
+            }
         } else if (selection.getAttribute("type") === "upgrade") {
             ExtractRuleFromSelection(selection, force._rules);
             ParseConfiguration(selection, force);
@@ -473,6 +477,10 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
     for (const key of force._factionRules.keys()) {
         force._rules.delete(key);
     }
+
+    // Sort rules.
+    force._rules = new Map([...force._rules.entries()].sort());
+
 
     // Sort force units by role and name
     force._units.sort((a: Unit, b: Unit): number => {
@@ -795,7 +803,14 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
 
     let rules = root.querySelectorAll("rules > rule");
     for (let rule of rules) {
-        ExtractRuleDescription(rule, unit._rules);
+        const parentSelection = rule.parentElement?.parentElement;
+        if (parentSelection && (
+            HasImmediateProfileWithTypeName(parentSelection, "Ranged Weapons")
+            || HasImmediateProfileWithTypeName(parentSelection, "Melee Weapons"))) {
+            ExtractRuleDescription(rule, unit._weaponRules);
+        } else {
+            ExtractRuleDescription(rule, unit._rules);
+        }
     }
 
     unit.normalize();
