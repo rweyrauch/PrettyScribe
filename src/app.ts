@@ -111,7 +111,7 @@ function parseXML(xmldata: string) {
       const renderer: Renderer30k = new Renderer30k(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  } else if (gameType == "(HH V2) Horus Heresy (2022)") {
+  } else if (gameType.includes("Horus Heresy (2022)")) {
     const roster = HorusHeresy.CreateRoster(doc);
     if (roster && roster._forces.length > 0) {
       const renderer: RendererHH2 = new RendererHH2(roster);
