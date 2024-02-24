@@ -85,7 +85,7 @@ describe("CreateRoster", function() {
                   "Theyn (Close combat weapon, Etacarn plasma pistol, Ion blaster, Weavefield crest)",
                   "Unit Upgrades (Comms array, Medipack, Pan spectral scanner)"
                 ],
-                '_rules': mapWithKeys(["Blast", "Devastating Wounds", "Eye of the Ancestors", "Feel No Pain 6+", "Heavy", "Ignores Cover", "Pistol", "Ruthless Efficiency"]),
+                '_rules': mapWithKeys(["Eye of the Ancestors", "Feel No Pain 6+", "Ignores Cover", "Ruthless Efficiency"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Comms array", "Luck Has, Need Keeps, Toil Earns", "Medipack", "Pan spectral scanner", "Weavefield crest"]),
                 }}),
@@ -124,7 +124,7 @@ describe("CreateRoster", function() {
                   "Theyn (Autoch-pattern bolter, Close combat weapon, Etacarn plasma pistol, Weavefield crest)",
                   "Unit Upgrades (Comms array, Medipack, Pan spectral scanner)"
                 ],
-                '_rules': mapWithKeys(["Blast", "Devastating Wounds", "Eye of the Ancestors", "Feel No Pain 6+", "Heavy", "Ignores Cover", "Pistol", "Ruthless Efficiency"]),
+                '_rules': mapWithKeys(["Eye of the Ancestors", "Feel No Pain 6+", "Ignores Cover", "Ruthless Efficiency"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Comms array", "Luck Has, Need Keeps, Toil Earns", "Medipack", "Pan spectral scanner", "Weavefield crest"]),
                 }}),
@@ -157,7 +157,7 @@ describe("CreateRoster", function() {
                   "4x Einhyr Hearthguard (Concussion gauntlet, Exo-armour grenade launcher, Volkanite disintegrator)",
                   "Hesyr (Concussion hammer, Exo-armour grenade launcher, Teleport crest, Volkanite disintegrator)"
                 ],
-                '_rules': mapWithKeys(["Blast", "Devastating Wounds", "Eye of the Ancestors", "Ruthless Efficiency"]),
+                '_rules': mapWithKeys(["Eye of the Ancestors", "Ruthless Efficiency"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Oathband Bodyguard", "Teleport crest"]),
                 }}),
@@ -189,7 +189,7 @@ describe("CreateRoster", function() {
                 '_modelList': [
                   "Hekaton Land Fortress (Armoured wheels, MATR autocannon, Pan spectral scanner, SP heavy conversion beamer, 2x Twin bolt cannon)"
                 ],
-                '_rules': mapWithKeys(["Conversion", "Deadly Demise D6", "Eye of the Ancestors", "Ruthless Efficiency", "Sustained Hits", "Twin-linked"]),
+                '_rules': mapWithKeys(["Deadly Demise D6", "Eye of the Ancestors", "Ruthless Efficiency"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Damaged: 1-5 wounds remaining", "Fire Support", "Pan spectral scanner"]),
                   "Transport": mapWithKeys(["Hekaton Land Fortress"]),
@@ -226,7 +226,7 @@ describe("CreateRoster", function() {
                   "Hernkyn Pioneer w/ pan-spectral scanner (Bolt revolver, Bolt shotgun, Magna-coil autocannon, Pan-spectral scanner, Plasma knife)",
                   "Hernkyn Pioneer w/ searchlight (Bolt revolver, Bolt shotgun, Magna-coil autocannon, Plasma knife, Rollbar searchlight)"
                 ],
-                '_rules': mapWithKeys(["Assault", "Eye of the Ancestors", "Ignores Cover", "Pistol", "Ruthless Efficiency", "Scouts 9\"", "Sustained Hits"]),
+                '_rules': mapWithKeys(["Eye of the Ancestors", "Ignores Cover", "Ruthless Efficiency", "Scouts 9\""]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Outflanking Mag-Riders", "Pan-spectral scanner", "Rollbar searchlight"]),
                 }}),
@@ -259,7 +259,7 @@ describe("CreateRoster", function() {
                 '_modelList': [
                   "Sagitaur (Armoured wheels, L7 missile launcher and Sagitaur missile launcher, Twin bolt cannon)"
                 ],
-                '_rules': mapWithKeys(["Blast", "Deadly Demise 1", "Eye of the Ancestors", "Ruthless Efficiency", "Scouts 6\"", "Sustained Hits", "Twin-linked"]),
+                '_rules': mapWithKeys(["Deadly Demise 1", "Eye of the Ancestors", "Ruthless Efficiency", "Scouts 6\""]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Blistering Advance"]),
                   "Transport": mapWithKeys(["Sagitaur"]),
@@ -293,30 +293,30 @@ describe("CreateRoster", function() {
                 '_modelList': [
                   "Sagitaur (Armoured wheels, L7 missile launcher and Sagitaur missile launcher, Twin bolt cannon)"
                 ],
-                '_rules': mapWithKeys(["Blast", "Deadly Demise 1", "Eye of the Ancestors", "Ruthless Efficiency", "Scouts 6\"", "Sustained Hits", "Twin-linked"]),
+                '_rules': mapWithKeys(["Deadly Demise 1", "Eye of the Ancestors", "Ruthless Efficiency", "Scouts 6\""]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Blistering Advance"]),
                   "Transport": mapWithKeys(["Sagitaur"]),
                 }}),
             ],
             '_rules': new Map([
-              ["Eye of the Ancestors", jasmine.any(String)],
-              ["Ruthless Efficiency", jasmine.any(String)],
-              ["Pistol", jasmine.any(String)],
-              ["Feel No Pain 6+", jasmine.any(String)],
-              ["Ignores Cover", jasmine.any(String)],
-              ["Blast", jasmine.any(String)],
-              ["Devastating Wounds", jasmine.any(String)],
-              ["Heavy", jasmine.any(String)],
-              ["Scouts 9\"", jasmine.any(String)],
               ["Assault", jasmine.any(String)],
-              ["Sustained Hits", jasmine.any(String)],
-              ["Deadly Demise D6", jasmine.any(String)],
+              ["Blast", jasmine.any(String)],
               ["Conversion", jasmine.any(String)],
-              ["Twin-linked", jasmine.any(String)],
-              ["Scouts 6\"", jasmine.any(String)],
               ["Deadly Demise 1", jasmine.any(String)],
+              ["Deadly Demise D6", jasmine.any(String)],
+              ["Devastating Wounds", jasmine.any(String)],
+              ["Eye of the Ancestors", jasmine.any(String)],
+              ["Feel No Pain 6+", jasmine.any(String)],
+              ["Heavy", jasmine.any(String)],
+              ["Ignores Cover", jasmine.any(String)],
               ["Leader", jasmine.any(String)],
+              ["Pistol", jasmine.any(String)],
+              ["Ruthless Efficiency", jasmine.any(String)],
+              ["Scouts 6\"", jasmine.any(String)],
+              ["Scouts 9\"", jasmine.any(String)],
+              ["Sustained Hits", jasmine.any(String)],
+              ["Twin-linked", jasmine.any(String)],
             ]),
             '_factionRules': new Map(),
           }),

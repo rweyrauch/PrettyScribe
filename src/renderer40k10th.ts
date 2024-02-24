@@ -488,24 +488,38 @@ export class Wh40kRenderer implements Renderer {
         let notesTableHead = createNoteHead('Unit notes', unit);
         if (notesTableHead) statsTable.appendChild(notesTableHead);
 
+        const tbody = statsTable.appendChild(document.createElement('thead'));
+        const tr = tbody.appendChild(document.createElement('tr'));
+        const profilesTd = tr.appendChild(document.createElement('td'));
+        profilesTd.colSpan = 12;
+        profilesTd.classList.add('subTableTd');
+        const profilesTable = profilesTd.appendChild(document.createElement('table'));
+        profilesTable.classList.add('table', 'table-sm', 'table-striped');
+
         // Tabular profile data, like model stats and weapons.
         // Sort by unit, then weapons, then other stuff.
         const typeNames = Object.keys(unit._profileTables).sort(Wh40k.CompareProfileTableName);
         for (const typeName of typeNames) {
             const table = unit._profileTables[typeName];
             const widths = typeName === 'Unit' ? this._unitLabelWidthsNormalized : this._weaponLabelWidthNormalized;
-            this.renderSubTable(statsTable, table._headers, table._contents, widths, 'Notes', [table]);
+            this.renderSubTable(profilesTable, table._headers, table._contents, widths, 'Notes', [table]);
         }
+
+        const abilitiesTd = tr.appendChild(document.createElement('td'));
+        abilitiesTd.colSpan = 8;
+        abilitiesTd.classList.add('subTableTd');
+        const abilitiesTable = abilitiesTd.appendChild(document.createElement('table'));
+        abilitiesTable.classList.add('table', 'table-sm', 'table-striped');
 
         // unit abilities and rules; rules are shared across units, with their
         // descriptions printed in bulk later, but show up with unit 'Abilities'
         if (!unit._abilities['Abilities'] && unit._rules.size > 0) {
-            this.renderUnitAbilitiesAndRules(statsTable, 'Abilities', new Map(), unit._rules);
+            this.renderUnitAbilitiesAndRules(abilitiesTable, 'Abilities', new Map(), unit._rules);
         }
         for (const abilitiesGroup of Object.keys(unit._abilities).sort()) {
             const abilitiesMap = unit._abilities[abilitiesGroup];
             const rules = abilitiesGroup === 'Abilities' ? unit._rules : undefined;
-            this.renderUnitAbilitiesAndRules(statsTable, abilitiesGroup, abilitiesMap, rules);
+            this.renderUnitAbilitiesAndRules(abilitiesTable, abilitiesGroup, abilitiesMap, rules);
         }
 
         // keywords
@@ -544,20 +558,30 @@ export class Wh40kRenderer implements Renderer {
 
     private renderUnitAbilitiesAndRules(container: HTMLElement, abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
         const thead = container.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row');
-        const abilitiesDiv = document.createElement('div');
+        thead.classList.add('info_row', 'table-active');
+        const tr = thead.appendChild(document.createElement('tr'));
+        tr.classList.add('header_row');
+        const th = tr.appendChild(document.createElement('th'));
+        th.appendChild(document.createTextNode(abilitiesGroup));
+
+        const tbody = container.appendChild(document.createElement('tbody'));
+        tbody.classList.add('info_row');
+        tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
         if (rulesMap && rulesMap.size > 0) {
             const rules = Array.from(rulesMap.keys()).sort(Wh40k.Compare).join(', ');
+            const abilitiesDiv = document.createElement('div');
             abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
+            tbody.appendChild(createTableRow([abilitiesDiv], [1], /* header= */ false));
         }
         const abilities = Array.from(abilitiesMap.keys()).sort(Wh40k.Compare);
         for (const ability of abilities) {
+            const abilitiesDiv = document.createElement('div');
             const abilityDiv = addHideAble(abilitiesDiv.appendChild(document.createElement('div')));
             abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
             abilityDiv.appendChild(document.createTextNode(abilitiesMap.get(ability) || '??'));
+            tbody.appendChild(createTableRow([abilitiesDiv], [1], /* header= */ false));
         }
-        thead.appendChild(createTableRow([abilitiesGroup, abilitiesDiv], [0.10, 0.90], /* header= */ false));
-
     }
 
     private renderModelList(container: HTMLElement, unit: Wh40k.Unit) {
