@@ -40,3 +40,10 @@ export function filterAndOrderStats(stats: Stats) {
     .sort((a, b) => a[1].statOrder - b[1].statOrder);
 }
 
+/**
+ * Format a stat into a readable string.
+ */
+export function formatStat(stat: StatValue): string {
+  const value = String(stat.value);
+  return stat.format ? stat.format.replace(/{[vt]}/, value) : value;
+}
