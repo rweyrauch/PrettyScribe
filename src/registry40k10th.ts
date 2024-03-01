@@ -40,21 +40,11 @@ function ParseUnit(entry: Entry) {
   entry.keywords['Faction']?.sort().forEach(f => unit._factions.add(f));
   entry.keywords['Keywords']?.sort().forEach(kw => unit._keywords.add(kw));
 
-  ParseUnitStatsProfile(entry, unit);
+  ParseModels(entry, unit);
   ParseUnitProfiles(entry, unit);
-  
-  // TODO: model list
 
   unit.normalize();
   return unit;
-}
-
-function ParseUnitStatsProfile(entry: Entry, unit: Wh40k.Unit) {
-  const unitStats = converStatsToTabularProfileRow(entry, 'Unit');
-  if (Object.keys(unitStats).length > 1) {
-    if (!unit._profileTables['Unit']) unit._profileTables['Unit'] = new Wh40k.TabularProfile();
-    unit._profileTables['Unit'].addRow(Object.assign({ Unit: entry.designation }, unitStats));
-  }
 }
 
 function ParseUnitProfiles(entry: Entry, unit: Wh40k.Unit) {
@@ -67,8 +57,17 @@ function ParseUnitProfiles(entry: Entry, unit: Wh40k.Unit) {
         unit._cost._points += trait.stats.Points?.value as number;
       }
     } else if (classification === 'Ability') {
-      // TODO: Damaged, Invulns, and Leader are incorrectly tagged as Core.
-      if (trait.tally['Core'] || trait.tally['Faction']) {
+      if (trait.designation === 'Leader') {
+        // Clean up Leader text, by splitting it up between the core rule and
+        // the unit-specific rule.
+        const splitIndex = trait.text.indexOf("This model can be attached");
+        const coreRule = trait.text.substring(0, splitIndex).trim();
+        if (coreRule) unit._rules.set(trait.designation, coreRule);
+        const unitRule = trait.text.substring(splitIndex);
+        if (!unit._abilities['Abilities']) unit._abilities['Abilities'] = new Map();
+        unit._abilities['Abilities'].set(trait.designation, unitRule);
+      } else if ((trait.tally['Core'] || trait.tally['Faction'])
+          && !trait.designation.startsWith('Damaged:')) {
         // Core abilities don't have text in the unit datasheet, and get
         // aggregated under Rules at the bottom of the page.
         unit._rules.set(trait.designation, trait.text);
@@ -77,7 +76,6 @@ function ParseUnitProfiles(entry: Entry, unit: Wh40k.Unit) {
         unit._abilities['Abilities'].set(trait.designation, trait.text);
       }
     } else if (classification === 'Model') {
-      ParseUnitStatsProfile(trait, unit);
       // Recurse into Model traits for additional profiles like weapons.
       ParseUnitProfiles(trait, unit);
     } else if (classification === 'Ranged Weapon' || classification === 'Melee Weapon') {
@@ -121,4 +119,48 @@ function converStatsToTabularProfileRow(entry: Entry, name: string, unit?: Wh40k
       {[name]: entry.designation},
       Object.fromEntries(relevantStats.map(s => [s[0], formatStat(s[1])])));
   return row;
+}
+function ParseModels(entry: Entry, unit: Wh40k.Unit) {
+  // Look for models in the unit...
+  const models = [...entry.assets.traits, ...entry.assets.included]
+      .filter(t => t.classification === 'Model');
+  // ... and if there are none, the unit covers the model.
+  if (models.length === 0) {
+    models.push(entry);
+  }
+
+  for (const modelEntry of models) {
+    ParseUnitStatsProfile(modelEntry, unit);
+    ParseModel(modelEntry, unit);
+  }
+}
+
+function ParseUnitStatsProfile(entry: Entry, unit: Wh40k.Unit) {
+  const unitStats = converStatsToTabularProfileRow(entry, 'Unit');
+  if (Object.keys(unitStats).length > 1) {
+    if (!unit._profileTables['Unit']) unit._profileTables['Unit'] = new Wh40k.TabularProfile();
+    unit._profileTables['Unit'].addRow(Object.assign({ Unit: entry.designation }, unitStats));
+  }
+}
+
+function ParseModel(entry: Entry, unit: Wh40k.Unit) {
+  const model = new Wh40k.Model();
+  model._name = entry.designation;
+  model._count = entry.quantity;
+  unit._models.push(model);
+  const addons = [...entry.assets.traits, ...entry.assets.included]
+      .filter(t => t.classification === 'Wargear'
+          || t.classification === 'Ranged Weapon'
+          || t.classification === 'Melee Weapon'
+          || t.classification === 'Enhancement');
+  for (const addon of addons) {
+    // Use Upgrades for everything, even Weapons, since Upgrades and Weapons
+    // are merged in the model list.
+    const upgrade = new Wh40k.Upgrade();
+    upgrade._name = addon.designation;
+    const cost = addon.stats.Points?.value;
+    if (cost) upgrade._cost._points = cost as number;
+    
+    model._upgrades.push(upgrade);
+  }
 }

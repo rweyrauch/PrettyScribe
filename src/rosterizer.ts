@@ -15,6 +15,7 @@ export interface Registry extends Entry {
 export interface Entry {
   assets: Assets;
   designation: string; // Name
+  quantity: number;
   stats: Stats;
   classification: string; // Type
   tally: { [key: string]: number; };
