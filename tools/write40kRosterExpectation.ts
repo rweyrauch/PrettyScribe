@@ -26,7 +26,7 @@ const INPUT_SUBDIR_TO_EXPECTATIONS: { [key: string]: (filename: string) => Promi
 const OUTPUT_DIRECTORY = 'spec';
 
 async function writeRosterExpectations(filename: string) {
-  const filenameMatch = filename.match(`${INPUT_DIRECTORY}/(?:([^/]+)/)?([^/]+)\.rosz?$`);
+  const filenameMatch = filename.match(`${INPUT_DIRECTORY}/(?:([^/]+)/)?([^/]+)\.(rosz?|regi[sz]try)$`);
   if (!filenameMatch) {
     throw new Error(`ERROR: Unexpected input filename doesn't match regex: ${filename}`);
   }
@@ -55,7 +55,7 @@ async function readAllTestFiles() {
     const subdirPath = path.join(INPUT_DIRECTORY, subdir);
     const contents = await fs.promises.readdir(subdirPath);
     const filenames = contents
-        .filter(name => name.endsWith('.ros') || name.endsWith('.rosz'))
+        .filter(name => name.match(/\.(rosz?|regi[sz]try)$/))
         .map(name => path.join(subdirPath, name));
     Promise.all(
       filenames.map(writeRosterExpectations));
