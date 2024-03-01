@@ -1,28 +1,35 @@
 import {Wh40k} from "./roster40k10th";
-import { filterAndOrderStats, formatStat, Entry } from "./rosterizer";
+import { filterAndOrderStats, formatStat, Entry, Registry } from "./rosterizer";
 
-export function Create40kRosterFromRegistry(registry: Entry) {
+export function Create40kRosterFromRegistry(registry: Registry) {
   return CreateRoster(registry);
 }
 
-export function CreateRoster(registry: Entry) {
-  // TODO fix utf8 or lack thereof, by switching to ArrayBuffers
+export function CreateRoster(registry: Registry) {
   const roster = new Wh40k.Roster40k();
   const force = new Wh40k.Force();
+  roster._name = registry.name;
+  force._name = registry.info.name;
+  ParseDetachment(registry, force);
   for (const unitEntry of registry.assets.included) {
     const unit = ParseUnit(unitEntry);
     force._units.push(unit);
     roster._cost.add(unit._cost);
-    // TODO fill out roster stuff
-    // TODO fill out roster rules
+    for (const entry of [...unit._rules.entries(), ...unit._weaponRules.entries()]) {
+      force._rules.set(entry[0], entry[1]);
+    }
   }
+  force._rules = new Map([...force._rules.entries()].sort());  // Sort rules.
   roster._forces.push(force);
   return roster;
 }
 
-export function ParseRegistry(registry: Entry) {
-  const units = registry.assets.included;
-  return ParseUnit(units[0]);
+function ParseDetachment(registry: Registry, force: Wh40k.Force) {
+  const detachment = registry.assets.traits.filter(t => t.classification === 'Detachment')[0];
+  if (!detachment) return;
+
+  force._faction = detachment.designation;
+  force._rules.set(detachment.designation, detachment.text);
 }
 
 function ParseUnit(entry: Entry) {

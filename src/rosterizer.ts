@@ -2,6 +2,16 @@
  * Generic types and util functions for dealing with Rosterizer registries.
  */
 
+/** Top-level registry. */
+export interface Registry extends Entry {
+  name: string, // Registry name
+  info: {
+    game: string,
+    name: string, // Army name
+  }
+}
+
+/** Equivalent to BattleScribe's `selection`. */
 export interface Entry {
   assets: Assets;
   designation: string; // Name
