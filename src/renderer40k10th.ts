@@ -708,14 +708,12 @@ function addHideAble<T extends Element>(e: T): T {
 }
 
 function toggleHidden(e: Event) {
-    let element = e.target as Element;
-    if (element) element = element.closest('.hide_able') as Element;
-    if (!element) return;
-    if (element.classList.contains('hidden')) {
-        element.classList.remove('hidden')
-    } else {
-        element.classList.add('hidden')
-    }
+    if (!e.target) return;
+    
+    const element = e.target as Element;
+    element.closest('.hide_able')?.classList.toggle('hidden');
+    // For clicks on the unit header, hide the entire unit sheet.
+    element.closest('.unit_header')?.closest('.wh40k_unit_sheet')?.classList.toggle('hidden');
 }
 
 
