@@ -14,6 +14,8 @@
     OF THIS SOFTWARE.
 */
 
+import JSZip from "jszip";
+
 import { CreateKT21Roster } from "./rosterKT21";
 import { RendererKT21 } from "./rendererKT21";
 import { Create40kRoster } from "./roster40k";
@@ -31,8 +33,8 @@ import { Wh40kRenderer } from "./renderer40k10th";
 import { CreateMESBGRoster } from "./rosterMESBG";
 import { renderMESBG } from "./rendererMESBG";
 
-import JSZip from "jszip";
-import { reject } from "lodash";
+import { Registry } from "./rosterizer";
+import { Create40kRosterFromRegistry } from "./registry40k10th";
 
 function cleanup(): void {
   $('#roster-title').empty();
@@ -48,7 +50,7 @@ function getFileExtension(filename: string): string {
   return "";
 }
 
-function parseXML(xmldata: string) {
+function parseBattleScribeXML(xmldata: string) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xmldata, "text/xml");
   if (!doc) return;
@@ -141,18 +143,45 @@ function parseXML(xmldata: string) {
   //    }
   // }
   else {
-      $('#errorText').html('PrettyScribe does not support game type \'' + gameType + '\'.');
-      $('#errorDialog').modal('show');
+    showErrorModal('PrettyScribe does not support game type \'' + gameType + '\'.');
   }
 }
 
-const unzip = async (file: string) : Promise<string> => {
-  if (file.charAt(0) !== 'P') {
-    return file
+function parseRosterizerJSON(jsondata: string) {
+  const registry: Registry = JSON.parse(jsondata);
+  (window as any).registry = registry;
+
+  const rosterTitle = $('#roster-title')[0];
+  const rosterList = $('#roster-lists')[0];
+  const forceUnits = $('#force-units')[0];
+
+  const game = registry.info.game;
+  if (game === 'Warhammer 40k') {
+    const roster = Create40kRosterFromRegistry(registry);
+    (window as any).roster = roster;
+
+    const renderer: Wh40kRenderer = new Wh40kRenderer(roster);
+    renderer.render(rosterTitle, rosterList, forceUnits);
   } else {
+    showErrorModal('PrettyScribe does not support game type \'' + game + '\'.');
+  }
+}
+
+/**
+ * If the input buffer is zipped, returns contents of the first file matching
+ * fileRegex, otherwise UTF8-decodes the buffer.
+ */
+async function maybeUnzip(buf: ArrayBuffer, fileRegex: RegExp): Promise<string> {
+  const array = new Int8Array(buf, 0, 1);
+  const isZipped = array[0] === 'P'.charCodeAt(0);
+
+  if (isZipped) {
     const jszip = new JSZip()
-    const zip = await jszip.loadAsync(file)
-    return zip.file(/[^/]+\.ros/)[0].async('string') // Get roster files that are in the root
+    const zip = await jszip.loadAsync(buf)
+    return zip.file(fileRegex)[0].async('string') // Get roster files that are in the root
+  } else {
+    const utf8decoder = new TextDecoder();  // Defaults to UTF-8
+    return utf8decoder.decode(buf);
   }
 }
 
@@ -160,31 +189,37 @@ let fileChangeEvent: Event | null = null;
 
 function handleFileSelect(event: Event) {
 
-  let input;
-  let files;
-
-  if (event?.type === "resize") input = fileChangeEvent?.target as HTMLInputElement;
-  else input = event?.target as HTMLInputElement;
-
-  files = input?.files;
+  const input = event?.type === "resize"
+      ? fileChangeEvent?.target as HTMLInputElement
+      : event?.target as HTMLInputElement;
 
   cleanup();
 
-  if (files) {
-    if (event?.type !== "resize") fileChangeEvent = event;
+  if (!input?.files) return;
+  const file = input?.files[0];
 
-    const reader = new FileReader();
-    reader.onerror = () => {
-      reader.abort();
-      reject(new DOMException('Failed to read roster file.'));
+  if (event?.type !== "resize") fileChangeEvent = event;
+
+  file.arrayBuffer().then(async (buf: ArrayBuffer) => {
+    if (file.name.match(/\.rosz?$/)) {
+      const xmldata = await maybeUnzip(buf, /[^/]+\.ros$/);
+      parseBattleScribeXML(xmldata);
+    } else if (file.name.match(/\.regi[sz]try$/)) {
+      const jsondata = await maybeUnzip(buf, /[^/]+\.registry$/);
+      parseRosterizerJSON(jsondata);
+    } else {
+      showErrorModal(`PrettyScribe does not support extension of ${file.name}.`);
     }
-    reader.onloadend = async () => {
-      const content = reader.result as string;
-      const xmldata = await unzip(content);
-      parseXML(xmldata);
-    }
-    reader.readAsBinaryString(files[0]);
-  }
+  }).catch((e) => {
+    showErrorModal(`Error opening ${file.name}: ${e}`);
+    console.error(e);
+  });
+}
+
+function showErrorModal(msg: string) {
+  $('#errorText').html(msg);
+  $('#errorDialog').modal('show');  
+
 }
 
 // TODO: re-render on resize if needed.  Reloading/parsing each time the window is

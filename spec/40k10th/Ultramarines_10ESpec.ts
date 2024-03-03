@@ -1,4 +1,5 @@
 import { readZippedRosterFile } from '../helpers/readRosterFile';
+import { Create40kRosterFromRegistry } from "../../src/registry40k10th";
 import { Wh40k } from "../../src/roster40k10th";
 
 function mapWithKeys(keys: string[]) {
