@@ -35,7 +35,7 @@ function ParseDetachment(registry: Registry, force: Wh40k.Force) {
 function ParseUnit(entry: Entry) {
   const unit = new Wh40k.Unit();
   unit._name = entry.designation;
-  unit._cost._points = entry.stats.Points.value as number;
+  ParseUnitCost(entry, unit);
 
   entry.keywords['Faction']?.sort().forEach(f => unit._factions.add(f));
   entry.keywords['Keywords']?.sort().forEach(kw => unit._keywords.add(kw));
@@ -47,15 +47,48 @@ function ParseUnit(entry: Entry) {
   return unit;
 }
 
+function ParseUnitCost(entry: Entry, unit: Wh40k.Unit) {
+  unit._cost._points = 0;
+
+  // Units with variable sizing have points specificed based on model count.
+  // Addons will have points in their entry -- this includes some bonus models
+  // which should NOT be counted for the unit model count wrt pricing.
+  let numModelsWithoutCosts = 0;
+  let assetPoints = 0;
+  function countPointsAndModels(e: Entry) {
+    for (const asset of [...e.assets.included, ...e.assets.traits]) {
+      if (asset.stats.Points?.value) {
+        assetPoints += asset.stats.Points.value as number;
+      } else if (asset.classification === 'Model') {
+        numModelsWithoutCosts += asset.quantity;
+      }
+      countPointsAndModels(asset);
+    }
+  }
+
+  countPointsAndModels(entry);
+  unit._cost._points = entry.stats.Points.value as number
+  if (entry.stats.model3rdTally.value
+      && numModelsWithoutCosts > (entry.stats.model3rdTally.value as number)) {
+    unit._cost._points = entry.stats.model4thCost.value as number;
+  } else if (entry.stats.model2ndTally.value
+      && numModelsWithoutCosts > (entry.stats.model2ndTally.value as number)) {
+    unit._cost._points = entry.stats.model3rdCost.value as number;
+  } else if (entry.stats.model1stTally.value
+      && numModelsWithoutCosts > (entry.stats.model1stTally.value as number)) {
+    unit._cost._points = entry.stats.model2ndCost.value as number;
+  } else {
+    unit._cost._points = entry.stats.Points.value as number;
+  }
+  unit._cost._points += assetPoints;
+}
+
 function ParseUnitProfiles(entry: Entry, unit: Wh40k.Unit) {
   for (const trait of [...entry.assets.traits, ...entry.assets.included]) {
     const classification = trait.classification;
     if (classification === 'Wargear' || classification === 'Enhancement') {
       if (!unit._abilities[classification]) unit._abilities[classification] = new Map();
       unit._abilities[classification].set(trait.designation, trait.text);
-      if (trait.stats.Points) {
-        unit._cost._points += trait.stats.Points?.value as number;
-      }
     } else if (classification === 'Ability') {
       if (trait.designation === 'Leader') {
         // Clean up Leader text, by splitting it up between the core rule and
@@ -78,15 +111,17 @@ function ParseUnitProfiles(entry: Entry, unit: Wh40k.Unit) {
     } else if (classification === 'Model') {
       // Recurse into Model traits for additional profiles like weapons.
       ParseUnitProfiles(trait, unit);
-    } else if (classification === 'Ranged Weapon' || classification === 'Melee Weapon') {
+    } else if (classification === 'Ranged Weapon'
+        || classification === 'Melee Weapon'
+        || classification === 'Weapon') {
       ParseWeaponProfile(trait, unit);
       // Check for attack profiles like standard/overcharge.
-      const subweaponTraits = trait.assets.traits.filter(t => t.classification === classification);
+      const subweaponTraits = trait.assets.traits.filter(t => t.classification.endsWith('Weapon'));
       for (const subweaponTrait of subweaponTraits) {
         ParseWeaponProfile(subweaponTrait, unit, trait.designation);
       }
     } else {
-      console.error(`Unexepcted classification '${classification}'`)
+      console.error(`Unexepcted classification '${classification}': ${trait.designation}`)
     }
   }
 }
@@ -120,6 +155,7 @@ function converStatsToTabularProfileRow(entry: Entry, name: string, unit?: Wh40k
       Object.fromEntries(relevantStats.map(s => [s[0], formatStat(s[1])])));
   return row;
 }
+
 function ParseModels(entry: Entry, unit: Wh40k.Unit) {
   // Look for models in the unit...
   const models = [...entry.assets.traits, ...entry.assets.included]
@@ -127,6 +163,15 @@ function ParseModels(entry: Entry, unit: Wh40k.Unit) {
   // ... and if there are none, the unit covers the model.
   if (models.length === 0) {
     models.push(entry);
+  } else {
+    // Since there are Models, look for unit-level upgrades.
+    ParseModel(
+      {
+        designation: 'Unit Upgrades',
+        assets: entry.assets,
+        quantity: 1
+      } as Entry, unit,
+      /* addModelWithoutAddons = */ false);
   }
 
   for (const modelEntry of models) {
@@ -143,13 +188,13 @@ function ParseUnitStatsProfile(entry: Entry, unit: Wh40k.Unit) {
   }
 }
 
-function ParseModel(entry: Entry, unit: Wh40k.Unit) {
+function ParseModel(entry: Entry, unit: Wh40k.Unit, addModelWithoutAddons = true) {
   const model = new Wh40k.Model();
   model._name = entry.designation;
   model._count = entry.quantity;
-  unit._models.push(model);
   const addons = [...entry.assets.traits, ...entry.assets.included]
       .filter(t => t.classification === 'Wargear'
+          || t.classification === 'Weapon'
           || t.classification === 'Ranged Weapon'
           || t.classification === 'Melee Weapon'
           || t.classification === 'Enhancement');
@@ -162,5 +207,8 @@ function ParseModel(entry: Entry, unit: Wh40k.Unit) {
     if (cost) upgrade._cost._points = cost as number;
     
     model._upgrades.push(upgrade);
+  }
+  if (addModelWithoutAddons || addons.length > 0) {
+    unit._models.push(model);
   }
 }

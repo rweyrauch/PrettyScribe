@@ -149,14 +149,17 @@ function parseBattleScribeXML(xmldata: string) {
 
 function parseRosterizerJSON(jsondata: string) {
   const registry: Registry = JSON.parse(jsondata);
+  (window as any).registry = registry;
 
   const rosterTitle = $('#roster-title')[0];
   const rosterList = $('#roster-lists')[0];
   const forceUnits = $('#force-units')[0];
 
-  const roster = Create40kRosterFromRegistry(registry);
   const game = registry.info.game;
   if (game === 'Warhammer 40k') {
+    const roster = Create40kRosterFromRegistry(registry);
+    (window as any).roster = roster;
+
     const renderer: Wh40kRenderer = new Wh40kRenderer(roster);
     renderer.render(rosterTitle, rosterList, forceUnits);
   } else {
@@ -209,6 +212,7 @@ function handleFileSelect(event: Event) {
     }
   }).catch((e) => {
     showErrorModal(`Error opening ${file.name}: ${e}`);
+    console.error(e);
   });
 }
 
