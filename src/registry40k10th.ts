@@ -48,39 +48,30 @@ function ParseUnit(entry: Entry) {
 }
 
 function ParseUnitCost(entry: Entry, unit: Wh40k.Unit) {
-  unit._cost._points = 0;
-
-  // Units with variable sizing have points specificed based on model count.
-  // Addons will have points in their entry -- this includes some bonus models
-  // which should NOT be counted for the unit model count wrt pricing.
-  let numModelsWithoutCosts = 0;
-  let assetPoints = 0;
-  function countPointsAndModels(e: Entry) {
-    for (const asset of [...e.assets.included, ...e.assets.traits]) {
-      if (asset.stats.Points?.value) {
-        assetPoints += asset.stats.Points.value as number;
-      } else if (asset.classification === 'Model') {
-        numModelsWithoutCosts += asset.quantity;
-      }
-      countPointsAndModels(asset);
-    }
-  }
-
-  countPointsAndModels(entry);
-  unit._cost._points = entry.stats.Points.value as number
+  const numModels = entry.stats.Models?.value as number;
   if (entry.stats.model3rdTally.value
-      && numModelsWithoutCosts > (entry.stats.model3rdTally.value as number)) {
+      && numModels > (entry.stats.model3rdTally.value as number)) {
     unit._cost._points = entry.stats.model4thCost.value as number;
   } else if (entry.stats.model2ndTally.value
-      && numModelsWithoutCosts > (entry.stats.model2ndTally.value as number)) {
+      && numModels > (entry.stats.model2ndTally.value as number)) {
     unit._cost._points = entry.stats.model3rdCost.value as number;
   } else if (entry.stats.model1stTally.value
-      && numModelsWithoutCosts > (entry.stats.model1stTally.value as number)) {
+      && numModels > (entry.stats.model1stTally.value as number)) {
     unit._cost._points = entry.stats.model2ndCost.value as number;
   } else {
     unit._cost._points = entry.stats.Points.value as number;
   }
-  unit._cost._points += assetPoints;
+
+  function countAddonPoints(e: Entry) {
+    for (const asset of [...e.assets.included, ...e.assets.traits]) {
+      if (asset.stats.Points?.value) {
+        unit._cost._points += asset.stats.Points.value as number;
+      }
+      countAddonPoints(asset);
+    }
+  }
+
+  countAddonPoints(entry);
 }
 
 function ParseUnitProfiles(entry: Entry, unit: Wh40k.Unit) {
