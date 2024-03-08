@@ -16,6 +16,7 @@ export interface Entry {
   assets: Assets;
   designation: string; // Name
   quantity: number;
+  rules: { [key: string]: Rule; };
   stats: Stats;
   classification: string; // Type
   tally: { [key: string]: number; };
@@ -26,6 +27,18 @@ export interface Entry {
 export interface Assets {
   included: Entry[];
   traits: Entry[];
+}
+
+export type Rule = {
+  evals: RuleEval[];
+};
+
+export type RuleEval = {
+  result: RuleEvalResult;
+}
+
+export type RuleEvalResult = {
+  integer: number;
 }
 
 export type Stats = { [key: string]: StatValue; };
