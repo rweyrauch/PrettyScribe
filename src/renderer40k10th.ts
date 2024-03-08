@@ -176,18 +176,18 @@ export class Wh40kRenderer implements Renderer {
                     }
                 }
             });
-        this.renderCheckboxOption(optionsDiv, 'collateDatasheets', 'Collate Detachment Datasheets',
+        this.renderCheckboxOption(optionsDiv, 'singleColumnDatasheets', 'Single-Column Datasheets',
             (e: Event) => {
-                const collatedSheets = document.getElementById('collated_sheets');
-                const detachmentSheets = document.getElementById('detachment_sheets');
-                if (!collatedSheets || !detachmentSheets) return;
+                const singleColumnSheeets = document.getElementById('single_column_sheets');
+                const doubleColumnSheets = document.getElementById('double_column_sheets');
+                if (!singleColumnSheeets || !doubleColumnSheets) return;
 
                 if ((e.target as HTMLInputElement).checked) {
-                    collatedSheets.classList.remove('d-none')
-                    detachmentSheets.classList.add('d-none')
+                    singleColumnSheeets.classList.remove('d-none')
+                    doubleColumnSheets.classList.add('d-none')
                 } else {
-                    collatedSheets.classList.add('d-none')
-                    detachmentSheets.classList.remove('d-none')
+                    singleColumnSheeets.classList.add('d-none')
+                    doubleColumnSheets.classList.remove('d-none')
                 }
             });
 
@@ -397,44 +397,37 @@ export class Wh40kRenderer implements Renderer {
 
         const catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
         const subFactionRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
-        const detachmentSheets = forces.appendChild(document.createElement('div'));
-        detachmentSheets.id = 'detachment_sheets';
-        const collatedSheets = forces.appendChild(document.createElement('div'));
-        collatedSheets.id = 'collated_sheets';
-        collatedSheets.style.pageBreakBefore = "always";
-        collatedSheets.classList.add('d-none');
-        const collatedUnits: Wh40k.Unit[] = [];
+        const doubleColumnSheets = forces.appendChild(document.createElement('div'));
+        doubleColumnSheets.id = 'double_column_sheets';
+        const singleColumnSheets = forces.appendChild(document.createElement('div'));
+        singleColumnSheets.id = 'single_column_sheets';
+        singleColumnSheets.style.pageBreakBefore = "always";
+        singleColumnSheets.classList.add('d-none');
 
         for (const force of this._roster._forces) {
-            const forceTitle = document.createElement('div');
-            forceTitle.style.pageBreakBefore = "always";
-            if (forceTitle) {
-                const p = document.createElement("p");
-                p.appendChild(document.createTextNode(force._catalog));
-                if (force._faction) {
-                    p.appendChild(document.createTextNode(" (" + force._faction + ")"));
-                }
-                forceTitle.appendChild(p);
+            if (this._roster._forces.length > 1) {
+                const forceTitle = document.createElement('div');
+                forceTitle.style.pageBreakBefore = "always";
+                if (forceTitle) {
+                    const p = document.createElement("p");
+                    p.appendChild(document.createTextNode(force._catalog));
+                    if (force._faction) {
+                        p.appendChild(document.createTextNode(" (" + force._faction + ")"));
+                    }
+                    forceTitle.appendChild(p);
+                }                
+
+                let h3 = document.createElement('h3');
+                h3.appendChild(forceTitle)
+                doubleColumnSheets.appendChild(h3);
             }
 
-            let h3 = document.createElement('h3');
-            h3.appendChild(forceTitle)
-            detachmentSheets.appendChild(h3);
-
-            this.renderDatasheets(detachmentSheets, force._units);
-
-            collatedUnits.push(...force._units);
+            this.renderDatasheets(doubleColumnSheets, force._units);
+            this.renderDatasheets(singleColumnSheets, force._units, true);
 
             mergeRules(catalogueRules, force._catalog, force._rules);
             mergeRules(subFactionRules, force._faction, force._factionRules);
         }
-
-        collatedUnits.sort((lhs: Wh40k.Unit, rhs: Wh40k.Unit) => {
-            if (lhs._role != rhs._role) return lhs._role - rhs._role;
-            if (lhs._name != rhs._name) return Wh40k.Compare(lhs._name, rhs._name);
-            return lhs._cost._points - rhs._cost._points;  // Simple heuristic, could do better.
-        });
-        this.renderDatasheets(collatedSheets, collatedUnits);
 
         let rules = document.createElement("div");
         rules.style.pageBreakBefore = "always";
@@ -443,7 +436,7 @@ export class Wh40kRenderer implements Renderer {
         forces.appendChild(rules);
     }
 
-    private renderDatasheets(forces: HTMLElement, units: Wh40k.Unit[]) {
+    private renderDatasheets(forces: HTMLElement, units: Wh40k.Unit[], singleColumn = false) {
         let numIdenticalUnits = 0;
         for (let i = 0; i < units.length; i++) {
             numIdenticalUnits++;
@@ -451,12 +444,12 @@ export class Wh40kRenderer implements Renderer {
             const nextUnit = units[i + 1];
             if (unit.equal(nextUnit)) continue;
 
-            this.renderUnitHtml(forces, unit, numIdenticalUnits);
+            this.renderUnitHtml(forces, unit, numIdenticalUnits, singleColumn);
             numIdenticalUnits = 0
         }
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number) {
+    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number, singleColumn = false) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
         const statsTable = document.createElement('table');
@@ -490,11 +483,15 @@ export class Wh40kRenderer implements Renderer {
 
         const tbody = statsTable.appendChild(document.createElement('thead'));
         const tr = tbody.appendChild(document.createElement('tr'));
-        const profilesTd = tr.appendChild(document.createElement('td'));
-        profilesTd.colSpan = 12;
-        profilesTd.classList.add('subTableTd');
-        const profilesTable = profilesTd.appendChild(document.createElement('table'));
-        profilesTable.classList.add('table', 'table-sm', 'table-striped');
+
+        let profilesTable = statsTable;
+        if (!singleColumn) {
+            const profilesTd = tr.appendChild(document.createElement('td'));
+            profilesTd.colSpan = 12;
+            profilesTd.classList.add('subTableTd');
+            profilesTable = profilesTd.appendChild(document.createElement('table'));
+            profilesTable.classList.add('table', 'table-sm', 'table-striped');
+        }
 
         // Tabular profile data, like model stats and weapons.
         // Sort by unit, then weapons, then other stuff.
@@ -505,11 +502,14 @@ export class Wh40kRenderer implements Renderer {
             this.renderSubTable(profilesTable, table._headers, table._contents, widths, 'Notes', [table]);
         }
 
-        const abilitiesTd = tr.appendChild(document.createElement('td'));
-        abilitiesTd.colSpan = 8;
-        abilitiesTd.classList.add('subTableTd');
-        const abilitiesTable = abilitiesTd.appendChild(document.createElement('table'));
-        abilitiesTable.classList.add('table', 'table-sm', 'table-striped');
+        let abilitiesTable = statsTable;
+        if (!singleColumn) {
+            const abilitiesTd = tr.appendChild(document.createElement('td'));
+            abilitiesTd.colSpan = 8;
+            abilitiesTd.classList.add('subTableTd');
+            abilitiesTable = abilitiesTd.appendChild(document.createElement('table'));
+            abilitiesTable.classList.add('table', 'table-sm', 'table-striped');
+        }
 
         // unit abilities and rules; rules are shared across units, with their
         // descriptions printed in bulk later, but show up with unit 'Abilities'
@@ -562,6 +562,7 @@ export class Wh40kRenderer implements Renderer {
         const tr = thead.appendChild(document.createElement('tr'));
         tr.classList.add('header_row');
         const th = tr.appendChild(document.createElement('th'));
+        th.colSpan = 20;
         th.appendChild(document.createTextNode(abilitiesGroup));
 
         const tbody = container.appendChild(document.createElement('tbody'));

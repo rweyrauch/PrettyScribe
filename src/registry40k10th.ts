@@ -48,7 +48,10 @@ function ParseUnit(entry: Entry) {
 }
 
 function ParseUnitCost(entry: Entry, unit: Wh40k.Unit) {
-  const numModels = entry.stats.Models?.value as number;
+  // Use the newer finalModelTally rule if available, otherwise use best effort
+  // stats.Models.
+  const numModels = entry.rules.finalModelTally?.evals[1]?.result.integer ||
+      entry.stats.Models?.value as number;
   if (entry.stats.model3rdTally.value
       && numModels > (entry.stats.model3rdTally.value as number)) {
     unit._cost._points = entry.stats.model4thCost.value as number;
