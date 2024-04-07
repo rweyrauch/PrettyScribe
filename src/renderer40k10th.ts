@@ -16,6 +16,9 @@
 
 import {Renderer} from "./renderer";
 import {Wh40k} from "./roster40k10th";
+import {createTableRow, createNoteHead, createNotesHead} from './html/table';
+import {addHideAble, toggleHidden} from "./html/hideable"
+import {loadOptionsFromLocalStorage, renderCheckboxOption, renderOptionsToggle} from "./html/options";
 
 export class Wh40kRenderer implements Renderer {
 
@@ -71,7 +74,7 @@ export class Wh40kRenderer implements Renderer {
             this.renderRosterDetails(forces);
         }
 
-        this.loadOptionsFromLocalStorage();
+        loadOptionsFromLocalStorage();
     }
 
     private renderRosterSummary(list: HTMLElement) {
@@ -133,28 +136,9 @@ export class Wh40kRenderer implements Renderer {
 
         // A toggle to hide or show options, since there are several.
         const optionsToggleSpan = optionsDiv.appendChild(document.createElement('span'));
-        optionsToggleSpan.classList.add('wh40k_options_toggle');
-        optionsToggleSpan.id = 'wh40k_options_toggle';
-        const optionsToggleExpandedText = '[\u2212] Options:';
-        const optionsToggleCollapsedText = '[+] Options';
-        optionsToggleSpan.appendChild(document.createTextNode(optionsToggleExpandedText));
-        optionsToggleSpan.addEventListener('click', (e: Event) => {
-            const optionsDiv = document.getElementById('wh40k_options_div');
-            const optionsToggle = document.getElementById('wh40k_options_toggle');
-            if (!optionsDiv || !optionsToggle) return;
+        renderOptionsToggle(optionsToggleSpan);
 
-            if (optionsDiv.classList.contains('hide_options')) {
-                optionsDiv.classList.remove('hide_options');
-                optionsToggle.innerText = optionsToggleExpandedText;
-                this.saveOptionToLocalStorage('option-toggle-hidden', 'false');
-            } else {
-                optionsDiv.classList.add('hide_options');
-                optionsToggle.innerText = optionsToggleCollapsedText;
-                this.saveOptionToLocalStorage('option-toggle-hidden', 'true');
-            }
-        });
-
-        this.renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase',
+        renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase',
             (e) => {
                 const abilities = document.getElementById('wh40k_abilities_list');
                 if (!abilities) return;
@@ -165,7 +149,7 @@ export class Wh40kRenderer implements Renderer {
                     abilities.classList.add('d-none');
                 }
             });
-        this.renderCheckboxOption(optionsDiv, 'showUpgradeCosts', 'Show upgrade costs',
+        renderCheckboxOption(optionsDiv, 'showUpgradeCosts', 'Show upgrade costs',
             (e: Event) => {
                 const costSpans = document.getElementsByClassName('wh40k_upgrade_cost');
                 for (const span of costSpans) {
@@ -176,7 +160,7 @@ export class Wh40kRenderer implements Renderer {
                     }
                 }
             });
-        this.renderCheckboxOption(optionsDiv, 'singleColumnDatasheets', 'Single-Column Datasheets',
+        renderCheckboxOption(optionsDiv, 'singleColumnDatasheets', 'Single-Column Datasheets',
             (e: Event) => {
                 const singleColumnSheeets = document.getElementById('single_column_sheets');
                 const doubleColumnSheets = document.getElementById('double_column_sheets');
@@ -195,7 +179,7 @@ export class Wh40kRenderer implements Renderer {
         const printOptionsDiv = optionsDiv.appendChild(document.createElement('span'));
         printOptionsDiv.classList.add('wh40k_options_print_subsection');
         printOptionsDiv.appendChild(document.createTextNode('Print:'));
-        this.renderCheckboxOption(printOptionsDiv, 'printBigger', 'Larger Text',
+        renderCheckboxOption(printOptionsDiv, 'printBigger', 'Larger Text',
             (e: Event) => {
                 const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
                 for (const div of unitSheetDiv) {
@@ -208,7 +192,7 @@ export class Wh40kRenderer implements Renderer {
             });
 
         // ability to hide divs (abilities, rules, ...) from printing
-        this.renderCheckboxOption(printOptionsDiv, 'hideElements', 'Hide Elements',
+        renderCheckboxOption(printOptionsDiv, 'hideElements', 'Hide Elements',
             (e: Event) => {
                 const body = document.body;
                 if ((e.target as HTMLInputElement).checked) {
@@ -219,7 +203,7 @@ export class Wh40kRenderer implements Renderer {
                     body.removeEventListener('click', toggleHidden)
                 }
             });
-        this.renderCheckboxOption(printOptionsDiv, 'datasheetPageBreaks', 'One Datasheet per Page',
+        renderCheckboxOption(printOptionsDiv, 'datasheetPageBreaks', 'One Datasheet per Page',
             (e: Event) => {
                 const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
                 for (const div of unitSheetDiv) {
@@ -232,61 +216,6 @@ export class Wh40kRenderer implements Renderer {
             });
     }
 
-    private renderCheckboxOption(optionsDiv: HTMLElement, idAndName: string, text: string, eventHandler: EventListenerOrEventListenerObject) {
-        const optDiv = optionsDiv.appendChild(document.createElement('div'));
-        optDiv.classList.add('wh40k_option');
-        const input = optDiv.appendChild(document.createElement('input'));
-        input.setAttribute('type', 'checkbox');
-        input.setAttribute('name', idAndName);
-        input.setAttribute('id', idAndName);
-        input.addEventListener('input', eventHandler);
-        input.addEventListener('change', e => this.saveCheckboxToLocalStorage(idAndName));
-        const label = optDiv.appendChild(document.createElement('label'));
-        label.setAttribute('for', idAndName);
-        label.appendChild(document.createTextNode(` ${text}`));
-    }
-
-    private saveCheckboxToLocalStorage(idAndName: string) {
-        const el = document.getElementById(idAndName) as HTMLInputElement;
-        if (!el) return;
-        this.saveOptionToLocalStorage(`option-checkbox-${idAndName}`, el.checked);
-    }
-
-    private saveOptionToLocalStorage(key: string, value: any) {
-        try {
-            window.localStorage[key] = value;
-        } catch (e) {
-            // localStorage not supported or enabled
-        }
-    }
-
-    private loadOptionsFromLocalStorage() {
-        try { 
-            for (let i = 0; i < window.localStorage.length; i++) {
-                const key = window.localStorage.key(i);
-                const checkboxId = key?.match(/option-checkbox-(.*)/)?.[1];
-                if (checkboxId) {
-                    const option = document.getElementById(checkboxId) as HTMLInputElement;
-                    if (!option) continue;
-
-                    option.checked = window.localStorage[key] === 'true';
-                    option.dispatchEvent(new Event('input'));
-                } else if (key === 'option-toggle-hidden') {
-                    const optionsDiv = document.getElementById('wh40k_options_div');
-                    const optionsToggle = document.getElementById('wh40k_options_toggle');
-                    if (!optionsDiv || !optionsToggle) return;
-
-                    const hideOptions = !!window.localStorage[key];
-        
-                    if (optionsDiv.classList.contains('hide_options') !== hideOptions) {
-                        optionsToggle.dispatchEvent(new Event('click'));
-                    }
-                }
-            }
-        } catch (e) {
-            // localStorage not supported or enabled
-        }
-    }
 
     private renderAbilitiesByPhase(list: HTMLElement) {
         if (!this._roster) return;
@@ -643,78 +572,3 @@ function mergeRules(ruleGroups: Map<string, Map<string, string | null>>, groupNa
     if (rulesToAdd.size === 0) return;
     ruleGroups.set(groupName, new Map([...ruleGroups.get(groupName) || [], ...rulesToAdd]));
 }
-
-function createTableRow(labels: (string | Element)[], widths: number[], header = false) {
-    const row = addHideAble(document.createElement('tr'));
-    if (header) row.classList.add('header_row');
-    for (let i = 0, colCount = 0; i < labels.length || colCount < 20; i++) {
-        const cell = document.createElement(header ? 'th' : 'td');
-        cell.scope = 'col';
-        if (i < labels.length) {
-            let node: Node;
-            const label = labels[i];
-            if (typeof label === 'string') {
-                node = document.createTextNode(label);
-            } else {
-                node = labels[i] as Element; // TypeScript requires a cast here.
-            }
-            cell.appendChild(node);
-
-            const width = widths[i] || 0.05;
-            cell.style.width = `${width * 100}%`;
-            colCount += cell.colSpan = Math.round(width / 0.05);
-        } else if (colCount < 20) {
-            // cell.style.width = `${(1 - width) * 100}%`;
-            cell.colSpan = (20 - colCount);
-            colCount = 20;
-        } else {
-            break;  // Shouldn't happen
-        }
-        row.appendChild(cell);
-    }
-    return row;
-}
-
-function createNoteHead(title: string, note: Wh40k.BaseNotes) {
-    if (!note.notes()) return null;
-
-    const thead = document.createElement('thead');
-    thead.classList.add('info_row');
-    thead.appendChild(createTableRow([title, note._customNotes], [0.10, 0.90], /* header= */ false));
-
-    return thead;
-}
-
-function createNotesHead(title: string, notes: Wh40k.BaseNotes[]) {
-    if (!notes.some(note => note._customNotes)) return null;
-
-    const thead = document.createElement('thead');
-    thead.classList.add('info_row');
-    const notesDiv = document.createElement('div');
-    for (const note of notes) {
-        if (!note.notes()) continue;
-
-        const noteDiv = notesDiv.appendChild(document.createElement('div'));
-        noteDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${note.name()}: `));
-        noteDiv.appendChild(document.createTextNode(note._customNotes));
-    }
-    thead.appendChild(createTableRow([title, notesDiv], [0.10, 0.90], /* header= */ false));
-
-    return thead;
-}
-
-function addHideAble<T extends Element>(e: T): T {
-    e.classList.add('hide_able')
-    return e;
-}
-
-function toggleHidden(e: Event) {
-    if (!e.target) return;
-    
-    const element = e.target as Element;
-    element.closest('.hide_able')?.classList.toggle('hidden');
-    // For clicks on the unit header, hide the entire unit sheet.
-    element.closest('.unit_header')?.closest('.wh40k_unit_sheet')?.classList.toggle('hidden');
-}
-
-
