@@ -231,7 +231,7 @@ label {
     vertical-align: top;
 }
 
-.wh40k_unit_sheet > table > * > * > td {
+.wh40k_unit_sheet table > * > * > td {
     padding: 0.1rem 0.25rem;
 }
 
@@ -351,8 +351,34 @@ label {
     border-right: 1px solid black;
 }
 
-.wh40k_unit_sheet > table > * > * > td.subTableTd > table {
+.wh40k_unit_sheet > table > * > * > td.subTableTd > div {
+    display: flex;
+    align-items: flex-start;
+    margin-top: -1px; /* not sure why this is necessary */
+}
+
+body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div {
+    flex-direction: column;
+}
+
+
+.wh40k_unit_sheet > table > * > * > td.subTableTd > div > table {
     margin-bottom: 0;
+}
+
+body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:first-child {
+    border-right: 1px solid black;
+    width: 60%;
+}
+
+body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:last-child {
+    border-top: 1px solid black;
+}
+
+body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:last-child {
+    border-left: 1px solid black;
+    margin-left: -1px; /* counter overlap between left and right columns' shared border */
+    width: 40%;
 }
 
 .wh40k_rules > div > p {
@@ -539,7 +565,7 @@ label {
 
 .hide_enabled .hide_able:hover {
     background-color: rgba(128, 128, 128, .4);
-    cursor: pointer;
+    cursor: cell;
     top: 0;
 }
 
