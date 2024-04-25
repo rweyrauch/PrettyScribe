@@ -583,3 +583,7 @@ body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div
 .page_break {
     break-before: page;
 }
+
+.draggable {
+    cursor: grab;
+}

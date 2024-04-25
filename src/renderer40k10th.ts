@@ -115,16 +115,50 @@ export class Wh40kRenderer implements Renderer {
             });
             forceTitle.appendChild(table);
 
-            let body = document.createElement('tbody');
-            table.appendChild(body);
-            for (let unit of force._units) {
+            let tbody = document.createElement('tbody');
+            table.appendChild(tbody);
+
+            // Make the table rows re-orderable via drag-and-drop.
+            let draggedItem: Element | null;
+            tbody.addEventListener("dragstart", ev => {
+                draggedItem = (ev.target as Element).closest('tr');
+                ev.dataTransfer!.effectAllowed = 'move';
+            });
+            tbody.addEventListener('dragover', ev => ev.preventDefault());
+            tbody.addEventListener("drop", ev => {
+                ev.preventDefault();
+                const target = (ev.target as Element).closest('tr');
+                if (!draggedItem || draggedItem === target) return;
+
+                // TODO: do a better job of showing where the item drops
+                // TODO: drop the item after target if dropped on lower half of target
+                const container = draggedItem.parentElement!;
+                container.insertBefore(draggedItem, target);
+
+                // Reorder all the datasheets.
+                // TODO: Fix behavior when identical datasheets have been merged.
+                const children = container.children;
+                for (let i = 0; i < children.length; i++) {
+                    const child = children[i];
+                    const originalIndex = child.id.match(/unit_summary_(\d+)/)?.[1];
+                    const datasheet = document.getElementById(`unit_details_${originalIndex}`);
+                    if (!datasheet) continue;
+                    datasheet.style.order = String(i);
+                }
+            });
+
+            for (let i = 0; i < force._units.length; i++) {
+                const unit = force._units[i];
                 const tr = document.createElement('tr');
+                tr.id = `unit_summary_${i}`;
+                tr.draggable = true;
+                tr.classList.add('draggable');
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.nameWithExtraCosts()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(Wh40k.UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
                 this.renderModelList(models, unit);
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
-                body.appendChild(tr);
+                tbody.appendChild(tr);
             }
         }
     }
@@ -340,6 +374,8 @@ export class Wh40kRenderer implements Renderer {
                 dataSheetsDiv.appendChild(h3);
             }
 
+            dataSheetsDiv.style.display = 'flex';
+            dataSheetsDiv.style.flexDirection = 'column';
             this.renderDatasheets(dataSheetsDiv, force._units);
 
             mergeRules(catalogueRules, force._catalog, force._rules);
@@ -361,14 +397,16 @@ export class Wh40kRenderer implements Renderer {
             const nextUnit = units[i + 1];
             if (unit.equal(nextUnit)) continue;
 
-            this.renderUnitHtml(forces, unit, numIdenticalUnits);
+            this.renderUnitHtml(forces, unit, numIdenticalUnits, i);
             numIdenticalUnits = 0
         }
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number) {
+    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number, index: number) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
+        statsDiv.id = `unit_details_${index}`;
+        statsDiv.style.order = String(index);
         const statsTable = document.createElement('table');
         statsTable.classList.add('table', 'table-sm', 'table-striped');
         statsDiv.appendChild(statsTable);
