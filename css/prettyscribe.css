@@ -587,3 +587,7 @@ body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div
 .draggable {
     cursor: grab;
 }
+
+.draggable_drop_target_top {
+    border-top: 2px solid green;
+}

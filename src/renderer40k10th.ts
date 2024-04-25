@@ -115,44 +115,11 @@ export class Wh40kRenderer implements Renderer {
             });
             forceTitle.appendChild(table);
 
-            let tbody = document.createElement('tbody');
-            table.appendChild(tbody);
-
-            // Make the table rows re-orderable via drag-and-drop.
-            let draggedItem: Element | null;
-            tbody.addEventListener("dragstart", ev => {
-                draggedItem = (ev.target as Element).closest('tr');
-                ev.dataTransfer!.effectAllowed = 'move';
-            });
-            tbody.addEventListener('dragover', ev => ev.preventDefault());
-            tbody.addEventListener("drop", ev => {
-                ev.preventDefault();
-                const target = (ev.target as Element).closest('tr');
-                if (!draggedItem || draggedItem === target) return;
-
-                // TODO: do a better job of showing where the item drops
-                // TODO: drop the item after target if dropped on lower half of target
-                const container = draggedItem.parentElement!;
-                container.insertBefore(draggedItem, target);
-
-                // Reorder all the datasheets.
-                // TODO: Fix behavior when identical datasheets have been merged.
-                const children = container.children;
-                for (let i = 0; i < children.length; i++) {
-                    const child = children[i];
-                    const originalIndex = child.id.match(/unit_summary_(\d+)/)?.[1];
-                    const datasheet = document.getElementById(`unit_details_${originalIndex}`);
-                    if (!datasheet) continue;
-                    datasheet.style.order = String(i);
-                }
-            });
-
+            const tbody = table.appendChild(document.createElement('tbody'));
             for (let i = 0; i < force._units.length; i++) {
                 const unit = force._units[i];
                 const tr = document.createElement('tr');
                 tr.id = `unit_summary_${i}`;
-                tr.draggable = true;
-                tr.classList.add('draggable');
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.nameWithExtraCosts()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(Wh40k.UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
@@ -160,7 +127,57 @@ export class Wh40kRenderer implements Renderer {
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
                 tbody.appendChild(tr);
             }
+
+            this.makeForceSummaryListItemsDraggable(tbody);
         }
+    }
+
+    /** Make the table rows re-orderable via drag-and-drop. */
+    private makeForceSummaryListItemsDraggable(tbody: HTMLElement) {
+        for (const child of tbody.children) {
+            (child as HTMLElement).draggable = true;
+            child.classList.add('draggable');
+        }
+
+        let draggedItem: Element | null;
+        let dropTarget: Element | null;
+        tbody.addEventListener("dragstart", ev => {
+            draggedItem = (ev.target as Element).closest('[draggable]');
+            ev.dataTransfer!.effectAllowed = 'move';
+        });
+        tbody.addEventListener('dragover', ev => {
+            ev.preventDefault();
+            const target = (ev.target as Element).closest('[draggable]');
+            if (dropTarget === target) return;
+
+            dropTarget?.classList.remove('draggable_drop_target_top')
+            target?.classList.add('draggable_drop_target_top');
+            dropTarget = target;
+        });
+        tbody.addEventListener("drop", ev => {
+            ev.preventDefault();
+            dropTarget?.classList.remove('draggable_drop_target_top')
+            const target = (ev.target as Element).closest('[draggable]');
+            if (!draggedItem || draggedItem === target) return;
+
+            // TODO: drop the item after target if dropped on lower half of target
+            const container = draggedItem.parentElement!;
+            container.insertBefore(draggedItem, target);
+
+            // Reorder all the datasheets.
+            // NB: this is the only part of this function that's not generic; we
+            // could separate it out, and reuse the rest of this function as a
+            // general function under ./html/draggable.
+            // TODO: Fix behavior when identical datasheets have been merged.
+            const children = container.children;
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i];
+                const originalIndex = child.id.match(/unit_summary_(\d+)/)?.[1];
+                const datasheet = document.getElementById(`unit_details_${originalIndex}`);
+                if (!datasheet) continue;
+                datasheet.style.order = String(i);
+            }
+        });
     }
 
     private renderOptionsDiv(title: HTMLElement) {
