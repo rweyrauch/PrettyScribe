@@ -163,39 +163,6 @@ describe("CreateRoster", function() {
                   "Abilities": mapWithKeys(["Oathband Bodyguard", "Teleport crest"]),
                 }}),
               jasmine.objectContaining({
-                '_name': "Hekaton Land Fortress",
-                '_cost': jasmine.objectContaining({_points: 225}),
-                '_profileTables': {
-                  "Unit": jasmine.objectContaining({
-                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
-                    '_contents': [
-                      jasmine.arrayContaining(["Hekaton Land Fortress"]),
-                    ],
-                  }),
-                  "Ranged Weapons": jasmine.objectContaining({
-                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
-                    '_contents': [
-                      jasmine.arrayContaining(["MATR autocannon"]),
-                      jasmine.arrayContaining(["SP heavy conversion beamer"]),
-                      jasmine.arrayContaining(["Twin bolt cannon"]),
-                    ],
-                  }),
-                  "Melee Weapons": jasmine.objectContaining({
-                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
-                    '_contents': [
-                      jasmine.arrayContaining(["Armoured wheels"]),
-                    ],
-                  })
-                },
-                '_modelList': [
-                  "Hekaton Land Fortress (Armoured wheels, MATR autocannon, Pan spectral scanner, SP heavy conversion beamer, 2x Twin bolt cannon)"
-                ],
-                '_rules': mapWithKeys(["Deadly Demise D6", "Eye of the Ancestors", "Ruthless Efficiency"]),
-                '_abilities': {
-                  "Abilities": mapWithKeys(["Damaged: 1-5 wounds remaining", "Fire Support", "Pan spectral scanner"]),
-                  "Transport": mapWithKeys(["Hekaton Land Fortress"]),
-                }}),
-              jasmine.objectContaining({
                 '_name': "Hernkyn Pioneers",
                 '_cost': jasmine.objectContaining({_points: 90}),
                 '_profileTables': {
@@ -230,6 +197,39 @@ describe("CreateRoster", function() {
                 '_rules': mapWithKeys(["Eye of the Ancestors", "Ignores Cover", "Ruthless Efficiency", "Scouts 9\""]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Outflanking Mag-Riders", "Pan-spectral scanner", "Rollbar searchlight"]),
+                }}),
+              jasmine.objectContaining({
+                '_name': "Hekaton Land Fortress",
+                '_cost': jasmine.objectContaining({_points: 225}),
+                '_profileTables': {
+                  "Unit": jasmine.objectContaining({
+                    '_headers': ["Unit","M","T","SV","W","LD","OC"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Hekaton Land Fortress"]),
+                    ],
+                  }),
+                  "Ranged Weapons": jasmine.objectContaining({
+                    '_headers': ["Ranged Weapons","Range","A","BS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["MATR autocannon"]),
+                      jasmine.arrayContaining(["SP heavy conversion beamer"]),
+                      jasmine.arrayContaining(["Twin bolt cannon"]),
+                    ],
+                  }),
+                  "Melee Weapons": jasmine.objectContaining({
+                    '_headers': ["Melee Weapons","Range","A","WS","S","AP","D","Keywords"],
+                    '_contents': [
+                      jasmine.arrayContaining(["Armoured wheels"]),
+                    ],
+                  })
+                },
+                '_modelList': [
+                  "Hekaton Land Fortress (Armoured wheels, MATR autocannon, Pan spectral scanner, SP heavy conversion beamer, 2x Twin bolt cannon)"
+                ],
+                '_rules': mapWithKeys(["Deadly Demise D6", "Eye of the Ancestors", "Ruthless Efficiency"]),
+                '_abilities': {
+                  "Abilities": mapWithKeys(["Damaged: 1-5 wounds remaining", "Fire Support", "Pan spectral scanner"]),
+                  "Transport": mapWithKeys(["Hekaton Land Fortress"]),
                 }}),
               jasmine.objectContaining({
                 '_name': "Sagitaur",

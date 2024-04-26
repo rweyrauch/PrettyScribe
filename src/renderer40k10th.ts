@@ -115,18 +115,69 @@ export class Wh40kRenderer implements Renderer {
             });
             forceTitle.appendChild(table);
 
-            let body = document.createElement('tbody');
-            table.appendChild(body);
-            for (let unit of force._units) {
+            const tbody = table.appendChild(document.createElement('tbody'));
+            for (let i = 0; i < force._units.length; i++) {
+                const unit = force._units[i];
                 const tr = document.createElement('tr');
+                tr.id = `unit_summary_${i}`;
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.nameWithExtraCosts()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(Wh40k.UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
                 this.renderModelList(models, unit);
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
-                body.appendChild(tr);
+                tbody.appendChild(tr);
             }
+
+            this.makeForceSummaryListItemsDraggable(tbody);
         }
+    }
+
+    /** Make the table rows re-orderable via drag-and-drop. */
+    private makeForceSummaryListItemsDraggable(tbody: HTMLElement) {
+        for (const child of tbody.children) {
+            (child as HTMLElement).draggable = true;
+            child.classList.add('draggable');
+        }
+
+        let draggedItem: Element | null;
+        let dropTarget: Element | null;
+        tbody.addEventListener("dragstart", ev => {
+            draggedItem = (ev.target as Element).closest('[draggable]');
+            ev.dataTransfer!.effectAllowed = 'move';
+        });
+        tbody.addEventListener('dragover', ev => {
+            ev.preventDefault();
+            const target = (ev.target as Element).closest('[draggable]');
+            if (dropTarget === target) return;
+
+            dropTarget?.classList.remove('draggable_drop_target_top')
+            target?.classList.add('draggable_drop_target_top');
+            dropTarget = target;
+        });
+        tbody.addEventListener("drop", ev => {
+            ev.preventDefault();
+            dropTarget?.classList.remove('draggable_drop_target_top')
+            const target = (ev.target as Element).closest('[draggable]');
+            if (!draggedItem || draggedItem === target) return;
+
+            // TODO: drop the item after target if dropped on lower half of target
+            const container = draggedItem.parentElement!;
+            container.insertBefore(draggedItem, target);
+
+            // Reorder all the datasheets.
+            // NB: this is the only part of this function that's not generic; we
+            // could separate it out, and reuse the rest of this function as a
+            // general function under ./html/draggable.
+            // TODO: Fix behavior when identical datasheets have been merged.
+            const children = container.children;
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i];
+                const originalIndex = child.id.match(/unit_summary_(\d+)/)?.[1];
+                const datasheet = document.getElementById(`unit_details_${originalIndex}`);
+                if (!datasheet) continue;
+                datasheet.style.order = String(i);
+            }
+        });
     }
 
     private renderOptionsDiv(title: HTMLElement) {
@@ -162,16 +213,10 @@ export class Wh40kRenderer implements Renderer {
             });
         renderCheckboxOption(optionsDiv, 'singleColumnDatasheets', 'Single-Column Datasheets',
             (e: Event) => {
-                const singleColumnSheeets = document.getElementById('single_column_sheets');
-                const doubleColumnSheets = document.getElementById('double_column_sheets');
-                if (!singleColumnSheeets || !doubleColumnSheets) return;
-
                 if ((e.target as HTMLInputElement).checked) {
-                    singleColumnSheeets.classList.remove('d-none')
-                    doubleColumnSheets.classList.add('d-none')
+                    document.body.classList.add('single_column');
                 } else {
-                    singleColumnSheeets.classList.add('d-none')
-                    doubleColumnSheets.classList.remove('d-none')
+                    document.body.classList.remove('single_column');
                 }
             });
 
@@ -215,7 +260,6 @@ export class Wh40kRenderer implements Renderer {
                 }
             });
     }
-
 
     private renderAbilitiesByPhase(list: HTMLElement) {
         if (!this._roster) return;
@@ -326,12 +370,8 @@ export class Wh40kRenderer implements Renderer {
 
         const catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
         const subFactionRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
-        const doubleColumnSheets = forces.appendChild(document.createElement('div'));
-        doubleColumnSheets.id = 'double_column_sheets';
-        const singleColumnSheets = forces.appendChild(document.createElement('div'));
-        singleColumnSheets.id = 'single_column_sheets';
-        singleColumnSheets.style.pageBreakBefore = "always";
-        singleColumnSheets.classList.add('d-none');
+        const dataSheetsDiv = forces.appendChild(document.createElement('div'));
+        dataSheetsDiv.classList.add('page_break');
 
         for (const force of this._roster._forces) {
             if (this._roster._forces.length > 1) {
@@ -348,11 +388,12 @@ export class Wh40kRenderer implements Renderer {
 
                 let h3 = document.createElement('h3');
                 h3.appendChild(forceTitle)
-                doubleColumnSheets.appendChild(h3);
+                dataSheetsDiv.appendChild(h3);
             }
 
-            this.renderDatasheets(doubleColumnSheets, force._units);
-            this.renderDatasheets(singleColumnSheets, force._units, true);
+            dataSheetsDiv.style.display = 'flex';
+            dataSheetsDiv.style.flexDirection = 'column';
+            this.renderDatasheets(dataSheetsDiv, force._units);
 
             mergeRules(catalogueRules, force._catalog, force._rules);
             mergeRules(subFactionRules, force._faction, force._factionRules);
@@ -365,7 +406,7 @@ export class Wh40kRenderer implements Renderer {
         forces.appendChild(rules);
     }
 
-    private renderDatasheets(forces: HTMLElement, units: Wh40k.Unit[], singleColumn = false) {
+    private renderDatasheets(forces: HTMLElement, units: Wh40k.Unit[]) {
         let numIdenticalUnits = 0;
         for (let i = 0; i < units.length; i++) {
             numIdenticalUnits++;
@@ -373,14 +414,16 @@ export class Wh40kRenderer implements Renderer {
             const nextUnit = units[i + 1];
             if (unit.equal(nextUnit)) continue;
 
-            this.renderUnitHtml(forces, unit, numIdenticalUnits, singleColumn);
+            this.renderUnitHtml(forces, unit, numIdenticalUnits, i);
             numIdenticalUnits = 0
         }
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number, singleColumn = false) {
+    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number, index: number) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
+        statsDiv.id = `unit_details_${index}`;
+        statsDiv.style.order = String(index);
         const statsTable = document.createElement('table');
         statsTable.classList.add('table', 'table-sm', 'table-striped');
         statsDiv.appendChild(statsTable);
@@ -413,17 +456,19 @@ export class Wh40kRenderer implements Renderer {
         const tbody = statsTable.appendChild(document.createElement('thead'));
         const tr = tbody.appendChild(document.createElement('tr'));
 
-        let profilesTable = statsTable;
-        if (!singleColumn) {
-            const profilesTd = tr.appendChild(document.createElement('td'));
-            profilesTd.colSpan = 12;
-            profilesTd.classList.add('subTableTd');
-            profilesTable = profilesTd.appendChild(document.createElement('table'));
-            profilesTable.classList.add('table', 'table-sm', 'table-striped');
-        }
+        // Create a new cell that, with CSS, can be displayed in one or two columns.
+        const singleOrDoubleColumnTd = tr.appendChild(document.createElement('td'));
+        singleOrDoubleColumnTd.colSpan = 20;
+        singleOrDoubleColumnTd.classList.add('subTableTd');
+        const singleOrDoubleColumnDiv = singleOrDoubleColumnTd.appendChild(document.createElement('div'));
 
         // Tabular profile data, like model stats and weapons.
         // Sort by unit, then weapons, then other stuff.
+        const profilesTable = singleOrDoubleColumnDiv.appendChild(
+            document.createElement('div').appendChild(
+                document.createElement('table')));
+        profilesTable.classList.add('table', 'table-sm', 'table-striped');
+
         const typeNames = Object.keys(unit._profileTables).sort(Wh40k.CompareProfileTableName);
         for (const typeName of typeNames) {
             const table = unit._profileTables[typeName];
@@ -431,17 +476,13 @@ export class Wh40kRenderer implements Renderer {
             this.renderSubTable(profilesTable, table._headers, table._contents, widths, 'Notes', [table]);
         }
 
-        let abilitiesTable = statsTable;
-        if (!singleColumn) {
-            const abilitiesTd = tr.appendChild(document.createElement('td'));
-            abilitiesTd.colSpan = 8;
-            abilitiesTd.classList.add('subTableTd');
-            abilitiesTable = abilitiesTd.appendChild(document.createElement('table'));
-            abilitiesTable.classList.add('table', 'table-sm', 'table-striped');
-        }
-
         // unit abilities and rules; rules are shared across units, with their
         // descriptions printed in bulk later, but show up with unit 'Abilities'
+        const abilitiesTable = singleOrDoubleColumnDiv.appendChild(
+            document.createElement('div').appendChild(
+                document.createElement('table')));
+        abilitiesTable.classList.add('table', 'table-sm', 'table-striped');
+
         if (!unit._abilities['Abilities'] && unit._rules.size > 0) {
             this.renderUnitAbilitiesAndRules(abilitiesTable, 'Abilities', new Map(), unit._rules);
         }
