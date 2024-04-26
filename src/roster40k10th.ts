@@ -86,27 +86,49 @@ export enum UnitRole {
     Character,
     Battleline,
     Infantry,
-    Vehicle,
+    Swarm,
     Mounted,
+    Beast,
+    Monster,
+    Vehicle,
     Transport,
     Fortification,
     Allied,
 }
 
-export const UnitRoleToString: string[] = [
-    'None',
+export const UnitRoleToString = {
+    [UnitRole.NONE]: 'None',
+    [UnitRole.EpicHero]: 'Epic Hero',
+    [UnitRole.Character]: 'Character',
+    [UnitRole.Battleline]: 'Battleline',
+    [UnitRole.Infantry]: 'Infantry',
+    [UnitRole.Swarm]: 'Swarm',
+    [UnitRole.Mounted]: 'Mounted',
+    [UnitRole.Beast]: 'Beast',
+    [UnitRole.Monster]: 'Monster',
+    [UnitRole.Vehicle]: 'Vehicle',
+    [UnitRole.Transport]: 'Dedicated Transport',
+    [UnitRole.Fortification]: 'Fortification',
+    [UnitRole.Allied]: 'Allied Units',
+};
 
-    'Epic Hero',
-    'Character',
-    'Battleline',
-    'Infantry',
-    'Vehicle',
-    'Mounted',
-    'Dedicated Transport',
-    'Fortification',
-    'Allied Unit',
-
- ];
+function LookupRole(roleText: string): UnitRole {
+    switch (roleText) {
+        case 'Epic Hero': return UnitRole.EpicHero;
+        case 'Character': return UnitRole.Character;
+        case 'Battleline': return UnitRole.Battleline;
+        case 'Infantry': return UnitRole.Infantry;
+        case 'Swarm': return UnitRole.Swarm;
+        case 'Mounted': return UnitRole.Mounted;
+        case 'Beast': return UnitRole.Beast;
+        case 'Monster': return UnitRole.Monster;
+        case 'Vehicle': return UnitRole.Vehicle;
+        case 'Dedicated Transport': return UnitRole.Transport;
+        case 'Fortification': return UnitRole.Fortification;
+        case 'Allied Units': return UnitRole.Allied;
+        default: return UnitRole.NONE;
+    }
+}
 
 export class Model extends BaseNotes {
 
@@ -552,21 +574,6 @@ function ExtractRuleDescription(rule: Element, map: Map<string, string | null>):
     if (ruleName && desc?.textContent) {
         map.set(ruleName, desc.textContent);
     }
-}
-
-function LookupRole(roleText: string): Wh40k.UnitRole {
-    switch (roleText) {
-        case 'Epic Hero': return UnitRole.EpicHero;
-        case 'Character': return UnitRole.Character;
-        case 'Battleline': return UnitRole.Battleline;
-        case 'Infantry': return UnitRole.Infantry;
-        case 'Mounted': return UnitRole.Mounted;
-        case 'Vehicle': return UnitRole.Vehicle;
-        case 'Dedicated Transport': return UnitRole.Transport;
-        case 'Fortification': return UnitRole.Fortification;
-        case 'Allied Units': return UnitRole.Allied;
-    }
-    return UnitRole.NONE;
 }
 
 function ExpandBaseNotes(root: Element, obj: BaseNotes): string {
