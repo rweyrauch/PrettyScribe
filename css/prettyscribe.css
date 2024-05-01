@@ -222,29 +222,35 @@ label {
     border-bottom-color: currentColor;
 }
 
-.wh40k_unit_sheet > table > * > * > *:not(:first-child):not(:last-child) {
+.wh40k_unit_sheet table > *:not(.keywords_row) > * > *:not(:first-child):not(:last-child) {
     text-align: center;
 }
 
-.wh40k_unit_sheet > table > * > * > td {
+.wh40k_unit_sheet > table > thead.keywords_row > * > * {
+    text-align: left;
+    vertical-align: top;
+}
+
+.wh40k_unit_sheet table > * > * > td {
     padding: 0.1rem 0.25rem;
 }
 
-.wh40k_unit_sheet > table > * > * > *:first-child {
+.wh40k_unit_sheet table > * > * > *:first-child {
     padding-left: var(--notchSize);
 }
 
-.wh40k_unit_sheet > table > thead.info_row > tr > td:first-child {
+.wh40k_unit_sheet table > thead.info_row > tr > td:first-child,
+.wh40k_unit_sheet table > thead.info_row.keywords_row > tr > td:nth-child(3) {
     font: bold 1em sans-serif;
     text-transform: uppercase;
     vertical-align: top;
 }
 
-.wh40k_unit_sheet > table > thead.info_row > tr > td {
+.wh40k_unit_sheet table > thead.info_row > tr > td {
     box-shadow: inset 0 0 0 9999px rgb(0 0 0 / 2%);
 }
 
-.wh40k_unit_sheet > table > thead.info_row > tr > td:not(:first-child) > div > div:not(:last-child) {
+.wh40k_unit_sheet table > thead.info_row > tr > td:not(:first-child) > div > div:not(:last-child) {
     margin-bottom: 0.35em;
 }
 
@@ -262,7 +268,7 @@ label {
     color: white;
 }
 
-.wh40k_unit_sheet > table > thead > tr.header_row > th {
+.wh40k_unit_sheet table > thead > tr.header_row > th {
     text-transform: uppercase;
     white-space: nowrap;
 }
@@ -339,6 +345,42 @@ label {
     );
 }
 
+.wh40k_unit_sheet > table > * > * > td.subTableTd {
+    padding: 0;
+    vertical-align: top;
+    border-right: 1px solid black;
+}
+
+.wh40k_unit_sheet > table > * > * > td.subTableTd > div {
+    display: flex;
+    align-items: flex-start;
+    margin-top: -1px; /* not sure why this is necessary */
+}
+
+body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div {
+    flex-direction: column;
+}
+
+
+.wh40k_unit_sheet > table > * > * > td.subTableTd > div > table {
+    margin-bottom: 0;
+}
+
+body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:first-child {
+    border-right: 1px solid black;
+    width: 60%;
+}
+
+body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:last-child {
+    border-top: 1px solid black;
+}
+
+body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:last-child {
+    border-left: 1px solid black;
+    margin-left: -1px; /* counter overlap between left and right columns' shared border */
+    width: 40%;
+}
+
 .wh40k_rules > div > p {
     white-space: pre-wrap;
     line-height: 1;
@@ -351,7 +393,7 @@ label {
 }
 @media print {
     .mesbg_container {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 .mesbg_container  * {
@@ -363,16 +405,17 @@ label {
     font-weight: lighter;
 }
 .mesbg_rosterInfo {
-    font-size: 1em;
+    font-size: 16px;
 }
 .mesbg_h1 {
-    font-size: 1.5em;
+    font-size: 2rem;
+    line-height: 1;
 }
 .mesbg_h2 {
-    font-size: 1.25em;
+    font-size: 1.5em;
 }
 .mesbg_h3 {
-    font-size: 1.125em;
+    font-size: 1.25em;
 }
 .mesbg_h4 {
     font-size: 1.125em;
@@ -392,7 +435,7 @@ label {
     background-color: #ccc;
 }
 .mesbg_trackerTable tr td {
-    padding: 4px;
+    padding: 32px;
 }
 .mesbg_trackerTable tr th {
     text-align: center;
@@ -402,6 +445,7 @@ label {
     padding: 4px 8px;
     text-align: center;
     font-size: 1em;
+    margin-top: 1em;
 }
 .mesbg_powerTable tr th {
     text-align: left;
@@ -467,11 +511,16 @@ label {
     margin-left: 16px;
 }
 .mesbg_bumpDown {
-    margin-bottom: 8px;
+    margin-bottom: 2em;
 }
 .mesbg_twoColumn {
     column-count: 2;
     column-gap: 24px;
+}
+.mesbg_twoColumnGrid {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 1fr 1fr;
 }
 .mesbg_woundChart {
     border-collapse: collapse;
@@ -516,7 +565,7 @@ label {
 
 .hide_enabled .hide_able:hover {
     background-color: rgba(128, 128, 128, .4);
-    cursor: pointer;
+    cursor: cell;
     top: 0;
 }
 
@@ -533,4 +582,12 @@ label {
 
 .page_break {
     break-before: page;
+}
+
+.draggable {
+    cursor: grab;
+}
+
+.draggable_drop_target_top {
+    border-top: 2px solid green;
 }

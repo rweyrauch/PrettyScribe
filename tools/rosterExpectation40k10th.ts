@@ -1,9 +1,19 @@
-import { readZippedRosterFile } from '../spec/helpers/readRosterFile';
+import { readZippedRosterFile, readZippedRegistryFile } from '../spec/helpers/readRosterFile';
+import { Create40kRosterFromRegistry } from  "../src/registry40k10th";
 import { Wh40k } from "../src/roster40k10th";
 
 export async function getRosterExpectation(filename: string): Promise<string> {
-  const doc = await readZippedRosterFile(filename);
+  if (filename.includes('.ros')) {
+    const roster = loadRoster(filename);
+    return generateRosterExceptation(await roster, filename, 'readZippedRosterFile', 'Wh40k.CreateRoster');
+  } else {
+    const roster = loadRegistry(filename);
+    return generateRosterExceptation(await roster, filename, 'readZippedRegistryFile', 'Create40kRosterFromRegistry');
+  }
+}
 
+async function loadRoster(filename: string): Promise<Wh40k.Roster40k> {
+  const doc = await readZippedRosterFile(filename);
 
   const gameType = doc.querySelector("roster")?.getAttribute("gameSystemName");
   if (gameType !== "Warhammer 40,000 10th Edition") {
@@ -15,8 +25,17 @@ export async function getRosterExpectation(filename: string): Promise<string> {
   if (!roster) {
     throw new Error(`ERROR: Roster '${filename}' did not parse.`);
   }
+  return roster;
+}
 
-  return `import { readZippedRosterFile } from '../helpers/readRosterFile';
+async function loadRegistry(filename: string): Promise<Wh40k.Roster40k> {
+  const registry = await readZippedRegistryFile(filename);
+  return Create40kRosterFromRegistry(registry);
+}
+
+function generateRosterExceptation(roster: Wh40k.Roster40k, filename: string, readFn: string, createFn: string) {
+  return `import { ${readFn} } from '../helpers/readRosterFile';
+import { Create40kRosterFromRegistry } from "../../src/registry40k10th";
 import { Wh40k } from "../../src/roster40k10th";
 
 function mapWithKeys(keys: string[]) {
@@ -25,8 +44,8 @@ function mapWithKeys(keys: string[]) {
 
 describe("CreateRoster", function() {
   it("loads ${filename}", async function() {
-    const doc = await readZippedRosterFile('${filename}');
-    const roster = Wh40k.CreateRoster(doc);
+    const doc = await ${readFn}('${filename}');
+    const roster = ${createFn}(doc);
 
     expect(roster).toEqual(
       jasmine.objectContaining({

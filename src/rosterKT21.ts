@@ -277,6 +277,9 @@ function ParseSelections(root: Element, force: Force): void {
 
         if (selectionName.includes("Detachment Command Cost")) {
             console.log("Found Detachment Command Cost");
+        } else if (selectionName.includes("Chapter Tactics")) {
+            console.log("Found chapter tactics.");
+            ExtractRuleFromSelection(selection, force._rules);
         } else {
             let operative = ParseOperative(selection);
             if (operative) {
@@ -341,12 +344,12 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
         console.log("Prop name:" + propName + "  Type: " + propType);
 
         if (propName && propType) {
-            if (propType === "Abilities" || propType === "Dynastic Code") {
+            if (propType === "Abilities" || propType === "Dynastic Code" || propType === "Chapter Tactics") {
                 const chars = prop.querySelectorAll("characteristics>characteristic");
                 for (const char of chars) {
                     const charName = char.getAttributeNode("name")?.nodeValue;
                     if (charName && char.textContent && propName) {
-                        if ((charName === "Description") || (charName === "Ability") || (charName == "Effect")) {
+                        if ((charName === "Description") || (charName === "Ability") || (charName == "Effect") || (charName == "Chapter Tactic")) {
                             map.set(propName, char.textContent);
                         }
                     }
@@ -358,7 +361,7 @@ function ExtractRuleFromSelection(root: Element, map: Map<string, string | null>
                         map.set(<string>rule.getAttributeNode("name")?.nodeValue, <string>rule.firstChild?.textContent);
                     }
                 }
-            }
+            }            
         }
     }
 }
@@ -544,7 +547,7 @@ function ParseModelProfiles(props: Element[], operative: Operative, operativeNam
                         }
                     }
                 }
-            } else if ((propType === "Abilities") || (propType === "Equipment") || (propType === "Ability") || (propType === "Unique Actions")) {
+            } else if ((propType === "Abilities") || (propType === "Equipment") || (propType === "Ability") || (propType === "Unique Actions") || (propType == "Chapter Tactics")) {
                 let chars = prop.querySelectorAll("characteristics>characteristic");
                 for (let char of chars) {
                     let charName = char.getAttributeNode("name")?.nodeValue;

@@ -1,4 +1,5 @@
 import { readZippedRosterFile } from '../helpers/readRosterFile';
+import { Create40kRosterFromRegistry } from "../../src/registry40k10th";
 import { Wh40k } from "../../src/roster40k10th";
 
 function mapWithKeys(keys: string[]) {
@@ -53,7 +54,7 @@ describe("CreateRoster", function() {
                   "2x Triarchal Menhir (Annihilator beam, Close combat weapon)",
                   "Unit Upgrades (Warlord)"
                 ],
-                '_rules': mapWithKeys(["Command Protocols", "Deadly Demise D6+3 (Szarekh model only)", "Devastating Wounds", "Indirect Fire", "Lethal Hits", "Reanimation Protocols"]),
+                '_rules': mapWithKeys(["Command Protocols", "Deadly Demise D6+3 (Szarekh model only)", "Reanimation Protocols"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Damaged: 1-6 wounds remaining", "Invulnerable Save", "The Silent King", "Triarchal Menhirs", "Voice of the Triarch"]),
                   "Triarch Abilities": mapWithKeys(["Bringer of Unity (Aura)", "Phaeron of the Blades (Aura)", "Phaeron of the Stars (Aura)"]),
@@ -84,7 +85,7 @@ describe("CreateRoster", function() {
                 '_modelList': [
                   "Overlord (Overlord's blade, Tachyon arrow)"
                 ],
-                '_rules': mapWithKeys(["Command Protocols", "Devastating Wounds", "Leader", "One Shot", "Reanimation Protocols"]),
+                '_rules': mapWithKeys(["Command Protocols", "Leader", "Reanimation Protocols"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Implacable Resilience", "Invulnerable Save", "Leader", "My Will Be Done"]),
                 }}),
@@ -115,7 +116,7 @@ describe("CreateRoster", function() {
                 '_modelList': [
                   "Doom Scythe (Armoured bulk, Heavy death ray, Twin tesla destructor)"
                 ],
-                '_rules': mapWithKeys(["Command Protocols", "Deadly Demise D3", "Reanimation Protocols", "Sustained Hits", "Twin-linked"]),
+                '_rules': mapWithKeys(["Command Protocols", "Deadly Demise D3", "Reanimation Protocols"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Atavistic Instigation", "Damaged: 1-4 wounds remaining"]),
                 }}),
@@ -153,29 +154,29 @@ describe("CreateRoster", function() {
                 '_modelList': [
                   "Tesseract Vault (Armoured bulk, C'tan Powers, 4x Tesla sphere)"
                 ],
-                '_rules': mapWithKeys(["Anti-", "Blast", "Command Protocols", "Deadly Demise D6+3", "Devastating Wounds", "Ignores Cover", "Indirect Fire", "Precision", "Reanimation Protocols", "Sustained Hits", "Torrent"]),
+                '_rules': mapWithKeys(["Anti-", "Blast", "Command Protocols", "Deadly Demise D6+3", "Devastating Wounds", "Ignores Cover", "Indirect Fire", "Precision", "Reanimation Protocols", "Torrent"]),
                 '_abilities': {
                   "Abilities": mapWithKeys(["Damaged: 1-8 wounds remaining", "Invulnerable Save", "Powers of the C’tan"]),
                 }}),
             ],
             '_rules': new Map([
-              ["Devastating Wounds", jasmine.any(String)],
-              ["One Shot", jasmine.any(String)],
-              ["Command Protocols", jasmine.any(String)],
-              ["Leader", jasmine.any(String)],
-              ["Reanimation Protocols", jasmine.any(String)],
               ["Anti-", jasmine.any(String)],
-              ["Sustained Hits", jasmine.any(String)],
               ["Blast", jasmine.any(String)],
-              ["Indirect Fire", jasmine.any(String)],
-              ["Ignores Cover", jasmine.any(String)],
-              ["Torrent", jasmine.any(String)],
-              ["Precision", jasmine.any(String)],
-              ["Deadly Demise D6+3", jasmine.any(String)],
-              ["Lethal Hits", jasmine.any(String)],
-              ["Deadly Demise D6+3 (Szarekh model only)", jasmine.any(String)],
-              ["Twin-linked", jasmine.any(String)],
+              ["Command Protocols", jasmine.any(String)],
               ["Deadly Demise D3", jasmine.any(String)],
+              ["Deadly Demise D6+3 (Szarekh model only)", jasmine.any(String)],
+              ["Deadly Demise D6+3", jasmine.any(String)],
+              ["Devastating Wounds", jasmine.any(String)],
+              ["Ignores Cover", jasmine.any(String)],
+              ["Indirect Fire", jasmine.any(String)],
+              ["Leader", jasmine.any(String)],
+              ["Lethal Hits", jasmine.any(String)],
+              ["One Shot", jasmine.any(String)],
+              ["Precision", jasmine.any(String)],
+              ["Reanimation Protocols", jasmine.any(String)],
+              ["Sustained Hits", jasmine.any(String)],
+              ["Torrent", jasmine.any(String)],
+              ["Twin-linked", jasmine.any(String)],
             ]),
             '_factionRules': new Map(),
           }),

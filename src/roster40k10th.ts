@@ -86,27 +86,49 @@ export enum UnitRole {
     Character,
     Battleline,
     Infantry,
-    Vehicle,
+    Swarm,
     Mounted,
+    Beast,
+    Monster,
+    Vehicle,
     Transport,
     Fortification,
     Allied,
 }
 
-export const UnitRoleToString: string[] = [
-    'None',
+export const UnitRoleToString = {
+    [UnitRole.NONE]: 'None',
+    [UnitRole.EpicHero]: 'Epic Hero',
+    [UnitRole.Character]: 'Character',
+    [UnitRole.Battleline]: 'Battleline',
+    [UnitRole.Infantry]: 'Infantry',
+    [UnitRole.Swarm]: 'Swarm',
+    [UnitRole.Mounted]: 'Mounted',
+    [UnitRole.Beast]: 'Beast',
+    [UnitRole.Monster]: 'Monster',
+    [UnitRole.Vehicle]: 'Vehicle',
+    [UnitRole.Transport]: 'Dedicated Transport',
+    [UnitRole.Fortification]: 'Fortification',
+    [UnitRole.Allied]: 'Allied Units',
+};
 
-    'Epic Hero',
-    'Character',
-    'Battleline',
-    'Infantry',
-    'Vehicle',
-    'Mounted',
-    'Dedicated Transport',
-    'Fortification',
-    'Allied Unit',
-
- ];
+function LookupRole(roleText: string): UnitRole {
+    switch (roleText) {
+        case 'Epic Hero': return UnitRole.EpicHero;
+        case 'Character': return UnitRole.Character;
+        case 'Battleline': return UnitRole.Battleline;
+        case 'Infantry': return UnitRole.Infantry;
+        case 'Swarm': return UnitRole.Swarm;
+        case 'Mounted': return UnitRole.Mounted;
+        case 'Beast': return UnitRole.Beast;
+        case 'Monster': return UnitRole.Monster;
+        case 'Vehicle': return UnitRole.Vehicle;
+        case 'Dedicated Transport': return UnitRole.Transport;
+        case 'Fortification': return UnitRole.Fortification;
+        case 'Allied Units': return UnitRole.Allied;
+        default: return UnitRole.NONE;
+    }
+}
 
 export class Model extends BaseNotes {
 
@@ -228,6 +250,7 @@ export class Unit extends BaseNotes {
     readonly _abilities: {[key: string]: Map<string, string>} = {};
     readonly _profileTables:  {[key: string]: TabularProfile} = {};
     readonly _rules: Map<string, string> = new Map();
+    readonly _weaponRules: Map<string, string> = new Map();
 
     readonly _models: Model[] = [];
     readonly _modelStats: Model[] = [];
@@ -449,6 +472,9 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
             for (const entry of unit._rules.entries()) {
                 force._rules.set(entry[0], entry[1]);
             }
+            for (const entry of unit._weaponRules.entries()) {
+                force._rules.set(entry[0], entry[1]);
+            }
         } else if (selection.getAttribute("type") === "upgrade") {
             ExtractRuleFromSelection(selection, force._rules);
             ParseConfiguration(selection, force);
@@ -473,6 +499,10 @@ function ParseSelections(root: Element, force: Force, is40k: boolean): void {
     for (const key of force._factionRules.keys()) {
         force._rules.delete(key);
     }
+
+    // Sort rules.
+    force._rules = new Map([...force._rules.entries()].sort());
+
 
     // Sort force units by role and name
     force._units.sort((a: Unit, b: Unit): number => {
@@ -544,21 +574,6 @@ function ExtractRuleDescription(rule: Element, map: Map<string, string | null>):
     if (ruleName && desc?.textContent) {
         map.set(ruleName, desc.textContent);
     }
-}
-
-function LookupRole(roleText: string): Wh40k.UnitRole {
-    switch (roleText) {
-        case 'Epic Hero': return UnitRole.EpicHero;
-        case 'Character': return UnitRole.Character;
-        case 'Battleline': return UnitRole.Battleline;
-        case 'Infantry': return UnitRole.Infantry;
-        case 'Mounted': return UnitRole.Mounted;
-        case 'Vehicle': return UnitRole.Vehicle;
-        case 'Dedicated Transport': return UnitRole.Transport;
-        case 'Fortification': return UnitRole.Fortification;
-        case 'Allied Units': return UnitRole.Allied;
-    }
-    return UnitRole.NONE;
 }
 
 function ExpandBaseNotes(root: Element, obj: BaseNotes): string {
@@ -795,7 +810,14 @@ function ParseUnit(root: Element, is40k: boolean): Unit {
 
     let rules = root.querySelectorAll("rules > rule");
     for (let rule of rules) {
-        ExtractRuleDescription(rule, unit._rules);
+        const parentSelection = rule.parentElement?.parentElement;
+        if (parentSelection && (
+            HasImmediateProfileWithTypeName(parentSelection, "Ranged Weapons")
+            || HasImmediateProfileWithTypeName(parentSelection, "Melee Weapons"))) {
+            ExtractRuleDescription(rule, unit._weaponRules);
+        } else {
+            ExtractRuleDescription(rule, unit._rules);
+        }
     }
 
     unit.normalize();

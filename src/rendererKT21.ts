@@ -16,6 +16,9 @@
 
 import {BaseNotes, Compare, Operative, PsychicPower, RosterKT21, Specialism, Weapons} from "./rosterKT21";
 import {Justification, Renderer, RenderParagraph, RenderText, RenderTextFull, VertAlign} from "./renderer";
+import {createTableRow, createNoteHead, createNotesHead} from './html/table';
+import {addHideAble, toggleHidden} from "./html/hideable"
+import {loadOptionsFromLocalStorage, renderCheckboxOption, renderOptionsToggle} from "./html/options";
 
 export class RendererKT21 implements Renderer {
 
@@ -78,7 +81,10 @@ export class RendererKT21 implements Renderer {
         }
 
         if (title) {
-            title.innerHTML = '<h3>' + this._roster.name() + ' (' + this._roster._equipmentPoints + ' EP)</h3>';
+            this.renderOptionsDiv(title);
+
+            const text = `${this._roster.name()} (${this._roster._equipmentPoints} EP)`;
+            title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
         }
 
         let catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
@@ -165,16 +171,24 @@ export class RendererKT21 implements Renderer {
                 let h3 = document.createElement('h3');
                 h3.appendChild(forceTitle);
                 forces.appendChild(h3);
-            }
 
-            if (force._leader) {
-                this.printOperative(force._leader, null, forces);
-            }
+                const canvasDiv = forces.appendChild(document.createElement('div'));
+                canvasDiv.id = 'kt_canvas';
+                canvasDiv.classList.add('d-none');
+                const htmlDiv = forces.appendChild(document.createElement('div'));
+                htmlDiv.id = 'kt_html';
 
-            let prevOperative: Operative | null = null;
-            for (let operative of force._operatives) {
-                this.printOperative(operative, prevOperative, forces);
-                prevOperative = operative;
+                if (force._leader) {
+                    this.printOperative(force._leader, null, canvasDiv);
+                    this.printOperativeHtml(force._leader, null, htmlDiv);
+                }
+    
+                let prevOperative: Operative | null = null;
+                for (let operative of force._operatives) {
+                    this.printOperative(operative, prevOperative, canvasDiv);
+                    this.printOperativeHtml(operative, prevOperative, htmlDiv);
+                    prevOperative = operative;
+                }
             }
 
             function addRule(rules: Map<string, string | null>, append: Map<string, string | null>) {
@@ -208,6 +222,232 @@ export class RendererKT21 implements Renderer {
         this.printRules(subFactionRules, rules);
         if (forces)
             forces.appendChild(rules);
+
+        loadOptionsFromLocalStorage();
+    }
+
+    private renderOptionsDiv(title: HTMLElement) {
+        const optionsDiv = title.appendChild(document.createElement('div'));
+        optionsDiv.classList.add('wh40k_options_div', 'd-print-none');
+        optionsDiv.id = 'wh40k_options_div';
+
+        // A toggle to hide or show options, since there are several.
+        const optionsToggleSpan = optionsDiv.appendChild(document.createElement('span'));
+        renderOptionsToggle(optionsToggleSpan);
+
+        renderCheckboxOption(optionsDiv, 'ktWithCanvas', 'Use old formatting',
+        (e) => {
+            const htmlDiv = document.getElementById('kt_html');
+            const canvasDiv = document.getElementById('kt_canvas');
+            const htmlOptionsDiv = document.getElementById('ktHtmlOptions');
+            if (!htmlDiv || !canvasDiv || !htmlOptionsDiv) return;
+
+            if ((e.target as HTMLInputElement).checked) {
+                htmlDiv.classList.add('d-none');
+                htmlOptionsDiv.classList.add('d-none');
+                canvasDiv.classList.remove('d-none');
+            } else {
+                htmlDiv.classList.remove('d-none');
+                htmlOptionsDiv.classList.remove('d-none');
+                canvasDiv.classList.add('d-none');
+            }
+        });
+
+        // Options related to printing are grouped together
+        const printOptionsDiv = optionsDiv.appendChild(document.createElement('span'));
+        printOptionsDiv.classList.add('wh40k_options_print_subsection');
+        printOptionsDiv.id = 'ktHtmlOptions';
+        printOptionsDiv.appendChild(document.createTextNode('Print:'));
+
+        renderCheckboxOption(printOptionsDiv, 'printBigger', 'Larger Text',
+            (e: Event) => {
+                const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
+                for (const div of unitSheetDiv) {
+                    if ((e.target as HTMLInputElement).checked) {
+                        div.classList.add('bigger')
+                    } else {
+                        div.classList.remove('bigger')
+                    }
+                }
+            });
+
+        // ability to hide divs (abilities, rules, ...) from printing
+        renderCheckboxOption(printOptionsDiv, 'hideElements', 'Hide Elements',
+            (e: Event) => {
+                const body = document.body;
+                if ((e.target as HTMLInputElement).checked) {
+                    body.classList.add('hide_enabled')
+                    body.addEventListener('click', toggleHidden)
+                } else {
+                    body.classList.remove('hide_enabled')
+                    body.removeEventListener('click', toggleHidden)
+                }
+            });
+        renderCheckboxOption(printOptionsDiv, 'datasheetPageBreaks', 'One Datasheet per Page',
+            (e: Event) => {
+                const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
+                for (const div of unitSheetDiv) {
+                    if ((e.target as HTMLInputElement).checked) {
+                        div.classList.add('page_break')
+                    } else {
+                        div.classList.remove('page_break')
+                    }
+                }
+            });
+    }
+
+    private printOperativeHtml(operative: Operative, prevOperative: null | Operative, forces: HTMLElement) {
+        if (operative.equal(prevOperative)) {
+            return;
+        }
+
+        const statsDiv = forces.appendChild(document.createElement('div'));
+        statsDiv.classList.add('wh40k_unit_sheet');
+        const statsTable = document.createElement('table');
+        statsTable.classList.add('table', 'table-sm', 'table-striped');
+        statsDiv.appendChild(statsTable);
+
+        // unit header
+        let thead = statsTable.appendChild(document.createElement('thead'));
+        thead.classList.add('table-dark', 'unit_header');
+        const unitCostDiv = document.createElement('div');
+        unitCostDiv.classList.add('unit_costs');
+        const roleImg = this._specialisms.get(operative._role);
+        unitCostDiv.appendChild(document.createElement('span')).appendChild(roleImg?.cloneNode() || document.createTextNode('-'));
+        thead.appendChild(createTableRow([unitCostDiv, operative.name()], [0.1, 0.9]));
+
+        // Add an invisible row of 20, 5% columns. This ensures correct
+        // spacing for the first few columns of visible rows.
+        const spacerTr = thead.appendChild(document.createElement('tr'));
+        for (let i = 0; i < 20; i++) {
+            const td = spacerTr.appendChild(document.createElement('td'));
+            td.colSpan = 1;
+            td.style.width = '5%';
+            td.style.padding = '0';
+        }
+
+        // Unique list of models
+        const uniqueModels: Operative[] = [];
+        const scrathModels: Map<string, Operative> = new Map();
+        if (!scrathModels.has(operative.name())) {
+            scrathModels.set(operative.name(), operative);
+            uniqueModels.push(operative);
+        }
+
+        let notesTableHead = createNoteHead('Operative notes', operative);
+        if (notesTableHead) statsTable.appendChild(notesTableHead);
+
+        thead = statsTable.appendChild(document.createElement('thead'));
+        thead.classList.add('table-active');
+        thead.appendChild(createTableRow(RendererKT21._unitLabels, this._unitLabelWidthsNormalized, /* header= */ true));
+
+        let tbody = statsTable.appendChild(document.createElement('tbody'));
+        tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+        for (const model of uniqueModels) {
+            tbody.append(createTableRow([
+                model.name(),
+                model._move,
+                model._apl,
+                model._groupActivations,
+                model._defence.toString(),
+                model._saves,
+                model._wounds.toString(),
+            ], this._unitLabelWidthsNormalized));
+        }
+
+        // Unique list of weapons
+        const uniqueWeapons: Weapons[] = [];
+        const scratchMap: Map<string, Weapons> = new Map();
+        for (const w of operative._weapons) {
+            if (!scratchMap.has(w.name())) {
+                scratchMap.set(w.name(), w);
+                uniqueWeapons.push(w);
+            }
+        }
+
+        if (uniqueWeapons.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(RendererKT21._weaponLabels, this._weaponLabelWidthNormalized, /* header= */ true));
+
+            tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+            for (const weapon of uniqueWeapons) {
+                tbody.append(createTableRow([
+                    weapon.nameAndCosts(),
+                    weapon._attacks,
+                    weapon._skill,
+                    weapon._damage,
+                    weapon._rules,
+                    weapon._criticalEffects,
+                ], this._weaponLabelWidthNormalized));    
+            }
+        }
+        notesTableHead = createNotesHead('Weapon notes', operative._weapons);
+        if (notesTableHead) statsTable.appendChild(notesTableHead);
+
+        // spells
+        if (operative._psychicPowers.length > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('table-active');
+            thead.appendChild(createTableRow(RendererKT21._spellLabels, this._spellLabelWidthNormalized, /* header= */ true));
+
+            tbody = statsTable.appendChild(document.createElement('tbody'));
+            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+
+            for (const spell of operative._psychicPowers) {
+                tbody.append(createTableRow([
+                    spell.name(),
+                    spell._effect,
+                ], this._spellLabelWidthNormalized));
+            }
+        }
+        notesTableHead = createNotesHead('Spell notes', operative._psychicPowers);
+        if (notesTableHead) statsTable.appendChild(notesTableHead);
+        
+        // abilities
+        if (operative._abilities.size > 0 || operative._rules.size > 0) {
+            const thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('info_row');
+            const abilitiesDiv = document.createElement('div');
+            if (operative._rules.size > 0) {
+                const rules = Array.from(operative._rules.keys()).sort(Compare).join(', ');
+                abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
+            }
+                const abilities = Array.from(operative._abilities.keys()).sort(Compare);
+            for (const ability of abilities) {
+                const abilityDiv = addHideAble(abilitiesDiv.appendChild(document.createElement('div')));
+                abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
+                abilityDiv.appendChild(document.createTextNode(operative._abilities.get(ability) || '??'));
+            }
+            thead.appendChild(createTableRow(['Abilities', abilitiesDiv], [0.10, 0.90], /* header= */ false));
+            }
+
+        // factions
+        if (operative._factions.size > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('info_row');
+            const factions = Array.from(operative._factions).sort(Compare).join(', ').toLocaleUpperCase();
+            thead.appendChild(createTableRow(['Factions', factions], [0.10, 0.90], /* header= */ false));
+        }
+
+        // keywords
+        if (operative._keywords.size > 0) {
+            thead = statsTable.appendChild(document.createElement('thead'));
+            thead.classList.add('info_row');
+            const keywords = Array.from(operative._keywords).sort(Compare).join(', ').toLocaleUpperCase();
+            thead.appendChild(createTableRow(['Keywords', keywords], [0.10, 0.90], /* header= */ false));
+        }
+
+        // model list
+        thead = statsTable.appendChild(document.createElement('thead'));
+        thead.classList.add('info_row');
+        const modelListDiv = document.createElement('div');
+        for (const model of [operative]) {
+            const div = modelListDiv.appendChild(document.createElement('div'));
+            div.appendChild(document.createTextNode(model.nameAndGear()));
+        }
+        thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
     }
 
     private printOperative(operative: Operative, prevOperative: null | Operative, forces: HTMLElement | null) {

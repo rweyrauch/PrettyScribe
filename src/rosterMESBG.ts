@@ -1,4 +1,4 @@
-export type RosterMESBG =  {
+export type RosterMESBG = {
   name: string;
   forces: MESBGForce[];
   points: number;
@@ -16,11 +16,11 @@ type Rule = {
   ruleText: string;
 };
 
-type Profile = {
+export type Profile = {
   movement: string;
   fight: string;
-  strength:string;
-  defense:string;
+  strength: string;
+  defense: string;
   attack: string;
   wounds: string;
   courage: string;
@@ -34,9 +34,9 @@ type HeroStuff = {
   heroicTier: string;
   magicalPowers: MagicalPower[];
   isLeader: boolean;
-}
+};
 
-type Model = {
+export type Model = {
   name: string;
   points: number;
   keywords: string[];
@@ -45,13 +45,13 @@ type Model = {
   wargear: Wargear[];
   mount?: Model;
   heroStuff?: HeroStuff;
-}
+};
 
 type Wargear = {
   name: string;
   points: number;
   rules: string[];
-}
+};
 
 type MagicalPower = {
   name: string;
@@ -60,19 +60,19 @@ type MagicalPower = {
   casting: string;
   normalEffect: string;
   channelledEffect: string;
-}
+};
 
-type Warriors = {
+export type Warriors = {
   count: number;
   points: number;
   model: Model;
-}
-type Warband = Warriors[]; 
+};
+type Warband = Warriors[];
 
 type Unit = {
   leader: Model;
   warband: Warband;
-}
+};
 
 export type MESBGForce = {
   name: string;
@@ -85,80 +85,82 @@ export type MESBGForce = {
 const GOOFY_NEWLINE_EXP = /\r\n|\r|\n| /;
 
 /**
- * 
+ *
  * @param doc a MESBG roster XML document
  * @returns An object containing the points cost and number of warriors in the list
  */
-const parsePointsAndWarriors = (doc: XMLDocument) : {points: number, warriors: number} => {
+const parsePointsAndWarriors = (
+  doc: XMLDocument
+): { points: number; warriors: number } => {
   const costs = doc.querySelectorAll("roster>costs>cost");
   let points = 0;
   let warriors = 0;
-  for(let cost of costs) {
-    if(cost.getAttribute("name")?.trim() === "Points") {
+  for (let cost of costs) {
+    if (cost.getAttribute("name")?.trim() === "Points") {
       points = parseInt(cost.getAttribute("value") ?? "0");
     }
-    if(cost.getAttribute("name")?.trim() === "Warriors") {
+    if (cost.getAttribute("name")?.trim() === "Warriors") {
       warriors = parseInt(cost.getAttribute("value") ?? "0");
     }
   }
-  return {points, warriors};
+  return { points, warriors };
 };
 
 /**
- * 
+ *
  * @param force a "force" level node
  * @returns The name the person gave it or a generic MESBG name
  */
-const getForceName = (force: Element) : string => {
+const getForceName = (force: Element): string => {
   return force.getAttribute("catalogueName") ?? "MESBG Force";
-}
+};
 
 /**
- * 
+ *
  * @param breakpointSelection the selection that has breakpoint stuff
  * @returns Breakpoint stuff
  */
 const parseBreakpoints = (breakpointSelection: Element): Breakpoints => {
-  const bp: Breakpoints = {half: 0, quarter: 0, modelCount: 0};
-  for(let rule of breakpointSelection.querySelectorAll("rules>rule")) {
+  const bp: Breakpoints = { half: 0, quarter: 0, modelCount: 0 };
+  for (let rule of breakpointSelection.querySelectorAll("rules>rule")) {
     const ruleName = rule.getAttribute("name") ?? "";
-    if(ruleName.endsWith("is halfway. (model)")) {
+    if (ruleName.endsWith("is halfway. (model)")) {
       const halfwayMark = parseFloat(ruleName);
-      if(!isNaN(halfwayMark)) {
+      if (!isNaN(halfwayMark)) {
         bp.half = Math.ceil(halfwayMark);
       }
     }
-    if(ruleName.endsWith("models remaining. (model)")) {
+    if (ruleName.endsWith("models remaining. (model)")) {
       const quarterMark = parseFloat(ruleName);
-      if(!isNaN(quarterMark)) {
+      if (!isNaN(quarterMark)) {
         bp.quarter = Math.ceil(quarterMark);
       }
     }
-    if(ruleName.endsWith("total models in Army. (model)")) {
+    if (ruleName.endsWith("total models in Army. (model)")) {
       const modelCount = parseFloat(ruleName);
-      if(!isNaN(modelCount)) {
+      if (!isNaN(modelCount)) {
         bp.modelCount = modelCount;
       }
     }
   }
   return bp;
-}
+};
 
 /**
- * 
- * @param rulesNodes 
+ *
+ * @param rulesNodes
  * @returns A list of rule names and their text
  */
 const parseRules = (rulesNodes: NodeListOf<Element>) => {
   const rules: Rule[] = [];
-  for(let rule of rulesNodes) {
-    if(rule.hasAttribute("name")) {
+  for (let rule of rulesNodes) {
+    if (rule.hasAttribute("name")) {
       const name = rule.getAttribute("name") ?? null;
       const desc = rule.querySelector("rule>description")?.textContent ?? "";
-      if(name !== null) {
+      if (name !== null) {
         rules.push({
           name,
-          ruleText: desc, 
+          ruleText: desc,
         });
       }
     }
@@ -170,41 +172,68 @@ const getHeroicStuff = (modelSelection: Element): HeroStuff | undefined => {
   let fate = "";
   let will = "";
   let might = "";
-  let actions:string[] = [];
+  let actions: string[] = [];
   let heroicTier = "";
   let isLeader = false;
   const magicalPowers: MagicalPower[] = [];
-
-  for(let profile of modelSelection.querySelectorAll("profiles > profile[typeName=\"Hero\"]")) {
-    for(let characteristic of profile.querySelectorAll("characteristics > characteristic")) {
-      switch(characteristic.getAttribute("name")?.trim() ?? "")  {
-        case "Might": might = characteristic.textContent ?? ""; break;
-        case "Fate": fate = characteristic.textContent ?? ""; break;
-        case "Will": will = characteristic.textContent ?? ""; break;
+  for (let profile of modelSelection.querySelectorAll(
+    'profiles > profile[typeName="Hero"]'
+  )) {
+    for (let characteristic of profile.querySelectorAll(
+      "characteristics > characteristic"
+    )) {
+      switch (characteristic.getAttribute("name")?.trim() ?? "") {
+        case "Might":
+          might = characteristic.textContent ?? "";
+          break;
+        case "Fate":
+          fate = characteristic.textContent ?? "";
+          break;
+        case "Will":
+          will = characteristic.textContent ?? "";
+          break;
         case "Heroic Actions":
           actions = characteristic.textContent?.split(GOOFY_NEWLINE_EXP) ?? [];
           break;
-        case "Heroic Tier": heroicTier = characteristic.textContent ?? "";break;
+        case "Heroic Tier":
+          heroicTier = characteristic.textContent ?? "";
+          break;
       }
     }
   }
-  for(let powerProfile of modelSelection.querySelectorAll("profile[typeName=\"Magical Power\"]")) {
-      const name = powerProfile.getAttribute("name") ?? "Unnamed Magic Power";
-      const duration = powerProfile.querySelector(":scope characteristic[name~=\"Duration\"]")?.textContent ?? "";
-      const range = powerProfile.querySelector(":scope characteristic[name~=\"Range\"]")?.textContent ?? "";
-      const casting = powerProfile.querySelector(":scope characteristic[name~=\"Casting\"]")?.textContent ?? "";
-      const normalEffect = powerProfile.querySelector(":scope characteristic[name~=\"Rule\"]")?.textContent ?? "";
-      const channelledEffect = powerProfile.querySelector(":scope characteristic[name~=\"Channelled\"]")?.textContent ?? "";
-      magicalPowers.push({
-        name,
-        duration,
-        range,
-        casting,
-        normalEffect,
-        channelledEffect,
-      })
+  for (let powerProfile of modelSelection.querySelectorAll(
+    'profile[typeName="Magical Power"]'
+  )) {
+    const name = powerProfile.getAttribute("name") ?? "Unnamed Magic Power";
+    const duration =
+      powerProfile.querySelector(':scope characteristic[name~="Duration"]')
+        ?.textContent ?? "";
+    const range =
+      powerProfile.querySelector(':scope characteristic[name~="Range"]')
+        ?.textContent ?? "";
+    const casting =
+      powerProfile.querySelector(':scope characteristic[name~="Casting"]')
+        ?.textContent ?? "";
+    const normalEffect =
+      powerProfile.querySelector(':scope characteristic[name~="Rule"]')
+        ?.textContent ?? "";
+    const channelledEffect =
+      powerProfile.querySelector(':scope characteristic[name~="Channelled"]')
+        ?.textContent ?? "";
+    magicalPowers.push({
+      name,
+      duration,
+      range,
+      casting,
+      normalEffect,
+      channelledEffect,
+    });
   }
-  isLeader = modelSelection.querySelector("selection[name=\"Leader (Valour)\"]") ? true : false;
+  isLeader = modelSelection.querySelector(
+    'selections > selection[name$="Leader (Valour)"]'
+  )
+    ? true
+    : false;
   return {
     fate,
     will,
@@ -214,18 +243,21 @@ const getHeroicStuff = (modelSelection: Element): HeroStuff | undefined => {
     magicalPowers,
     isLeader,
   };
-}
+};
 
 /**
  * Parses out all the stats, equipment, rules, etc. for a model in a
- * somewhat ugly and inefficient manner. 
- * 
+ * somewhat ugly and inefficient manner.
+ *
  * @param modelSelection the selection node that has all the data for a model
  * @returns  the parsed model in full
  */
 const parseModel = (modelSelection: Element): Model => {
-  const rules = parseRules(modelSelection.querySelectorAll("rules > rule") ?? []);
-  const name = modelSelection.getAttribute("name")?.trim() ?? "Unknown Model Name";
+  const rules = parseRules(
+    modelSelection.querySelectorAll("rules > rule") ?? []
+  );
+  const name =
+    modelSelection.getAttribute("name")?.trim() ?? "Unknown Model Name";
   let keywords: string[] = [];
   const wargear: Wargear[] = [];
   let mount: Model | undefined = undefined;
@@ -239,52 +271,88 @@ const parseModel = (modelSelection: Element): Model => {
   let courage = "";
   let heroStuff: HeroStuff | undefined = undefined;
   const tmpProfiles = modelSelection.querySelectorAll("profiles > profile");
-  for(let profile of modelSelection.querySelectorAll(":scope profiles > profile")) {
+  for (let profile of modelSelection.querySelectorAll(
+    ":scope profiles > profile"
+  )) {
     const typeName = profile.getAttribute("typeName");
     // guard against mounts causing double dipping, although they shouldn't???
     const profileName = profile.getAttribute("name")?.trim() ?? "wowza";
-    if((typeName === "Hero" || typeName === "Warrior") && profileName.startsWith(name)) {
-      for(let characteristic of profile.querySelectorAll("characteristics > characteristic")) {
-        switch(characteristic.getAttribute("name")?.trim() ?? "")  {
-          case "Wounds": wounds = characteristic.textContent ?? ""; break;
-          case "Courage": courage = characteristic.textContent ?? ""; break;
-          case "Attack": attack = characteristic.textContent ?? ""; break;
-          case "Defense": defense = characteristic.textContent ?? ""; break;
-          case "Strength": strength = characteristic.textContent ?? ""; break;
-          case "Fight": fight = characteristic.textContent ?? ""; break;
-          case "Movement": movement = characteristic.textContent ?? ""; break;
+    if (
+      (typeName === "Hero" || typeName === "Warrior") &&
+      profileName.startsWith(name)
+    ) {
+      for (let characteristic of profile.querySelectorAll(
+        "characteristics > characteristic"
+      )) {
+        switch (characteristic.getAttribute("name")?.trim() ?? "") {
+          case "Wounds":
+            wounds = characteristic.textContent ?? "";
+            break;
+          case "Courage":
+            courage = characteristic.textContent ?? "";
+            break;
+          case "Attack":
+            attack = characteristic.textContent ?? "";
+            break;
+          case "Defense":
+            defense = characteristic.textContent ?? "";
+            break;
+          case "Strength":
+            strength = characteristic.textContent ?? "";
+            break;
+          case "Fight":
+            fight = characteristic.textContent ?? "";
+            break;
+          case "Movement":
+            movement = characteristic.textContent ?? "";
+            break;
           case "Keywords":
-            keywords = characteristic.textContent?.split(GOOFY_NEWLINE_EXP) ?? []; 
+            keywords =
+              characteristic.textContent?.split(GOOFY_NEWLINE_EXP) ?? [];
             break;
         }
       } // end stats
       // wargear / upgrades / mounts and other stuff a model can have
       // see if we are wargear (vs. a mount or "leader" attribute)
-      for(let equipment of getDirectSelections(modelSelection) ?? []) { // TODO: just select the appropriate nodes
-        if(equipment.querySelector("profile[typeName$=\"Wargear\"]")) {
+      for (let equipment of getDirectSelections(modelSelection) ?? []) {
+        // TODO: just select the appropriate nodes
+        if (
+          equipment.getAttribute("name") === "Shield" ||
+          equipment.querySelector('profile[typeName$="Wargear"]') ||
+          equipment.querySelector('profile[typeName$="Shooting Weapon"]')
+        ) {
           const name = equipment.getAttribute("name") ?? "Equipment";
           // note the `$=` is because BattleScribe likes to put spaces in front of values
-          const points = parseInt(equipment.querySelector("cost[name$=\"Points\"]")?.getAttribute("value") ?? "0");
-          const rules: string[]  = [];
-          for(let rule of equipment.querySelectorAll("characteristics > characteristic")) {
-            if(rule.textContent !== null) {
+          const points = parseInt(
+            equipment
+              .querySelector('cost[name$="Points"]')
+              ?.getAttribute("value") ?? "0"
+          );
+          const rules: string[] = [];
+          for (let rule of equipment.querySelectorAll(
+            "characteristics > characteristic"
+          )) {
+            if (rule.textContent !== null) {
               rules.push(rule.textContent);
             }
           }
           wargear.push({ name, points, rules });
         }
-        if(equipment.querySelector("profile[typeName$=\"Warrior\"]")) {
-          mount = parseModel(equipment.querySelector("profile[typeName$=\"Warrior\"]")?.parentElement?.parentElement!);
+        if (equipment.querySelector('profile[typeName$="Warrior"]')) {
+          mount = parseModel(
+            equipment.querySelector('profile[typeName$="Warrior"]')
+              ?.parentElement?.parentElement!
+          );
         }
       }
-      if(typeName === "Hero") {
+      if (typeName === "Hero") {
         heroStuff = getHeroicStuff(modelSelection);
       }
     }
   }
   let points = 0;
-  for(let cost of getDirectCosts(modelSelection) ?? []) {
-    if(cost.getAttribute("name")?.trim() === "Points") {
+  for (let cost of getDirectCosts(modelSelection) ?? []) {
+    if (cost.getAttribute("name")?.trim() === "Points") {
       points = parseInt(cost.getAttribute("value") ?? "0");
     }
   }
@@ -305,152 +373,161 @@ const parseModel = (modelSelection: Element): Model => {
     wargear,
     mount,
     heroStuff,
-  }
+  };
 };
 
 const parseWarband = (warbandSelection: Element): Warband => {
   const warband: Warband = [];
   // do neat things
   // loop over each thing
-  for(let sel of getDirectSelections(warbandSelection) ?? []) {
-    const _m = sel.querySelector("selection[type~=\"model\"]");
-    if(_m !== null) {
+  for (let sel of getDirectSelections(warbandSelection) ?? []) {
+    const _m = sel.querySelector('selection[type~="model"]');
+    if (_m !== null) {
       const model = parseModel(sel);
       const count = parseInt(_m.getAttribute("number") ?? "0");
-      const points = parseInt(_m.querySelector("cost[name~=\"Points\"]")?.getAttribute("value") ?? "0");
+      const points = parseInt(
+        _m.querySelector('cost[name~="Points"]')?.getAttribute("value") ?? "0"
+      );
       warband.push({
         model,
         count,
         points,
-      })
+      });
     }
   }
   return warband;
-}
+};
 
 /**
  * Gets only the top-level "selection" elements of a node. Using `querySelectorAll` by
  * default return _all_ the nodes down the tree, which we don't want sometimes.
- *  
+ *
  * @param el a node that has "selections" inside
- * @returns 
+ * @returns
  */
-const getDirectSelections = (el: Element) : NodeListOf<Element> | null => 
-  el.querySelector("selections")?.querySelectorAll(":scope > selection") ?? null;
+const getDirectSelections = (el: Element): NodeListOf<Element> | null =>
+  el.querySelector("selections")?.querySelectorAll(":scope > selection") ??
+  null;
 
 /**
  * Gets only the top-level "cost" elements of a node. Using `querySelectorAll` by
  * default return _all_ the nodes down the tree, which we don't want sometimes.
- *  
+ *
  * @param el a node that probably has "costs" inside
- * @returns 
+ * @returns
  */
-const getDirectCosts = (el: Element) : NodeListOf<Element> | null => 
+const getDirectCosts = (el: Element): NodeListOf<Element> | null =>
   el.querySelector("costs")?.querySelectorAll(":scope > cost") ?? null;
-
 
 /**
  * Takes a `selection` that looks like a Hero and parses the two interesting bits inside, which
  * are the inner `selections->selection` that are the model and the warband.
- *  
- * @param heroSelection 
- * @returns 
+ *
+ * @param heroSelection
+ * @returns
  */
 const parseHero = (heroSelection: Element): Unit | null => {
   // inside here there is a type: "model" and a  name "Warband" selection
   let maybeLeader: Model | null = null;
   let warband: Warband = [];
   const directSelections = getDirectSelections(heroSelection);
-  if(directSelections === null) {
+  if (directSelections === null) {
     return directSelections;
   }
-  for(let selection of directSelections) {
-    if(selection.getAttribute("type") === "model") {
+  for (let selection of directSelections) {
+    if (selection.getAttribute("type") === "model") {
       maybeLeader = parseModel(selection);
     }
-    if(selection.getAttribute("name") === "Warband") {
+    if (selection.getAttribute("name") === "Warband") {
       // do something neat
       warband = parseWarband(selection);
     }
   }
-  if(maybeLeader !== null) {
+  if (maybeLeader !== null) {
     return {
       leader: maybeLeader,
       warband,
-    }
+    };
   }
   return null;
 };
 
 /**
- * 
+ *
  * @param node a top level force->selections->selection node
- * @returns if that node looks like a hero / unit 
+ * @returns if that node looks like a hero / unit
  */
-const isModelSelection = (node: Element):boolean => {
+const isModelSelection = (node: Element): boolean => {
   let isHero = false;
-  for(let s of getDirectSelections(node) ?? []) {
-    if(s.getAttribute("type") === "model") {
+  for (let s of getDirectSelections(node) ?? []) {
+    if (s.getAttribute("type") === "model") {
       isHero = true;
     }
   }
   return isHero;
-}
+};
 
-const parseForces = (doc: XMLDocument) : MESBGForce[] => {
+const parseForces = (doc: XMLDocument): MESBGForce[] => {
   const forcesList = doc.querySelectorAll("roster>forces>force");
   const parsedForces: MESBGForce[] = [];
-  for(let force of forcesList) {
+  for (let force of forcesList) {
     const name = getForceName(force);
-    let breakpoints: Breakpoints = {half: 0, quarter: 0, modelCount: 0};
+    let breakpoints: Breakpoints = { half: 0, quarter: 0, modelCount: 0 };
     const units: Unit[] = [];
     const armyBonus: Rule[] = []; // maybe there can be more than one??
     // iterate over top-level selections
     const forceSelections = getDirectSelections(force);
-    if(forceSelections === null) {
+    if (forceSelections === null) {
       continue;
     }
-    for(let selection of forceSelections) {
+    for (let selection of forceSelections) {
       const val = selection.getAttribute("name");
-      if(val === "Determine Breakpoint & 25%") {
+      if (val === "Determine Breakpoint & 25%") {
         breakpoints = parseBreakpoints(selection);
-      } else if(isModelSelection(selection)) {
-          const unit = parseHero(selection);
-          if(unit !== null) {
-            units.push(unit);
-          }
-      } else { // this, in theory is the faction / army bonus!
+      } else if (isModelSelection(selection)) {
+        const unit = parseHero(selection);
+        if (unit !== null) {
+          units.push(unit);
+        }
+      } else {
+        // this, in theory is the faction / army bonus!
         const _r = selection.querySelectorAll("rules > rule");
-        for(let rule of _r) {
+        for (let rule of _r) {
           const _d = rule.querySelector("description")?.textContent ?? "";
           armyBonus.push({
             name: rule.getAttribute("name") ?? "",
             ruleText: _d,
-          })
+          });
         }
-
-      } 
+      }
     }
     parsedForces.push({
       name,
       breakpoints,
       units,
       armyBonus,
-    })
+    });
   }
   return parsedForces;
 };
 
 export function CreateMESBGRoster(doc: XMLDocument): RosterMESBG | null {
-  if(doc) {
-    const name = 
-      doc.querySelector("roster")?.getAttribute("name") 
-      ?? "Middle-Earth Stratgegy Battle Game Roster";
-    
-    const {points, warriors} = parsePointsAndWarriors(doc);
-    
-    const forces = parseForces(doc);
+  if (doc) {
+    const name =
+      doc.querySelector("roster")?.getAttribute("name") ??
+      "Middle-Earth Stratgegy Battle Game Roster";
 
+    const { points, warriors } = parsePointsAndWarriors(doc);
+
+    const forces = parseForces(doc);
+    /*
+    console.log("ROSTER", {
+      name,
+      forces,
+      points,
+      warriors,
+    });
+    // */
     return {
       name,
       forces,
@@ -458,9 +535,9 @@ export function CreateMESBGRoster(doc: XMLDocument): RosterMESBG | null {
       warriors,
     };
   }
+  alert("Bad Input File");
   return null;
-};
-
+}
 
 /*
 
