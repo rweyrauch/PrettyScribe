@@ -119,7 +119,7 @@ export class Wh40kRenderer implements Renderer {
             for (let i = 0; i < force._units.length; i++) {
                 const unit = force._units[i];
                 const tr = document.createElement('tr');
-                tr.id = `unit_summary_${i}`;
+                tr.dataset.index = String(i);
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.nameWithExtraCosts()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(Wh40k.UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
@@ -171,9 +171,9 @@ export class Wh40kRenderer implements Renderer {
             // TODO: Fix behavior when identical datasheets have been merged.
             const children = container.children;
             for (let i = 0; i < children.length; i++) {
-                const child = children[i];
-                const originalIndex = child.id.match(/unit_summary_(\d+)/)?.[1];
-                const datasheet = document.getElementById(`unit_details_${originalIndex}`);
+                const child = children[i] as HTMLElement;
+                const originalIndex = child.dataset.index;
+                const datasheet = document.querySelector(`.wh40k_unit_sheet[data-index="${originalIndex}"]`) as HTMLElement;
                 if (!datasheet) continue;
                 datasheet.style.order = String(i);
             }
@@ -422,7 +422,7 @@ export class Wh40kRenderer implements Renderer {
     private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number, index: number) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
-        statsDiv.id = `unit_details_${index}`;
+        statsDiv.dataset.index = String(index);
         statsDiv.style.order = String(index);
         const statsTable = document.createElement('table');
         statsTable.classList.add('table', 'table-sm', 'table-striped');
