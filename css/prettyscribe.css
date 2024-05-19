@@ -306,9 +306,14 @@ label {
     font-size: 0.6em;
 }
 
+.wh40k_unit_sheet > table > thead.unit_header > tr > td > div.unit_count,
 .wh40k_unit_sheet > table > thead.unit_header > tr > td > div.unit_cp_costs {
     flex-direction: row-reverse;
     padding-right: calc(var(--notchSize) - 0.25rem) /* Offset td's 0.25rem padding-right. */
+}
+
+.wh40k_unit_sheet > table > thead.unit_header > tr > td > div.unit_count > span::before {
+    content: "ˣ" attr(data-count);
 }
 
 /* Render an octogonal border around certain elements. */

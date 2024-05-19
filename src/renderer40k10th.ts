@@ -75,6 +75,7 @@ export class Wh40kRenderer implements Renderer {
         }
 
         loadOptionsFromLocalStorage();
+        this.collapseIdenticalUnits();
     }
 
     private renderRosterSummary(list: HTMLElement) {
@@ -168,7 +169,6 @@ export class Wh40kRenderer implements Renderer {
             // NB: this is the only part of this function that's not generic; we
             // could separate it out, and reuse the rest of this function as a
             // general function under ./html/draggable.
-            // TODO: Fix behavior when identical datasheets have been merged.
             const children = container.children;
             for (let i = 0; i < children.length; i++) {
                 const child = children[i] as HTMLElement;
@@ -177,7 +177,36 @@ export class Wh40kRenderer implements Renderer {
                 if (!datasheet) continue;
                 datasheet.style.order = String(i);
             }
+            this.collapseIdenticalUnits();
         });
+    }
+
+    /**
+     * Iterates over datasheets, which may have been reordered, and collapses
+     * identical units into a single datasheet, noting the count of that unit.
+     */
+    private collapseIdenticalUnits() {
+        const datasheets = document.querySelectorAll('.wh40k_unit_sheet');
+        const sortedDatasheets = (Array.from(datasheets) as HTMLElement[]).sort((a, b) => {
+            return +a.style.order - +b.style.order;
+        });
+
+        let lastDatasheet = null;
+        for (const datasheet of sortedDatasheets) {
+            datasheet.classList.remove('d-none');
+            const unitCountSpan = datasheet.querySelector('div.unit_count > span') as HTMLElement;
+            if (lastDatasheet && lastDatasheet?.dataset.hash === datasheet.dataset.hash) {
+                lastDatasheet.classList.add('d-none');
+                const lastUnitCountSpan = lastDatasheet.querySelector('div.unit_count > span') as HTMLElement;
+                const lastCount = +(lastUnitCountSpan?.dataset.count || '');
+                unitCountSpan.dataset.count = String(lastCount + 1);
+                unitCountSpan.parentElement?.classList.remove('d-none');
+            } else {
+                unitCountSpan.dataset.count = String(1);
+                unitCountSpan.parentElement?.classList.add('d-none');
+            }
+            lastDatasheet = datasheet;
+        }
     }
 
     private renderOptionsDiv(title: HTMLElement) {
@@ -407,21 +436,18 @@ export class Wh40kRenderer implements Renderer {
     }
 
     private renderDatasheets(forces: HTMLElement, units: Wh40k.Unit[]) {
-        let numIdenticalUnits = 0;
         for (let i = 0; i < units.length; i++) {
-            numIdenticalUnits++;
             const unit = units[i];
-            const nextUnit = units[i + 1];
-            if (unit.equal(nextUnit)) continue;
-
-            this.renderUnitHtml(forces, unit, numIdenticalUnits, i);
-            numIdenticalUnits = 0
+            this.renderUnitHtml(forces, unit, i);
         }
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number, index: number) {
+    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, index: number) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
+        // Use >>> (unsigned right shift) to correctly convert negative 32-bit integers to hex. 
+        statsDiv.dataset.hash = (unit.hash() >>> 0).toString(16);
+        statsDiv.dataset.name = unit.name();
         statsDiv.dataset.index = String(index);
         statsDiv.style.order = String(index);
         const statsTable = document.createElement('table');
@@ -437,8 +463,12 @@ export class Wh40kRenderer implements Renderer {
         unitCostDiv.appendChild(document.createElement('span')).appendChild(roleImg?.cloneNode() || document.createTextNode('-'));
         unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._points.toString()));
 
-        let cpCostDiv: Element | string = '';
-        thead.appendChild(createTableRow([unitCostDiv, unit.name() + (unitCount > 1 ? ` (${unitCount})` : ''), cpCostDiv], [0.1, 0.8, 0.1]));
+        const unitCountDiv = document.createElement('div');
+        unitCountDiv.classList.add('unit_costs', 'unit_count');
+        const unitCountSpan = unitCountDiv.appendChild(document.createElement('span'));
+        unitCountSpan.classList.add('unit_count');
+        unitCountSpan.dataset.count = String(1);
+        thead.appendChild(createTableRow([unitCostDiv, unit.name(), unitCountDiv], [0.1, 0.8, 0.1]));
 
         // Add an invisible row of 20, 5% columns. This ensures correct
         // spacing for the first few columns of visible rows.

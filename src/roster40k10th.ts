@@ -33,10 +33,16 @@ export class BaseNotes {
         return this._customNotes;
     }
 
+    // Note: should be computed on same fields as hash().
     equal(other: BaseNotes | null): boolean {
         if (other == null) return false;
         // Weapons in 40k have unique names
         return (this._name === other._name);
+    }
+
+    // Note: should be computed on same fields as equal().
+    hash(): number {
+        return stringHash(this.name());
     }
 }
 
@@ -145,6 +151,7 @@ export class Model extends BaseNotes {
     _weapons: Weapon[] = [];
     _upgrades: Upgrade[] = [];
 
+    // Note: should be computed on same fields as hash().
     equal(model: Model | null): boolean {
         if (model == null) return false;
 
@@ -167,6 +174,20 @@ export class Model extends BaseNotes {
             return true;
         }
         return false;
+    }
+
+    // Note: should be computed on same fields as equal().
+    hash(): number {
+        let hash = 17;  // Arbitrary prime number.
+        hash = addHash(hash, stringHash(this._name));
+        hash = addHash(hash, this._count);
+        for (const weapon of this._weapons) {
+            hash = addHash(hash, weapon.hash());
+        }
+        for (const upgrade of this._upgrades) {
+            hash = addHash(hash, upgrade.hash());
+        }
+        return hash & hash;
     }
 
     nameAndGear(): string {
@@ -272,6 +293,7 @@ export class Unit extends BaseNotes {
         return extraCosts.length ? `${this.name()} [${extraCosts.join(', ')}]` : this.name();
     }
 
+    // Note: should be computed on same fields as hash().
     equal(unit: Unit | null): boolean {
         if (unit == null) return false;
 
@@ -301,6 +323,23 @@ export class Unit extends BaseNotes {
             return true;
         }
         return false;
+    }
+
+    // Note: should be computed on same fields as equal().
+    hash() : number {
+        let hash = 41;  // Arbitrary prime number.
+        hash = addHash(hash, stringHash(this._name));
+        hash = addHash(hash, this._role);
+        for (const model of this._models) {
+            hash = addHash(hash, model.hash());
+        }
+        for (const [abilityGroup, abilities] of Object.entries(this._abilities)) {
+            for (const abilityName of abilities.keys()) {
+                const abilityHash = stringHash(`${abilityGroup}:${abilityName}`);
+                hash = addHash(hash, abilityHash);
+            }
+        }
+        return hash;
     }
 
     normalize(): void {
@@ -907,6 +946,21 @@ export function CompareProfileTableName(a: string, b: string) {
     const aOrder = sortOrder.includes(a) ? sortOrder.indexOf(a) : sortOrder.length;
     const bOrder = sortOrder.includes(b) ? sortOrder.indexOf(b) : sortOrder.length;
     return aOrder - bOrder;
+}
+
+function stringHash(s: string): number {
+    let hash = 23;  // Arbitrary prime number.
+    for (var i = 0; i < s.length; i++) {
+        var code = s.charCodeAt(i);
+        hash = ((hash << 5) - hash) + code;
+        hash |= 0; // Convert to 32-bit integer
+    }
+    return hash;
+}
+
+function addHash(lhs: number, rhs: number) {
+    const hash = ((lhs << 5) - lhs) + rhs;
+    return hash | 0;
 }
 
 } // namespace Wh40k
