@@ -70,10 +70,6 @@ export class Wh40kRenderer implements Renderer {
         }
 
         if (list) {
-            // TODO: move this to a better place, and only render it if the order is not default
-            const resetOrderButton = list.appendChild(document.createElement('button'));
-            resetOrderButton.appendChild(document.createTextNode('Reset datasheet order'));
-            resetOrderButton.addEventListener('click', e => this.resetDatasheetOrder());
             this.renderRosterSummary(list);
             this.renderAbilitiesByPhase(list);
         }
@@ -139,6 +135,14 @@ export class Wh40kRenderer implements Renderer {
             }
 
             this.makeForceSummaryListItemsDraggable(tbody);
+
+            // Button to reset the order is only shown when the list is not in
+            // its natural order.
+            const resetOrderButton = forceTitle.appendChild(document.createElement('button'));
+            resetOrderButton.id = 'reset-order-button';
+            resetOrderButton.appendChild(document.createTextNode('Reset datasheet order'));
+            resetOrderButton.classList.add('d-none', 'btn', 'btn-secondary');            
+            resetOrderButton.addEventListener('click', e => this.resetDatasheetOrder(tbody));
         }
     }
 
@@ -189,12 +193,23 @@ export class Wh40kRenderer implements Renderer {
      */
     private orderDatasheetsToMatchSummary(container: Element) {
         const children = container.children;
+        let isNaturallySorted = true;
         for (let i = 0; i < children.length; i++) {
-            const child = children[i] as HTMLElement;
-            const originalIndex = child.dataset.index;
+            const originalIndex = (children[i] as HTMLElement).dataset.index;
+            if (i > 0) {
+                const prevIndex = (children[i - 1] as HTMLElement).dataset.index || -1;
+                isNaturallySorted &&= +(originalIndex || 0) > +prevIndex;
+            }
             const datasheet = document.querySelector(`.wh40k_unit_sheet[data-index="${originalIndex}"]`) as HTMLElement;
             if (!datasheet) continue;
             datasheet.style.order = String(i);
+        }
+
+        const resetDatasheetOrderButton = document.querySelector('#reset-order-button');
+        if (isNaturallySorted) {
+            resetDatasheetOrderButton?.classList.add('d-none');
+        } else {
+            resetDatasheetOrderButton?.classList.remove('d-none');
         }
     }
 
@@ -263,10 +278,9 @@ export class Wh40kRenderer implements Renderer {
         }
     }
 
-    private resetDatasheetOrder() {
+    private resetDatasheetOrder(container: Element) {
         try {
             delete window.localStorage[`40k-order-${this._rosterId}`];
-            const container = document.querySelector('tr.draggable')?.parentElement!;
             const sortedSummaries = (Array.from(container.children) as HTMLElement[]).sort((a, b) => {
                 return +(a.dataset.index || 0) - +(b.dataset.index || 0);
             })
