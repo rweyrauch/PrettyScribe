@@ -18,17 +18,21 @@ import {Renderer} from "./renderer";
 import {Wh40k} from "./roster40k10th";
 import {createTableRow, createNoteHead, createNotesHead} from './html/table';
 import {addHideAble, toggleHidden} from "./html/hideable"
-import {loadOptionsFromLocalStorage, renderCheckboxOption, renderOptionsToggle} from "./html/options";
+import {loadOptionsFromLocalStorage, renderCheckboxOption, renderOptionsToggle, saveOptionToLocalStorage} from "./html/options";
 
 export class Wh40kRenderer implements Renderer {
 
     private readonly _roster: Wh40k.Roster40k | null = null;
+    private readonly _rosterId: string | undefined;
 
     private _roles: Map<Wh40k.UnitRole, HTMLImageElement | null> = new Map();
 
     constructor(roster: Wh40k.Roster40k) {
 
         this._roster = roster;
+
+        const rosterHash = this._roster?.hash() || 0;
+        this._rosterId = `${this._roster?.name()}:${(rosterHash >>> 0).toString(16)}`;
 
         this._roles.set(Wh40k.UnitRole.EpicHero, document.getElementById('role_hq') as HTMLImageElement);
         this._roles.set(Wh40k.UnitRole.Character, document.getElementById('role_hq') as HTMLImageElement);
@@ -66,6 +70,10 @@ export class Wh40kRenderer implements Renderer {
         }
 
         if (list) {
+            // TODO: move this to a better place, and only render it if the order is not default
+            const resetOrderButton = list.appendChild(document.createElement('button'));
+            resetOrderButton.appendChild(document.createTextNode('Reset datasheet order'));
+            resetOrderButton.addEventListener('click', e => this.resetDatasheetOrder());
             this.renderRosterSummary(list);
             this.renderAbilitiesByPhase(list);
         }
@@ -75,6 +83,7 @@ export class Wh40kRenderer implements Renderer {
         }
 
         loadOptionsFromLocalStorage();
+        this.loadDatasheetOrderFromLocalStorage();
         this.collapseIdenticalUnits();
     }
 
@@ -169,16 +178,24 @@ export class Wh40kRenderer implements Renderer {
             // NB: this is the only part of this function that's not generic; we
             // could separate it out, and reuse the rest of this function as a
             // general function under ./html/draggable.
-            const children = container.children;
-            for (let i = 0; i < children.length; i++) {
-                const child = children[i] as HTMLElement;
-                const originalIndex = child.dataset.index;
-                const datasheet = document.querySelector(`.wh40k_unit_sheet[data-index="${originalIndex}"]`) as HTMLElement;
-                if (!datasheet) continue;
-                datasheet.style.order = String(i);
-            }
+            this.orderDatasheetsToMatchSummary(container);
             this.collapseIdenticalUnits();
+            this.saveDatasheetOrderToLocalStorage();
         });
+    }
+
+    /**
+     * Reorders datasheets to match the DOM order of of the roster summary table.
+     */
+    private orderDatasheetsToMatchSummary(container: Element) {
+        const children = container.children;
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i] as HTMLElement;
+            const originalIndex = child.dataset.index;
+            const datasheet = document.querySelector(`.wh40k_unit_sheet[data-index="${originalIndex}"]`) as HTMLElement;
+            if (!datasheet) continue;
+            datasheet.style.order = String(i);
+        }
     }
 
     /**
@@ -206,6 +223,61 @@ export class Wh40kRenderer implements Renderer {
                 unitCountSpan.parentElement?.classList.add('d-none');
             }
             lastDatasheet = datasheet;
+        }
+    }
+
+    private saveDatasheetOrderToLocalStorage() {
+        try {
+            const summaryRows = document.querySelectorAll('tr.draggable');
+            const order = (Array.from(summaryRows) as HTMLElement[]).map(e => e.dataset.index);
+            saveOptionToLocalStorage(`40k-order-${this._rosterId}`, JSON.stringify(order));
+        } catch (e) {
+            // localStorage not supported or enabled
+            console.warn('Error in saveDatasheetOrderToLocalStorage', e);
+        }
+    }
+
+    private loadDatasheetOrderFromLocalStorage() {
+        try {
+            // Load order from LocalStorage
+            const order = JSON.parse(window.localStorage[`40k-order-${this._rosterId}`] || '[]');
+            const container = document.querySelector('tr.draggable')?.parentElement!;
+            if (order.length) {
+                // Take a snapshot of container.children, which is a live array that
+                // would change as we start calling appendChild below. 
+                const summaries = Array.from(container.children);
+                for (let i = 0; i < summaries.length && i < order.length; i++) {
+                    const o = order[i];
+                    container.appendChild(summaries[o]);
+                }
+                this.orderDatasheetsToMatchSummary(container);
+                // This call to this.collapseIdenticalUnits() should be optional
+                // because the caller of this method _should_ call it, just in
+                // case we didn't load order from localStorage. However, we call
+                // it here just in case. 
+                this.collapseIdenticalUnits();
+            }
+        } catch (e) {
+            // localStorage not supported or enabled
+            console.warn('Error in loadDatasheetOrderFromLocalStorage', e);
+        }
+    }
+
+    private resetDatasheetOrder() {
+        try {
+            delete window.localStorage[`40k-order-${this._rosterId}`];
+            const container = document.querySelector('tr.draggable')?.parentElement!;
+            const sortedSummaries = (Array.from(container.children) as HTMLElement[]).sort((a, b) => {
+                return +(a.dataset.index || 0) - +(b.dataset.index || 0);
+            })
+            for (const row of sortedSummaries) {
+                container.appendChild(row);
+            }
+            this.orderDatasheetsToMatchSummary(container);
+            this.collapseIdenticalUnits();
+        } catch (e) {
+            // localStorage not supported or enabled
+            console.warn('Error in resetDatasheetOrder', e);
         }
     }
 
@@ -633,9 +705,7 @@ export class Wh40kRenderer implements Renderer {
         }
     }
 
-    private static _unitLabels = ["MODEL", "M", "T", "SV", "W", "LD", "OC"];
     private _unitLabelWidthsNormalized = [0.40, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
-    private static _weaponLabels = ["WEAPONS", "RANGE", "A", "BS/WS", "S", "AP", "D", "ABILITIES"];
     private _weaponLabelWidthNormalized = [0.30, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.30];
 }
 

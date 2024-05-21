@@ -393,11 +393,28 @@ export class Force extends BaseNotes {
     _configurations: string[] = [];
     _rules: Map<string, string | null> = new Map();
     _units: Unit[] = [];
+
+    hash(): number {
+        let hash = 71;  // Arbitrary prime number.
+        for (const unit of this._units) {
+            hash = addHash(hash, unit.hash());
+        }
+        return hash;
+    }
 }
 
 export class Roster40k extends BaseNotes {
     _cost = new Costs();
     _forces: Force[] = [];
+
+
+    hash(): number {
+        let hash = 59;  // Arbitrary prime number.
+        for (const force of this._forces) {
+            hash = addHash(hash, force.hash());
+        }
+        return hash;
+    }
 }
 
 export class Costs {
