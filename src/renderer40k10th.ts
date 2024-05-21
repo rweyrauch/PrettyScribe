@@ -326,15 +326,16 @@ export class Wh40kRenderer implements Renderer {
                     }
                 }
             });
-        renderCheckboxOption(optionsDiv, 'hideArmyRules', 'Hide army rules',
-        (e: Event) => {
-            const rulesDiv = document.getElementById('all-army-rules');
-            if ((e.target as HTMLInputElement).checked) {
-                rulesDiv?.classList.add('d-none')
-            } else {
-                rulesDiv?.classList.remove('d-none')
-            }
-        });        
+        renderCheckboxOption(optionsDiv, 'showArmyRules', 'Show army rules',
+            (e: Event) => {
+                const rulesDiv = document.getElementById('all-army-rules');
+                if ((e.target as HTMLInputElement).checked) {
+                    rulesDiv?.classList.remove('d-none')
+                } else {
+                    rulesDiv?.classList.add('d-none')
+                }
+            },
+            /* defaultChecked= */ true);
         renderCheckboxOption(optionsDiv, 'singleColumnDatasheets', 'Single-Column Datasheets',
             (e: Event) => {
                 if ((e.target as HTMLInputElement).checked) {
