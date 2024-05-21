@@ -141,7 +141,7 @@ export class Wh40kRenderer implements Renderer {
             const resetOrderButton = forceTitle.appendChild(document.createElement('button'));
             resetOrderButton.id = 'reset-order-button';
             resetOrderButton.appendChild(document.createTextNode('Reset datasheet order'));
-            resetOrderButton.classList.add('d-none', 'btn', 'btn-secondary');            
+            resetOrderButton.classList.add('d-none', 'btn', 'btn-secondary', 'd-print-none');            
             resetOrderButton.addEventListener('click', e => this.resetDatasheetOrder(tbody));
         }
     }
@@ -326,6 +326,15 @@ export class Wh40kRenderer implements Renderer {
                     }
                 }
             });
+        renderCheckboxOption(optionsDiv, 'hideArmyRules', 'Hide army rules',
+        (e: Event) => {
+            const rulesDiv = document.getElementById('all-army-rules');
+            if ((e.target as HTMLInputElement).checked) {
+                rulesDiv?.classList.add('d-none')
+            } else {
+                rulesDiv?.classList.remove('d-none')
+            }
+        });        
         renderCheckboxOption(optionsDiv, 'singleColumnDatasheets', 'Single-Column Datasheets',
             (e: Event) => {
                 if ((e.target as HTMLInputElement).checked) {
@@ -516,6 +525,7 @@ export class Wh40kRenderer implements Renderer {
 
         let rules = document.createElement("div");
         rules.style.pageBreakBefore = "always";
+        rules.id = 'all-army-rules';
         this.printRules(catalogueRules, rules);
         this.printRules(subFactionRules, rules);
         forces.appendChild(rules);
