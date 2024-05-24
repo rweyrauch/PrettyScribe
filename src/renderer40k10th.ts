@@ -18,17 +18,21 @@ import {Renderer} from "./renderer";
 import {Wh40k} from "./roster40k10th";
 import {createTableRow, createNoteHead, createNotesHead} from './html/table';
 import {addHideAble, toggleHidden} from "./html/hideable"
-import {loadOptionsFromLocalStorage, renderCheckboxOption, renderOptionsToggle} from "./html/options";
+import {loadOptionsFromLocalStorage, renderCheckboxOption, renderOptionsToggle, saveOptionToLocalStorage} from "./html/options";
 
 export class Wh40kRenderer implements Renderer {
 
     private readonly _roster: Wh40k.Roster40k | null = null;
+    private readonly _rosterId: string | undefined;
 
     private _roles: Map<Wh40k.UnitRole, HTMLImageElement | null> = new Map();
 
     constructor(roster: Wh40k.Roster40k) {
 
         this._roster = roster;
+
+        const rosterHash = this._roster?.hash() || 0;
+        this._rosterId = `${this._roster?.name()}:${(rosterHash >>> 0).toString(16)}`;
 
         this._roles.set(Wh40k.UnitRole.EpicHero, document.getElementById('role_hq') as HTMLImageElement);
         this._roles.set(Wh40k.UnitRole.Character, document.getElementById('role_hq') as HTMLImageElement);
@@ -75,6 +79,8 @@ export class Wh40kRenderer implements Renderer {
         }
 
         loadOptionsFromLocalStorage();
+        this.loadDatasheetOrderFromLocalStorage();
+        this.collapseIdenticalUnits();
     }
 
     private renderRosterSummary(list: HTMLElement) {
@@ -119,7 +125,7 @@ export class Wh40kRenderer implements Renderer {
             for (let i = 0; i < force._units.length; i++) {
                 const unit = force._units[i];
                 const tr = document.createElement('tr');
-                tr.id = `unit_summary_${i}`;
+                tr.dataset.index = String(i);
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.nameWithExtraCosts()));
                 tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(Wh40k.UnitRoleToString[unit._role]));
                 const models = tr.appendChild(document.createElement('td'));
@@ -129,6 +135,14 @@ export class Wh40kRenderer implements Renderer {
             }
 
             this.makeForceSummaryListItemsDraggable(tbody);
+
+            // Button to reset the order is only shown when the list is not in
+            // its natural order.
+            const resetOrderButton = forceTitle.appendChild(document.createElement('button'));
+            resetOrderButton.id = 'reset-order-button';
+            resetOrderButton.appendChild(document.createTextNode('Reset datasheet order'));
+            resetOrderButton.classList.add('d-none', 'btn', 'btn-secondary', 'd-print-none');            
+            resetOrderButton.addEventListener('click', e => this.resetDatasheetOrder(tbody));
         }
     }
 
@@ -168,16 +182,117 @@ export class Wh40kRenderer implements Renderer {
             // NB: this is the only part of this function that's not generic; we
             // could separate it out, and reuse the rest of this function as a
             // general function under ./html/draggable.
-            // TODO: Fix behavior when identical datasheets have been merged.
-            const children = container.children;
-            for (let i = 0; i < children.length; i++) {
-                const child = children[i];
-                const originalIndex = child.id.match(/unit_summary_(\d+)/)?.[1];
-                const datasheet = document.getElementById(`unit_details_${originalIndex}`);
-                if (!datasheet) continue;
-                datasheet.style.order = String(i);
-            }
+            this.orderDatasheetsToMatchSummary(container);
+            this.collapseIdenticalUnits();
+            this.saveDatasheetOrderToLocalStorage();
         });
+    }
+
+    /**
+     * Reorders datasheets to match the DOM order of of the roster summary table.
+     */
+    private orderDatasheetsToMatchSummary(container: Element) {
+        const children = container.children;
+        let isNaturallySorted = true;
+        for (let i = 0; i < children.length; i++) {
+            const originalIndex = (children[i] as HTMLElement).dataset.index;
+            if (i > 0) {
+                const prevIndex = (children[i - 1] as HTMLElement).dataset.index || -1;
+                isNaturallySorted &&= +(originalIndex || 0) > +prevIndex;
+            }
+            const datasheet = document.querySelector(`.wh40k_unit_sheet[data-index="${originalIndex}"]`) as HTMLElement;
+            if (!datasheet) continue;
+            datasheet.style.order = String(i);
+        }
+
+        const resetDatasheetOrderButton = document.querySelector('#reset-order-button');
+        if (isNaturallySorted) {
+            resetDatasheetOrderButton?.classList.add('d-none');
+        } else {
+            resetDatasheetOrderButton?.classList.remove('d-none');
+        }
+    }
+
+    /**
+     * Iterates over datasheets, which may have been reordered, and collapses
+     * identical units into a single datasheet, noting the count of that unit.
+     */
+    private collapseIdenticalUnits() {
+        const datasheets = document.querySelectorAll('.wh40k_unit_sheet');
+        const sortedDatasheets = (Array.from(datasheets) as HTMLElement[]).sort((a, b) => {
+            return +a.style.order - +b.style.order;
+        });
+
+        let lastDatasheet = null;
+        for (const datasheet of sortedDatasheets) {
+            datasheet.classList.remove('d-none');
+            const unitCountSpan = datasheet.querySelector('div.unit_count > span') as HTMLElement;
+            if (lastDatasheet && lastDatasheet?.dataset.hash === datasheet.dataset.hash) {
+                lastDatasheet.classList.add('d-none');
+                const lastUnitCountSpan = lastDatasheet.querySelector('div.unit_count > span') as HTMLElement;
+                const lastCount = +(lastUnitCountSpan?.dataset.count || '');
+                unitCountSpan.dataset.count = String(lastCount + 1);
+                unitCountSpan.parentElement?.classList.remove('d-none');
+            } else {
+                unitCountSpan.dataset.count = String(1);
+                unitCountSpan.parentElement?.classList.add('d-none');
+            }
+            lastDatasheet = datasheet;
+        }
+    }
+
+    private saveDatasheetOrderToLocalStorage() {
+        try {
+            const summaryRows = document.querySelectorAll('tr.draggable');
+            const order = (Array.from(summaryRows) as HTMLElement[]).map(e => e.dataset.index);
+            saveOptionToLocalStorage(`40k-order-${this._rosterId}`, JSON.stringify(order));
+        } catch (e) {
+            // localStorage not supported or enabled
+            console.warn('Error in saveDatasheetOrderToLocalStorage', e);
+        }
+    }
+
+    private loadDatasheetOrderFromLocalStorage() {
+        try {
+            // Load order from LocalStorage
+            const order = JSON.parse(window.localStorage[`40k-order-${this._rosterId}`] || '[]');
+            const container = document.querySelector('tr.draggable')?.parentElement!;
+            if (order.length) {
+                // Take a snapshot of container.children, which is a live array that
+                // would change as we start calling appendChild below. 
+                const summaries = Array.from(container.children);
+                for (let i = 0; i < summaries.length && i < order.length; i++) {
+                    const o = order[i];
+                    container.appendChild(summaries[o]);
+                }
+                this.orderDatasheetsToMatchSummary(container);
+                // This call to this.collapseIdenticalUnits() should be optional
+                // because the caller of this method _should_ call it, just in
+                // case we didn't load order from localStorage. However, we call
+                // it here just in case. 
+                this.collapseIdenticalUnits();
+            }
+        } catch (e) {
+            // localStorage not supported or enabled
+            console.warn('Error in loadDatasheetOrderFromLocalStorage', e);
+        }
+    }
+
+    private resetDatasheetOrder(container: Element) {
+        try {
+            delete window.localStorage[`40k-order-${this._rosterId}`];
+            const sortedSummaries = (Array.from(container.children) as HTMLElement[]).sort((a, b) => {
+                return +(a.dataset.index || 0) - +(b.dataset.index || 0);
+            })
+            for (const row of sortedSummaries) {
+                container.appendChild(row);
+            }
+            this.orderDatasheetsToMatchSummary(container);
+            this.collapseIdenticalUnits();
+        } catch (e) {
+            // localStorage not supported or enabled
+            console.warn('Error in resetDatasheetOrder', e);
+        }
     }
 
     private renderOptionsDiv(title: HTMLElement) {
@@ -211,6 +326,16 @@ export class Wh40kRenderer implements Renderer {
                     }
                 }
             });
+        renderCheckboxOption(optionsDiv, 'showArmyRules', 'Show army rules',
+            (e: Event) => {
+                const rulesDiv = document.getElementById('all-army-rules');
+                if ((e.target as HTMLInputElement).checked) {
+                    rulesDiv?.classList.remove('d-none')
+                } else {
+                    rulesDiv?.classList.add('d-none')
+                }
+            },
+            /* defaultChecked= */ true);
         renderCheckboxOption(optionsDiv, 'singleColumnDatasheets', 'Single-Column Datasheets',
             (e: Event) => {
                 if ((e.target as HTMLInputElement).checked) {
@@ -401,28 +526,26 @@ export class Wh40kRenderer implements Renderer {
 
         let rules = document.createElement("div");
         rules.style.pageBreakBefore = "always";
+        rules.id = 'all-army-rules';
         this.printRules(catalogueRules, rules);
         this.printRules(subFactionRules, rules);
         forces.appendChild(rules);
     }
 
     private renderDatasheets(forces: HTMLElement, units: Wh40k.Unit[]) {
-        let numIdenticalUnits = 0;
         for (let i = 0; i < units.length; i++) {
-            numIdenticalUnits++;
             const unit = units[i];
-            const nextUnit = units[i + 1];
-            if (unit.equal(nextUnit)) continue;
-
-            this.renderUnitHtml(forces, unit, numIdenticalUnits, i);
-            numIdenticalUnits = 0
+            this.renderUnitHtml(forces, unit, i);
         }
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, unitCount: number, index: number) {
+    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, index: number) {
         const statsDiv = forces.appendChild(document.createElement('div'));
         statsDiv.classList.add('wh40k_unit_sheet');
-        statsDiv.id = `unit_details_${index}`;
+        // Use >>> (unsigned right shift) to correctly convert negative 32-bit integers to hex. 
+        statsDiv.dataset.hash = (unit.hash() >>> 0).toString(16);
+        statsDiv.dataset.name = unit.name();
+        statsDiv.dataset.index = String(index);
         statsDiv.style.order = String(index);
         const statsTable = document.createElement('table');
         statsTable.classList.add('table', 'table-sm', 'table-striped');
@@ -437,8 +560,12 @@ export class Wh40kRenderer implements Renderer {
         unitCostDiv.appendChild(document.createElement('span')).appendChild(roleImg?.cloneNode() || document.createTextNode('-'));
         unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._points.toString()));
 
-        let cpCostDiv: Element | string = '';
-        thead.appendChild(createTableRow([unitCostDiv, unit.name() + (unitCount > 1 ? ` (${unitCount})` : ''), cpCostDiv], [0.1, 0.8, 0.1]));
+        const unitCountDiv = document.createElement('div');
+        unitCountDiv.classList.add('unit_costs', 'unit_count');
+        const unitCountSpan = unitCountDiv.appendChild(document.createElement('span'));
+        unitCountSpan.classList.add('unit_count');
+        unitCountSpan.dataset.count = String(1);
+        thead.appendChild(createTableRow([unitCostDiv, unit.name(), unitCountDiv], [0.1, 0.8, 0.1]));
 
         // Add an invisible row of 20, 5% columns. This ensures correct
         // spacing for the first few columns of visible rows.
@@ -603,9 +730,7 @@ export class Wh40kRenderer implements Renderer {
         }
     }
 
-    private static _unitLabels = ["MODEL", "M", "T", "SV", "W", "LD", "OC"];
     private _unitLabelWidthsNormalized = [0.40, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
-    private static _weaponLabels = ["WEAPONS", "RANGE", "A", "BS/WS", "S", "AP", "D", "ABILITIES"];
     private _weaponLabelWidthNormalized = [0.30, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.30];
 }
 
