@@ -121,6 +121,7 @@ function parseBattleScribeXML(xmldata: string) {
     }
   } else if (gameType == "Warhammer 40,000 10th Edition") {
     const roster = Wh40k.CreateRoster(doc);
+    (window as any).roster = roster;
     if (roster && roster._forces.length > 0) {
       const renderer: Wh40kRenderer = new Wh40kRenderer(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);

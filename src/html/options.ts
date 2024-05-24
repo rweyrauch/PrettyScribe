@@ -40,13 +40,14 @@ export function renderOptionsToggle(parent: HTMLElement) {
  * @param text text/label to specify for the checkbox
  * @param eventHandler event handler to run on changes to the checkbox value
  */
-export function renderCheckboxOption(parent: HTMLElement, idAndName: string, text: string, eventHandler: EventListenerOrEventListenerObject) {
+export function renderCheckboxOption(parent: HTMLElement, idAndName: string, text: string, eventHandler: EventListenerOrEventListenerObject, defaultChecked = false) {
   const optDiv = parent.appendChild(document.createElement('div'));
   optDiv.classList.add('wh40k_option');
   const input = optDiv.appendChild(document.createElement('input'));
   input.setAttribute('type', 'checkbox');
   input.setAttribute('name', idAndName);
   input.setAttribute('id', idAndName);
+  if (defaultChecked) input.checked = true;
   input.addEventListener('input', eventHandler);
   input.addEventListener('change', e => saveCheckboxToLocalStorage(idAndName));
   const label = optDiv.appendChild(document.createElement('label'));
@@ -90,7 +91,7 @@ export function loadOptionsFromLocalStorage() {
               const optionsToggle = document.getElementById('wh40k_options_toggle');
               if (!optionsDiv || !optionsToggle) return;
 
-              const hideOptions = !!window.localStorage[key];
+              const hideOptions = window.localStorage[key] === 'true';
   
               if (optionsDiv.classList.contains('hide_options') !== hideOptions) {
                   optionsToggle.dispatchEvent(new Event('click'));
