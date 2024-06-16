@@ -16,9 +16,9 @@
 
 import {Renderer} from "./renderer";
 import {Wh40k} from "./roster40k10th";
-import {createTableRow, createNoteHead, createNotesHead} from './html/table';
 import {addHideAble, toggleHidden} from "./html/hideable"
 import {loadOptionsFromLocalStorage, renderCheckboxOption, renderOptionsToggle, saveOptionToLocalStorage} from "./html/options";
+import {PsJsx} from './html/jsx';
 
 export class Wh40kRenderer implements Renderer {
 
@@ -87,63 +87,61 @@ export class Wh40kRenderer implements Renderer {
         if (!this._roster) return;
 
         for (const force of this._roster._forces) {
-
-            const forceTitle = document.createElement('div');
-            if (force._faction) {
-                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force.name()} (${force._faction})`));
-            } else {
-                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force.name()}`));
-            }
-            if (force._configurations.length > 0) {
-                const list = forceTitle.appendChild(document.createElement('ul'));
-                for (const configuration of force._configurations) {
-                    list.appendChild(document.createElement('li'))
-                        .appendChild(document.createElement('i'))
-                        .appendChild(document.createTextNode(configuration));
-                }
-            }
-            list.appendChild(forceTitle);
-
-            const table = document.createElement('table');
-            table.classList.add('table', 'table-sm', 'table-striped');
-            const thead = document.createElement('thead');
-            table.appendChild(thead);
-            thead.classList.add('thead-light');
-            const tr = document.createElement('tr');
-            thead.appendChild(tr);
-            const headerInfo = [{name: "NAME", w: '20%'}, {name: "ROLE", w: '15%'}, {name: "MODELS", w: '55%'}, {name: "POINTS", w: '5%'}];
-            headerInfo.forEach(element => {
-                let th = document.createElement('th');
-                th.scope = "col";
-                th.appendChild(document.createTextNode(element.name));
-                th.style.width = element.w;
-                tr.appendChild(th);
-            });
-            forceTitle.appendChild(table);
-
-            const tbody = table.appendChild(document.createElement('tbody'));
-            for (let i = 0; i < force._units.length; i++) {
-                const unit = force._units[i];
-                const tr = document.createElement('tr');
-                tr.dataset.index = String(i);
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit.nameWithExtraCosts()));
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(Wh40k.UnitRoleToString[unit._role]));
-                const models = tr.appendChild(document.createElement('td'));
-                this.renderModelList(models, unit);
-                tr.appendChild(document.createElement('td')).appendChild(document.createTextNode(unit._cost._points.toString()));
-                tbody.appendChild(tr);
-            }
-
-            this.makeForceSummaryListItemsDraggable(tbody);
-
-            // Button to reset the order is only shown when the list is not in
-            // its natural order.
-            const resetOrderButton = forceTitle.appendChild(document.createElement('button'));
-            resetOrderButton.id = 'reset-order-button';
-            resetOrderButton.appendChild(document.createTextNode('Reset datasheet order'));
-            resetOrderButton.classList.add('d-none', 'btn', 'btn-secondary', 'd-print-none');            
-            resetOrderButton.addEventListener('click', e => this.resetDatasheetOrder(tbody));
+            list.append(this.renderForceSummary(force));
         }
+    }
+
+    private renderForceSummary(force: Wh40k.Force) {
+        let tbody: HTMLElement;
+        const tbodyRef = (el: HTMLElement) => {
+            tbody = el;
+        }
+        const resetDatasheetOrderButtonOnclick = (e: Event) => this.resetDatasheetOrder(tbody);
+
+        const results = <div>
+          {force._faction
+              ? `${force._catalog} ${force.name()} (${force._faction})`
+              : `${force._catalog} ${force.name()}`
+          }
+          {force._configurations.length > 0 && 
+            <ul>{
+              force._configurations.map(configuration => 
+                <li><i>{configuration}</i></li>
+              )
+            }
+            </ul>
+          }
+      
+          <table className="table table-sm table-striped">
+            <thead className="thead-light">
+              <tr>
+                <th scope="col" style="width: 20%;">NAME</th>
+                <th scope="col" style="width: 15%;">ROLE</th>
+                <th scope="col" style="width: 55%;">MODELS</th>
+                <th scope="col" style="width: 5%;">POINTS</th>
+              </tr>
+            </thead>
+            <tbody ref={tbodyRef}>
+              {force._units.map((unit, i) => 
+                <tr data-index={i}>
+                  <td>{unit.nameWithExtraCosts()}</td>
+                  <td>{Wh40k.UnitRoleToString[unit._role]}</td>
+                  <td>{this.renderModelList(unit)}</td>
+                  <td>{unit._cost._points.toString()}</td>
+                </tr>)
+              }
+            </tbody>
+          </table>
+          <button
+              id='reset-order-button'
+              className="d-none btn btn-secondary d-print-none"
+              onclick={resetDatasheetOrderButtonOnclick}>
+                Reset datasheet order
+          </button>
+        </div>;
+
+        this.makeForceSummaryListItemsDraggable(tbody!);
+        return results;
     }
 
     /** Make the table rows re-orderable via drag-and-drop. */
@@ -535,174 +533,158 @@ export class Wh40kRenderer implements Renderer {
     private renderDatasheets(forces: HTMLElement, units: Wh40k.Unit[]) {
         for (let i = 0; i < units.length; i++) {
             const unit = units[i];
-            this.renderUnitHtml(forces, unit, i);
+            forces.appendChild(this.renderUnit(unit, i));
         }
     }
 
-    private renderUnitHtml(forces: HTMLElement, unit: Wh40k.Unit, index: number) {
-        const statsDiv = forces.appendChild(document.createElement('div'));
-        statsDiv.classList.add('wh40k_unit_sheet');
-        // Use >>> (unsigned right shift) to correctly convert negative 32-bit integers to hex. 
-        statsDiv.dataset.hash = (unit.hash() >>> 0).toString(16);
-        statsDiv.dataset.name = unit.name();
-        statsDiv.dataset.index = String(index);
-        statsDiv.style.order = String(index);
-        const statsTable = document.createElement('table');
-        statsTable.classList.add('table', 'table-sm', 'table-striped');
-        statsDiv.appendChild(statsTable);
+    private renderUnit(unit: Wh40k.Unit, index: number) {
+        return <div className='wh40k_unit_sheet'
+                data-hash={(unit.hash() >>> 0).toString(16)}
+                data-name={unit.name()}
+                data-index={String(index)}
+            style={`order: ${index};`}>
+            <table className="table table-sm table-striped">
+                <thead className='table-dark unit_header'>
+                    {/* unit header */}
+                    <tr className='hide_able'>
+                        <td scope='col' colspan='2' style='width: 10%;'>
+                            <div className='unit_costs'>
+                                <span>{this._roles.get(unit._role)?.cloneNode() || '-'}</span>
+                                <span>{unit._cost._points.toString()}</span>
+                            </div>
+                        </td>
+                        <td scope='col' colspan='16' style='width: 80%;'>{unit.name()}</td>
+                        <td scope='col' colspan='2' style='width: 10%;'>
+                            <div className='unit_costs unit_count'>
+                                <span className='unit_count' data-count='1'></span>
+                            </div>
+                        </td>
+                    </tr>
 
-        // unit header
-        let thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('table-dark', 'unit_header');
-        const unitCostDiv = document.createElement('div');
-        unitCostDiv.classList.add('unit_costs');
-        const roleImg = this._roles.get(unit._role);
-        unitCostDiv.appendChild(document.createElement('span')).appendChild(roleImg?.cloneNode() || document.createTextNode('-'));
-        unitCostDiv.appendChild(document.createElement('span')).appendChild(document.createTextNode(unit._cost._points.toString()));
+                    {/* Add an invisible row of 20, 5% columns. This ensures correct
+                        spacing for the first few columns of visible rows.*/}
+                    <tr>
+                        {[...Array(20).keys()].map(i =>
+                            <td colspan='1' style='width: 5%; padding: 0px;'></td>)}
+                    </tr>
 
-        const unitCountDiv = document.createElement('div');
-        unitCountDiv.classList.add('unit_costs', 'unit_count');
-        const unitCountSpan = unitCountDiv.appendChild(document.createElement('span'));
-        unitCountSpan.classList.add('unit_count');
-        unitCountSpan.dataset.count = String(1);
-        thead.appendChild(createTableRow([unitCostDiv, unit.name(), unitCountDiv], [0.1, 0.8, 0.1]));
-
-        // Add an invisible row of 20, 5% columns. This ensures correct
-        // spacing for the first few columns of visible rows.
-        const spacerTr = thead.appendChild(document.createElement('tr'));
-        for (let i = 0; i < 20; i++) {
-            const td = spacerTr.appendChild(document.createElement('td'));
-            td.colSpan = 1;
-            td.style.width = '5%';
-            td.style.padding = '0';
-        }
-
-        let notesTableHead = createNoteHead('Unit notes', unit);
-        if (notesTableHead) statsTable.appendChild(notesTableHead);
-
-        const tbody = statsTable.appendChild(document.createElement('thead'));
-        const tr = tbody.appendChild(document.createElement('tr'));
-
-        // Create a new cell that, with CSS, can be displayed in one or two columns.
-        const singleOrDoubleColumnTd = tr.appendChild(document.createElement('td'));
-        singleOrDoubleColumnTd.colSpan = 20;
-        singleOrDoubleColumnTd.classList.add('subTableTd');
-        const singleOrDoubleColumnDiv = singleOrDoubleColumnTd.appendChild(document.createElement('div'));
-
-        // Tabular profile data, like model stats and weapons.
-        // Sort by unit, then weapons, then other stuff.
-        const profilesTable = singleOrDoubleColumnDiv.appendChild(
-            document.createElement('div').appendChild(
-                document.createElement('table')));
-        profilesTable.classList.add('table', 'table-sm', 'table-striped');
-
-        const typeNames = Object.keys(unit._profileTables).sort(Wh40k.CompareProfileTableName);
-        for (const typeName of typeNames) {
-            const table = unit._profileTables[typeName];
-            const widths = typeName === 'Unit' ? this._unitLabelWidthsNormalized : this._weaponLabelWidthNormalized;
-            this.renderSubTable(profilesTable, table._headers, table._contents, widths, 'Notes', [table]);
-        }
-
-        // unit abilities and rules; rules are shared across units, with their
-        // descriptions printed in bulk later, but show up with unit 'Abilities'
-        const abilitiesTable = singleOrDoubleColumnDiv.appendChild(
-            document.createElement('div').appendChild(
-                document.createElement('table')));
-        abilitiesTable.classList.add('table', 'table-sm', 'table-striped');
-
-        if (!unit._abilities['Abilities'] && unit._rules.size > 0) {
-            this.renderUnitAbilitiesAndRules(abilitiesTable, 'Abilities', new Map(), unit._rules);
-        }
-        for (const abilitiesGroup of Object.keys(unit._abilities).sort()) {
-            const abilitiesMap = unit._abilities[abilitiesGroup];
-            const rules = abilitiesGroup === 'Abilities' ? unit._rules : undefined;
-            this.renderUnitAbilitiesAndRules(abilitiesTable, abilitiesGroup, abilitiesMap, rules);
-        }
-
-        // keywords
-        thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row', 'keywords_row');
-        const keywords = Array.from(unit._keywords).sort(Wh40k.Compare).join(', ').toLocaleUpperCase();
-        const factions = Array.from(unit._factions).sort(Wh40k.Compare).join(', ').toLocaleUpperCase();
-        thead.appendChild(createTableRow(['Keywords', keywords, 'Factions', factions], [0.10, 0.60, 0.10, 0.20], /* header= */ false));
-
-        // model list
-        thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row');
-        const modelListDiv = document.createElement('div');
-        this.renderModelList(modelListDiv, unit);
-        thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
+                    {this.renderNotesHead('Unit notes', unit)}
+                </thead>
+                <thead>
+                    <tr>
+                        <td colspan='20' className='subTableTd'>
+                            <div>
+                                {this.renderProfilesTables(unit)}
+                                <table className="table table-sm table-striped">
+                                    {!unit._abilities['Abilities'] && unit._rules.size > 0 &&
+                                        this.renderUnitAbilitiesAndRules('Abilities', new Map(), unit._rules)}
+                                    {Object.entries(unit._abilities).sort().map(([abilitiesGroup, abilitiesMap]) =>
+                                        this.renderUnitAbilitiesAndRules(
+                                            abilitiesGroup,
+                                            abilitiesMap,
+                                            abilitiesGroup === 'Abilities' ? unit._rules : undefined))}
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <thead className='info_row keywords_row'>
+                    <tr class='hide_able'>
+                        <td scope='col' colspan='2' style='width: 10%;'>Keywords</td>
+                        <td scope='col' colspan='12' style='width: 60%;'>{Array.from(unit._keywords).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</td>
+                        <td scope='col' colspan='2' style='width: 10%;'>Factions</td>
+                        <td scope='col' colspan='4' style='width: 20%;'>{Array.from(unit._factions).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</td>
+                    </tr>
+                </thead>
+                <thead className='info_row'>
+                    <tr class='hide_able'>
+                        <td scope='col' colspan='2' style='width: 10%;'>MODELS</td>
+                         {/* TODO remove the next div; it was added to confirm TSX transition */}
+                        <td scope='col' colspan='18' style='width: 90%;'><div>{this.renderModelList(unit)}</div></td>
+                    </tr>
+                </thead>
+            </table>
+        </div>;
     }
 
-    renderSubTable(container: HTMLElement, labels: string[], contents: string[][], widths: number[], notesName: string, notes: Wh40k.BaseNotes[]) {
-        const thead = container.appendChild(document.createElement('thead'));
-        thead.classList.add('table-active');
+    private renderProfilesTables(unit: Wh40k.Unit) {
+        const entries = Object.entries(unit._profileTables)
+            .sort((a, b) => Wh40k.CompareProfileTableName(a[0], b[0]))
+            .map(([typeName, table]) => {
+                const widths = typeName === 'Unit' ? this._unitLabelWidthsNormalized : this._weaponLabelWidthNormalized;
+                return [table, widths];
+            }) as [Wh40k.TabularProfile, number[]][];
+        ;
 
-        // header content
-        thead.appendChild(createTableRow(labels, widths, /* header= */ true));
-
-        let tbody = container.appendChild(document.createElement('tbody'));
-        tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-
-        // body content
-        for (const content of contents) {
-            tbody.append(createTableRow(content, widths));
-        }
-
-        const notesTableHead = createNotesHead(notesName, notes);
-        if (notesTableHead) container.appendChild(notesTableHead);
+        return <table className="table table-sm table-striped">
+            {entries.map(([table, widths]) => <>
+                <thead className='table-active'>
+                    <tr className='hide_able header_row'>
+                        {widths.map((width, i) => <th
+                                scope='col'
+                                colspan={Math.round(width / 0.05)}
+                                style={`width: ${width * 100}%;`}>
+                            {table._headers[i]}
+                        </th>)}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr></tr> {/* Reverse the stripe coloring to start with white. */}
+                    {table._contents.map(row => <tr className='hide_able'>
+                        {widths.map((width, i) => <td scope='col'
+                                colspan={Math.round(width / 0.05)}
+                                style={`width: ${width * 100}%;`}>
+                            {row[i]}
+                        </td>)}
+                    </tr>)}
+                </tbody>
+            </>)}
+        </table>;
     }
 
-    private renderUnitAbilitiesAndRules(container: HTMLElement, abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
-        const thead = container.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row', 'table-active');
-        const tr = thead.appendChild(document.createElement('tr'));
-        tr.classList.add('header_row');
-        const th = tr.appendChild(document.createElement('th'));
-        th.colSpan = 20;
-        th.appendChild(document.createTextNode(abilitiesGroup));
-
-        const tbody = container.appendChild(document.createElement('tbody'));
-        tbody.classList.add('info_row');
-        tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
-
-        if (rulesMap && rulesMap.size > 0) {
-            const rules = Array.from(rulesMap.keys()).sort(Wh40k.Compare).join(', ');
-            const abilitiesDiv = document.createElement('div');
-            abilitiesDiv.appendChild(document.createElement('div')).appendChild(document.createElement('b')).appendChild(document.createTextNode(rules));
-            tbody.appendChild(createTableRow([abilitiesDiv], [1], /* header= */ false));
-        }
-        const abilities = Array.from(abilitiesMap.keys()).sort(Wh40k.Compare);
-        for (const ability of abilities) {
-            const abilitiesDiv = document.createElement('div');
-            const abilityDiv = addHideAble(abilitiesDiv.appendChild(document.createElement('div')));
-            abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(`${ability.toUpperCase()}: `));
-            abilityDiv.appendChild(document.createTextNode(abilitiesMap.get(ability) || '??'));
-            tbody.appendChild(createTableRow([abilitiesDiv], [1], /* header= */ false));
-        }
+    private renderUnitAbilitiesAndRules(abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
+        return <>
+        <thead className='info_row table-active'>
+            <tr className='header_row'>
+                <th colspan='20'>{abilitiesGroup}</th>
+            </tr>
+        </thead>
+        <tbody className='info_row'>
+            <tr></tr> {/* Reverse the stripe coloring to start with white. */}
+            {/* TODO remove the nested div; it was added to confirm TSX transition */}
+            {rulesMap && rulesMap.size > 0 &&
+                <tr className='hide_able'><td scope="col" colspan="20" style="width: 100%;"><div><div>
+                    <b>{Array.from(rulesMap.keys()).sort(Wh40k.Compare).join(', ')}</b>
+                </div></div></td></tr>}
+            {Array.from(abilitiesMap.keys()).sort(Wh40k.Compare).map(ability =>
+                <tr className='hide_able'><td scope="col" colspan="20" style="width: 100%;"><div><div className="hide_able">
+                    <b>{`${ability.toUpperCase()}: `}</b>
+                    {abilitiesMap.get(ability) || '??'}
+                </div></div></td></tr>)}
+        </tbody>
+        </>
     }
 
-    private renderModelList(container: HTMLElement, unit: Wh40k.Unit) {
-        for (const model of unit._models) {
-            const div = container.appendChild(document.createElement('div'));
-
-            div.appendChild(document.createTextNode((model._count > 1 ? `${model._count}x ` : '') + model.name()));
-
-            const modelGear = model.getDedupedWeaponsAndUpgrades();
-            if (modelGear.length === 0) continue;
-
-            div.appendChild(document.createTextNode(' ('));
-            for (const gear of modelGear) {
-                if (gear !== modelGear[0]) div.appendChild(document.createTextNode(', '));
-                div.appendChild(document.createTextNode((gear._count > 1 ? `${gear._count}x ` : '') + gear.selectionName()));
-                if (gear._cost.hasValues()) {
-                    const costSpan = div.appendChild(document.createElement('span'));
-                    costSpan.classList.add('wh40k_upgrade_cost', 'd-none');
-                    costSpan.appendChild(document.createTextNode(` ${gear._cost.toString()}`));
+    private renderModelList(unit: Wh40k.Unit) {
+        return unit._models.map(model => 
+            <div>
+                {model._count > 1 ? `${model._count}x ` : ''}{model.name()}
+                {model.getDedupedWeaponsAndUpgrades().length > 0 &&
+                    <> (
+                        {model.getDedupedWeaponsAndUpgrades().map((gear, i) =>
+                          <>
+                            {i > 0 ? ', ' : ''}
+                            {gear._count > 1 ? `${gear._count}x ` : ''}{gear.selectionName()}
+                            {gear._cost.hasValues() &&
+                              <span className='wh40k_upgrade_cost d-none'>
+                                {` ${gear._cost.toString()}`}
+                              </span>}
+                          </>
+                        )}
+                    )</>
                 }
-            }
-            div.appendChild(document.createTextNode(')'));
-        }
+            </div>
+        );
     }
 
     private printRules(root: Map<string, Map<string, string | null>>, section: HTMLElement | null) {
@@ -730,7 +712,17 @@ export class Wh40kRenderer implements Renderer {
         }
     }
 
-    private _unitLabelWidthsNormalized = [0.40, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
+    private renderNotesHead(title: string, note: Wh40k.BaseNotes) {
+        if (!note.notes()) return null
+        return <thead className='info_row'>
+            <tr>
+                <td style='width: 10%' colspan='2'>{title}</td>
+                <td style='width: 90%' colspan='18'>{note._customNotes}</td>
+            </tr>
+        </thead>;
+    }
+
+    private _unitLabelWidthsNormalized = [0.40, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.30];
     private _weaponLabelWidthNormalized = [0.30, 0.1, 0.1, 0.05, 0.05, 0.05, 0.05, 0.30];
 }
 
