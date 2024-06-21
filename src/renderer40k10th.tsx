@@ -48,47 +48,39 @@ export class Wh40kRenderer implements Renderer {
 
         if (this._roster == null) return;
 
-        if (title) {
-            this.renderOptionsDiv(title);
-
-            const costs = [`${this._roster._cost._points} pts`];
-            for (const costName in this._roster._cost._freeformValues) {
-                costs.push(`${this._roster._cost._freeformValues[costName]}${costName}`);
-            }
-            const text = `${this._roster.name()} (${costs.join(', ')})`;
-            title.appendChild(document.createElement('h3')).appendChild(document.createTextNode(text));
-
-            // Footer div is hideEnabled, except when printing.
-            const footer = title.appendChild(document.createElement('div'));
-            footer.classList.add('footer');
-            footer.appendChild(document.createElement('div')).appendChild(document.createTextNode('PrettyScribe'));
-            footer.appendChild(document.createElement('div')).appendChild(document.createTextNode(text));
-
-            if (this._roster._customNotes) {
-                title.appendChild(document.createElement('p')).appendChild(document.createTextNode(this._roster._customNotes));
-            }
+        const costs = [`${this._roster._cost._points} pts`];
+        for (const costName in this._roster._cost._freeformValues) {
+            costs.push(`${this._roster._cost._freeformValues[costName]}${costName}`);
         }
+        const rosterNameAndCost = `${this._roster.name()} (${costs.join(', ')})`;
 
-        if (list) {
-            this.renderRosterSummary(list);
-            this.renderAbilitiesByPhase(list);
-        }
+        title?.appendChild(<>
+            {this.renderOptionsDiv()}
+            <h3>{rosterNameAndCost}</h3>
+            {/* Footer div is hideEnabled, except when printing. */}
+            <div className='footer'>
+                <div>PrettyScribe</div>
+                <div>{rosterNameAndCost}</div>
+            </div>
+            {this._roster._customNotes && <p>{this._roster._customNotes}</p>}
+        </>);
 
-        if (forces) {
-            this.renderRosterDetails(forces);
-        }
+        list?.appendChild(<>
+            {this.renderRosterSummary()}
+            {this.renderAbilitiesByPhase()}
+        </>);
+
+        forces?.appendChild(this.renderRosterDetails());
 
         loadOptionsFromLocalStorage();
         this.loadDatasheetOrderFromLocalStorage();
         this.collapseIdenticalUnits();
     }
 
-    private renderRosterSummary(list: HTMLElement) {
-        if (!this._roster) return;
-
-        for (const force of this._roster._forces) {
-            list.append(this.renderForceSummary(force));
-        }
+    private renderRosterSummary() {
+        return <>{this._roster?._forces.map(force =>
+            this.renderForceSummary(force))}
+        </>;
     }
 
     private renderForceSummary(force: Wh40k.Force) {
@@ -293,13 +285,13 @@ export class Wh40kRenderer implements Renderer {
         }
     }
 
-    private renderOptionsDiv(title: HTMLElement) {
-        const optionsDiv = title.appendChild(document.createElement('div'));
-        optionsDiv.classList.add('wh40k_options_div', 'd-print-none');
-        optionsDiv.id = 'wh40k_options_div';
+    private renderOptionsDiv() {
+        const optionsDiv = <div
+            className='wh40k_options_div d-print-none'
+            id='wh40k_options_div'></div>;
 
         // A toggle to hide or show options, since there are several.
-        const optionsToggleSpan = optionsDiv.appendChild(document.createElement('span'));
+        const optionsToggleSpan = optionsDiv.appendChild(<span></span>);
         renderOptionsToggle(optionsToggleSpan);
 
         renderCheckboxOption(optionsDiv, 'showPhaseAbilities', 'Show abilities by phase',
@@ -344,9 +336,9 @@ export class Wh40kRenderer implements Renderer {
             });
 
         // Options related to printing are grouped together
-        const printOptionsDiv = optionsDiv.appendChild(document.createElement('span'));
-        printOptionsDiv.classList.add('wh40k_options_print_subsection');
-        printOptionsDiv.appendChild(document.createTextNode('Print:'));
+        const printOptionsDiv = optionsDiv.appendChild(
+            <span className='wh40k_options_print_subsection'>Print:</span>
+        );
         renderCheckboxOption(printOptionsDiv, 'printBigger', 'Larger Text',
             (e: Event) => {
                 const unitSheetDiv = document.getElementsByClassName('wh40k_unit_sheet');
@@ -382,9 +374,11 @@ export class Wh40kRenderer implements Renderer {
                     }
                 }
             });
+
+        return optionsDiv;
     }
 
-    private renderAbilitiesByPhase(list: HTMLElement) {
+    private renderAbilitiesByPhase() {
         if (!this._roster) return;
 
         const allPhaseAbilities: { [key: string]: Element[] } = {};
@@ -398,11 +392,9 @@ export class Wh40kRenderer implements Renderer {
 
                         // Create a div with the ability, to highlight the phase in
                         // the ability's rule.
-                        const abilityDiv = addHideAble(document.createElement('div'));
-                        abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(unit.name()));
-                        abilityDiv.appendChild(document.createTextNode(' - '));
-                        abilityDiv.appendChild(document.createElement('b')).appendChild(document.createTextNode(ability));
-                        abilityDiv.appendChild(document.createTextNode(' - '));
+                        const abilityDiv = <div className='hide_able'>
+                            <b>{unit.name()}</b> - <b>{ability}</b>{' - '}
+                        </div>;
 
                         let text = description;
                         for (const match of matches) {
@@ -453,7 +445,7 @@ export class Wh40kRenderer implements Renderer {
                                 phaseAbilities.push(abilityDiv);
                             }
 
-                            abilityDiv.appendChild(document.createElement('u')).appendChild(document.createTextNode(match[0]));
+                            abilityDiv.appendChild(<u>{match[0]}</u>);
 
                             const newOffset = textIndex + phaseMatch.length;
                             text = text.substring(newOffset);
@@ -466,75 +458,48 @@ export class Wh40kRenderer implements Renderer {
             }
         }
 
-        const sectionDiv = list.appendChild(document.createElement('div'));
-        sectionDiv.setAttribute('id', 'wh40k_abilities_list');
-        sectionDiv.classList.add('d-none');  // Options will allow user to toggle this on.
-        sectionDiv.appendChild(document.createElement('h3')).appendChild(document.createTextNode('Abilities by Phase'));
-
         const sortedPhases = ['pre-game phase', 'command phase', 'movement phase', 'psychic phase', 'shooting phase', 'charge phase', 'fight phase', 'morale phase']
-            .filter(phase => !!allPhaseAbilities[phase]);
-        if (sortedPhases.length === 0) {
-            sectionDiv.appendChild(document.createTextNode('No phase-specific abilities in roster'));
-        } else {
-            for (const phase of sortedPhases) {
-                sectionDiv.appendChild(document.createElement('h4')).appendChild(document.createTextNode(phase));
-                for (const abilitiesDiv of allPhaseAbilities[phase]) {
-                    // If an ability applies to multiple phases, the first time
-                    // we render its div, it will not have a parent; subsequent
-                    // times, clone the div as elements can only have one parent.
-                    sectionDiv.appendChild(abilitiesDiv.parentElement ? abilitiesDiv.cloneNode(true) : abilitiesDiv);
-                }
-            }
-        }
+           .filter(phase => !!allPhaseAbilities[phase]);
+
+        // Options will allow user to toggle this on.
+        return <div id='wh40k_abilities_list' className='d-none'>
+            <h3>Abilities by Phase</h3>
+            {sortedPhases.length === 0
+                ? 'No phase-specific abilities in roster'
+                : sortedPhases.map(phase => <>
+                    <h4>{phase}</h4>
+                    {/* Clone abilitiesDiv, so that if it shows up in multiple phases, each shows a copy. */}
+                    {allPhaseAbilities[phase].map(abilitiesDiv => abilitiesDiv.cloneNode(true))}
+                </>)}
+        </div>;
     }
 
-    private renderRosterDetails(forces: HTMLElement) {
+    private renderRosterDetails() {
         if (!this._roster) return;
 
         const catalogueRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
         const subFactionRules: Map<string, Map<string, string | null>> = new Map<string, Map<string, string | null>>();
-        const dataSheetsDiv = forces.appendChild(document.createElement('div'));
-        dataSheetsDiv.classList.add('page_break');
-
-        for (const force of this._roster._forces) {
-            if (this._roster._forces.length > 1) {
-                const forceTitle = document.createElement('div');
-                forceTitle.style.pageBreakBefore = "always";
-                if (forceTitle) {
-                    const p = document.createElement("p");
-                    p.appendChild(document.createTextNode(force._catalog));
-                    if (force._faction) {
-                        p.appendChild(document.createTextNode(" (" + force._faction + ")"));
-                    }
-                    forceTitle.appendChild(p);
-                }                
-
-                let h3 = document.createElement('h3');
-                h3.appendChild(forceTitle)
-                dataSheetsDiv.appendChild(h3);
-            }
-
-            dataSheetsDiv.style.display = 'flex';
-            dataSheetsDiv.style.flexDirection = 'column';
-            this.renderDatasheets(dataSheetsDiv, force._units);
-
-            mergeRules(catalogueRules, force._catalog, force._rules);
-            mergeRules(subFactionRules, force._faction, force._factionRules);
-        }
-
-        let rules = document.createElement("div");
-        rules.style.pageBreakBefore = "always";
-        rules.id = 'all-army-rules';
-        this.printRules(catalogueRules, rules);
-        this.printRules(subFactionRules, rules);
-        forces.appendChild(rules);
-    }
-
-    private renderDatasheets(forces: HTMLElement, units: Wh40k.Unit[]) {
-        for (let i = 0; i < units.length; i++) {
-            const unit = units[i];
-            forces.appendChild(this.renderUnit(unit, i));
-        }
+        return <>
+            <div className='page_break' style='display: flex; flex-direction: column;'>
+                {this._roster._forces.map(force =>
+                    <>
+                        {this._roster!._forces.length > 1 && <h3>
+                            <div style='page-break-before: always;'><p>
+                                {force._catalog}
+                                {force._faction && ` (${force._faction})`}
+                            </p></div>
+                        </h3>}
+                        {mergeRules(catalogueRules, force._catalog, force._rules)}
+                        {mergeRules(subFactionRules, force._faction, force._factionRules)}
+                        {force._units.map((unit, i) => this.renderUnit(unit, i))}
+                    </>
+                )}
+            </div>
+            <div id='all-army-rules' style='page-break-before: always;'>
+                {this.renderRules(catalogueRules)}
+                {this.renderRules(subFactionRules)}
+            </div>
+        </>;
     }
 
     private renderUnit(unit: Wh40k.Unit, index: number) {
@@ -687,29 +652,18 @@ export class Wh40kRenderer implements Renderer {
         );
     }
 
-    private printRules(root: Map<string, Map<string, string | null>>, section: HTMLElement | null) {
-        if (root.size === 0 || !section) return;
+    private renderRules(root: Map<string, Map<string, string | null>>) {
+        if (root.size === 0) return null;
 
-        for (let [subFaction, rules] of root.entries()) {
-            let allegianceRules = document.createElement('div');
-            allegianceRules.classList.add('wh40k_rules');
-            let rulesHeader = document.createElement('h3');
-            allegianceRules.appendChild(rulesHeader);
-            rulesHeader.appendChild(document.createTextNode(subFaction));
-
-            for (let rule of rules) {
-                let row = addHideAble(document.createElement('div'));
-                let name = document.createElement('b');
-                name.appendChild(document.createTextNode(rule[0]));
-                let desc = document.createElement('p');
-                desc.appendChild(document.createTextNode(rule[1] || ''));
-                row.appendChild(name);
-                row.appendChild(desc);
-                allegianceRules.appendChild(row);
-            }
-
-            section.appendChild(allegianceRules);
-        }
+        return <>
+            {Array.from(root.entries()).map(([subFaction, rules]) => <div className='wh40k_rules'>
+                <h3>{subFaction}</h3>
+                {Array.from(rules.entries()).map((rule) => <div className='hide_able'>
+                    <b>{rule[0]}</b>
+                    <p>{rule[1]}</p>
+                </div>)}
+            </div>)}
+        </>;
     }
 
     private renderNotesHead(title: string, note: Wh40k.BaseNotes) {
