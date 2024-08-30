@@ -36,6 +36,20 @@ label {
         display: flex;
         justify-content: space-between;
     }
+
+    .hide_enabled .hidden {
+        display: none;
+    }
+
+    a, a:visited {
+        color: black;
+        text-decoration: none;
+    }
+}
+
+@page {
+    /* fix for printing on DIN A4 */
+    margin: 7mm;
 }
 
 .aos_unit {
@@ -492,7 +506,7 @@ body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div
 }
 */
 .mesbg_flex  {
- display: flex;
+    display: flex;
     align-items: center;
 }
 .mesbg_flexBetween {
@@ -576,13 +590,6 @@ body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div
 
 .hide_enabled .hidden {
     text-decoration: line-through;
-}
-
-@media print {
-    .hide_enabled .hidden {
-        display: none;
-    }
-    a, a:visited { color: black; text-decoration: none; }
 }
 
 .page_break {
