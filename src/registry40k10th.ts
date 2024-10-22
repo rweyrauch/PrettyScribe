@@ -11,7 +11,10 @@ export function CreateRoster(registry: Registry) {
   roster._name = registry.name;
   force._name = registry.info.name;
   ParseDetachment(registry, force);
-  for (const unitEntry of registry.assets.included) {
+  // Combat patrol puts units in traits instead of included.
+  for (const unitEntry of [...registry.assets.included, ...registry.assets.traits]) {
+    if (unitEntry.classIdentity != 'Unit') continue;
+
     const unit = ParseUnit(unitEntry);
     force._units.push(unit);
     roster._cost.add(unit._cost);
@@ -61,8 +64,10 @@ function ParseUnitCost(entry: Entry, unit: Wh40k.Unit) {
   } else if (entry.stats.model1stTally.value
       && numModels > (entry.stats.model1stTally.value as number)) {
     unit._cost._points = entry.stats.model2ndCost.value as number;
-  } else {
+  } else if (entry.stats.Points) {
     unit._cost._points = entry.stats.Points.value as number;
+  } else {
+    // Do nothing. Combat patrols don't include points
   }
 
   function countAddonPoints(e: Entry) {

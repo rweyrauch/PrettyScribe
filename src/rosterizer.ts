@@ -19,6 +19,7 @@ export interface Entry {
   rules: { [key: string]: Rule; };
   stats: Stats;
   classification: string; // Type
+  classIdentity: string; // Also type, but more generic
   tally: { [key: string]: number; };
   text: string;
   keywords: { [key: string]: string[]; };
