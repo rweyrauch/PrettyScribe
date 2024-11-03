@@ -584,35 +584,24 @@ export class Wh40kRenderer implements Renderer {
         const entries = Object.entries(unit._profileTables)
             .sort((a, b) => Wh40k.CompareProfileTableName(a[0], b[0]))
             .map(([typeName, table]) => {
-                const widths = typeName === 'Unit' ? this._unitLabelWidthsNormalized : this._weaponLabelWidthNormalized;
-                return [table, widths];
-            }) as [Wh40k.TabularProfile, number[]][];
-        ;
-
-        return <table className="table table-sm table-striped wh40k_profiles">
-            {entries.map(([table, widths]) => <>
-                <thead className='table-active'>
-                    <tr className='hide_able header_row'>
-                        {widths.map((width, i) => <th
-                                scope='col'
-                                colspan={Math.round(width / 0.05)}
-                                style={`width: ${width * 100}%;`}>
-                            {this.renderProfileTableHeaderCell(table._headers[i])}
-                        </th>)}
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr></tr> {/* Reverse the stripe coloring to start with white. */}
-                    {table._contents.map(row => <tr className='hide_able'>
-                        {widths.map((width, i) => <td scope='col'
-                                colspan={Math.round(width / 0.05)}
-                                style={`width: ${width * 100}%;`}>
-                            {row[i]}
-                        </td>)}
-                    </tr>)}
-                </tbody>
-            </>)}
-        </table>;
+                const className = typeName === 'Unit' ? 'wh40k_unit_profile_table' : 'wh40k_weapon_profile_table';
+                return [table, className];
+            }) as [Wh40k.TabularProfile, string][];
+        
+        return <div>
+            {entries.map(([table, className]) => <div class={className}>
+                <div className='hide_able'>
+                    {table._headers.map((header) => <div>
+                        {this.renderProfileTableHeaderCell(header)}
+                    </div>)}
+                </div>
+                {table._contents.map(row => <div className='hide_able'>
+                        {row.map((cell) => <div>
+                            {cell === '-' ? '' : cell}
+                        </div>)}
+                    </div>)}
+                </div>)}
+        </div>
     }
 
     private renderProfileTableHeaderCell(name: string) {

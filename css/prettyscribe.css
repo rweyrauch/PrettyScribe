@@ -422,33 +422,173 @@ label {
     margin-top: -1px; /* not sure why this is necessary */
 }
 
-body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div {
-    flex-direction: column;
-}
-
-
 .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table {
     margin-bottom: 0;
 }
 
-body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:first-child {
+body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div {
+    flex-direction: column;
+}
+
+/* Mobile */
+@media only screen and (width <= 768px) {
+    body .wh40k_unit_sheet > table > * > * > td.subTableTd > div {
+        flex-direction: column;
+    }
+}
+
+body .wh40k_unit_sheet > table > * > * > td.subTableTd > div > *:first-child {
     border-right: 1px solid black;
     width: 60%;
 }
 
-body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:last-child {
-    border-top: 1px solid black;
+body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div > *:first-child {
+    border-right: 0px solid black;
+    width: 100%;
 }
 
-body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:last-child {
-    border-left: 1px solid black;
+/* Mobile */
+@media only screen and (width <= 768px) {
+    body .wh40k_unit_sheet > table > * > * > td.subTableTd > div > *:first-child {
+        border-right: 0px solid black;
+        width: 100%;
+    }    
+}
+
+body .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:last-child {
+    border-left: 1px solid black; /* for double-column layout */
     margin-left: -1px; /* counter overlap between left and right columns' shared border */
     width: 40%;
+}
+
+body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:last-child {
+    border-top: 1px solid black;
+    border-left: unset;
+    margin-left: unset;
+    width: 100%;
+}
+
+/* Mobile */
+@media only screen and (width <= 768px) {
+    body .wh40k_unit_sheet > table > * > * > td.subTableTd > div > table:last-child {
+        border-top: 1px solid black;
+        border-left: unset;
+        margin-left: unset;
+        width: 100%;
+    }    
 }
 
 .wh40k_rules > div > p {
     white-space: pre-wrap;
     line-height: 1;
+}
+
+.wh40k_unit_profile_table,
+.wh40k_weapon_profile_table {
+    width: 100%;
+}
+
+.wh40k_unit_profile_table > div,
+.wh40k_weapon_profile_table > div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wh40k_unit_profile_table > div:nth-of-type(odd),
+.wh40k_weapon_profile_table > div:nth-of-type(odd) {
+    background-color: var(--bs-table-striped-bg);
+}
+
+.wh40k_unit_profile_table > div:first-child,
+.wh40k_weapon_profile_table > div:first-child {
+    background-color: var(--bs-table-active-bg);
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: bold;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.wh40k_unit_profile_table:first-child > div:first-child,
+.wh40k_weapon_profile_table:first-child > div:first-child {
+    border-top: 0px;
+}
+
+.wh40k_unit_profile_table > div:not(:first-child),
+.wh40k_weapon_profile_table > div:not(:first-child) {
+    border-bottom: 1px solid var(--bs-table-active-bg);
+}
+
+.wh40k_unit_profile_table > div:first-child > div,
+.wh40k_weapon_profile_table > div:first-child > div {
+    padding: 0.25rem 0;
+}
+
+.wh40k_unit_profile_table > div:not(:first-child) > div,
+.wh40k_weapon_profile_table > div:not(:first-child) > div {
+    padding: 0.05rem 0;
+}
+
+.wh40k_unit_profile_table > div > div,
+.wh40k_weapon_profile_table > div > div {
+    flex-basis: 5%;
+}
+
+.wh40k_unit_profile_table > div > div:first-child {
+    flex-basis: 40%;
+    padding-left: var(--notchSize);
+}
+
+.wh40k_weapon_profile_table > div > div:first-child {
+    flex-basis: 30%;
+    padding-left: var(--notchSize);
+}
+
+.wh40k_weapon_profile_table > div > div:nth-child(2),
+.wh40k_weapon_profile_table > div > div:nth-child(3) {
+    flex-basis: 10%;
+}
+
+.wh40k_weapon_profile_table > div > div:last-child {
+    flex-basis: 30%;
+}
+
+.wh40k_unit_profile_table > div > div:not(:first-child),
+.wh40k_weapon_profile_table > div > div:not(:first-child):not(:last-child) {
+    text-align: center;
+}
+
+/* Mobile */
+@media only screen and (width <= 768px) {
+    .wh40k_unit_profile_table > div > div,
+    .wh40k_weapon_profile_table > div > div {
+        flex-basis: 8%;
+        flex-shrink: 0;
+    }
+    
+    .wh40k_unit_profile_table > div > div:first-child,
+    .wh40k_weapon_profile_table > div > div:first-child {
+        /* Leave some space for long attributes like D6+3 in other columns */
+        flex-basis: 46%;
+    }
+        
+    .wh40k_weapon_profile_table > div > div:nth-child(2) {
+        flex-basis: 12%;
+    }
+
+    .wh40k_weapon_profile_table > div > div:nth-child(3) {
+        flex-basis: 8%;
+    }
+    
+    .wh40k_weapon_profile_table > div:first-child > div:last-child {
+        display: none;  /* Hide the Keywords column */
+    }
+
+    .wh40k_weapon_profile_table > div > div:last-child {
+        flex-basis: 100%;
+        font-style: italic;
+        padding-left: calc(2 * var(--notchSize));
+    }
 }
 
 .wh40k_keywords_and_factions,
