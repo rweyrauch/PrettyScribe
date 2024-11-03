@@ -555,10 +555,18 @@ export class Wh40kRenderer implements Renderer {
                 </thead>
                 <thead className='info_row keywords_row'>
                     <tr class='hide_able'>
-                        <td scope='col' colspan='2' style='width: 10%;'>Keywords</td>
-                        <td scope='col' colspan='12' style='width: 60%;'>{Array.from(unit._keywords).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</td>
-                        <td scope='col' colspan='2' style='width: 10%;'>Factions</td>
-                        <td scope='col' colspan='4' style='width: 20%;'>{Array.from(unit._factions).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</td>
+                        <td colspan='20'>
+                            <div class='wh40k_keywords_and_factions'>
+                                <div class='wh40k_keywords'>
+                                    <div>Keywords</div>
+                                    <div>{Array.from(unit._keywords).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</div>
+                                </div>
+                                <div class='wh40k_factions'>
+                                    <div>Factions</div>
+                                    <div>{Array.from(unit._factions).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </thead>
                 <thead className='info_row'>
@@ -581,7 +589,7 @@ export class Wh40kRenderer implements Renderer {
             }) as [Wh40k.TabularProfile, number[]][];
         ;
 
-        return <table className="table table-sm table-striped">
+        return <table className="table table-sm table-striped wh40k_profiles">
             {entries.map(([table, widths]) => <>
                 <thead className='table-active'>
                     <tr className='hide_able header_row'>
@@ -589,7 +597,7 @@ export class Wh40kRenderer implements Renderer {
                                 scope='col'
                                 colspan={Math.round(width / 0.05)}
                                 style={`width: ${width * 100}%;`}>
-                            {table._headers[i]}
+                            {this.renderProfileTableHeaderCell(table._headers[i])}
                         </th>)}
                     </tr>
                 </thead>
@@ -607,22 +615,36 @@ export class Wh40kRenderer implements Renderer {
         </table>;
     }
 
+    private renderProfileTableHeaderCell(name: string) {
+        if (name === 'Ranged Weapons' || name === 'Melee Weapons') {
+            return <>
+              <span class='desktop-only'>{name}</span><span class='mobile-only'>{name.replace(' Weapons', '')}</span>
+            </>
+        } else if (name === 'Range') {
+            return <>
+              <span class='desktop-only'>{name}</span><span class='mobile-only'>Rng</span>
+            </>
+        } else {
+            return <>{name}</>;
+        }
+    }
+
     private renderUnitAbilitiesAndRules(abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
         return <>
         <thead className='info_row table-active'>
             <tr className='header_row'>
-                <th colspan='20'>{abilitiesGroup}</th>
+                <th>{abilitiesGroup}</th>
             </tr>
         </thead>
         <tbody className='info_row'>
             <tr></tr> {/* Reverse the stripe coloring to start with white. */}
             {/* TODO remove the nested div; it was added to confirm TSX transition */}
             {rulesMap && rulesMap.size > 0 &&
-                <tr className='hide_able'><td scope="col" colspan="20" style="width: 100%;"><div><div>
+                <tr className='hide_able'><td scope="col" style="width: 100%;"><div><div>
                     <b>{Array.from(rulesMap.keys()).sort(Wh40k.Compare).join(', ')}</b>
                 </div></div></td></tr>}
             {Array.from(abilitiesMap.keys()).sort(Wh40k.Compare).map(ability =>
-                <tr className='hide_able'><td scope="col" colspan="20" style="width: 100%;"><div><div className="hide_able">
+                <tr className='hide_able'><td scope="col" style="width: 100%;"><div><div className="hide_able">
                     <b>{`${ability.toUpperCase()}: `}</b>
                     {abilitiesMap.get(ability) || '??'}
                 </div></div></td></tr>)}

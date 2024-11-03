@@ -197,14 +197,6 @@ label {
     padding: 0 10px 0 5px;
 }
 
-.wh40k_unit_sheet.bigger {
-    width: 800px;
-}
-
-.wh40k_unit_sheet:not(.bigger) {
-    width: 1110px;
-}
-
 .wh40k_unit_sheet > table {
     --borderColor: black;
     --notchSize: 0.8em;
@@ -227,6 +219,60 @@ label {
             0% calc(100% - var(--notchSize))
     );
 }
+
+/* Desktop */
+@media only screen and (width > 768px) {
+    .mobile-only {
+        display: none;
+    }
+
+    .wh40k_unit_sheet.bigger {
+        width: 800px;
+    }
+    
+    .wh40k_unit_sheet:not(.bigger) {
+        width: 1110px;
+    }
+}
+
+@media print {
+    .mobile-only {
+        display: none;
+    }
+
+    .wh40k_unit_sheet.bigger {
+        width: 800px;
+    }
+    
+    .wh40k_unit_sheet:not(.bigger) {
+        width: 1110px;
+    }
+}
+
+/* Mobile */
+@media only screen and (width <= 768px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .wh40k_unit_sheet {
+        padding: 0px;
+    }
+
+    .container-fluid {
+        --bs-gutter-x: 0px;
+    }
+
+    .wh40k_unit_sheet > table {
+        --notchSize: 0.4em;
+    }
+
+    /* Some special profile tables will have long names, so allow wrapping. */
+    .wh40k_unit_sheet table > thead > tr.header_row > th {
+        white-space: normal;
+    }
+}
+
 
 .wh40k_unit_sheet > .table > thead:not(:first-child) > :last-child > * {
     border-top-color: currentColor;
@@ -403,6 +449,65 @@ body:not(.single_column) .wh40k_unit_sheet > table > * > * > td.subTableTd > div
 .wh40k_rules > div > p {
     white-space: pre-wrap;
     line-height: 1;
+}
+
+.wh40k_keywords_and_factions,
+.wh40k_keywords,
+.wh40k_factions {
+    display: flex;
+}
+
+.wh40k_keywords > div,
+.wh40k_factions > div {
+    display: inline;
+}
+
+.wh40k_keywords > div:last-child,
+.wh40k_factions > div:last-child {
+    font-weight: normal;
+}
+
+.wh40k_keywords_and_factions {
+    display: flex;
+}
+.wh40k_keywords {
+    flex-basis: 70%;
+}
+.wh40k_factions {
+    flex-basis: 30%;
+}
+
+.wh40k_keywords > div:first-child {
+    flex-basis: 13.5%;
+}
+.wh40k_keywords > div:last-child {
+    flex-basis: 86%
+}
+.wh40k_factions > div:first-child {
+    flex-basis: 33%;
+}
+.wh40k_factions > div:last-child {
+    flex-basis: 67%;
+}
+.wh40k_keywords > div:first-child,
+.wh40k_factions > div:first-child {
+    /* Improves "KEYWORDS" for "Print: Larger Text" */
+    padding-right: 3px;
+}
+
+/* Mobile */
+@media only screen and (width <= 768px) {
+    .wh40k_keywords_and_factions {
+        display: block;
+    }
+    .wh40k_keywords > div:first-child,
+    .wh40k_factions > div:first-child {
+        flex-basis: 25%;
+    }
+    .wh40k_keywords > div:last-child,
+    .wh40k_factions > div:last-child {
+        flex-basis: 75%;
+    }
 }
 
 /* MESBG Start */
