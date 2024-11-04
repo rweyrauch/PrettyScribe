@@ -555,10 +555,18 @@ export class Wh40kRenderer implements Renderer {
                 </thead>
                 <thead className='info_row keywords_row'>
                     <tr class='hide_able'>
-                        <td scope='col' colspan='2' style='width: 10%;'>Keywords</td>
-                        <td scope='col' colspan='12' style='width: 60%;'>{Array.from(unit._keywords).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</td>
-                        <td scope='col' colspan='2' style='width: 10%;'>Factions</td>
-                        <td scope='col' colspan='4' style='width: 20%;'>{Array.from(unit._factions).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</td>
+                        <td colspan='20'>
+                            <div class='wh40k_keywords_and_factions'>
+                                <div class='wh40k_keywords'>
+                                    <div>Keywords</div>
+                                    <div>{Array.from(unit._keywords).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</div>
+                                </div>
+                                <div class='wh40k_factions'>
+                                    <div>Factions</div>
+                                    <div>{Array.from(unit._factions).sort(Wh40k.Compare).join(', ').toLocaleUpperCase()}</div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </thead>
                 <thead className='info_row'>
@@ -576,53 +584,56 @@ export class Wh40kRenderer implements Renderer {
         const entries = Object.entries(unit._profileTables)
             .sort((a, b) => Wh40k.CompareProfileTableName(a[0], b[0]))
             .map(([typeName, table]) => {
-                const widths = typeName === 'Unit' ? this._unitLabelWidthsNormalized : this._weaponLabelWidthNormalized;
-                return [table, widths];
-            }) as [Wh40k.TabularProfile, number[]][];
-        ;
+                const className = typeName === 'Unit' ? 'wh40k_unit_profile_table' : 'wh40k_weapon_profile_table';
+                return [table, className];
+            }) as [Wh40k.TabularProfile, string][];
+        
+        return <div>
+            {entries.map(([table, className]) => <div class={className}>
+                <div className='hide_able'>
+                    {table._headers.map((header) => <div>
+                        {this.renderProfileTableHeaderCell(header)}
+                    </div>)}
+                </div>
+                {table._contents.map(row => <div className='hide_able'>
+                        {row.map((cell) => <div>
+                            {cell === '-' ? '' : cell}
+                        </div>)}
+                    </div>)}
+                </div>)}
+        </div>
+    }
 
-        return <table className="table table-sm table-striped">
-            {entries.map(([table, widths]) => <>
-                <thead className='table-active'>
-                    <tr className='hide_able header_row'>
-                        {widths.map((width, i) => <th
-                                scope='col'
-                                colspan={Math.round(width / 0.05)}
-                                style={`width: ${width * 100}%;`}>
-                            {table._headers[i]}
-                        </th>)}
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr></tr> {/* Reverse the stripe coloring to start with white. */}
-                    {table._contents.map(row => <tr className='hide_able'>
-                        {widths.map((width, i) => <td scope='col'
-                                colspan={Math.round(width / 0.05)}
-                                style={`width: ${width * 100}%;`}>
-                            {row[i]}
-                        </td>)}
-                    </tr>)}
-                </tbody>
-            </>)}
-        </table>;
+    private renderProfileTableHeaderCell(name: string) {
+        if (name === 'Ranged Weapons' || name === 'Melee Weapons') {
+            return <>
+              <span class='desktop-only'>{name}</span><span class='mobile-only'>{name.replace(' Weapons', '')}</span>
+            </>
+        } else if (name === 'Range') {
+            return <>
+              <span class='desktop-only'>{name}</span><span class='mobile-only'>Rng</span>
+            </>
+        } else {
+            return <>{name}</>;
+        }
     }
 
     private renderUnitAbilitiesAndRules(abilitiesGroup: string, abilitiesMap: Map<string, string>, rulesMap?: Map<string, string>) {
         return <>
         <thead className='info_row table-active'>
             <tr className='header_row'>
-                <th colspan='20'>{abilitiesGroup}</th>
+                <th>{abilitiesGroup}</th>
             </tr>
         </thead>
         <tbody className='info_row'>
             <tr></tr> {/* Reverse the stripe coloring to start with white. */}
             {/* TODO remove the nested div; it was added to confirm TSX transition */}
             {rulesMap && rulesMap.size > 0 &&
-                <tr className='hide_able'><td scope="col" colspan="20" style="width: 100%;"><div><div>
+                <tr className='hide_able'><td scope="col" style="width: 100%;"><div><div>
                     <b>{Array.from(rulesMap.keys()).sort(Wh40k.Compare).join(', ')}</b>
                 </div></div></td></tr>}
             {Array.from(abilitiesMap.keys()).sort(Wh40k.Compare).map(ability =>
-                <tr className='hide_able'><td scope="col" colspan="20" style="width: 100%;"><div><div className="hide_able">
+                <tr className='hide_able'><td scope="col" style="width: 100%;"><div><div className="hide_able">
                     <b>{`${ability.toUpperCase()}: `}</b>
                     {abilitiesMap.get(ability) || '??'}
                 </div></div></td></tr>)}
