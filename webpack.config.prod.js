@@ -1,5 +1,4 @@
 const path = require('path');
-const CleanPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/app.ts',
@@ -13,9 +12,6 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        new CleanPlugin.CleanWebpackPlugin(),
-    ],
     output: {
         filename: 'prettyscribe.js',
         path: path.resolve(__dirname, 'dist'),
