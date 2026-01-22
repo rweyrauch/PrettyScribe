@@ -8,7 +8,7 @@
     "@types/lodash": "^4.14.178",
     "bootswatch": "^5.1.3",
     "jszip": "^3.7.1",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "xpath-ts": "^1.3.13"
   },
   "devDependencies": {
