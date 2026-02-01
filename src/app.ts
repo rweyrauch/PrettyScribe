@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Rick Weyrauch,
+    Copyright 2020-26 Rick Weyrauch,
 
     Permission to use, copy, modify, and/or distribute this software for any purpose 
     with or without fee is hereby granted, provided that the above copyright notice
@@ -25,6 +25,8 @@ import { Create30kRoster } from "./roster30k";
 import { Renderer30k } from "./renderer30k";
 import { HorusHeresy } from "./rosterHH2";
 import { RendererHH2 } from "./rendererHH2";
+import { HorusHeresy3 } from "./rosterHH3";
+import { RendererHH3 } from "./rendererHH3";
 import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
 import { CreateWarcryRoster } from "./rosterWarcry";
@@ -111,6 +113,12 @@ function parseBattleScribeXML(xmldata: string) {
     const roster = Create30kRoster(doc);
     if (roster && roster._forces.length > 0) {
       const renderer: Renderer30k = new Renderer30k(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  } else if (gameType === "Horus Heresy 3rd Edition") {
+    const roster = HorusHeresy3.CreateRoster(doc);
+    if (roster && roster._forces.length > 0) {
+      const renderer: RendererHH3 = new RendererHH3(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
   } else if (gameType.includes("Horus Heresy (2022)")) {
