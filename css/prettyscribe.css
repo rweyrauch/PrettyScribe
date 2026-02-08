@@ -827,6 +827,197 @@ body.single_column .wh40k_unit_sheet > table > * > * > td.subTableTd > div > tab
     color: black;
 }
 
+/* HH3 Styles */
+.hh3-rule-link {
+    color: #2c3e50;
+    text-decoration: none;
+    border-bottom: 1px dotted #7f8c8d;
+    transition: color 0.15s, border-color 0.15s;
+}
+.hh3-rule-link:hover {
+    color: #8b0000;
+    border-bottom-color: #8b0000;
+}
+
+.hh3_force_header {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2c3e50;
+    border-left: 4px solid #8b0000;
+    padding: 0.4em 0.8em;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    background: linear-gradient(90deg, rgba(139,0,0,0.06) 0%, transparent 100%);
+}
+
+.hh3_force_header .hh3_detachment_name {
+    display: block;
+    font-size: 0.85em;
+    font-weight: 400;
+    color: #555;
+    margin-top: 0.15em;
+}
+
+.hh3_section_label {
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555;
+    padding: 0.35em 0.5em;
+}
+
+.hh3_reaction_card {
+    background: #fafafa;
+    border-left: 3px solid #6c757d;
+    padding: 0.5em 0.75em;
+    margin-bottom: 0.5em;
+}
+
+.hh3_reaction_card .hh3_reaction_name {
+    font-weight: 700;
+    font-size: 0.95em;
+    color: #2c3e50;
+    margin-bottom: 0.3em;
+}
+
+.hh3_reaction_card .hh3_reaction_summary {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 0.4em;
+    font-size: 0.9em;
+}
+
+.hh3_reaction_card .hh3_reaction_field {
+    margin-bottom: 0.25em;
+    font-size: 0.88em;
+    line-height: 1.35;
+}
+
+.hh3_reaction_card .hh3_reaction_field b {
+    color: #444;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.hh3_gambit_card {
+    background: #fdfaf3;
+    border-left: 3px solid #b8860b;
+    padding: 0.5em 0.75em;
+    margin-bottom: 0.5em;
+}
+
+.hh3_gambit_card .hh3_gambit_name {
+    font-weight: 700;
+    font-size: 0.95em;
+    color: #2c3e50;
+    margin-bottom: 0.3em;
+}
+
+.hh3_gambit_card .hh3_gambit_summary {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 0.3em;
+    font-size: 0.9em;
+}
+
+.hh3_gambit_card .hh3_gambit_description {
+    font-size: 0.88em;
+    line-height: 1.35;
+}
+
+.hh3_wargear_summary {
+    font-style: italic;
+    color: #555;
+    font-size: 0.9em;
+}
+
+.hh3_wargear_description {
+    font-size: 0.88em;
+    line-height: 1.35;
+}
+
+.hh3_keywords_row {
+    font-size: 0.85em;
+}
+
+.hh3_keywords_label {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #444;
+    vertical-align: top;
+}
+
+.hh3_keywords_value {
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.hh3_model_list_row {
+    font-size: 0.88em;
+    line-height: 1.5;
+}
+
+.hh3_roster_summary_table {
+    font-size: 0.9em;
+}
+
+.hh3_roster_summary_table thead th {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #555;
+}
+
+.hh3_rules_section {
+    line-height: 1.3;
+}
+
+.hh3_rules_section h3 {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.6em;
+}
+
+.hh3_rules_section > div {
+    margin-bottom: 0.6em;
+}
+
+.hh3_rules_section > div > b {
+    color: #2c3e50;
+}
+
+.hh3_rules_section > div > p {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    margin-bottom: 0;
+    font-size: 0.9em;
+}
+
+@media print {
+    .hh3_force_header {
+        border-left-color: #333;
+        background: none;
+    }
+    .hh3_reaction_card {
+        background: none;
+        border-left-color: #999;
+    }
+    .hh3_gambit_card {
+        background: none;
+        border-left-color: #999;
+    }
+    .hh3-rule-link {
+        color: black;
+        border-bottom-style: none;
+    }
+}
+
 .hide_enabled .hide_able:hover {
     background-color: rgba(128, 128, 128, .4);
     cursor: cell;

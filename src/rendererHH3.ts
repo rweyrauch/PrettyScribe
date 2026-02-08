@@ -78,15 +78,21 @@ export class RendererHH3 implements Renderer {
         for (const force of this._roster._forces) {
 
             const forceTitle = document.createElement('div');
+            forceTitle.classList.add('hh3_force_header');
+            const catalogSpan = document.createElement('span');
+            catalogSpan.appendChild(document.createTextNode(force._catalog.trim()));
             if (force._faction) {
-                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force._name} (${force._faction})`));
-            } else {
-                forceTitle.appendChild(document.createTextNode(`${force._catalog} ${force._name}`));
+                catalogSpan.appendChild(document.createTextNode(` (${force._faction})`));
             }
+            forceTitle.appendChild(catalogSpan);
+            const detachmentSpan = document.createElement('span');
+            detachmentSpan.classList.add('hh3_detachment_name');
+            detachmentSpan.appendChild(document.createTextNode(force._name));
+            forceTitle.appendChild(detachmentSpan);
             list.appendChild(forceTitle);
 
             const table = document.createElement('table');
-            table.classList.add('table', 'table-sm', 'table-striped');
+            table.classList.add('table', 'table-sm', 'table-striped', 'hh3_roster_summary_table');
             const thead = document.createElement('thead');
             table.appendChild(thead);
             thead.classList.add('thead-light');
@@ -278,19 +284,19 @@ export class RendererHH3 implements Renderer {
 
         for (const force of this._roster._forces) {
             const forceTitle = document.createElement('div');
+            forceTitle.classList.add('hh3_force_header');
             forceTitle.style.pageBreakBefore = "always";
-            if (forceTitle) {
-                const p = document.createElement("p");
-                p.appendChild(document.createTextNode(force._catalog));
-                if (force._faction) {
-                    p.appendChild(document.createTextNode(" (" + force._faction + ")"));
-                }
-                forceTitle.appendChild(p);
+            const catalogSpan = document.createElement('span');
+            catalogSpan.appendChild(document.createTextNode(force._catalog.trim()));
+            if (force._faction) {
+                catalogSpan.appendChild(document.createTextNode(" (" + force._faction + ")"));
             }
-
-            let h3 = document.createElement('h3');
-            h3.appendChild(forceTitle)
-            detachmentSheets.appendChild(h3);
+            forceTitle.appendChild(catalogSpan);
+            const detachmentSpan = document.createElement('span');
+            detachmentSpan.classList.add('hh3_detachment_name');
+            detachmentSpan.appendChild(document.createTextNode(force._name));
+            forceTitle.appendChild(detachmentSpan);
+            detachmentSheets.appendChild(forceTitle);
 
             this.renderDatasheets(detachmentSheets, force._units);
 
@@ -512,15 +518,16 @@ export class RendererHH3 implements Renderer {
             for (const gear of wargear) {
                 const descDiv = document.createElement('div');
                 if (gear._summary) {
-                    const summaryEl = document.createElement('i');
+                    const summaryEl = document.createElement('div');
+                    summaryEl.classList.add('hh3_wargear_summary');
                     summaryEl.appendChild(document.createTextNode(gear._summary));
                     descDiv.appendChild(summaryEl);
-                    if (gear._description) {
-                        descDiv.appendChild(document.createElement('br'));
-                    }
                 }
                 if (gear._description) {
-                    descDiv.appendChild(document.createTextNode(gear._description));
+                    const descEl = document.createElement('div');
+                    descEl.classList.add('hh3_wargear_description');
+                    descEl.appendChild(document.createTextNode(gear._description));
+                    descDiv.appendChild(descEl);
                 }
                 tbody.append(createTableRow([
                     gear.name(),
@@ -536,50 +543,50 @@ export class RendererHH3 implements Renderer {
         if (reactions.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
-            thead.appendChild(createTableRow(["Reaction", "Details"], [0.25, 0.75], /* header= */ true));
+            thead.appendChild(createTableRow(["Reactions", ""], [0.25, 0.75], /* header= */ true));
 
             let tbody = statsTable.appendChild(document.createElement('tbody'));
-            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+            tbody.append(document.createElement('tr'));
 
             for (const reaction of reactions) {
-                const detailsDiv = document.createElement('div');
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('hh3_reaction_card');
+
+                const nameDiv = document.createElement('div');
+                nameDiv.classList.add('hh3_reaction_name');
+                nameDiv.appendChild(document.createTextNode(reaction.name()));
+                cardDiv.appendChild(nameDiv);
+
                 if (reaction._summary) {
-                    const summaryEl = document.createElement('i');
-                    summaryEl.appendChild(document.createTextNode(reaction._summary));
-                    detailsDiv.appendChild(summaryEl);
-                    detailsDiv.appendChild(document.createElement('br'));
+                    const summaryDiv = document.createElement('div');
+                    summaryDiv.classList.add('hh3_reaction_summary');
+                    summaryDiv.appendChild(document.createTextNode(reaction._summary));
+                    cardDiv.appendChild(summaryDiv);
                 }
-                if (reaction._trigger) {
+
+                const fields = [
+                    { label: 'Trigger', value: reaction._trigger },
+                    { label: 'Cost', value: reaction._reactionCost },
+                    { label: 'Target', value: reaction._target },
+                    { label: 'Process', value: reaction._process },
+                ];
+                for (const field of fields) {
+                    if (!field.value) continue;
+                    const fieldDiv = document.createElement('div');
+                    fieldDiv.classList.add('hh3_reaction_field');
                     const b = document.createElement('b');
-                    b.appendChild(document.createTextNode('Trigger: '));
-                    detailsDiv.appendChild(b);
-                    detailsDiv.appendChild(document.createTextNode(reaction._trigger));
-                    detailsDiv.appendChild(document.createElement('br'));
+                    b.appendChild(document.createTextNode(field.label + ': '));
+                    fieldDiv.appendChild(b);
+                    fieldDiv.appendChild(document.createTextNode(field.value));
+                    cardDiv.appendChild(fieldDiv);
                 }
-                if (reaction._reactionCost) {
-                    const b = document.createElement('b');
-                    b.appendChild(document.createTextNode('Cost: '));
-                    detailsDiv.appendChild(b);
-                    detailsDiv.appendChild(document.createTextNode(reaction._reactionCost));
-                    detailsDiv.appendChild(document.createElement('br'));
-                }
-                if (reaction._target) {
-                    const b = document.createElement('b');
-                    b.appendChild(document.createTextNode('Target: '));
-                    detailsDiv.appendChild(b);
-                    detailsDiv.appendChild(document.createTextNode(reaction._target));
-                    detailsDiv.appendChild(document.createElement('br'));
-                }
-                if (reaction._process) {
-                    const b = document.createElement('b');
-                    b.appendChild(document.createTextNode('Process: '));
-                    detailsDiv.appendChild(b);
-                    detailsDiv.appendChild(document.createTextNode(reaction._process));
-                }
-                tbody.append(createTableRow([
-                    reaction.name(),
-                    detailsDiv,
-                ], [0.25, 0.75]));
+
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.colSpan = 20;
+                td.appendChild(cardDiv);
+                tr.appendChild(td);
+                tbody.append(tr);
             }
         }
 
@@ -588,28 +595,39 @@ export class RendererHH3 implements Renderer {
         if (gambits.length > 0) {
             thead = statsTable.appendChild(document.createElement('thead'));
             thead.classList.add('table-active');
-            thead.appendChild(createTableRow(["Gambit", "Description"], [0.25, 0.75], /* header= */ true));
+            thead.appendChild(createTableRow(["Gambits", ""], [0.25, 0.75], /* header= */ true));
 
             let tbody = statsTable.appendChild(document.createElement('tbody'));
-            tbody.append(document.createElement('tr')); // Reverse the stripe coloring to start with white.
+            tbody.append(document.createElement('tr'));
 
             for (const gambit of gambits) {
-                const descDiv = document.createElement('div');
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('hh3_gambit_card');
+
+                const nameDiv = document.createElement('div');
+                nameDiv.classList.add('hh3_gambit_name');
+                nameDiv.appendChild(document.createTextNode(gambit.name()));
+                cardDiv.appendChild(nameDiv);
+
                 if (gambit._summary) {
-                    const summaryEl = document.createElement('i');
-                    summaryEl.appendChild(document.createTextNode(gambit._summary));
-                    descDiv.appendChild(summaryEl);
-                    if (gambit._description) {
-                        descDiv.appendChild(document.createElement('br'));
-                    }
+                    const summaryDiv = document.createElement('div');
+                    summaryDiv.classList.add('hh3_gambit_summary');
+                    summaryDiv.appendChild(document.createTextNode(gambit._summary));
+                    cardDiv.appendChild(summaryDiv);
                 }
                 if (gambit._description) {
+                    const descDiv = document.createElement('div');
+                    descDiv.classList.add('hh3_gambit_description');
                     descDiv.appendChild(document.createTextNode(gambit._description));
+                    cardDiv.appendChild(descDiv);
                 }
-                tbody.append(createTableRow([
-                    gambit.name(),
-                    descDiv,
-                ], [0.25, 0.75]));
+
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.colSpan = 20;
+                td.appendChild(cardDiv);
+                tr.appendChild(td);
+                tbody.append(tr);
             }
         }
 
@@ -628,16 +646,21 @@ export class RendererHH3 implements Renderer {
 
         // keywords
         thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row');
-        const keywords = Array.from(unit._keywords).sort(HorusHeresy3.Compare).join(', ').toLocaleUpperCase();
-        thead.appendChild(createTableRow(['Keywords', keywords], [0.10, 0.90], /* header= */ false));
+        thead.classList.add('info_row', 'hh3_keywords_row');
+        const keywordsDiv = document.createElement('span');
+        keywordsDiv.classList.add('hh3_keywords_value');
+        keywordsDiv.appendChild(document.createTextNode(Array.from(unit._keywords).sort(HorusHeresy3.Compare).join(', ').toLocaleUpperCase()));
+        const keywordsLabel = document.createElement('span');
+        keywordsLabel.classList.add('hh3_keywords_label');
+        keywordsLabel.appendChild(document.createTextNode('Keywords'));
+        thead.appendChild(createTableRow([keywordsLabel, keywordsDiv], [0.10, 0.90], /* header= */ false));
 
         // model list
         thead = statsTable.appendChild(document.createElement('thead'));
-        thead.classList.add('info_row');
+        thead.classList.add('info_row', 'hh3_model_list_row');
         const modelListDiv = document.createElement('div');
         this.renderModelList(modelListDiv, unit);
-        thead.appendChild(createTableRow(['MODELS', modelListDiv], [0.10, 0.90], /* header= */ false));
+        thead.appendChild(createTableRow(['Models', modelListDiv], [0.10, 0.90], /* header= */ false));
     }
 
     private renderUnitRules(container: HTMLElement, rulesGroup: string, rules: string[]) {
@@ -647,7 +670,7 @@ export class RendererHH3 implements Renderer {
         rules.forEach((rule, index) => {
             let text = rule.trim();
             if (index > 0) {
-                rulesDiv.appendChild(document.createTextNode(", "));
+                rulesDiv.appendChild(document.createTextNode(', '));
             }
             let anchor = document.createElement('a');
             anchor.classList.add('hh3-rule-link');
@@ -656,7 +679,10 @@ export class RendererHH3 implements Renderer {
             rulesDiv.appendChild(anchor);
         });
 
-        thead.appendChild(createTableRow([rulesGroup, rulesDiv], [0.10, 0.90], /* header= */ false));
+        const labelSpan = document.createElement('span');
+        labelSpan.classList.add('hh3_keywords_label');
+        labelSpan.appendChild(document.createTextNode(rulesGroup));
+        thead.appendChild(createTableRow([labelSpan, rulesDiv], [0.10, 0.90], /* header= */ false));
     }
 
     private renderModelList(container: HTMLElement, unit: HorusHeresy3.Unit) {
@@ -687,7 +713,7 @@ export class RendererHH3 implements Renderer {
 
         for (let [subFaction, rules] of root.entries()) {
             let allegianceRules = document.createElement('div');
-            allegianceRules.classList.add('wh40k_rules');
+            allegianceRules.classList.add('hh3_rules_section');
             let rulesHeader = document.createElement('h3');
             allegianceRules.appendChild(rulesHeader);
             rulesHeader.appendChild(document.createTextNode(subFaction));
@@ -708,9 +734,10 @@ export class RendererHH3 implements Renderer {
         }
     }
 
-    // 16 data columns + spacer = Model, Type, M, WS, BS, S, T, W, I, A, LD, CL, WP, IN, SAV, INV, ""
-    private static _infantryLabels = ["Model", "Type", "M", "WS", "BS", "S", "T", "W", "I", "A", "LD", "CL", "WP", "IN", "SAV", "INV", ""];
-    private _infantryLabelWidthsNormalized = [0.15, 0.15, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.0];
+    // 16 data columns = Model, Type, M, WS, BS, S, T, W, I, A, LD, CL, WP, IN, SAV, INV
+    // ColSpans: 3 + 3 + 14×1 = 20 (fills the 20-column grid exactly)
+    private static _infantryLabels = ["Model", "Type", "M", "WS", "BS", "S", "T", "W", "I", "A", "LD", "CL", "WP", "IN", "SAV", "INV"];
+    private _infantryLabelWidthsNormalized = [0.15, 0.15, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
     private static _vehicleLabels = ["Model", "Type", "M", "BS", "Front", "Side", "Rear", "HP", "Capacity", ""];
     private _vehicleLabelWidthsNormalized = [0.20, 0.20, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.2, 0.1];
 
