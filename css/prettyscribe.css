@@ -122,6 +122,93 @@ label {
     border-bottom: 1px solid #8a7c32;;
 }
 
+/* AoS 4.0 Styles */
+.aos4_unit {
+    break-inside: avoid;
+}
+
+.aos4_font {
+    font-size: 14px;
+    font-family: 'Crimson Pro', serif;
+}
+
+.aos4_unit_stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    border: 2px solid #5a4a2a;
+    border-radius: 4px;
+    width: 100%;
+    aspect-ratio: 1;
+    text-align: center;
+}
+
+.aos4_stat_move, .aos4_stat_health, .aos4_stat_save, .aos4_stat_control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #5a4a2a;
+    padding: 4px;
+}
+
+.aos4_stat_move {
+    background-color: #e8e3ca;
+}
+
+.aos4_stat_health {
+    background-color: #d1c89a;
+}
+
+.aos4_stat_save {
+    background-color: #d1c89a;
+}
+
+.aos4_stat_control {
+    background-color: #e8e3ca;
+}
+
+.aos4_stat_label {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.aos4_light {
+    background-color: #e8e3ca;
+}
+
+.aos4_medium {
+    background-color: #d1c89a;
+}
+
+.aos4_dark {
+    background-color: #8a7c32;
+}
+
+.aos4_table {
+    border-top: 1px solid #8a7c32;
+    border-bottom: 1px solid #8a7c32;
+}
+
+.aos4_ability_card {
+    border: 1px solid #d1c89a;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #faf8f0;
+}
+
+.aos4_ability_name {
+    border-bottom: 1px solid #d1c89a;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+}
+
+.aos4_ability_field {
+    margin-bottom: 4px;
+}
+
 .warcry_unit {
     break-inside: avoid;
 }
