@@ -1,5 +1,5 @@
 /*
-    Copyright 2020 Rick Weyrauch,
+    Copyright 2020-26 Rick Weyrauch,
 
     Permission to use, copy, modify, and/or distribute this software for any purpose 
     with or without fee is hereby granted, provided that the above copyright notice
@@ -25,8 +25,12 @@ import { Create30kRoster } from "./roster30k";
 import { Renderer30k } from "./renderer30k";
 import { HorusHeresy } from "./rosterHH2";
 import { RendererHH2 } from "./rendererHH2";
+import { HorusHeresy3 } from "./rosterHH3";
+import { RendererHH3 } from "./rendererHH3";
 import { CreateAoSRoster } from "./rosterAoS";
 import { RendererAoS } from "./rendererAoS";
+import { CreateAoS4Roster } from "./rosterAoS4";
+import { RendererAoS4 } from "./rendererAoS4";
 import { CreateWarcryRoster } from "./rosterWarcry";
 import { RendererWarcry } from "./rendererWarcry";
 import { Wh40kRenderer } from "./renderer40k10th";
@@ -59,8 +63,9 @@ function parseBattleScribeXML(xmldata: string) {
   const info = doc.querySelector("roster");
   if (!info) return;
 
+  const gameSystemId = info.getAttribute("gameSystemId");
   const gameType = info.getAttribute("gameSystemName");
-  if (!gameType) return;
+  if (!gameSystemId) return;
 
   const rosterName = info.getAttribute("name");
   if (rosterName) {
@@ -71,80 +76,86 @@ function parseBattleScribeXML(xmldata: string) {
   const rosterList = $('#roster-lists')[0];
   const forceUnits = $('#force-units')[0];
 
-  if (gameType == "Warhammer 40,000 8th Edition") {
+  if (gameSystemId === "28ec-711c-d87f-3aeb") {
+    // Warhammer 40,000 8th Edition / 9th Edition (same ID)
     const roster = Create40kRoster(doc);
     if (roster && roster._forces.length > 0) {
       const renderer: Renderer40k = new Renderer40k(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  } else if (gameType == "Warhammer 40,000 9th Edition") {
-    const roster = Create40kRoster(doc);
-    if (roster && roster._forces.length > 0) {
-      const renderer: Renderer40k = new Renderer40k(roster);
-      renderer.render(rosterTitle, rosterList, forceUnits);
-    }
-  } else if (gameType == "Warhammer 40,000: Kill Team (2018)") {
+  } else if (gameSystemId === "a467-5f42-d24c-6e5b") {
+    // Warhammer 40,000: Kill Team (2018)
     const roster = Create40kRoster(doc, false);
     if (roster && roster._forces.length > 0) {
       const renderer: Renderer40k = new Renderer40k(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  } else if (gameType == "Warhammer 40,000: Kill Team (2021)") {
+  } else if (gameSystemId === "3b7e-7dab-f79f-2e74") {
+    // Warhammer 40,000: Kill Team (2021)
     const roster = CreateKT21Roster(doc);
     if (roster && roster._forces.length > 0) {
       const renderer: RendererKT21 = new RendererKT21(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  } else if (gameType == "Age of Sigmar") {
+  } else if (gameSystemId === "e51d-b1a3-75fc-dc3g") {
+    // Age of Sigmar 4.0
+    const roster = CreateAoS4Roster(doc);
+    if (roster) {
+      const renderer: RendererAoS4 = new RendererAoS4(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  } else if (gameSystemId === "e51d-b1a3-75fc-dc33") {
+    // Age of Sigmar (3.0)
     const roster = CreateAoSRoster(doc);
     if (roster) {
       const renderer: RendererAoS = new RendererAoS(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  } else if (gameType == "Warhammer Age of Sigmar: Warcry") {
+  } else if (gameSystemId === "e5fe-db52-95ba-6b62") {
+    // Warhammer Age of Sigmar: Warcry
     const roster = CreateWarcryRoster(doc);
     if (roster) {
       const renderer: RendererWarcry = new RendererWarcry(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  } else if (gameType == "Warhammer 30,000 - The Horus Heresy") {
+  } else if (gameSystemId === "ca571888-56a9-c58e-ddaf-54f4713538bc") {
+    // Warhammer 30,000 - The Horus Heresy
     const roster = Create30kRoster(doc);
     if (roster && roster._forces.length > 0) {
       const renderer: Renderer30k = new Renderer30k(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  } else if (gameType.includes("Horus Heresy (2022)")) {
+  } else if (gameSystemId === "sys-9fe4-1dc3-b7c2-73cf") {
+    // Horus Heresy 3rd Edition
+    const roster = HorusHeresy3.CreateRoster(doc);
+    if (roster && roster._forces.length > 0) {
+      const renderer: RendererHH3 = new RendererHH3(roster);
+      renderer.render(rosterTitle, rosterList, forceUnits);
+    }
+  } else if (gameSystemId === "28d4-bd2e-4858-ece6") {
+    // Horus Heresy (2022)
     const roster = HorusHeresy.CreateRoster(doc);
     if (roster && roster._forces.length > 0) {
       const renderer: RendererHH2 = new RendererHH2(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  } else if (gameType == "Warhammer 40,000 10th Edition") {
+  } else if (gameSystemId === "sys-352e-adc2-7639-d6a9") {
+    // Warhammer 40,000 10th Edition
     const roster = Wh40k.CreateRoster(doc);
     (window as any).roster = roster;
     if (roster && roster._forces.length > 0) {
       const renderer: Wh40kRenderer = new Wh40kRenderer(roster);
       renderer.render(rosterTitle, rosterList, forceUnits);
     }
-  } else if (gameType === "Middle-Earth Strategy Battle Game") {
+  } else if (gameSystemId === "3e16-9abf-6238-4ed9") {
+    // Middle-Earth Strategy Battle Game
     const roster = CreateMESBGRoster(doc);
     if(roster !== null) {
       console.log(roster);
       renderMESBG(roster, rosterTitle, rosterList, forceUnits);
     }
-  }
-  // TODO: add (proper) support for Apocalypse
-  // else if (gameType == "Warhammer 40,000: Apocalypse") {
-  //    let roster = Create40kRoster(doc);
-  //    if (roster) {
-  //      if (roster._forces.length > 0) {
-  //        const renderer: Renderer40k = new Renderer40k(roster);
-  //        renderer.render(rosterTitle, rosterList, forceUnits);
-  //      }
-  //    }
-  // }
-  else {
-    showErrorModal('PrettyScribe does not support game type \'' + gameType + '\'.');
+  } else {
+    showErrorModal('PrettyScribe does not support game type \'' + (gameType || gameSystemId) + '\'.');
   }
 }
 
