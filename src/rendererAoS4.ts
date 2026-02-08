@@ -218,10 +218,10 @@ export class RendererAoS4 implements Renderer {
             let unitStats = document.createElement('div');
             unitStats.classList.add("col-3");
             unitStats.innerHTML = `<div class="aos4_unit_stats">
-                <div class="aos4_stat_move"><span class="aos4_stat_label">MOVE</span><p class="h2">${unit._move || '-'}</p></div>
-                <div class="aos4_stat_health"><span class="aos4_stat_label">HEALTH</span><p class="h2">${unit._health || '-'}</p></div>
-                <div class="aos4_stat_save"><span class="aos4_stat_label">SAVE</span><p class="h2">${unit._save || '-'}</p></div>
-                <div class="aos4_stat_control"><span class="aos4_stat_label">CONTROL</span><p class="h2">${unit._control || '-'}</p></div>
+                <div class="aos4_stat_move"><p class="h1">${unit._move || '-'}</p></div>
+                <div class="aos4_stat_health"><p class="h1">${unit._health || '-'}</p></div>
+                <div class="aos4_stat_save"><p class="h1">${unit._save || '-'}</p></div>
+                <div class="aos4_stat_control"><p class="h1">${unit._control || '-'}</p></div>
                 </div>`;
             unitRow.append(unitStats);
         }
@@ -269,11 +269,11 @@ export class RendererAoS4 implements Renderer {
         // Stats box with Banishment instead of Control
         let statsDiv = document.createElement('div');
         statsDiv.classList.add("col-3");
-        statsDiv.innerHTML = `<div class="aos4_unit_stats">
-            <div class="aos4_stat_move"><span class="aos4_stat_label">MOVE</span><p class="h2">${manifestation._move || '-'}</p></div>
-            <div class="aos4_stat_health"><span class="aos4_stat_label">HEALTH</span><p class="h2">${manifestation._health || '-'}</p></div>
-            <div class="aos4_stat_save"><span class="aos4_stat_label">SAVE</span><p class="h2">${manifestation._save || '-'}</p></div>
-            <div class="aos4_stat_control"><span class="aos4_stat_label">BANISH</span><p class="h2">${manifestation._banishment || '-'}</p></div>
+        statsDiv.innerHTML = `<div class="aos4_manifestation_stats">
+            <div class="aos4_stat_move"><p class="h1">${manifestation._move || '-'}</p></div>
+            <div class="aos4_stat_health"><p class="h1">${manifestation._health || '-'}</p></div>
+            <div class="aos4_stat_save"><p class="h1">${manifestation._save || '-'}</p></div>
+            <div class="aos4_stat_control"><p class="h1">${manifestation._banishment || '-'}</p></div>
             </div>`;
         row.append(statsDiv);
 
