@@ -114,8 +114,8 @@ export function FormatAbilityText(text: string): string {
     if (!text) return "";
     // Convert **text** to <b>text</b>
     let result = text.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
-    // Convert ^^text^^ to <sup>text</sup>
-    result = result.replace(/\^\^([^^]+)\^\^/g, '<sup>$1</sup>');
+    // Convert ^^text^^ to <b><i>text</i></b>
+    result = result.replace(/\^\^([^^]+)\^\^/g, '<b><i>$1</i></b>');
     // Convert newlines to <br>
     result = result.replace(/\n/g, '<br>');
     return result;
