@@ -229,7 +229,7 @@ function handleFileSelect(event: Event) {
 }
 
 function showErrorModal(msg: string) {
-  $('#errorText').html(msg);
+  $('#errorText').text(msg);
   $('#errorDialog').modal('show');  
 
 }
