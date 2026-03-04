@@ -26,7 +26,7 @@ const INPUT_SUBDIR_TO_EXPECTATIONS: { [key: string]: (filename: string) => Promi
 const OUTPUT_DIRECTORY = 'spec';
 
 async function writeRosterExpectations(filename: string) {
-  const filenameMatch = filename.match(`${INPUT_DIRECTORY}/(?:([^/]+)/)?([^/]+)\.(rosz?|regi[sz]try)$`);
+  const filenameMatch = filename.match(`${INPUT_DIRECTORY}/(?:([^/]+)/)?([^/]+)\\.(rosz?|regi[sz]try)$`);
   if (!filenameMatch) {
     throw new Error(`ERROR: Unexpected input filename doesn't match regex: ${filename}`);
   }
