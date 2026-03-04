@@ -1,9 +1,5 @@
 node_modules
-#dist
+dist
 .idea
 .vscode/settings.json
-/dist/app*
-/dist/main*
-/dist/renderer*
-/dist/roster*
 .DS_Store
