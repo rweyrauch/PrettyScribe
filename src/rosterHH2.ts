@@ -538,7 +538,7 @@ export namespace HorusHeresy {
 
                 // Only include the allegiance rules once.
                 if (!DuplicateForce(force, roster)) {
-                    const rules = root.querySelectorAll("force>rules>rule");
+                    const rules = root.querySelectorAll("rules>rule");
                     for (let rule of rules) {
                         ExtractRuleDescription(rule, force._rules);
                     }

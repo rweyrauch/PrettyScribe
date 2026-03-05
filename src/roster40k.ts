@@ -455,7 +455,7 @@ function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void 
 
             // Only include the allegiance rules once.
             if (!DuplicateForce(f, roster)) {
-                const rules = root.querySelectorAll("force>rules>rule");
+                const rules = root.querySelectorAll("rules>rule");
                 for (let rule of rules) {
                     ExtractRuleDescription(rule, f._rules);
                 }
@@ -469,7 +469,9 @@ function ParseForces(doc: XMLDocument, roster: Roster40k, is40k: boolean): void 
 }
 
 function ParseSelections(root: Element, force: Force, is40k: boolean): void {
-    let selections = root.querySelectorAll("force>selections>selection");
+    // Use combined selector: direct selections of this force element, plus direct selections of
+    // any nested force elements (for rosters that embed multiple detachments as nested forces).
+    let selections = root.querySelectorAll(":scope > selections > selection, force > selections > selection");
 
     for (let selection of selections) {
         // What kind of selection is this
