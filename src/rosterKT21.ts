@@ -247,7 +247,7 @@ function ParseForces(doc: XMLDocument, roster: RosterKT21): void {
 
             // Only include the allegiance rules once.
             if (!DuplicateForce(f, roster)) {
-                var rules = root.querySelectorAll("force>rules>rule");
+                var rules = root.querySelectorAll("rules>rule");
                 for (let rule of rules) {
                     if (rule.hasAttribute("name")) {
                         let ruleName = rule.getAttributeNode("name")?.nodeValue;
@@ -267,7 +267,7 @@ function ParseForces(doc: XMLDocument, roster: RosterKT21): void {
 }
 
 function ParseSelections(root: Element, force: Force): void {
-    let selections = root.querySelectorAll("force>selections>selection");
+    let selections = root.querySelectorAll(":scope > selections > selection");
 
     for (let selection of selections) {
         // What kind of selection is this

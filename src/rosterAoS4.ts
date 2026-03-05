@@ -202,7 +202,7 @@ function ParseForces(doc: XMLDocument, roster: RosterAoS4): void {
 }
 
 function ParseArmyConfig(root: Element, force: AoS4Force): void {
-    let selections = root.querySelectorAll("force>selections>selection");
+    let selections = root.querySelectorAll(":scope > selections > selection");
 
     for (let selection of selections) {
         let selectionName = selection.getAttributeNode("name")?.nodeValue;
@@ -400,7 +400,7 @@ function ParseSpellOrPrayerLore(selection: Element, abilityList: AoS4Ability[]):
 }
 
 function ParseRegimentSelections(root: Element, force: AoS4Force): void {
-    let selections = root.querySelectorAll("force>selections>selection");
+    let selections = root.querySelectorAll(":scope > selections > selection");
     let unit_id = 0;
     for (let selection of selections) {
         let unit = ParseUnit(selection);

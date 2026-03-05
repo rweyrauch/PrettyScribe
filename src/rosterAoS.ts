@@ -294,7 +294,7 @@ function ParseForces(doc: XMLDocument, roster: RosterAoS): void {
 }
 
 function ParseSelections(root: Element, force: AoSForce): void {
-    let selections = root.querySelectorAll("force>selections>selection");
+    let selections = root.querySelectorAll(":scope > selections > selection");
 
     let unit_id = 0;
     for (let selection of selections) {
@@ -394,7 +394,7 @@ function ParseSelections(root: Element, force: AoSForce): void {
 }
 
 function ParseRules(root: Element, force: AoSForce): void {
-    let rules = root.querySelectorAll("force>rules>rule");
+    let rules = root.querySelectorAll("rules>rule");
 
     for (let rule of rules) {
         let ruleName = rule.getAttributeNode("name")?.nodeValue;

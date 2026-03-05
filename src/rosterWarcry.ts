@@ -332,7 +332,7 @@ function ParseAllegiance(root: Element, force: WarcryForce): void {
 }
 
 function ParseSelections(root: Element, force: WarcryForce): void {
-    let selections = root.querySelectorAll("force>selections>selection");
+    let selections = root.querySelectorAll(":scope > selections > selection");
 
     for (let selection of selections) {
         // What kind of selection is this
