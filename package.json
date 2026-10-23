@@ -20,7 +20,7 @@
     "jsdom": "^28.1.0",
     "tsx": "^4.19.2",
     "typescript": "^4.5.5",
-    "vite": "^8.0.16"
+    "vite": "^8.1.6"
   },
   "scripts": {
     "test": "NODE_OPTIONS=\"--import tsx\" jasmine --config=jasmine.json",
